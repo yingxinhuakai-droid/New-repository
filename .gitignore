@@ -4,5 +4,5 @@
 node_modules/
 *.log
 
-# 超大文件（超过Gitee 100MB限制）
-注安workbuddy/26年中级注安运营手册.xlsx
+# 超大文件（超过100MB）
+za/26年中级注安运营手册.xlsx
