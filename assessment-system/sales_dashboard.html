@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>销售工作台 · 学员诊断详情</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f3f4f6;color:#1f2937;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#0f172a,#1e293b);color:#fff;padding:16px 24px;display:flex;align-items:center;justify-content:space-between}
+.header h1{font-size:18px;font-weight:700}
+.header .badge{background:#22c55e;color:#fff;padding:4px 12px;border-radius:20px;font-size:11px;font-weight:600}
+
+.container{max-width:960px;margin:0 auto;padding:20px 16px}
+
+/* 学员信息卡 */
+.student-card{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;gap:24px;flex-wrap:wrap}
+.student-avatar{width:56px;height:56px;border-radius:14px;background:linear-gradient(135deg,#1a56db,#3b82f6);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0}
+.student-info{flex:1;min-width:200px}
+.student-info h2{font-size:18px;margin-bottom:6px}
+.student-info .tags{display:flex;gap:6px;flex-wrap:wrap}
+.student-info .tag{padding:3px 10px;border-radius:14px;font-size:11px;font-weight:500;background:#f3f4f6;color:#4b5563}
+.student-meta{display:flex;flex-direction:column;gap:4px;min-width:160px}
+.student-meta .meta-row{display:flex;justify-content:space-between;font-size:13px;color:#6b7280}
+.student-meta .meta-row span:last-child{color:#1f2937;font-weight:500}
+
+/* 评分总览 */
+.score-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:16px}
+.score-card{background:#fff;border-radius:14px;padding:18px;text-align:center;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.score-card .num{font-size:32px;font-weight:800}
+.score-card .lbl{font-size:12px;color:#6b7280;margin-top:2px}
+.score-card .sub{font-size:11px;color:#9ca3af}
+
+/* 区块 */
+.section{background:#fff;border-radius:16px;padding:24px;margin-bottom:16px;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.section h3{font-size:16px;margin-bottom:16px;display:flex;align-items:center;gap:6px}
+
+/* 雷达图区 */
+.chart-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.chart-box{background:#f9fafb;border-radius:12px;padding:16px}
+.chart-box h4{font-size:13px;color:#6b7280;margin-bottom:10px}
+
+/* 知识点 */
+.kp-row{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid #f9fafb}
+.kp-name{width:140px;font-size:13px;font-weight:500;flex-shrink:0}
+.kp-bar-wrap{flex:1;height:8px;background:#f3f4f6;border-radius:8px;overflow:hidden}
+.kp-bar{height:100%;border-radius:8px}
+.kp-val{font-size:13px;font-weight:600;width:40px;text-align:right}
+.kp-badge{font-size:10px;padding:2px 8px;border-radius:8px;font-weight:600;width:52px;text-align:center;flex-shrink:0}
+.kp-badge.weak{background:#fee2e2;color:#dc2626}
+.kp-badge.mid{background:#fef3c7;color:#92400e}
+.kp-badge.good{background:#dcfce7;color:#15803d}
+
+/* 三阶段规划 */
+.phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.phase-card{border-radius:14px;padding:18px;border:2px solid #e5e7eb}
+.phase-card h4{font-size:15px;margin-bottom:4px}
+.phase-card .phase-period{font-size:12px;color:#6b7280;margin-bottom:10px}
+.phase-card ul{list-style:none;font-size:13px;line-height:1.8}
+.phase-card ul li::before{content:"▸ ";color:inherit;font-weight:700}
+.phase-card.p1{border-color:#93c5fd;background:#f8faff}
+.phase-card.p2{border-color:#fcd34d;background:#fffbeb}
+.phase-card.p3{border-color:#fca5a5;background:#fef2f2}
+
+/* 课程推荐 */
+.course-list{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.course-item{background:#f8fafc;border-radius:12px;padding:14px;border-left:4px solid #1a56db}
+.course-item h4{font-size:14px;margin-bottom:2px}
+.course-item p{font-size:12px;color:#6b7280;line-height:1.5}
+
+/* 话术卡 */
+.script-card{background:#fefce8;border:1px solid #fde68a;border-radius:14px;padding:20px;margin-top:12px}
+.script-card h4{font-size:14px;color:#92400e;margin-bottom:10px}
+.script-block{margin-bottom:12px}
+.script-block .script-label{font-size:11px;font-weight:700;color:#b45309;text-transform:uppercase;margin-bottom:4px}
+.script-block .script-text{font-size:13px;line-height:1.8;color:#1f2937;background:#fff;padding:12px;border-radius:8px;border:1px solid #fde68a}
+
+/* Empty State */
+.empty-state{text-align:center;padding:60px 20px}
+.empty-state .icon{font-size:64px;margin-bottom:16px}
+.empty-state h2{font-size:20px;color:#374151;margin-bottom:8px}
+.empty-state p{font-size:14px;color:#9ca3af;margin-bottom:24px;line-height:1.6}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:11px 24px;border:none;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:#1a56db;color:#fff}
+.btn-primary:hover{background:#1e40af}
+.btn-outline{background:#fff;color:#1a56db;border:2px solid #1a56db}
+.btn-outline:hover{background:#eff6ff}
+.btn-sm{padding:7px 14px;font-size:12px}
+.actions{display:flex;gap:8px;margin-top:20px;flex-wrap:wrap}
+
+@media (max-width:768px){
+  .score-row{grid-template-columns:repeat(2,1fr)}
+  .chart-grid{grid-template-columns:1fr}
+  .phase-grid{grid-template-columns:1fr}
+  .course-list{grid-template-columns:1fr}
+  .kp-name{width:100px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 销售工作台 · 学员诊断详情</h1>
+  <span class="badge" id="dataBadge">实时数据</span>
+</div>
+
+<div class="container" id="mainContent">
+  <!-- 空状态 -->
+  <div class="empty-state" id="emptyState">
+    <div class="icon">📋</div>
+    <h2>暂无诊断数据</h2>
+    <p>学员完成测评后，数据将自动同步到这里。<br>你可以先用模拟数据预览工作台效果。</p>
+    <div style="display:flex;gap:10px;justify-content:center">
+      <button class="btn btn-primary" onclick="loadDemoData()">🎬 加载演示数据</button>
+    </div>
+  </div>
+
+  <!-- 数据看板 -->
+  <div id="dashboard" style="display:none">
+    <!-- 学员信息 -->
+    <div class="student-card" id="studentCard"></div>
+
+    <!-- 评分总览 -->
+    <div class="score-row" id="scoreRow"></div>
+
+    <!-- 雷达图 -->
+    <div class="section">
+      <h3>📊 能力分析</h3>
+      <div class="chart-grid">
+        <div class="chart-box"><h4>四科得分率雷达图</h4><canvas id="radarChart" height="220"></canvas></div>
+        <div class="chart-box"><h4>各科正确率对比</h4><canvas id="barChart" height="220"></canvas></div>
+      </div>
+    </div>
+
+    <!-- 知识点 -->
+    <div class="section">
+      <h3>🎯 知识点掌握详情</h3>
+      <div id="kpDetail"></div>
+    </div>
+
+    <!-- 薄弱点分析 -->
+    <div class="section" id="weaknessSection">
+      <h3>⚠️ 薄弱点排查</h3>
+      <div id="weaknessList"></div>
+    </div>
+
+    <!-- 三阶段备考规划 -->
+    <div class="section">
+      <h3>📅 专属备考规划（三阶段）</h3>
+      <div class="phase-grid" id="phasePlan"></div>
+      <div style="margin-top:16px;padding:14px;background:#f0f9ff;border-radius:10px;font-size:13px;color:#0369a1;line-height:1.7" id="studyTips"></div>
+    </div>
+
+    <!-- 课程推荐 -->
+    <div class="section">
+      <h3>🎓 推荐课程匹配</h3>
+      <div class="course-list" id="courseRecs"></div>
+    </div>
+
+    <!-- 销售话术 -->
+    <div class="section">
+      <h3>💬 沟通话术（基于诊断结果）</h3>
+      <div id="scriptContent"></div>
+    </div>
+
+    <!-- 操作 -->
+    <div class="actions">
+      <button class="btn btn-outline btn-sm" onclick="window.print()">🖨 打印报告</button>
+      <button class="btn btn-outline btn-sm" onclick="clearData()">🗑 清除数据</button>
+      <button class="btn btn-primary btn-sm" onclick="loadDemoData()">🔄 换一组演示数据</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ===== 数据获取 =====
+function getAssessmentData() {
+  const raw = localStorage.getItem('assessment_data');
+  if (!raw) return null;
+  try { return JSON.parse(raw); } catch(e) { return null; }
+}
+
+// ===== 演示数据 =====
+function getDemoData() {
+  const preInfo = {
+    education: '本科', major: '理工科类（非安全专业）', experience: '3-5年',
+    target: '一年内通过全部4科', studyTime: '2-3小时', attempted: '没考过，第一次',
+    selfWeakness: '案例分析不会答'
+  };
+  const subShort = ['法规', '管理', '技术', '实务'];
+  const answers = [
+    {questionId:'law_001',subject:'安全生产法律法规',knowledge:'安全生产法·适用范围',subPoint:'适用范围',difficulty:1,type:'single',selected:'C',correct:true},
+    {questionId:'law_005',subject:'安全生产法律法规',knowledge:'事故等级划分',subPoint:'事故等级划分',difficulty:3,type:'single',selected:'A',correct:false},
+    {questionId:'mgmt_001',subject:'安全生产管理',knowledge:'安全生产责任制',subPoint:'责任体系建设',difficulty:1,type:'single',selected:'B',correct:true},
+    {questionId:'mgmt_003',subject:'安全生产管理',knowledge:'LEC评价法',subPoint:'LEC评价法',difficulty:3,type:'single',selected:'A',correct:false},
+    {questionId:'tech_001',subject:'安全生产技术基础',knowledge:'机械安全·防护装置',subPoint:'防护装置',difficulty:2,type:'single',selected:'A',correct:true},
+    {questionId:'tech_003',subject:'安全生产技术基础',knowledge:'特种设备·锅炉安全附件',subPoint:'锅炉安全附件',difficulty:3,type:'single',selected:'B',correct:true},
+    {questionId:'practice_001',subject:'安全生产专业实务',knowledge:'案例分析·危险因素辨识',subPoint:'GB/T13861分类',difficulty:3,type:'case',selected:'B',correct:false},
+    {questionId:'practice_004',subject:'安全生产专业实务',knowledge:'案例分析·整改措施',subPoint:'整改措施建议',difficulty:2,type:'multi',selected:'ABD',correct:false},
+  ];
+  const totalQ = answers.length, correctQ = answers.filter(a=>a.correct).length;
+  const subjects = ['安全生产法律法规','安全生产管理','安全生产技术基础','安全生产专业实务'];
+  const subData = subjects.map(s=>{
+    const qs = answers.filter(a=>a.subject===s);
+    return {name:s,short:subShort[subjects.indexOf(s)],total:qs.length,correct:qs.filter(a=>a.correct).length};
+  });
+  const kpMap = {};
+  answers.forEach(a=>{const k=a.subPoint||a.knowledge;if(!kpMap[k])kpMap[k]={total:0,correct:0};kpMap[k].total++;kpMap[k].correct+=a.correct?1:0;});
+  return {preInfo,answers,score:Math.round((correctQ/totalQ)*100),subData,kpMap,
+    weaks:Object.entries(kpMap).filter(([,d])=>(d.correct/d.total)<0.5).sort((a,b)=>(a[1].correct/a[1].total)-(b[1].correct/b[1].total)),
+    timerElapsed:342,timestamp:Date.now()};
+}
+
+// ===== 主渲染 =====
+function renderDashboard(data) {
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+
+  const { preInfo, subData, score, kpMap, weaks, timerElapsed, timestamp } = data;
+
+  // 学员信息卡
+  const tagLabels = [];
+  if (preInfo.attempted.includes('没考过')) tagLabels.push('首次备考');
+  if (preInfo.attempted.includes('但没过')) tagLabels.push('二战考生');
+  if (preInfo.attempted.includes('过了部分')) tagLabels.push('有基础');
+  if (preInfo.studyTime.includes('3小时')) tagLabels.push('时间充裕');
+  else if (preInfo.studyTime.includes('2')) tagLabels.push('时间尚可');
+  else tagLabels.push('时间紧张');
+  if (preInfo.target.includes('全科')) tagLabels.push('目标全科');
+  if (score>=70) tagLabels.push('基础扎实');
+  else if (score>=40) tagLabels.push('需重点跟进');
+  else tagLabels.push('高潜学员');
+
+  const totalSec = timerElapsed; const m=Math.floor(totalSec/60),s=totalSec%60;
+  const timeStr = `${String(m).padStart(2,'0')}分${String(s).padStart(2,'0')}秒`;
+  const ts = new Date(timestamp);
+
+  document.getElementById('studentCard').innerHTML = `
+    <div class="student-avatar">🎓</div>
+    <div class="student-info">
+      <h2>匿名学员 <span style="font-size:12px;color:#6b7280;font-weight:400">ID: ${String(timestamp).slice(-6)}</span></h2>
+      <div class="tags">${tagLabels.map(t=>`<span class="tag">${t}</span>`).join('')}</div>
+    </div>
+    <div class="student-meta">
+      <div class="meta-row"><span>学历</span><span>${preInfo.education}</span></div>
+      <div class="meta-row"><span>专业</span><span>${preInfo.major}</span></div>
+      <div class="meta-row"><span>工作经验</span><span>${preInfo.experience}</span></div>
+      <div class="meta-row"><span>每日学时</span><span>${preInfo.studyTime}</span></div>
+      <div class="meta-row"><span>考试经历</span><span>${preInfo.attempted}</span></div>
+      <div class="meta-row"><span>答题用时</span><span>${timeStr}</span></div>
+      <div class="meta-row"><span>测评时间</span><span>${ts.toLocaleString('zh-CN')}</span></div>
+    </div>`;
+
+  // 评分总览
+  const lvl = score>=70 ? {label:'基础扎实',color:'#22c55e'} : score>=40 ? {label:'需要加强',color:'#f59e0b'} : {label:'从零起步',color:'#ef4444'};
+  const correctQ = subData.reduce((sum,s)=>sum+s.correct,0);
+  const totalQ = subData.reduce((sum,s)=>sum+s.total,0);
+  document.getElementById('scoreRow').innerHTML = `
+    <div class="score-card"><div class="num" style="color:${lvl.color}">${score}</div><div class="lbl">综合得分</div><div class="sub">${lvl.label}</div></div>
+    <div class="score-card"><div class="num" style="color:#1a56db">${correctQ}/${totalQ}</div><div class="lbl">正确题数</div><div class="sub">共${totalQ}道</div></div>
+    ${subData.map(s=>{
+      const pct=s.total>0?Math.round((s.correct/s.total)*100):0;
+      return `<div class="score-card"><div class="num" style="color:${pct>=70?'#22c55e':pct>=40?'#f59e0b':'#ef4444'}">${pct}%</div><div class="lbl">${s.short}</div><div class="sub">${s.correct}/${s.total}</div></div>`;
+    }).join('')}
+  `;
+
+  // 雷达图
+  setTimeout(()=>{
+    const rctx=document.getElementById('radarChart'); if(!rctx)return;
+    if(window._rc)window._rc.destroy();
+    window._rc=new Chart(rctx,{type:'radar',data:{labels:subData.map(s=>s.short),
+      datasets:[{label:'得分率',data:subData.map(s=>s.total>0?Math.round((s.correct/s.total)*100):0),
+        backgroundColor:'rgba(26,86,219,.12)',borderColor:'#1a56db',borderWidth:2,pointBackgroundColor:'#1a56db',pointRadius:5},
+        {label:'及格线',data:[60,60,60,60],backgroundColor:'rgba(34,197,94,.04)',borderColor:'#22c55e',borderWidth:1,borderDash:[6,4],pointRadius:0}]},
+      options:{responsive:true,scales:{r:{beginAtZero:true,max:100,ticks:{stepSize:20}}},plugins:{legend:{position:'bottom',labels:{font:{size:10}}}}}
+    });
+    const bctx=document.getElementById('barChart'); if(!bctx)return;
+    if(window._bc)window._bc.destroy();
+    window._bc=new Chart(bctx,{type:'bar',data:{labels:subData.map(s=>s.short),
+      datasets:[{label:'正确率',data:subData.map(s=>s.total>0?Math.round((s.correct/s.total)*100):0),
+        backgroundColor:subData.map(s=>{const pct=s.total>0?Math.round((s.correct/s.total)*100):0;return pct>=70?'#22c55e':pct>=40?'#f59e0b':'#ef4444';}),
+        borderRadius:6}]},
+      options:{responsive:true,scales:{y:{beginAtZero:true,max:100,ticks:{stepSize:20}}},plugins:{legend:{display:false}}}
+    });
+  },150);
+
+  // 知识点
+  document.getElementById('kpDetail').innerHTML = Object.entries(kpMap).sort((a,b)=>(a[1].correct/a[1].total)-(b[1].correct/b[1].total)).map(([name,d])=>{
+    const pct=Math.round((d.correct/d.total)*100);
+    const cls=pct>=70?'good':pct>=40?'mid':'weak';
+    const label=pct>=70?'已掌握':pct>=40?'待加强':'薄弱';
+    return `<div class="kp-row">
+      <span class="kp-name">${name}</span>
+      <div class="kp-bar-wrap"><div class="kp-bar" style="width:${pct}%;background:${pct>=70?'#22c55e':pct>=40?'#f59e0b':'#ef4444'}"></div></div>
+      <span class="kp-val">${pct}%</span><span class="kp-badge ${cls}">${label}</span>
+    </div>`;
+  }).join('');
+
+  // 薄弱点
+  document.getElementById('weaknessList').innerHTML = weaks.length===0
+    ? '<p style="color:#22c55e;font-weight:600">🎉 各知识点掌握良好，无明显薄弱环节！</p>'
+    : weaks.map(([name,d])=>{
+      const pct=Math.round((d.correct/d.total)*100);
+      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:12px 0;border-bottom:1px solid #f9fafb">
+        <div><span style="color:#dc2626;font-weight:600;font-size:14px">${name}</span><span style="color:#9ca3af;font-size:12px;margin-left:8px">正确率 ${pct}%</span></div>
+        <span style="color:#1a56db;font-size:12px;font-weight:500">📌 需专项突破</span></div>`;
+    }).join('');
+
+  // 三阶段备考规划
+  const weakSubjects = subData.filter(s=>s.total>0&&(s.correct/s.total)<0.6).map(s=>s.short).join('、')||'各科';
+  const days = preInfo.studyTime.includes('3小时') ? {p1:20,p2:28,p3:14} : preInfo.studyTime.includes('2') ? {p1:30,p2:35,p3:20} : {p1:40,p2:45,p3:25};
+  document.getElementById('phasePlan').innerHTML = `
+    <div class="phase-card p1">
+      <h4>🔵 基础夯实期</h4>
+      <div class="phase-period">约 ${days.p1} 天</div>
+      <ul>
+        <li>法规：精读安全生产法+条例</li>
+        <li>管理：搭建安全知识框架</li>
+        <li>技术：通读教材，标注重点</li>
+        <li>实务：了解案例分析答题套路</li>
+        <li>每日 15 道基础题</li>
+      </ul>
+    </div>
+    <div class="phase-card p2">
+      <h4>🟡 强化突破期</h4>
+      <div class="phase-period">约 ${days.p2} 天</div>
+      <ul>
+        <li>重点攻克：${weakSubjects}</li>
+        <li>每科刷真题 2 套</li>
+        <li>整理错题本，分析错因</li>
+        <li>专项练习案例分析</li>
+        <li>每日 25 道题+错题复习</li>
+      </ul>
+    </div>
+    <div class="phase-card p3">
+      <h4>🔴 冲刺模拟期</h4>
+      <div class="phase-period">约 ${days.p3} 天</div>
+      <ul>
+        <li>全真模拟考试，体验时间压力</li>
+        <li>背诵高频数字和条文</li>
+        <li>复盘错题，查漏补缺</li>
+        <li>考前心态调整</li>
+        <li>每日 1 套模拟卷</li>
+      </ul>
+    </div>`;
+  document.getElementById('studyTips').innerHTML = `
+    <strong>💡 个性化建议：</strong><br>
+    ${score>=70 ? '基础扎实，重点放在案例分析的答题技巧和全真模拟上，保持节奏即可。' :
+      score>=40 ? '有基础但不够系统，建议跟着课程体系走，重点突破' + weakSubjects + '，每天保证2小时以上有效学习。' :
+      '基础薄弱，需要从零构建知识体系。建议从法规和管理入门，再逐步攻克技术和实务。强烈建议系统报班学习，避免走弯路。'}
+    ${preInfo.selfWeakness ? '<br><br>学员自评薄弱点：<strong>' + preInfo.selfWeakness + '</strong>，该科目应重点投入。' : ''}
+    ${preInfo.attempted.includes('但没过') ? '<br><br>⚠️ 该学员有考试失败经历，要帮助其分析上次失利原因，重建信心。' : ''}
+  `;
+
+  // 课程推荐
+  const courseMap = {
+    weakLaw: weakSubjects.includes('法规'), weakMgmt: weakSubjects.includes('管理'),
+    weakTech: weakSubjects.includes('技术'), weakPractice: weakSubjects.includes('实务'),
+  };
+  document.getElementById('courseRecs').innerHTML = [
+    {name:'《安全生产法律法规》精讲课',reason:'系统性梳理法规体系，重点讲解高频考点和易混淆条文',show:true,priority:1},
+    {name:'《安全生产管理》通关课',reason:'将抽象管理知识案例化、场景化，配合思维导图构建知识网络',show:true,priority:2},
+    {name:'《安全生产技术基础》专题课',reason:'分模块攻克机械、电气、特种设备、防火防爆四大技术难点',show:true,priority:3},
+    {name:'《安全生产专业实务》案例分析特训',reason:'手把手教学案例分析答题框架，从读题到作答全流程拆解',show:true,priority:4},
+    {name:'《考前冲刺串讲》押题班',reason:'考前精华串讲+高频考点预测，适合最后阶段临门一脚',show:score<70,priority:5},
+  ].filter(c=>c.show).sort((a,b)=>a.priority-b.priority).map(c=>`
+    <div class="course-item"><h4>${c.name}</h4><p>${c.reason}</p></div>
+  `).join('');
+
+  // 销售话术
+  const weakList = weaks.length>0 ? weaks.map(([name])=>name).slice(0,2).join('和') : '';
+  document.getElementById('scriptContent').innerHTML = `
+    <div class="script-block">
+      <div class="script-label">🔓 破冰切入</div>
+      <div class="script-text">
+        同学你好，刚看到你完成了咱们的注安学习诊断测评。${score>=70?'你的基础挺扎实的！':'测评结果出来了，我帮你分析了一下。'}
+        整体得分<strong>${score}分</strong>，${score>=70?'已经超过了大部分第一次参加测评的学员':'还有比较大的提升空间，但别担心，找准方向后进步很快'}。
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-label">🎯 痛点切入</div>
+      <div class="script-text">
+        从诊断来看，你的${score>=70?'案例分析部分':'<strong>${weakList||'多个知识点'}</strong>'}是主要失分点。
+        ${preInfo.selfWeakness ? '你自己也提到' + preInfo.selfWeakness + '，这确实是很多学员的共性问题。' : ''}
+        不过好消息是，${score>=70?'针对性练习1-2个月就能明显提上来':'只要用对方法，这些知识点都是可以系统攻克的'}。
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-label">📅 规划引导</div>
+      <div class="script-text">
+        我帮你规划了一个<strong>三阶段备考方案</strong>：基础夯实→强化突破→冲刺模拟。整个周期约${days.p1+days.p2+days.p3}天，每天${preInfo.studyTime}。
+        方案比较细，包含每周具体任务和课程匹配，电话里或者微信上我详细跟你说。
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-label">💪 促进行动</div>
+      <div class="script-text">
+        ${preInfo.attempted.includes('没考过') ? '第一次考不用慌，跟着节奏走就行。' :
+          preInfo.attempted.includes('但没过') ? '上次可能方法没找对，这次我们换个策略。' :
+          '你有一定的基础，只要把薄弱点补上，通过的希望很大。'}
+        咱们这套课程体系就是针对诊断结果匹配的，现在报名还送${score>=70?'考前冲刺串讲':'全套基础精讲课'}，你看是先给你发个课程大纲看看？
+      </div>
+    </div>
+    <div class="script-block">
+      <div class="script-label">📋 关键信息速记</div>
+      <div class="script-text">
+        ${score>=70 ? '✅ 基础好 → 推荐冲刺班 → 重点攻案例 → 强调通过率信心' :
+          score>=40 ? '📚 有基础但不够 → 推荐系统班 → 重点补' + (weakList||'薄弱科目') + ' → 给信心+紧迫感' :
+          '🎯 基础弱 → 推荐全程班 → 从法规入手 → 强调系统学习重要性 → 给希望'}
+        <br>⏰ 距考试约${Math.floor(Math.random()*60+90)}天 ⚠️ ${preInfo.studyTime.includes('不到')?'时间紧张，需尽快启动':'时间尚可，现在开始来得及'}
+      </div>
+    </div>
+  `;
+}
+
+// ===== 操作 =====
+function loadDemoData() {
+  const data = getDemoData();
+  renderDashboard(data);
+}
+
+function clearData() {
+  localStorage.removeItem('assessment_data');
+  document.getElementById('emptyState').style.display = 'block';
+  document.getElementById('dashboard').style.display = 'none';
+}
+
+// ===== 初始化 =====
+window.addEventListener('storage', function(e) {
+  if (e.key === 'assessment_data' && e.newValue) {
+    try { renderDashboard(JSON.parse(e.newValue)); } catch(err) {}
+  }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+  const data = getAssessmentData();
+  if (data) { renderDashboard(data); }
+});
+
+// 导出供其他模块使用
+if (typeof module !== 'undefined' && module.exports) {
+  module.exports = { getAssessmentData, getDemoData, renderDashboard };
+}
+</script>
+</body>
+</html>

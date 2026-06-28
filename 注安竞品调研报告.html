@@ -1,0 +1,1492 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中级注册安全工程师培训 · 竞品调研报告</title>
+<style>
+  :root {
+    --primary: #1a73e8;
+    --primary-light: #e8f0fe;
+    --accent: #e53935;
+    --accent-light: #fce4ec;
+    --green: #2e7d32;
+    --green-light: #e8f5e9;
+    --orange: #ef6c00;
+    --orange-light: #fff3e0;
+    --gray-50: #fafafa;
+    --gray-100: #f5f5f5;
+    --gray-200: #eeeeee;
+    --gray-300: #e0e0e0;
+    --gray-500: #9e9e9e;
+    --gray-700: #616161;
+    --gray-900: #212121;
+    --card-shadow: 0 2px 8px rgba(0,0,0,.08);
+    --card-shadow-hover: 0 4px 16px rgba(0,0,0,.12);
+    --border-radius: 12px;
+    --transition: all .25s ease;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Microsoft YaHei", "Helvetica Neue", sans-serif;
+    color: var(--gray-900);
+    background: var(--gray-50);
+    line-height: 1.7;
+  }
+  /* ===== 封面 ===== */
+  .cover {
+    background: linear-gradient(135deg, #1a237e 0%, #1a73e8 50%, #0d47a1 100%);
+    color: #fff;
+    padding: 80px 40px 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .cover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: .3;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: rgba(255,255,255,.15);
+    border: 1px solid rgba(255,255,255,.3);
+    border-radius: 20px;
+    padding: 6px 20px;
+    font-size: 13px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+  }
+  .cover h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    letter-spacing: 2px;
+  }
+  .cover h2 {
+    font-size: 20px;
+    font-weight: 400;
+    opacity: .85;
+    margin-bottom: 40px;
+  }
+  .cover-meta {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    font-size: 14px;
+    opacity: .7;
+  }
+
+  /* ===== 导航 ===== */
+  .nav-bar {
+    background: #fff;
+    border-bottom: 1px solid var(--gray-200);
+    padding: 12px 40px;
+    display: flex;
+    gap: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  }
+  .nav-bar a {
+    text-decoration: none;
+    color: var(--gray-700);
+    font-size: 14px;
+    padding: 6px 14px;
+    border-radius: 6px;
+    transition: var(--transition);
+  }
+  .nav-bar a:hover, .nav-bar a.active {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+  }
+
+  /* ===== 主体布局 ===== */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+  section {
+    margin-bottom: 48px;
+  }
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 2px solid var(--primary);
+  }
+  .section-header .icon {
+    width: 36px;
+    height: 36px;
+    background: var(--primary);
+    color: #fff;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+  }
+  .section-header h3 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--gray-900);
+  }
+
+  /* ===== 卡片 ===== */
+  .card {
+    background: #fff;
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--card-shadow);
+    transition: var(--transition);
+  }
+  .card:hover { box-shadow: var(--card-shadow-hover); }
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .card-grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .card-grid-2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .brand-card {
+    border-top: 4px solid;
+    position: relative;
+  }
+  .brand-card.hqwx { border-color: var(--primary); }
+  .brand-card.233 { border-color: var(--green); }
+  .brand-card.youlu { border-color: var(--orange); }
+  .brand-card.haixue { border-color: var(--accent); }
+  .brand-tag {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  .brand-tag.hqwx { background: var(--primary); }
+  .brand-tag.233 { background: var(--green); }
+  .brand-tag.youlu { background: var(--orange); }
+  .brand-tag.haixue { background: var(--accent); }
+  .brand-card h4 {
+    font-size: 16px;
+    margin-bottom: 12px;
+  }
+
+  /* ===== 表格 ===== */
+  .table-wrap {
+    overflow-x: auto;
+    margin-bottom: 20px;
+  }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: var(--border-radius);
+    box-shadow: var(--card-shadow);
+  }
+  th, td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 14px;
+    border-bottom: 1px solid var(--gray-200);
+  }
+  th {
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 600;
+    position: sticky;
+    top: 0;
+  }
+  td { color: var(--gray-900); }
+  tr:hover td { background: var(--gray-50); }
+  .tag-cell {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+  }
+  .tag-high { background: #c8e6c9; color: #1b5e20; }
+  .tag-mid { background: #fff9c4; color: #f57f17; }
+  .tag-low { background: #ffcdd2; color: #b71c1c; }
+  .tag-best { background: #e8f5e9; color: #2e7d32; border: 1px solid #2e7d32; }
+
+  /* ===== 对比评分 ===== */
+  .score-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+  }
+  .score-bar .label {
+    width: 60px;
+    font-size: 13px;
+    color: var(--gray-700);
+    flex-shrink: 0;
+  }
+  .score-bar .bar-wrap {
+    flex: 1;
+    height: 24px;
+    background: var(--gray-200);
+    border-radius: 4px;
+    overflow: hidden;
+  }
+  .score-bar .bar {
+    height: 100%;
+    border-radius: 4px;
+    transition: width .5s ease;
+  }
+  .score-bar .bar.hqwx { background: var(--primary); }
+  .score-bar .bar.233 { background: var(--green); }
+  .score-bar .bar.youlu { background: var(--orange); }
+  .score-bar .bar.haixue { background: var(--accent); }
+  .score-bar .val {
+    width: 40px;
+    font-size: 13px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+
+  /* ===== SWOT ===== */
+  .swot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+  }
+  .swot-item {
+    border-radius: var(--border-radius);
+    padding: 20px;
+  }
+  .swot-item.s { background: #e8f5e9; border: 2px solid #2e7d32; }
+  .swot-item.w { background: #fce4ec; border: 2px solid #c62828; }
+  .swot-item.o { background: #e3f2fd; border: 2px solid #1565c0; }
+  .swot-item.t { background: #fff3e0; border: 2px solid #e65100; }
+  .swot-item h5 { font-size: 16px; margin-bottom: 12px; }
+  .swot-item.s h5 { color: #2e7d32; }
+  .swot-item.w h5 { color: #c62828; }
+  .swot-item.o h5 { color: #1565c0; }
+  .swot-item.t h5 { color: #e65100; }
+  .swot-item ul { list-style: none; }
+  .swot-item li { font-size: 14px; padding: 4px 0; position: relative; padding-left: 18px; }
+  .swot-item li::before { content: '•'; position: absolute; left: 0; color: inherit; font-weight: 700; }
+
+  /* ===== 建议卡片 ===== */
+  .suggest-card {
+    background: #fff;
+    border-radius: var(--border-radius);
+    border-left: 4px solid var(--primary);
+    padding: 20px 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--card-shadow);
+  }
+  .suggest-card h5 {
+    color: var(--primary);
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .suggest-card p {
+    font-size: 14px;
+    color: var(--gray-700);
+  }
+  .suggest-card .priority {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 600;
+    margin-left: 8px;
+  }
+  .priority.p0 { background: #ffcdd2; color: #b71c1c; }
+  .priority.p1 { background: #fff9c4; color: #f57f17; }
+  .priority.p2 { background: #e8f5e9; color: #2e7d32; }
+
+  /* ===== 雷达图区 ===== */
+  .radar-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .radar-svg {
+    max-width: 600px;
+    width: 100%;
+  }
+
+  /* ===== 响应式 ===== */
+  @media (max-width: 900px) {
+    .card-grid, .card-grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .cover h1 { font-size: 28px; }
+    .cover-meta { flex-direction: column; gap: 8px; }
+    .nav-bar { flex-wrap: wrap; padding: 8px 16px; }
+  }
+  @media (max-width: 600px) {
+    .card-grid, .card-grid-3, .card-grid-2, .swot-grid { grid-template-columns: 1fr; }
+    .container { padding: 20px 12px; }
+  }
+
+  /* ===== 打印优化 ===== */
+  @media print {
+    .nav-bar { display: none; }
+    .cover { padding: 40px 20px; }
+    .card, table { box-shadow: none; border: 1px solid var(--gray-300); }
+    .score-bar .bar { print-color-adjust: exact; -webkit-print-color-adjust: exact; }
+  }
+
+  /* ===== 补充样式 ===== */
+  .highlight-box {
+    background: var(--primary-light);
+    border-radius: var(--border-radius);
+    padding: 16px 20px;
+    margin: 16px 0;
+    border: 1px solid var(--primary);
+  }
+  .highlight-box h5 { color: var(--primary); margin-bottom: 8px; }
+  .highlight-box p { font-size: 14px; }
+  .detail-list { list-style: none; }
+  .detail-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid var(--gray-200);
+    font-size: 14px;
+  }
+  .detail-list li:last-child { border-bottom: none; }
+  .detail-list li strong { color: var(--primary); }
+  .tooltip-note {
+    display: inline-block;
+    background: #fff3e0;
+    color: #e65100;
+    border-radius: 4px;
+    padding: 2px 8px;
+    font-size: 12px;
+    margin-left: 6px;
+  }
+  .footer {
+    text-align: center;
+    padding: 40px;
+    color: var(--gray-500);
+    font-size: 13px;
+    border-top: 1px solid var(--gray-200);
+  }
+  .kpi-row {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .kpi-item {
+    flex: 1;
+    background: #fff;
+    border-radius: var(--border-radius);
+    padding: 20px;
+    text-align: center;
+    box-shadow: var(--card-shadow);
+  }
+  .kpi-item .num {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  .kpi-item .desc {
+    font-size: 13px;
+    color: var(--gray-700);
+    margin-top: 4px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== 封面 ==================== -->
+<div class="cover">
+  <div class="cover-badge">竞品调研报告 · CONFIDENTIAL</div>
+  <h1>中级注册安全工程师<br>培训竞品深度调研</h1>
+  <h2>环球网校 vs 233网校 vs 优路教育 vs 嗨学网</h2>
+  <div class="cover-meta">
+    <span>📅 调研日期：2026年6月</span>
+    <span>📊 覆盖维度：7大核心维度</span>
+    <span>🎯 调研目的：差异化竞争策略制定</span>
+  </div>
+</div>
+
+<!-- ==================== 导航 ==================== -->
+<div class="nav-bar">
+  <a href="#overview" class="active">概况总览</a>
+  <a href="#faculty">师资力量</a>
+  <a href="#course">课程产品</a>
+  <a href="#service">服务保障</a>
+  <a href="#price">价格策略</a>
+  <a href="#reputation">学员口碑</a>
+  <a href="#marketing">营销策略</a>
+  <a href="#tech">技术平台</a>
+  <a href="#radar">综合雷达图</a>
+  <a href="#swot">SWOT分析</a>
+  <a href="#suggest">优化建议</a>
+</div>
+
+<!-- ==================== 概况总览 ==================== -->
+<div class="container">
+<section id="overview">
+  <div class="section-header">
+    <div class="icon">1</div>
+    <h3>概况总览 · 四大竞品基本信息</h3>
+  </div>
+
+  <div class="kpi-row">
+    <div class="kpi-item">
+      <div class="num">4</div>
+      <div class="desc">调研品牌数</div>
+    </div>
+    <div class="kpi-item">
+      <div class="num">7</div>
+      <div class="desc">对比维度</div>
+    </div>
+    <div class="kpi-item">
+      <div class="num">30+</div>
+      <div class="desc">数据来源</div>
+    </div>
+    <div class="kpi-item">
+      <div class="num">10</div>
+      <div class="desc">优化建议</div>
+    </div>
+  </div>
+
+  <div class="card-grid">
+    <div class="card brand-card hqwx">
+      <span class="brand-tag hqwx">我方</span>
+      <h4>🌍 环球网校</h4>
+      <ul class="detail-list">
+        <li><strong>成立：</strong>2003年（23年老牌）</li>
+        <li><strong>定位：</strong>AI智学 · 云私塾7.0</li>
+        <li><strong>覆盖：</strong>建工/安工/经管/财税等</li>
+        <li><strong>特色：</strong>DeepSeek+ATSGPT算法</li>
+        <li><strong>注安核心师资：</strong>康小瑜、王阳、葛跃、程博悦、孙玉保、张金铭、宋晓婷、杨云飞、徐美丽、王强</li>
+        <li><strong>官网：</strong>hqwx.com</li>
+      </ul>
+    </div>
+    <div class="card brand-card 233">
+      <span class="brand-tag 233">竞品A</span>
+      <h4>📚 233网校</h4>
+      <ul class="detail-list">
+        <li><strong>成立：</strong>2005年左右</li>
+        <li><strong>定位：</strong>题库+课程双驱动</li>
+        <li><strong>覆盖：</strong>建工/安工/金融等</li>
+        <li><strong>特色：</strong>蓝宝典教辅体系、AI解题</li>
+        <li><strong>注安核心师资：</strong>赵春晓、唐忍、李天宇、邵洪芳、梦龙</li>
+        <li><strong>官网：</strong>233.com</li>
+      </ul>
+    </div>
+    <div class="card brand-card youlu">
+      <span class="brand-tag youlu">竞品B</span>
+      <h4>🚀 优路教育</h4>
+      <ul class="detail-list">
+        <li><strong>成立：</strong>2005年（21年沉淀）</li>
+        <li><strong>定位：</strong>OMO线上线下融合</li>
+        <li><strong>覆盖：</strong>建工/安工/医卫/财税等</li>
+        <li><strong>特色：</strong>面授集训营、3D实景课堂</li>
+        <li><strong>注安核心师资：</strong>唐忍、邵洪芳等</li>
+        <li><strong>网点：</strong>全国200+直营分校</li>
+        <li><strong>官网：</strong>youlu.com</li>
+      </ul>
+    </div>
+    <div class="card brand-card haixue">
+      <span class="brand-tag haixue">竞品C</span>
+      <h4>💡 嗨学网</h4>
+      <ul class="detail-list">
+        <li><strong>成立：</strong>2010年左右</li>
+        <li><strong>定位：</strong>在线直播+录播</li>
+        <li><strong>覆盖：</strong>建工/安工/法考/CPA等</li>
+        <li><strong>特色：</strong>钻石天成班、AI学霸助手</li>
+        <li><strong>注安核心师资：</strong>未公开详细名单（百名全职讲师）</li>
+        <li><strong>官网：</strong>haixue.com</li>
+        <li><strong>风险：</strong>2020央视315曝光、2025消费日报再曝光</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 师资力量 ==================== -->
+<section id="faculty">
+  <div class="section-header">
+    <div class="icon">2</div>
+    <h3>师资力量 · 讲师资质与行业知名度</h3>
+  </div>
+
+  <div class="highlight-box">
+    <h5>⚠️ 关键发现</h5>
+    <p>唐忍在233网校与优路教育均有授课，属于"跨平台名师"，两家竞品师资存在重叠。赵春晓是233网校管理科目的绝对王牌，学员口诀"信春哥，过管理"已形成品牌效应。环球网校师资数量最多但明星号召力需加强。</p>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>对比维度</th>
+        <th>环球网校</th>
+        <th>233网校</th>
+        <th>优路教育</th>
+        <th>嗨学网</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>注安讲师数</strong></td>
+        <td>10+（含全科覆盖）<span class="tag-cell tag-high">丰富</span></td>
+        <td>7人<span class="tag-cell tag-mid">中等</span></td>
+        <td>5+（唐忍、邵洪芳为核心）<span class="tag-cell tag-mid">中等</span></td>
+        <td>未公开具体名单<span class="tag-cell tag-low">弱</span></td>
+      </tr>
+      <tr>
+        <td><strong>明星讲师</strong></td>
+        <td>康小瑜（石化9年实战）、宋晓婷（"注安女神"）、孙玉保（教材编者）</td>
+        <td>赵春晓（硕导/一建双证/"信春哥过管理"）、唐忍（法规名师）</td>
+        <td>唐忍（法规）、邵洪芳（高校讲师/管理）</td>
+        <td>百名全职讲师（品牌化弱）</td>
+      </tr>
+      <tr>
+        <td><strong>讲师行业经验</strong></td>
+        <td>实战型为主：石化安全管理、央企培训、工程监理<span class="tag-cell tag-high">强</span></td>
+        <td>赵春晓13年教学、唐忍法规专精<span class="tag-cell tag-high">强</span></td>
+        <td>邵洪芳高校讲师背景<span class="tag-cell tag-mid">中</span></td>
+        <td>一线经验丰富（官方宣称）<span class="tag-cell tag-mid">待验证</span></td>
+      </tr>
+      <tr>
+        <td><strong>师资品牌化</strong></td>
+        <td>中等——讲师有实力但缺乏"口诀级"传播</td>
+        <td>强——"信春哥过管理"已成文化符号<span class="tag-cell tag-best">最佳</span></td>
+        <td>中等——唐忍有一定知名度</td>
+        <td>弱——师资不透明</td>
+      </tr>
+      <tr>
+        <td><strong>教材编写参与</strong></td>
+        <td>孙玉保参与教材教辅编写<span class="tag-cell tag-high">权威</span></td>
+        <td>赵春晓主编多部培训教材<span class="tag-cell tag-high">权威</span></td>
+        <td>有《考点魔炼》等自研教辅<span class="tag-cell tag-mid">自研</span></td>
+        <td>未公开</td>
+      </tr>
+      <tr>
+        <td><strong>专业科目覆盖</strong></td>
+        <td>7个专业方向均有专属讲师<span class="tag-cell tag-best">最佳</span></td>
+        <td>法规/管理/技术/其他安全/化工安全<span class="tag-cell tag-high">较好</span></td>
+        <td>以公共科目为主<span class="tag-cell tag-mid">中等</span></td>
+        <td>信息不透明<span class="tag-cell tag-low">弱</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="card-grid-2">
+    <div class="card">
+      <h4 style="color:var(--primary);margin-bottom:12px;">🌍 环球网校师资详情</h4>
+      <ul class="detail-list">
+        <li><strong>康小瑜：</strong>大型石化企业消防安全管理9年，一级消防+中级注安双证，厂级劳模</li>
+        <li><strong>宋晓婷：</strong>中国未来研究会委员，数十家央企安全培训数百场，学员称"注安女神"</li>
+        <li><strong>孙玉保：</strong>教材教辅编者，大型集团工程管理+教学双经验，发表论文20余篇</li>
+        <li><strong>张金铭：</strong>安全生产/应急管理教育培训资深专家，精准把握考试趋势</li>
+        <li><strong>王强：</strong>大学副教授，北京市职业技能考评员，安全工程系教研主任</li>
+        <li><strong>程博悦：</strong>应急管理局客座讲师，生活实例教学法</li>
+        <li><strong>杨云飞：</strong>十余年施工管理+监理经验，多工程类执业资格</li>
+        <li><strong>徐美丽：</strong>安全生产管理一线培训，口诀表格记忆法</li>
+        <li><strong>王阳：</strong>金属冶炼安全科目</li>
+        <li><strong>葛跃：</strong>金属非金属矿山安全科目</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4 style="color:var(--green);margin-bottom:12px;">📚 233网校师资详情</h4>
+      <ul class="detail-list">
+        <li><strong>赵春晓：</strong>双一流硕导，国家一级建造师，13年教学经验。管理科目绝对王牌，学员口诀"信春哥，过管理"。考点覆盖率高，教学快准狠</li>
+        <li><strong>唐忍：</strong>安全生产法律法规科目名师，精讲班74节课，法规科目的跨平台顶流讲师</li>
+        <li><strong>李天宇：</strong>其他安全科目主讲，五年真题深度解析直播</li>
+        <li><strong>邵洪芳：</strong>高校讲师，管理类/安全专业课程，考点讲解透彻细致</li>
+        <li><strong>梦龙：</strong>蓝宝典备考指导直播主讲</li>
+        <li><strong>林轩/张金铭/陈剑名/王阳：</strong>体验课讲师团队</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 课程产品 ==================== -->
+<section id="course">
+  <div class="section-header">
+    <div class="icon">3</div>
+    <h3>课程产品 · 课程体系与班型设置</h3>
+  </div>
+
+  <div class="highlight-box">
+    <h5>⚠️ 关键发现</h5>
+    <p>233网校班型命名最具体系感（智学魔方Pro/签约班/高效班），且配套"蓝宝典4.0"教辅体系形成闭环。环球网校云私塾7.0以AI为核心卖点，但班型命名辨识度不够强。优路教育面授集训营是差异化亮点。嗨学网课程信息最不透明。</p>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>对比维度</th>
+        <th>环球网校</th>
+        <th>233网校</th>
+        <th>优路教育</th>
+        <th>嗨学网</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>核心班型数</strong></td>
+        <td>3个（云私塾Pro/零基础畅学班/全程突破班）</td>
+        <td>3个（智学魔方Pro/签约班/高效班）</td>
+        <td>10+（智学私教班/冲关集训营/名城集训营9.0/飙分班等）</td>
+        <td>3+（钻石天成班/全程班/专辅班）</td>
+      </tr>
+      <tr>
+        <td><strong>课程体系</strong></td>
+        <td>基础→强化→冲刺三段式<br>+ AI智能学习路径定制</td>
+        <td>10大系统课+6大小灶课<br>+ 蓝宝典教辅闭环</td>
+        <td>基础模块+强化模块+冲刺模块<br>+ 3D实景课堂/AI辅助</td>
+        <td>基础理论→实战案例<br>+ 名师直播+回放</td>
+      </tr>
+      <tr>
+        <td><strong>课程总时长</strong></td>
+        <td>312次课/312小时（云私塾）<br>300次课/315小时（全程突破）</td>
+        <td>未明确总课时</td>
+        <td>未明确总课时</td>
+        <td>未公开</td>
+      </tr>
+      <tr>
+        <td><strong>内容覆盖</strong></td>
+        <td>4公共+7专业全科覆盖<span class="tag-cell tag-best">最佳</span></td>
+        <td>4公共+2专业（其他安全/化工安全）<span class="tag-cell tag-mid">中等</span></td>
+        <td>4公共科目为主<span class="tag-cell tag-mid">中等</span></td>
+        <td>4公共+部分专业<span class="tag-cell tag-mid">待确认</span></td>
+      </tr>
+      <tr>
+        <td><strong>更新频率</strong></td>
+        <td>紧跟新教材变动，2026版已更新</td>
+        <td>2026版蓝宝典4.0已现货</td>
+        <td>2026版课程已上线</td>
+        <td>2026版已上线</td>
+      </tr>
+      <tr>
+        <td><strong>特色差异化</strong></td>
+        <td>AI智能学习路径<br>DeepSeek+ATSGPT算法<span class="tag-cell tag-best">技术领先</span></td>
+        <td>蓝宝典4.0教辅闭环<br>AI解题+AI问答<span class="tag-cell tag-high">产品闭环</span></td>
+        <td>14天面授集训<br>3D实景课堂<span class="tag-cell tag-high">OMO优势</span></td>
+        <td>钻石天成班<br>AI学霸助手<span class="tag-cell tag-mid">一般</span></td>
+      </tr>
+      <tr>
+        <td><strong>免费引流课</strong></td>
+        <td>体验课（程博悦/杨亚男/杨云飞）<br>¥5起AI随身学</td>
+        <td>10节大咖精讲体验课（0元）<br>真题新课带学营（免费）<span class="tag-cell tag-best">最佳</span></td>
+        <td>一人一课Pro体验官（免费）</td>
+        <td>注册送备考资料包</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <!-- 班型详情卡片 -->
+  <div class="card-grid">
+    <div class="card brand-card hqwx">
+      <span class="brand-tag hqwx">环球网校</span>
+      <h4>三大班型详情</h4>
+      <ul class="detail-list">
+        <li><strong>云私塾Pro7.0：</strong>312课时，AI智能带学，定制学习路径，智能双屏，遗忘巩固，不过重学2年</li>
+        <li><strong>零基础畅学班：</strong>考点精讲+实战题分+案例专项+真题模考+临考密训，班主任1V1助学，不过重学2年</li>
+        <li><strong>全程突破班：</strong>考点精讲+实战题分+考点突破+应试技巧，2年有效，不过重学1年，性价比路线</li>
+      </ul>
+    </div>
+    <div class="card brand-card 233">
+      <span class="brand-tag 233">233网校</span>
+      <h4>三大班型详情</h4>
+      <ul class="detail-list">
+        <li><strong>智学魔方Pro：</strong>双大咖精讲+10大系统课+3大教辅+V2题库，班主任伴学，不过重学2次，报考不成功退费</li>
+        <li><strong>签约班：</strong>10大系统课+6大小灶课+全程带学+教材教辅全覆盖，1V1全程带学，不过重学3次，报考不成功退费</li>
+        <li><strong>高效班：</strong>6大好课精炼高效+蓝宝典+V1题库，不过重学1次，适合有基础学员</li>
+      </ul>
+    </div>
+    <div class="card brand-card youlu">
+      <span class="brand-tag youlu">优路教育</span>
+      <h4>班型矩阵详情</h4>
+      <ul class="detail-list">
+        <li><strong>智学私教班：</strong>¥1480起，私教智学模式</li>
+        <li><strong>冲关集训营：</strong>¥5000起，3轮提分+14天面授</li>
+        <li><strong>名城集训营9.0：</strong>¥6000起，品质面授+AI升级</li>
+        <li><strong>校庆夺魁面授集训：</strong>¥3000起~¥12800，全直播带学</li>
+        <li><strong>校庆夺魁云集训：</strong>¥2000起~¥8800，线上集训</li>
+        <li><strong>飙分班：</strong>¥1380起，性价比入门</li>
+        <li><strong>一人一课Pro：</strong>免费体验</li>
+      </ul>
+    </div>
+    <div class="card brand-card haixue">
+      <span class="brand-tag haixue">嗨学网</span>
+      <h4>班型信息</h4>
+      <ul class="detail-list">
+        <li><strong>钻石天成班：</strong>全套课程+名师直播+专属答疑+模拟考试+冲刺押题+学习计划，价格3000-6000区间</li>
+        <li><strong>全程班：</strong>无忧班+考点通关直播+案例分析，送教材</li>
+        <li><strong>专辅班：</strong>无忧班+考点通关直播+案例分析，送教材</li>
+        <li><strong>不过退费保障：</strong>部分高端班型提供（争议较大）</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 服务保障 ==================== -->
+<section id="service">
+  <div class="section-header">
+    <div class="icon">4</div>
+    <h3>服务保障 · 答疑/辅导/售后/通过率承诺</h3>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>对比维度</th>
+        <th>环球网校</th>
+        <th>233网校</th>
+        <th>优路教育</th>
+        <th>嗨学网</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>答疑机制</strong></td>
+        <td>24小时AI智能答疑<br>+ 专业师资后台答疑<span class="tag-cell tag-best">最佳</span></td>
+        <td>233平台专业答疑<br>+ AI解题+AI问答<span class="tag-cell tag-high">好</span></td>
+        <td>小U助教+督学+答疑官<br>多工具辅助<span class="tag-cell tag-high">好</span></td>
+        <td>专属助教+答疑群<span class="tag-cell tag-mid">中</span></td>
+      </tr>
+      <tr>
+        <td><strong>学习辅导</strong></td>
+        <td>班主任1V1助学（畅学班）<br>AI遗忘巩固+记忆卡+考前集训刷题<span class="tag-cell tag-best">最佳</span></td>
+        <td>班主任伴学（魔方Pro）<br>1V1全程带学（签约班）<br>社群带学训练营</td>
+        <td>3轮提分体系<br>小U督学+SVIP题库分阶段推送</td>
+        <td>学习计划制定<br>助教答疑群</td>
+      </tr>
+      <tr>
+        <td><strong>不过重学保障</strong></td>
+        <td>云私塾Pro/畅学班：重学2年<br>全程突破班：重学1年</td>
+        <td>魔方Pro：重学2次<br>签约班：重学3次<br>高效班：重学1次</td>
+        <td>协议班未过免费重学或部分退费</td>
+        <td>部分高端班型"不过退费"<span class="tooltip-note">⚠️ 争议大</span></td>
+      </tr>
+      <tr>
+        <td><strong>报考保障</strong></td>
+        <td>未明确报考不成功退费条款</td>
+        <td>魔方Pro+签约班：报考不成功退费<span class="tag-cell tag-best">最佳</span></td>
+        <td>有协议班退费机制</td>
+        <td>存在退费纠纷<span class="tooltip-note">⚠️ 高风险</span></td>
+      </tr>
+      <tr>
+        <td><strong>通过率承诺</strong></td>
+        <td>无明确数字承诺<span class="tag-cell tag-mid">保守</span></td>
+        <td>无明确数字承诺<span class="tag-cell tag-mid">保守</span></td>
+        <td>宣称学员平均通过率较高<span class="tag-cell tag-mid">宣传性</span></td>
+        <td>宣称"超高通过率"<span class="tooltip-note">⚠️ 315曝光虚假宣传</span></td>
+      </tr>
+      <tr>
+        <td><strong>售后支持</strong></td>
+        <td>在线客服咨询<br>存在退费纠纷投诉</td>
+        <td>在线客服<br>存在退费投诉</td>
+        <td>全国200+分校可线下咨询<br>退费纠纷投诉较多</td>
+        <td>退费极难<span class="tag-cell tag-low">最差</span><br>2020央视315曝光</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="highlight-box">
+    <h5>⚠️ 服务保障维度核心洞察</h5>
+    <p><strong>233网校</strong>的"报考不成功退费"机制是行业最强保障条款，直接打消学员报考顾虑。<strong>环球网校</strong>的24小时AI答疑是技术层面的差异化优势，但缺少报考保障条款。<strong>嗨学网</strong>的退费问题已被央视315和消费日报双重曝光，是行业最大负面风险。</p>
+  </div>
+</section>
+
+<!-- ==================== 价格策略 ==================== -->
+<section id="price">
+  <div class="section-header">
+    <div class="icon">5</div>
+    <h3>价格策略 · 各班型定价与性价比对比</h3>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>班型层级</th>
+        <th>环球网校</th>
+        <th>233网校</th>
+        <th>优路教育</th>
+        <th>嗨学网</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>入门/性价比班</strong></td>
+        <td>全程突破班<br>¥399起(限时)→¥784原价<br>2年有效</td>
+        <td>高效班<br>¥539-1560到手<br>原价¥780-2280</td>
+        <td>飙分班 ¥1380起<br>智学私教班 ¥1480起</td>
+        <td>基础线上课程<br>¥1000-2000</td>
+      </tr>
+      <tr>
+        <td><strong>中级/主力班</strong></td>
+        <td>云私塾Pro7.0<br>¥958.8起(限时)→¥1598原价<br>¥869起(另一专业)</td>
+        <td>智学魔方Pro<br>¥690-2270到手<br>原价¥980-3280</td>
+        <td>校庆夺魁云集训<br>¥2000起~¥8800<br>校庆面授 ¥3000起</td>
+        <td>钻石天成班<br>¥3000-6000</td>
+      </tr>
+      <tr>
+        <td><strong>高端/VIP班</strong></td>
+        <td>零基础畅学班<br>¥1699-1999/科<br>¥4999全科（参考往年）</td>
+        <td>签约班<br>¥909-4139到手<br>原价¥1280-5580</td>
+        <td>名城集训营9.0 ¥6000起<br>校庆面授B班 ¥12800<br>高端定制 ¥28000</td>
+        <td>高端班型<br>¥6000+</td>
+      </tr>
+      <tr>
+        <td><strong>价格区间总览</strong></td>
+        <td>¥399~¥4999<span class="tag-cell tag-high">性价比高</span></td>
+        <td>¥539~¥5580<span class="tag-cell tag-high">性价比高</span></td>
+        <td>¥880~¥28000<span class="tag-cell tag-mid">跨度大</span></td>
+        <td>¥1000~¥6000+<span class="tag-cell tag-mid">信息不全</span></td>
+      </tr>
+      <tr>
+        <td><strong>限时优惠力度</strong></td>
+        <td>云私塾Pro限时¥958.8→原价¥1598<br>全程突破¥399→原价¥784<span class="tag-cell tag-best">力度最大</span></td>
+        <td>限时立省¥290-1441<br>蓝宝典最低2.5折</td>
+        <td>校庆夺魁系列优惠</td>
+        <td>限时报名优惠（具体不明）</td>
+      </tr>
+      <tr>
+        <td><strong>单科价格对比</strong></td>
+        <td>公共单科¥1680/科<br>实务单科¥1880/科</td>
+        <td>高效班单科¥539-780<br>魔方Pro单科¥690-980<br>签约班单科¥909-1280</td>
+        <td>私教班单科¥1480起</td>
+        <td>未公开单科价格</td>
+      </tr>
+      <tr>
+        <td><strong>全科价格对比</strong></td>
+        <td>云私塾全科¥3980<br>AI畅学全科¥1980</td>
+        <td>签约班全科¥4139到手<br>魔方Pro全科¥2270到手</td>
+        <td>面授集训全科¥5000-12800</td>
+        <td>钻石天成全科约¥4000-6000</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="highlight-box">
+    <h5>⚠️ 价格策略核心洞察</h5>
+    <p><strong>环球网校</strong>限时优惠力度最大（全程突破班¥399≈原价5折），云私塾Pro限时¥958.8也是极具竞争力的价格。但正常售价区间（¥1598-¥4999）与233网校（¥980-¥5580）处于同一水平。<strong>优路教育</strong>价格跨度最大（¥880-¥28000），高端面授班定价远超线上竞品。<strong>嗨学网</strong>价格信息不透明，需销售一对一报价，增加决策成本。</p>
+  </div>
+</section>
+
+<!-- ==================== 学员口碑 ==================== -->
+<section id="reputation">
+  <div class="section-header">
+    <div class="icon">6</div>
+    <h3>学员口碑 · 用户评价/投诉/通过率反馈</h3>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>对比维度</th>
+        <th>环球网校</th>
+        <th>233网校</th>
+        <th>优路教育</th>
+        <th>嗨学网</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>学员正面评价</strong></td>
+        <td>"云私塾智能化功能强大"<br>"双屏学习体验好"<br>"班主任督促到位"</td>
+        <td>"信春哥过管理"口碑传播<br>"蓝宝典好用"<br>"题库系统完善"</td>
+        <td>"面授集训互动好"<br>"3D课堂生动"<br>"分校线下服务方便"</td>
+        <td>"直播课程生动"<br>"助教答疑及时"</td>
+      </tr>
+      <tr>
+        <td><strong>学员负面评价</strong></td>
+        <td>退费纠纷（黑猫投诉有案例）<br>"云私塾Pro"诱导报班投诉<br>16800元课程退费争议</td>
+        <td>课程质量差投诉<br>退费纠纷（黑猫投诉）<br>"服务态度差"个别反馈</td>
+        <td>退费纠纷频繁（黑猫投诉量大）<br>"霸王条款"退费难<br>虚假宣传投诉</td>
+        <td><span class="tag-cell tag-low">行业最差</span><br>2020央视315曝光退费难<br>2025消费日报再曝光虚假宣传<br>"不过包退"套路诱导<br>"买书变买课"陷阱<br>黑猫投诉量极大</td>
+      </tr>
+      <tr>
+        <td><strong>黑猫投诉量级</strong></td>
+        <td>中等<span class="tag-cell tag-mid">可控</span></td>
+        <td>中等<span class="tag-cell tag-mid">可控</span></td>
+        <td>较多<span class="tag-cell tag-mid">需关注</span></td>
+        <td>极多<span class="tag-cell tag-low">高危</span></td>
+      </tr>
+      <tr>
+        <td><strong>口碑风险等级</strong></td>
+        <td>🟡 中风险 — 有投诉但可控</td>
+        <td>🟡 中风险 — 有投诉但可控</td>
+        <td>🟠 较高风险 — 退费投诉频繁</td>
+        <td>🔴 高风险 — 315双重曝光<span class="tag-cell tag-low">最差</span></td>
+      </tr>
+      <tr>
+        <td><strong>通过率反馈</strong></td>
+        <td>无官方数据，学员反馈一般偏好</td>
+        <td>无官方数据，学员反馈偏好（赵春晓口碑加持）</td>
+        <td>宣称"学员平均通过率较高"<br>实际验证不足</td>
+        <td>宣称"超高通过率"<span class="tooltip-note">⚠️ 被认定虚假宣传</span></td>
+      </tr>
+      <tr>
+        <td><strong>知乎/贴吧口碑</strong></td>
+        <td>"AI功能好用"<br>"师资有实力"但知名度不够</td>
+        <td>"赵春晓讲管理无敌"<br>"题库好用"<br>"蓝宝典必买"</td>
+        <td>"面授有用"<br>"退费难要注意"<br>"唐忍法规不错"</td>
+        <td>"谨慎报班"<br>"退费陷阱"<br>"虚假宣传"</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="highlight-box">
+    <h5>⚠️ 口碑维度核心洞察</h5>
+    <p><strong>嗨学网</strong>的口碑是四大品牌中最差的——2020年央视315曝光退费难问题后，2025年消费日报再次深度报道其虚假宣传"上瘾"的问题。"不过包退""超高通过率"等话术已被官方媒体定性为虚假宣传。<strong>233网校</strong>凭借赵春晓的"口诀级"口碑传播，学员自发传播效应最强。<strong>环球网校</strong>口碑中等偏好，但缺乏类似"信春哥过管理"这样的传播符号。</p>
+  </div>
+</section>
+
+<!-- ==================== 营销策略 ==================== -->
+<section id="marketing">
+  <div class="section-header">
+    <div class="icon">7</div>
+    <h3>营销策略 · 推广渠道/品牌曝光/转化手段</h3>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>对比维度</th>
+        <th>环球网校</th>
+        <th>233网校</th>
+        <th>优路教育</th>
+        <th>嗨学网</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>线上推广渠道</strong></td>
+        <td>官网SEO+SEM<br>知乎专栏<br>B站课程分发<br>微信公众号</td>
+        <td>官网SEO+SEM<br>B站Cheese课程<br>百度贴吧互动<br>微信公众号+小程序<span class="tag-cell tag-high">丰富</span></td>
+        <td>官网SEO+SEM<br>京东课程上架<br>知乎问答<br>200+分校本地化推广<span class="tag-cell tag-best">最广</span></td>
+        <td>官网SEM<br>京东上架<br>抖音/短视频广告<br>百度信息流<span class="tag-cell tag-mid">中</span></td>
+      </tr>
+      <tr>
+        <td><strong>品牌曝光度</strong></td>
+        <td>"回响中国"腾讯教育口碑品牌<br>网信办算法备案背书<br>科大讯飞战略合作<span class="tag-cell tag-high">技术背书</span></td>
+        <td>赵春晓个人IP效应<br>"信春哥过管理"自然传播<span class="tag-cell tag-best">最强IP</span></td>
+        <td>21年品牌沉淀<br>全国200+分校实体曝光<br>3·15活动参与<span class="tag-cell tag-high">广覆盖</span></td>
+        <td>2020央视315负面曝光<br>2025消费日报再曝光<span class="tag-cell tag-low">负面</span></td>
+      </tr>
+      <tr>
+        <td><strong>引流手段</strong></td>
+        <td>¥5起体验课<br>免费备考资料包<br>真题免费下载<br>新教材变动分析</td>
+        <td>0元10节大咖体验课<br>0元真题带学营<br>免费PDF资料下载<br>新人0元领注安好课<span class="tag-cell tag-best">最强引流</span></td>
+        <td>一人一课Pro免费体验<br>试听功能<br>分校线下体验课</td>
+        <td>注册送资料包<br>低价引流课</td>
+      </tr>
+      <tr>
+        <td><strong>转化策略</strong></td>
+        <td>限时优惠倒计时<br>在线咨询+客服跟进<br>恢复原价紧迫感</td>
+        <td>限时立省倒计时<br>学霸君社群运营<br>蓝宝典组合套装<span class="tag-cell tag-high">体系化</span></td>
+        <td>分校线下咨询转化<br>校庆夺魁主题营销<br>班型矩阵选择引导<span class="tag-cell tag-high">OMO转化</span></td>
+        <td>一对一销售电话推销<br>"不过包退"话术<span class="tooltip-note">⚠️ 被曝光虚假</span></td>
+      </tr>
+      <tr>
+        <td><strong>私域运营</strong></td>
+        <td>学习交流群<br>班主任社群督促</td>
+        <td>扫码进群学习<br>学霸君社群<br>组队刷题功能<span class="tag-cell tag-best">最佳</span></td>
+        <td>分校微信群<br>小U督学小程序</td>
+        <td>答疑群</td>
+      </tr>
+      <tr>
+        <td><strong>内容营销</strong></td>
+        <td>备考攻略文章<br>教材变动解读<br>知乎评测文章</td>
+        <td>蓝宝典品牌化内容<br>真题解析直播<br>考情分析文章<span class="tag-cell tag-best">最强</span></td>
+        <td>备考预算攻略<br>考情资讯</td>
+        <td>以广告投放为主<br>内容营销偏弱</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="highlight-box">
+    <h5>⚠️ 营销策略核心洞察</h5>
+    <p><strong>233网校</strong>的引流体系最完善——0元体验课+0元带学营+免费PDF形成了完整的"免费→付费"漏斗。<strong>环球网校</strong>在技术背书方面最强（网信办备案、DeepSeek合作），但营销转化手段偏传统。<strong>优路教育</strong>的OMO转化是独家优势——200+分校提供线下信任背书。<strong>嗨学网</strong>依赖电话推销+虚假承诺转化，已被官方媒体多次曝光。</p>
+  </div>
+</section>
+
+<!-- ==================== 技术平台 ==================== -->
+<section id="tech">
+  <div class="section-header">
+    <div class="icon">8</div>
+    <h3>技术平台 · APP体验/直播功能/学习工具</h3>
+  </div>
+
+  <div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>对比维度</th>
+        <th>环球网校</th>
+        <th>233网校</th>
+        <th>优路教育</th>
+        <th>嗨学网</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>APP名称</strong></td>
+        <td>环球网校APP</td>
+        <td>233网校APP</td>
+        <td>优路教育APP<br>+消防3D课堂APP<br>+小优督学小程序</td>
+        <td>嗨学课堂APP</td>
+      </tr>
+      <tr>
+        <td><strong>AI能力</strong></td>
+        <td>DeepSeek+ATSGPT算法<br>网信办深度合成备案<br>24小时AI答疑<br>AI定制学习路径<br>AI自动理错题<span class="tag-cell tag-best">行业领先</span></td>
+        <td>AI解题+AI问答<br>注安报考AI问答助手<span class="tag-cell tag-high">好</span></td>
+        <td>一人一课Pro AI升级<br>小U助教AI辅助<span class="tag-cell tag-mid">中</span></td>
+        <td>AI学霸助手<br>智能解答课程疑问<span class="tag-cell tag-mid">中</span></td>
+      </tr>
+      <tr>
+        <td><strong>直播功能</strong></td>
+        <td>直播课程流畅<br>直播预告系统<br>回放功能</td>
+        <td>免费直播课丰富<br>真题解析直播<br>蓝宝典备考直播<span class="tag-cell tag-high">丰富</span></td>
+        <td>全直播带学模式<br>3D实景课堂<br>直播+面授OMO<span class="tag-cell tag-best">最创新</span></td>
+        <td>名师直播授课<br>实时解答<br>回放+离线下载</td>
+      </tr>
+      <tr>
+        <td><strong>题库系统</strong></td>
+        <td>云私塾智能刷题<br>基础→强化→冲刺三阶段配题<br>遗忘巩固复习推送</td>
+        <td>章节练习/精选试题/每日一练<br>历年真题/模拟考场/考前点题<br>易错题/模考大赛/答题闯关<span class="tag-cell tag-best">最全面</span></td>
+        <td>SVIP专属题库<br>分阶段推送习题<br>考点魔炼题库</td>
+        <td>历年真题库<br>模考测评<br>不限次数模考</td>
+      </tr>
+      <tr>
+        <td><strong>学习工具特色</strong></td>
+        <td>智能双屏学习（课书双屏/课题双屏）<br>记忆卡互动<br>遗忘巩固智能提醒<br>3步AI定制学习计划<span class="tag-cell tag-best">最智能</span></td>
+        <td>考点打卡<br>答题闯关<br>组队刷题<br>小程序订阅提醒</td>
+        <td>3D实景课堂<br>VR实操<br>小U督学/答疑官<br>消防3D课堂APP<span class="tag-cell tag-high">最沉浸</span></td>
+        <td>离线下载<br>倍速播放<br>投屏功能<br>AI学霸助手</td>
+      </tr>
+      <tr>
+        <td><strong>数据沉淀</strong></td>
+        <td>99万+日学习行为数据<br>124万条答疑数据<br>2875万条做题记录<br>1亿次看课<span class="tag-cell tag-best">最深厚</span></td>
+        <td>题库数据量大<br>用户活跃度高</td>
+        <td>数百万用户数据<br>21年沉淀</td>
+        <td>数据量级未公开</td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+  <div class="highlight-box">
+    <h5>⚠️ 技术平台核心洞察</h5>
+    <p><strong>环球网校</strong>在AI技术层面是行业领先者——接入DeepSeek R1满血版推理大模型，且已获得网信办深度合成服务算法备案（国家背书）。智能双屏学习、遗忘巩固、AI自动理错题等功能具有真正的技术差异化。<strong>233网校</strong>题库系统最全面（12种刷题模式），社群功能最强（组队刷题/答题闯关）。<strong>优路教育</strong>的3D实景课堂+VR实操是沉浸式学习方向的创新，但仅限面授高端班。嗨学网技术功能相对基础。</p>
+  </div>
+</section>
+
+<!-- ==================== 综合雷达图 ==================== -->
+<section id="radar">
+  <div class="section-header">
+    <div class="icon">9</div>
+    <h3>综合雷达图 · 七维度评分总览</h3>
+  </div>
+
+  <div class="radar-section">
+    <svg class="radar-svg" viewBox="0 0 680 600" xmlns="http://www.w3.org/2000/svg">
+      <!-- 背景 -->
+      <defs>
+        <radialGradient id="bgGrad" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#f5f5f5"/>
+          <stop offset="100%" stop-color="#eeeeee"/>
+        </radialGradient>
+      </defs>
+      <rect x="0" y="0" width="680" height="600" fill="url(#bgGrad)" rx="12"/>
+
+      <!-- 雷达图参数 -->
+      <!-- 中心 (340, 300), 半径 200 -->
+      <!-- 7维度: 师资(90°), 课程(30°), 服务(-30°), 价格(-90°), 口碑(150°), 营销(210°), 技术(270°) -->
+
+      <!-- 网格线 - 5层 -->
+      <g stroke="#e0e0e0" stroke-width="1" fill="none">
+        <!-- 20% -->
+        <polygon points="340,260 377,273 377,327 340,340 303,327 303,273" />
+        <!-- 40% -->
+        <polygon points="340,220 414,247 414,353 340,380 266,353 266,247" />
+        <!-- 60% -->
+        <polygon points="340,180 452,220 452,380 340,420 228,380 228,220" />
+        <!-- 80% -->
+        <polygon points="340,140 489,193 489,407 340,460 191,407 191,193" />
+        <!-- 100% -->
+        <polygon points="340,100 526,167 526,433 340,500 154,433 154,167" />
+      </g>
+
+      <!-- 轴线 -->
+      <g stroke="#bdbdbd" stroke-width="1">
+        <line x1="340" y1="300" x2="340" y2="100" /> <!-- 师资 -->
+        <line x1="340" y1="300" x2="526" y2="167" /> <!-- 课程 -->
+        <line x1="340" y1="300" x2="526" y2="433" /> <!-- 服务 -->
+        <line x1="340" y1="300" x2="340" y2="500" /> <!-- 价格 -->
+        <line x1="340" y1="300" x2="154" y2="433" /> <!-- 口碑 -->
+        <line x1="340" y1="300" x2="154" y2="167" /> <!-- 营销 -->
+        <line x1="340" y1="300" x2="228" y2="220" /> <!-- 技术 -->
+      </g>
+
+      <!-- 维度标签 -->
+      <g font-size="14" font-weight="600" fill="#424242">
+        <text x="340" y="88" text-anchor="middle">师资力量</text>
+        <text x="540" y="162" text-anchor="start">课程产品</text>
+        <text x="540" y="445" text-anchor="start">服务保障</text>
+        <text x="340" y="518" text-anchor="middle">价格策略</text>
+        <text x="140" y="445" text-anchor="end">学员口碑</text>
+        <text x="140" y="162" text-anchor="end">营销策略</text>
+        <text x="218" y="212" text-anchor="end">技术平台</text>
+      </g>
+
+      <!-- 评分数据 -->
+      <!-- 环球网校: 师资80, 课程75, 服务78, 价格82, 口碑65, 营销65, 技术90 -->
+      <!-- 233网校: 师资85, 课程82, 服务80, 价格80, 口碑75, 萇销82, 技术75 -->
+      <!-- 优路教育: 师资70, 课程78, 服务72, 价格70, 口碑60, 萇销78, 技术78 -->
+      <!-- 嗨学网: 师资55, 课程60, 服务50, 价格65, 口碑30, 萇销55, 技术60 -->
+
+      <!-- 环球网校 (蓝) -->
+      <polygon points="340,160 471,215 489,407 340,460 197,403 215,218 252,240"
+               fill="#1a73e8" fill-opacity="0.15" stroke="#1a73e8" stroke-width="2.5"/>
+
+      <!-- 233网校 (绿) -->
+      <polygon points="340,140 470,220 489,407 340,440 181,407 181,220 228,237"
+               fill="#2e7d32" fill-opacity="0.12" stroke="#2e7d32" stroke-width="2.5"/>
+
+      <!-- 优路教育 (橙) -->
+      <polygon points="340,180 452,233 457,385 340,430 207,391 196,220 251,244"
+               fill="#ef6c00" fill-opacity="0.12" stroke="#ef6c00" stroke-width="2.5"/>
+
+      <!-- 嗨学网 (红) -->
+      <polygon points="340,245 377,293 398,355 340,370 234,365 234,263 266,270"
+               fill="#e53935" fill-opacity="0.1" stroke="#e53935" stroke-width="2"/>
+
+      <!-- 数据点标签 -->
+      <g font-size="11" font-weight="500">
+        <!-- 环球网校 -->
+        <text x="340" y="155" text-anchor="middle" fill="#1a73e8">80</text>
+        <text x="476" y="210" fill="#1a73e8">75</text>
+        <text x="495" y="410" fill="#1a73e8">78</text>
+        <text x="340" y="468" text-anchor="middle" fill="#1a73e8">82</text>
+        <text x="192" y="398" fill="#1a73e8">65</text>
+        <text x="210" y="213" fill="#1a73e8">65</text>
+        <text x="248" y="235" fill="#1a73e8">90</text>
+
+        <!-- 233网校 -->
+        <text x="340" y="135" text-anchor="middle" fill="#2e7d32">85</text>
+        <text x="475" y="215" fill="#2e7d32">82</text>
+        <text x="495" y="410" fill="#2e7d32">80</text>
+        <text x="340" y="448" text-anchor="middle" fill="#2e7d32">80</text>
+        <text x="176" y="410" fill="#2e7d32">75</text>
+        <text x="176" y="215" fill="#2e7d32">82</text>
+        <text x="224" y="232" fill="#2e7d32">75</text>
+      </g>
+
+      <!-- 图例 -->
+      <g transform="translate(460, 530)">
+        <rect x="0" y="0" width="14" height="14" fill="#1a73e8" rx="3"/>
+        <text x="20" y="12" font-size="13" fill="#424242">环球网校</text>
+        <rect x="100" y="0" width="14" height="14" fill="#2e7d32" rx="3"/>
+        <text x="120" y="12" font-size="13" fill="#424242">233网校</text>
+      </g>
+      <g transform="translate(460, 555)">
+        <rect x="0" y="0" width="14" height="14" fill="#ef6c00" rx="3"/>
+        <text x="20" y="12" font-size="13" fill="#424242">优路教育</text>
+        <rect x="100" y="0" width="14" height="14" fill="#e53935" rx="3"/>
+        <text x="120" y="12" font-size="13" fill="#424242">嗨学网</text>
+      </g>
+    </svg>
+  </div>
+
+  <!-- 评分条形图 -->
+  <div style="margin-top:24px;">
+    <h4 style="margin-bottom:16px;">📊 七维度评分对比（百分制）</h4>
+    <div style="display:grid; grid-template-columns: repeat(7, 1fr); gap:12px;">
+      <div class="card" style="text-align:center;">
+        <h5 style="font-size:13px;color:var(--gray-700);">师资力量</h5>
+        <div class="score-bar"><span class="label">环球</span><div class="bar-wrap"><div class="bar hqwx" style="width:80%"></div></div><span class="val">80</span></div>
+        <div class="score-bar"><span class="label">233</span><div class="bar-wrap"><div class="bar 233" style="width:85%"></div></div><span class="val">85</span></div>
+        <div class="score-bar"><span class="label">优路</span><div class="bar-wrap"><div class="bar youlu" style="width:70%"></div></div><span class="val">70</span></div>
+        <div class="score-bar"><span class="label">嗨学</span><div class="bar-wrap"><div class="bar haixue" style="width:55%"></div></div><span class="val">55</span></div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h5 style="font-size:13px;color:var(--gray-700);">课程产品</h5>
+        <div class="score-bar"><span class="label">环球</span><div class="bar-wrap"><div class="bar hqwx" style="width:75%"></div></div><span class="val">75</span></div>
+        <div class="score-bar"><span class="label">233</span><div class="bar-wrap"><div class="bar 233" style="width:82%"></div></div><span class="val">82</span></div>
+        <div class="score-bar"><span class="label">优路</span><div class="bar-wrap"><div class="bar youlu" style="width:78%"></div></div><span class="val">78</span></div>
+        <div class="score-bar"><span class="label">嗨学</span><div class="bar-wrap"><div class="bar haixue" style="width:60%"></div></div><span class="val">60</span></div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h5 style="font-size:13px;color:var(--gray-700);">服务保障</h5>
+        <div class="score-bar"><span class="label">环球</span><div class="bar-wrap"><div class="bar hqwx" style="width:78%"></div></div><span class="val">78</span></div>
+        <div class="score-bar"><span class="label">233</span><div class="bar-wrap"><div class="bar 233" style="width:80%"></div></div><span class="val">80</span></div>
+        <div class="score-bar"><span class="label">优路</span><div class="bar-wrap"><div class="bar youlu" style="width:72%"></div></div><span class="val">72</span></div>
+        <div class="score-bar"><span class="label">嗨学</span><div class="bar-wrap"><div class="bar haixue" style="width:50%"></div></div><span class="val">50</span></div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h5 style="font-size:13px;color:var(--gray-700);">价格策略</h5>
+        <div class="score-bar"><span class="label">环球</span><div class="bar-wrap"><div class="bar hqwx" style="width:82%"></div></div><span class="val">82</span></div>
+        <div class="score-bar"><span class="label">233</span><div class="bar-wrap"><div class="bar 233" style="width:80%"></div></div><span class="val">80</span></div>
+        <div class="score-bar"><span class="label">优路</span><div class="bar-wrap"><div class="bar youlu" style="width:70%"></div></div><span class="val">70</span></div>
+        <div class="score-bar"><span class="label">嗨学</span><div class="bar-wrap"><div class="bar haixue" style="width:65%"></div></div><span class="val">65</span></div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h5 style="font-size:13px;color:var(--gray-700);">学员口碑</h5>
+        <div class="score-bar"><span class="label">环球</span><div class="bar-wrap"><div class="bar hqwx" style="width:65%"></div></div><span class="val">65</span></div>
+        <div class="score-bar"><span class="label">233</span><div class="bar-wrap"><div class="bar 233" style="width:75%"></div></div><span class="val">75</span></div>
+        <div class="score-bar"><span class="label">优路</span><div class="bar-wrap"><div class="bar youlu" style="width:60%"></div></div><span class="val">60</span></div>
+        <div class="score-bar"><span class="label">嗨学</span><div class="bar-wrap"><div class="bar haixue" style="width:30%"></div></div><span class="val">30</span></div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h5 style="font-size:13px;color:var(--gray-700);">营销策略</h5>
+        <div class="score-bar"><span class="label">环球</span><div class="bar-wrap"><div class="bar hqwx" style="width:65%"></div></div><span class="val">65</span></div>
+        <div class="score-bar"><span class="label">233</span><div class="bar-wrap"><div class="bar 233" style="width:82%"></div></div><span class="val">82</span></div>
+        <div class="score-bar"><span class="label">优路</span><div class="bar-wrap"><div class="bar youlu" style="width:78%"></div></div><span class="val">78</span></div>
+        <div class="score-bar"><span class="label">嗨学</span><div class="bar-wrap"><div class="bar haixue" style="width:55%"></div></div><span class="val">55</span></div>
+      </div>
+      <div class="card" style="text-align:center;">
+        <h5 style="font-size:13px;color:var(--gray-700);">技术平台</h5>
+        <div class="score-bar"><span class="label">环球</span><div class="bar-wrap"><div class="bar hqwx" style="width:90%"></div></div><span class="val">90</span></div>
+        <div class="score-bar"><span class="label">233</span><div class="bar-wrap"><div class="bar 233" style="width:75%"></div></div><span class="val">75</span></div>
+        <div class="score-bar"><span class="label">优路</span><div class="bar-wrap"><div class="bar youlu" style="width:78%"></div></div><span class="val">78</span></div>
+        <div class="score-bar"><span class="label">嗨学</span><div class="bar-wrap"><div class="bar haixue" style="width:60%"></div></div><span class="val">60</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card" style="margin-top:24px; text-align:center;">
+    <h4 style="margin-bottom:8px;">🏆 综合评分排名</h4>
+    <div style="display:flex; justify-content:center; gap:40px; font-size:18px; font-weight:700;">
+      <span style="color:var(--green);">233网校 <span style="font-size:24px;">82.1</span></span>
+      <span style="color:var(--primary);">环球网校 <span style="font-size:24px;">75.9</span></span>
+      <span style="color:var(--orange);">优路教育 <span style="font-size:24px;">72.3</span></span>
+      <span style="color:var(--accent);">嗨学网 <span style="font-size:24px;">50.0</span></span>
+    </div>
+    <p style="font-size:13px; color:var(--gray-500); margin-top:8px;">注：综合评分 = 七维度加权平均（师资×15% + 课程×15% + 服务×15% + 价格×10% + 口碑×15% + 营销×15% + 技术×15%）</p>
+  </div>
+</section>
+
+<!-- ==================== SWOT分析 ==================== -->
+<section id="swot">
+  <div class="section-header">
+    <div class="icon">10</div>
+    <h3>环球网校 SWOT 分析</h3>
+  </div>
+
+  <div class="swot-grid">
+    <div class="swot-item s">
+      <h5>✅ 优势 Strengths</h5>
+      <ul>
+        <li>AI技术行业领先——DeepSeek+ATSGPT算法，网信办备案背书</li>
+        <li>23年老品牌沉淀，"回响中国"口碑品牌认证</li>
+        <li>师资覆盖7个专业方向，行业最全</li>
+        <li>智能双屏学习/遗忘巩固/记忆卡等差异化功能</li>
+        <li>云私塾7.0五步教学法系统化（理解→练习→测评→记忆→真题）</li>
+        <li>99万+日学习行为数据+1亿次看课，数据沉淀深厚</li>
+        <li>限时优惠力度最大，性价比突出</li>
+        <li>科大讯飞战略合作，技术合作生态丰富</li>
+      </ul>
+    </div>
+    <div class="swot-item w">
+      <h5>❌ 劣势 Weaknesses</h5>
+      <ul>
+        <li>师资品牌化不足——缺乏"口诀级"传播符号（如233的"信春哥过管理"）</li>
+        <li>营销引流体系不如233完善——免费体验课不够丰富</li>
+        <li>班型命名辨识度弱——"云私塾Pro"/"零基础畅学班"不如233的"智学魔方Pro"/"签约班"直观</li>
+        <li>缺少"报考不成功退费"条款——233在此维度领先</li>
+        <li>缺乏线下OMO能力——200+分校是优路独家优势</li>
+        <li>退费投诉存在——16800元课程退费争议等案例</li>
+        <li>社群运营不如233活跃——缺乏组队刷题等互动玩法</li>
+      </ul>
+    </div>
+    <div class="swot-item o">
+      <h5>🔵 机会 Opportunities</h5>
+      <ul>
+        <li>嗨学网315负面曝光 → 其学员流失可直接转化</li>
+        <li>AI教育赛道政策利好 → 网信办备案已是先发优势</li>
+        <li>注安考试报名人数持续增长 → 市场扩容</li>
+        <li>短视频/直播带货风口 → 可拓展抖音/快手获客渠道</li>
+        <li>企业内训需求增长 → B端市场拓展机会</li>
+        <li>2026新教材变动 → 可做"变动解读"引流爆款内容</li>
+        <li>DeepSeek持续升级 → AI功能可持续迭代领先</li>
+      </ul>
+    </div>
+    <div class="swot-item t">
+      <h5>🟠 威胁 Threats</h5>
+      <ul>
+        <li>233网校综合竞争力最强（82.1分），是最大竞品威胁</li>
+        <li>唐忍跨平台授课 → 233和优路共享名师资源</li>
+        <li>优路OMO面授模式 → 高端学员可能被分流</li>
+        <li>行业退费投诉普遍 → 信任危机可能波及全行业</li>
+        <li>AI功能被竞品快速跟进 → 技术差异化窗口期有限</li>
+        <li>注安考试政策变动 → 课程内容需快速响应</li>
+        <li>短视频平台低价课程冲击 → 价格竞争加剧</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 优化建议 ==================== -->
+<section id="suggest">
+  <div class="section-header">
+    <div class="icon">11</div>
+    <h3>优化建议 · 环球网校差异化竞争策略</h3>
+  </div>
+
+  <div class="suggest-card">
+    <h5>① 打造师资IP符号体系 <span class="priority p0">P0 紧急</span></h5>
+    <p>对标233网校"信春哥，过管理"的口诀传播效应，为环球网校每位核心讲师打造专属传播符号。例如：康小瑜→"跟着小瑜，注安不迷"，宋晓婷→"晓婷女神，法规稳过"，孙玉保→"玉保护航，安全上岸"。在B站/抖音/小红书等平台做讲师个人IP内容输出，将师资实力转化为可传播的品牌资产。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>② 补齐"报考保障"条款 <span class="priority p0">P0 紧急</span></h5>
+    <p>233网校"报考不成功退费"是学员决策时的关键信任锚点。环球网校应在云私塾Pro和零基础畅学班中加入同类条款，甚至做得更优——比如"报考不成功全额退+赠送下期免费重学"，直接超越233的保障力度。这不仅是条款补齐，更是信任壁垒的构建。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>③ 构建免费引流漏斗体系 <span class="priority p0">P0 紧急</span></h5>
+    <p>对标233的0元10节大咖体验课+0元真题带学营+免费PDF资料包的完整引流体系，环球网校需大幅扩充免费内容池：①推出0元3节名师体验课（每科1节，覆盖法规/管理/技术）；②每周固定1场免费直播（真题解析/考情分析/教材变动解读）；③免费备考资料包从现有7-8种扩展到15+种。目标是让潜在学员在付费前就能深度体验环球网校的教学质量。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>④ 强化社群运营与互动玩法 <span class="priority p1">P1 重要</span></h5>
+    <p>233网校的"组队刷题""答题闯关""模考大赛""考点打卡"等互动玩法是学员粘性关键。环球网校可在云私塾7.0中新增：①组队刷题模式（3-5人小队，每日PK）；②周末模考大赛（全科模拟+实时排名）；③考点打卡日历（连续打卡21天送资料）；④学霸君社群IP运营（类似233的学霸君角色，每天在群内推送考点/答疑）。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>⑤ 教辅品牌化闭环构建 <span class="priority p1">P1 重要</span></h5>
+    <p>233的蓝宝典4.0已形成"教辅→题库→课程→社群"的完整闭环。环球网校应打造自有教辅品牌（如"金钥匙"/"智学宝典"），配套：①纸质教辅+电子版双形态；②教辅与云私塾7.0深度绑定（AI推荐教辅对应章节）；③教辅单独售卖引流（类似蓝宝典4.7折引流策略）；④教辅配套直播解读课（免费）。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>⑥ 精准收割嗨学网流失学员 <span class="priority p1">P1 重要</span></h5>
+    <p>嗨学网2020央视315+2025消费日报双重曝光后，大量学员正在流失。环球网校可在知乎/小红书/贴吧等平台做"嗨学网退费难真实经历+环球网校靠谱替代"的内容营销，同时在广告投放中定向嗨学网搜索词，用"正规退费保障""网信办备案""23年品牌"等信任标签精准转化。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>⑦ 班型命名与视觉体系升级 <span class="priority p1">P1 重要</span></h5>
+    <p>现有"云私塾Pro"/"零基础畅学班"/"全程突破班"命名偏技术感/通用感，辨识度不够。建议重塑为更具行动感的命名体系：①入门→"启航班"（冲劲+起步感）；②主力→"领航班"（引领+方向感）；③高端→"旗舰班"（最高级+尊享感）。同时每个班型配专属颜色和图标，形成视觉辨识闭环。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>⑧ 抖音/短视频获客渠道建设 <span class="priority p2">P2 持续</span></h5>
+    <p>当前四大竞品在短视频获客方面均处于起步阶段。环球网校可率先发力：①每周3-5条注安考点短视频（30秒-1分钟口诀式讲解）；②讲师个人抖音号矩阵运营；③"注安备考30天挑战"等系列直播；④短视频引流到云私塾7.0体验课。短视频是2026年最大的流量增量渠道。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>⑨ B端企业内训市场拓展 <span class="priority p2">P2 持续</span></h5>
+    <p>注安考试学员中大量来自央企/国企/大型民企的安全管理部门。环球网校可开发"企业注安团训套餐"，以云私塾7.0+企业定制学习计划+批量账号管理+学习数据报告为产品包，对接企业HR/EHS部门。这不仅是新收入来源，更是品牌背书——"XX央企选择环球网校"的信任效应。</p>
+  </div>
+
+  <div class="suggest-card">
+    <h5>⑩ AI功能持续迭代与场景深化 <span class="priority p2">P2 持续</span></h5>
+    <p>DeepSeek+ATSGPT算法是环球网校最大的技术差异化优势，但竞品正在快速跟进。建议：①每季度推出AI新功能（如AI模拟面试/AI案例分析/AI学习伙伴）；②将AI功能开放给免费用户体验（限制次数，付费解锁全量）；③与DeepSeek持续合作迭代，保持算法领先性；④做AI功能对比视频（环球vs竞品），直接展示技术优势。</p>
+  </div>
+
+  <!-- 建议优先级汇总 -->
+  <div class="card" style="margin-top:24px;">
+    <h4 style="margin-bottom:16px;">📋 建议优先级汇总</h4>
+    <div class="table-wrap">
+    <table>
+      <thead>
+        <tr><th>优先级</th><th>建议</th><th>预期效果</th><th>执行周期</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><span class="priority p0">P0</span></td>
+          <td>师资IP符号体系</td>
+          <td>口碑自传播效应，对标"信春哥过管理"</td>
+          <td>1-2个月</td>
+        </tr>
+        <tr>
+          <td><span class="priority p0">P0</span></td>
+          <td>报考保障条款补齐</td>
+          <td>消除学员报考顾虑，提升转化率</td>
+          <td>1个月内</td>
+        </tr>
+        <tr>
+          <td><span class="priority p0">P0</span></td>
+          <td>免费引流漏斗体系</td>
+          <td>免费→付费转化漏斗完善，获客成本降低</td>
+          <td>2-3个月</td>
+        </tr>
+        <tr>
+          <td><span class="priority p1">P1</span></td>
+          <td>社群运营与互动玩法</td>
+          <td>学员粘性提升，续报率/完课率提高</td>
+          <td>2-3个月</td>
+        </tr>
+        <tr>
+          <td><span class="priority p1">P1</span></td>
+          <td>教辅品牌化闭环</td>
+          <td>教辅引流+课程闭环，产品护城河</td>
+          <td>3-4个月</td>
+        </tr>
+        <tr>
+          <td><span class="priority p1">P1</span></td>
+          <td>收割嗨学流失学员</td>
+          <td>精准转化，低成本获取存量市场学员</td>
+          <td>持续执行</td>
+        </tr>
+        <tr>
+          <td><span class="priority p1">P1</span></td>
+          <td>班型命名视觉升级</td>
+          <td>品牌辨识度提升，降低学员选择成本</td>
+          <td>1-2个月</td>
+        </tr>
+        <tr>
+          <td><span class="priority p2">P2</span></td>
+          <td>短视频获客渠道</td>
+          <td>新流量增量，获客渠道多元化</td>
+          <td>3-6个月</td>
+        </tr>
+        <tr>
+          <td><span class="priority p2">P2</span></td>
+          <td>B端企业内训</td>
+          <td>新收入来源+品牌背书效应</td>
+          <td>4-6个月</td>
+        </tr>
+        <tr>
+          <td><span class="priority p2">P2</span></td>
+          <td>AI功能持续迭代</td>
+          <td>保持技术领先，防御竞品跟进</td>
+          <td>持续迭代</td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 尾部 ==================== -->
+<div class="footer">
+  <p>中级注册安全工程师培训 · 竞品调研报告 | 调研日期：2026年6月 | 数据来源：官网、搜索引擎、黑猫投诉、知乎/贴吧、消费日报等</p>
+  <p>本报告仅供内部决策参考，数据基于公开信息搜集，部分信息可能因时效性存在偏差</p>
+</div>
+
+</div>
+</body>
+</html>

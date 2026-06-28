@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>教研团队 AI 助手使用培训手册 - 环球网校</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --bg-secondary: #f8f9fb;
+    --bg-card: #ffffff;
+    --text: #1a1a2e;
+    --text-secondary: #5a5a7a;
+    --text-tertiary: #8a8aa0;
+    --border: #e8eaef;
+    --border-light: #f0f1f5;
+    --primary: #4f46e5;
+    --primary-light: #eef2ff;
+    --primary-dark: #3730a3;
+    --success: #059669;
+    --success-light: #ecfdf5;
+    --warning: #d97706;
+    --warning-light: #fffbeb;
+    --danger: #dc2626;
+    --danger-light: #fef2f2;
+    --info: #2563eb;
+    --info-light: #eff6ff;
+    --radius: 12px;
+    --radius-sm: 8px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-lg: 0 4px 16px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+    --font-sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    --font-mono: "SF Mono", "Fira Code", "Fira Mono", "Consolas", monospace;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--bg-secondary);
+    color: var(--text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #a855f7 100%);
+    color: white;
+    padding: 48px 0 40px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 500px;
+    height: 500px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 50%;
+  }
+  .hero-content { position: relative; z-index: 1; }
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 13px;
+    margin-bottom: 16px;
+  }
+  .hero h1 {
+    font-size: 32px;
+    font-weight: 600;
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+  }
+  .hero p {
+    font-size: 15px;
+    opacity: 0.85;
+    max-width: 560px;
+  }
+  .hero-meta {
+    display: flex;
+    gap: 20px;
+    margin-top: 16px;
+    font-size: 13px;
+    opacity: 0.75;
+  }
+
+  /* Section */
+  .section {
+    padding: 32px 0;
+  }
+  .section-header {
+    margin-bottom: 20px;
+  }
+  .section-label {
+    display: inline-block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--primary);
+    background: var(--primary-light);
+    padding: 3px 10px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .section-header h2 {
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--text);
+    letter-spacing: -0.3px;
+  }
+  .section-header p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+    max-width: 640px;
+  }
+
+  /* Cards */
+  .card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 16px;
+    box-shadow: var(--shadow-sm);
+  }
+  .card-accent {
+    border-left: 3px solid var(--primary);
+  }
+  .card-success { border-left: 3px solid var(--success); }
+  .card-warning { border-left: 3px solid var(--warning); }
+  .card-danger { border-left: 3px solid var(--danger); }
+  .card-info { border-left: 3px solid var(--info); }
+
+  .card h3 {
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--text);
+  }
+  .card h4 {
+    font-size: 14px;
+    font-weight: 600;
+    margin: 16px 0 8px;
+  }
+  .card p, .card li {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+
+  /* Template box - the star */
+  .template-box {
+    background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+    border-radius: var(--radius);
+    padding: 28px 28px 20px;
+    margin: 20px 0;
+    color: #e2e8f0;
+    position: relative;
+    overflow: hidden;
+    box-shadow: var(--shadow-lg);
+  }
+  .template-box::after {
+    content: '';
+    position: absolute;
+    top: -30px;
+    right: -30px;
+    width: 120px;
+    height: 120px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 50%;
+  }
+  .template-box .tb-badge {
+    display: inline-block;
+    background: rgba(168,85,247,0.3);
+    color: #c4b5fd;
+    font-size: 11px;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 4px;
+    margin-bottom: 12px;
+    letter-spacing: 0.5px;
+  }
+  .template-box .tb-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #f5f3ff;
+    margin-bottom: 6px;
+  }
+  .template-box .tb-subtitle {
+    font-size: 13px;
+    color: #a5b4fc;
+    margin-bottom: 16px;
+  }
+  .template-box .tb-step {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 10px;
+    align-items: flex-start;
+  }
+  .template-box .tb-step-num {
+    flex-shrink: 0;
+    width: 26px;
+    height: 26px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: #c4b5fd;
+    margin-top: 1px;
+  }
+  .template-box .tb-step-content {
+    flex: 1;
+    font-size: 13px;
+    line-height: 1.65;
+  }
+  .template-box .tb-step-content strong {
+    color: #e9d5ff;
+    font-weight: 600;
+  }
+
+  /* Code block */
+  .code-block {
+    background: #f8f9fb;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    margin: 12px 0;
+    font-family: var(--font-mono);
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--text);
+    overflow-x: auto;
+    white-space: pre-wrap;
+    word-break: break-all;
+  }
+  .code-block .hl { color: var(--primary); font-weight: 600; }
+  .code-block .cm { color: var(--text-tertiary); }
+  .code-block .kw { color: var(--info); }
+
+  /* Scenario card */
+  .scenario-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: box-shadow 0.2s;
+  }
+  .scenario-card:hover { box-shadow: var(--shadow-lg); }
+  .scenario-header {
+    padding: 16px 24px;
+    background: var(--bg-secondary);
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .scenario-num {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .scenario-header h3 {
+    font-size: 15px;
+    font-weight: 600;
+    flex: 1;
+  }
+  .scenario-tag {
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 4px;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .scenario-body { padding: 20px 24px; }
+  .scenario-body h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-secondary);
+    margin: 16px 0 8px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .scenario-body h4:first-child { margin-top: 0; }
+
+  .bad-result {
+    background: var(--danger-light);
+    border: 1px solid #fecaca;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin: 8px 0;
+  }
+  .bad-result::before {
+    content: '❌ 小白常犯写法 ';
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--danger);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .bad-result p {
+    font-size: 13px;
+    color: #7f1d1d;
+    margin: 0;
+  }
+
+  .good-result {
+    background: var(--success-light);
+    border: 1px solid #a7f3d0;
+    border-radius: var(--radius-sm);
+    padding: 12px 16px;
+    margin: 8px 0;
+  }
+  .good-result::before {
+    content: '✅ 标准化提问 ';
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--success);
+    display: block;
+    margin-bottom: 6px;
+  }
+  .good-result p {
+    font-size: 13px;
+    color: #064e3b;
+    margin: 0;
+  }
+
+  /* Tips grid */
+  .tips-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+  }
+  .tip-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow-sm);
+  }
+  .tip-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  .tip-card h4 { font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+  .tip-card p { font-size: 13px; color: var(--text-secondary); line-height: 1.6; }
+
+  /* Mistake list */
+  .mistake-list {
+    list-style: none;
+    padding: 0;
+  }
+  .mistake-list li {
+    display: flex;
+    gap: 10px;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+    font-size: 14px;
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .mistake-list li:last-child { border-bottom: none; }
+  .mistake-cross {
+    color: var(--danger);
+    font-weight: 700;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  /* Quick Ref */
+  .quick-ref {
+    background: linear-gradient(135deg, #faf5ff 0%, #f5f3ff 100%);
+    border: 2px solid #ddd6fe;
+    border-radius: var(--radius);
+    padding: 28px;
+    margin: 20px 0;
+  }
+  .quick-ref h3 {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    color: var(--primary-dark);
+  }
+  .quick-ref-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+  }
+  .quick-ref-item {
+    background: white;
+    border-radius: var(--radius-sm);
+    padding: 14px 16px;
+    border: 1px solid var(--border);
+  }
+  .quick-ref-item .qr-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--primary);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 4px;
+  }
+  .quick-ref-item .qr-val {
+    font-size: 13px;
+    color: var(--text);
+  }
+
+  /* Checklist */
+  .checklist {
+    list-style: none;
+    padding: 0;
+  }
+  .checklist li {
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+    padding: 6px 0;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .checklist li .chk {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 2px solid var(--success);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 2px;
+    color: var(--success);
+    font-size: 10px;
+  }
+
+  /* Footer */
+  .footer {
+    text-align: center;
+    padding: 40px 0;
+    color: var(--text-tertiary);
+    font-size: 13px;
+    border-top: 1px solid var(--border-light);
+    margin-top: 20px;
+  }
+
+  /* Table */
+  .mini-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 13px;
+    margin: 12px 0;
+  }
+  .mini-table th {
+    text-align: left;
+    padding: 10px 12px;
+    background: var(--bg-secondary);
+    font-weight: 600;
+    color: var(--text);
+    border-bottom: 1px solid var(--border);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+  }
+  .mini-table td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--border-light);
+    color: var(--text-secondary);
+    line-height: 1.6;
+  }
+  .mini-table tr:last-child td { border-bottom: none; }
+
+  @media (max-width: 640px) {
+    .hero h1 { font-size: 24px; }
+    .container { padding: 0 16px; }
+    .tips-grid { grid-template-columns: 1fr; }
+    .quick-ref-grid { grid-template-columns: 1fr 1fr; }
+    .scenario-body { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ HERO ============ -->
+<div class="hero">
+  <div class="container hero-content">
+    <div class="hero-badge">环球网校 · 教研内部培训</div>
+    <h1>教研团队 AI 助手使用培训手册</h1>
+    <p>从零开始，15 分钟学会用标准化提问让 AI 替你产出讲义、题目、课件、解析和报告。</p>
+    <div class="hero-meta">
+      <span>📅 2026 年 6 月</span>
+      <span>👥 面向全体教研老师</span>
+      <span>⏱ 阅读约 12 分钟</span>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ============ 快速入门 ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Part 1</div>
+    <h2>快速入门：AI 能帮教研做什么？</h2>
+    <p>先搞清楚 AI 的能力边界，才知道什么时候该用它、怎么用最值。</p>
+  </div>
+
+  <table class="mini-table">
+    <thead>
+      <tr><th>教研场景</th><th>AI 能做什么</th><th>你不能期待 AI 做什么</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>讲义编写</strong></td>
+        <td>按考纲章节生成讲义初稿、考点清单、背诵手册，教研审核后定稿</td>
+        <td>100% 无误的终稿（必须人工核对法条编号和计算公式）</td>
+      </tr>
+      <tr>
+        <td><strong>题目命制</strong></td>
+        <td>根据考点生成单选题、多选题、案例分析题 + 完整解析 + 法条依据</td>
+        <td>直接上架的成品题（需要教研逐题审核难度和合规性）</td>
+      </tr>
+      <tr>
+        <td><strong>课件制作</strong></td>
+        <td>输出 PPT 逐页内容框架、讲解逻辑、随堂提问设计</td>
+        <td>直接可用的 .pptx 文件（需要手动或通过腾讯文档套入模板）</td>
+      </tr>
+      <tr>
+        <td><strong>答疑解析</strong></td>
+        <td>生成标准答案 + 法条依据 + 计算步骤 + 得分框架</td>
+        <td>代替教研老师的专业判断（需教研确认答案口径）</td>
+      </tr>
+      <tr>
+        <td><strong>数据分析</strong></td>
+        <td>根据你给的错题数据表格，产出错误类型分类、薄弱考点追溯、TOP 榜单</td>
+        <td>无数据凭空分析（必须提供原始数据）</td>
+      </tr>
+      <tr>
+        <td><strong>考纲研读</strong></td>
+        <td>新旧考纲逐条对比、标注增减和分值变化，输出对比报告</td>
+        <td>预测出题方向（只能基于考纲文本分析，无法替代教研的经验判断）</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="card card-info" style="margin-top:16px;">
+    <h3>核心原则：AI 是"初稿机器"，教研是"质量守门人"</h3>
+    <p>你的价值在于<strong>审核、校准、拍板</strong>。AI 帮你省掉 80% 的重复性初稿劳动，剩下 20% 的关键决策必须你来做。</p>
+  </div>
+</div>
+
+<!-- ============ 核心模板 ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Part 2 · 核心</div>
+    <h2>万能提问模板：五要素法</h2>
+    <p>这是本手册最重要的内容。无论什么教研任务，套这个模板，输出质量立刻提升一个档次。</p>
+  </div>
+
+  <div class="template-box">
+    <div class="tb-badge">⭐ 收藏这个模板</div>
+    <div class="tb-title">标准化提问五要素</div>
+    <div class="tb-subtitle">缺一个要素，AI 就可能自由发挥，结果不可控</div>
+
+    <div class="tb-step">
+      <div class="tb-step-num">1</div>
+      <div class="tb-step-content"><strong>角色设定</strong> —— 告诉 AI 它现在是谁<br>示例：「你是一位有 10 年教龄的中级注册安全工程师培训讲师」</div>
+    </div>
+    <div class="tb-step">
+      <div class="tb-step-num">2</div>
+      <div class="tb-step-content"><strong>任务描述</strong> —— 具体要做什么事<br>示例：「请编写一份《安全生产法律法规》第三章的考点清单」</div>
+    </div>
+    <div class="tb-step">
+      <div class="tb-step-num">3</div>
+      <div class="tb-step-content"><strong>输入材料</strong> —— 给 AI 提供原始素材<br>示例：「以下是本章官方考纲原文：[粘贴内容]」或上传考纲文件</div>
+    </div>
+    <div class="tb-step">
+      <div class="tb-step-num">4</div>
+      <div class="tb-step-content"><strong>输出要求</strong> —— 格式、层级、长度、风格<br>示例：「按掌握/熟悉/了解三级分类，每个考点标注法条编号和近 3 年考频，输出为表格格式」</div>
+    </div>
+    <div class="tb-step">
+      <div class="tb-step-num">5</div>
+      <div class="tb-step-content"><strong>约束条件</strong> —— 明确不要什么<br>示例：「不要展开超纲内容，不要使用非官方术语，法条必须精确到条款号」</div>
+    </div>
+  </div>
+
+  <div class="card card-accent">
+    <h3>把五要素浓缩成一句话模板</h3>
+    <div class="code-block">
+<span class="cm">【复制下面这段话，填空即可】</span>
+
+<span class="hl">你是一位</span> [角色，如：注安法规科目资深讲师]。
+<span class="hl">请帮我</span> [任务，如：编写技术科目第三章讲义初稿]。
+<span class="hl">以下是参考材料：</span>[粘贴考纲/教材原文/已有资料]。
+<span class="hl">请按以下要求输出：</span>
+1. [格式要求：如表格/分点/Markdown]
+2. [内容要求：如分层级/标注考频/含法条依据]
+3. [长度要求：如每章不超过 2000 字]
+<span class="hl">注意：</span>[约束条件：如不要超纲/不要口语化/法条必须精确]
+</div>
+  </div>
+</div>
+
+<!-- ============ 场景案例 ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Part 3 · 实战</div>
+    <h2>六大场景 · 完整案例演示</h2>
+    <p>每个案例都展示"小白常犯的模糊提问"和"标准化提问"，对照学习效果最好。</p>
+  </div>
+
+  <!-- 场景1 -->
+  <div class="scenario-card">
+    <div class="scenario-header">
+      <div class="scenario-num">1</div>
+      <h3>讲义编写：安全生产法律法规考点清单</h3>
+      <span class="scenario-tag">教材研发</span>
+    </div>
+    <div class="scenario-body">
+      <div class="bad-result">
+        <p>帮我写一份安全生产法的考点清单。</p>
+      </div>
+      <p style="font-size:12px;color:var(--text-tertiary);margin:6px 0 10px;">👆 这种写法AI不知道你要哪个章节、什么层级、什么格式，出来的东西大概率不能用。</p>
+
+      <div class="good-result">
+        <p>
+你是一位有 8 年教龄的中级注册安全工程师《法规》科目培训讲师。<br><br>
+请帮我编写《安全生产法律法规》科目中"第三章 安全生产法"的考点清单，面向基础阶段学员。<br><br>
+以下是本章考纲原文：<br>
+[此处粘贴 2025 版中级注安法规科目第三章考纲内容]<br><br>
+请按以下要求输出：<br>
+1. 按"掌握 / 熟悉 / 了解"三级分类<br>
+2. 每个考点标注对应法条编号（如《安全生产法》第 XX 条）<br>
+3. 标注近 3 年（2023-2025）该考点在真题中的出现频次<br>
+4. 每个考点附加一句"易错提醒"<br>
+5. 输出为 Markdown 表格格式<br><br>
+注意：<br>
+- 以 2021 年修订版《安全生产法》为法条依据<br>
+- 不要引入其他单行法规的内容<br>
+- 考点描述控制在 30 字以内
+        </p>
+      </div>
+
+      <h4>这个提问为什么好？</h4>
+      <ul class="checklist">
+        <li><span class="chk">✓</span> 角色明确：法规定向讲师，AI 会自动调用法规知识</li>
+        <li><span class="chk">✓</span> 层级清晰：基础阶段，AI 知道不写拔高内容</li>
+        <li><span class="chk">✓</span> 输入具体：粘贴考纲，AI 有据可依</li>
+        <li><span class="chk">✓</span> 格式固定：表格 + 三级分类 + 考频 + 易错提醒，输出结构完全可控</li>
+        <li><span class="chk">✓</span> 有约束：限定了法条版本、不超纲、字数控制</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 场景2 -->
+  <div class="scenario-card">
+    <div class="scenario-header">
+      <div class="scenario-num">2</div>
+      <h3>题目命制：原创单选 + 完整解析</h3>
+      <span class="scenario-tag">题库建设</span>
+    </div>
+    <div class="scenario-body">
+      <div class="bad-result">
+        <p>帮我出几道关于电气安全的单选题。</p>
+      </div>
+
+      <div class="good-result">
+        <p>
+你是一位中级注册安全工程师《安全生产技术基础》科目的命题专家。<br><br>
+请根据以下考点出 3 道单选题：<br>
+考点：电气安全技术 — 触电防护技术 — 保护接地与保护接零<br>
+难度：中等（适合已完成基础阶段学习的学员）<br><br>
+参考考纲要求：<br>
+[此处粘贴电气安全章节考纲]<br><br>
+请按以下要求输出每道题：<br>
+1. 题干：场景化描述（贴近实际工作场景），50-80 字<br>
+2. 四个选项（A/B/C/D），干扰项要有迷惑性（常见概念混淆点）<br>
+3. 正确答案 + 完整解析（含：法条/标准依据、判断逻辑、每个错误选项的排除理由）<br>
+4. 标注考点对应的考纲编号<br>
+5. 附加：该题的"学员常见错误思路"分析<br><br>
+注意：<br>
+- 依据 GB/T 13869《用电安全导则》和《安全生产技术基础》官方教材<br>
+- 不要出超纲或已废止标准的题目<br>
+- 选项不要出现"以上都对/以上都不对"
+        </p>
+      </div>
+
+      <h4>关键技巧</h4>
+      <ul class="checklist">
+        <li><span class="chk">✓</span> 要求场景化题干 + 有迷惑性的干扰项 → 出题质量接近人工</li>
+        <li><span class="chk">✓</span> 要求标注考纲编号 → 方便后续题库标签管理</li>
+        <li><span class="chk">✓</span> 要求"学员常见错误思路" → 直接可用于答疑和磨课</li>
+        <li><span class="chk">✓</span> 约束"不出超纲题、不出以上都对" → 避免 AI 偷懒</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 场景3 -->
+  <div class="scenario-card">
+    <div class="scenario-header">
+      <div class="scenario-num">3</div>
+      <h3>课件制作：一节课的完整教案 + 逐页 PPT 内容</h3>
+      <span class="scenario-tag">课程设计</span>
+    </div>
+    <div class="scenario-body">
+      <div class="bad-result">
+        <p>帮我做一个安全管理课程的 PPT。</p>
+      </div>
+
+      <div class="good-result">
+        <p>
+你是一位中级注安《安全生产管理》科目的资深讲师，擅长将复杂知识点拆解为易于讲解的课件结构。<br><br>
+请为以下知识点制作一节课（45 分钟）的完整教案和 PPT 内容框架：<br>
+知识点：安全生产管理 — 安全评价方法 — 安全检查表法（SCL）<br>
+授课对象：零基础学员（第一次接触安全评价方法）<br><br>
+参考材料：<br>
+[粘贴教材对应章节内容]<br><br>
+请输出：<br><br>
+第一部分：教案<br>
+1. 教学目标（知识目标 + 能力目标）<br>
+2. 重难点分析（标注"重点""难点"）<br>
+3. 教学时间分配（导入 5min / 讲解 25min / 案例 10min / 小结 5min）<br>
+4. 与本课程其他知识点的衔接说明<br><br>
+第二部分：PPT 逐页内容（共约 15-18 页）<br>
+每页包含：<br>
+- 页面标题<br>
+- 核心内容（3-5 个要点）<br>
+- 讲师备注（这一页该怎么说、什么语气、要不要互动）<br>
+- 如有案例，完整写出案例描述和分析<br><br>
+第三部分：随堂互动设计<br>
+- 3 个课堂提问（含参考答案）<br>
+- 1 个小组讨论题目<br><br>
+注意：<br>
+- 用生活化比喻辅助讲解专业概念（如把 SCL 比作"出门前的物品清单"）<br>
+- 避免大段文字堆砌，PPT 每页要点不超过 5 条<br>
+- 语言口语化但不失专业感
+        </p>
+      </div>
+
+      <h4>这个案例的亮点</h4>
+      <ul class="checklist">
+        <li><span class="chk">✓</span> 一次性产出教案 + PPT 框架 + 互动设计，三合一</li>
+        <li><span class="chk">✓</span> "生活化比喻"的要求，让零基础学员听得懂</li>
+        <li><span class="chk">✓</span> 明确了"讲师备注"和"互动设计"，不只是给内容还给教法</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 场景4 -->
+  <div class="scenario-card">
+    <div class="scenario-header">
+      <div class="scenario-num">4</div>
+      <h3>答疑解析：一道案例题的标准答案 + 得分框架</h3>
+      <span class="scenario-tag">答疑标准化</span>
+    </div>
+    <div class="scenario-body">
+      <div class="bad-result">
+        <p>这道案例分析题答案是什么？[粘贴题目]</p>
+      </div>
+
+      <div class="good-result">
+        <p>
+你是一位中级注册安全工程师《安全生产专业实务》科目的阅卷专家，熟悉主观题的评分标准和踩分规则。<br><br>
+请为以下实务案例分析题生成标准答案和评分细则：<br>
+[粘贴完整的案例题目，包含背景材料和小问]<br><br>
+请按以下结构输出：<br>
+1. 考点识别：列出本题涉及的考点及考纲编号<br>
+2. 解题思路：分步骤说明这道题的思考路径<br>
+3. 标准答案：逐问给出完整参考答案<br>
+4. 评分细则：每小问的踩分点、分值分配、得分关键词<br>
+5. 常见失分点：学员答这道题最容易在哪里丢分，为什么<br>
+6. 答疑引导话术：如果学员答错了，老师应该怎么引导他找到正确答案（不要直接说答案）<br><br>
+注意：<br>
+- 法条引用必须精确到条款号<br>
+- 评分细则要细化到"写出XX给 2 分，只写YY 给 1 分"的粒度<br>
+- 答疑话术要"启发式"，不是"告知式"
+        </p>
+      </div>
+
+      <h4>这解决了什么痛点？</h4>
+      <ul class="checklist">
+        <li><span class="chk">✓</span> 四位老师讲同一道题，答案和评分标准完全一致</li>
+        <li><span class="chk">✓</span> 答疑不再靠老师个人发挥，有标准引导话术</li>
+        <li><span class="chk">✓</span> 评价细则可直接用于模考阅卷</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- 场景5 -->
+  <div class="scenario-card">
+    <div class="scenario-header">
+      <div class="scenario-num">5</div>
+      <h3>考纲分析：新旧考纲对比报告</h3>
+      <span class="scenario-tag">内容生产</span>
+    </div>
+    <div class="scenario-body">
+      <div class="bad-result">
+        <p>帮我对比一下新旧考纲有什么变化。</p>
+      </div>
+
+      <div class="good-result">
+        <p>
+你是一位中级注册安全工程师考试政策研究专家，每年第一时间研读官方考纲变化。<br><br>
+请对比以下两份考纲，输出差异分析报告：<br>
+旧版：2024 版中级注安《安全生产技术基础》考试大纲<br>
+[粘贴 2024 版考纲全文或上传文件]<br>
+新版：2025 版中级注安《安全生产技术基础》考试大纲<br>
+[粘贴 2025 版考纲全文或上传文件]<br><br>
+请按以下结构输出报告：<br>
+1. 总体变化概述（100 字以内总结）<br>
+2. 新增考点清单（逐条列出，标注所在章节）<br>
+3. 删除考点清单（逐条列出，标注原所在章节）<br>
+4. 调整考点清单（原考点内容有变化的，标注变化细节）<br>
+5. 分值权重变化分析（如考纲有标注分值变化的）<br>
+6. 对教研资料的影响评估：哪些讲义/题目/课件需要更新<br>
+7. 建议更新优先级（紧急 / 重要 / 可延后）<br><br>
+注意：<br>
+- 逐条对比，不要遗漏任何细节<br>
+- 对"措辞微调但实质未变"的考点特别标注<br>
+- 输出为正式报告格式，语体书面化
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 场景6 -->
+  <div class="scenario-card">
+    <div class="scenario-header">
+      <div class="scenario-num">6</div>
+      <h3>数据分析：学员错题诊断报告</h3>
+      <span class="scenario-tag">质量管控</span>
+    </div>
+    <div class="scenario-body">
+      <div class="bad-result">
+        <p>帮我分析一下学生的错题数据。</p>
+      </div>
+
+      <div class="good-result">
+        <p>
+你是一位教育数据分析师，擅长从学员答题数据中诊断教学薄弱环节。<br><br>
+以下是某期注安《管理》科目模考错题数据（共 200 名学员参加）：<br>
+[粘贴错题数据表格，含：题号、考点名称、错误人数、错误率、常见错误选项]<br><br>
+请按以下要求产出分析报告：<br>
+1. 错题 TOP 10 榜单（按错误率降序）<br>
+2. 错误类型分类统计：<br>
+   - 法条混淆类（选了相似法条的干扰项）占比 ___%<br>
+   - 概念不清类（选了概念相近的错误选项）占比 ___%<br>
+   - 计算失误类（计算题选错）占比 ___%<br>
+   - 审题偏差类（题目理解错误）占比 ___%<br>
+3. 薄弱考点集群：按章节汇总失分率，识别最薄弱的 3 个章节<br>
+4. 教学改进建议：针对每个薄弱考点，给出具体的补漏方案（重讲知识点 / 出变式题 / 录制微课）<br>
+5. 学员分层建议：按分数段划分零基础/中等/拔高，给出针对性学习建议<br><br>
+注意：<br>
+- 所有百分比保留一位小数<br>
+- 改进建议要具体到"XX 章节 XX 知识点需要补充 XX 类型练习"<br>
+- 报告语言要教研向（可被教学主管直接用于教研会讨论）
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 进阶技巧 ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Part 4</div>
+    <h2>进阶技巧：让 AI 输出更精准</h2>
+    <p>掌握了五要素模板后，这些技巧能让你的效率再翻倍。</p>
+  </div>
+
+  <div class="tips-grid">
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#eef2ff;color:#4f46e5;">📎</div>
+      <h4>上传附件代替粘贴</h4>
+      <p>考纲 PDF、教材 Word、错题 Excel 都可以直接上传文件，比手动粘贴省时间，而且 AI 能读取表格和 PDF 中的结构化数据。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#ecfdf5;color:#059669;">🔄</div>
+      <h4>不满意就追问</h4>
+      <p>AI 一次输出不够好？直接说"第三题难度太低，重出""考点清单太简略，每个考点加 50 字解释"。追问不花钱。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#fffbeb;color:#d97706;">📋</div>
+      <h4>批量处理</h4>
+      <p>别一次只让 AI 做一道题。说"请按上述模板出 10 道题"，一次产出，逐个审核，效率高得多。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#fef2f2;color:#dc2626;">🔗</div>
+      <h4>上下文接力</h4>
+      <p>上一轮生成了讲义，下一轮可以说"基于刚才的讲义，帮我出配套练习题"。AI 记得上下文，不用重复粘贴。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#eff6ff;color:#2563eb;">📊</div>
+      <h4>直连腾讯文档</h4>
+      <p>生成的表格、讲义、报告可以直接写入腾讯文档在线协同编辑，不需要复制粘贴切换工具。</p>
+    </div>
+    <div class="tip-card">
+      <div class="tip-icon" style="background:#f5f3ff;color:#7c3aed;">🤖</div>
+      <h4>设置定时任务</h4>
+      <p>每周一自动抓取应急管理部最新通知生成简报、每月 1 号自动产出上月错题报告。设置一次，自动执行。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 常见错误 ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Part 5</div>
+    <h2>新手最容易犯的 6 个错误</h2>
+    <p>避开这些坑，输出质量立刻提升。</p>
+  </div>
+
+  <div class="card card-danger">
+    <ul class="mistake-list">
+      <li>
+        <span class="mistake-cross">✕</span>
+        <div>
+          <strong>只有任务，没有角色。</strong><br>
+          错误：「帮我写一份讲义。」<br>
+          正确：「你是一位注安技术科目讲师，请帮我写电气安全章节讲义。」<br>
+          <span style="color:var(--text-tertiary);font-size:12px;">原因：没有角色，AI 不知道用什么知识体系和语言风格。</span>
+        </div>
+      </li>
+      <li>
+        <span class="mistake-cross">✕</span>
+        <div>
+          <strong>没有给参考材料。</strong><br>
+          错误：「帮我出一道关于应急预案的题。」<br>
+          正确：粘贴考纲原文或教材内容后再请 AI 出题。<br>
+          <span style="color:var(--text-tertiary);font-size:12px;">原因：不给材料，AI 可能引用过时或错误的标准，你得花更多时间核对。</span>
+        </div>
+      </li>
+      <li>
+        <span class="mistake-cross">✕</span>
+        <div>
+          <strong>没有指定格式。</strong><br>
+          错误：「写个考点总结。」<br>
+          正确：「用 Markdown 表格输出，三列：考点名称 / 法条依据 / 考频。」<br>
+          <span style="color:var(--text-tertiary);font-size:12px;">原因：AI 默认输出可能是段落文字，不是你想要的表格或清单。</span>
+        </div>
+      </li>
+      <li>
+        <span class="mistake-cross">✕</span>
+        <div>
+          <strong>没有设置约束条件。</strong><br>
+          错误：「帮我写一份安全管理的讲义。」<br>
+          正确：「…注意：以 2021 版《安全生产法》为准，不要引入已废止的 2014 版内容，不要超纲。」<br>
+          <span style="color:var(--text-tertiary);font-size:12px;">原因：不设边界，AI 可能混入旧法条或拓展到不相关领域。</span>
+        </div>
+      </li>
+      <li>
+        <span class="mistake-cross">✕</span>
+        <div>
+          <strong>一次塞太多任务。</strong><br>
+          错误：「帮我写安工四科的讲义、题库、课件、还有学习计划。」<br>
+          正确：一次聚焦一个任务，完成后用上下文接力做下一个。<br>
+          <span style="color:var(--text-tertiary);font-size:12px;">原因：任务太多 AI 容易混淆重点，每个任务的输出质量都会下降。</span>
+        </div>
+      </li>
+      <li>
+        <span class="mistake-cross">✕</span>
+        <div>
+          <strong>拿到输出不审核直接用。</strong><br>
+          错误：AI 出的题直接录入题库。<br>
+          正确：逐题核对法条编号、确认考纲匹配、检查选项逻辑，确认无误后入库。<br>
+          <span style="color:var(--text-tertiary);font-size:12px;">原因：AI 不能替代专业判断，法条编号和标准引用是教研的生命线。</span>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 快速参考 ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Part 6</div>
+    <h2>快速参考卡：每个场景的提问关键词</h2>
+    <p>不记得完整模板时，打开这张卡，找到对应场景，用关键词拼出你的提问。</p>
+  </div>
+
+  <div class="quick-ref">
+    <h3>教研场景 × 提问关键词速查</h3>
+    <div class="quick-ref-grid">
+      <div class="quick-ref-item">
+        <div class="qr-label">讲义/考点清单</div>
+        <div class="qr-val">角色：XX科目讲师 + 章节 + 基础/提升/冲刺 + 考频标注 + 法条依据 + 表格格式</div>
+      </div>
+      <div class="quick-ref-item">
+        <div class="qr-label">出题</div>
+        <div class="qr-val">角色：命题专家 + 考点 + 难度 + 题型 + 场景化题干 + 干扰项迷惑性 + 完整解析 + 考纲编号</div>
+      </div>
+      <div class="quick-ref-item">
+        <div class="qr-label">课件/教案</div>
+        <div class="qr-val">角色：XX科目讲师 + 知识点 + 学员水平 + 教案(目标/重难点/时间) + PPT逐页内容 + 讲师备注 + 互动设计</div>
+      </div>
+      <div class="quick-ref-item">
+        <div class="qr-label">答疑解析</div>
+        <div class="qr-val">角色：阅卷专家 + 考点识别 + 解题思路 + 标准答案 + 评分细则 + 常见失分点 + 引导话术</div>
+      </div>
+      <div class="quick-ref-item">
+        <div class="qr-label">考纲对比</div>
+        <div class="qr-val">角色：政策研究专家 + 新旧考纲全文 + 新增/删除/调整清单 + 分值变化 + 影响评估 + 更新优先级</div>
+      </div>
+      <div class="quick-ref-item">
+        <div class="qr-label">错题分析</div>
+        <div class="qr-val">角色：数据分析师 + 原始数据表格 + TOP榜单 + 错误分类统计 + 薄弱章节 + 补漏建议 + 学员分层</div>
+      </div>
+      <div class="quick-ref-item">
+        <div class="qr-label">学习计划</div>
+        <div class="qr-val">角色：备考规划师 + 学员基础类型 + 备考周期 + 四科搭配 + 每周任务 + 阶段目标 + 时间表格</div>
+      </div>
+      <div class="quick-ref-item">
+        <div class="qr-label">速记/口诀</div>
+        <div class="qr-val">角色：记忆法专家 + 知识点列表 + 口诀要求(押韵/谐音/联想) + 附带解释说明</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ 自查清单 ============ -->
+<div class="section">
+  <div class="section-header">
+    <div class="section-label">Bonus</div>
+    <h2>发送前自查清单</h2>
+    <p>每次提问前，花 10 秒钟过一遍，确保不踩坑。</p>
+  </div>
+
+  <div class="card card-success">
+    <ul class="checklist">
+      <li><span class="chk">✓</span> 我设定了角色吗？（AI 知道它是谁）</li>
+      <li><span class="chk">✓</span> 任务描述具体吗？（不是"帮我写个东西"）</li>
+      <li><span class="chk">✓</span> 给了参考材料吗？（考纲/教材/数据表格）</li>
+      <li><span class="chk">✓</span> 指定了输出格式吗？（表格/分点/报告/PPT框架）</li>
+      <li><span class="chk">✓</span> 设置了约束条件吗？（法条版本/不超纲/字数限制）</li>
+      <li><span class="chk">✓</span> 一次只做一个任务吗？（不贪多）</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ============ 最后 ============ -->
+<div class="section">
+  <div class="card card-accent" style="text-align:center;padding:32px;">
+    <h3 style="font-size:18px;margin-bottom:8px;">记住一句话</h3>
+    <p style="font-size:15px;color:var(--text-secondary);max-width:500px;margin:0 auto;">
+      <strong>AI 是你的初稿机器，你是质量守门人。</strong><br>
+      你给的指令越清晰，它给的输出越精准。<br>
+      把省下来的时间，花在最需要你专业判断的地方。
+    </p>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">
+  环球网校 · 教研团队内部培训资料 · 2026 年 6 月
+</div>
+
+</body>
+</html>

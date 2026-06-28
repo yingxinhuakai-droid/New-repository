@@ -1,0 +1,936 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI HOT 晨报 — 2026年06月24日 周三</title>
+<style>
+:root {
+  --bg: #0a0e14;
+  --bg-card: #131820;
+  --bg-card-hover: #1a2230;
+  --border: #1e2a3a;
+  --text: #c9d1d9;
+  --text-dim: #6e7681;
+  --text-bright: #e6edf3;
+  --accent: #58a6ff;
+  --accent-glow: rgba(88,166,255,0.15);
+  --green: #3fb950;
+  --orange: #d2991d;
+  --purple: #a371f7;
+  --pink: #db61a2;
+  --cyan: #39c5cf;
+  --red: #f85149;
+  --hero-gradient: linear-gradient(135deg, #0d1117 0%, #161b22 50%, #0d1117 100%);
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* Hero */
+.hero {
+  background: var(--hero-gradient);
+  border-bottom: 1px solid var(--border);
+  padding: 48px 0 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(88,166,255,0.04) 0%, transparent 60%),
+              radial-gradient(ellipse at 80% 80%, rgba(163,113,247,0.03) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+.hero-date {
+  font-size: 14px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--text-bright);
+  margin-bottom: 4px;
+  letter-spacing: -0.5px;
+}
+
+.hero-subtitle {
+  font-size: 16px;
+  color: var(--text-dim);
+  margin-bottom: 32px;
+}
+
+.hero-total {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(88,166,255,0.1);
+  border: 1px solid rgba(88,166,255,0.2);
+  border-radius: 20px;
+  padding: 6px 20px;
+  margin-bottom: 32px;
+}
+
+.hero-total-num {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hero-total-label {
+  font-size: 14px;
+  color: var(--text-dim);
+}
+
+.stats-row {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.stat-chip {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 10px 18px;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+  color: inherit;
+}
+
+.stat-chip:hover {
+  border-color: var(--accent);
+  background: #1a2230;
+  transform: translateY(-1px);
+}
+
+.stat-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.stat-dot.models { background: var(--accent); }
+.stat-dot.products { background: var(--green); }
+.stat-dot.industry { background: var(--orange); }
+.stat-dot.paper { background: var(--purple); }
+.stat-dot.tip { background: var(--cyan); }
+
+.stat-label {
+  font-size: 13px;
+  color: var(--text-dim);
+}
+
+.stat-count {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-bright);
+}
+
+/* Navigation */
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,14,20,0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  padding: 12px 0;
+}
+
+.nav-inner {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  padding: 6px 16px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: var(--text-dim);
+  text-decoration: none;
+  transition: all 0.2s;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--accent);
+  background: rgba(88,166,255,0.08);
+}
+
+/* Section */
+.section {
+  padding: 48px 0 20px;
+}
+
+.section-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.section-icon {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.section-title {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--text-bright);
+}
+
+.section-count {
+  font-size: 13px;
+  color: var(--text-dim);
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 12px;
+  margin-left: auto;
+}
+
+/* Card Grid */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 16px;
+}
+
+.card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 20px 22px;
+  transition: all 0.25s;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: var(--border);
+  transition: background 0.25s;
+}
+
+.card:hover {
+  border-color: #30363d;
+  background: var(--bg-card-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+}
+
+.card:hover::before {
+  background: var(--accent);
+}
+
+.card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.card-num {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-dim);
+  background: rgba(110,118,129,0.1);
+  border-radius: 6px;
+  padding: 2px 8px;
+  flex-shrink: 0;
+  font-variant-numeric: tabular-nums;
+}
+
+.card-source {
+  font-size: 11px;
+  color: var(--accent);
+  background: rgba(88,166,255,0.08);
+  border: 1px solid rgba(88,166,255,0.15);
+  border-radius: 10px;
+  padding: 2px 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  line-height: 1.5;
+}
+
+.card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-bright);
+  line-height: 1.5;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.card-summary {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: var(--accent);
+  text-decoration: none;
+  padding: 4px 10px;
+  border-radius: 6px;
+  transition: all 0.2s;
+}
+
+.card-link:hover {
+  background: rgba(88,166,255,0.1);
+}
+
+.card-link svg {
+  width: 12px;
+  height: 12px;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.footer {
+  border-top: 1px solid var(--border);
+  padding: 32px 0;
+  margin-top: 48px;
+  text-align: center;
+}
+
+.footer-info {
+  font-size: 13px;
+  color: var(--text-dim);
+  line-height: 2;
+}
+
+.footer-brand {
+  font-size: 14px;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #30363d; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero { padding: 36px 0 28px; }
+  .hero-title { font-size: 26px; }
+  .card-grid { grid-template-columns: 1fr; }
+  .stats-row { gap: 8px; }
+  .stat-chip { padding: 8px 12px; }
+  .stat-label { font-size: 12px; }
+  .container { padding: 0 16px; }
+  .section { padding: 32px 0 12px; }
+  .section-title { font-size: 19px; }
+}
+
+@media (max-width: 480px) {
+  .hero-title { font-size: 22px; }
+  .hero-total { padding: 4px 14px; }
+  .hero-total-num { font-size: 22px; }
+  .card { padding: 16px 18px; gap: 10px; }
+  .card-title { font-size: 14px; }
+  .nav-link { font-size: 12px; padding: 4px 10px; }
+}
+</style>
+</head>
+<body>
+
+<!-- Hero -->
+<header class="hero">
+  <div class="container">
+    <div class="hero-date">AI HOT · DAILY BRIEFING</div>
+    <h1 class="hero-title">AI 晨报</h1>
+    <p class="hero-subtitle">2026年06月24日 周三</p>
+    <div class="hero-total">
+      <span class="hero-total-num">26</span>
+      <span class="hero-total-label">条精选</span>
+    </div>
+    <div class="stats-row">
+      <a href="#models" class="stat-chip">
+        <span class="stat-dot models"></span>
+        <span class="stat-label">模型发布/更新</span>
+        <span class="stat-count">7</span>
+      </a>
+      <a href="#products" class="stat-chip">
+        <span class="stat-dot products"></span>
+        <span class="stat-label">产品发布/更新</span>
+        <span class="stat-count">6</span>
+      </a>
+      <a href="#industry" class="stat-chip">
+        <span class="stat-dot industry"></span>
+        <span class="stat-label">行业动态</span>
+        <span class="stat-count">5</span>
+      </a>
+      <a href="#paper" class="stat-chip">
+        <span class="stat-dot paper"></span>
+        <span class="stat-label">论文研究</span>
+        <span class="stat-count">3</span>
+      </a>
+      <a href="#tips" class="stat-chip">
+        <span class="stat-dot tip"></span>
+        <span class="stat-label">技巧与观点</span>
+        <span class="stat-count">5</span>
+      </a>
+
+    </div>
+  </div>
+</header>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <div class="container nav-inner">
+    <a href="#models" class="nav-link">模型发布/更新</a>
+    <a href="#products" class="nav-link">产品发布/更新</a>
+    <a href="#industry" class="nav-link">行业动态</a>
+    <a href="#paper" class="nav-link">论文研究</a>
+    <a href="#tips" class="nav-link">技巧与观点</a>
+
+  </div>
+</nav>
+
+<!-- Sections -->
+<main class="container">
+
+  <section class="section" id="models">
+    <div class="section-header">
+      <span class="section-icon">🧠</span>
+      <h2 class="section-title">模型发布/更新</h2>
+      <span class="section-count">7 条</span>
+    </div>
+    <div class="card-grid">
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#1</span>
+          <span class="card-source">X：Sky Computing Lab (@haoailab)</span>
+        </div>
+        <h3 class="card-title">FastWan-QAD：单卡5090上1.8秒生成5秒视频</h3>
+        <p class="card-summary">Sky Computing Lab 发布 FastWan-QAD 视频生成模型系列，</p>
+        <div class="card-footer">
+          <a href="https://x.com/haoailab/status/2069493820732170695" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#2</span>
+          <span class="card-source">公众号：京东JoyAI</span>
+        </div>
+        <h3 class="card-title">京东全栈开源JoyAI-VL-Interaction，从“一问一答”走向“边看边说”</h3>
+        <p class="card-summary">京东近日开源全球首个全栈交互模型JoyAI-VL-Interaction，获vLLM-Omni原生支持。</p>
+        <div class="card-footer">
+          <a href="https://mp.weixin.qq.com/s/IY6XGp4k6VgD9ZPH6YprCA" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#3</span>
+          <span class="card-source">IT之家（RSS）</span>
+        </div>
+        <h3 class="card-title">网易有道发布 Confucius4-TTS：14 语种跨语种无口音语音克隆开源模型</h3>
+        <p class="card-summary">网易有道推出“子曰 4.0”TTS 引擎 Confucius4-TTS，声称是业内首个支持 14 种语言跨语种无口音、</p>
+        <div class="card-footer">
+          <a href="https://www.ithome.com/0/967/636.htm" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#4</span>
+          <span class="card-source">X：Krea AI (@krea_ai)</span>
+        </div>
+        <h3 class="card-title">Krea 2 技术报告正式发布</h3>
+        <p class="card-summary">我们的技术报告已发布。 深入解析创建 Krea 2 所用的数据、架构及训练技巧。</p>
+        <div class="card-footer">
+          <a href="https://x.com/krea_ai/status/2069473417804591191" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#5</span>
+          <span class="card-source">公众号：火山引擎</span>
+        </div>
+        <h3 class="card-title">豆包音频生成模型1.0发布，重新定义AI音频创作</h3>
+        <p class="card-summary">火山引擎正式发布豆包音频生成模型1.0（Doubao-Seed-Audio 1.0），支持文本与音频参考生成，</p>
+        <div class="card-footer">
+          <a href="https://mp.weixin.qq.com/s/iL0uyUjOMUEfudeuDP6wQQ" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#6</span>
+          <span class="card-source">Mistral AI：News（网页）</span>
+        </div>
+        <h3 class="card-title">Mistral OCR 4</h3>
+        <p class="card-summary">Mistral AI 发布 OCR 4，新增边界框、块分类（标题、表格、方程式、签名等）及逐页逐词置信度分数。</p>
+        <div class="card-footer">
+          <a href="https://mistral.ai/news/ocr-4" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#7</span>
+          <span class="card-source">字节 Seed：Research Feed（网页内嵌数据）</span>
+        </div>
+        <h3 class="card-title">Seed2.1 正式发布，深入 AI 生产力</h3>
+        <p class="card-summary">字节Seed发布Seed2.1系列，面向真实生产力场景的智能体，强化通用Agent能力、代码工程交付与多模态理解。</p>
+        <div class="card-footer">
+          <a href="https://seed.bytedance.com/zh/blog/seed2-1-%E6%AD%A3%E5%BC%8F%E5%8F%91%E5%B8%83-%E6%B7%B1%E5%85%A5-ai-%E7%94%9F%E4%BA%A7%E5%8A%9B" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="products">
+    <div class="section-header">
+      <span class="section-icon">🚀</span>
+      <h2 class="section-title">产品发布/更新</h2>
+      <span class="section-count">6 条</span>
+    </div>
+    <div class="card-grid">
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#8</span>
+          <span class="card-source">Hugging Face：Blog（RSS）</span>
+        </div>
+        <h3 class="card-title">IBM 开源 CUGA：轻量级智能体框架，提供二十余个单文件示例应用</h3>
+        <p class="card-summary">IBM 开源了 CUGA（Configurable Generalist Agent），</p>
+        <div class="card-footer">
+          <a href="https://huggingface.co/blog/ibm-research/cuga-apps" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#9</span>
+          <span class="card-source">X：Runway (@runwayml)</span>
+        </div>
+        <h3 class="card-title">Runway推出Seedance 4K等三款新模型</h3>
+        <p class="card-summary">Seedance 4K。Seedance Mini。Kling 3.0 Turbo。现已推出。 全球最佳模型，汇聚一处。</p>
+        <div class="card-footer">
+          <a href="https://x.com/runwayml/status/2069535148450705517" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#10</span>
+          <span class="card-source">Hacker News 热门（buzzing.cc 中文翻译）</span>
+        </div>
+        <h3 class="card-title">无限制OCR：单次长时域解析</h3>
+        <p class="card-summary">Unlimited OCR 是一个托管在 GitHub 的项目，实现单次长时域解析（One-Shot Long-Hor…</p>
+        <div class="card-footer">
+          <a href="https://github.com/baidu/Unlimited-OCR" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#11</span>
+          <span class="card-source">公众号：千问APP（阿里）</span>
+        </div>
+        <h3 class="card-title">国内首个高考志愿AI测评出炉，千问多项表现超过资深咨询师</h3>
+        <p class="card-summary">友松实验室发布国内首个高考志愿AI能力测评报告，测试千问高考志愿填报Agent四大模块。</p>
+        <div class="card-footer">
+          <a href="https://mp.weixin.qq.com/s/oGHVP4MgGS1rbmT8s8St8Q" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#12</span>
+          <span class="card-source">Anthropic：Newsroom（网页）</span>
+        </div>
+        <h3 class="card-title">Anthropic 推出 Claude Tag：在 Slack 中通过 @Claude 协作</h3>
+        <p class="card-summary">Anthropic 推出 Claude Tag，一种在 Slack 频道中通过 @Claude 委托任务的新协作方式。</p>
+        <div class="card-footer">
+          <a href="https://www.anthropic.com/news/introducing-claude-tag" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#13</span>
+          <span class="card-source">Claude Code：GitHub Releases（RSS）</span>
+        </div>
+        <h3 class="card-title">Claude Code v2.1.187 发布</h3>
+        <p class="card-summary">Claude Code v2.1.187 新增 `sandbox.credentials` 设置，</p>
+        <div class="card-footer">
+          <a href="https://github.com/anthropics/claude-code/releases/tag/v2.1.187" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="industry">
+    <div class="section-header">
+      <span class="section-icon">📡</span>
+      <h2 class="section-title">行业动态</h2>
+      <span class="section-count">5 条</span>
+    </div>
+    <div class="card-grid">
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#14</span>
+          <span class="card-source">Ars Technica：AI（RSS）</span>
+        </div>
+        <h3 class="card-title">Oracle因AI应用裁员21000人，债务驱动云基础设施投资</h3>
+        <p class="card-summary">Oracle在截至5月31日的财年裁员21000人，员工总数降至141,000人，降幅12.9%。</p>
+        <div class="card-footer">
+          <a href="https://arstechnica.com/ai/2026/06/oracles-21000-layoffs-help-drive-its-debt-fueled-ai-investments" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#15</span>
+          <span class="card-source">Artificial Intelligence News（RSS）</span>
+        </div>
+        <h3 class="card-title">五眼联盟警告：AI网络威胁数月内将影响普通用户</h3>
+        <p class="card-summary">2026年6月22日，五眼联盟（美、英、加、澳、新）网络安全部门联合警告，即将到来的AI模型（如OpenAI的GPT-…</p>
+        <div class="card-footer">
+          <a href="https://www.artificialintelligence-news.com/news/five-eyes-warning-ai-cyber-threats" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#16</span>
+          <span class="card-source">GitHub Blog</span>
+        </div>
+        <h3 class="card-title">GitHub联合开源联盟呼吁修改加州AI透明度法案以保护开源</h3>
+        <p class="card-summary">GitHub 联合 Black Forest Labs、Hugging Face 与 Mozilla Corporat…</p>
+        <div class="card-footer">
+          <a href="https://github.blog/news-insights/policy-news-and-insights/github-joins-coalition-advocating-for-fixes-to-california-ai-transparency-act-to-protect-open-source" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#17</span>
+          <span class="card-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</span>
+        </div>
+        <h3 class="card-title">OpenAI 助力 Appia Foundation 推动先进 AI 共享标准建设</h3>
+        <p class="card-summary">OpenAI 通过 Appia Foundation 支持制定先进 AI 的共享标准，涵盖评估框架、安全实践与全球合作。</p>
+        <div class="card-footer">
+          <a href="https://openai.com/index/helping-build-shared-standards-for-advanced-ai" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#18</span>
+          <span class="card-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</span>
+        </div>
+        <h3 class="card-title">Omio 如何构建对话式旅行的未来</h3>
+        <p class="card-summary">Omio 利用 OpenAI 技术打造对话式旅行体验，加速产品开发进程，并推动自身向 AI 原生公司转型。</p>
+        <div class="card-footer">
+          <a href="https://openai.com/index/omio" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="paper">
+    <div class="section-header">
+      <span class="section-icon">📄</span>
+      <h2 class="section-title">论文研究</h2>
+      <span class="section-count">3 条</span>
+    </div>
+    <div class="card-grid">
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#19</span>
+          <span class="card-source">Hacker News 热门（buzzing.cc 中文翻译）</span>
+        </div>
+        <h3 class="card-title">AI招聘工具存在种族偏见和系统性排斥；黑人占比26%，亚裔占比15%</h3>
+        <p class="card-summary">一项覆盖340万人、400万份申请、150家雇主和1700个职位的大规模实地研究发现，</p>
+        <div class="card-footer">
+          <a href="https://hai.stanford.edu/news/ai-hiring-tools-can-yield-racial-bias-and-systemic-rejection" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#20</span>
+          <span class="card-source">Apple Machine Learning Research（RSS）</span>
+        </div>
+        <h3 class="card-title">九位评委，两个有效投票：相关错误削弱LLM评审面板</h3>
+        <p class="card-summary">苹果机器学习研究团队发现，LLM-as-a-judge面板因模型间高度相关而严重受限。</p>
+        <div class="card-footer">
+          <a href="https://machinelearning.apple.com/research/correlated-llm-evaluation-panels" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#21</span>
+          <span class="card-source">Apple Machine Learning Research（RSS）</span>
+        </div>
+        <h3 class="card-title">基于指标依赖的标注饱和：从标签分布中学习</h3>
+        <p class="card-summary">在ChaosNLI数据集（每项100个标注）上微调NLI模型，发现所需标注人数因评估指标而异：熵相关（识别分歧项）需约…</p>
+        <div class="card-footer">
+          <a href="https://machinelearning.apple.com/research/metric-dependent-annotation-saturation" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="tips">
+    <div class="section-header">
+      <span class="section-icon">💡</span>
+      <h2 class="section-title">技巧与观点</h2>
+      <span class="section-count">5 条</span>
+    </div>
+    <div class="card-grid">
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#22</span>
+          <span class="card-source">Hugging Face：Blog（RSS）</span>
+        </div>
+        <h3 class="card-title">huggingface_hub 实现每周发布：AI、开源工具、人工审核闭环</h3>
+        <p class="card-summary">Hugging Face 将 huggingface_hub 的发布周期从每 4‑6 周缩短至每周，</p>
+        <div class="card-footer">
+          <a href="https://huggingface.co/blog/huggingface-hub-release-ci" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#23</span>
+          <span class="card-source">Hugging Face：Blog（RSS）</span>
+        </div>
+        <h3 class="card-title">在 Transformers.js 中实验提议的跨源存储 API</h3>
+        <p class="card-summary">Transformers.js 在浏览器中运行 AI 模型时，不同来源的 Web 应用会重复下载并缓存相同的模型资源（…</p>
+        <div class="card-footer">
+          <a href="https://huggingface.co/blog/cross-origin-storage" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#24</span>
+          <span class="card-source">Meta Engineering Blog（RSS）</span>
+        </div>
+        <h3 class="card-title">Meta 如何为 AI 眼镜设计超窄钢壳电池</h3>
+        <p class="card-summary">Meta 工程团队为 Ray-Ban Meta 等智能眼镜开发了宽度仅 7mm 的钢壳电池。</p>
+        <div class="card-footer">
+          <a href="https://engineering.fb.com/2026/06/23/production-engineering/how-meta-built-ultra-narrow-batteries-for-ai-glasses-meta-tech-podcast" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#25</span>
+          <span class="card-source">Claude：Blog（网页）</span>
+        </div>
+        <h3 class="card-title">Claude Tag 的 Agent Identity 访问模型</h3>
+        <p class="card-summary">Claude Tag 推出 agent identity（智能体身份）访问模型，</p>
+        <div class="card-footer">
+          <a href="https://claude.com/blog/agent-identity-access-model" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+
+      <article class="card">
+        <div class="card-header">
+          <span class="card-num">#26</span>
+          <span class="card-source">OpenAI：官网动态（RSS · 排除企业/客户案例）</span>
+        </div>
+        <h3 class="card-title">GPT-5 帮助免疫学家 Derya Unutmaz 解开三年未解之谜</h3>
+        <p class="card-summary">GPT-5 Pro 帮助免疫学家 Derya Unutmaz 解决了一个长达三年的免疫学谜团，</p>
+        <div class="card-footer">
+          <a href="https://openai.com/index/gpt-5-immunology-mystery" target="_blank" rel="noopener noreferrer" class="card-link">
+            <svg viewBox="0 0 16 16" fill="currentColor"><path fill-rule="evenodd" d="M3.75 2h3.5a.75.75 0 010 1.5h-3.5a.25.25 0 00-.25.25v8.5c0 .138.112.25.25.25h8.5a.25.25 0 00.25-.25v-3.5a.75.75 0 011.5 0v3.5A1.75 1.75 0 0112.25 14h-8.5A1.75 1.75 0 012 12.25v-8.5C2 2.784 2.784 2 3.75 2zm6.854-1h4.146a.25.25 0 01.25.25v4.146a.25.25 0 01-.427.177L13.03 4.03 9.28 7.78a.751.751 0 01-1.042-.018.751.751 0 01-.018-1.042l3.75-3.75-1.543-1.543A.25.25 0 0110.604 1z"/></svg>
+            原文
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+</main>
+
+<footer class="footer">
+  <div class="container">
+    <p class="footer-brand">AI HOT · 晨报</p>
+    <p class="footer-info">
+      本日共收录 <strong>26</strong> 条精选资讯 · 数据来源：<a href="https://aihot.virxact.com" style="color:var(--accent);" target="_blank" rel="noopener noreferrer">AI HOT (aihot.virxact.com)</a><br>
+      生成时间：2026年06月24日 北京时间 · 仅供信息参考，不代表编辑立场
+    </p>
+  </div>
+</footer>
+
+<script>
+// Sticky nav highlight
+const nav = document.getElementById('nav');
+const navLinks = nav.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.section');
+
+function updateActiveNav() {
+  const scrollY = window.scrollY + nav.offsetHeight + 20;
+  let current = '';
+  sections.forEach(section => {
+    if (section.offsetTop <= scrollY) {
+      current = section.id;
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.toggle('active', link.getAttribute('href') === '#' + current);
+  });
+}
+
+window.addEventListener('scroll', updateActiveNav, { passive: true });
+updateActiveNav();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初级注册安全工程师 · 全国考务提醒（6月18日）</title>
+<style>
+  :root {
+    --bg: #0f172a;
+    --card-bg: #1e293b;
+    --border: #334155;
+    --text: #e2e8f0;
+    --text-secondary: #94a3b8;
+    --accent: #f59e0b;
+    --danger: #ef4444;
+    --success: #10b981;
+    --info: #3b82f6;
+    --warn: #f97316;
+    --highlight: #fef3c7;
+    --highlight-bg: #422006;
+    --tag-bg: #1e293b;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    padding: 20px;
+  }
+  .container { max-width: 860px; margin: 0 auto; }
+  
+  /* Header */
+  .header {
+    background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .header .date {
+    font-size: 13px;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .header h1 {
+    font-size: 26px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #fbbf24, #f59e0b);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 12px;
+  }
+  .header .subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  
+  /* Alert Banner */
+  .alert-banner {
+    background: linear-gradient(135deg, #7f1d1d, #450a0a);
+    border: 1px solid #ef4444;
+    border-radius: 12px;
+    padding: 18px 22px;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+  }
+  .alert-banner .icon { font-size: 24px; flex-shrink: 0; }
+  .alert-banner .content h3 { color: #fca5a5; font-size: 15px; margin-bottom: 4px; }
+  .alert-banner .content p { color: #fecaca; font-size: 13px; }
+  
+  /* Tips Card */
+  .tips-card {
+    background: linear-gradient(135deg, #0c4a6e, #082f49);
+    border: 1px solid #0369a1;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 20px;
+  }
+  .tips-card h3 {
+    color: #7dd3fc;
+    font-size: 16px;
+    margin-bottom: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .tips-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .tips-card ul li {
+    color: #bae6fd;
+    font-size: 13px;
+    padding: 4px 0;
+    padding-left: 18px;
+    position: relative;
+  }
+  .tips-card ul li::before {
+    content: '✦';
+    position: absolute;
+    left: 0;
+    color: #38bdf8;
+    font-size: 10px;
+  }
+  
+  /* Section */
+  .section {
+    margin-bottom: 28px;
+  }
+  .section-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .section-title .badge {
+    font-size: 12px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 600;
+  }
+  .badge-urgent { background: #ef4444; color: #fff; }
+  .badge-upcoming { background: #f97316; color: #fff; }
+  .badge-closed { background: #475569; color: #cbd5e1; }
+  .badge-pending { background: #1e40af; color: #93c5fd; }
+  
+  /* Province Card */
+  .prov-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px 20px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .prov-card.urgent { border-color: #ef4444; border-width: 2px; animation: pulse 2s infinite; }
+  .prov-card.hot { border-color: #f97316; }
+  
+  @keyframes pulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(239,68,68,0.3); }
+    50% { box-shadow: 0 0 12px 2px rgba(239,68,68,0.2); }
+  }
+  
+  .prov-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+  .prov-name {
+    font-size: 17px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .prov-status {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .status-open { background: #14532d; color: #4ade80; }
+  .status-close { background: #7f1d1d; color: #fca5a5; }
+  .status-upcoming { background: #431407; color: #fdba74; }
+  .status-exam { background: #1e3a5f; color: #93c5fd; }
+  
+  .prov-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6px 20px;
+    font-size: 13px;
+  }
+  .prov-info .label { color: var(--text-secondary); font-size: 11px; }
+  .prov-info .value { color: var(--text); }
+  .prov-info .value.highlight { color: #fbbf24; font-weight: 600; }
+  .prov-info .value.alert { color: #fca5a5; font-weight: 600; }
+  
+  .prov-link {
+    margin-top: 10px;
+    font-size: 12px;
+  }
+  .prov-link a {
+    color: var(--info);
+    text-decoration: none;
+    word-break: break-all;
+  }
+  .prov-link a:hover { text-decoration: underline; }
+  
+  /* Countdown */
+  .countdown {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #7f1d1d;
+    color: #fff;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+  
+  /* Pitfall section */
+  .pitfall {
+    background: linear-gradient(135deg, #451a03, #422006);
+    border: 1px solid #f97316;
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-top: 24px;
+  }
+  .pitfall h3 {
+    color: #fdba74;
+    font-size: 16px;
+    margin-bottom: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .pitfall-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .pitfall-item {
+    background: rgba(0,0,0,0.25);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-size: 12px;
+  }
+  .pitfall-item .pf-title {
+    color: #f97316;
+    font-weight: 700;
+    margin-bottom: 4px;
+    font-size: 13px;
+  }
+  .pitfall-item .pf-desc { color: #fed7aa; font-size: 12px; }
+  
+  /* Footer */
+  .footer {
+    text-align: center;
+    color: var(--text-secondary);
+    font-size: 11px;
+    margin-top: 24px;
+    padding: 16px;
+    border-top: 1px solid var(--border);
+  }
+  
+  /* Requirement Grid */
+  .req-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 12px 0;
+    font-size: 12px;
+  }
+  .req-table th {
+    background: #1e293b;
+    color: #fbbf24;
+    padding: 10px 12px;
+    text-align: left;
+    border: 1px solid var(--border);
+    font-weight: 600;
+  }
+  .req-table td {
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .req-table tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
+  
+  @media (max-width: 640px) {
+    .prov-info { grid-template-columns: 1fr; }
+    .pitfall-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <div class="date">2026年6月18日 · 星期四</div>
+  <h1>🔰 初级注册安全工程师 · 全国考务提醒</h1>
+  <div class="subtitle">覆盖 16 个已公告省份 · 5 省未出通知持续蹲公告</div>
+</div>
+
+<!-- ⚠️ CRITICAL ALERT -->
+<div class="alert-banner">
+  <div class="icon">🚨</div>
+  <div class="content">
+    <h3>上海报名今日16:00截止！最后一天！</h3>
+    <p>上海市初级注安报名通道将于今天下午4点关闭，缴费同步截止（17:00），逾期不补。请上海考生务必立即完成报名+缴费！</p>
+  </div>
+</div>
+
+<!-- 备考小贴士 -->
+<div class="tips-card">
+  <h3>📚 今日备考小贴士</h3>
+  <ul>
+    <li><strong>倒计时冲刺：</strong>北京（6月27日，剩9天）、广东（7月4日，剩16天），已报名的考生请进入刷题节奏，每天至少1套真题+错题复盘。</li>
+    <li><strong>法规重点：</strong>《安全生产法》2025修订版是必考内容，重点关注"三管三必须"、企业主体责任、事故等级划分标准。</li>
+    <li><strong>实务答题技巧：</strong>主观题按"①判断对错→②引用法规条文→③分析后果→④提出整改措施"四步法作答，踩点给分。</li>
+    <li><strong>新考生规划：</strong>浙江（6月27日开始报名）和安徽（7月18日开始报名）是最近的下一个窗口，提前准备好白底证件照电子版、学历证书扫描件。</li>
+  </ul>
+</div>
+
+<!-- ============================== -->
+<!-- 一、正在报名 / 即将截止 -->
+<!-- ============================== -->
+<div class="section">
+  <div class="section-title">
+    🔴 正在报名中
+    <span class="badge badge-urgent">1省</span>
+  </div>
+
+  <!-- 上海 -->
+  <div class="prov-card urgent">
+    <div class="prov-header">
+      <div class="prov-name">🏙️ 上海 <span class="countdown">⏰ 今日16:00截止！</span></div>
+      <span class="prov-status status-open">报名中</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value alert">6月8日10:00 – 6月18日16:00（今天截止！）</div></div>
+      <div><div class="label">缴费截止</div><div class="value alert">6月18日17:00（逾期视为放弃）</div></div>
+      <div><div class="label">报名入口</div><div class="value">上海一网通办 → 应急管理局 → 初级注安报名</div></div>
+      <div><div class="label">审核方式</div><div class="value">告知承诺制 + 考前抽查 + 考后审核</div></div>
+      <div><div class="label">准考证打印</div><div class="value">9月1日10:00 – 9月3日16:00</div></div>
+      <div><div class="label">考试时间</div><div class="value highlight">9月5日</div></div>
+      <div><div class="label">考试费用</div><div class="value">70元/科</div></div>
+      <div><div class="label">专业类别</div><div class="value">化工/金属冶炼/建筑施工/道路运输/其他安全</div></div>
+    </div>
+    <div class="prov-link">
+      📎 官方通知：<a href="http://yjglj.sh.gov.cn/xwzx/gg/20260528/59885d8b14f74aceb21c7d9084ac5b6a.html" target="_blank">上海市应急管理局 » 考务通知</a> | 报名入口：一网通办 zwdt.sh.gov.cn
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- 二、报名已结束 / 考试即将到来 -->
+<!-- ============================== -->
+<div class="section">
+  <div class="section-title">
+    🟠 报名已结束 · 即将考试
+    <span class="badge badge-upcoming">6省</span>
+  </div>
+
+  <!-- 北京 -->
+  <div class="prov-card hot">
+    <div class="prov-header">
+      <div class="prov-name">🏛️ 北京 <span class="countdown">📅 距考试仅剩 9 天！</span></div>
+      <span class="prov-status status-exam">即将考试</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value">5月7日 – 5月11日14:00（已截止）</div></div>
+      <div><div class="label">缴费状态</div><div class="value">5月14日已截止</div></div>
+      <div><div class="label">报名入口</div><div class="value">北京人社局 → 人事考试服务频道</div></div>
+      <div><div class="label">审核方式</div><div class="value">告知承诺制（新考生上传学历证明）</div></div>
+      <div><div class="label">准考证打印</div><div class="value alert">考前一周，预计6月20日左右开放</div></div>
+      <div><div class="label">考试时间</div><div class="value highlight">6月27日</div></div>
+      <div><div class="label">专业类别</div><div class="value">煤矿/非煤矿山/化工/冶炼/建筑/道路/其他（7个）</div></div>
+    </div>
+    <div class="prov-link">
+      📎 官方通知：<a href="https://rsj.beijing.gov.cn/ywsite/bjpta/" target="_blank">北京市人事考试网</a>
+    </div>
+  </div>
+
+  <!-- 广东 -->
+  <div class="prov-card hot">
+    <div class="prov-header">
+      <div class="prov-name">🐉 广东 <span class="countdown">📅 距考试 16 天 · 准考证即将打印</span></div>
+      <span class="prov-status status-exam">即将考试</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value">5月11日9:00 – 5月19日17:00（已截止）</div></div>
+      <div><div class="label">缴费状态</div><div class="value">5月20日17:00已截止（55元/科）</div></div>
+      <div><div class="label">报名入口</div><div class="value">广东人事考试网 rsks.gd.gov.cn</div></div>
+      <div><div class="label">审核方式</div><div class="value">告知承诺制 + 学历在线核查（24h）</div></div>
+      <div><div class="label">准考证打印</div><div class="value highlight">6月30日9:00 – 7月3日17:00</div></div>
+      <div><div class="label">考试时间</div><div class="value highlight">7月4日</div></div>
+      <div><div class="label">考试形式</div><div class="value">电子化考试（机考）</div></div>
+    </div>
+    <div class="prov-link">
+      📎 官方通知：<a href="https://rsks.gd.gov.cn/" target="_blank">广东省人事考试局</a>
+    </div>
+  </div>
+
+  <!-- 河北 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">🏯 河北</div>
+      <span class="prov-status status-exam">待考试</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value">4月21日9:00 – 5月14日17:00（已截止）</div></div>
+      <div><div class="label">报名入口</div><div class="value">河北省初级注安考试报名系统（独立入口）</div></div>
+      <div><div class="label">考试时间</div><div class="value">预计6月（待公布具体日期）</div></div>
+      <div><div class="label">重要提醒</div><div class="value alert">请密切关注准考证打印通知，考试可能在6月底</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- 三、已考完省份 -->
+<!-- ============================== -->
+<div class="section">
+  <div class="section-title">
+    ⚫ 已结束考试
+    <span class="badge badge-closed">5省</span>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 13px;">
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+      <strong>🌊 福建</strong><br>
+      <span style="color:var(--text-secondary)">报名 4.1-10 · 考试 6月6日</span><br>
+      <span style="color:#4ade80;font-size:11px;">✅ 已考完</span>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+      <strong>🐼 四川</strong><br>
+      <span style="color:var(--text-secondary)">报名 4.15-27 · 考试 6月14日</span><br>
+      <span style="color:#4ade80;font-size:11px;">✅ 已考完</span>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+      <strong>🏔️ 重庆</strong><br>
+      <span style="color:var(--text-secondary)">报名 3.24-30 · 考试 5月10日</span><br>
+      <span style="color:#4ade80;font-size:11px;">✅ 已考完</span>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+      <strong>🏜️ 宁夏</strong><br>
+      <span style="color:var(--text-secondary)">报名 4.13-27 · 考试 6月14日</span><br>
+      <span style="color:#4ade80;font-size:11px;">✅ 已考完</span>
+    </div>
+    <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:8px;padding:12px 14px;">
+      <strong>🏡 江苏（上半年）</strong><br>
+      <span style="color:var(--text-secondary)">报名 3.16-30 · 考试 5月25日</span><br>
+      <span style="color:#4ade80;font-size:11px;">✅ 已考完 · 下半年9月5日待报名</span>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- 四、即将报名省份 -->
+<!-- ============================== -->
+<div class="section">
+  <div class="section-title">
+    🟡 即将开始报名
+    <span class="badge badge-upcoming">6省</span>
+  </div>
+
+  <!-- 浙江 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">🌊 浙江</div>
+      <span class="prov-status status-upcoming">9天后报名</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value highlight">6月27日9:00 – 7月7日17:00</div></div>
+      <div><div class="label">报名入口</div><div class="value">浙江人事考试网</div></div>
+      <div><div class="label">考试时间</div><div class="value highlight">9月5日</div></div>
+      <div><div class="label">建议</div><div class="value">提前准备白底证件照、学历证书扫描件</div></div>
+    </div>
+  </div>
+
+  <!-- 安徽 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">🏘️ 安徽</div>
+      <span class="prov-status status-upcoming">30天后报名</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value highlight">7月18日9:00 – 8月1日16:00</div></div>
+      <div><div class="label">报名入口</div><div class="value">安徽人事考试网</div></div>
+      <div><div class="label">考试时间</div><div class="value highlight">9月5日</div></div>
+    </div>
+  </div>
+
+  <!-- 贵州 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">🏔️ 贵州</div>
+      <span class="prov-status status-upcoming">41天后报名</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value highlight">7月29日9:00 – 8月4日17:00</div></div>
+      <div><div class="label">报名入口</div><div class="value">贵州人事考试网</div></div>
+      <div><div class="label">考试时间</div><div class="value highlight">10月25日</div></div>
+      <div><div class="label">注意</div><div class="value alert">报名周期仅7天！非常短，务必准时</div></div>
+    </div>
+  </div>
+
+  <!-- 江苏下半年 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">🏡 江苏（下半年）</div>
+      <span class="prov-status status-upcoming">待公告</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">考试时间</div><div class="value highlight">9月5日</div></div>
+      <div><div class="label">报名时间</div><div class="value alert">待公布，预计7月</div></div>
+      <div><div class="label">报名入口</div><div class="value">江苏省人力资源和社会保障厅</div></div>
+      <div><div class="label">提醒</div><div class="value">持续关注官方公告，勿错过</div></div>
+    </div>
+  </div>
+
+  <!-- 山东 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">⛰️ 山东</div>
+      <span class="prov-status status-upcoming">82天后报名</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value highlight">9月8日9:00 – 9月17日17:00</div></div>
+      <div><div class="label">报名入口</div><div class="value">山东省初级注安考试考务管理系统</div></div>
+      <div><div class="label">考试时间</div><div class="value">预计10月</div></div>
+    </div>
+  </div>
+
+  <!-- 广西 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">🌴 广西</div>
+      <span class="prov-status status-upcoming">84天后报名</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value highlight">9月10日8:00 – 9月26日18:00</div></div>
+      <div><div class="label">报名入口</div><div class="value">广西应急管理微信公众号</div></div>
+      <div><div class="label">考试时间</div><div class="value">预计10月</div></div>
+    </div>
+  </div>
+
+  <!-- 天津 -->
+  <div class="prov-card">
+    <div class="prov-header">
+      <div class="prov-name">🎡 天津</div>
+      <span class="prov-status status-upcoming">114天后报名</span>
+    </div>
+    <div class="prov-info">
+      <div><div class="label">报名时间</div><div class="value highlight">10月10日0:00 – 10月19日24:00</div></div>
+      <div><div class="label">报名入口</div><div class="value">天津市人才考评中心网上报名服务平台</div></div>
+      <div><div class="label">考试时间</div><div class="value">预计11月</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- 五、未出公告省份 -->
+<!-- ============================== -->
+<div class="section">
+  <div class="section-title">
+    🔵 今年尚未发布公告
+    <span class="badge badge-pending">5省</span>
+  </div>
+
+  <div style="background:var(--card-bg);border:1px solid var(--border);border-radius:12px;padding:16px 20px;font-size:13px;">
+    <table style="width:100%;border-collapse:collapse;font-size:13px;">
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 0;"><strong>🌲 吉林</strong></td>
+        <td style="padding:8px 0;color:var(--text-secondary);">征求意见阶段，尚未正式发布2026考务通知</td>
+        <td style="padding:8px 0;color:#f97316;">⚠️ 持续蹲公告</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 0;"><strong>☁️ 云南</strong></td>
+        <td style="padding:8px 0;color:var(--text-secondary);">官方表示"考试准备好后将组织开展"</td>
+        <td style="padding:8px 0;color:#f97316;">⚠️ 持续蹲公告</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 0;"><strong>🏛️ 陕西</strong></td>
+        <td style="padding:8px 0;color:var(--text-secondary);">是否开考等待进一步进展</td>
+        <td style="padding:8px 0;color:#f97316;">⚠️ 持续蹲公告</td>
+      </tr>
+      <tr style="border-bottom:1px solid var(--border);">
+        <td style="padding:8px 0;"><strong>🐎 内蒙古</strong></td>
+        <td style="padding:8px 0;color:var(--text-secondary);">征求意见阶段，尚未正式发布2026考务通知</td>
+        <td style="padding:8px 0;color:#f97316;">⚠️ 持续蹲公告</td>
+      </tr>
+      <tr>
+        <td style="padding:8px 0;"><strong>❄️ 黑龙江</strong></td>
+        <td style="padding:8px 0;color:var(--text-secondary);">暂未开展初级注安考试</td>
+        <td style="padding:8px 0;color:var(--text-secondary);">今年大概率不开考</td>
+      </tr>
+    </table>
+    <p style="margin-top:12px;color:var(--text-secondary);font-size:11px;">
+      💡 以上5省考生建议：关注本省应急管理厅官网 + 人事考试网，报名公告通常在报名前1-2周发布。
+    </p>
+  </div>
+</div>
+
+<!-- ============================== -->
+<!-- 六、报考条件硬性要求速查 -->
+<!-- ============================== -->
+<div class="section">
+  <div class="section-title">📋 报考条件速查（全国统一标准）</div>
+  <table class="req-table">
+    <thead>
+      <tr>
+        <th>学历</th>
+        <th>安全工程及相关专业</th>
+        <th>其他专业</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>中专</strong></td>
+        <td>从事安全生产业务满 <span style="color:#fbbf24;">4年</span></td>
+        <td>从事安全生产业务满 <span style="color:#fbbf24;">5年</span></td>
+      </tr>
+      <tr>
+        <td><strong>大学专科</strong></td>
+        <td>从事安全生产业务满 <span style="color:#fbbf24;">2年</span></td>
+        <td>从事安全生产业务满 <span style="color:#fbbf24;">3年</span></td>
+      </tr>
+      <tr>
+        <td><strong>大学本科及以上</strong></td>
+        <td colspan="2" style="text-align:center;color:#4ade80;">从事安全生产业务即可（无年限要求）</td>
+      </tr>
+    </tbody>
+  </table>
+  <p style="font-size:11px;color:var(--text-secondary);margin-top:6px;">
+    ⚠️ 工作年限截止计算至2026年12月31日 · 中专不含高中/职高/技校 · 安全工程相关专业目录参照应急厅函〔2019〕410号
+  </p>
+</div>
+
+<!-- ============================== -->
+<!-- 七、报名避坑提醒 -->
+<!-- ============================== -->
+<div class="pitfall">
+  <h3>⚠️ 报名避坑提醒</h3>
+  <div class="pitfall-grid">
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑1：错过缴费 = 报名无效</div>
+      <div class="pf-desc">多数省份缴费截止时间比报名晚1-2天，但也有的同步截止（如上海）。务必确认"缴费成功"状态，未缴费视为放弃。</div>
+    </div>
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑2：照片审核不通过</div>
+      <div class="pf-desc">必须使用报名系统指定的"照片处理工具"预处理后再上传，白底、近期、免冠、彩色半身正面照。照片会印在准考证和证书上。</div>
+    </div>
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑3：学历在线核验需24h</div>
+      <div class="pf-desc">部分省份（如广东）学历信息需24小时在线核查，务必提前注册并完善学历信息，不要在最后一天才注册！</div>
+    </div>
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑4：告知承诺 ≠ 不审核</div>
+      <div class="pf-desc">告知承诺制是"先承诺后核查"，考试成绩合格后仍会进行资格复核。提供虚假信息将取消成绩，已缴费用不退。</div>
+    </div>
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑5：报名周期短，无补报</div>
+      <div class="pf-desc">贵州报名窗口仅7天，北京仅5天。全国所有省份均无补报名/补缴费环节，错过只能等明年。</div>
+    </div>
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑6：工作年限证明不全</div>
+      <div class="pf-desc">需准备社保证明或单位盖章的工作年限证明。计算到2026年12月31日，全日制学历在校期间不计入。</div>
+    </div>
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑7：选错专业类别</div>
+      <div class="pf-desc">实务科目分多个专业方向（化工/建筑/道路/矿山等），报名时选定后不可更改，需与自身工作实际匹配。</div>
+    </div>
+    <div class="pitfall-item">
+      <div class="pf-title">🚫 坑8：准考证信息有误不处理</div>
+      <div class="pf-desc">打印准考证后立即核对姓名、身份证号，如有误务必在截止时间前联系考试机构更正，逾期无法修改。</div>
+    </div>
+  </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+  <p>📌 数据来源：各省应急管理厅、人事考试网官方公告 | 更新时间：2026年6月18日 09:00</p>
+  <p style="margin-top:6px;">⏰ 下次推送：2026年6月19日 | 本推送仅含初级注册安全工程师考务信息</p>
+  <p style="margin-top:4px;color:#f59e0b;">📢 重点提醒：上海报名今日截止！浙江6月27日开报，安徽7月18日开报，请互相转告！</p>
+</div>
+
+</div>
+</body>
+</html>

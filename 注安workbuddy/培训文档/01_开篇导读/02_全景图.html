@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>1.2 全景图：6 大场景 × 26 个应用点速查表｜WorkBuddy 培训</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+  color: #2c3e50;
+  line-height: 1.8;
+  padding: 20px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+.header {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+  color: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(30, 58, 138, 0.15);
+}
+.breadcrumb { font-size: 13px; opacity: 0.85; margin-bottom: 12px; }
+.breadcrumb a { color: #fbbf24; text-decoration: none; }
+h1 { font-size: 28px; margin-bottom: 12px; font-weight: 700; }
+.subtitle { font-size: 15px; opacity: 0.9; }
+
+.scene {
+  background: white;
+  border-radius: 14px;
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  border-top: 6px solid;
+}
+.scene-1 { border-color: #3b82f6; }
+.scene-2 { border-color: #10b981; }
+.scene-3 { border-color: #f59e0b; }
+.scene-4 { border-color: #ef4444; }
+.scene-5 { border-color: #8b5cf6; }
+.scene-6 { border-color: #ec4899; }
+
+.scene-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 8px;
+}
+.scene-title .icon {
+  font-size: 32px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  color: white;
+}
+.scene-1 .icon { background: linear-gradient(135deg, #3b82f6, #1e40af); }
+.scene-2 .icon { background: linear-gradient(135deg, #10b981, #047857); }
+.scene-3 .icon { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.scene-4 .icon { background: linear-gradient(135deg, #ef4444, #b91c1c); }
+.scene-5 .icon { background: linear-gradient(135deg, #8b5cf6, #6d28d9); }
+.scene-6 .icon { background: linear-gradient(135deg, #ec4899, #be185d); }
+
+.scene-title h2 { color: #1e3a8a; font-size: 22px; }
+.scene-desc { color: #64748b; font-size: 14px; margin-bottom: 16px; padding-left: 62px; }
+
+.app-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 12px;
+  margin-top: 16px;
+}
+.app-card {
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  padding: 14px 16px;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+.app-card:hover { transform: translateY(-3px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); border-color: #93c5fd; }
+.app-card h4 { color: #1e3a8a; font-size: 15px; margin-bottom: 6px; display: flex; align-items: center; gap: 6px; }
+.app-card p { color: #64748b; font-size: 13px; margin: 0; }
+.app-card .tag { display: inline-block; background: #dbeafe; color: #1e40af; font-size: 11px; padding: 2px 8px; border-radius: 4px; margin-right: 4px; margin-top: 6px; }
+.app-card .tag.high { background: #fee2e2; color: #991b1b; }
+.app-card .tag.mid { background: #fef3c7; color: #92400e; }
+.app-card .tag.low { background: #d1fae5; color: #065f46; }
+
+.heatmap {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 3px;
+  margin: 16px 0;
+  font-size: 11px;
+  text-align: center;
+}
+.heatmap div { padding: 8px 4px; border-radius: 4px; color: white; font-weight: 600; }
+.h3 { background: #ef4444; }
+.h2 { background: #f59e0b; }
+.h1 { background: #10b981; }
+.h0 { background: #e2e8f0; color: #94a3b8; }
+
+.legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: 12px; margin: 12px 0; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 14px; height: 14px; border-radius: 3px; }
+
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.nav-footer a {
+  padding: 10px 20px;
+  background: #3b82f6;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.nav-footer a.home { background: #64748b; }
+.nav-footer a:hover { opacity: 0.9; }
+
+@media (max-width: 640px) {
+  .app-grid { grid-template-columns: 1fr; }
+  .heatmap { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="breadcrumb">📚 WorkBuddy × 中级注安运营培训 / <a href="index.html">模块一·开篇导读</a> / 1.2 全景图</div>
+    <h1>🗺️ 6 大场景 × 26 个应用点速查表</h1>
+    <p class="subtitle">一张图看懂 WorkBuddy 在中级注安项目里能干什么</p>
+  </div>
+
+  <div class="scene scene-1">
+    <div class="scene-title">
+      <div class="icon">📋</div>
+      <h2>场景一：运营方案策划与跨部门推动</h2>
+    </div>
+    <p class="scene-desc">把模糊的想法变成可落地的方案，把方案拆成可执行的任务</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <h4>🎯 1.1 头脑风暴助手</h4>
+        <p>输入目标 → 自动生成 3-5 套备选方案</p>
+        <span class="tag high">⭐⭐⭐ 高频</span>
+      </div>
+      <div class="app-card">
+        <h4>📄 1.2 方案结构化</h4>
+        <p>散乱想法 → "目标/动作/责任/时间/预算"五段式方案</p>
+        <span class="tag high">⭐⭐⭐ 高频</span>
+      </div>
+      <div class="app-card">
+        <h4>🧩 1.3 跨部门任务拆解</h4>
+        <p>方案 → 教研/销售/技术/设计 四象限 To-do</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📦 1.4 资源盘点</h4>
+        <p>反向盘点所需课程、师资、物料（含缺口标注）</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>⚠️ 1.5 风险预案</h4>
+        <p>识别卡点（部门配合/时间/预算）+ Plan B</p>
+        <span class="tag low">⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📝 1.6 会议纪要 → 行动项</h4>
+        <p>录音/笔记 → "待办+负责人+截止时间" 行动表</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene scene-2">
+    <div class="scene-title">
+      <div class="icon">💼</div>
+      <h2>场景二：销售端支持（话术 / 卖点 / 培训）</h2>
+    </div>
+    <p class="scene-desc">把课程翻译成客户听得懂的语言，把销售武装到牙齿</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <h4>💎 2.1 课程卖点提炼（FAB）</h4>
+        <p>课程特色 → 5-8 条"客户听得懂"的卖点 + 话术</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>💬 2.2 销售话术库</h4>
+        <p>6 大场景：开场白/挖需/塑造/逼单/异议/转介绍</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>❓ 2.3 异议处理手册</h4>
+        <p>10 大抗拒点 Q&A + 应对话术</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🥊 2.4 竞品对比表</h4>
+        <p>环球 vs 中大 vs 学天 vs 233 矩阵 + 差异话术</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>👥 2.5 客户分群话术</h4>
+        <p>上班族/宝妈/在校生/转行/二战 5 类人群话术</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🎓 2.6 销售培训 PPT</h4>
+        <p>新人入职 / 产品更新培训（自动生成 .pptx）</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📱 2.7 朋友圈/社群文案</h4>
+        <p>每日 1-3 条软广素材 + 30 天日历</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🤖 2.8 私聊陪练脚本</h4>
+        <p>销售私聊标准流程（含话术+心理学原理）</p>
+        <span class="tag low">⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene scene-3">
+    <div class="scene-title">
+      <div class="icon">🎨</div>
+      <h2>场景三：海报与宣传物料</h2>
+    </div>
+    <p class="scene-desc">让设计效率飞起来，营销日历提前排好</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <h4>⏰ 3.1 倒计时海报</h4>
+        <p>考试/报名/开课 倒计时 9 宫格套图（HTML）</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>✨ 3.2 课程亮点海报</h4>
+        <p>3 句话 + 关键词卡片 系列海报</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>👨‍🎓 3.3 学员故事海报</h4>
+        <p>上岸学员访谈 → 情感化海报</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>👨‍🏫 3.4 教师 IP 海报</h4>
+        <p>包装主讲老师"权威+亲和"形象</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🎁 3.5 活动引爆海报</h4>
+        <p>限时特惠/抽奖/拼团 主视觉</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📱 3.6 朋友圈九宫格</h4>
+        <p>1 次生成 9 张统一风格图文</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🎬 3.7 视频素材</h4>
+        <p>15s 短视频脚本 + 自动生成（多模态）</p>
+        <span class="tag low">⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📅 3.8 营销日历</h4>
+        <p>月度节日/热点 → 提前 1 周排好主题</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene scene-4">
+    <div class="scene-title">
+      <div class="icon">📊</div>
+      <h2>场景四：周报与业绩分析（⭐⭐⭐ 核心）</h2>
+    </div>
+    <p class="scene-desc">每周省 2 小时，还能挖出数据里真正的问题</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <h4>📋 4.1 周报自动生成</h4>
+        <p>输入关键数据 → 输出结构化周报（Word/MD）</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>💰 4.2 营收分析</h4>
+        <p>直播/录播/图书/题库/协议班 端口拆解 + 同比环比</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📈 4.3 流量分析</h4>
+        <p>UV/PV/注册/转化 漏斗 + 来源渠道拆解</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🔀 4.4 端口对比</h4>
+        <p>抖音/微信/百度/APP/官网 各端口 ROI</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📉 4.5 趋势分析</h4>
+        <p>近 4/8/12 周业绩走势 + 拐点识别</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🏆 4.6 Top 榜单</h4>
+        <p>本周热销课程 + 销售龙虎榜</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📱 4.7 H5 实时数据看板</h4>
+        <p>核心指标实时展示（HTML，手机/电脑双端）</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🚨 4.8 异常预警</h4>
+        <p>自动识别数据异常（同比下滑 >20% 等）</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🎯 4.9 下周行动建议</h4>
+        <p>基于本周数据 → 3 条具体动作 + 预期结果</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene scene-5">
+    <div class="scene-title">
+      <div class="icon">🔍</div>
+      <h2>场景五：学员调研与心理分析</h2>
+    </div>
+    <p class="scene-desc">从"问卷发了没人看"到"洞察驱动运营"</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <h4>📝 5.1 调研问卷设计</h4>
+        <p>新客/在读/二战/老学员 4 类问卷</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📊 5.2 调研结果分析</h4>
+        <p>Excel 问卷 → 数据简报 + 关键洞察</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>👤 5.3 学员心理画像</h4>
+        <p>3-5 类典型画像（标签+痛点+决策路径）</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>⛔ 5.4 学习障碍分析</h4>
+        <p>弃考/弃学 时点 + 原因 + 干预动作</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🛤️ 5.5 决策路径分析</h4>
+        <p>看到广告→咨询→试听→报名 全链路</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>⭐ 5.6 NPS / 满意度</h4>
+        <p>净推荐值计算 + 改进建议</p>
+        <span class="tag low">⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🥷 5.7 竞品学员调研</h4>
+        <p>挖竞品用户痛点 → 差异化话术</p>
+        <span class="tag low">⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene scene-6">
+    <div class="scene-title">
+      <div class="icon">🚀</div>
+      <h2>场景六：WorkBuddy 特色进阶能力</h2>
+    </div>
+    <p class="scene-desc">把过程资产变成组织能力，让 AI 干重复活</p>
+    <div class="app-grid">
+      <div class="app-card">
+        <h4>🛠️ 6.1 Sales Workbench 销售工作台</h4>
+        <p>聚合：话术/海报/竞品/学员标签 1 个 HTML</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📱 6.2 H5 实时数据看板</h4>
+        <p>自动拉数据，手机/电脑 双端适配</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>📚 6.3 知识库沉淀</h4>
+        <p>话术/方案/复盘 → 乐享，AI 检索调用</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🤖 6.4 自动化任务</h4>
+        <p>每周五 17:00 自动生成周报草稿 + 推送</p>
+        <span class="tag high">⭐⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🖼️ 6.5 多模态生成</h4>
+        <p>输入主题 → 一键生成海报图 / 短视频</p>
+        <span class="tag mid">⭐⭐</span>
+      </div>
+      <div class="app-card">
+        <h4>🎓 6.6 AI 师傅课程</h4>
+        <p>高频问题沉淀成 AI 答疑课</p>
+        <span class="tag low">⭐</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="scene" style="background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%); border: 1px solid #fbbf24; border-top: 6px solid #f59e0b;">
+    <h2 style="color: #92400e; margin-bottom: 16px;">🔥 一周热度热力图（猴哥推荐使用频率）</h2>
+    <p style="color: #78350f; margin-bottom: 12px; font-size: 14px;">基于中级注安项目实际工作节奏预估，颜色越深 = 越频繁：</p>
+    <div class="heatmap">
+      <div class="h0">周一</div>
+      <div class="h1">会议多</div>
+      <div class="h2">流量周报</div>
+      <div class="h2">方案推进</div>
+      <div class="h3">周报写</div>
+      <div class="h3">周报润</div>
+      <div class="h0">休息</div>
+      <div class="h1">复盘</div>
+      <div class="h2">调研</div>
+      <div class="h1">海报</div>
+      <div class="h2">话术</div>
+      <div class="h1">培训</div>
+      <div class="h0">-</div>
+      <div class="h0">-</div>
+    </div>
+    <div class="legend">
+      <div class="legend-item"><div class="legend-dot" style="background:#ef4444;"></div>每日必用</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#f59e0b;"></div>每周 2-3 次</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#10b981;"></div>每周 1 次</div>
+      <div class="legend-item"><div class="legend-dot" style="background:#e2e8f0;"></div>按需</div>
+    </div>
+  </div>
+
+  <div class="nav-footer">
+    <a href="01_写在前面.html">← 上一篇：1.1 写在前面</a>
+    <a href="index.html" class="home">🏠 模块一首页</a>
+    <a href="03_极速上手.html">下一篇：1.3 极速上手 →</a>
+  </div>
+</div>
+</body>
+</html>

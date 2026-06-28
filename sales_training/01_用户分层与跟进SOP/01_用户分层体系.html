@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户分层体系 - 注安销售培训</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; line-height: 1.6; font-size: 15px; }
+.hero { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 40px 32px 32px; color: #fff; }
+.hero-inner { max-width: 880px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.hero-title { font-size: 28px; font-weight: 700; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); margin-top: 8px; }
+.container { max-width: 880px; margin: 0 auto; padding: 32px; }
+
+.concept-box { background: #fff; border-radius: 14px; border: 1px solid #e5e5e7; padding: 24px; margin-bottom: 20px; }
+.concept-box h2 { font-size: 18px; font-weight: 700; color: #1e3a8a; margin-bottom: 16px; }
+.concept-box h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; margin-top: 16px; }
+.concept-box p { color: #6e6e73; margin-bottom: 8px; }
+
+.layer-row { display: flex; align-items: stretch; gap: 16px; margin-bottom: 16px; }
+.layer-left { width: 80px; display: flex; flex-direction: column; align-items: center; justify-content: center; border-radius: 12px; padding: 12px 8px; text-align: center; flex-shrink: 0; }
+.layer-num { font-size: 24px; font-weight: 700; color: #fff; }
+.layer-name { font-size: 12px; font-weight: 600; color: #fff; margin-top: 2px; }
+.layer-right { flex: 1; background: #fff; border-radius: 12px; border: 1px solid #e5e5e7; padding: 16px 20px; }
+.layer-right h4 { font-size: 15px; font-weight: 600; margin-bottom: 6px; }
+.layer-right p { font-size: 13px; color: #6e6e73; margin-bottom: 4px; }
+.layer-tags { display: flex; gap: 8px; margin-top: 8px; }
+.layer-tag { font-size: 11px; padding: 3px 10px; border-radius: 100px; font-weight: 500; }
+.tag-team { background: #f0f0f2; color: #1d1d1f; }
+.tag-strategy { background: rgba(30,58,138,0.08); color: #1e3a8a; }
+.tag-price { background: rgba(52,199,89,0.08); color: #2d8a3e; }
+
+.l1 { background: #1e3a8a; }
+.l2 { background: #2563eb; }
+.l3 { background: #7c3aed; }
+.l4 { background: #059669; }
+.l5 { background: #be185d; }
+.l6 { background: #6b7280; }
+
+.checklist { background: #fff; border-radius: 14px; border: 1px solid #e5e5e7; padding: 24px; margin-bottom: 20px; }
+.checklist h2 { font-size: 18px; font-weight: 700; color: #1e3a8a; margin-bottom: 16px; }
+.check-item { display: flex; gap: 12px; align-items: flex-start; padding: 12px 0; border-bottom: 1px solid #e5e5e5; }
+.check-item:last-child { border-bottom: none; }
+.check-dot { width: 24px; height: 24px; border-radius: 50%; border: 2px solid #1e3a8a; display: flex; align-items: center; justify-content: center; font-size: 14px; flex-shrink: 0; }
+.check-content { flex: 1; }
+.check-title { font-weight: 600; font-size: 14px; }
+.check-desc { font-size: 13px; color: #6e6e73; margin-top: 2px; }
+
+.template-box { background: #1e3a8a; border-radius: 14px; padding: 24px; margin-bottom: 20px; color: #fff; }
+.template-box h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+.template-box code { background: rgba(255,255,255,0.12); padding: 12px 16px; border-radius: 8px; font-family: 'SF Mono', Menlo, monospace; font-size: 13px; display: block; margin-bottom: 8px; white-space: pre-wrap; border-left: 3px solid rgba(255,255,255,0.4); }
+
+.flow-diagram { background: #fff; border-radius: 14px; border: 1px solid #e5e5e7; padding: 24px; margin-bottom: 20px; }
+.flow-diagram h2 { font-size: 18px; font-weight: 700; color: #1e3a8a; margin-bottom: 16px; }
+.flow-step { display: flex; align-items: center; gap: 12px; margin-bottom: 12px; }
+.flow-arrow { text-align: center; font-size: 20px; color: #86868b; margin-bottom: 8px; }
+.flow-box { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px; border-radius: 10px; font-size: 14px; font-weight: 600; }
+.flow-box.blue { background: rgba(30,58,138,0.08); color: #1e3a8a; }
+.flow-box.green { background: rgba(5,150,105,0.08); color: #059669; }
+.flow-box.purple { background: rgba(124,58,237,0.08); color: #7c3aed; }
+.flow-box.red { background: rgba(190,24,93,0.08); color: #be185d; }
+.flow-box.gray { background: rgba(107,114,128,0.08); color: #6b7280; }
+.flow-desc { font-size: 12px; color: #86868b; margin-top: 2px; }
+
+.nav-bar { display: flex; justify-content: space-between; margin-top: 32px; }
+.nav-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; background: #fff; border: 1px solid #e5e5e7; color: #1d1d1f; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.nav-btn:hover { background: #1e3a8a; color: #fff; }
+.nav-btn.primary { background: #1e3a8a; color: #fff; border: none; }
+.nav-btn.primary:hover { background: #2563eb; }
+
+.footer { text-align: center; padding: 32px; font-size: 12px; color: #86868b; }
+
+@media (max-width: 600px) {
+  .layer-row { flex-direction: column; }
+  .layer-left { width: 100%; flex-direction: row; padding: 8px 16px; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="index.html">模块一</a> / 用户分层体系</div>
+    <div class="hero-title">用户分层体系</div>
+    <div class="hero-sub">6秒判断用户属于哪一层，该用什么策略跟进</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 核心概念 -->
+  <div class="concept-box">
+    <h2>为什么要分层</h2>
+    <p>不分层的销售就像"所有人用同一把锤子钉钉子"——温线索被冷线索挤占精力，高意向升级用户没人管，结果就是：</p>
+    <p style="color:#be185d;font-weight:500;">低效跟进 = 资源浪费 = 业绩不达标</p>
+    <h3>分层后的好处</h3>
+    <p style="color:#1d1d1f;">1. <strong>精力分配有优先级</strong> — 80%时间给意向+成交用户，20%时间培育温线索</p>
+    <p style="color:#1d1d1f;">2. <strong>话术匹配场景</strong> — 冷线索不急着报价，意向用户直接促单</p>
+    <p style="color:#1d1d1f;">3. <strong>流转不扯皮</strong> — 电销加微成功→即时转社群，社群成交→标记流转升级</p>
+    <p style="color:#1d1d1f;">4. <strong>数据可追踪</strong> — 每层人数、转化率、停留时长一目了然</p>
+  </div>
+
+  <!-- 6层模型 -->
+  <div class="concept-box">
+    <h2>6层用户模型</h2>
+
+    <div class="layer-row">
+      <div class="layer-left l1"><div class="layer-num">1</div><div class="layer-name">冷线索</div></div>
+      <div class="layer-right">
+        <h4>冷线索 — 仅留资/未接通/未加微</h4>
+        <p>来源：广告投放、官网、合作渠道、拨打电话未接通</p>
+        <p>典型特征：只知道手机号或微信ID，没有实质性沟通记录</p>
+        <p style="color:#be185d;font-weight:500;">常见错误：对冷线索急着报价 → 对方直接消失</p>
+        <div class="layer-tags">
+          <span class="layer-tag tag-team">归属：纯电销团队</span>
+          <span class="layer-tag tag-strategy">策略：电话3次+短信触达</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="layer-left l2"><div class="layer-num">2</div><div class="layer-name">温线索</div></div>
+      <div class="layer-right">
+        <h4>温线索 — 已加微/已接通但未成交</h4>
+        <p>来源：纯电销加微成功、社群引流、自然关注</p>
+        <p>典型特征：对方有回应但不主动，偶尔回复，没有明确购买意向</p>
+        <p style="color:#059669;font-weight:500;">关键动作：培育 > 推销，用内容建立信任</p>
+        <div class="layer-tags">
+          <span class="layer-tag tag-team">归属：社群微销团队</span>
+          <span class="layer-tag tag-strategy">策略：微信培育+痛点内容推送</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="layer-left l3"><div class="layer-num">3</div><div class="layer-name">意向</div></div>
+      <div class="layer-right">
+        <h4>意向用户 — 已表达兴趣/试听/问价</h4>
+        <p>来源：微销跟进中、电销转交、主动咨询</p>
+        <p>典型特征：问价格、问课程内容、要试听、提到自己的考试需求</p>
+        <p style="color:#7c3aed;font-weight:500;">关键动作：报价+促单，不给对方犹豫时间</p>
+        <div class="layer-tags">
+          <span class="layer-tag tag-team">归属：社群微销团队</span>
+          <span class="layer-tag tag-strategy">策略：报价+试听+案例</span>
+          <span class="layer-tag tag-price">客单价：¥2,500</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="layer-left l4"><div class="layer-num">4</div><div class="layer-name">成交</div></div>
+      <div class="layer-right">
+        <h4>成交用户（基础班）— 已购买¥2,500课程</h4>
+        <p>来源：微销/电销成交</p>
+        <p>典型特征：已付款，开始学习，可能有满意度反馈</p>
+        <p style="color:#059669;font-weight:500;">关键动作：交付保障 + 为升级铺垫</p>
+        <div class="layer-tags">
+          <span class="layer-tag tag-team">归属：交付团队 → 升级电销团队</span>
+          <span class="layer-tag tag-strategy">策略：学习跟进+满意度回访</span>
+          <span class="layer-tag tag-price">客单价：¥2,500 → ¥16,800</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="layer-left l5"><div class="layer-num">5</div><div class="layer-name">升级</div></div>
+      <div class="layer-right">
+        <h4>高意向升级 — 基础班在读且表达升级意向</h4>
+        <p>来源：升级电销跟进中、基础班学习过程中发现痛点</p>
+        <p>典型特征：主动问高端班、表达"基础班不够"、提到备考压力</p>
+        <p style="color:#be185d;font-weight:500;">关键动作：升级方案+限时优惠窗口</p>
+        <div class="layer-tags">
+          <span class="layer-tag tag-team">归属：升级电销团队</span>
+          <span class="layer-tag tag-strategy">策略：升级方案+优惠窗口+班级对比</span>
+          <span class="layer-tag tag-price">客单价：¥16,800</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer-row">
+      <div class="layer-left l6"><div class="layer-num">6</div><div class="layer-name">沉默</div></div>
+      <div class="layer-right">
+        <h4>沉默/流失风险 — 超N天未跟进/未响应</h4>
+        <p>来源：各团队沉淀、多次触达仍无回应</p>
+        <p>典型特征：超过7天不回复微信、电话3次未接、3次拒接</p>
+        <p style="color:#6b7280;font-weight:500;">关键动作：限时激活活动 + 不再投入大量精力</p>
+        <div class="layer-tags">
+          <span class="layer-tag tag-team">归属：召回团队（可指定）</span>
+          <span class="layer-tag tag-strategy">策略：激活活动+限时优惠+批量触达</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 用户流转路径 -->
+  <div class="flow-diagram">
+    <h2>用户如何在6层之间流转</h2>
+
+    <div class="flow-step">
+      <div class="flow-box blue">冷线索（纯电销）</div>
+      <div style="flex:1;text-align:center;color:#86868b;">加微成功 / 接通表达兴趣 →</div>
+      <div class="flow-box purple">温线索（社群微销）</div>
+    </div>
+    <div class="flow-arrow">&#8595;</div>
+    <div class="flow-step">
+      <div class="flow-box purple">温线索</div>
+      <div style="flex:1;text-align:center;color:#86868b;">问价/试听/表达需求 →</div>
+      <div class="flow-box red">意向用户</div>
+    </div>
+    <div class="flow-arrow">&#8595;</div>
+    <div class="flow-step">
+      <div class="flow-box red">意向用户</div>
+      <div style="flex:1;text-align:center;color:#86868b;">付款成交 →</div>
+      <div class="flow-box green">成交用户（¥2,500）</div>
+    </div>
+    <div class="flow-arrow">&#8595;</div>
+    <div class="flow-step">
+      <div class="flow-box green">成交用户</div>
+      <div style="flex:1;text-align:center;color:#86868b;">表达升级意向 →</div>
+      <div class="flow-box blue">高意向升级（¥16,800）</div>
+    </div>
+    <div style="margin-top:16px;padding:12px;background:#f5f5f7;border-radius:8px;font-size:13px;color:#6e6e73;">
+      <strong style="color:#be185d;">侧路：</strong>任何层级超期未响应 → <span style="color:#6b7280;font-weight:600;">沉默/流失风险层</span> → 批量激活或释放
+    </div>
+  </div>
+
+  <!-- 判断模板 -->
+  <div class="template-box">
+    <h2>6秒判断模板 — 遇到新用户怎么分层</h2>
+    <code>Q1: 对方有没有实质性沟通记录？
+  有 → 不是冷线索，往下看
+  没有 → 【冷线索】→ 纯电销跟进
+
+Q2: 对方有没有明确购买意向？
+  有（问价/要试听/说"想考注安"）→ 【意向用户】→ 社群微销促单
+  没有 → 往下看
+
+Q3: 对方有没有回应但不够主动？
+  有 → 【温线索】→ 社群微销培育
+  没有回应/超过7天 → 【沉默/流失风险】→ 召回池
+
+Q4: 对方已经购买了基础班？
+  是 → 【成交用户】→ 交付 + 升级铺垫
+  已表达升级意向 → 【高意向升级】→ 升级电销促单</code>
+  </div>
+
+  <!-- 自检清单 -->
+  <div class="checklist">
+    <h2>自检清单 — 你是否掌握了分层体系</h2>
+
+    <div class="check-item">
+      <div class="check-dot">1</div>
+      <div class="check-content">
+        <div class="check-title">能6秒判断新用户的分层</div>
+        <div class="check-desc">拿到一个线索，立刻判断它属于1-6哪一层</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-dot">2</div>
+      <div class="check-content">
+        <div class="check-title">知道每一层该用什么跟进策略</div>
+        <div class="check-desc">冷线索不报价、温线索不催单、意向用户不给犹豫时间</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-dot">3</div>
+      <div class="check-content">
+        <div class="check-title">知道自己的团队负责哪几层</div>
+        <div class="check-desc">纯电销负责冷→温，社群微销负责温→意向→成交，升级负责成交→升级</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-dot">4</div>
+      <div class="check-content">
+        <div class="check-title">知道流转触发条件</div>
+        <div class="check-desc">加微成功即转社群、成交即标记为升级储备、超7天未响应进召回池</div>
+      </div>
+    </div>
+    <div class="check-item">
+      <div class="check-dot">5</div>
+      <div class="check-content">
+        <div class="check-title">不在冷线索上浪费超过30%的时间</div>
+        <div class="check-desc">冷线索的ROI最低，批量触达即可，不要一个个深度跟进</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 导航 -->
+  <div class="nav-bar">
+    <a class="nav-btn" href="index.html">&#8592; 返回模块首页</a>
+    <a class="nav-btn primary" href="02_社群微销跟进SOP.html">下一篇：社群微销跟进SOP &#8594;</a>
+  </div>
+
+</div>
+
+<div class="footer">注安销售团队培训文档 · 用户分层体系 · 内部资料</div>
+</body>
+</html>

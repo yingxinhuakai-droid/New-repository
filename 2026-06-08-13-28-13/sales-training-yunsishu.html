@@ -1,0 +1,1312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云私塾平板端 App · 销售培训手册</title>
+<style>
+  :root {
+    --primary: #6C5CE7;
+    --primary-light: #A29BFE;
+    --primary-dark: #5A4BD1;
+    --secondary: #00CEC9;
+    --accent: #FD79A8;
+    --warning: #FDCB6E;
+    --success: #55EFC4;
+    --bg-gradient-start: #667eea;
+    --bg-gradient-end: #764ba2;
+    --card-bg: #FFFFFF;
+    --text-primary: #2D3436;
+    --text-secondary: #636e72;
+    --text-light: #b2bec3;
+    --border-radius: 16px;
+    --shadow-sm: 0 2px 12px rgba(108,92,231,0.08);
+    --shadow-md: 0 8px 30px rgba(108,92,231,0.12);
+    --shadow-lg: 0 20px 60px rgba(108,92,231,0.15);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--text-primary);
+    line-height: 1.8;
+    background: linear-gradient(135deg, #f5f7fa 0%, #e4e8f0 100%);
+    min-height: 100vh;
+  }
+
+  /* ===== Hero Section ===== */
+  .hero {
+    background: linear-gradient(135deg, var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+    padding: 80px 40px 70px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -20%;
+    width: 140%;
+    height: 200%;
+    background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.08) 0%, transparent 50%),
+                radial-gradient(circle at 70% 60%, rgba(255,255,255,0.05) 0%, transparent 40%);
+    animation: floatBg 20s ease-in-out infinite alternate;
+  }
+  @keyframes floatBg {
+    from { transform: translate(0, 0) rotate(0deg); }
+    to { transform: translate(-3%, 2%) rotate(2deg); }
+  }
+
+  .hero-badge {
+    display: inline-block;
+    background: rgba(255,255,255,0.18);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255,255,255,0.25);
+    border-radius: 50px;
+    padding: 8px 24px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.95);
+    margin-bottom: 24px;
+    letter-spacing: 1px;
+    font-weight: 500;
+  }
+
+  .hero h1 {
+    font-size: 48px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 10px;
+    letter-spacing: 2px;
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-brandline {
+    font-size: 19px;
+    color: rgba(255,255,255,0.65);
+    font-weight: 400;
+    margin-bottom: 20px;
+    position: relative;
+    z-index: 1;
+    font-style: italic;
+    letter-spacing: 1px;
+  }
+
+  .hero-subtitle {
+    font-size: 22px;
+    color: rgba(255,255,255,0.85);
+    max-width: 700px;
+    margin: 0 auto 32px;
+    position: relative;
+    z-index: 1;
+    line-height: 1.6;
+  }
+
+  .hero-tags {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .hero-tag {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 10px;
+    padding: 8px 20px;
+    font-size: 14px;
+    color: rgba(255,255,255,0.9);
+    border: 1px solid rgba(255,255,255,0.2);
+    transition: all 0.3s;
+  }
+
+  /* ===== Container ===== */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ===== Section Styles ===== */
+  .section {
+    padding: 64px 0;
+  }
+
+  .section-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 36px;
+  }
+  .section-number {
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+  .section-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--text-primary);
+  }
+  .section-desc {
+    font-size: 16px;
+    color: var(--text-secondary);
+    margin-top: 4px;
+  }
+
+  /* ===== Product Intro Cards ===== */
+  .intro-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+  }
+  .intro-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 32px;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.35s cubic-bezier(.25,.46,.45,.94);
+    border: 1px solid rgba(108,92,231,0.06);
+  }
+  .intro-card:hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+  }
+  .intro-card-icon {
+    width: 56px;
+    height: 56px;
+    border-radius: 14px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    margin-bottom: 20px;
+  }
+  .intro-card h3 {
+    font-size: 19px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .intro-card p {
+    font-size: 14.5px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ===== Brand Story Banner ===== */
+  .brand-story {
+    background: linear-gradient(135deg, #2D3436 0%, #4a4f5a 100%);
+    border-radius: var(--border-radius);
+    padding: 48px 40px;
+    margin-top: 36px;
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .brand-story::before {
+    content: '';
+    position: absolute;
+    top: -30%; right: -10%;
+    width: 300px; height: 300px;
+    background: radial-gradient(circle, rgba(108,92,231,0.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .brand-story::after {
+    content: '';
+    position: absolute;
+    bottom: -20%; left: -5%;
+    width: 250px; height: 250px;
+    background: radial-gradient(circle, rgba(0,206,201,0.2) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .brand-story-inner {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .brand-story-quote {
+    flex: 1;
+    min-width: 280px;
+  }
+  .brand-story-quote .brand-icon {
+    font-size: 42px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .brand-story-quote h3 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .brand-story-quote p {
+    font-size: 15px;
+    opacity: 0.8;
+    line-height: 1.9;
+  }
+  .brand-story-values {
+    flex: 1;
+    min-width: 280px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+  }
+  .brand-value-chip {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 12px;
+    padding: 16px;
+    transition: all 0.3s;
+  }
+  .brand-value-chip:hover {
+    background: rgba(255,255,255,0.14);
+    border-color: rgba(255,255,255,0.25);
+  }
+  .brand-value-chip .chip-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .brand-value-chip .chip-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255,255,255,0.9);
+  }
+  .brand-value-chip .chip-desc {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    margin-top: 2px;
+  }
+
+  /* ===== Feature Table ===== */
+  .feature-table-wrapper {
+    overflow-x: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+  }
+  .feature-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--card-bg);
+  }
+  .feature-table thead th {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #fff;
+    padding: 18px 24px;
+    font-size: 16px;
+    font-weight: 600;
+    text-align: left;
+    white-space: nowrap;
+  }
+  .feature-table thead th:first-child { border-radius: var(--border-radius) 0 0 0; }
+  .feature-table thead th:last-child { border-radius: 0 var(--border-radius) 0 0; }
+  .feature-table tbody tr {
+    transition: all 0.2s;
+    border-bottom: 1px solid #f0edff;
+  }
+  .feature-table tbody tr:hover {
+    background: linear-gradient(90deg, rgba(108,92,231,0.04) 0%, rgba(162,155,254,0.04) 100%);
+  }
+  .feature-table tbody tr:last-child td:first-child { border-radius: 0 0 0 var(--border-radius); }
+  .feature-table tbody tr:last-child td:last-child { border-radius: 0 0 var(--border-radius) 0; }
+  .feature-table td {
+    padding: 16px 24px;
+    font-size: 14.5px;
+    vertical-align: top;
+  }
+  .feature-table td:first-child {
+    font-weight: 600;
+    color: var(--primary);
+    white-space: nowrap;
+    min-width: 130px;
+    position: relative;
+  }
+  .feature-table td:first-child::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 50%;
+    transform: translateY(-50%);
+    width: 3px; height: 60%;
+    border-radius: 3px;
+    background: linear-gradient(180deg, var(--primary), var(--secondary));
+  }
+  .feature-table td:last-child {
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ===== Core Loop Diagram ===== */
+  .loop-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 24px;
+    padding: 52px 40px;
+    text-align: center;
+    margin-top: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+  .loop-section::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(circle at 20% 80%, rgba(255,255,255,0.07) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255,255,255,0.05) 0%, transparent 40%);
+  }
+  .loop-label {
+    font-size: 17px;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 28px;
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+  }
+  .loop-diagram {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+  }
+  .loop-step {
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 16px;
+    padding: 20px 32px;
+    min-width: 110px;
+    transition: all 0.3s;
+  }
+  .loop-step:hover {
+    background: rgba(255,255,255,0.25);
+    transform: scale(1.06);
+    border-color: rgba(255,255,255,0.5);
+  }
+  .loop-step-icon { font-size: 32px; margin-bottom: 6px; }
+  .loop-step-text { color: #fff; font-size: 18px; font-weight: 700; }
+  .loop-arrow {
+    font-size: 28px;
+    color: rgba(255,255,255,0.6);
+    animation: arrowPulse 1.5s ease-in-out infinite;
+  }
+  @keyframes arrowPulse {
+    0%, 100% { opacity: 0.5; transform: translateX(0); }
+    50% { opacity: 1; transform: translateX(4px); }
+  }
+
+  /* ===== Brand in-loop tagline ===== */
+  .loop-brand {
+    margin-top: 28px;
+    font-size: 15px;
+    color: rgba(255,255,255,0.55);
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+    font-style: italic;
+  }
+
+  /* ===== Screenshot Gallery ===== */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(480px, 1fr));
+    gap: 28px;
+  }
+  .gallery-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.35s;
+    border: 1px solid rgba(108,92,231,0.06);
+  }
+  .gallery-item:hover {
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-4px);
+  }
+  .gallery-img-wrap {
+    overflow: hidden;
+    background: #f8f7fc;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 280px;
+  }
+  .gallery-img-wrap img {
+    max-width: 100%;
+    border-radius: 10px;
+    transition: transform 0.4s;
+  }
+  .gallery-item:hover img { transform: scale(1.03); }
+  .gallery-caption { padding: 20px 24px; }
+  .gallery-caption h4 {
+    font-size: 17px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .gallery-caption p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.7;
+  }
+
+  /* ===== Section Brand Banner ===== */
+  .section-brand-banner {
+    background: linear-gradient(135deg, rgba(108,92,231,0.07) 0%, rgba(0,206,201,0.05) 100%);
+    border: 1px solid rgba(108,92,231,0.12);
+    border-radius: var(--border-radius);
+    padding: 18px 24px;
+    margin-bottom: 32px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 14px;
+    color: var(--primary);
+    font-weight: 500;
+  }
+  .section-brand-banner .banner-emoji { font-size: 22px; }
+
+  /* ===== Selling Points ===== */
+  .points-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 22px;
+  }
+  .point-card {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 28px 24px;
+    box-shadow: var(--shadow-sm);
+    border-left: 4px solid;
+    transition: all 0.3s;
+  }
+  .point-card:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateY(-3px);
+  }
+  .point-num {
+    display: inline-block;
+    width: 32px;
+    height: 32px;
+    border-radius: 10px;
+    text-align: center;
+    line-height: 32px;
+    font-size: 15px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 14px;
+  }
+  .point-card h4 { font-size: 17px; font-weight: 700; margin-bottom: 8px; }
+  .point-card p { font-size: 14px; color: var(--text-secondary); line-height: 1.7; }
+
+  /* ===== Brand Voice Note ===== */
+  .voice-note {
+    background: linear-gradient(135deg, rgba(253,121,168,0.08) 0%, rgba(108,92,231,0.06) 100%);
+    border: 1px dashed rgba(108,92,231,0.2);
+    border-radius: var(--border-radius);
+    padding: 20px 24px;
+    margin-top: 28px;
+  }
+  .voice-note-title {
+    font-size: 13px;
+    color: var(--accent);
+    font-weight: 700;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .voice-note p {
+    font-size: 13.5px;
+    color: var(--text-secondary);
+    line-height: 1.8;
+  }
+
+  /* ===== VIP Student Section ===== */
+  .vip-timeline {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+  }
+  .vip-timeline::before {
+    content: '';
+    position: absolute;
+    left: 48px;
+    top: 0; bottom: 0;
+    width: 2px;
+    background: linear-gradient(180deg, var(--primary) 0%, var(--secondary) 100%);
+  }
+  .vip-step {
+    display: flex;
+    gap: 24px;
+    padding: 0 0 40px 0;
+    position: relative;
+  }
+  .vip-step:last-child { padding-bottom: 0; }
+  .vip-step-num {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 19px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+    z-index: 1;
+    box-shadow: 0 4px 16px rgba(108,92,231,0.25);
+  }
+  .vip-step-content {
+    flex: 1;
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    padding: 24px;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid rgba(108,92,231,0.06);
+    transition: all 0.3s;
+  }
+  .vip-step-content:hover {
+    box-shadow: var(--shadow-md);
+    transform: translateX(4px);
+  }
+  .vip-step-content h4 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .vip-step-content .step-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: #fff;
+    border-radius: 6px;
+    padding: 3px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+  .vip-step-content ul {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 8px;
+  }
+  .vip-step-content ul li {
+    padding: 8px 0 8px 20px;
+    position: relative;
+    font-size: 14px;
+    color: var(--text-secondary);
+  }
+  .vip-step-content ul li::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 16px;
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--primary-light);
+  }
+
+  /* ===== VIP Comparison Cards ===== */
+  .compare-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-bottom: 36px;
+  }
+  .compare-card {
+    border-radius: var(--border-radius);
+    padding: 32px;
+    border: 2px solid;
+    transition: all 0.3s;
+  }
+  .compare-card.basic {
+    background: #fafafa;
+    border-color: #e0e0e0;
+  }
+  .compare-card.vip {
+    background: linear-gradient(135deg, #f8f7ff 0%, #f0edff 100%);
+    border-color: var(--primary);
+    position: relative;
+  }
+  .compare-card.vip::after {
+    content: '✨ 付费学员专属';
+    position: absolute;
+    top: -14px; right: 20px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+    color: #fff;
+    padding: 5px 16px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+  }
+  .compare-card h4 {
+    font-size: 20px;
+    margin-bottom: 16px;
+  }
+  .compare-card ul {
+    list-style: none;
+    padding: 0;
+  }
+  .compare-card ul li {
+    padding: 10px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+    font-size: 14px;
+    color: var(--text-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .compare-card ul li .check { color: var(--success); font-weight: bold; }
+  .compare-card ul li .cross { color: #ccc; }
+  .compare-card .highlight-note {
+    margin-top: 16px;
+    padding: 12px 16px;
+    background: rgba(108,92,231,0.08);
+    border-radius: 10px;
+    font-size: 13px;
+    color: var(--primary-dark);
+    font-weight: 600;
+    text-align: center;
+  }
+
+  /* ===== FAQ Section ===== */
+  .faq-list {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .faq-item {
+    background: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    border: 1px solid rgba(108,92,231,0.05);
+  }
+  .faq-q {
+    padding: 20px 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-weight: 600;
+    font-size: 16px;
+    transition: all 0.2s;
+    user-select: none;
+  }
+  .faq-q:hover { background: #faf9fe; }
+  .faq-q-icon {
+    font-size: 20px;
+    transition: transform 0.3s;
+    color: var(--primary);
+  }
+  .faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease-out, padding 0.35s ease-out;
+  }
+  .faq-item.active .faq-a { max-height: 400px; padding: 0 24px 20px; }
+  .faq-item.active .faq-q-icon { transform: rotate(180deg); }
+  .faq-a p { font-size: 14.5px; color: var(--text-secondary); line-height: 1.8; }
+
+  /* ===== Footer ===== */
+  .footer {
+    background: linear-gradient(135deg, #2D3436 0%, #636E72 100%);
+    color: rgba(255,255,255,0.7);
+    text-align: center;
+    padding: 48px 32px;
+    margin-top: 40px;
+  }
+  .footer h3 { color: #fff; font-size: 20px; margin-bottom: 12px; }
+  .footer p { font-size: 14px; opacity: 0.7; }
+  .footer-brand {
+    margin-top: 24px;
+    font-size: 24px;
+    font-weight: 800;
+    color: #fff;
+    letter-spacing: 3px;
+  }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 768px) {
+    .hero { padding: 56px 20px 48px; }
+    .hero h1 { font-size: 32px; }
+    .hero-subtitle { font-size: 16px; }
+    .hero-brandline { font-size: 15px; }
+    .section { padding: 42px 0; }
+    .section-title { font-size: 22px; }
+    .container { padding: 0 16px; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .intro-grid { grid-template-columns: 1fr; }
+    .points-grid { grid-template-columns: 1fr; }
+    .compare-cards { grid-template-columns: 1fr; }
+    .loop-step { padding: 14px 22px; min-width: 80px; }
+    .loop-step-text { font-size: 15px; }
+    .feature-table td { padding: 12px 16px; font-size: 13.5px; }
+    .brand-story-inner { flex-direction: column; }
+    .brand-story-values { grid-template-columns: 1fr 1fr; }
+    .vip-timeline::before { left: 28px; }
+    .vip-step-num { width: 34px; height: 34px; font-size: 16px; }
+    .vip-step { gap: 16px; }
+    .vip-step-content ul { grid-template-columns: 1fr; }
+  }
+
+  /* ===== Scroll animations ===== */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+  }
+  .fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<section class="hero">
+  <div class="hero-badge">📱 环球网校 · 专属平板端</div>
+  <h1>云私塾平板端 App</h1>
+  <p class="hero-brandline">—— 你的云端私教，随身的学习管家 ——</p>
+  <p class="hero-subtitle">专为平板设备定制开发的职业资格考证学习应用<br>购课用户免费使用 · 大屏触控专属体验</p>
+  <div class="hero-tags">
+    <span class="hero-tag">🎯 11大功能模块</span>
+    <span class="hero-tag">📐 二分屏讲义</span>
+    <span class="hero-tag">🔄 学练测记闭环</span>
+    <span class="hero-tag">📥 离线可用</span>
+    <span class="hero-tag">✍️ 手写笔记</span>
+  </div>
+</section>
+
+<!-- ===== 产品介绍 ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number" style="background:linear-gradient(135deg,#6C5CE7,#a29bfe)">01</div>
+      <div>
+        <div class="section-title">产品定位 &amp; 核心价值</div>
+        <div class="section-desc">了解产品本质，才能精准传递价值</div>
+      </div>
+    </div>
+
+    <div class="intro-grid">
+      <div class="intro-card fade-in">
+        <div class="intro-card-icon" style="background:linear-gradient(135deg,#6C5CE7,#a29bfe)">📱</div>
+        <h3>什么是云私塾平板端？</h3>
+        <p>专为平板设备（iPad / 安卓平板）定制开发的职业资格考证学习应用，是环球网校为<strong>已购课用户提供的免费增值权益</strong>。用户购买课程后即可免费下载使用。</p>
+      </div>
+      <div class="intro-card fade-in">
+        <div class="intro-card-icon" style="background:linear-gradient(135deg,#00CEC9,#55EFC4)">🖥️</div>
+        <h3>为什么专门做平板端？</h3>
+        <p>不同于手机端与 Web 端，本次针对<strong>平板大屏特性（大屏显示、触控操作）</strong>进行专项开发与兼容适配，全面解决原有适配不足的问题。</p>
+      </div>
+      <div class="intro-card fade-in">
+        <div class="intro-card-icon" style="background:linear-gradient(135deg,#FD79A8,#fab1a0)">🎁</div>
+        <h3>支持哪些课程？</h3>
+        <p>全面支持<strong>云私塾</strong>和<strong>普通课商品</strong>两种类型的学习内容，覆盖环球网校全品类职业资格考试课程体系。</p>
+      </div>
+      <div class="intro-card fade-in">
+        <div class="intro-card-icon" style="background:linear-gradient(135deg,#FDCB6E,#f39c12)">⭐</div>
+        <h3>用户核心价值是什么？</h3>
+        <p>为平板端用户打造<strong>更流畅、更便捷的备考体验</strong>：大屏看视频不费眼、触控操作更自然、离线下载随时学、手写笔记更高效。</p>
+      </div>
+    </div>
+
+    <!-- 品牌叙事卡片 -->
+    <div class="brand-story fade-in">
+      <div class="brand-story-inner">
+        <div class="brand-story-quote">
+          <span class="brand-icon">☁️</span>
+          <h3>云私塾 — 让备考回归本质</h3>
+          <p>「私塾」二字，承载的是因材施教的传统智慧——每位学员都值得拥有量身定制的学习路径。<br><br>
+          「云」字代表的，是打破时空限制的现代技术——让优质教学资源随行而动，让智能算法为每个人导航。<br><br>
+          <strong>云私塾平板端，就是这一理念在考证备考场景下的完整体现。</strong></p>
+        </div>
+        <div class="brand-story-values">
+          <div class="brand-value-chip">
+            <div class="chip-icon">🎯</div>
+            <div class="chip-label">个性化</div>
+            <div class="chip-desc">智能规划，一人一策</div>
+          </div>
+          <div class="brand-value-chip">
+            <div class="chip-icon">⚡</div>
+            <div class="chip-label">高效率</div>
+            <div class="chip-desc">闭环打通，拒绝浪费</div>
+          </div>
+          <div class="brand-value-chip">
+            <div class="chip-icon">📐</div>
+            <div class="chip-label">沉浸式</div>
+            <div class="chip-desc">大屏专属，深度专注</div>
+          </div>
+          <div class="brand-value-chip">
+            <div class="chip-icon">🛡️</div>
+            <div class="chip-label">有保障</div>
+            <div class="chip-desc">购课即享，无需额外付费</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 功能总览 ===== -->
+<section class="section" style="background:#f8f7fc;padding:64px 0;">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number" style="background:linear-gradient(135deg,#00CEC9,#55EFC4)">02</div>
+      <div>
+        <div class="section-title">11 大功能模块全景图</div>
+        <div class="section-desc">每个功能都是销售话术的素材库</div>
+      </div>
+    </div>
+
+    <!-- 品牌引导语 -->
+    <div class="section-brand-banner fade-in">
+      <span class="banner-emoji">💡</span>
+      <span>云私塾的核心理念：<strong>不是给你一堆工具让你自己摸索，而是用智能系统为你铺设一条从"学"到"过"的最短路径。</strong></span>
+    </div>
+
+    <div class="feature-table-wrapper fade-in">
+      <table class="feature-table">
+        <thead>
+          <tr><th>功能模块</th><th>核心亮点（销售卖点）</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>📋 规划学习</td><td>智能生成个性化备考计划，按科目、章节合理分配学习任务，帮助用户有节奏地推进复习进度，告别盲目学习</td></tr>
+          <tr><td>🎯 自主学习</td><td>支持自由选择课程与章节，灵活安排学习顺序，满足用户碎片化与系统化学习的双重需求</td></tr>
+          <tr><td>🔄 复习模式</td><td>基于学习记录智能推送待复习内容，强化薄弱知识点，提升记忆留存率，科学抗遗忘</td></tr>
+          <tr><td>📐 课程讲义二分屏</td><td><strong>平板大屏独有功能</strong>，左右分屏同步展示课程视频与配套讲义，边听课边对照资料，告别来回切换的烦恼</td></tr>
+          <tr><td>📝 题集</td><td>覆盖历年真题、模拟题、专项练习，支持按章节、题型筛选，精准匹配刷题需求</td></tr>
+          <tr><td>❌ 错题本</td><td>自动归集做错题目，支持分类查看与二次练习，帮助用户针对性攻克薄弱环节</td></tr>
+          <tr><td>🧠 记忆卡</td><td>将重点知识提炼为卡片形式，利用碎片时间随时巩固，强化"记"的学习闭环</td></tr>
+          <tr><td>💬 答疑</td><td>学习过程中遇到疑问可即时提问，快速获得解答，降低学习卡壳频率</td></tr>
+          <tr><td>✍️ 手写笔记</td><td><strong>充分发挥平板触控优势</strong>，支持随堂手写批注与笔记记录，让学习更主动、更深入</td></tr>
+          <tr><td>📊 学习报告</td><td>可视化呈现学习时长、进度、练题数据，清晰掌握备考状态，及时调整学习策略</td></tr>
+          <tr><td>📥 资料下载</td><td>支持讲义、课件等学习资料本地下载，随时随地查阅，不受网络限制</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 核心定位 -->
+    <div class="loop-section fade-in">
+      <div class="loop-label">🎯 核心定位：围绕以下完整学习闭环，充分发挥平板大屏与触控优势，打造沉浸式一体化备考体验</div>
+      <div class="loop-diagram">
+        <div class="loop-step"><div class="loop-step-icon">📖</div><div class="loop-step-text">学</div></div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-step"><div class="loop-step-icon">✏️</div><div class="loop-step-text">练</div></div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-step"><div class="loop-step-icon">📋</div><div class="loop-step-text">测</div></div>
+        <span class="loop-arrow">→</span>
+        <div class="loop-step"><div class="loop-step-icon">🧠</div><div class="loop-step-text">记</div></div>
+      </div>
+      <div class="loop-brand">云私塾 · 你的云端私教，让每一步学习都有方向</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 界面展示 ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number" style="background:linear-gradient(135deg,#FD79A8,#fab1a0)">03</div>
+      <div>
+        <div class="section-title">核心界面功能详解</div>
+        <div class="section-desc">配合截图讲解，让学员直观感受产品力</div>
+      </div>
+    </div>
+
+    <!-- 品牌引导语 -->
+    <div class="section-brand-banner fade-in">
+      <span class="banner-emoji">🔍</span>
+      <span>向客户演示时，关键不是"有什么功能"，而是<strong>"这些功能能帮你节省多少时间、提高多少通过率"</strong>。</span>
+    </div>
+
+    <div class="gallery-grid">
+      <div class="gallery-item fade-in">
+        <div class="gallery-img-wrap">
+          <img src="/Users/houjiasanshao/.workbuddy/clipboard-images/clipboard-2026-06-08T05-28-15-278Z-f7269c14.jpg" alt="App首页界面">
+        </div>
+        <div class="gallery-caption">
+          <h4>🏠 智能学习首页</h4>
+          <p><strong>一句话卖点：</strong>打开即知今日进度，一站式管理所有学习入口。<br><br>
+          • 左侧卡片实时显示<strong>今日学习时长、累计学习时长、做题数量</strong><br>
+          • 中间区域按<strong>基础阶段→强化阶段→冲刺阶段</strong>自动规划课程列表<br>
+          • 右侧快捷入口直达<strong>题集、记忆卡</strong>，掌握备考状态一目了然<br>
+          • 底部导航栏一键切换<strong>题集/记忆卡/答疑/错题本/学习报告/工具箱/个人中心</strong></p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in">
+        <div class="gallery-img-wrap">
+          <img src="/Users/houjiasanshao/.workbuddy/clipboard-images/clipboard-2026-06-08T05-28-15-278Z-89c84e5e.png" alt="题集页面">
+        </div>
+        <div class="gallery-caption">
+          <h4>📝 多维度题集系统</h4>
+          <p><strong>一句话卖点：</strong>从章节到真题，从作业到刷题，一套系统满足所有练题场景。<br><br>
+          • <strong>章节练习：</strong>按教材章节逐一攻克，显示每章完成进度和正确率<br>
+          • <strong>课后作业：</strong>检验课堂学习效果，量化成果（如 0/188 题）<br>
+          • <strong>自定义刷题：</strong>自由组合筛选条件，针对性强化训练<br>
+          • <strong>高频易错：</strong>周/月/年度易错大数据分析，提前避坑<br>
+          • <strong>历年真题：</strong>完整收录往年考试真题，模考精测</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in">
+        <div class="gallery-img-wrap">
+          <img src="/Users/houjiasanshao/.workbuddy/clipboard-images/clipboard-2026-06-08T05-28-15-280Z-6a20aaaa.png" alt="课程讲义二分屏">
+        </div>
+        <div class="gallery-caption">
+          <h4>📐 课程讲义二分屏（平板独占）</h4>
+          <p><strong>一句话卖点：</strong>这是手机端永远做不到的体验——左边听老师讲课，右边看配套讲义。<br><br>
+          • <strong>左侧视频区：</strong>高清课程视频播放，老师板书、图表清晰可见<br>
+          • <strong>右侧讲义区：</strong>同步展示配套课件/PDF讲义，重点高亮标注<br>
+          • <strong>底部目录：</strong>快速切换不同章节课程，已学/未学状态明确标注<br>
+          • 支持添加个人笔记，边听边记，效率翻倍</p>
+        </div>
+      </div>
+
+      <div class="gallery-item fade-in">
+        <div class="gallery-img-wrap">
+          <img src="/Users/houjiasanshao/.workbuddy/clipboard-images/clipboard-2026-06-08T05-28-15-282Z-73797b7e.png" alt="错题本页面">
+        </div>
+        <div class="gallery-caption">
+          <h4>❌ 智能错题本</h4>
+          <p><strong>一句话卖点：</strong>错题不再石沉大海，三级分类 + 智能推荐让你每一道错题都有价值。<br><br>
+          • <strong>三级分类：</strong>待练习（新错题）→ 顽固错题（≥2次错误）→ 已纠正（彻底掌握）<br>
+          • <strong>多维度统计：</strong>全部错题 / 本月错题 / 本周错题，时间维度一目了然<br>
+          • <strong>三种归类方式：</strong>按章节归类、按题型归类、按原记录归类<br>
+          • <strong>举一反三：</strong>根据现有错题，智能推荐同考点下的其他相似题目进行拓展练习</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 销售话术 ===== -->
+<section class="section" style="background:#f8f7fc;padding:64px 0;">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number" style="background:linear-gradient(135deg,#FDCB6E,#f39c12)">04</div>
+      <div>
+        <div class="section-title">金牌销售话术要点</div>
+        <div class="section-desc">记住这些关键词，让每次沟通都有说服力</div>
+      </div>
+    </div>
+
+    <!-- 品牌引导语 -->
+    <div class="section-brand-banner fade-in">
+      <span class="banner-emoji">🎙️</span>
+      <span>销售的本质不是说服，而是<strong>让客户自己看到价值</strong>。云私塾的核心价值可以用一句话概括：<strong>"买课送专属备考管家，从学到过全程有人带。"</strong></span>
+    </div>
+
+    <div class="points-grid">
+      <div class="point-card fade-in" style="border-color:#6C5CE7">
+        <div class="point-num" style="background:linear-gradient(135deg,#6C5CE7,#a29bfe)">1</div>
+        <h4>💰 免费 = 无门槛转化</h4>
+        <p>"您买我们的课程之后，<strong>这个平板 App 是完全免费的</strong>，不需要额外花一分钱。这就好比你请了一位私教，私教还送了你一套专属的学习装备。"——用"免费"作为切入点，降低客户心理防线，同时暗示课程本身的价值包含了这个增值服务。</p>
+      </div>
+      <div class="point-card fade-in" style="border-color:#00CEC9">
+        <div class="point-num" style="background:linear-gradient(135deg,#00CEC9,#55EFC4)">2</div>
+        <h4>🖥️ 平板专属 = 差异化竞争</h4>
+        <p>"这不是把手机版放大那么简单，我们专门为平板做了开发。<strong>比如那个二分屏功能</strong>，左边看视频右边看讲义，手机上根本做不到。这就像从手机小屏换到了教室大屏幕——学习体验完全不同。"——强调技术投入和专业性，建立差异化认知。</p>
+      </div>
+      <div class="point-card fade-in" style="border-color:#FD79A8">
+        <div class="point-num" style="background:linear-gradient(135deg,#FD79A8,#fab1a0)">3</div>
+        <h4>🔄 闭环设计 = 效果保障</h4>
+        <p>"从学到练、从练到测、从测到记，<strong>整套流程是打通的</strong>。哪里薄弱系统自动推哪里，不用您自己操心怎么安排。云私塾就像一位了解你的私教，知道你哪里不会、该补哪里。"——让客户感受到产品的系统性，不是零散的工具堆砌。</p>
+      </div>
+      <div class="point-card fade-in" style="border-color:#FDCB6E">
+        <div class="point-num" style="background:linear-gradient(135deg,#FDCB6E,#f39c12)">4</div>
+        <h4>📥 离线可用 = 场景全覆盖</h4>
+        <p>"资料都能下载到本地，<strong>地铁上、飞机上、没网络的地方照样能学</strong>。云私塾不会因为网络问题让你中断学习——这就是'云'的另一个含义：随时随地在云端，也在本地。"——击中在职考生通勤时间长、碎片化学习的痛点。</p>
+      </div>
+      <div class="point-card fade-in" style="border-color:#55EFC4">
+        <div class="point-num" style="background:linear-gradient(135deg,#55EFC4,#00CEC9)">5</div>
+        <h4>✍️ 手写笔记 = 学习体验升级</h4>
+        <p>"平板可以直接在上面写字画重点，<strong>就像在纸上一样自然</strong>，比鼠标键盘方便多了。我们都知道动手写能加深记忆，云私塾就是让你保留这个好习惯。"——唤起用户对传统纸笔学习的好感和对数字化的向往。</p>
+      </div>
+      <div class="point-card fade-in" style="border-color:#a29bfe">
+        <div class="point-num" style="background:linear-gradient(135deg,#a29bfe,#6C5CE7)">6</div>
+        <h4>📊 数据可视化 = 进度透明</h4>
+        <p>"学了多久、做了多少题、正确率多少，<strong>打开首页一眼就能看到</strong>，不用自己记账。云私塾把备考变成一件可控的事情——知道进度、知道弱项、知道下一步该干什么。"——给控制欲强或焦虑型考生一颗定心丸。</p>
+      </div>
+    </div>
+
+    <!-- 品牌音调提示 -->
+    <div class="voice-note fade-in">
+      <div class="voice-note-title">🎤 品牌话术基调</div>
+      <p>
+        <strong>核心比喻：</strong>将"云私塾"比作一位<em>随时在线的个人备考教练</em>——专业、贴心、不推销、只陪伴。<br>
+        <strong>沟通风格：</strong>真诚直接，不浮夸；用场景说话，不用形容词堆砌。<br>
+        <strong>关键词：</strong>免费、专属、智能、省心、高效、不焦虑。<br>
+        <strong>一句话品牌主张：</strong><em>"云私塾平板端——你的云端私教，让备考不再孤军奋战。"</em>
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- ===== 付费学员专属体验 ===== -->
+<section class="section">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number" style="background:linear-gradient(135deg,#6C5CE7,#00CEC9)">05</div>
+      <div>
+        <div class="section-title">付费学员专属体验展示</div>
+        <div class="section-desc">购买课程后的 App 完整使用旅程，让客户清晰看到付费的价值</div>
+      </div>
+    </div>
+
+    <!-- 对比卡片 -->
+    <div class="section-brand-banner fade-in">
+      <span class="banner-emoji">🔑</span>
+      <span>付费学员解锁的不只是课程内容，而是<strong>云私塾"学练测记"全闭环 + 平板专属功能</strong>的完整体验。以下是付费前后的核心差异：</span>
+    </div>
+
+    <div class="compare-cards fade-in">
+      <div class="compare-card basic">
+        <h4>🆓 未购课状态</h4>
+        <ul>
+          <li><span class="check">✓</span> 可下载 App</li>
+          <li><span class="check">✓</span> 浏览功能界面</li>
+          <li><span class="check">✓</span> 查看课程目录</li>
+          <li><span class="cross">✗</span> 无法观看完整课程视频</li>
+          <li><span class="cross">✗</span> 无法使用题集刷题</li>
+          <li><span class="cross">✗</span> 无法生成学习报告</li>
+          <li><span class="cross">✗</span> 无法使用错题本</li>
+          <li><span class="cross">✗</span> 无法下载学习资料</li>
+          <li><span class="cross">✗</span> 无法使用答疑功能</li>
+        </ul>
+      </div>
+      <div class="compare-card vip">
+        <h4>⭐ 付费学员体验</h4>
+        <ul>
+          <li><span class="check">✓</span> <strong>全部 11 大功能模块开放</strong></li>
+          <li><span class="check">✓</span> 完整课程视频随时观看</li>
+          <li><span class="check">✓</span> 二分屏讲义沉浸学习</li>
+          <li><span class="check">✓</span> 历年真题 + 模拟题无限刷</li>
+          <li><span class="check">✓</span> 智能错题本自动归集</li>
+          <li><span class="check">✓</span> 学习报告可视化追踪</li>
+          <li><span class="check">✓</span> 一键答疑快速解答</li>
+          <li><span class="check">✓</span> 资料离线下载随时学</li>
+          <li><span class="check">✓</span> 手写笔记发挥平板优势</li>
+        </ul>
+        <div class="highlight-note">🎁 全部功能无需额外付费 · 一次购课，持续使用</div>
+      </div>
+    </div>
+
+    <!-- 付费学员旅程时间线 -->
+    <div class="vip-timeline fade-in">
+      <div class="vip-step">
+        <div class="vip-step-num" style="background:linear-gradient(135deg,#6C5CE7,#a29bfe)">1</div>
+        <div class="vip-step-content">
+          <span class="step-tag">🎯 第一步</span>
+          <h4>智能规划，开启备考之旅</h4>
+          <ul>
+            <li>系统根据考试时间<strong>自动生成个性化学习计划</strong></li>
+            <li>按基础→强化→冲刺三阶段规划时间轴</li>
+            <li>每日学习任务清晰可见，不用自己排日程</li>
+            <li>会根据学习进度动态调整后续安排</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vip-step">
+        <div class="vip-step-num" style="background:linear-gradient(135deg,#00CEC9,#55EFC4)">2</div>
+        <div class="vip-step-content">
+          <span class="step-tag">📖 第二步</span>
+          <h4>二分屏学习，听课看讲义两不误</h4>
+          <ul>
+            <li>左侧高清视频 + 右侧配套讲义，<strong>无需切换页面</strong></li>
+            <li>讲义重点自动高亮标注，快速定位关键内容</li>
+            <li>支持倍速播放、标记已学/未学章节</li>
+            <li>随堂手写笔记，不动笔的学习等于没学</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vip-step">
+        <div class="vip-step-num" style="background:linear-gradient(135deg,#FD79A8,#fab1a0)">3</div>
+        <div class="vip-step-content">
+          <span class="step-tag">✏️ 第三步</span>
+          <h4>多维度刷题，从练习到精通</h4>
+          <ul>
+            <li>章节练习：学完一课练一课，<strong>即时检验吸收效果</strong></li>
+            <li>课后作业：量化课时学习成果，进度一目了然</li>
+            <li>自定义刷题：自由组合知识点 + 题型，精准突破</li>
+            <li>历年真题：完整收录，模拟真实考试环境</li>
+            <li>高频易错：周/月大数据告诉你哪些题最容易踩坑</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vip-step">
+        <div class="vip-step-num" style="background:linear-gradient(135deg,#FDCB6E,#f39c12)">4</div>
+        <div class="vip-step-content">
+          <span class="step-tag">🔄 第四步</span>
+          <h4>错题归集 + 举一反三，不让一道错题白做</h4>
+          <ul>
+            <li>错题<strong>自动收录</strong>，按待练习→顽固错题→已纠正三级分类</li>
+            <li>支持按章节/题型/时间多维度检索错题</li>
+            <li>智能推荐同类题目"举一反三"，深度攻克薄弱点</li>
+            <li>顽固错题算法标记（≥2次），重点突破</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="vip-step">
+        <div class="vip-step-num" style="background:linear-gradient(135deg,#6C5CE7,#764ba2)">5</div>
+        <div class="vip-step-content">
+          <span class="step-tag">📊 第五步</span>
+          <h4>学习报告 + 记忆卡，持续巩固不遗忘</h4>
+          <ul>
+            <li><strong>可视化学习报告</strong>：时长/进度/正确率数据一目了然</li>
+            <li>智能复习模式：基于遗忘曲线推送待复习内容</li>
+            <li>记忆卡随时巩固重点知识，碎片时间也不浪费</li>
+            <li>学习数据云端同步，换设备不影响学习进度</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== FAQ ===== -->
+<section class="section" style="background:#f8f7fc;padding:64px 0;">
+  <div class="container">
+    <div class="section-header fade-in">
+      <div class="section-number" style="background:linear-gradient(135deg,#636E72,#2D3436)">06</div>
+      <div>
+        <div class="section-title">常见问题解答（FAQ）</div>
+        <div class="section-desc">提前准备好答案，应对客户疑问游刃有余</div>
+      </div>
+    </div>
+
+    <div class="faq-list fade-in">
+      <div class="faq-item active">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>❓ 云私塾平板端需要额外付费吗？</span>
+          <span class="faq-q-icon">▼</span>
+        </div>
+        <div class="faq-a">
+          <p><strong>不需要。</strong>只要在环球网校购买了课程，即可免费下载和使用云私塾平板端 App。这是为购课用户提供的增值权益，不收取任何额外费用。这是非常重要的销售卖点——"买课送专属备考工具"，性价比极高。</p>
+        </div>
+      </div>
+      <div class="faq-item active">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>❓ 支持哪些设备？只有 iPad 吗？</span>
+          <span class="faq-q-icon">▼</span>
+        </div>
+        <div class="faq-a">
+          <p><strong>支持所有主流平板设备。</strong>包括 iPad（iOS）和各类安卓平板。只要是平板设备都可以下载安装并享受完整的平板专属功能体验。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>❓ 付费之后具体能解锁哪些功能？</span>
+          <span class="faq-q-icon">▼</span>
+        </div>
+        <div class="faq-a">
+          <p><strong>付费学员解锁云私塾完整"学练测记"四大闭环：</strong><br>
+          ① <strong>学：</strong>完整课程视频 + 智能规划学习 + 二分屏讲义<br>
+          ② <strong>练：</strong>章节练习 + 历年真题 + 课后作业<br>
+          ③ <strong>测：</strong>自定义刷题 + 高频易错大数据分析<br>
+          ④ <strong>记：</strong>智能错题本 + 记忆卡 + 举一反三<br>
+          外加 <strong>答疑、手写笔记、学习报告、离线下载</strong> 等增值功能。可以去 05 板块查看详细对比。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>❓ 和手机版有什么区别？为什么要用平板版？</span>
+          <span class="faq-q-icon">▼</span>
+        </div>
+        <div class="faq-a">
+          <p><strong>核心区别在于三点：</strong><br>
+          ① <strong>屏幕体验：</strong>平板大屏更适合长时间观看课程视频，眼睛不易疲劳<br>
+          ② <strong>独占功能：</strong>二分屏讲义、手写笔记等是平板专属功能，手机版没有<br>
+          ③ <strong>交互优化：</strong>所有按钮和布局都针对触摸屏和大尺寸重新设计，操作更顺手</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>❓ 没有网络的时候可以用吗？</span>
+          <span class="faq-q-icon">▼</span>
+        </div>
+        <div class="faq-a">
+          <p><strong>可以。</strong>App 支持<strong>资料离线下载</strong>功能，用户可以在有网络时将讲义、课件等学习资源下载到设备本地，即使断网也能正常查看和学习。非常适合通勤、出差等碎片化学习场景。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>❓ 支持哪些类型的课程？</span>
+          <span class="faq-q-icon">▼</span>
+        </div>
+        <div class="faq-a">
+          <p><strong>全面支持两大类型课程：</strong>① 云私塾课程（AI 智能学习系统）；② 普通课商品（传统录播/直播课）。基本覆盖了环球网校所有的职业资格考证课程品类。</p>
+        </div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-q" onclick="toggleFaq(this)">
+          <span>❓ 如何向客户演示这款产品？</span>
+          <span class="faq-q-icon">▼</span>
+        </div>
+        <div class="faq-a">
+          <p><strong>建议演示顺序：</strong><br>
+          第一步：打开 App 展示首页仪表盘 → 强调"打开就知道今天学了什么"<br>
+          第二步：进入自主学习选一门课 → 切换到<strong>二分屏模式</strong>展示（最震撼的功能！）<br>
+          第三步：进入题集展示刷题多样性 → 打开错题本展示智能分类<br>
+          第四步：回到首页展示学习报告数据可视化<br>
+          <em>全程强调"这些都是免费的"、"手机上做不到"</em></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <h3>环球网校 · 云私塾平板端</h3>
+  <p>你的云端私教，让备考不再孤军奋战</p>
+  <div class="footer-brand">YUN SI SHU TABLET 📱</div>
+  <p style="margin-top:16px;font-size:12px;opacity:0.5;">内部培训文档 · 仅供销售团队参考使用</p>
+</footer>
+
+<script>
+// FAQ toggle
+function toggleFaq(el) {
+  const item = el.parentElement;
+  const wasActive = item.classList.contains('active');
+  document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+  if (!wasActive) item.classList.add('active');
+}
+
+// Scroll reveal animation
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>你的AI备考搭子，全新升级 | 环球网校AI老师</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: #f5f0fa; color: #333; line-height: 1.7; overflow-x: hidden;
+  }
+
+  :root {
+    --primary: #6C5CE7; --primary-light: #a29bfe; --primary-dark: #5a4bd1;
+    --accent-pink: #fd79a8; --accent-warm: #fab1a0;
+    --bg-grad-start: #f0e6ff; --bg-grad-end: #fff5f8;
+    --card-bg: rgba(255,255,255,0.85);
+    --text-main: #2d3436; --text-sub: #636e72;
+    --shadow-soft: 0 4px 24px rgba(108,92,231,0.12);
+    --shadow-card: 0 8px 32px rgba(108,92,231,0.15);
+    --radius-lg: 20px; --radius-md: 14px;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column;
+    align-items: center; justify-content: center;
+    text-align: center;
+    padding: 60px 24px 90px;
+    background: linear-gradient(160deg, var(--bg-grad-start) 0%, var(--bg-grad-end) 50%, #fef9ff 100%);
+    position: relative; overflow: hidden;
+  }
+
+  .hero::before {
+    content: ''; position: absolute;
+    width: 500px; height: 500px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(162,155,254,0.28) 0%, transparent 70%);
+    top: -120px; right: -120px;
+    animation: floatBlob 12s ease-in-out infinite;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    width: 420px; height: 420px; border-radius: 50%;
+    background: radial-gradient(circle, rgba(253,121,168,0.16) 0%, transparent 70%);
+    bottom: -80px; left: -100px;
+    animation: floatBlob 10s ease-in-out infinite reverse;
+  }
+
+  @keyframes floatBlob {
+    0%, 100% { transform: translate(0,0) scale(1); }
+    33% { transform: translate(30px,-20px) scale(1.05); }
+    66% { transform: translate(-20px,20px) scale(0.95); }
+  }
+
+  .badge-new {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+    color: white; padding: 8px 22px; border-radius: 30px;
+    font-size: 14px; font-weight: 600; letter-spacing: 1px;
+    margin-bottom: 32px; box-shadow: 0 4px 16px rgba(108,92,231,0.35);
+  }
+
+  .hero h1 {
+    font-size: clamp(28px, 6vw, 48px); font-weight: 800;
+    background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+    margin-bottom: 16px; line-height: 1.3; z-index: 2;
+  }
+
+  .hero-subtitle {
+    font-size: clamp(16px, 3vw, 20px); color: var(--text-sub);
+    max-width: 500px; margin-bottom: 48px; line-height: 1.8; z-index: 2;
+  }
+
+  /* ===== Avatar Image Hero ===== */
+  .hero-visual {
+    position: relative; width: 200px; height: 200px;
+    z-index: 2; margin-bottom: 24px;
+  }
+
+  /* 圆形头像 + 光晕环 */
+  .avatar-ring {
+    position: absolute; top: -8px; left: -8px; right: -8px; bottom: -8px;
+    border-radius: 50%;
+    background: conic-gradient(from 0deg, var(--primary-light), var(--accent-pink), var(--primary), var(--primary-light));
+    animation: ringSpin 12s linear infinite;
+    opacity: 0.6;
+  }
+  @keyframes ringSpin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+  .avatar-glow {
+    position: absolute; top: -20px; left: -20px; right: -20px; bottom: -20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(108,92,231,0.15) 0%, transparent 70%);
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.6; transform: scale(1.08); }
+  }
+
+  .avatar-img-wrapper {
+    position: relative; width: 100%; height: 100%; border-radius: 50%;
+    overflow: hidden; z-index: 2;
+    background: linear-gradient(160deg, #f0e6ff, #fff5f8);
+    box-shadow: 0 4px 24px rgba(108,92,231,0.25), inset 0 0 0 4px rgba(255,255,255,0.9);
+    animation: avatarFloat 4s ease-in-out infinite;
+  }
+  @keyframes avatarFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+
+  .avatar-img-wrapper img {
+    width: 100%; height: 100%; object-fit: cover;
+    display: block;
+  }
+
+  /* Floating ability bubbles around the avatar */
+  .ability-bubbles {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 3;
+  }
+  .ability-bubble {
+    position: absolute;
+    background: var(--card-bg); backdrop-filter: blur(6px);
+    border-radius: 20px; padding: 6px 14px;
+    font-size: 12px; font-weight: 600; color: var(--primary);
+    white-space: nowrap;
+    box-shadow: 0 2px 12px rgba(108,92,231,0.18);
+    border: 1px solid rgba(162,155,254,0.2);
+  }
+  .ability-bubble:nth-child(1) { top: 5%; left: -10%; animation: driftBubble 5s ease-in-out infinite; }
+  .ability-bubble:nth-child(2) { top: 15%; right: -15%; animation: driftBubble 4.5s ease-in-out infinite 0.3s; }
+  .ability-bubble:nth-child(3) { bottom: 20%; left: -5%; animation: driftBubble 5.5s ease-in-out infinite 0.6s; }
+  .ability-bubble:nth-child(4) { bottom: 5%; right: -10%; animation: driftBubble 4.8s ease-in-out infinite 0.9s; }
+
+  @keyframes driftBubble {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(6px, -8px); }
+    50% { transform: translate(-4px, 4px); }
+    75% { transform: translate(4px, 6px); }
+  }
+
+  .scroll-hint {
+    position: absolute; bottom: 30px; left: 50%; transform: translateX(-50%);
+    display: flex; flex-direction: column; align-items: center; gap: 6px;
+    color: var(--text-sub); font-size: 13px; opacity: 0.7;
+    animation: scrollBounce 2s ease-in-out infinite;
+  }
+  @keyframes scrollBounce {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(8px); }
+  }
+  .scroll-hint svg { width: 20px; fill: currentColor; }
+
+  /* ===== Section Common ===== */
+  .section { padding: 70px 20px; max-width: 900px; margin: 0 auto; }
+  .section-title {
+    text-align: center; margin-bottom: 12px;
+    font-size: clamp(22px, 4vw, 32px); font-weight: 700; color: var(--text-main);
+  }
+  .section-subtitle {
+    text-align: center; color: var(--text-sub); font-size: 15px;
+    margin-bottom: 44px; max-width: 520px; margin-left: auto; margin-right: auto;
+  }
+  .section-title span.highlight {
+    background: linear-gradient(135deg, var(--primary), var(--accent-pink));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+
+  /* ===== Feature Cards ===== */
+  .features-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 20px;
+  }
+  .feature-card {
+    background: var(--card-bg); backdrop-filter: blur(10px);
+    border-radius: var(--radius-md); padding: 28px 24px;
+    transition: all 0.35s cubic-bezier(.25,.8,.25,1);
+    border: 1px solid rgba(162,155,254,0.2);
+    position: relative; overflow: hidden;
+  }
+  .feature-card:hover {
+    transform: translateY(-6px); box-shadow: var(--shadow-card);
+    border-color: rgba(162,155,254,0.45);
+  }
+  .feature-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: linear-gradient(90deg, var(--primary), var(--accent-pink));
+    opacity: 0; transition: opacity 0.3s;
+  }
+  .feature-card:hover::before { opacity: 1; }
+
+  .feature-icon {
+    width: 52px; height: 52px; border-radius: 14px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 26px; margin-bottom: 16px;
+    background: linear-gradient(135deg, rgba(108,92,231,0.12), rgba(253,121,168,0.12));
+  }
+  .feature-title { font-size: 17px; font-weight: 700; color: var(--text-main); margin-bottom: 8px; }
+  .feature-desc { font-size: 13.5px; color: var(--text-sub); line-height: 1.75; }
+  .feature-tag {
+    display: inline-block; font-size: 11px; color: var(--primary);
+    background: rgba(108,92,231,0.08); padding: 2px 10px;
+    border-radius: 20px; margin-top: 12px; font-weight: 600;
+  }
+
+  /* ===== Journey ===== */
+  .journey-section {
+    background: linear-gradient(180deg, #fff 0%, var(--bg-grad-start) 100%);
+    padding: 70px 20px;
+  }
+  .journey-container { max-width: 800px; margin: 0 auto; }
+  .timeline {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    gap: 8px; position: relative; padding: 40px 0 20px;
+  }
+  .timeline::before {
+    content: ''; position: absolute; top: 56px; left: 8%; right: 8%;
+    height: 3px; background: linear-gradient(90deg, var(--primary-light), var(--accent-pink));
+    border-radius: 2px;
+  }
+  .timeline-item { flex: 1; text-align: center; position: relative; z-index: 1; }
+  .timeline-dot {
+    width: 48px; height: 48px; border-radius: 50%; background: white;
+    border: 3px solid var(--primary);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 20px; margin: 0 auto 14px;
+    box-shadow: 0 4px 12px rgba(108,92,231,0.2); transition: all 0.3s;
+  }
+  .timeline-item:hover .timeline-dot { transform: scale(1.15); box-shadow: 0 6px 20px rgba(108,92,231,0.35); }
+  .timeline-label { font-size: 15px; font-weight: 700; color: var(--text-main); margin-bottom: 6px; }
+  .timeline-detail { font-size: 12px; color: var(--text-sub); line-height: 1.6; max-width: 130px; margin: 0 auto; }
+
+  /* ===== Showcase: Device Mockups ===== */
+  .showcase-section { background: #fff; padding: 70px 20px; }
+
+  .showcase-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    max-width: 720px; margin: 0 auto;
+  }
+
+  /* Phone mockup frame */
+  .device-frame {
+    position: relative;
+    border-radius: 28px;
+    background: #1a1a2e;
+    padding: 8px;
+    box-shadow: 0 12px 40px rgba(0,0,0,0.18), 0 0 0 1px rgba(108,92,231,0.1);
+    transition: transform 0.35s, box-shadow 0.35s;
+  }
+  .device-frame:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 48px rgba(0,0,0,0.22), 0 0 0 2px rgba(108,92,231,0.3);
+  }
+
+  .device-notch {
+    position: absolute; top: 8px; left: 50%; transform: translateX(-50%);
+    width: 80px; height: 22px; background: #1a1a2e; border-radius: 14px;
+    z-index: 2;
+  }
+
+  .device-screen {
+    border-radius: 20px; overflow: hidden; background: #f8f6fc;
+  }
+  .device-screen img {
+    width: 100%; display: block; border-radius: 20px;
+  }
+
+  .device-label {
+    text-align: center; margin-top: 14px;
+    font-size: 13px; color: var(--text-sub); font-weight: 600;
+  }
+
+  /* Pad mockup - wider */
+  .device-frame.pad {
+    border-radius: 20px; padding: 10px;
+  }
+  .device-frame.pad .device-screen { border-radius: 14px; }
+  .device-frame.pad .device-screen img { border-radius: 14px; }
+  .device-frame.pad .device-notch {
+    width: 60px; height: 14px; border-radius: 8px; top: 10px;
+  }
+
+  /* Conversation highlight card (not in a device frame) */
+  .conv-card {
+    background: var(--card-bg); backdrop-filter: blur(10px);
+    border-radius: var(--radius-lg); padding: 20px;
+    border: 2px solid rgba(162,155,254,0.35);
+    box-shadow: var(--shadow-card);
+    display: flex; flex-direction: column; gap: 16px;
+    transition: transform 0.35s;
+  }
+  .conv-card:hover { transform: translateY(-4px); }
+
+  .conv-card .conv-img {
+    border-radius: 14px; overflow: hidden;
+    box-shadow: 0 4px 16px rgba(108,92,231,0.1);
+  }
+  .conv-card .conv-img img { width: 100%; display: block; }
+
+  .conv-card .conv-quote {
+    font-size: 14px; color: var(--text-main); line-height: 1.7;
+    padding: 0 4px; font-style: italic;
+  }
+  .conv-card .conv-quote em {
+    color: var(--primary); font-weight: 600; font-style: normal;
+  }
+
+  .conv-label {
+    text-align: center; margin-top: 14px;
+    font-size: 13px; color: var(--text-sub); font-weight: 600;
+  }
+
+  /* ===== CTA ===== */
+  .cta-section {
+    text-align: center; padding: 80px 24px 100px;
+    background: linear-gradient(160deg, var(--primary) 0%, #8e44ad 50%, var(--accent-pink) 100%);
+    color: white; position: relative; overflow: hidden;
+  }
+  .cta-section::before {
+    content: ''; position: absolute;
+    width: 600px; height: 600px; border-radius: 50%;
+    background: rgba(255,255,255,0.06);
+    top: -200px; right: -150px;
+  }
+  .cta-section h2 { font-size: clamp(24px, 5vw, 38px); font-weight: 800; margin-bottom: 16px; }
+  .cta-section p { font-size: 16px; opacity: 0.88; margin-bottom: 36px; max-width: 480px; margin-left: auto; margin-right: auto; }
+
+  .version-info {
+    display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center; margin-bottom: 36px;
+  }
+  .version-badge {
+    background: rgba(255,255,255,0.18); backdrop-filter: blur(8px);
+    padding: 10px 22px; border-radius: 30px;
+    font-size: 14px; font-weight: 600;
+    border: 1px solid rgba(255,255,255,0.25);
+  }
+  .version-badge strong { font-size: 16px; }
+
+  .cta-btn {
+    display: inline-block; background: white; color: var(--primary);
+    font-size: 18px; font-weight: 700;
+    padding: 16px 52px; border-radius: 40px;
+    text-decoration: none; box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    transition: all 0.3s; letter-spacing: 1px;
+  }
+  .cta-btn:hover { transform: translateY(-3px); box-shadow: 0 12px 36px rgba(0,0,0,0.28); }
+
+  /* ===== Footer ===== */
+  footer { text-align: center; padding: 30px 20px; color: var(--text-sub); font-size: 13px; background: #f5f0fa; }
+
+  /* ===== Animations ===== */
+  .fade-up {
+    opacity: 0; transform: translateY(30px);
+    transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ===== Responsive ===== */
+  @media (max-width: 600px) {
+    .hero { padding: 50px 18px 70px; min-height: 95vh; }
+    .hero-visual { width: 160px; height: 160px; }
+    .ability-bubble { font-size: 11px; padding: 5px 10px; }
+    .ability-bubble:nth-child(1) { left: -5%; }
+    .ability-bubble:nth-child(2) { right: -5%; }
+    .ability-bubble:nth-child(3) { left: 0%; }
+    .ability-bubble:nth-child(4) { right: 0%; }
+    .section { padding: 50px 16px; }
+    .features-grid { grid-template-columns: 1fr; }
+    .timeline { flex-direction: column; align-items: center; gap: 0; }
+    .timeline::before { top: 0; bottom: 0; left: 24px; right: auto; width: 3px; height: auto; }
+    .timeline-item { text-align: left; display: flex; align-items: flex-start; gap: 16px; margin-bottom: 28px; }
+    .timeline-dot { margin: 0; flex-shrink: 0; }
+    .showcase-grid { grid-template-columns: 1fr; gap: 24px; }
+    .version-info { gap: 10px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== Hero ========== -->
+<section class="hero">
+  <div class="badge-new">✨ 全新升级 · 现已上线</div>
+  <h1>你的AI备考搭子<br>全新升级</h1>
+  <p class="hero-subtitle">从想考到考完，青青老师全程陪你。<br>更聪明、更懂你、更好用。</p>
+
+  <!-- 青青老师头像 + 光环 -->
+  <div class="hero-visual">
+    <div class="avatar-glow"></div>
+    <div class="avatar-ring"></div>
+    <div class="avatar-img-wrapper">
+      <img src="eml_images/qingqing_avatar.png" alt="青青老师" />
+    </div>
+
+    <!-- 漂浮能力标签 -->
+    <div class="ability-bubbles">
+      <div class="ability-bubble">📸 拍照提问</div>
+      <div class="ability-bubble">🧠 智能决策</div>
+      <div class="ability-bubble">💜 记得你</div>
+      <div class="ability-bubble">🔄 全程陪伴</div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>向下滑动探索</span>
+    <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5H7z"/></svg>
+  </div>
+</section>
+
+
+<!-- ========== 6大升级亮点 ========== -->
+<section class="section fade-up">
+  <h2 class="section-title">这次升级，<span class="highlight">哪里不一样？</span></h2>
+  <p class="section-subtitle">六大维度全面进化，让你的备考体验焕然一新</p>
+
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-icon">🧠</div>
+      <div class="feature-title">它变聪明了</div>
+      <div class="feature-desc">不再是固定流程的机械回复，而是像真人老师一样——根据你的情况智能判断，给出最适合的回答。</div>
+      <span class="feature-tag">Agent 智能决策</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📸</div>
+      <div class="feature-title">拍照就能问</div>
+      <div class="feature-desc">遇到不会的题？拍下来直接发给青青老师。题目截图、教材页面、学习资料，都能识别。</div>
+      <span class="feature-tag">多模态图片输入</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">💜</div>
+      <div class="feature-title">它记得你</div>
+      <div class="feature-desc">上次聊到哪了、学到什么程度了、哪些地方容易错……青青老师都记得，每次对话都是延续，不是重新开始。</div>
+      <span class="feature-tag">长期记忆 + 上下文理解</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔄</div>
+      <div class="feature-title">全程陪着你</div>
+      <div class="feature-desc">从犹豫要不要报、怎么报名选科目，到备考答疑、冲刺提分，再到考后复盘——全流程覆盖。</div>
+      <span class="feature-tag">全生命周期服务</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">🔓</div>
+      <div class="feature-title">先试试再说</div>
+      <div class="feature-desc">不用注册登录也能提问。先体验再决定，降低你的首次使用门槛。</div>
+      <span class="feature-tag">未登录可用</span>
+    </div>
+    <div class="feature-card">
+      <div class="feature-icon">📱</div>
+      <div class="feature-title">Pad 也能用</div>
+      <div class="feature-desc">新增 Pad 端适配，大屏看题、问老师，学习体验更舒适，适合长时间沉浸式学习。</div>
+      <span class="feature-tag">全终端覆盖</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 全流程场景地图 ========== -->
+<section class="journey-section">
+  <div class="journey-container">
+    <h2 class="section-title fade-up"><span class="highlight">备考全旅程</span>，每一步都在</h2>
+    <p class="section-subtitle fade-up">青青老师不只是答疑工具，而是贯穿你整个备考周期的智能搭档</p>
+
+    <div class="timeline fade-up">
+      <div class="timeline-item">
+        <div class="timeline-dot">💭</div>
+        <div class="timeline-label">想考阶段</div>
+        <div class="timeline-detail">报什么考？选什么方向？<br>帮你分析决策</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">📝</div>
+        <div class="timeline-label">报名期</div>
+        <div class="timeline-detail">条件够不够？<br>流程怎么走？时间节点提醒</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">📚</div>
+        <div class="timeline-label">备考中</div>
+        <div class="timeline-detail">教材讲解·拍题答疑<br>个性化学习规划</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🚀</div>
+        <div class="timeline-label">考前冲刺</div>
+        <div class="timeline-detail">复习重点·答题技巧<br>时间分配建议</div>
+      </div>
+      <div class="timeline-item">
+        <div class="timeline-dot">🎉</div>
+        <div class="timeline-label">考后复盘</div>
+        <div class="timeline-detail">成绩分析·下一步规划</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ========== 精选产品展示（设备框内） ========== -->
+<section class="showcase-section">
+  <h2 class="section-title fade-up">看看<span class="highlight">真实效果</span></h2>
+  <p class="section-subtitle fade-up">手机端 · Pad端 · 网页端，随时随地找到青青老师</p>
+
+  <div class="showcase-grid fade-up">
+
+    <!-- 手机端：青青老师暖心对话 -->
+    <div>
+      <div class="conv-card">
+        <div class="conv-img">
+          <img src="eml_images/qingqing_warm_chat.png" alt="青青老师暖心对话" />
+        </div>
+        <div class="conv-quote">「你已经坚持学了 <em>42 天</em>了，真的很了不起！今天咱们继续把第四章啃下来 💪」</div>
+      </div>
+      <div class="conv-label">💬 暖心陪伴 · 它记得你的每一步</div>
+    </div>
+
+    <!-- 手机端：专业答疑（设备框） -->
+    <div>
+      <div class="device-frame">
+        <div class="device-notch"></div>
+        <div class="device-screen">
+          <img src="eml_images/07_1505998205.7_78c08d31.png" alt="青青老师主界面" />
+        </div>
+      </div>
+      <div class="device-label">📱 手机端 — 青青老师随时在线</div>
+    </div>
+
+    <!-- Pad端：AI老师+学习报告双栏 -->
+    <div>
+      <div class="device-frame pad">
+        <div class="device-notch"></div>
+        <div class="device-screen">
+          <img src="eml_images/05_1505998205.7_9a2445d5.png" alt="Pad端AI+学习报告" />
+        </div>
+      </div>
+      <div class="device-label">🖥️ Pad端 — 左侧学习报告 + 右侧青青老师</div>
+    </div>
+
+    <!-- 网页端浮窗 -->
+    <div>
+      <div class="device-frame" style="border-radius: 14px; background: #f8f6fc; border: 2px solid rgba(162,155,254,0.3); padding: 6px;">
+        <div class="device-screen" style="border-radius: 10px;">
+          <img src="eml_images/00_1505998205.7_1b58361e.png" alt="网页端浮窗" />
+        </div>
+      </div>
+      <div class="device-label">💻 网页端 — 右下角青青老师随时召唤</div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ========== CTA ========== -->
+<section class="cta-section">
+  <h2>现在就去找青青老师聊聊吧 👋</h2>
+  <p>打开环球网校 App，在「AI专区」或底部导航找到青青老师</p>
+
+  <div class="version-info">
+    <span class="version-badge"><strong>iOS</strong>&nbsp; v7.13.14</span>
+    <span class="version-badge"><strong>安卓</strong>&nbsp; v7.11.77</span>
+    <span class="version-badge"><strong>Pad</strong>&nbsp; v1.0.6</span>
+  </div>
+
+  <a href="https://www.hqwx.com" target="_blank" class="cta-btn">前往环球网校 →</a>
+</section>
+
+
+<!-- ========== Footer ========== -->
+<footer>
+  <p>环球网校 © 2026 · 让教育更美好</p>
+  <p style="margin-top:6px;opacity:0.6;">本页面仅供内部宣传使用</p>
+</footer>
+
+
+<!-- ===== Scroll Reveal ===== -->
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) { entry.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>

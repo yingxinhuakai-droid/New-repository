@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>注安销售工作台</title>
+<style>
+:root {
+  --c-bg: #F5F5F5;
+  --c-card: #FFFFFF;
+  --c-primary: #1A56DB;
+  --c-primary-light: #E8EFFA;
+  --c-success: #059669;
+  --c-success-light: #ECFDF5;
+  --c-danger: #DC2626;
+  --c-danger-light: #FEF2F2;
+  --c-warning: #D97706;
+  --c-warning-light: #FFFBEB;
+  --c-text: #111827;
+  --c-text-2: #6B7280;
+  --c-text-3: #9CA3AF;
+  --c-border: #E5E7EB;
+  --c-border-hover: #D1D5DB;
+  --radius: 12px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-card: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+  -webkit-font-smoothing: antialiased;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+.container { max-width: 800px; margin: 0 auto; padding: 12px 12px 100px; }
+
+/* Header */
+.header {
+  padding: 16px 4px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.header h1 { font-size: 20px; font-weight: 600; }
+.header .time { font-size: 13px; color: var(--c-text-2); }
+
+/* Tab Nav */
+.tab-nav {
+  display: flex;
+  background: var(--c-card);
+  border-radius: var(--radius);
+  padding: 4px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow-sm);
+}
+.tab-btn {
+  flex: 1;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--c-text-2);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.tab-btn.active { background: var(--c-primary); color: #fff; }
+
+/* Cards */
+.card {
+  background: var(--c-card);
+  border-radius: var(--radius);
+  padding: 16px;
+  margin-bottom: 12px;
+  box-shadow: var(--shadow-card);
+  border: 1px solid var(--c-border);
+}
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.card-title { font-size: 15px; font-weight: 600; }
+.card-subtitle { font-size: 12px; color: var(--c-text-2); }
+
+/* Form */
+.form-group { margin-bottom: 12px; }
+.form-label { display: block; font-size: 13px; font-weight: 500; margin-bottom: 4px; color: var(--c-text); }
+.form-input, .form-select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  background: #fff;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+}
+.form-input:focus, .form-select:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 3px rgba(26,86,219,0.1);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary { background: var(--c-primary); color: #fff; }
+.btn-primary:active { opacity: 0.85; }
+.btn-outline { background: #fff; border: 1px solid var(--c-border); color: var(--c-text); }
+.btn-sm { padding: 6px 12px; font-size: 12px; }
+.btn-block { width: 100%; }
+
+/* Tags / Badges */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-size: 11px;
+  font-weight: 500;
+}
+.tag-red { background: var(--c-danger-light); color: var(--c-danger); }
+.tag-green { background: var(--c-success-light); color: var(--c-success); }
+.tag-blue { background: var(--c-primary-light); color: var(--c-primary); }
+.tag-yellow { background: var(--c-warning-light); color: var(--c-warning); }
+.tag-lg { padding: 4px 12px; font-size: 13px; }
+
+/* Result cards */
+.result-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--c-border);
+}
+.result-row:last-child { border-bottom: none; }
+.result-label { font-size: 13px; color: var(--c-text-2); }
+.result-value { font-size: 14px; font-weight: 600; }
+
+/* Search */
+.search-bar {
+  position: relative;
+  margin-bottom: 12px;
+}
+.search-bar input {
+  width: 100%;
+  padding: 10px 12px 10px 36px;
+  border: 1px solid var(--c-border);
+  border-radius: var(--radius);
+  font-size: 14px;
+  background: var(--c-card);
+}
+.search-bar input:focus { outline: none; border-color: var(--c-primary); }
+.search-icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--c-text-3);
+  font-size: 14px;
+}
+
+/* Section title */
+.section-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--c-text-2);
+  padding: 8px 0 4px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ID List */
+.id-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px;
+  background: #F9FAFB;
+  border-radius: var(--radius-sm);
+  margin-bottom: 6px;
+}
+.id-item .id-num {
+  font-family: 'SF Mono', 'Menlo', 'Monaco', monospace;
+  font-size: 13px;
+  color: var(--c-primary);
+  font-weight: 500;
+}
+.id-item .id-name { font-size: 13px; color: var(--c-text); flex: 1; margin: 0 12px; }
+.id-item .copy-btn {
+  padding: 4px 10px;
+  font-size: 11px;
+  border: 1px solid var(--c-border);
+  border-radius: 4px;
+  background: #fff;
+  color: var(--c-text-2);
+  cursor: pointer;
+}
+.id-item .copy-btn.copied { border-color: var(--c-success); color: var(--c-success); background: var(--c-success-light); }
+
+/* Red line card */
+.redline-card {
+  border-left: 3px solid var(--c-danger);
+  padding: 12px;
+  margin-bottom: 10px;
+  background: #FFFBFC;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}
+.redline-forbidden { font-size: 13px; color: var(--c-danger); font-weight: 500; }
+.redline-safe { font-size: 12px; color: var(--c-text-2); margin-top: 4px; }
+
+/* Toast */
+.toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #111827;
+  color: #fff;
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-size: 13px;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.toast.show { opacity: 1; }
+
+/* Price table */
+.price-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+.price-cell {
+  padding: 12px;
+  background: #F9FAFB;
+  border-radius: var(--radius-sm);
+  text-align: center;
+}
+.price-cell .class-name { font-size: 14px; font-weight: 600; }
+.price-cell .class-price { font-size: 18px; font-weight: 700; color: var(--c-primary); margin: 4px 0; }
+.price-cell .class-detail { font-size: 11px; color: var(--c-text-2); }
+
+/* Filter chips */
+.chip-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 12px;
+}
+.chip {
+  padding: 6px 12px;
+  border: 1px solid var(--c-border);
+  border-radius: 16px;
+  font-size: 12px;
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.2s;
+}
+.chip:active, .chip.selected { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+
+/* Two-col on desktop */
+@media (min-width: 640px) {
+  .price-grid { grid-template-columns: repeat(3, 1fr); }
+  .card-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .card-row .card { margin-bottom: 0; }
+}
+
+/* Modal for detail */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  animation: fadeIn 0.2s;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 16px 16px 0 0;
+  width: 100%;
+  max-width: 800px;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 20px;
+  animation: slideUp 0.25s;
+}
+.modal-handle {
+  width: 40px;
+  height: 4px;
+  background: var(--c-border);
+  border-radius: 2px;
+  margin: 0 auto 16px;
+}
+@keyframes fadeIn { from { opacity:0 } to { opacity:1 } }
+@keyframes slideUp { from { transform:translateY(100%) } to { transform:translateY(0) } }
+
+.hidden { display: none !important; }
+
+/* Responsive empty state */
+.empty-state {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--c-text-3);
+}
+.empty-state .icon { font-size: 32px; margin-bottom: 8px; }
+.empty-state p { font-size: 14px; }
+
+/* Highlight */
+.highlight { background: #FEF3C7; padding: 2px 4px; border-radius: 3px; }
+
+/* Info banner */
+.info-banner {
+  background: var(--c-primary-light);
+  border-radius: var(--radius-sm);
+  padding: 12px;
+  font-size: 13px;
+  color: var(--c-primary);
+  margin-bottom: 16px;
+}
+.info-banner .icon { margin-right: 6px; }
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="header">
+    <h1>注安销售工作台</h1>
+    <span class="time" id="currentTime"></span>
+  </div>
+
+  <div class="tab-nav">
+    <button class="tab-btn active" onclick="switchTab('price')">价格速查</button>
+    <button class="tab-btn" onclick="switchTab('id')">商品ID</button>
+    <button class="tab-btn" onclick="switchTab('redline')">质检红线</button>
+  </div>
+
+  <!-- 模块1: 价格速查 & 话术 -->
+  <div id="tab-price">
+    <div class="card">
+      <div class="card-header"><span class="card-title">复购 / 升级价格查询</span></div>
+      <div class="form-group">
+        <label class="form-label">学员历史消费情况</label>
+        <select class="form-select" id="priceHistory" onchange="calcPrice()">
+          <option value="">-- 请选择 --</option>
+          <option value="2000+">历史单笔满 2000元及以上</option>
+          <option value="500-1999">历史单笔满 500-1999元</option>
+          <option value="under500">历史消费不足 500元</option>
+          <option value="new">新用户 / 无消费记录</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">原班型年份（升级抵扣用）</label>
+        <select class="form-select" id="priceYear" onchange="calcPrice()">
+          <option value="">-- 请选择 --</option>
+          <option value="26">26年考季课程</option>
+          <option value="25">25年考季课程</option>
+          <option value="24">24年及以前考季课程</option>
+          <option value="other">其他项目/增项复购</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">操作类型</label>
+        <select class="form-select" id="priceType" onchange="calcPrice()">
+          <option value="upgrade">同项目升级</option>
+          <option value="repurchase">同项目复购</option>
+          <option value="cross">其他项目/增项复购</option>
+        </select>
+      </div>
+
+      <div id="priceResult" class="hidden" style="margin-top:12px;">
+        <div style="font-size:13px;color:var(--c-text-2);margin-bottom:8px;" id="priceRuleText"></div>
+
+        <div class="section-title">各班型价格一览</div>
+        <div class="price-grid">
+          <div class="price-cell">
+            <div class="class-name">魔鬼训练营</div>
+            <div class="class-price">¥16,800</div>
+            <div class="class-detail">全科退费版 / 6-12期免息</div>
+          </div>
+          <div class="price-cell">
+            <div class="class-name">央企私教班</div>
+            <div class="class-price">¥4,599</div>
+            <div class="class-detail">两年不过退3000 / 全科</div>
+          </div>
+          <div class="price-cell">
+            <div class="class-name">IP私教营</div>
+            <div class="class-price">¥3,980</div>
+            <div class="class-detail">实务单科 / 通过退50%</div>
+          </div>
+          <div class="price-cell">
+            <div class="class-name">云私塾 PRO</div>
+            <div class="class-price">¥2,999</div>
+            <div class="class-detail">全科 / 6期免息</div>
+          </div>
+          <div class="price-cell">
+            <div class="class-name">零基础AI畅学</div>
+            <div class="class-price">¥1,999</div>
+            <div class="class-detail">全科 / 3期免息</div>
+          </div>
+          <div class="price-cell">
+            <div class="class-name">全程突破班</div>
+            <div class="class-price">¥980</div>
+            <div class="class-detail">全科 / 3期免息</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 升级抵扣规则速查 -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">升级抵扣规则速查</span></div>
+      <div class="result-row">
+        <span class="result-label">26年考季课程升级</span>
+        <span class="result-value tag tag-green tag-lg">100% 抵扣</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">25年考季课程升级/平级</span>
+        <span class="result-value tag tag-blue tag-lg">40% 抵扣</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">24年及以前课程升级/平级</span>
+        <span class="result-value tag tag-yellow tag-lg">20% 抵扣</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">25年首售产品 升 央企/私教/魔鬼/钻石</span>
+        <span class="result-value tag tag-green tag-lg">100% 抵扣</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">24年及前首售升同左</span>
+        <span class="result-value tag tag-blue tag-lg">50% 抵扣</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">前考季续报产品再购买续报</span>
+        <span class="result-value tag tag-yellow tag-lg">统一 50% 抵扣</span>
+      </div>
+    </div>
+
+    <!-- 团购阶梯价 -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">团购阶梯价参考</span></div>
+      <div class="result-row">
+        <span class="result-label">1-2人 正价</span>
+        <span class="result-value">央企 ¥4,599 · 云私塾 ¥2,999</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">3-5人团购</span>
+        <span class="result-value">央企 ¥3,699 · 云私塾 ¥2,699</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">6-9人团购</span>
+        <span class="result-value">央企 ¥3,399 · 云私塾 ¥2,399</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">10-30人</span>
+        <span class="result-value">央企 ¥2,999 · 云私塾 ¥1,999</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">31-50人</span>
+        <span class="result-value">央企 ¥2,799 · 云私塾 ¥1,799</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">51-79人</span>
+        <span class="result-value">央企 ¥2,599 · 云私塾 ¥1,599</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">80人以上</span>
+        <span class="result-value" style="font-size:12px;">央企 ¥2,599 · 云私塾 ¥1,399</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">101人以上</span>
+        <span class="result-value" style="font-size:12px;">央企 ¥2,199 · 云私塾 ¥1,199</span>
+      </div>
+      <div style="margin-top:8px;font-size:11px;color:#DC2626;">* 团购需提前报备，非项目主动组织须申请</div>
+    </div>
+
+    <!-- 营销话术速查 -->
+    <div class="card">
+      <div class="card-header"><span class="card-title">当前营销话术速查</span></div>
+      <div class="info-banner">📅 6月营销：复购专属优惠 | 考试倒计时 145 天</div>
+      <div class="result-row">
+        <span class="result-label">本月噱头</span>
+        <span class="result-value">复购：凭二建/环评准考证 注安满1000减100</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">本月课程节点</span>
+        <span class="result-value">精炼真题开播 · 刷题班上线</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">赠品策略</span>
+        <span class="result-value">考点精讲班：报全程突破班及以上赠送</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 模块2: 商品ID查询 -->
+  <div id="tab-id" class="hidden">
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="搜索商品名称或ID..." id="idSearch" oninput="filterIds()">
+    </div>
+    <div class="chip-row" id="classFilter">
+      <span class="chip selected" onclick="filterByClass('all', this)">全部</span>
+      <span class="chip" onclick="filterByClass('OMO', this)">OMO线下</span>
+      <span class="chip" onclick="filterByClass('魔鬼', this)">线上魔鬼</span>
+      <span class="chip" onclick="filterByClass('云私塾', this)">云私塾PRO</span>
+      <span class="chip" onclick="filterByClass('零基础', this)">零基础AI</span>
+      <span class="chip" onclick="filterByClass('全程', this)">全程突破</span>
+      <span class="chip" onclick="filterByClass('私教营', this)">私教营</span>
+      <span class="chip" onclick="filterByClass('央企', this)">央企私教</span>
+    </div>
+    <div class="chip-row" id="subjectFilter">
+      <span class="chip selected" onclick="filterBySubject('all', this)">全部科目</span>
+      <span class="chip" onclick="filterBySubject('全科', this)">全科</span>
+      <span class="chip" onclick="filterBySubject('法规', this)">法规</span>
+      <span class="chip" onclick="filterBySubject('管理', this)">管理</span>
+      <span class="chip" onclick="filterBySubject('技术', this)">技术</span>
+      <span class="chip" onclick="filterBySubject('化工', this)">化工</span>
+      <span class="chip" onclick="filterBySubject('建筑', this)">建筑</span>
+      <span class="chip" onclick="filterBySubject('其他', this)">其他</span>
+      <span class="chip" onclick="filterBySubject('煤矿', this)">煤矿</span>
+      <span class="chip" onclick="filterBySubject('矿山', this)">矿山</span>
+      <span class="chip" onclick="filterBySubject('金属', this)">金属</span>
+      <span class="chip" onclick="filterBySubject('道路', this)">道路</span>
+    </div>
+    <div id="idCount" style="font-size:12px;color:var(--c-text-3);margin-bottom:8px;"></div>
+    <div id="idList"></div>
+  </div>
+
+  <!-- 模块3: 质检红线 -->
+  <div id="tab-redline" class="hidden">
+    <div class="info-banner" style="background:var(--c-danger-light);color:var(--c-danger);">
+      ⚠️ 以下内容为话术红线，违规将承担一级违规责任。请每日自检。
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">禁用话术清单</span></div>
+
+      <div class="redline-card">
+        <div class="redline-forbidden">一、明示或暗示有原题、答案</div>
+        <div class="redline-safe">✅ 合规说法："基于对历年考点考察方式和出题形式的剖析，网校出的题在考试中会有相似题"</div>
+      </div>
+
+      <div class="redline-card">
+        <div class="redline-forbidden">二、虚报考点覆盖率（禁止自行承诺比例）</div>
+        <div class="redline-safe">✅ 合规说法："在考试未出现大范围超纲的情况下，面授讲义覆盖率可达90%以上，AB卷+必会题考点覆盖率可达90%以上。"（需精确引用此句）</div>
+      </div>
+
+      <div class="redline-card">
+        <div class="redline-forbidden">三、通过率话术（学员主动问才答）</div>
+        <div class="redline-safe">✅ 合规前提：完课率80%前提下。魔鬼/OMO班说明退费班型学完退费；云私塾7.0旗舰班通过率85.2%。不主推"通过率"概念，仅在学员追问时说明。</div>
+      </div>
+
+      <div class="redline-card">
+        <div class="redline-forbidden">四、谎报学习时长</div>
+        <div class="redline-safe">✅ 实际数据：魔鬼/OMO全科419H+8天面授/线上集训；单科109H+2天。退费标准：魔鬼单科~43H、全科~160H。</div>
+      </div>
+
+      <div class="redline-card">
+        <div class="redline-forbidden">五、虚假宣传（虚假退费、虚假承诺、虚假师资）</div>
+        <div class="redline-safe">✅ 退费必须出示完整协议链接并说明条件。师资需如实说明，非独家老师不能标"独家"。</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header"><span class="card-title">魔鬼/OMO 售卖质检要点</span></div>
+      <div class="result-row">
+        <span class="result-label">Step 1</span>
+        <span class="result-value">完整产介 + 说明退费条件</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Step 2</span>
+        <span class="result-value">附带协议链接（必须）</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Step 3</span>
+        <span class="result-value">质检监查路径确认（有记录可查）</span>
+      </div>
+      <div class="result-row">
+        <span class="result-label">Step 4</span>
+        <span class="result-value">无误导、无承诺、无虚假宣传</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+// ==================== DATA LAYER ====================
+// Data structured for easy replacement with API calls
+
+const PRODUCT_IDS = [
+  { id: "10016436", name: "OMO线下集训营-建筑全科", cls: "OMO", subject: "建筑", subjGrp: "全科" },
+  { id: "10016437", name: "OMO线下集训营-其他全科", cls: "OMO", subject: "其他", subjGrp: "全科" },
+  { id: "10016435", name: "OMO线下集训营-化工全科", cls: "OMO", subject: "化工", subjGrp: "全科" },
+  { id: "10016375", name: "OMO线下集训营-法规", cls: "OMO", subject: "法规", subjGrp: "单科" },
+  { id: "10016378", name: "OMO线下集训营-管理", cls: "OMO", subject: "管理", subjGrp: "单科" },
+  { id: "10016380", name: "OMO线下集训营-技术", cls: "OMO", subject: "技术", subjGrp: "单科" },
+  { id: "10016381", name: "OMO线下集训营-化工", cls: "OMO", subject: "化工", subjGrp: "单科" },
+  { id: "10016382", name: "OMO线下集训营-建筑", cls: "OMO", subject: "建筑", subjGrp: "单科" },
+  { id: "10016384", name: "OMO线下集训营-其他", cls: "OMO", subject: "其他", subjGrp: "单科" },
+
+  { id: "10016346", name: "线上魔鬼训练营-建筑全科", cls: "魔鬼", subject: "建筑", subjGrp: "全科" },
+  { id: "10016345", name: "线上魔鬼训练营-化工全科", cls: "魔鬼", subject: "化工", subjGrp: "全科" },
+  { id: "10016353", name: "线上魔鬼训练营-其他全科", cls: "魔鬼", subject: "其他", subjGrp: "全科" },
+  { id: "10016354", name: "线上魔鬼训练营-金属全科", cls: "魔鬼", subject: "金属", subjGrp: "全科" },
+  { id: "10016366", name: "线上魔鬼训练营-矿山全科", cls: "魔鬼", subject: "矿山", subjGrp: "全科" },
+  { id: "10016368", name: "线上魔鬼训练营-煤矿全科", cls: "魔鬼", subject: "煤矿", subjGrp: "全科" },
+  { id: "10016372", name: "线上魔鬼训练营-道路全科", cls: "魔鬼", subject: "道路", subjGrp: "全科" },
+  { id: "10016296", name: "线上魔鬼训练营-法规", cls: "魔鬼", subject: "法规", subjGrp: "单科" },
+  { id: "10016297", name: "线上魔鬼训练营-管理", cls: "魔鬼", subject: "管理", subjGrp: "单科" },
+  { id: "10016298", name: "线上魔鬼训练营-技术", cls: "魔鬼", subject: "技术", subjGrp: "单科" },
+  { id: "10016299", name: "线上魔鬼训练营-化工", cls: "魔鬼", subject: "化工", subjGrp: "单科" },
+  { id: "10016309", name: "线上魔鬼训练营-建筑", cls: "魔鬼", subject: "建筑", subjGrp: "单科" },
+  { id: "10016310", name: "线上魔鬼训练营-其他", cls: "魔鬼", subject: "其他", subjGrp: "单科" },
+  { id: "10016317", name: "线上魔鬼训练营-金属", cls: "魔鬼", subject: "金属", subjGrp: "单科" },
+  { id: "10016319", name: "线上魔鬼训练营-矿山", cls: "魔鬼", subject: "矿山", subjGrp: "单科" },
+  { id: "10016320", name: "线上魔鬼训练营-煤矿", cls: "魔鬼", subject: "煤矿", subjGrp: "单科" },
+  { id: "10016321", name: "线上魔鬼训练营-道路", cls: "魔鬼", subject: "道路", subjGrp: "单科" },
+  { id: "10016420", name: "线上魔鬼训练营-化工全科-双重退费", cls: "魔鬼", subject: "化工", subjGrp: "全科" },
+  { id: "10016422", name: "线上魔鬼训练营-建筑全科-双重退费", cls: "魔鬼", subject: "建筑", subjGrp: "全科" },
+  { id: "10016426", name: "线上魔鬼训练营-其他全科-双重退费", cls: "魔鬼", subject: "其他", subjGrp: "全科" },
+  { id: "10016427", name: "线上魔鬼训练营-金属全科-双重退费", cls: "魔鬼", subject: "金属", subjGrp: "全科" },
+  { id: "10016430", name: "线上魔鬼训练营-矿山全科-双重退费", cls: "魔鬼", subject: "矿山", subjGrp: "全科" },
+  { id: "10016432", name: "线上魔鬼训练营-煤矿全科-双重退费", cls: "魔鬼", subject: "煤矿", subjGrp: "全科" },
+  { id: "10016433", name: "线上魔鬼训练营-道路全科-双重退费", cls: "魔鬼", subject: "道路", subjGrp: "全科" },
+
+  { id: "10016017", name: "云私塾PRO-建筑全科", cls: "云私塾", subject: "建筑", subjGrp: "全科" },
+  { id: "10016013", name: "云私塾PRO-化工全科", cls: "云私塾", subject: "化工", subjGrp: "全科" },
+  { id: "10016020", name: "云私塾PRO-其他全科", cls: "云私塾", subject: "其他", subjGrp: "全科" },
+  { id: "10016026", name: "云私塾PRO-金属全科", cls: "云私塾", subject: "金属", subjGrp: "全科" },
+  { id: "10016027", name: "云私塾PRO-矿山全科", cls: "云私塾", subject: "矿山", subjGrp: "全科" },
+  { id: "10016028", name: "云私塾PRO-煤矿全科", cls: "云私塾", subject: "煤矿", subjGrp: "全科" },
+  { id: "10016029", name: "云私塾PRO-道路全科", cls: "云私塾", subject: "道路", subjGrp: "全科" },
+  { id: "10015917", name: "云私塾PRO-法规", cls: "云私塾", subject: "法规", subjGrp: "单科" },
+  { id: "10015918", name: "云私塾PRO-管理", cls: "云私塾", subject: "管理", subjGrp: "单科" },
+  { id: "10015919", name: "云私塾PRO-技术", cls: "云私塾", subject: "技术", subjGrp: "单科" },
+  { id: "10015920", name: "云私塾PRO-化工", cls: "云私塾", subject: "化工", subjGrp: "单科" },
+  { id: "10015921", name: "云私塾PRO-建筑", cls: "云私塾", subject: "建筑", subjGrp: "单科" },
+  { id: "10015922", name: "云私塾PRO-其他", cls: "云私塾", subject: "其他", subjGrp: "单科" },
+  { id: "10015923", name: "云私塾PRO-金属", cls: "云私塾", subject: "金属", subjGrp: "单科" },
+  { id: "10015924", name: "云私塾PRO-矿山", cls: "云私塾", subject: "矿山", subjGrp: "单科" },
+  { id: "10015925", name: "云私塾PRO-煤矿", cls: "云私塾", subject: "煤矿", subjGrp: "单科" },
+  { id: "10015926", name: "云私塾PRO-道路", cls: "云私塾", subject: "道路", subjGrp: "单科" },
+  { id: "10028725", name: "云私塾PRO-保二争三版-化工全科", cls: "云私塾", subject: "化工", subjGrp: "全科" },
+  { id: "10028726", name: "云私塾PRO-保二争三版-其他全科", cls: "云私塾", subject: "其他", subjGrp: "全科" },
+  { id: "10028727", name: "云私塾PRO-保二争三版-建筑全科", cls: "云私塾", subject: "建筑", subjGrp: "全科" },
+  { id: "10028728", name: "云私塾PRO-保二争三版-金属全科", cls: "云私塾", subject: "金属", subjGrp: "全科" },
+  { id: "10028729", name: "云私塾PRO-保二争三版-矿山全科", cls: "云私塾", subject: "矿山", subjGrp: "全科" },
+  { id: "10028730", name: "云私塾PRO-保二争三版-煤矿全科", cls: "云私塾", subject: "煤矿", subjGrp: "全科" },
+  { id: "10028731", name: "云私塾PRO-保二争三版-道路全科", cls: "云私塾", subject: "道路", subjGrp: "全科" },
+
+  { id: "10015999", name: "零基础AI畅学-建筑全科", cls: "零基础", subject: "建筑", subjGrp: "全科" },
+  { id: "10015998", name: "零基础AI畅学-化工全科", cls: "零基础", subject: "化工", subjGrp: "全科" },
+  { id: "10016000", name: "零基础AI畅学-其他全科", cls: "零基础", subject: "其他", subjGrp: "全科" },
+  { id: "10016001", name: "零基础AI畅学-金属全科", cls: "零基础", subject: "金属", subjGrp: "全科" },
+  { id: "10016002", name: "零基础AI畅学-矿山全科", cls: "零基础", subject: "矿山", subjGrp: "全科" },
+  { id: "10016003", name: "零基础AI畅学-煤矿全科", cls: "零基础", subject: "煤矿", subjGrp: "全科" },
+  { id: "10016004", name: "零基础AI畅学-道路全科", cls: "零基础", subject: "道路", subjGrp: "全科" },
+  { id: "10015907", name: "零基础AI畅学-法规", cls: "零基础", subject: "法规", subjGrp: "单科" },
+  { id: "10015908", name: "零基础AI畅学-管理", cls: "零基础", subject: "管理", subjGrp: "单科" },
+  { id: "10015909", name: "零基础AI畅学-技术", cls: "零基础", subject: "技术", subjGrp: "单科" },
+  { id: "10015910", name: "零基础AI畅学-化工", cls: "零基础", subject: "化工", subjGrp: "单科" },
+  { id: "10015911", name: "零基础AI畅学-建筑", cls: "零基础", subject: "建筑", subjGrp: "单科" },
+  { id: "10015912", name: "零基础AI畅学-其他", cls: "零基础", subject: "其他", subjGrp: "单科" },
+  { id: "10015913", name: "零基础AI畅学-金属", cls: "零基础", subject: "金属", subjGrp: "单科" },
+  { id: "10015914", name: "零基础AI畅学-矿山", cls: "零基础", subject: "矿山", subjGrp: "单科" },
+  { id: "10015915", name: "零基础AI畅学-煤矿", cls: "零基础", subject: "煤矿", subjGrp: "单科" },
+  { id: "10015916", name: "零基础AI畅学-道路", cls: "零基础", subject: "道路", subjGrp: "单科" },
+
+  { id: "10015986", name: "全程突破班-化工全科", cls: "全程", subject: "化工", subjGrp: "全科" },
+  { id: "10015987", name: "全程突破班-建筑全科", cls: "全程", subject: "建筑", subjGrp: "全科" },
+  { id: "10015988", name: "全程突破班-其他全科", cls: "全程", subject: "其他", subjGrp: "全科" },
+  { id: "10015994", name: "全程突破班-金属全科", cls: "全程", subject: "金属", subjGrp: "全科" },
+  { id: "10015995", name: "全程突破班-矿山全科", cls: "全程", subject: "矿山", subjGrp: "全科" },
+  { id: "10015996", name: "全程突破班-煤矿全科", cls: "全程", subject: "煤矿", subjGrp: "全科" },
+  { id: "10015997", name: "全程突破班-道路全科", cls: "全程", subject: "道路", subjGrp: "全科" },
+  { id: "10015897", name: "全程突破班-法规", cls: "全程", subject: "法规", subjGrp: "单科" },
+  { id: "10015898", name: "全程突破班-管理", cls: "全程", subject: "管理", subjGrp: "单科" },
+  { id: "10015899", name: "全程突破班-技术", cls: "全程", subject: "技术", subjGrp: "单科" },
+  { id: "10015906", name: "全程突破班-道路", cls: "全程", subject: "道路", subjGrp: "单科" },
+  { id: "10015905", name: "全程突破班-煤矿", cls: "全程", subject: "煤矿", subjGrp: "单科" },
+  { id: "10015904", name: "全程突破班-矿山", cls: "全程", subject: "矿山", subjGrp: "单科" },
+  { id: "10015903", name: "全程突破班-金属", cls: "全程", subject: "金属", subjGrp: "单科" },
+  { id: "10015902", name: "全程突破班-其他", cls: "全程", subject: "其他", subjGrp: "单科" },
+  { id: "10015901", name: "全程突破班-建筑", cls: "全程", subject: "建筑", subjGrp: "单科" },
+  { id: "10015900", name: "全程突破班-化工", cls: "全程", subject: "化工", subjGrp: "单科" },
+
+  { id: "10016290", name: "IP私教营-建筑实务", cls: "私教营", subject: "建筑", subjGrp: "实务" },
+  { id: "10016291", name: "IP私教营-化工实务", cls: "私教营", subject: "化工", subjGrp: "实务" },
+  { id: "10016292", name: "IP私教营-其他实务", cls: "私教营", subject: "其他", subjGrp: "实务" },
+  { id: "10016293", name: "IP私教营-煤矿实务", cls: "私教营", subject: "煤矿", subjGrp: "实务" },
+  { id: "10016294", name: "IP私教营-矿山实务", cls: "私教营", subject: "矿山", subjGrp: "实务" },
+  { id: "10016295", name: "IP私教营-金属实务", cls: "私教营", subject: "金属", subjGrp: "实务" },
+
+  { id: "10016339", name: "央企私教班-建筑全科", cls: "央企", subject: "建筑", subjGrp: "全科" },
+  { id: "10016340", name: "央企私教班-化工全科", cls: "央企", subject: "化工", subjGrp: "全科" },
+  { id: "10016341", name: "央企私教班-其他全科", cls: "央企", subject: "其他", subjGrp: "全科" },
+  { id: "10016440", name: "央企私教班-央企定制重学版", cls: "央企", subject: "定制", subjGrp: "全科" },
+];
+
+// ==================== TAB SWITCHING ====================
+function switchTab(tab) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    if (b.textContent.includes(tab === 'price' ? '价格' : tab === 'id' ? '商品' : '质检')) b.classList.add('active');
+  });
+  document.getElementById('tab-price').classList.toggle('hidden', tab !== 'price');
+  document.getElementById('tab-id').classList.toggle('hidden', tab !== 'id');
+  document.getElementById('tab-redline').classList.toggle('hidden', tab !== 'redline');
+  if (tab === 'id') renderIds();
+}
+
+// ==================== TOAST ====================
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+// ==================== PRICE CALCULATOR ====================
+function calcPrice() {
+  const hist = document.getElementById('priceHistory').value;
+  const yr = document.getElementById('priceYear').value;
+  const typ = document.getElementById('priceType').value;
+  const result = document.getElementById('priceResult');
+  const ruleText = document.getElementById('priceRuleText');
+
+  if (!hist && !yr && !typ) { result.classList.add('hidden'); return; }
+
+  let rule = '';
+  if (typ === 'upgrade') {
+    if (yr === '26') rule = '规则：26年课程按 <b>100% 升级抵扣</b>';
+    else if (yr === '25') rule = '规则：25年课程按 <b>40% 升级/平级抵扣</b>（首售产品升央企/私教/魔鬼/钻石可 100%）';
+    else if (yr === '24') rule = '规则：24年及以前按 <b>20% 升级/平级抵扣</b>（首售升高端可 50%）';
+  } else if (typ === 'repurchase') {
+    if (hist === '2000+') rule = '复购价：央企重学版<b>¥3,399</b> · 云私塾全科<b>¥2,399</b>（退费无优惠）';
+    else if (hist === '500-1999') rule = '复购价：央企重学版<b>¥3,699</b> · 云私塾全科<b>¥2,699</b>（退费无优惠）';
+    else rule = '按正价购买，无复购优惠';
+  } else if (typ === 'cross') {
+    if (hist === '2000+') rule = '跨项目复购：央企定制重学版<b>¥3,399</b> · 云私塾全科<b>¥2,399</b> · 公单¥699 · 实单¥899';
+    else if (hist === '500-1999') rule = '跨项目复购：央企定制重学版<b>¥3,699</b> · 云私塾全科<b>¥2,699</b> · 公单¥799 · 实单¥999';
+    else rule = '无跨项目优惠，按正价';
+  }
+
+  ruleText.innerHTML = rule;
+  result.classList.remove('hidden');
+}
+
+// ==================== PRODUCT ID MODULE ====================
+let currentClass = 'all';
+let currentSubject = 'all';
+
+function filterByClass(cls, el) {
+  currentClass = cls;
+  document.querySelectorAll('#classFilter .chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  renderIds();
+}
+
+function filterBySubject(subj, el) {
+  currentSubject = subj;
+  document.querySelectorAll('#subjectFilter .chip').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  renderIds();
+}
+
+function filterIds() {
+  renderIds();
+}
+
+function renderIds() {
+  const search = (document.getElementById('idSearch').value || '').toLowerCase();
+  let filtered = PRODUCT_IDS;
+
+  if (currentClass !== 'all') {
+    filtered = filtered.filter(p => p.cls === currentClass);
+  }
+  if (currentSubject !== 'all') {
+    filtered = filtered.filter(p => p.subject === currentSubject || p.subjGrp === currentSubject);
+  }
+  if (search) {
+    filtered = filtered.filter(p => p.id.includes(search) || p.name.toLowerCase().includes(search));
+  }
+
+  document.getElementById('idCount').textContent = `共 ${filtered.length} 条商品`;
+
+  const container = document.getElementById('idList');
+  if (filtered.length === 0) {
+    container.innerHTML = '<div class="empty-state"><div class="icon">📭</div><p>没有匹配的商品ID</p></div>';
+    return;
+  }
+
+  container.innerHTML = filtered.map((p, i) => `
+    <div class="id-item" style="animation: fadeIn 0.2s ${i*0.02}s both;">
+      <span class="tag ${p.cls==='魔鬼' ? 'tag-red' : p.cls==='云私塾' ? 'tag-blue' : p.cls==='OMO' ? 'tag-yellow' : p.cls==='央企' ? 'tag-green' : 'tag-blue'}">${getClassLabel(p.cls)}</span>
+      <span class="id-name">${p.name}</span>
+      <span class="id-num">${p.id}</span>
+      <button class="copy-btn" onclick="copyId('${p.id}', this)">复制</button>
+    </div>
+  `).join('');
+}
+
+function getClassLabel(cls) {
+  const map = { 'OMO':'OMO', '魔鬼':'魔鬼', '云私塾':'云私塾', '零基础':'零基础', '全程':'突破', '私教营':'私教营', '央企':'央企' };
+  return map[cls] || cls;
+}
+
+function copyId(id, btn) {
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(id).then(() => {
+      btn.textContent = '已复制';
+      btn.classList.add('copied');
+      showToast('已复制：' + id);
+      setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 1500);
+    });
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = id;
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '已复制';
+    btn.classList.add('copied');
+    showToast('已复制：' + id);
+    setTimeout(() => { btn.textContent = '复制'; btn.classList.remove('copied'); }, 1500);
+  }
+}
+
+// ==================== TIME ====================
+function updateTime() {
+  const now = new Date();
+  document.getElementById('currentTime').textContent = now.toLocaleDateString('zh-CN', { month:'numeric', day:'numeric', weekday:'short' }) + ' ' + now.toLocaleTimeString('zh-CN', { hour:'2-digit', minute:'2-digit' });
+}
+setInterval(updateTime, 30000);
+updateTime();
+
+// ==================== INIT ====================
+// Render IDs on init so it's ready
+renderIds();
+</script>
+</body>
+</html>

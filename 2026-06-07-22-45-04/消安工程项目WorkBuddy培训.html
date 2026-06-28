@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WorkBuddy × 中级注册安全工程师 — 团队培训手册（v3 真实数据版）</title>
+<style>
+  :root {
+    --blue: #2563eb; --blue-light: #eff6ff; --blue-dark: #1e40af;
+    --emerald: #059669; --emerald-light: #ecfdf5;
+    --amber: #d97706; --amber-light: #fffbeb;
+    --purple: #7c3aed; --purple-light: #f5f3ff;
+    --rose: #e11d48; --rose-light: #fff1f2;
+    --cyan: #0891b2; --cyan-light: #ecfeff;
+    --slate-50: #f8fafc; --slate-100: #f1f5f9; --slate-200: #e2e8f0;
+    --slate-300: #cbd5e1; --slate-400: #94a3b8; --slate-500: #64748b;
+    --slate-600: #475569; --slate-700: #334155; --slate-800: #1e293b; --slate-900: #0f172a;
+    --white: #ffffff;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    --shadow-lg: 0 10px 25px -3px rgba(0,0,0,0.08), 0 4px 6px -4px rgba(0,0,0,0.04);
+    --shadow-xl: 0 20px 40px -5px rgba(0,0,0,0.1);
+    --radius: 12px; --radius-lg: 20px;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", "Noto Sans SC", sans-serif;
+    background: var(--slate-50); color: var(--slate-800); line-height: 1.75;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Sidebar TOC */
+  .sidebar {
+    position: fixed; left: 0; top: 0; bottom: 0; width: 240px;
+    background: var(--white); border-right: 1px solid var(--slate-200);
+    padding: 28px 20px; overflow-y: auto; z-index: 50;
+    box-shadow: var(--shadow-sm);
+  }
+  .sidebar-logo {
+    font-size: 18px; font-weight: 800; margin-bottom: 8px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .sidebar-subtitle { font-size: 12px; color: var(--slate-400); margin-bottom: 24px; }
+  .toc-item {
+    display: block; padding: 8px 12px; margin: 2px 0; border-radius: 8px;
+    color: var(--slate-600); font-size: 13px; text-decoration: none;
+    transition: all 0.2s; font-weight: 500; cursor: pointer;
+  }
+  .toc-item:hover { background: var(--blue-light); color: var(--blue); }
+  .toc-item.toc-h2 { font-weight: 700; color: var(--slate-800); font-size: 14px; margin-top: 8px; }
+  .toc-item.toc-h3 { padding-left: 24px; font-size: 12px; }
+  .toc-item.toc-new { color: var(--emerald); font-weight: 700; }
+  .sidebar-divider { height: 1px; background: var(--slate-200); margin: 12px 0; }
+
+  .main { margin-left: 240px; }
+  .section {
+    padding: 80px 32px; max-width: 1000px;
+    border-bottom: 1px solid var(--slate-200);
+  }
+  .section:last-child { border-bottom: none; }
+
+  /* Hero */
+  .hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 40%, #1a56db 100%);
+    color: var(--white); padding: 100px 32px 120px; position: relative; overflow: hidden;
+    text-align: center;
+  }
+  .hero::after {
+    content: ''; position: absolute; top: -50%; right: -20%; width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%); border-radius: 50%;
+  }
+  .hero::before {
+    content: ''; position: absolute; bottom: -30%; left: -10%; width: 400px; height: 400px;
+    background: radial-gradient(circle, rgba(139,92,246,0.15) 0%, transparent 70%); border-radius: 50%;
+  }
+  .hero-badge {
+    display: inline-block; padding: 6px 16px; border-radius: 20px;
+    background: rgba(255,255,255,0.12); color: #93c5fd; font-size: 13px;
+    font-weight: 600; margin-bottom: 20px; letter-spacing: 0.5px; position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-size: 52px; font-weight: 800; letter-spacing: -1px; position: relative; z-index: 1; line-height: 1.2;
+  }
+  .hero h1 span { color: #fbbf24; }
+  .hero p { font-size: 18px; color: #94a3b8; max-width: 600px; margin: 16px auto 0; position: relative; z-index: 1; }
+  .hero-meta { display: flex; gap: 32px; justify-content: center; margin-top: 32px; color: #64748b; font-size: 14px; position: relative; z-index: 1; flex-wrap: wrap; }
+
+  h2 { font-size: 32px; font-weight: 800; letter-spacing: -0.3px; margin-bottom: 8px; line-height: 1.3; }
+  .section-desc { font-size: 16px; color: var(--slate-500); margin-bottom: 40px; max-width: 680px; }
+
+  .tag {
+    display: inline-block; padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 700;
+    margin-bottom: 12px; letter-spacing: 0.3px;
+  }
+  .tag-blue { background: var(--blue-light); color: var(--blue); }
+  .tag-green { background: var(--emerald-light); color: var(--emerald); }
+  .tag-amber { background: var(--amber-light); color: var(--amber); }
+  .tag-purple { background: var(--purple-light); color: var(--purple); }
+  .tag-rose { background: var(--rose-light); color: var(--rose); }
+  .tag-cyan { background: var(--cyan-light); color: var(--cyan); }
+
+  .card-grid { display: grid; gap: 20px; margin-top: 24px; }
+  .card-grid.col2 { grid-template-columns: 1fr 1fr; }
+  .card-grid.col3 { grid-template-columns: repeat(3, 1fr); }
+  .card-grid.col4 { grid-template-columns: repeat(4, 1fr); }
+  .card {
+    background: var(--white); border-radius: var(--radius-lg); padding: 28px;
+    box-shadow: var(--shadow); border: 1px solid var(--slate-200); transition: all 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-lg); border-color: var(--slate-300); }
+  .card-icon { font-size: 40px; margin-bottom: 14px; display: block; }
+  .card h4 { font-size: 17px; margin-bottom: 8px; font-weight: 700; }
+  .card p { font-size: 14px; color: var(--slate-500); line-height: 1.8; }
+  .card-accent-top::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+  }
+  .card-accent-top.accent-blue::before { background: var(--blue); }
+  .card-accent-top.accent-green::before { background: var(--emerald); }
+  .card-accent-top.accent-amber::before { background: var(--amber); }
+  .card-accent-top.accent-purple::before { background: var(--purple); }
+  .card-accent-top.accent-rose::before { background: var(--rose); }
+  .card-accent-top.accent-cyan::before { background: var(--cyan); }
+
+  .case-box {
+    background: var(--white); border-radius: var(--radius-lg); padding: 0; margin-top: 32px;
+    overflow: hidden; box-shadow: var(--shadow-lg); border: 1px solid var(--slate-200);
+  }
+  .case-header {
+    padding: 20px 28px; font-weight: 700; font-size: 16px;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .case-header.blue { background: var(--blue-light); color: var(--blue-dark); }
+  .case-header.green { background: var(--emerald-light); color: #065f46; }
+  .case-body { padding: 28px; }
+  .case-step { margin-bottom: 24px; }
+  .case-step:last-child { margin-bottom: 0; }
+  .case-step-label {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-size: 14px; font-weight: 700; color: var(--slate-700); margin-bottom: 10px;
+  }
+  .case-step-num {
+    width: 26px; height: 26px; border-radius: 50%; display: inline-flex;
+    align-items: center; justify-content: center; font-size: 13px; font-weight: 800;
+    color: #fff; flex-shrink: 0;
+  }
+  .step-blue { background: var(--blue); }
+  .step-green { background: var(--emerald); }
+  .step-purple { background: var(--purple); }
+
+  .prompt-block {
+    background: #1e293b; color: #e2e8f0; border-radius: var(--radius);
+    padding: 22px 26px; font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+    font-size: 13px; line-height: 2; overflow-x: auto; position: relative;
+  }
+  .prompt-block::after {
+    content: '📋 复制试试'; position: absolute; top: 14px; right: 20px;
+    font-family: -apple-system, sans-serif; font-size: 11px; color: #64748b;
+    background: rgba(255,255,255,0.08); padding: 3px 10px; border-radius: 12px;
+  }
+  .prompt-block .kw { color: #7dd3fc; }
+  .prompt-block .val { color: #fbbf24; }
+  .prompt-block .cmt { color: #64748b; }
+
+  .prompt-variants { margin-top: 24px; }
+  .variant-title { font-size: 15px; font-weight: 700; margin-bottom: 12px; color: var(--slate-700); }
+  .variant-card {
+    background: var(--white); border: 1px solid var(--slate-200); border-radius: var(--radius);
+    padding: 20px 24px; margin-bottom: 12px; position: relative; transition: all 0.2s;
+  }
+  .variant-card:hover { border-color: var(--blue); box-shadow: var(--shadow); }
+  .variant-label {
+    display: inline-block; padding: 3px 10px; border-radius: 6px; font-size: 11px;
+    font-weight: 700; margin-bottom: 8px;
+  }
+  .variant-label.phone { background: #dbeafe; color: #1e40af; }
+  .variant-label.wechat { background: #d1fae5; color: #065f46; }
+  .variant-label.social { background: #fef3c7; color: #92400e; }
+  .variant-label.report { background: #ede9fe; color: #5b21b6; }
+  .variant-label.analysis { background: #fee2e2; color: #991b1b; }
+  .variant-label.new { background: #d1fae5; color: #065f46; font-weight: 800; }
+  .variant-text {
+    font-size: 13px; color: var(--slate-600); line-height: 1.9; font-family: "SF Mono", "Fira Code", monospace;
+    background: var(--slate-50); padding: 12px 16px; border-radius: 8px; margin-top: 8px;
+  }
+
+  .compare-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 24px; }
+  .compare-box {
+    border-radius: var(--radius-lg); padding: 28px; border: 2px solid;
+  }
+  .compare-box h3 { font-size: 20px; margin-bottom: 16px; display: flex; align-items: center; gap: 10px; }
+  .compare-box ul { padding-left: 18px; line-height: 2.2; font-size: 14px; }
+  .compare-box.before { border-color: #fca5a5; background: #fef2f2; }
+  .compare-box.before h3 { color: #991b1b; }
+  .compare-box.before ul { color: var(--slate-600); }
+  .compare-box.after { border-color: #86efac; background: #f0fdf4; }
+  .compare-box.after h3 { color: #065f46; }
+  .compare-box.after ul { color: var(--slate-700); }
+
+  .tip {
+    display: flex; gap: 12px; align-items: flex-start; padding: 18px 22px;
+    border-radius: var(--radius); margin-top: 20px; font-size: 14px; line-height: 1.8;
+  }
+  .tip-icon { font-size: 22px; flex-shrink: 0; }
+  .tip.blue { background: var(--blue-light); border-left: 4px solid var(--blue); }
+  .tip.green { background: var(--emerald-light); border-left: 4px solid var(--emerald); }
+  .tip.amber { background: var(--amber-light); border-left: 4px solid var(--amber); }
+
+  /* Data highlight box */
+  .data-highlight {
+    background: linear-gradient(135deg, #eff6ff, #f5f3ff);
+    border: 1px solid #bfdbfe; border-radius: var(--radius-lg); padding: 28px 32px; margin-top: 24px;
+  }
+  .data-highlight h4 { font-size: 18px; color: var(--slate-800); margin-bottom: 16px; display: flex; align-items: center; gap: 8px; }
+  .data-highlight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 16px; }
+  .data-highlight-item {
+    text-align: center; padding: 16px 12px;
+    background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow-sm);
+  }
+  .data-highlight-item .dh-num { font-size: 28px; font-weight: 800; color: var(--blue); }
+  .data-highlight-item .dh-label { font-size: 12px; color: var(--slate-500); margin-top: 4px; }
+  .data-highlight-item .dh-sub { font-size: 11px; color: var(--slate-400); }
+
+  /* source tag */
+  .source-tag {
+    display: inline-block; padding: 2px 8px; border-radius: 4px;
+    font-size: 11px; font-weight: 600; background: #fef3c7; color: #92400e; margin-left: 8px;
+  }
+
+  .data-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 24px; }
+  .data-table thead th {
+    background: linear-gradient(135deg, #1e293b, #334155); color: #fff; padding: 14px 18px;
+    text-align: left; font-size: 13px; font-weight: 700;
+  }
+  .data-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .data-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .data-table tbody td {
+    padding: 14px 18px; font-size: 14px; border-bottom: 1px solid var(--slate-200);
+    background: var(--white);
+  }
+  .data-table tbody tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+  .data-table tbody tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+  .data-table tbody tr:hover td { background: var(--slate-50); }
+  .time-save { color: var(--emerald); font-weight: 700; }
+
+  .divider { text-align: center; padding: 12px 0; color: var(--slate-300); font-size: 20px; }
+
+  .formula-box {
+    background: linear-gradient(135deg, var(--purple-light), var(--blue-light));
+    border-radius: var(--radius-lg); padding: 32px; text-align: center; margin-top: 24px;
+  }
+  .formula-box h3 { margin-bottom: 20px; color: var(--slate-800); }
+  .formula-steps {
+    display: flex; align-items: center; justify-content: center; gap: 12px; flex-wrap: wrap;
+  }
+  .formula-item {
+    background: var(--white); padding: 12px 20px; border-radius: 10px;
+    font-weight: 700; font-size: 14px; box-shadow: var(--shadow); white-space: nowrap;
+  }
+  .formula-plus { font-size: 20px; font-weight: 800; color: var(--purple); }
+  .formula-equals { font-size: 24px; font-weight: 800; color: var(--blue); }
+
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 32px; }
+  .stat-card {
+    background: var(--white); border-radius: var(--radius); padding: 24px 20px;
+    text-align: center; box-shadow: var(--shadow); border: 1px solid var(--slate-200);
+  }
+  .stat-num { font-size: 36px; font-weight: 800; color: var(--blue); }
+  .stat-label { font-size: 13px; color: var(--slate-500); margin-top: 4px; }
+
+  /* newbie alert */
+  .newbie-alert {
+    background: linear-gradient(135deg, #ecfdf5, #f0fdf4);
+    border: 1px solid #86efac; border-radius: var(--radius); padding: 20px 24px;
+    margin-top: 20px; display: flex; gap: 12px; align-items: flex-start;
+  }
+  .newbie-alert .na-icon { font-size: 28px; flex-shrink: 0; }
+  .newbie-alert .na-content { font-size: 14px; color: #065f46; line-height: 1.8; }
+  .newbie-alert .na-content strong { color: #047857; }
+
+  .site-footer {
+    text-align: center; padding: 48px 32px; color: var(--slate-400); font-size: 13px;
+    margin-left: 240px;
+  }
+
+  /* comp table */
+  .comp-table { width: 100%; border-collapse: separate; border-spacing: 0; margin-top: 20px; }
+  .comp-table thead th {
+    background: #1e293b; color: #fff; padding: 12px 14px; text-align: left; font-size: 13px; font-weight: 700;
+  }
+  .comp-table thead th:first-child { border-radius: 10px 0 0 0; }
+  .comp-table thead th:last-child { border-radius: 0 10px 0 0; }
+  .comp-table tbody td {
+    padding: 10px 14px; font-size: 13px; border-bottom: 1px solid var(--slate-200); background: var(--white);
+  }
+  .comp-table tbody tr:last-child td:first-child { border-radius: 0 0 0 10px; }
+  .comp-table tbody tr:last-child td:last-child { border-radius: 0 0 10px 0; }
+  .comp-table .our { background: #ecfdf5; font-weight: 600; }
+  .comp-table .our td { border-color: #86efac; }
+
+  @media (max-width: 1024px) {
+    .card-grid.col3, .card-grid.col4 { grid-template-columns: 1fr 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .compare-row { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 768px) {
+    .sidebar { display: none; }
+    .main, .site-footer { margin-left: 0; }
+    .hero h1 { font-size: 32px; }
+    .section { padding: 48px 20px; }
+    .card-grid.col2, .card-grid.col3, .card-grid.col4 { grid-template-columns: 1fr; }
+    .stats-row { grid-template-columns: 1fr 1fr; }
+    .hero { padding: 60px 20px 80px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ====== SIDEBAR ====== -->
+<aside class="sidebar">
+  <div class="sidebar-logo">WorkBuddy × 中安</div>
+  <div class="sidebar-subtitle">团队培训手册 v3 · 真实数据版</div>
+  <a class="toc-item toc-h2" href="#intro">🚀 为什么需要 WorkBuddy</a>
+  <a class="toc-item toc-h2" href="#howto">💡 怎么跟它说话</a>
+  <div class="sidebar-divider"></div>
+  <a class="toc-item toc-h2" href="#scenario1">📋 场景一：运营方案</a>
+  <a class="toc-item toc-h3" href="#scenario1-case">— 真实案例：复购活动</a>
+  <a class="toc-item toc-h3" href="#scenario1-prompts">— 更多提示词</a>
+  <a class="toc-item toc-h2" href="#scenario2">💬 场景二：销售支持</a>
+  <a class="toc-item toc-h3" href="#scenario2-case">— 案例：竞品话术</a>
+  <a class="toc-item toc-h3" href="#scenario2-prompts">— 更多提示词</a>
+  <a class="toc-item toc-h2" href="#scenario3">🎨 场景三：海报设计</a>
+  <a class="toc-item toc-h3" href="#scenario3-case">— 案例：直播海报</a>
+  <a class="toc-item toc-h2" href="#scenario4">📊 场景四：数据周报</a>
+  <a class="toc-item toc-h3" href="#scenario4-case">— 案例：5月复盘</a>
+  <a class="toc-item toc-h2" href="#scenario5">🔬 场景五：调研分析</a>
+  <a class="toc-item toc-h3" href="#scenario5-case">— 案例：217人调研</a>
+  <a class="toc-item toc-h3" href="#scenario5-prompts">— 更多提示词</a>
+  <a class="toc-item toc-h2 toc-new" href="#product">🏫 新增：云私塾产品速览</a>
+  <div class="sidebar-divider"></div>
+  <a class="toc-item toc-h2" href="#cheatsheet">🗺️ 综合速查表</a>
+  <a class="toc-item toc-h2" href="#qa">❓ 常见问题</a>
+</aside>
+
+<!-- ====== MAIN ====== -->
+<main class="main">
+
+<!-- ====== HERO ====== -->
+<section class="hero" id="top">
+  <div class="hero-badge">🛡️ 中级注册安全工程师 · 团队内部培训 v3</div>
+  <h1>用 <span>WorkBuddy</span> 干活<br>把我们的真实业务用起来</h1>
+  <p>不是空讲理论。这本手册里的每个案例、每条数据，都来自我们自己的业务文件——复购方案、竞品调研、直播策划、5月复盘。</p>
+  <div class="hero-meta">
+    <span>📅 2026年6月</span>
+    <span>👤 项目负责人</span>
+    <span>⏱ 阅读约 25 分钟</span>
+    <span>🎯 面向小白</span>
+    <span>📊 基于真实数据</span>
+  </div>
+</section>
+
+<!-- ====== SECTION: 为什么需要 WorkBuddy ====== -->
+<section class="section" id="intro">
+  <span class="tag tag-blue">第 1 课</span>
+  <h2>为什么你需要 WorkBuddy？</h2>
+  <p class="section-desc">先别紧张，WorkBuddy 不是那种要你学指令、懂代码的"高科技"。你可以把它想象成——<strong style="color:var(--blue);">一个随时在线的AI同事，你让它做什么它就做什么</strong>。</p>
+
+  <div class="compare-row">
+    <div class="compare-box before">
+      <h3>😰 不用 WorkBuddy 的时候</h3>
+      <ul>
+        <li>写方案对着空白 Word 发呆 30 分钟起步</li>
+        <li>做海报需要找设计排期，等 2 天</li>
+        <li>写周报手动拼接数据，容易出错</li>
+        <li>做竞品调研要搜几十个网页手动整理</li>
+        <li>写销售话术靠自己憋，没有章法</li>
+        <li>新人学产品要翻一堆文档，太慢</li>
+      </ul>
+    </div>
+    <div class="compare-box after">
+      <h3>🚀 用 WorkBuddy 之后</h3>
+      <ul>
+        <li>30 秒说出需求，3 分钟出方案初稿</li>
+        <li>一句话描述海报需求，当场生成图片</li>
+        <li>粘贴数据 → 自动分析 → 自动写周报</li>
+        <li>一条指令完成调研 + 对比 + 报告</li>
+        <li>输入课程卖点，自动生成多场景话术</li>
+        <li>上传产品手册，秒变销售培训素材</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="data-highlight">
+    <h4>📊 看看我们自己的数据——这些工作以前要花多少时间？</h4>
+    <div class="data-highlight-grid">
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--emerald);">2-3天</div>
+        <div class="dh-label">一份完整运营方案</div>
+        <div class="dh-sub">→ 现在30分钟</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--blue);">3-4小时</div>
+        <div class="dh-label">每周周报+数据分析</div>
+        <div class="dh-sub">→ 现在15分钟</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--purple);">2天</div>
+        <div class="dh-label">竞品调研+对比表</div>
+        <div class="dh-sub">→ 现在1小时内</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--amber);">1天</div>
+        <div class="dh-label">全套销售话术+物料</div>
+        <div class="dh-sub">→ 现在10分钟初稿</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip blue" style="margin-top:32px;">
+    <span class="tip-icon">💡</span>
+    <div>
+      <strong>一句话记住：</strong>你跟 WorkBuddy 说"做什么"，它直接"做出来"——不是给你建议，是给你成品。方案、图片、报表、话术，都是可以直接用的那种。
+    </div>
+  </div>
+
+  <div class="newbie-alert">
+    <span class="na-icon">🆕</span>
+    <div class="na-content">
+      <strong>如果你是第一次用 AI 工具：</strong>下面这些场景，你只要<strong>复制提示词 → 替换括号里的内容 → 发给 WorkBuddy</strong>，就行了。不需要学任何知识，跟发微信一样简单。
+    </div>
+  </div>
+</section>
+
+<!-- ====== SECTION: 怎么跟 WorkBuddy 说话 ====== -->
+<section class="section" id="howto">
+  <span class="tag tag-purple">第 2 课</span>
+  <h2>怎么跟 WorkBuddy 说话？</h2>
+  <p class="section-desc">很多人说"AI不好用"，其实是因为说的太模糊。你把一个需求说给新同事听，他不会读心术对吧？对 AI 也一样——<strong>多说一点，结果好很多</strong>。</p>
+
+  <div class="formula-box">
+    <h3>🧩 万能公式（四个要素）</h3>
+    <div class="formula-steps">
+      <div class="formula-item">👤 我是谁</div>
+      <span class="formula-plus">+</span>
+      <div class="formula-item">🎯 要做什么</div>
+      <span class="formula-plus">+</span>
+      <div class="formula-item">📐 怎么要求</div>
+      <span class="formula-plus">+</span>
+      <div class="formula-item">📄 什么格式</div>
+      <span class="formula-equals">=</span>
+      <div class="formula-item" style="background:linear-gradient(135deg,var(--blue),var(--purple));color:#fff;">完美结果</div>
+    </div>
+  </div>
+
+  <div class="compare-row" style="margin-top:32px;">
+    <div class="compare-box before">
+      <h3>❌ 太模糊（AI 会乱猜）</h3>
+      <ul>
+        <li>"帮我写个方案"</li>
+        <li>"做一张海报"</li>
+        <li>"分析一下数据"</li>
+        <li>"帮我调研一下竞品"</li>
+        <li style="color:var(--rose);font-weight:600;">← 你连自己是什么业务都没说，AI 没法猜</li>
+      </ul>
+    </div>
+    <div class="compare-box after">
+      <h3>✅ 说清楚了（AI 就能做对）</h3>
+      <ul>
+        <li>"我是中安培训项目负责人，需要策划 618 云私塾冲刺班运营方案，包含目标、分工、时间线、预算，输出到腾讯文档"</li>
+        <li>"帮我分析 5 月安全项目业绩：全项目达成率 86%，注安同比降 26%，帮我找下滑原因和下周对策"</li>
+        <li>"帮我整理中安竞品对比表：233 网校（2460元）、优路（3490元）、嗨学（2680元），对比课程、师资、价格、功能"</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="tip green" style="margin-top:24px;">
+    <span class="tip-icon">🔑</span>
+    <div>
+      <strong>记住这个比喻：</strong>把 WorkBuddy 当成一个<strong>能力很强、但需要你交代清楚背景的新同事</strong>。你跟新同事说"帮我做个事"，也得告诉他前因后果吧？对 WorkBuddy 也一样——交代清楚 = 拿到好结果。
+    </div>
+  </div>
+</section>
+
+<!-- ====== SCENARIO 1: 运营方案 ====== -->
+<section class="section" id="scenario1">
+  <span class="tag tag-blue">场景一</span>
+  <h2>📋 项目运营方案策划</h2>
+  <p class="section-desc">我们项目负责人的核心工作——推动教研、销售、市场一起做事。以前写一个方案要反复修改好几天，现在用 WorkBuddy，和平时开会交代任务一样自然。</p>
+
+  <div class="data-highlight">
+    <h4>🔍 我们的真实业务背景 <span class="source-tag">来自：复购活动方案规划.xlsx + 5月数据复盘 + 直播安排.xlsx</span></h4>
+    <div class="data-highlight-grid">
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--blue);">16%</div>
+        <div class="dh-label">复购业绩占总业绩</div>
+        <div class="dh-sub">复购是重要增长引擎</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--emerald);">4000人</div>
+        <div class="dh-label">直播目标预约数</div>
+        <div class="dh-sub">到课目标800人</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--purple);">5000+</div>
+        <div class="dh-label">短信触达量</div>
+        <div class="dh-sub">含销售私域+公众号+抖音</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--amber);">666元×2</div>
+        <div class="dh-label">直播返现福利</div>
+        <div class="dh-sub">+云私塾单科×3免费</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完整案例 -->
+  <div class="case-box" id="scenario1-case">
+    <div class="case-header blue">📖 真实案例：策划"6月复购冲刺"活动 ——来自我们自己做的复购方案</div>
+    <div class="case-body">
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-blue">1</span> 实际业务场景
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);margin-bottom:12px;">
+          5月数据复盘发现业绩缺口较大（全项目达成率86%），复购活动作为6月重点计划。需要：制定复购话术、安排直播活动、协调教研制作复购物料。和去年一样又要花2天写方案。
+        </p>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-blue">2</span> 打开 WorkBuddy，把真实需求说给它
+        </div>
+        <div class="prompt-block">
+          我是<span class="kw">中级注册安全工程师培训项目负责人</span>。<br><br>
+          本月要启动<span class="val">"老学员复购冲刺"</span>活动。复购业绩目前占我们总业绩的<span class="val">16%</span>，是重要增长点。<br><br>
+          <span class="cmt"># 活动背景</span><br>
+          - 5月业绩达成率<span class="val">86%</span>，有缺口需要6月活动补<br>
+          - 竞品233、优路、嗨学都在推冲刺班，价格对比我已整理好[可上传竞品调研Excel]<br>
+          - 我们有<span class="val">云私塾7.0</span>专属功能（定制学习方案、二战模式、遗忘补强算法）可以打差异化<br><br>
+          <span class="cmt"># 请帮我写一份完整方案：</span><br>
+          1. <span class="val">活动目标</span>：复购预期业绩目标、转化率目标<br>
+          2. <span class="val">目标学员分层</span>：去年已报未续 / 已报已续 / 二战学员<br>
+          3. <span class="val">复购话术</span>：电话+微信+社群三条线的话术框架<br>
+          4. <span class="val">直播活动</span>：参考上次发布会模式（目标预约4000人、到课800人），安排直播时间、讲师、福利（如返现666元、抽奖云私塾单科）<br>
+          5. <span class="val">推广渠道</span>：短信5000+、销售私域、公众号、抖音<br>
+          6. <span class="val">部门分工</span>：教研（制作复购物料+直播内容）、销售（话术培训+线索跟进）、市场（渠道推广）的时间和交付物<br>
+          7. <span class="val">风险预案</span>：如果预约不及预期怎么办<br><br>
+          请把方案<span class="val">插入腾讯文档</span>，各部门能看到实时更新的版本。
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-blue">3</span> WorkBuddy 产出什么
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          ✅ 一份完整复购方案，包含上面的所有模块，直接在腾讯文档里<br>
+          ✅ 可以直接分享给各部门负责人看，大家各取所需<br>
+          ✅ 觉得哪部分不够好？直接说"把直播福利再丰富一下""把话术改成更接地气"，秒改<br>
+          <strong style="color:var(--emerald);">从2天方案撰写，缩短到30分钟。</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="prompt-variants" id="scenario1-prompts">
+    <div class="variant-title">🔖 更多运营场景提示词（复制→替换括号内容→使用）</div>
+
+    <div class="variant-card">
+      <span class="variant-label report">场景：直播活动策划</span>
+      <div class="variant-text">
+        我是中安项目负责人，要策划一场"云私塾7.0新功能发布会"直播。目标：站内预约[4000]人、到课[800]人。推广渠道：短信、销售私域、公众号、抖音。直播福利：[666元返现×2]+[云私塾单科×3免费]。请写一份包含预热期→直播当天→复盘期的全流程方案。
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <span class="variant-label report">场景：618活动策划</span>
+      <div class="variant-text">
+        618要推云私塾全科特惠。竞品价格参考：233网校全科[2460-2200]元、优路[3490]元、嗨学[2680-2980]元。我们的优势是云私塾7.0智能学习系统。请帮我策划618活动方案：定价策略、促销节奏、推广渠道分工、销售节点把控。
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <span class="variant-label report">场景：新教材发布营销</span>
+      <div class="variant-text">
+        官方教材已出版，我们要借势宣传"新修订图书"。请策划一套方案：1.制作教材变动解析海报/推文 2.安排各科直播解读（法规/管理/技术/实务）3.配合图书包产品推广。同时给销售做教材变动培训材料，确保他们能讲清楚变化。
+      </div>
+    </div>
+  </div>
+
+  <div class="tip blue">
+    <span class="tip-icon">💡</span>
+    <div><strong>小贴士：</strong>做方案时把你的真实数据文件（Excel）直接拖给 WorkBuddy，它会基于你的真实数据来写方案，不是泛泛而谈。比如上传竞品调研和5月复盘，它写的方案就会更有针对性。</div>
+  </div>
+</section>
+
+<!-- ====== SCENARIO 2: 销售支持 ====== -->
+<section class="section" id="scenario2">
+  <span class="tag tag-green">场景二</span>
+  <h2>💬 销售端支持 — 真实竞品数据驱动的销售话术</h2>
+  <p class="section-desc">我们课程研发好了，销售同事要用"学员听得懂的话"讲出去。WorkBuddy 能把课程卖点、竞品对比、学员痛点，一键转化成各场景话术。</p>
+
+  <div class="data-highlight">
+    <h4>🔍 真实竞品价格对比 <span class="source-tag">来自：26年中级注安竞品调研.xlsx</span></h4>
+    <div class="data-highlight-grid">
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--rose);">¥2,460</div>
+        <div class="dh-label">233网校（云私塾）</div>
+        <div class="dh-sub">全科促销2200元</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--amber);">¥3,490</div>
+        <div class="dh-label">优路（优师私教班MAX）</div>
+        <div class="dh-sub">全科价格最高</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--slate-600);">¥2,680</div>
+        <div class="dh-label">嗨学</div>
+        <div class="dh-sub">全科2680-2980元</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--purple);">¥539</div>
+        <div class="dh-label">本质注安（五阶私塾班）</div>
+        <div class="dh-sub">单科起539-1599元</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 完整案例 -->
+  <div class="case-box" id="scenario2-case">
+    <div class="case-header green">📖 真实案例：用竞品对比数据 + 云私塾差异化卖点生成全场景话术</div>
+    <div class="case-body">
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-green">1</span> 实际业务场景
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          我们刚做完竞品调研——233、优路、嗨学、本质注安四家的价格和师资都摸清了。云私塾7.0的差异化功能（遗忘补强算法、二战模式、智能答疑、定制学习方案）需要"翻译"成销售能讲、学员能懂的话。还有调研显示学员最看重"讲师专业水平"（64.88%）和"课程通关率"（42.14%），这些都要变成话术。
+        </p>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-green">2</span> 打开 WorkBuddy，把竞品数据+产品信息给它
+        </div>
+        <div class="prompt-block">
+          我是<span class="kw">中安培训项目课程研发负责人</span>。刚完成竞品调研和产品梳理，需要给销售团队准备全套话术。<br><br>
+          <span class="cmt"># 竞品价格参考</span><br>
+          - 233网校（云私塾）：全科 <span class="val">2460-2200元</span><br>
+          - 优路（优师私教班MAX）：全科 <span class="val">3490元</span>，价格最高<br>
+          - 嗨学：全科 <span class="val">2680-2980元</span><br>
+          - 本质注安（五阶私塾班）：单科 <span class="val">539-1599元</span><br><br>
+          我们的差异化武器——<span class="kw">云私塾7.0</span>：<br>
+          - <span class="val">定制学习方案</span>：根据学员基础智能推荐短期冲关/系统备考/二战方案<br>
+          - <span class="val">二战模式</span>：不再重学已会内容，直接检测掌握度，≥90%直接跳过<br>
+          - <span class="val">遗忘补强算法</span>：精准定位遗忘点，每天10分钟巩固复习<br>
+          - <span class="val">智能双屏+智能答疑</span>：看课同时查讲义，24小时随问随答<br>
+          - <span class="val">免费重学2年</span>：可跨年、可延期<br><br>
+          <span class="cmt"># 学员调研结论</span><br>
+          - 217人调研：<span class="val">64.88%</span>最看重讲师专业水平，<span class="val">42.14%</span>最看重通关率<br>
+          - 最大挑战：<span class="val">42.86%</span>工作忙时间碎片化，<span class="val">27.65%</span>知识点繁多<br>
+          - <span class="val">46%</span>为二战学员<br><br>
+          请帮我生成：<br>
+          1. <span class="val">云私塾7.0核心卖点</span>（5条，对标竞品差异，每条50字）<br>
+          2. <span class="val">vs 233网校话术</span>：他们价格低但我们有智能学习系统<br>
+          3. <span class="val">vs 优路话术</span>：他们价格高但我们性价比更好<br>
+          4. <span class="val">vs 嗨学话术</span>：对比功能和通过率<br>
+          5. <span class="val">针对二战学员的专属话术</span>（他们46%！强调二战模式不重学已会内容）<br>
+          6. <span class="val">针对"没时间"顾虑的应答</span>（42.86%的学员痛点）<br>
+          7. <span class="val">电话+微信+朋友圈</span>三场景话术各一套<br><br>
+          全部输出到<span class="kw">腾讯文档</span>，每个竞品一页、每个场景一页。
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-green">3</span> 拿到什么
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          ✅ 一本完整的"销售兵器库"——按竞品、按场景、按学员类型分类的话术<br>
+          ✅ 销售同事打开腾讯文档就能找到"学员说233便宜怎么办"→标准应答<br>
+          ✅ 新人销售第一天就能用，不需要背产品手册<br>
+          <strong style="color:var(--emerald);">从课研完成到销售能讲，从1周缩短到半天。</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="prompt-variants" id="scenario2-prompts">
+    <div class="variant-title">🔖 更多销售场景提示词</div>
+
+    <div class="variant-card">
+      <span class="variant-label phone">场景：二战学员突破</span>
+      <div class="variant-text">
+        我们调研显示46%学员是二战。帮我写套话术：开头先共鸣"去年差几分的心情我懂"，然后讲云私塾二战模式怎么省时间（已会内容直接跳过、只学薄弱点），再讲免费重学2年保障。语气真诚不油腻。
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <span class="variant-label wechat">场景：复购老学员转化</span>
+      <div class="variant-text">
+        帮我写老学员复购话术。他们已经报过一科，现在要推全科。卖点：云私塾系统记录学习数据、只补薄弱科目、打包优惠。包含电话回访话术和微信跟进话术。语气：老朋友聊天的感觉，不是推销。
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <span class="variant-label social">场景：销售培训材料</span>
+      <div class="variant-text">
+        下周新销售培训，帮我做一份产品培训材料：1.中安考试介绍（一页讲清楚）2.云私塾7.0 vs 竞品对比表 3.最常见的10个学员问题+标准应答 4.电话销售流程拆解。每部分标注讲解重点和预计时长。
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <span class="variant-label new">🆕 场景：用调研数据说服学员</span>
+      <div class="variant-text">
+        我们调查了217个备考学员，64.88%认为讲师专业水平最重要、42.14%最看通关率。帮我写一段"用数据说话"的开场白，在电话开场30秒内用这个数据建立信任。不要太硬，要自然。
+      </div>
+    </div>
+  </div>
+
+  <div class="tip green">
+    <span class="tip-icon">💡</span>
+    <div><strong>小贴士：</strong>上传竞品调研Excel和产品手册PDF，WorkBuddy 会基于真实文档写话术，不是凭空编。如果你觉得语气太"官方"，加一句"改得更口语化""像朋友聊天一样"，它会调整风格。</div>
+  </div>
+</section>
+
+<!-- ====== SCENARIO 3: 海报设计 ====== -->
+<section class="section" id="scenario3">
+  <span class="tag tag-amber">场景三</span>
+  <h2>🎨 海报与视觉物料制作</h2>
+  <p class="section-desc">做运营活动最头疼的就是等设计排期。现在你告诉 WorkBuddy 要什么，它当场生成——海报、Banner、朋友圈图都行。</p>
+
+  <div class="card-grid col3">
+    <div class="card card-accent-top accent-amber">
+      <span class="card-icon">🖼️</span>
+      <h4>活动海报</h4>
+      <p>复购活动、618、发布会、考前冲刺——输入信息和风格要求，秒出专业级海报</p>
+    </div>
+    <div class="card card-accent-top accent-amber">
+      <span class="card-icon">📱</span>
+      <h4>朋友圈宣传图</h4>
+      <p>适配手机竖屏尺寸，可批量生成多版本，保证朋友圈内容质量和频次</p>
+    </div>
+    <div class="card card-accent-top accent-amber">
+      <span class="card-icon">🏷️</span>
+      <h4>课程封面 / Banner</h4>
+      <p>统一品牌风格，直播封面、课程头图、推文配图一次搞定</p>
+    </div>
+  </div>
+
+  <div class="case-box" id="scenario3-case">
+    <div class="case-header amber" style="background:var(--amber-light);color:#92400e;">📖 真实案例：为"云私塾发布会"制作直播海报和推广物料</div>
+    <div class="case-body">
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">1</span> 实际场景
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          25年云私塾发布会直播，需要在朋友圈、社群、公众号多渠道推广。需要：直播预告海报、倒计时海报、课程亮点长图。以前找设计排期至少3天。
+        </p>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">2</span> 这样跟 WorkBuddy 说
+        </div>
+        <div class="prompt-block">
+          帮我生成<span class="kw">"云私塾7.0发布会"直播预告海报</span>。<br><br>
+          <span class="cmt"># 海报信息</span><br>
+          - 主标题：<span class="val">"你的备考，AI 说了算"</span><br>
+          - 副标题：<span class="val">云私塾7.0——遗忘补强算法 + 二战模式 + 智能答疑</span><br>
+          - 福利：<span class="val">直播抽返现 666元×2 / 云私塾单科免费×3</span><br>
+          - 时间：<span class="val">X月X日 晚19:00</span><br><br>
+          <span class="cmt"># 设计要求</span><br>
+          - 风格：<span class="kw">科技感+专业感，蓝紫色渐变</span><br>
+          - 尺寸：<span class="kw">竖版 1080×1920，适合朋友圈转发</span><br>
+          - 要求：<span class="kw">主标题醒目，福利内容一眼可见，有紧迫感但不焦虑</span>
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">3</span> 不满意？接着改
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          👉 "背景太暗了，调亮一点"<br>
+          👉 "加一个倒计时元素，更紧迫"<br>
+          👉 "同样内容再生成横版 Banner 1200×628，用于公众号"<br>
+          👉 "生成同系列的朋友圈九宫格素材"<br>
+          ✅ <strong style="color:var(--emerald);">从需求到全套物料，30分钟全搞定。</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip amber">
+    <span class="tip-icon">💡</span>
+    <div><strong>小贴士：</strong>描述海报时，越具体越好——说清楚标题文字、配色、尺寸、使用平台。可以参考我们之前的海报风格告诉它"像XX风格"。如果公司有品牌色，直接给它色号。</div>
+  </div>
+</section>
+
+<!-- ====== SCENARIO 4: 周报与数据分析 ====== -->
+<section class="section" id="scenario4">
+  <span class="tag tag-purple">场景四</span>
+  <h2>📊 周报与业绩数据分析 —— 用真实复盘数据说话</h2>
+  <p class="section-desc">每周要分析营收、流量、转化率，然后写周报。现在你直接把数据给它，它帮你分析+写周报+给行动建议。</p>
+
+  <div class="data-highlight">
+    <h4>🔍 5月安全项目实际数据速览 <span class="source-tag">来自：安全项目26年5月数据复盘</span></h4>
+    <div class="data-highlight-grid">
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--rose);">86%</div>
+        <div class="dh-label">全项目达成率</div>
+        <div class="dh-sub">有14%业绩缺口</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--rose);">-12.4%</div>
+        <div class="dh-label">中级注安同比</div>
+        <div class="dh-sub">核心科目下滑</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--emerald);">+44%</div>
+        <div class="dh-label">初级注安同比</div>
+        <div class="dh-sub">增长科目</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--amber);">冲击6月</div>
+        <div class="dh-label">复购+618活动</div>
+        <div class="dh-sub">关键动作：补缺口</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="case-box" id="scenario4-case">
+    <div class="case-header purple" style="background:var(--purple-light);color:#5b21b6;">📖 真实案例：5月安全项目数据复盘 → 周报 → 6月对策</div>
+    <div class="case-body">
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">1</span> 实际场景
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          5月数据复盘会议前，需要汇总安全项目整体情况：中级注安达成率、各端口（C端销售/自成单/电商/SEM）表现、流量与转化变化。数据散在多个表格，手动汇总要3-4小时。
+        </p>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">2</span> 把复盘 Excel 直接拖给 WorkBuddy
+        </div>
+        <div class="prompt-block">
+          我是<span class="kw">中安培训项目负责人</span>，附件是安全项目5月数据复盘。<br><br>
+          请帮我做：<br>
+          1. <span class="val">整体业绩分析</span>：各考试品类（中级注安/初级注安/环评/碳排）的达成率、同比变化、找出口最大的下滑科目<br>
+          2. <span class="val">端口分析</span>：哪个端口（C端销售/自成单/电商/SEM等）拖了后腿？哪个在增长？<br>
+          3. <span class="val">直属团队分析</span>：各团队完成情况，首售/续报占比变化<br>
+          4. <span class="val">产品分析</span>：哪个班型卖得好？哪个下滑？ARPU变化<br>
+          5. <span class="val">流量分析</span>：各渠道流量和转化效率对比<br>
+          6. <span class="val">问题诊断</span>：中级注安同比为何下滑？主要瓶颈在哪？<br>
+          7. <span class="val">周报生成</span>：根据以上分析写一份300字周报摘要<br>
+          8. <span class="val">6月对策</span>：给3-5条可执行的6月改进行动<br><br>
+          如果数据中有异常值或明显问题，请重点标注。输出到<span class="kw">腾讯文档</span>。
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">3</span> 产出什么
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          ✅ 一份结构化的数据复盘报告：整体概览→分端口分析→问题诊断→建议<br>
+          ✅ 自动标注出"注安同比下滑12.4%""某团队业绩差额大"等关键问题<br>
+          ✅ 可直接发送的周报摘要<br>
+          ✅ 6月行动计划（复购活动、618促销、新教材营销）<br>
+          <strong style="color:var(--emerald);">从原来的4-5小时数据整理+分析+写周报，缩短到15分钟。</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="tip purple" style="background:var(--purple-light);border-left-color:var(--purple);">
+    <span class="tip-icon">💡</span>
+    <div><strong>小贴士：</strong>如果你用腾讯文档表格管理数据，可以直接让 WorkBuddy 连接腾讯文档读取表格，不用手动粘贴。分析时把上下文也说清楚，比如"这周有618所以某渠道数据偏高正常"，它判断会更准。</div>
+  </div>
+</section>
+
+<!-- ====== SCENARIO 5: 调研分析 ====== -->
+<section class="section" id="scenario5">
+  <span class="tag tag-rose">场景五</span>
+  <h2>🔬 学员调研与竞品分析 —— 用我们自己的调研数据</h2>
+  <p class="section-desc">了解学员在想什么、竞品在做什么，才能做对决策。WorkBuddy 能帮你分析调研问卷、整理竞品对比、输出决策报告。</p>
+
+  <div class="data-highlight">
+    <h4>🔍 我们做的217人学员调研结果 <span class="source-tag">来自：26年中级注安竞品调研.xlsx → 调查问卷sheet</span></h4>
+    <div class="data-highlight-grid">
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--blue);">217人</div>
+        <div class="dh-label">有效调研样本</div>
+        <div class="dh-sub">46%为二战学员</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--purple);">64.88%</div>
+        <div class="dh-label">最看重"讲师专业水平"</div>
+        <div class="dh-sub">远超其他因素</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--emerald);">42.14%</div>
+        <div class="dh-label">最看重"课程通关率"</div>
+        <div class="dh-sub">排名第一的课程因素</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--rose);">42.86%</div>
+        <div class="dh-label">最大挑战"时间碎片化"</div>
+        <div class="dh-sub">27.65%觉得知识点太多</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 调研应用 -->
+  <div class="newbie-alert">
+    <span class="na-icon">🎯</span>
+    <div class="na-content">
+      <strong>这份调研告诉我们应该怎么做：</strong>学员最在乎讲师和通关率 → 话术重点打师资和通过率；学员最大痛点是没时间 → 云私塾"定学习计划+二战模式"就是卖点。这些洞察，WorkBuddy 几秒钟就能从调研数据里提取出来。
+    </div>
+  </div>
+
+  <div class="case-box" id="scenario5-case">
+    <div class="case-header rose" style="background:var(--rose-light);color:#991b1b;">📖 真实案例：竞品调研 + 学员调研 → 运营策略报告</div>
+    <div class="case-body">
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">1</span> 实际场景
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          刚做完竞品调研和学员问卷，手里有大量数据需要分析。竞品四家课程价格、师资、功能需要横向对比。217份学员问卷需要提炼关键洞察。还要结合这些信息来调整课程定价和销售策略。
+        </p>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">2</span> 把两个 Excel 一起拖进去
+        </div>
+        <div class="prompt-block">
+          我是中级注册安全工程师培训项目负责人，附件有两个文件：<br>
+          - <span class="kw">竞品调研</span>：233网校/优路/嗨学/本质注安的价格、师资、功能<br>
+          - <span class="kw">学员问卷</span>：217份有效问卷<br><br>
+          请帮我输出一份<span class="val">"竞品+学员调研综合报告"</span>：<br><br>
+          <span class="cmt"># 第一部分：竞品对比</span><br>
+          1. 四家竞品的课程、价格、师资、功能对比表<br>
+          2. 各家优势劣势分析<br>
+          3. 我们的差异化机会在哪里（结合云私塾7.0功能）<br><br>
+          <span class="cmt"># 第二部分：学员洞察</span><br>
+          1. 学员最关注的因素排序<br>
+          2. 二战学员 vs 首考学员的需求差异<br>
+          3. 学员最大学习障碍及应对方案<br>
+          4. 未付费学员的核心顾虑<br><br>
+          <span class="cmt"># 第三部分：策略建议</span><br>
+          1. 基于调研结果，我们的定价策略应该如何调整？<br>
+          2. 销售话术应该重点打哪几个点？<br>
+          3. 产品功能宣传应该突出什么？<br>
+          4. 对二战学员应该有什么专属策略？<br><br>
+          全部输出到<span class="kw">腾讯文档</span>，要有数据支撑，不要泛泛而谈。
+        </div>
+      </div>
+      <div class="case-step">
+        <div class="case-step-label">
+          <span class="case-step-num step-purple">3</span> 拿到什么
+        </div>
+        <p style="font-size:14px;color:var(--slate-600);">
+          ✅ 一份完整调研报告，三个部分环环相扣<br>
+          ✅ 竞品对比表可以直接放入销售培训材料<br>
+          ✅ 学员洞察直接指导话术方向和产品改进<br>
+          ✅ 策略建议有数据支撑，可以在周会上直接分享讨论<br>
+          <strong style="color:var(--emerald);">原来需要2-3天搜索+整理+分析，现在1小时内搞定。</strong>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="prompt-variants" id="scenario5-prompts">
+    <div class="variant-title">🔖 更多调研场景提示词</div>
+
+    <div class="variant-card">
+      <span class="variant-label analysis">场景：用调研数据支撑定价决策</span>
+      <div class="variant-text">
+        我们调研显示学员对价格敏感，竞品最低539元起。我们云私塾全科定价应该怎样？请结合调研中"学员最看重讲师水平（64.88%）"和"课程通关率（42.14%）"的数据，帮我分析：我们是否应该打价格战？还是走差异化的品质路线？给出建议和话术。
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <span class="variant-label new">🆕 场景：二战学员专项分析</span>
+      <div class="variant-text">
+        调研显示46%学员是二战。帮我做一份"二战学员专项洞察"：他们和首考学员有什么不同？为什么去年没过？他们最需要什么帮助？我们的二战模式如何打动他们？导出为适合销售使用的简版手册。
+      </div>
+    </div>
+
+    <div class="variant-card">
+      <span class="variant-label analysis">场景：行业趋势报告</span>
+      <div class="variant-text">
+        帮我搜索2026年上半年注册安全工程师行业动态：政策变化、考试改革、行业人才需求。结合我们的调研数据，写一份"行业半年观察"用于内部战略参考。每个趋势附上对我们业务的影响评估。
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ====== NEW: 云私塾产品速览 ====== -->
+<section class="section" id="product">
+  <span class="tag tag-green" style="background:#d1fae5;color:#065f46;">🆕 新章节</span>
+  <h2>🏫 快速了解：云私塾7.0是什么？</h2>
+  <p class="section-desc">如果你是新人或者刚接触项目，这一页帮你<strong>5分钟搞清楚我们卖的是什么</strong>。<span class="source-tag">来自：2026年中级注安云私塾《产品手册》.xlsx</span></p>
+
+  <div class="card-grid col3" style="margin-top:32px;">
+    <div class="card card-accent-top accent-blue">
+      <span class="card-icon">📚</span>
+      <h4>四阶段课程体系</h4>
+      <p><strong>先导→基础→强化→冲刺</strong>，从测评到考场一站式。基础阶段23-40H/科精讲，冲刺阶段临考密训直播。</p>
+    </div>
+    <div class="card card-accent-top accent-green">
+      <span class="card-icon">🤖</span>
+      <h4>智能学习系统</h4>
+      <p>定制学习方案、二战模式（已会跳过）、遗忘补强算法（每天10分钟）、智能双屏+答疑</p>
+    </div>
+    <div class="card card-accent-top accent-purple">
+      <span class="card-icon">🛡️</span>
+      <h4>服务保障</h4>
+      <p>免费重学2年、可跨年可延期。助学服务（报名提醒+模考通知）、人工答疑（工作日24h回复）</p>
+    </div>
+  </div>
+
+  <table class="comp-table" style="margin-top:28px;">
+    <thead>
+      <tr>
+        <th>学习阶段</th>
+        <th>核心课程</th>
+        <th>形式</th>
+        <th>课时</th>
+        <th>学习目标</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>先导阶段</strong></td>
+        <td>学情测评 + 认知考试 + 备考指导</td>
+        <td>系统+录播</td>
+        <td>1-2.5H</td>
+        <td>了解考试全貌，匹配专属学习方案</td>
+      </tr>
+      <tr>
+        <td><strong>基础阶段</strong></td>
+        <td>考点精讲 + 记忆卡 + 基础模考</td>
+        <td>录播+直播</td>
+        <td>23-40H/科</td>
+        <td>按教材顺序全面学习，打牢基础</td>
+      </tr>
+      <tr>
+        <td><strong>强化阶段</strong></td>
+        <td>实战题分班 + 案例专项 + 考点突破</td>
+        <td>录播+直播</td>
+        <td>10-12H/科</td>
+        <td>大量刷题，攻克重难点，提升应试能力</td>
+      </tr>
+      <tr>
+        <td><strong>冲刺阶段</strong></td>
+        <td>真题解析 + 实战模考 + 临考密训 + 应试技巧</td>
+        <td>录播+直播</td>
+        <td>4-8H/科</td>
+        <td>仿真模考，查缺补漏，考前冲刺</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="data-highlight" style="margin-top:28px;">
+    <h4>🎯 云私塾7.0六大专属功能（销售时重点打这些）</h4>
+    <div class="data-highlight-grid">
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--blue);font-size:20px;">定制方案</div>
+        <div class="dh-label">根据基础推荐学习方案</div>
+        <div class="dh-sub">短期冲关/系统备考/二战</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--emerald);font-size:20px;">二战模式</div>
+        <div class="dh-label">已会内容直接跳过</div>
+        <div class="dh-sub">正确率≥90%自动通过</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--purple);font-size:20px;">遗忘补强</div>
+        <div class="dh-label">每天10分钟对抗遗忘</div>
+        <div class="dh-sub">智能算法定位学习盲点</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--amber);font-size:20px;">智能答疑</div>
+        <div class="dh-label">24小时随问随答</div>
+        <div class="dh-sub">看课+错题+讲义问就答</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--cyan);font-size:20px;">智能双屏</div>
+        <div class="dh-label">课书/课题双屏</div>
+        <div class="dh-sub">边看视频边查讲义</div>
+      </div>
+      <div class="data-highlight-item">
+        <div class="dh-num" style="color:var(--rose);font-size:20px;">免费重学2年</div>
+        <div class="dh-label">可跨年可延期</div>
+        <div class="dh-sub">考不过免费再学</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="newbie-alert">
+    <span class="na-icon">💬</span>
+    <div class="na-content">
+      <strong>教辅资料也是卖点：</strong>电子资料包括历年考点分值分布、考情分析&复习规划、速记口诀、新教材变动对比、高频易错知识点、案例分析答题模板、考前10页纸。还有纸质习题集和真题模拟卷（4套真题+4套模拟）。跟学员讲的时候这些都算"附加价值"。
+    </div>
+  </div>
+</section>
+
+<!-- ====== CHEATSHEET ====== -->
+<section class="section" id="cheatsheet">
+  <span class="tag tag-cyan">速查</span>
+  <h2>🗺️ 快速查：我遇到什么场景，该怎么说？</h2>
+  <p class="section-desc">不用从头看。找到你当前的工作场景，复制对应提示词模板，填上你的具体信息就行。</p>
+
+  <table class="data-table">
+    <thead>
+      <tr>
+        <th>💼 工作场景</th>
+        <th>🗣️ 核心提示词模板</th>
+        <th>📦 产出</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>策划运营活动</strong></td>
+        <td style="font-size:13px;">"我是中安项目负责人，要策划[活动名称]，背景是[简述情况]。请写完整方案：目标、分工、时间线、渠道、预算、风险预案。参考我们之前的[复购方案/直播方案]模式，输出腾讯文档"</td>
+        <td>方案文档</td>
+      </tr>
+      <tr>
+        <td><strong>竞品对比+话术</strong></td>
+        <td style="font-size:13px;">"我上传了竞品调研表[拖文件]。请对比233（2460元）/优路（3490元）/嗨学（2680元）/本质注安（539元），生成差异化话术。我们的武器是云私塾7.0[列出功能]，目标学员中46%是二战"</td>
+        <td>话术文档</td>
+      </tr>
+      <tr>
+        <td><strong>做活动海报</strong></td>
+        <td style="font-size:13px;">"生成[活动名]宣传海报。标题[xxx]，副标题[xxx]，福利[xxx]，风格[科技感/专业/温暖]。尺寸1080×1920，蓝紫渐变"</td>
+        <td>海报图片</td>
+      </tr>
+      <tr>
+        <td><strong>写数据周报</strong></td>
+        <td style="font-size:13px;">"这是5月数据复盘文件[拖Excel]。帮我：整体分析、分端口找问题、标注异常、写300字周报摘要、给6月3-5条行动建议。输出腾讯文档"</td>
+        <td>分析+周报</td>
+      </tr>
+      <tr>
+        <td><strong>分析调研问卷</strong></td>
+        <td style="font-size:13px;">"上传了217份学员问卷[拖文件]。帮我提炼：关键发现、学员画像、痛点排序、二战vs首考差异。基于发现给销售和运营各3条建议"</td>
+        <td>调研报告</td>
+      </tr>
+      <tr>
+        <td><strong>销售培训材料</strong></td>
+        <td style="font-size:13px;">"我要培训新销售。帮我做：云私塾7.0产品卖点（对标竞品）、常见10问+应答、电话销售流程拆解、二战学员专属话术。要小白也能看懂"</td>
+        <td>培训手册</td>
+      </tr>
+      <tr>
+        <td><strong>社群运营内容</strong></td>
+        <td style="font-size:13px;">"帮我想5个备考社群互动话题。学员痛点：时间碎片化（42%）、知识点多（27%）。每个话题附引导话术和预期互动效果"</td>
+        <td>运营计划</td>
+      </tr>
+      <tr>
+        <td><strong>了解产品</strong></td>
+        <td style="font-size:13px;">"我是新人，请用大白话介绍云私塾7.0：课程怎么安排的？有什么特别功能？和竞品比好在哪？资料有哪些？我一会儿要用这些信息回答学员问题"</td>
+        <td>产品速览</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="tip cyan" style="background:var(--cyan-light);border-left-color:var(--cyan);">
+    <span class="tip-icon">📌</span>
+    <div><strong>建议：</strong>截图存手机。每次打开 WorkBuddy 前，扫一眼左栏找到你当前场景，把右栏的模板复制过去，填上具体信息，就能直接用。</div>
+  </div>
+</section>
+
+<!-- ====== Q&A ====== -->
+<section class="section" id="qa">
+  <span class="tag tag-purple">Q&A</span>
+  <h2>❓ 同事们最常问的</h2>
+
+  <div class="card-grid col2">
+    <div class="card">
+      <span class="card-icon">🤔</span>
+      <h4>生成的内容能直接用吗？</h4>
+      <p>建议当"高质量初稿"。方案和话术微调就能用；数据类内容核对关键数字；海报多试几次找到满意风格。<strong>人机协作，你是最后拍板的人。</strong></p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔒</span>
+      <h4>我上传的业务数据安全吗？</h4>
+      <p>WorkBuddy 不用你的数据训练模型。但学员姓名、手机号这些个人信息建议脱敏后再传。营收数据、竞品信息这些没问题。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🆓</span>
+      <h4>要钱吗？</h4>
+      <p>基础功能免费可用。图片生成、大批量数据处理等高级功能可能有额度，具体看实际版本。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">⚠️</span>
+      <h4>有什么不能做？</h4>
+      <p>❌ 不能替代你的业务判断<br>❌ 不处理考试作弊相关<br>❌ 不上传学员隐私信息<br>❌ 重要法律文件请人审</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">📂</span>
+      <h4>能传什么文件？</h4>
+      <p>Excel、Word、PDF、图片、PPT都能拖进去。单文件建议50MB以下。我们那些竞品调研Excel、产品手册PDF都能直接喂给它。</p>
+    </div>
+    <div class="card">
+      <span class="card-icon">🔄</span>
+      <h4>怎么让它记住我的习惯？</h4>
+      <p>第一次用就说"以后帮我写方案都用这个模板"或"话术风格接地气一点"，它会记住你的偏好，下次自动套用。</p>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:48px 0 16px;">
+    <h3 style="font-size:24px;margin-bottom:12px;">🎉 别光看，去试试！</h3>
+    <p style="color:var(--slate-500);font-size:16px;max-width:520px;margin:0 auto 20px;">
+      打开 WorkBuddy → 翻到上面任意一个<strong>真实案例</strong> → 复制提示词 → 把我们的业务数据拖进去 → 看看它产出什么。
+    </p>
+    <p style="color:var(--blue);font-weight:700;font-size:18px;">有问题随时找我👋</p>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-footer">
+  WorkBuddy × 中级注册安全工程师项目 · 团队培训手册 v3（真实数据版）· 2026年6月
+</footer>
+
+</body>
+</html>

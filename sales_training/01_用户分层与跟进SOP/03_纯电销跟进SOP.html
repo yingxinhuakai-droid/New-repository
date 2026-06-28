@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>纯电销跟进SOP - 注安销售培训</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; line-height: 1.6; font-size: 15px; }
+.hero { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 40px 32px 32px; color: #fff; }
+.hero-inner { max-width: 880px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.hero-title { font-size: 28px; font-weight: 700; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); margin-top: 8px; }
+
+.container { max-width: 880px; margin: 0 auto; padding: 32px; }
+
+.card { background: #fff; border-radius: 14px; border: 1px solid #e5e5e7; padding: 24px; margin-bottom: 20px; }
+.card h2 { font-size: 18px; font-weight: 700; color: #1e3a8a; margin-bottom: 16px; }
+.card h3 { font-size: 15px; font-weight: 600; margin-bottom: 8px; margin-top: 20px; }
+.card p { color: #6e6e73; margin-bottom: 8px; }
+
+.stat-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 20px; }
+.stat-card { background: #fff; border-radius: 12px; border: 1px solid #e5e5e7; padding: 16px; text-align: center; }
+.stat-num { font-size: 22px; font-weight: 700; color: #1e3a8a; }
+.stat-label { font-size: 12px; color: #86868b; margin-top: 4px; }
+
+.timeline { position: relative; }
+.timeline-line { position: absolute; left: 28px; top: 0; bottom: 0; width: 2px; background: #e5e5e7; }
+.tl-item { position: relative; padding-left: 64px; padding-bottom: 24px; }
+.tl-dot { position: absolute; left: 20px; top: 4px; width: 18px; height: 18px; border-radius: 50%; }
+.tl-dot.done { background: #059669; }
+.tl-dot.current { background: #1e3a8a; box-shadow: 0 0 0 4px rgba(30,58,138,0.2); }
+.tl-dot.pending { background: #e5e5e7; }
+.tl-day { font-size: 12px; font-weight: 600; color: #1e3a8a; margin-bottom: 2px; }
+.tl-title { font-size: 15px; font-weight: 600; color: #1d1d1f; }
+.tl-desc { font-size: 13px; color: #6e6e73; margin-top: 4px; }
+
+.action-box { background: rgba(30,58,138,0.04); border-radius: 10px; padding: 16px; margin-top: 12px; }
+.action-label { font-size: 12px; font-weight: 600; color: #1e3a8a; margin-bottom: 6px; }
+.action-list { font-size: 13px; color: #1d1d1f; }
+.action-list li { margin-bottom: 4px; }
+
+.warn-box { background: rgba(255,59,48,0.04); border-radius: 10px; padding: 16px; margin-top: 12px; }
+.warn-label { font-size: 12px; font-weight: 600; color: #dc2626; margin-bottom: 6px; }
+
+.success-box { background: rgba(5,150,105,0.04); border-radius: 10px; padding: 16px; margin-top: 12px; }
+.success-label { font-size: 12px; font-weight: 600; color: #059669; margin-bottom: 6px; }
+
+.template-box { background: #1e3a8a; border-radius: 14px; padding: 24px; margin-bottom: 20px; color: #fff; }
+.template-box h2 { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 12px; }
+.template-box code { background: rgba(255,255,255,0.12); padding: 12px 16px; border-radius: 8px; font-family: 'SF Mono', Menlo, monospace; font-size: 13px; display: block; margin-bottom: 8px; white-space: pre-wrap; border-left: 3px solid rgba(255,255,255,0.4); }
+
+.nav-bar { display: flex; justify-content: space-between; margin-top: 32px; }
+.nav-btn { display: inline-flex; align-items: center; gap: 8px; padding: 12px 20px; border-radius: 10px; background: #fff; border: 1px solid #e5e5e7; color: #1d1d1f; font-weight: 500; text-decoration: none; transition: all 0.2s; }
+.nav-btn:hover { background: #1e3a8a; color: #fff; }
+.nav-btn.primary { background: #1e3a8a; color: #fff; border: none; }
+.nav-btn.primary:hover { background: #2563eb; }
+
+.footer { text-align: center; padding: 32px; font-size: 12px; color: #86868b; }
+
+@media (max-width: 600px) { .stat-grid { grid-template-columns: repeat(2,1fr); } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="../index.html">首页</a> / <a href="index.html">模块一</a> / 纯电销跟进SOP</div>
+    <div class="hero-title">纯电销跟进SOP</div>
+    <div class="hero-sub">7天"电话+加微"双触达路径 — 从未接通到转交社群</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="stat-grid">
+    <div class="stat-card">
+      <div class="stat-num">7天</div>
+      <div class="stat-label">触达周期</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">3次</div>
+      <div class="stat-label">拨打尝试上限</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">60%</div>
+      <div class="stat-label">目标接通率</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">22人</div>
+      <div class="stat-label">团队规模</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h2>纯电销团队的核心定位</h2>
+    <p>纯电销团队不是"最终成交团队"，而是<strong style="color:#1d1d1f;">线索的第一次触达和筛选器</strong>。核心使命：</p>
+    <p style="color:#1d1d1f;font-weight:500;">1. 从海量线索中筛选出"有回应的人"</p>
+    <p style="color:#1d1d1f;font-weight:500;">2. 通过电话/短信把冷线索转化为温线索</p>
+    <p style="color:#1d1d1f;font-weight:500;">3. 加微成功后立刻转交社群微销团队</p>
+    <div class="warn-box">
+      <div class="warn-label">核心原则</div>
+      <p style="font-size:14px;color:#991b1b;font-weight:500;">纯电销不负责成交！加微成功即转交，不要自己接着聊微信。你擅长打电话，不擅长微信培育。</p>
+    </div>
+  </div>
+
+  <!-- 7天SOP -->
+  <div class="card">
+    <h2>7天双触达路径</h2>
+    <div class="timeline">
+      <div class="timeline-line"></div>
+
+      <div class="tl-item">
+        <div class="tl-dot done"></div>
+        <div class="tl-day">Day 0</div>
+        <div class="tl-title">首次拨打（3次尝试，不同时段）</div>
+        <div class="tl-desc">核心目的：确认线索是否"活"，建立初步印象</div>
+        <div class="action-box">
+          <div class="action-label">拨打节奏</div>
+          <ul class="action-list">
+            <li>第1次：上午10:00-11:30（上班族开会前有空）</li>
+            <li>第2次：下午14:00-16:00（午休后，精力恢复）</li>
+            <li>第3次：晚上19:00-21:00（下班后，最可能接听）</li>
+          </ul>
+        </div>
+        <div class="action-box" style="background:rgba(5,150,105,0.04);">
+          <div class="action-label" style="color:#059669;">接通后的关键动作</div>
+          <ul class="action-list">
+            <li>15秒内完成自我介绍+来意说明</li>
+            <li>确认对方是否在考注安或有兴趣</li>
+            <li>有兴趣 → 引导加微信："我这边有备考资料，加微信发给你更方便"</li>
+            <li>加微成功 → 即时转交社群微销，附带电话沟通记录</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot done"></div>
+        <div class="tl-day">Day 1</div>
+        <div class="tl-title">未接通 → 短信/AI语音触达 + 引导加微</div>
+        <div class="tl-desc">核心目的：让未接通的人知道你找过他，给他一个回应的理由</div>
+        <div class="action-box">
+          <div class="action-label">具体动作</div>
+          <ul class="action-list">
+            <li>发送短信："您好，XX注安考试辅导，之前给您打过电话未接通，这边有免费备考资料，加微信XXXX领取~"</li>
+            <li>可选：AI语音留言（15秒以内，语气自然）</li>
+            <li>同时发送企微好友申请（备注："注安备考资料-XX"）</li>
+          </ul>
+        </div>
+        <div class="template-box" style="background:#2563eb;margin-top:12px;">
+          <h2 style="font-size:14px;">短信模板</h2>
+          <code>【XX教育】您好，之前致电未接通。我是注安考试辅导老师XX，这边有一份2026注安备考指南+历年真题包，免费送您。加微信XXXX即可领取。回复1表示感兴趣，回复0不再打扰。</code>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot current"></div>
+        <div class="tl-day">Day 3</div>
+        <div class="tl-title">二次拨打 + 企微好友申请（再次）</div>
+        <div class="tl-desc">核心目的：给未接通的人第二次机会，同时强化加微渠道</div>
+        <div class="action-box">
+          <div class="action-label">具体动作</div>
+          <ul class="action-list">
+            <li>再次拨打1次（选一个之前没试过的时段）</li>
+            <li>如仍未接通 → 再发1次企微好友申请</li>
+            <li>备注改为："XX教育-注安备考-上次未接通"</li>
+            <li>短信补充："本周注安报名高峰期，备考资料已备好，加微领取"</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="tl-item">
+        <div class="tl-dot pending"></div>
+        <div class="tl-day">Day 7</div>
+        <div class="tl-title">终判 — 转入培育池或释放</div>
+        <div class="tl-desc">核心目的：7天未触达成功=冷线索，不再投入单个精力</div>
+        <div class="action-box">
+          <div class="action-label">终判规则</div>
+          <ul class="action-list">
+            <li>加微成功 → 立刻转交社群微销团队（不管对方有没有回复）</li>
+            <li>接通但拒绝加微 → 标记"拒绝"，1个月后批量再触达</li>
+            <li>7天完全未触达 → 转入长期培育池，由社群团队批量运营</li>
+          </ul>
+        </div>
+        <div class="success-box">
+          <div class="success-label">加微成功后的转交规范</div>
+          <ul class="action-list">
+            <li>在CRM中标记"已加微-待转交"</li>
+            <li>附上电话沟通记录（对方说了什么、痛点是什么）</li>
+            <li>标注来源渠道（抖音/小红书/百度/官网）</li>
+            <li>社群微销接收后24小时内必须发出欢迎语</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 电话脚本 -->
+  <div class="template-box">
+    <h2>15秒电话开场脚本</h2>
+    <code>接通后的前15秒决定对方会不会继续听：
+
+"您好，XX先生/女士，我是XX教育的XX老师，
+看到您关注了注册安全工程师考试，
+这边有个备考信息想跟您确认一下——
+您是今年准备考注安吗？"
+
+对方回答"是" → "好的，我这边有免费备考资料，加个微信发给您方便查看~"
+对方回答"不确定" → "没关系，我先发一份考试介绍给您看看，加个微信就行~"
+对方回答"不需要" → "好的打扰了，祝您顺利~"（礼貌结束，标记拒绝）</code>
+  </div>
+
+  <!-- 不同时段拨打策略 -->
+  <div class="card">
+    <h2>拨打时段策略</h2>
+    <div style="overflow-x:auto;">
+      <table style="width:100%;border-collapse:collapse;font-size:14px;">
+        <thead>
+          <tr style="background:#f5f5f7;">
+            <th style="padding:12px;text-align:left;font-weight:600;color:#86868b;font-size:12px;">时段</th>
+            <th style="padding:12px;text-align:left;font-weight:600;color:#86868b;font-size:12px;">接通率</th>
+            <th style="padding:12px;text-align:left;font-weight:600;color:#86868b;font-size:12px;">适合人群</th>
+            <th style="padding:12px;text-align:left;font-weight:600;color:#86868b;font-size:12px;">开场重点</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid #e5e5e5;">
+            <td style="padding:12px;"><strong>10:00-11:30</strong></td>
+            <td style="padding:12px;color:#059669;font-weight:600;">较高</td>
+            <td style="padding:12px;">上班族、在职人员</td>
+            <td style="padding:12px;">"上班前有空聊聊吗"</td>
+          </tr>
+          <tr style="border-bottom:1px solid #e5e5e5;">
+            <td style="padding:12px;"><strong>14:00-16:00</strong></td>
+            <td style="padding:12px;color:#7c3aed;font-weight:600;">中等</td>
+            <td style="padding:12px;">午休后、管理层</td>
+            <td style="padding:12px;">"下午打扰一下"</td>
+          </tr>
+          <tr style="border-bottom:1px solid #e5e5e5;">
+            <td style="padding:12px;"><strong>19:00-21:00</strong></td>
+            <td style="padding:12px;color:#1e3a8a;font-weight:600;">最高</td>
+            <td style="padding:12px;">所有人、下班后</td>
+            <td style="padding:12px;">"下班了聊几句备考"</td>
+          </tr>
+          <tr>
+            <td style="padding:12px;"><strong>避开时段</strong></td>
+            <td style="padding:12px;color:#dc2626;font-weight:600;">极低</td>
+            <td style="padding:12px;">12:00-14:00（午休）、周末上午</td>
+            <td style="padding:12px;">不要打</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- 自检清单 -->
+  <div class="card">
+    <h2>自检清单 — 你是否掌握了纯电销SOP</h2>
+    <div style="display:flex;flex-direction:column;gap:12px;">
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #e5e5e5;">
+        <div style="width:24px;height:24px;border-radius:50%;border:2px solid #1e3a8a;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">1</div>
+        <div style="flex:1;"><div style="font-weight:600;font-size:14px;">Day 0 一定要打3次（3个时段）</div><div style="font-size:13px;color:#6e6e73;margin-top:2px;">打1次就放弃=浪费线索</div></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #e5e5e5;">
+        <div style="width:24px;height:24px;border-radius:50%;border:2px solid #1e3a8a;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">2</div>
+        <div style="flex:1;"><div style="font-weight:600;font-size:14px;">加微成功立刻转交社群微销</div><div style="font-size:13px;color:#6e6e73;margin-top:2px;">不要自己接着聊微信，你的强项是打电话</div></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #e5e5e5;">
+        <div style="width:24px;height:24px;border-radius:50%;border:2px solid #1e3a8a;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">3</div>
+        <div style="flex:1;"><div style="font-weight:600;font-size:14px;">转交时一定要附上沟通记录</div><div style="font-size:13px;color:#6e6e73;margin-top:2px;">没有记录=社群微销从零开始=浪费对方已建立的好感</div></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid #e5e5e5;">
+        <div style="width:24px;height:24px;border-radius:50%;border:2px solid #1e3a8a;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">4</div>
+        <div style="flex:1;"><div style="font-weight:600;font-size:14px;">7天是终点，超期不浪费单个精力</div><div style="font-size:13px;color:#6e6e73;margin-top:2px;">转入培育池批量处理，不再一个个死磕</div></div>
+      </div>
+      <div style="display:flex;gap:12px;align-items:flex-start;padding:10px 0;">
+        <div style="width:24px;height:24px;border-radius:50%;border:2px solid #1e3a8a;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">5</div>
+        <div style="flex:1;"><div style="font-weight:600;font-size:14px;">15秒开场脚本必须熟练</div><div style="font-size:13px;color:#6e6e73;margin-top:2px;">超过15秒对方就会挂电话</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-bar">
+    <a class="nav-btn" href="02_社群微销跟进SOP.html">&#8592; 上一篇：社群微销跟进SOP</a>
+    <a class="nav-btn primary" href="04_升级电销跟进SOP.html">下一篇：升级电销跟进SOP &#8594;</a>
+  </div>
+
+</div>
+
+<div class="footer">注安销售团队培训文档 · 纯电销跟进SOP · 内部资料</div>
+</body>
+</html>

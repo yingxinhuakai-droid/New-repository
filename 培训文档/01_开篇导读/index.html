@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模块一·开篇导读｜WorkBuddy × 中级注安运营培训</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef5 100%);
+  color: #2c3e50;
+  line-height: 1.8;
+  padding: 20px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+
+.hero {
+  background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 50%, #06b6d4 100%);
+  color: white;
+  padding: 50px 40px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 32px rgba(30, 58, 138, 0.2);
+  text-align: center;
+}
+.hero .badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(10px);
+}
+.hero h1 { font-size: 36px; margin-bottom: 12px; font-weight: 700; }
+.hero .desc { font-size: 16px; opacity: 0.95; max-width: 600px; margin: 0 auto; }
+.hero .stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.hero .stat-item { text-align: center; }
+.hero .stat-num { font-size: 28px; font-weight: 700; color: #fbbf24; }
+.hero .stat-label { font-size: 13px; opacity: 0.85; }
+
+.module-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+  background: white;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.module-nav a {
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+.module-nav a.active { background: linear-gradient(135deg, #1e3a8a, #3b82f6); color: white; border-color: transparent; }
+.module-nav a:hover:not(.active) { background: #eff6ff; transform: translateY(-2px); }
+.module-nav a.disabled { opacity: 0.4; pointer-events: none; }
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.doc-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: inherit;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.doc-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #1e3a8a, #3b82f6);
+}
+.doc-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(30, 58, 138, 0.15); border-color: #3b82f6; }
+.doc-card .doc-num {
+  display: inline-block;
+  background: #1e3a8a;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.doc-card h3 { color: #1e3a8a; font-size: 18px; margin-bottom: 8px; }
+.doc-card p { color: #64748b; font-size: 14px; margin: 0; }
+.doc-card .meta {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #94a3b8;
+  display: flex;
+  gap: 8px;
+}
+.doc-card .meta span { background: #f1f5f9; padding: 2px 8px; border-radius: 4px; }
+
+.progress-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.progress-card h2 {
+  color: #1e3a8a;
+  font-size: 20px;
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 4px solid #3b82f6;
+}
+.progress-bar {
+  background: #e2e8f0;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.progress-bar .fill {
+  background: linear-gradient(90deg, #10b981, #34d399);
+  height: 100%;
+  border-radius: 6px;
+  transition: width 0.5s;
+}
+.progress-text { color: #64748b; font-size: 13px; text-align: right; }
+
+.quote-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #78350f;
+}
+.quote-card h2 { color: #92400e; font-size: 20px; margin-bottom: 8px; }
+.quote-card p { font-size: 14px; }
+
+@media (max-width: 640px) {
+  .hero { padding: 30px 20px; }
+  .hero h1 { font-size: 24px; }
+  .hero .stats { gap: 20px; }
+  .module-nav { grid-template-columns: repeat(2, 1fr); }
+  .doc-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="badge">📚 WorkBuddy 培训文档体系 v1.0</div>
+    <h1>WorkBuddy × 中级注安运营</h1>
+    <p class="desc">一份覆盖 6 大场景、31 篇文档的 AI 工具实操手册，让团队拿到就能照着做</p>
+    <div class="stats">
+      <div class="stat-item"><div class="stat-num">31</div><div class="stat-label">培训文档</div></div>
+      <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">业务场景</div></div>
+      <div class="stat-item"><div class="stat-num">26</div><div class="stat-label">应用点</div></div>
+      <div class="stat-item"><div class="stat-num">14h+</div><div class="stat-label">每周节省</div></div>
+    </div>
+  </div>
+
+  <div class="module-nav">
+    <a href="index.html" class="active">① 开篇导读</a>
+    <a href="../02_运营方案/index.html">② 运营方案</a>
+    <a href="../03_销售支持/index.html">③ 销售支持</a>
+    <a href="../04_海报物料/index.html">④ 海报物料</a>
+    <a href="../05_周报分析/index.html">⑤ 周报分析</a>
+    <a href="../06_学员调研/index.html">⑥ 学员调研</a>
+    <a href="../07_进阶能力/index.html">⑦ 进阶能力</a>
+  </div>
+
+  <div class="progress-card">
+    <h2>📊 模块一·开篇导读 - 学习进度</h2>
+    <div class="progress-bar"><div class="fill" style="width: 0%;"></div></div>
+    <div class="progress-text">已完成 0/4 篇 · 点击下方文档开始学习</div>
+  </div>
+
+  <div class="doc-grid">
+    <a href="01_写在前面.html" class="doc-card">
+      <span class="doc-num">1.1</span>
+      <h3>📘 写在前面：为什么我们要用 WorkBuddy</h3>
+      <p>痛点回顾、工具价值、ROI 预期、5 分钟速览整套体系</p>
+      <div class="meta"><span>⏱️ 5 分钟</span><span>🎯 必读</span></div>
+    </a>
+    <a href="02_全景图.html" class="doc-card">
+      <span class="doc-num">1.2</span>
+      <h3>🗺️ 全景图：6 大场景 × 26 个应用点速查表</h3>
+      <p>一张图看懂能做什么，含使用频次热力图</p>
+      <div class="meta"><span>⏱️ 3 分钟</span><span>📋 速查</span></div>
+    </a>
+    <a href="03_极速上手.html" class="doc-card">
+      <span class="doc-num">1.3</span>
+      <h3>🚀 5 分钟极速上手</h3>
+      <p>3 个 Hello World 案例，跑通核心流程</p>
+      <div class="meta"><span>⏱️ 5 分钟</span><span>💻 实操</span></div>
+    </a>
+    <a href="04_提问心法.html" class="doc-card">
+      <span class="doc-num">1.4</span>
+      <h3>💡 提问心法：怎样向 AI 提问才能拿到好答案</h3>
+      <p>5 条黄金法则 + 10 个反例对比 + 万能提问模板</p>
+      <div class="meta"><span>⏱️ 8 分钟</span><span>🌟 重点</span></div>
+    </a>
+  </div>
+
+  <div class="quote-card">
+    <h2>🎯 模块一学习目标</h2>
+    <p>读完 4 篇文档，<strong>30 分钟内</strong>你能：<br>
+    ① 说出 WorkBuddy 能帮你做什么、不能做什么<br>
+    ② 找到自己想深入的场景入口<br>
+    ③ 独立完成 3 个 Hello World 案例<br>
+    ④ 用"角色+背景+任务+格式+示例"5 要素写出 80 分的提问</p>
+  </div>
+
+  <div class="progress-card" style="background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); border: 1px solid #93c5fd;">
+    <h2 style="color: #1e40af;">📅 接下来怎么学？</h2>
+    <ol style="margin-left: 24px; color: #1e3a8a;">
+      <li><strong>本批（已完成）</strong>：模块一·开篇导读 4 篇 — <span style="color: #10b981;">✅ 全部交付</span></li>
+      <li><strong>下一批</strong>：模块五·周报分析 5 篇（⭐⭐⭐ 核心，最快产出价值）</li>
+      <li><strong>再下一批</strong>：模块三·销售支持 + 模块二·运营方案（共 11 篇）</li>
+      <li><strong>最后一批</strong>：模块四·海报物料 + 模块六·学员调研 + 模块七·进阶能力（共 11 篇）</li>
+    </ol>
+  </div>
+</div>
+</body>
+</html>

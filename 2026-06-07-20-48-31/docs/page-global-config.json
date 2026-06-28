@@ -1,0 +1,14 @@
+{
+  "slideStyle": "flat",
+  "colorScheme": "Professional Blue-Orange Flat Style",
+  "primaryColor": "#0EA5E9",
+  "accentColor1": "#F97316",
+  "accentColor2": "#10B981",
+  "neutralColor": "#64748B",
+  "background": {
+    "type": "color",
+    "value": "#FFFFFF"
+  },
+  "fontTitle": "'Noto Sans SC', sans-serif",
+  "fontBody": "'Noto Sans SC', sans-serif"
+}

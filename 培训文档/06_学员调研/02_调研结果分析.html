@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>6.2 调研结果分析 · WorkBuddy 培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafafa;color:#1f2937;line-height:1.7}
+.header{background:linear-gradient(135deg,#0f766e 0%,#14b8a6 100%);color:#fff;padding:48px 32px 56px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.08);border-radius:50%}
+.crumbs{font-size:13px;opacity:0.9;margin-bottom:14px}
+.crumbs a{color:#fff;text-decoration:none}
+h1{font-size:34px;margin-bottom:12px;position:relative;z-index:1}
+.subtitle{font-size:16px;opacity:0.95;position:relative;z-index:1}
+.container{max-width:1100px;margin:-32px auto 60px;padding:0 24px}
+.card{background:#fff;border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h2{font-size:24px;color:#0f766e;margin-bottom:16px;padding-left:14px;border-left:5px solid #14b8a6}
+.card h3{font-size:18px;color:#0f766e;margin:18px 0 10px}
+.tip{background:linear-gradient(135deg,#ccfbf1,#99f6e4);border-left:4px solid #14b8a6;padding:16px 20px;border-radius:8px;margin:20px 0;color:#134e4a}
+.tip strong{color:#0f766e}
+.flow{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border-radius:12px;padding:24px;margin:20px 0}
+.flow-step{background:#fff;border-left:4px solid #14b8a6;padding:18px 20px;margin:12px 0;border-radius:8px}
+.flow-step b{color:#0f766e;display:block;margin-bottom:6px;font-size:15px}
+.flow-step p{color:#374151;font-size:14px;margin:4px 0}
+.bar-chart{background:#fff;border-radius:10px;padding:18px;margin:20px 0}
+.bar-row{display:grid;grid-template-columns:140px 1fr 60px;gap:12px;align-items:center;margin:8px 0}
+.bar-row .label{color:#0f766e;font-size:14px;font-weight:600}
+.bar-row .bar{background:#e0f2fe;height:24px;border-radius:4px;overflow:hidden;position:relative}
+.bar-row .fill{background:linear-gradient(135deg,#0f766e,#14b8a6);height:100%;display:flex;align-items:center;padding-left:8px;color:#fff;font-size:12px;font-weight:bold}
+.bar-row .pct{color:#0f766e;font-weight:bold;font-size:14px;text-align:right}
+.persona-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0}
+.persona-card{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border-radius:10px;padding:18px;border-top:4px solid #14b8a6}
+.persona-card b{display:block;color:#0f766e;font-size:15px;margin-bottom:6px}
+.persona-card p{color:#374151;font-size:13px;margin:6px 0;line-height:1.6}
+table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+th{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:14px 12px;text-align:left;font-size:14px}
+td{padding:12px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+tr:hover td{background:#f0fdfa}
+.template{background:#f8fafc;border-left:4px solid #14b8a6;padding:18px;border-radius:8px;margin:16px 0;font-family:Menlo,monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;color:#0f766e}
+.report{background:linear-gradient(135deg,#f8fafc,#f1f5f9);border:1px solid #cbd5e1;border-radius:10px;padding:24px;margin:20px 0;font-size:14px;line-height:1.8}
+.report h3{color:#0f766e;margin:16px 0 8px;font-size:18px;border-bottom:2px solid #14b8a6;padding-bottom:4px}
+.report h3:first-child{margin-top:0}
+.report p{margin:8px 0}
+.report .highlight{background:#fef3c7;padding:2px 6px;border-radius:4px}
+.nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb}
+.nav a{padding:12px 24px;background:#fff;border:2px solid #14b8a6;color:#0f766e;text-decoration:none;border-radius:8px;font-weight:600}
+.nav a:hover{background:#14b8a6;color:#fff}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumbs"><a href="../index.html">培训首页</a> / <a href="index.html">模块六·学员调研</a> / 6.2</div>
+  <h1>📊 调研结果分析（Excel → 数据简报）</h1>
+  <div class="subtitle">把回收的问卷 Excel 一键变成"3 段式数据简报"——15 分钟出报告</div>
+</div>
+<div class="container">
+
+<div class="card">
+  <h2>一、4 步分析流程（AI 一键搞定）</h2>
+  <div class="flow">
+    <div class="flow-step">
+      <b>第 1 步 · 导出 Excel</b>
+      <p>从腾讯问卷 / 问卷星 导出"含表头"的原始数据 Excel（每行 1 份答卷）</p>
+    </div>
+    <div class="flow-step">
+      <b>第 2 步 · 数据清洗</b>
+      <p>删除"答题时间 &lt; 60 秒"或"&gt; 1800 秒"的无效答卷（刷的 / 瞎填的）</p>
+    </div>
+    <div class="flow-step">
+      <b>第 3 步 · 粘贴提问</b>
+      <p>把 Excel 截图 / 数据表直接粘贴到 AI（见下方提问模板）</p>
+    </div>
+    <div class="flow-step">
+      <b>第 4 步 · 输出简报</b>
+      <p>AI 自动输出"3 段式数据简报"：①关键数字 ②Top 3 洞察 ③行动建议</p>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>二、实战案例：老学员复购调研报告</h2>
+  <p>基于虚拟调研数据（300 份样本），展示 AI 分析后的"3 段式简报"长啥样：</p>
+
+  <div class="report">
+    <h3>一、关键数字（一眼看懂）</h3>
+    <p>• <span class="highlight">NPS 净推荐值：+42</span>（行业平均 +25，<b>远高于行业</b>）<br>
+    • 复购意愿：<b>38%</b> 表示愿意 3 个月内再报一项<br>
+    • 推荐意愿：<b>71%</b> 表示愿意推荐给朋友<br>
+    • 课程满意度：<b>8.6 分</b>（10 分制）<br>
+    • 主要复购目标：<b>一消 45%</b> &gt; 一建 28% &gt; 城规 15%</p>
+
+    <h3>二、Top 3 关键洞察</h3>
+    <p><b>1. 一消是绝对复购主力</b><br>
+    取证学员中 45% 想考一消，主因是"同属安全/消防大类，知识体系复用"。建议 4 月立即启动"注安 → 一消"联报活动，定价上浮 5% 也可接受。</p>
+    <p><b>2. 老学员推荐意愿强（71%）但转化路径不清</b><br>
+    71% 愿意推荐，但只有 12% 实际推荐过（差距巨大）。问题：缺乏"老带新"激励机制和标准化推荐话术。</p>
+    <p><b>3. 课程满意度 8.6 分，主讲老师是关键加分项</b><br>
+    学员高频好评"命题人张老师讲得清楚"。建议把张老师的形象做成单独的"名师 IP"宣传物料。</p>
+
+    <h3>三、3 条具体行动建议</h3>
+    <p><b>1. 【立即】启动"老带新"激励</b><br>
+    ① 老学员每推荐 1 人成单，奖励 ¥200 现金 + 1 套名师课<br>
+    ② 给老学员发"专属推荐链接 / 海报"，降低推荐门槛<br>
+    ② 预期：3 个月内老带新转化占比从 12% → 25%</p>
+    <p><b>2. 【4 月】"注安 → 一消"联报活动</b><br>
+    ① 凭注安证享一消 8 折（参考复购方案）<br>
+    ② 营销主题："考完注安闲不住，3 个月过一消"<br>
+    ③ 预期：4 月老学员复购贡献营收 ¥40 万</p>
+    <p><b>3. 【持续】张老师 IP 化包装</b><br>
+    ① 把"命题人张老师"做成海报 / 短视频主角<br>
+    ② 所有课程宣传物料中"名师风采"位置保留<br>
+    ③ 预期：提升品牌信任度，间接拉升转化率 5%</p>
+  </div>
+</div>
+
+<div class="card">
+  <h2>三、关键指标可视化（条形图示例）</h2>
+  <h3>老学员复购目标分布</h3>
+  <div class="bar-chart">
+    <div class="bar-row"><span class="label">一消</span><div class="bar"><div class="fill" style="width:90%">45%</div></div><span class="pct">45%</span></div>
+    <div class="bar-row"><span class="label">一建</span><div class="bar"><div class="fill" style="width:56%">28%</div></div><span class="pct">28%</span></div>
+    <div class="bar-row"><span class="label">城规</span><div class="bar"><div class="fill" style="width:30%">15%</div></div><span class="pct">15%</span></div>
+    <div class="bar-row"><span class="label">咨询工程师</span><div class="bar"><div class="fill" style="width:14%">7%</div></div><span class="pct">7%</span></div>
+    <div class="bar-row"><span class="label">不需要</span><div class="bar"><div class="fill" style="width:10%;background:linear-gradient(135deg,#94a3b8,#64748b)">5%</div></div><span class="pct">5%</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>四、提问模板（直接复制用）</h2>
+  <div class="template">这是一份《中级注安 26 年老学员复购调研》的结果数据（300 份样本）。
+
+请按"3 段式数据简报"输出：
+
+【第一段：关键数字（10 个以内的核心数字）】
+- NPS 净推荐值
+- 复购意愿占比
+- 推荐意愿占比
+- 课程满意度平均分
+- Top 3 复购目标
+
+【第二段：Top 3 关键洞察】
+- 每个洞察要有"数据支撑 + 业务含义"
+- 要能直接指导运营动作
+
+【第三段：3 条具体行动建议】
+- 每条建议要含"动作 + 责任人 + 时间节点 + 预期结果"
+- 按优先级排序
+
+数据如下（已粘贴 Excel 内容）：
+[把 Excel 截图 / 数据表 / 关键问题汇总贴在这里]</div>
+</div>
+
+<div class="card">
+  <h2>五、4 类常见调研报告模板</h2>
+  <table>
+    <thead><tr><th>调研类型</th><th>关键数字</th><th>重点洞察方向</th><th>输出频率</th></tr></thead>
+    <tbody>
+      <tr><td>新客意向调研</td><td>渠道占比 / 意向分 / 预算分布</td><td>高意向学员特征 / 决策障碍</td><td>每季度</td></tr>
+      <tr><td>在读学员满意度</td><td>课程满意度 / 学习障碍</td><td>课程痛点 / 老师反馈</td><td>每月</td></tr>
+      <tr><td>二战学员</td><td>去年失败原因 / 预期</td><td>去年问题 / 复购决策点</td><td>4 月 / 8 月</td></tr>
+      <tr><td>老学员复购 / NPS</td><td>NPS / 复购率 / 推荐率</td><td>复购目标 / 转介绍机制</td><td>取证后 30 天</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="tip"><strong>📌 报告使用建议：</strong>数据简报出来后，<b>1 小时内</b>在团队群里同步 Top 3 洞察；3 天内确定行动项负责人；下周一检查落地情况。绝不能"调研完就放进抽屉"。</div>
+
+<div class="nav">
+  <a href="01_调研问卷设计.html">← 上一篇：6.1 调研问卷设计</a>
+  <a href="03_学员心理画像.html">下一篇：6.3 学员心理画像 →</a>
+</div>
+
+</div>
+</body>
+</html>

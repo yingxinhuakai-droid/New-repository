@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模块五·周报与业绩分析｜WorkBuddy 培训</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #f5f7fa 0%, #fee2e2 100%);
+  color: #2c3e50;
+  line-height: 1.8;
+  padding: 20px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+
+.hero {
+  background: linear-gradient(135deg, #7f1d1d 0%, #991b1b 50%, #ef4444 100%);
+  color: white;
+  padding: 50px 40px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 32px rgba(127, 29, 29, 0.2);
+  text-align: center;
+}
+.hero .badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(10px);
+}
+.hero h1 { font-size: 36px; margin-bottom: 12px; font-weight: 700; }
+.hero .desc { font-size: 16px; opacity: 0.95; max-width: 700px; margin: 0 auto 24px; }
+.hero .stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.hero .stat-item { text-align: center; }
+.hero .stat-num { font-size: 28px; font-weight: 700; color: #fbbf24; }
+.hero .stat-label { font-size: 13px; opacity: 0.85; }
+
+.module-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+  background: white;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.module-nav a {
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+.module-nav a.active { background: linear-gradient(135deg, #7f1d1d, #ef4444); color: white; border-color: transparent; }
+.module-nav a:hover:not(.active) { background: #fee2e2; transform: translateY(-2px); }
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.doc-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  text-decoration: none;
+  color: inherit;
+  border: 2px solid transparent;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.doc-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #7f1d1d, #ef4444);
+}
+.doc-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(127, 29, 29, 0.15); border-color: #ef4444; }
+.doc-card .doc-num {
+  display: inline-block;
+  background: #7f1d1d;
+  color: white;
+  padding: 3px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.doc-card h3 { color: #7f1d1d; font-size: 18px; margin-bottom: 8px; }
+.doc-card p { color: #64748b; font-size: 14px; margin: 0; }
+.doc-card .meta {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #94a3b8;
+  display: flex;
+  gap: 8px;
+}
+.doc-card .meta span { background: #fee2e2; padding: 2px 8px; border-radius: 4px; }
+
+.progress-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.progress-card h2 {
+  color: #7f1d1d;
+  font-size: 20px;
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 4px solid #ef4444;
+}
+.progress-bar {
+  background: #fee2e2;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.progress-bar .fill {
+  background: linear-gradient(90deg, #10b981, #34d399);
+  height: 100%;
+  border-radius: 6px;
+}
+.progress-text { color: #64748b; font-size: 13px; text-align: right; }
+
+.quote-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #78350f;
+}
+.quote-card h2 { color: #92400e; font-size: 20px; margin-bottom: 8px; }
+.quote-card p { font-size: 14px; }
+
+@media (max-width: 640px) {
+  .hero { padding: 30px 20px; }
+  .hero h1 { font-size: 24px; }
+  .module-nav { grid-template-columns: repeat(2, 1fr); }
+  .doc-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="badge">⭐⭐⭐ 核心模块</div>
+    <h1>📊 模块五·周报与业绩分析</h1>
+    <p class="desc">每周省 2 小时，还能挖出数据里真正的问题，让周报从"流水账"变"决策书"</p>
+    <div class="stats">
+      <div class="stat-item"><div class="stat-num">5</div><div class="stat-label">培训文档</div></div>
+      <div class="stat-item"><div class="stat-num">2h+</div><div class="stat-label">每周节省</div></div>
+      <div class="stat-item"><div class="stat-num">70%</div><div class="stat-label">效率提升</div></div>
+      <div class="stat-item"><div class="stat-num">5 个</div><div class="stat-label">分析维度</div></div>
+    </div>
+  </div>
+
+  <div class="module-nav">
+    <a href="../01_开篇导读/index.html">① 开篇导读</a>
+    <a href="../02_运营方案/index.html">② 运营方案</a>
+    <a href="../03_销售支持/index.html">③ 销售支持</a>
+    <a href="../04_海报物料/index.html">④ 海报物料</a>
+    <a href="index.html" class="active">⑤ 周报分析</a>
+    <a href="../06_学员调研/index.html">⑥ 学员调研</a>
+    <a href="../07_进阶能力/index.html">⑦ 进阶能力</a>
+  </div>
+
+  <div class="progress-card">
+    <h2>📊 模块五·周报分析 - 学习进度</h2>
+    <div class="progress-bar"><div class="fill" style="width: 100%;"></div></div>
+    <div class="progress-text">已完成 5/5 篇 · 全部交付 🎉</div>
+  </div>
+
+  <div class="doc-grid">
+    <a href="01_周报模板.html" class="doc-card">
+      <span class="doc-num">5.1</span>
+      <h3>📋 周报自动生成：模板 + 实战</h3>
+      <p>万能提问模板 + 3 个实战案例 + 质量自检表，30 分钟出周报</p>
+      <div class="meta"><span>⏱️ 8 分钟</span><span>⭐⭐⭐ 必读</span></div>
+    </a>
+    <a href="02_营收分析.html" class="doc-card">
+      <span class="doc-num">5.2</span>
+      <h3>💰 营收分析：5 大端口拆解法</h3>
+      <p>从"总营收 287,500"到"为什么协议班下滑 22%"，3 步挖出真问题</p>
+      <div class="meta"><span>⏱️ 10 分钟</span><span>⭐⭐⭐ 必读</span></div>
+    </a>
+    <a href="03_流量分析.html" class="doc-card">
+      <span class="doc-num">5.3</span>
+      <h3>📈 流量分析：UV/PV/转化漏斗</h3>
+      <p>5 段式漏斗，找到最窄瓶颈，4 步让流量变营收</p>
+      <div class="meta"><span>⏱️ 10 分钟</span><span>⭐⭐⭐ 必读</span></div>
+    </a>
+    <a href="04_H5看板.html" class="doc-card">
+      <span class="doc-num">5.4</span>
+      <h3>📱 H5 实时数据看板</h3>
+      <p>把核心数据装进口袋，老板/同事扫码就能看</p>
+      <div class="meta"><span>⏱️ 8 分钟</span><span>⭐⭐ 进阶</span></div>
+    </a>
+    <a href="05_异常预警.html" class="doc-card">
+      <span class="doc-num">5.5</span>
+      <h3>🚨 数据异常预警 + 下周行动建议</h3>
+      <p>让 AI 帮你"诊断+开方"：5 Why 挖根因 + SMART 行动建议</p>
+      <div class="meta"><span>⏱️ 10 分钟</span><span>⭐⭐⭐ 必读</span></div>
+    </a>
+  </div>
+
+  <div class="quote-card">
+    <h2>🎯 模块五学习目标</h2>
+    <p>读完 5 篇文档，<strong>2 小时内</strong>你能：<br>
+    ① 用 1 个模板让 AI 在 2 分钟内生成周报初稿<br>
+    ② 把总营收拆成 5 大端口，找到下滑原因<br>
+    ③ 搭建"UV→注册→咨询→订单"漏斗，找到瓶颈<br>
+    ④ 做出 1 个手机/电脑双端适配的 H5 实时看板<br>
+    ⑤ 用"诊断+开方"模板，让周报有"灵魂"</p>
+  </div>
+
+  <div class="progress-card" style="background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%); border: 1px solid #fca5a5;">
+    <h2 style="color: #7f1d1d;">📅 模块五·立即落地建议</h2>
+    <ol style="margin-left: 24px; color: #7f1d1d;">
+      <li><strong>本周内必做：</strong>5.1 周报模板跑一次，存档为快捷指令</li>
+      <li><strong>本周内必做：</strong>5.5 诊断+开方模板跑一次，写入本周周报</li>
+      <li><strong>下周可做：</strong>5.2 营收 + 5.3 流量分析模板各跑一次</li>
+      <li><strong>第 3 周：</strong>5.4 H5 看板做出来，分享给团队</li>
+    </ol>
+  </div>
+</div>
+</body>
+</html>

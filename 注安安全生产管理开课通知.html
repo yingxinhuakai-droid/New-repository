@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中级注册安全工程师 - 安全生产管理 开课通知</title>
+<style>
+  :root {
+    --ink: #0b1622;
+    --navy: #12243d;
+    --navy-light: #1a3357;
+    --gold: #c8962e;
+    --gold-bright: #e6ac3a;
+    --gold-light: #f5d78a;
+    --gold-pale: #fdf3dd;
+    --white: #ffffff;
+    --cream: #faf6ef;
+    --warm-bg: #f7f3ea;
+    --text: #1c1c2a;
+    --text-secondary: #6b6b80;
+    --safety-orange: #e87a1e;
+    --safety-yellow: #f5b642;
+    --border-subtle: #e8e0d4;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+    background: #e2ddd4;
+    padding: 30px 20px;
+    font-family: "PingFang SC", "Noto Sans SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .poster {
+    width: 1080px;
+    background: var(--white);
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.06),
+      0 12px 40px rgba(0,0,0,0.10),
+      0 24px 80px rgba(0,0,0,0.14);
+    position: relative;
+  }
+
+  /* =============================================
+     HERO SECTION
+     ============================================= */
+  .hero {
+    background: var(--ink);
+    padding: 52px 60px 0;
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Hexagonal honeycomb pattern */
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    opacity: 0.04;
+    background-image:
+      radial-gradient(circle at 25% 40%, rgba(255,255,255,0.2) 0%, transparent 50%),
+      radial-gradient(circle at 75% 30%, rgba(255,255,255,0.1) 0%, transparent 40%);
+    pointer-events: none;
+  }
+
+  /* Safety stripe accent */
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 8px;
+    background: repeating-linear-gradient(
+      -45deg,
+      var(--safety-yellow) 0px,
+      var(--safety-yellow) 14px,
+      var(--ink) 14px,
+      var(--ink) 28px
+    );
+    opacity: 0.85;
+    pointer-events: none;
+  }
+
+  /* Large decorative circle */
+  .hero-orbit {
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    border: 1.5px solid rgba(200, 150, 46, 0.08);
+    border-radius: 50%;
+    top: -160px;
+    right: -140px;
+    pointer-events: none;
+  }
+  .hero-orbit2 {
+    position: absolute;
+    width: 360px;
+    height: 360px;
+    border: 1px solid rgba(200, 150, 46, 0.05);
+    border-radius: 50%;
+    top: -180px;
+    left: -120px;
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    position: relative;
+    z-index: 1;
+    padding-bottom: 52px;
+  }
+
+  /* Top bar */
+  .hero-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+  }
+
+  .logo-box {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 24px;
+    border: 1.5px dashed rgba(200, 150, 46, 0.3);
+    border-radius: 10px;
+    background: rgba(255,255,255,0.02);
+  }
+  .logo-diamond {
+    width: 36px;
+    height: 36px;
+    background: linear-gradient(135deg, var(--gold-bright), var(--gold));
+    transform: rotate(45deg);
+    border-radius: 4px;
+  }
+  .logo-text {
+    color: rgba(255,255,255,0.5);
+    font-size: 17px;
+    letter-spacing: 3px;
+    font-weight: 500;
+  }
+
+  .top-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: rgba(200, 150, 46, 0.1);
+    border: 1px solid rgba(200, 150, 46, 0.2);
+    border-radius: 40px;
+    padding: 10px 22px;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--gold-bright);
+    letter-spacing: 1.5px;
+  }
+  .top-badge::before {
+    content: '';
+    width: 8px;
+    height: 8px;
+    background: var(--gold-bright);
+    border-radius: 50%;
+    box-shadow: 0 0 10px rgba(230, 172, 58, 0.6);
+    animation: pulse-dot 2s ease-in-out infinite;
+  }
+  @keyframes pulse-dot {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.6); }
+  }
+
+  /* Title area */
+  .hero-title-wrap {
+    text-align: center;
+  }
+
+  .hero-eyebrow {
+    font-size: 20px;
+    color: rgba(200, 150, 46, 0.7);
+    letter-spacing: 8px;
+    font-weight: 400;
+    margin-bottom: 16px;
+  }
+
+  .hero-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  .hero-divider-line {
+    width: 50px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(200,150,46,0.3), transparent);
+  }
+  .hero-divider-diamond {
+    width: 10px;
+    height: 10px;
+    background: var(--gold);
+    transform: rotate(45deg);
+  }
+
+  .hero-main-title {
+    font-size: 72px;
+    font-weight: 900;
+    line-height: 1.1;
+    letter-spacing: 8px;
+    margin-bottom: 16px;
+  }
+  .hero-main-title .gold {
+    background: linear-gradient(
+      180deg,
+      #fef0c8 0%,
+      #f5d78a 15%,
+      #e6ac3a 35%,
+      #c8962e 55%,
+      #a67c26 75%,
+      #c8962e 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero-sub {
+    font-size: 24px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 4px;
+    font-weight: 300;
+  }
+
+  /* =============================================
+     SELLING POINTS RIBBON
+     ============================================= */
+  .ribbon-row {
+    display: flex;
+    gap: 20px;
+    padding: 0 60px;
+    margin-top: -40px;
+    position: relative;
+    z-index: 3;
+  }
+
+  .ribbon-card {
+    flex: 1;
+    background: var(--white);
+    border-radius: 16px;
+    padding: 36px 28px 30px;
+    text-align: center;
+    box-shadow:
+      0 2px 8px rgba(0,0,0,0.04),
+      0 8px 24px rgba(0,0,0,0.06);
+    border: 1px solid var(--border-subtle);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .ribbon-card:hover {
+    transform: translateY(-4px);
+    box-shadow:
+      0 4px 12px rgba(0,0,0,0.06),
+      0 12px 36px rgba(0,0,0,0.10);
+  }
+  .ribbon-icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+    font-size: 30px;
+    position: relative;
+  }
+  .ribbon-card:nth-child(1) .ribbon-icon { background: linear-gradient(135deg, #eef6ff, #dceaff); }
+  .ribbon-card:nth-child(2) .ribbon-icon { background: linear-gradient(135deg, #fff7e6, #ffecc8); }
+  .ribbon-card:nth-child(3) .ribbon-icon { background: linear-gradient(135deg, #f0faf5, #d8f5e6); }
+
+  .ribbon-label {
+    font-size: 23px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+  .ribbon-desc {
+    font-size: 15px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+    line-height: 1.5;
+  }
+
+  /* =============================================
+     MAIN CONTENT
+     ============================================= */
+  .main-body {
+    padding: 48px 60px 32px;
+  }
+
+  /* Info duo */
+  .info-duo {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+
+  .info-tile {
+    flex: 1;
+    background: var(--cream);
+    border-radius: 16px;
+    padding: 32px 36px;
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    border: 1px solid var(--border-subtle);
+  }
+  .info-tile-icon {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    font-size: 30px;
+    background: linear-gradient(135deg, var(--navy), var(--navy-light));
+  }
+  .info-tile-label {
+    font-size: 16px;
+    color: var(--text-secondary);
+    letter-spacing: 1.5px;
+    margin-bottom: 4px;
+  }
+  .info-tile-value {
+    font-size: 30px;
+    font-weight: 800;
+    color: var(--text);
+    letter-spacing: 3px;
+  }
+
+  /* Format chips */
+  .format-row {
+    text-align: center;
+    margin-bottom: 36px;
+  }
+  .format-label {
+    font-size: 18px;
+    color: var(--text-secondary);
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+  .format-chips {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  .format-chip {
+    padding: 14px 36px;
+    border-radius: 40px;
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .chip-online {
+    background: linear-gradient(135deg, #e8f1fd, #d4e6fb);
+    color: #1a5fa8;
+    border: 1px solid rgba(26,95,168,0.12);
+  }
+  .chip-offline {
+    background: linear-gradient(135deg, #fff4e5, #ffe4c4);
+    color: #c25e0e;
+    border: 1px solid rgba(194,94,14,0.12);
+  }
+
+  /* =============================================
+     HIGHLIGHTS SECTION
+     ============================================= */
+  .hl-section {
+    background: linear-gradient(170deg, #faf7f0 0%, #f5efe2 100%);
+    border-radius: 18px;
+    padding: 44px 48px;
+    border: 1px solid var(--border-subtle);
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Subtle hex pattern */
+  .hl-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(circle at 8% 20%, rgba(200,150,46,0.06) 0%, transparent 25%),
+      radial-gradient(circle at 92% 80%, rgba(200,150,46,0.04) 0%, transparent 25%);
+    pointer-events: none;
+  }
+
+  .hl-header {
+    text-align: center;
+    margin-bottom: 36px;
+    position: relative;
+    z-index: 1;
+  }
+  .hl-title {
+    font-size: 26px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 4px;
+    display: inline-block;
+  }
+  .hl-title::after {
+    content: '';
+    display: block;
+    width: 48px;
+    height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--gold-bright));
+    margin: 12px auto 0;
+    border-radius: 2px;
+  }
+
+  .hl-cards {
+    display: flex;
+    gap: 18px;
+    position: relative;
+    z-index: 1;
+  }
+  .hl-card {
+    flex: 1;
+    background: var(--white);
+    border-radius: 14px;
+    padding: 32px 20px 28px;
+    text-align: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.03);
+    border: 1px solid var(--border-subtle);
+  }
+  .hl-number {
+    font-size: 48px;
+    font-weight: 900;
+    background: linear-gradient(180deg, var(--gold-bright), var(--safety-orange));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    line-height: 1.1;
+    margin-bottom: 4px;
+  }
+  .hl-name {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text);
+    letter-spacing: 2px;
+    margin-bottom: 4px;
+  }
+  .hl-note {
+    font-size: 14px;
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+  }
+
+  /* =============================================
+     BOTTOM CTA SECTION
+     ============================================= */
+  .cta-section {
+    background: linear-gradient(180deg, var(--navy) 0%, var(--ink) 100%);
+    padding: 48px 60px 44px;
+    display: flex;
+    align-items: center;
+    gap: 52px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-section::before {
+    content: '';
+    position: absolute;
+    width: 280px;
+    height: 280px;
+    border: 1px solid rgba(200, 150, 46, 0.06);
+    border-radius: 50%;
+    bottom: -60px;
+    left: -80px;
+    pointer-events: none;
+  }
+  .cta-section::after {
+    content: '';
+    position: absolute;
+    width: 160px;
+    height: 160px;
+    border: 1px solid rgba(200, 150, 46, 0.04);
+    border-radius: 50%;
+    top: -40px;
+    right: 40px;
+    pointer-events: none;
+  }
+
+  .qr-block {
+    flex-shrink: 0;
+    position: relative;
+    z-index: 1;
+  }
+  .qr-frame {
+    width: 200px;
+    height: 200px;
+    background: var(--white);
+    border-radius: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    box-shadow: 0 8px 32px rgba(200, 150, 46, 0.18);
+    border: 3px solid rgba(200,150,46,0.2);
+  }
+  .qr-frame-icon {
+    font-size: 56px;
+    opacity: 0.3;
+  }
+  .qr-frame-label {
+    font-size: 15px;
+    color: #aaa;
+    letter-spacing: 2px;
+  }
+
+  .cta-right {
+    flex: 1;
+    position: relative;
+    z-index: 1;
+  }
+  .cta-headline {
+    font-size: 30px;
+    font-weight: 700;
+    color: var(--gold-bright);
+    letter-spacing: 3px;
+    margin-bottom: 10px;
+  }
+  .cta-subline {
+    font-size: 18px;
+    color: rgba(255,255,255,0.45);
+    letter-spacing: 2px;
+    margin-bottom: 22px;
+  }
+  .cta-contacts {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .cta-contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 18px;
+    color: rgba(255,255,255,0.65);
+    letter-spacing: 1.5px;
+  }
+  .cta-contact::before {
+    content: '';
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold-bright);
+    flex-shrink: 0;
+  }
+
+  /* =============================================
+     FOOTER
+     ============================================= */
+  .poster-footer {
+    text-align: center;
+    padding: 18px 60px;
+    background: #f9f9f9;
+    font-size: 13px;
+    color: #c0c0c0;
+    letter-spacing: 1px;
+  }
+
+  /* =============================================
+     RESPONSIVE: force 1080
+     ============================================= */
+  @media (max-width: 1100px) {
+    .poster { width: 100%; }
+  }
+</style>
+</head>
+<body>
+
+<div class="poster">
+
+  <!-- ==================== HERO ==================== -->
+  <section class="hero">
+    <div class="hero-pattern"></div>
+    <div class="hero-orbit"></div>
+    <div class="hero-orbit2"></div>
+
+    <div class="hero-inner">
+      <div class="hero-bar">
+        <div class="logo-box">
+          <div class="logo-diamond"></div>
+          <span class="logo-text">机构 LOGO</span>
+        </div>
+        <div class="top-badge">2026 · 备考冲刺</div>
+      </div>
+
+      <div class="hero-title-wrap">
+        <div class="hero-eyebrow">中 级 注 册 安 全 工 程 师</div>
+        <div class="hero-title">
+          <span class="gold">安全生产管理</span>
+        </div>
+        <div class="hero-divider">
+          <div class="hero-divider-line"></div>
+          <div class="hero-divider-diamond"></div>
+          <div class="hero-divider-line"></div>
+        </div>
+        <div class="hero-sub">精讲课 · 正式开班</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SELLING POINTS ==================== -->
+  <section class="ribbon-row">
+    <div class="ribbon-card">
+      <div class="ribbon-icon">🎯</div>
+      <div class="ribbon-label">紧扣考纲</div>
+      <div class="ribbon-desc">精准覆盖考试核心考点<br>考试重点一网打尽</div>
+    </div>
+    <div class="ribbon-card">
+      <div class="ribbon-icon">👨‍🏫</div>
+      <div class="ribbon-label">名师授课</div>
+      <div class="ribbon-desc">资深讲师深度解析<br>通俗易懂直击考点</div>
+    </div>
+    <div class="ribbon-card">
+      <div class="ribbon-icon">📈</div>
+      <div class="ribbon-label">备考冲刺</div>
+      <div class="ribbon-desc">高效突破提分瓶颈<br>科学规划冲刺节奏</div>
+    </div>
+  </section>
+
+  <!-- ==================== MAIN BODY ==================== -->
+  <section class="main-body">
+    <!-- Teacher & Date -->
+    <div class="info-duo">
+      <div class="info-tile">
+        <div class="info-tile-icon">👨‍🏫</div>
+        <div>
+          <div class="info-tile-label">授课讲师</div>
+          <div class="info-tile-value">康小瑜</div>
+        </div>
+      </div>
+      <div class="info-tile">
+        <div class="info-tile-icon">📅</div>
+        <div>
+          <div class="info-tile-label">开课时间</div>
+          <div class="info-tile-value">6 月 18 日</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Format -->
+    <div class="format-row">
+      <div class="format-label">授 课 形 式</div>
+      <div class="format-chips">
+        <div class="format-chip chip-online">💻 线上直播</div>
+        <div class="format-chip chip-offline">🏫 线下面授</div>
+      </div>
+    </div>
+
+    <!-- Highlights -->
+    <div class="hl-section">
+      <div class="hl-header">
+        <span class="hl-title">课 程 亮 点</span>
+      </div>
+      <div class="hl-cards">
+        <div class="hl-card">
+          <div class="hl-number">60+</div>
+          <div class="hl-name">精讲课时</div>
+          <div class="hl-note">系统梳理知识体系</div>
+        </div>
+        <div class="hl-card">
+          <div class="hl-number">800+</div>
+          <div class="hl-name">章节习题</div>
+          <div class="hl-note">随堂巩固核心考点</div>
+        </div>
+        <div class="hl-card">
+          <div class="hl-number">10套</div>
+          <div class="hl-name">模拟考试</div>
+          <div class="hl-note">全真演练查漏补缺</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CTA ==================== -->
+  <section class="cta-section">
+    <div class="qr-block">
+      <div class="qr-frame">
+        <div class="qr-frame-icon">📱</div>
+        <div class="qr-frame-label">扫码报名</div>
+        <div style="font-size:11px;color:#d0d0d0;">二维码占位</div>
+      </div>
+    </div>
+    <div class="cta-right">
+      <div class="cta-headline">立即报名</div>
+      <div class="cta-subline">名额有限，抢占备考先机</div>
+      <div class="cta-contacts">
+        <div class="cta-contact">咨询热线：400-XXX-XXXX</div>
+        <div class="cta-contact">微信咨询：xxxxxx</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <div class="poster-footer">
+    © 2026 安全工程师培训 · 安全生产管理课程 · 最终解释权归机构所有
+  </div>
+
+</div>
+
+</body>
+</html>

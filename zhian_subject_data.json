@@ -1,0 +1,2430 @@
+{
+  "法律法规": {
+    "第一章 \n安全生产相关国家政策": [
+      {
+        "seq": 1,
+        "content": "安全生产相关国家政策",
+        "importance": 1
+      }
+    ],
+    "第二章 \n安全生产法律基础知识": [
+      {
+        "seq": 2,
+        "content": "法的效力层级",
+        "importance": 2
+      }
+    ],
+    "第三章 \n安全生产法": [
+      {
+        "seq": 3,
+        "content": "主要负责人的判定",
+        "importance": 2
+      },
+      {
+        "seq": 4,
+        "content": "安全生产法的适用",
+        "importance": 2
+      },
+      {
+        "seq": 5,
+        "content": "安全生产监管部门的职责",
+        "importance": 4
+      },
+      {
+        "seq": 6,
+        "content": "主要负责人及安全管理机构、安全管理人员职责",
+        "importance": 5
+      },
+      {
+        "seq": 7,
+        "content": "安全生产管理机构和安全生产管理人员配备",
+        "importance": 5
+      },
+      {
+        "seq": 8,
+        "content": "有关资金保障、保险的规定",
+        "importance": 2
+      },
+      {
+        "seq": 9,
+        "content": "从业人员教育和培训",
+        "importance": 3
+      },
+      {
+        "seq": 10,
+        "content": "重大危险源与双控体系",
+        "importance": 3
+      },
+      {
+        "seq": 11,
+        "content": "作业现场安全管理",
+        "importance": 4
+      },
+      {
+        "seq": 12,
+        "content": "出租发包的安全生产管理",
+        "importance": 5
+      },
+      {
+        "seq": 13,
+        "content": "从业人员的权利和义务",
+        "importance": 3
+      },
+      {
+        "seq": 14,
+        "content": "监管部门检查行使的职权",
+        "importance": 4
+      },
+      {
+        "seq": 15,
+        "content": "安全生产监督检查的要求",
+        "importance": 2
+      },
+      {
+        "seq": 16,
+        "content": "安全事故应急救援",
+        "importance": 3
+      },
+      {
+        "seq": 17,
+        "content": "生产事故报告和调查处理",
+        "importance": 3
+      },
+      {
+        "seq": 18,
+        "content": "中介机构的法律责任",
+        "importance": 2
+      },
+      {
+        "seq": 19,
+        "content": "生产经营单位及相关负责人的法律责任",
+        "importance": 4
+      }
+    ],
+    "第四章 \n安全生产单行法律": [
+      {
+        "seq": 20,
+        "content": "矿山建设的安全保障",
+        "importance": 1
+      },
+      {
+        "seq": 21,
+        "content": "矿山开采的安全保障",
+        "importance": 1
+      },
+      {
+        "seq": 22,
+        "content": "单位的消防安全职责",
+        "importance": 2
+      },
+      {
+        "seq": 23,
+        "content": "消防组织规定与灭火救援规定",
+        "importance": 4
+      },
+      {
+        "seq": 24,
+        "content": "道路通行条件",
+        "importance": 2
+      },
+      {
+        "seq": 25,
+        "content": "道路通行规定",
+        "importance": 3
+      },
+      {
+        "seq": 26,
+        "content": "特种设备生产安全",
+        "importance": 3
+      },
+      {
+        "seq": 27,
+        "content": "特种设备的经营使用安全",
+        "importance": 4
+      },
+      {
+        "seq": 28,
+        "content": "特种设备的检验检测与监督管理",
+        "importance": 3
+      },
+      {
+        "seq": 29,
+        "content": "特种设备的事故调查处理",
+        "importance": 3
+      },
+      {
+        "seq": 30,
+        "content": "建筑工程的发包与承包管理",
+        "importance": 4
+      },
+      {
+        "seq": 31,
+        "content": "建筑施工安全管理",
+        "importance": 3
+      }
+    ],
+    "第五章 \n安全生产相关法律": [
+      {
+        "seq": 32,
+        "content": "与安全生产有关的规定",
+        "importance": 2
+      },
+      {
+        "seq": 33,
+        "content": "重大责任事故罪和强令组织他人违章冒险作业罪",
+        "importance": 2
+      },
+      {
+        "seq": 34,
+        "content": "不报、谎报安全事故罪",
+        "importance": 3
+      },
+      {
+        "seq": 35,
+        "content": "危险作业罪",
+        "importance": 3
+      },
+      {
+        "seq": 36,
+        "content": "重大劳动安全事故罪",
+        "importance": 3
+      },
+      {
+        "seq": 37,
+        "content": "行政处罚的种类",
+        "importance": 2
+      },
+      {
+        "seq": 38,
+        "content": "行政处罚的管辖和适用",
+        "importance": 3
+      },
+      {
+        "seq": 39,
+        "content": "行政处罚的执行",
+        "importance": 3
+      },
+      {
+        "seq": 40,
+        "content": "行政强制措施—查封和扣押",
+        "importance": 3
+      },
+      {
+        "seq": 41,
+        "content": "女职工和未成年工劳动保护",
+        "importance": 3
+      },
+      {
+        "seq": 42,
+        "content": "劳动合同的订立和履行",
+        "importance": 5
+      },
+      {
+        "seq": 43,
+        "content": "劳动合同的解除",
+        "importance": 3
+      },
+      {
+        "seq": 44,
+        "content": "突发事件预警及预防措施",
+        "importance": 3
+      },
+      {
+        "seq": 45,
+        "content": "应急处置和救援",
+        "importance": 3
+      },
+      {
+        "seq": 46,
+        "content": "职业病预防管理",
+        "importance": 3
+      },
+      {
+        "seq": 47,
+        "content": "职业病诊断与保障",
+        "importance": 3
+      }
+    ],
+    "第六章 \n安全生产行政法规": [
+      {
+        "seq": 48,
+        "content": "安全生产许可证的颁发管理",
+        "importance": 3
+      },
+      {
+        "seq": 49,
+        "content": "煤矿安全监察规定",
+        "importance": 3
+      },
+      {
+        "seq": 50,
+        "content": "煤矿停产整顿与关闭的规定",
+        "importance": 3
+      },
+      {
+        "seq": 51,
+        "content": "建设工程各方的安全责任",
+        "importance": 5
+      },
+      {
+        "seq": 52,
+        "content": "生产安全事故的应急救援和调查处理",
+        "importance": 3
+      },
+      {
+        "seq": 53,
+        "content": "危险化学品生产、储存安全",
+        "importance": 5
+      },
+      {
+        "seq": 54,
+        "content": "危险化学品使用、经营安全",
+        "importance": 4
+      },
+      {
+        "seq": 55,
+        "content": "危险化学品运输安全",
+        "importance": 3
+      },
+      {
+        "seq": 56,
+        "content": "危险化学品监督管理",
+        "importance": 2
+      },
+      {
+        "seq": 57,
+        "content": "烟花爆竹生产安全",
+        "importance": 3
+      },
+      {
+        "seq": 58,
+        "content": "烟花爆竹经营、运输、燃放安全",
+        "importance": 4
+      },
+      {
+        "seq": 59,
+        "content": "民用爆炸物品生产、销售、购买安全",
+        "importance": 4
+      },
+      {
+        "seq": 60,
+        "content": "民用爆炸物品的运输、使用和储存",
+        "importance": 3
+      },
+      {
+        "seq": 61,
+        "content": "特种设备分类",
+        "importance": 2
+      },
+      {
+        "seq": 62,
+        "content": "特种设备使用安全",
+        "importance": 5
+      },
+      {
+        "seq": 63,
+        "content": "特种设备检测",
+        "importance": 3
+      },
+      {
+        "seq": 64,
+        "content": "特种设备事故类别",
+        "importance": 3
+      },
+      {
+        "seq": 65,
+        "content": "事故应急的管辖",
+        "importance": 2
+      },
+      {
+        "seq": 66,
+        "content": "应急准备",
+        "importance": 5
+      },
+      {
+        "seq": 67,
+        "content": "应急救援措施",
+        "importance": 4
+      },
+      {
+        "seq": 68,
+        "content": "生产安全事故分类",
+        "importance": 4
+      },
+      {
+        "seq": 69,
+        "content": "事故的报告和救援",
+        "importance": 5
+      },
+      {
+        "seq": 70,
+        "content": "事故调查",
+        "importance": 4
+      },
+      {
+        "seq": 71,
+        "content": "工伤保险基金",
+        "importance": 4
+      },
+      {
+        "seq": 72,
+        "content": "工伤认定",
+        "importance": 4
+      },
+      {
+        "seq": 73,
+        "content": "劳动能力鉴定",
+        "importance": 4
+      },
+      {
+        "seq": 74,
+        "content": "工伤保险待遇",
+        "importance": 5
+      },
+      {
+        "seq": 75,
+        "content": "大型群众性活动的安全管理",
+        "importance": 3
+      },
+      {
+        "seq": 76,
+        "content": "女职工的劳动保护与禁忌从事的劳动范围",
+        "importance": 3
+      }
+    ],
+    "第七章 \n安全生产部门规章": [
+      {
+        "seq": 77,
+        "content": "安全培训内容和培训学时",
+        "importance": 4
+      },
+      {
+        "seq": 78,
+        "content": "安全培训组织实施",
+        "importance": 3
+      },
+      {
+        "seq": 79,
+        "content": "特种作业人员具备的条件",
+        "importance": 3
+      },
+      {
+        "seq": 80,
+        "content": "特种作业人员证书管理",
+        "importance": 5
+      },
+      {
+        "seq": 81,
+        "content": "监督管理",
+        "importance": 2
+      },
+      {
+        "seq": 82,
+        "content": "安全培训与考核发证",
+        "importance": 3
+      },
+      {
+        "seq": 83,
+        "content": "事故隐患排查治理",
+        "importance": 5
+      },
+      {
+        "seq": 84,
+        "content": "生产安全事故应急预案管理",
+        "importance": 3
+      },
+      {
+        "seq": 85,
+        "content": "高层民用建筑消防安全管理",
+        "importance": 3
+      },
+      {
+        "seq": 86,
+        "content": "工贸企业粉尘防爆安全管理",
+        "importance": 3
+      },
+      {
+        "seq": 87,
+        "content": "建设工程消防设计审查验收管理",
+        "importance": 4
+      },
+      {
+        "seq": 88,
+        "content": "“三同时”监督管理",
+        "importance": 4
+      },
+      {
+        "seq": 89,
+        "content": "危险化学品管道安全管理",
+        "importance": 3
+      },
+      {
+        "seq": 90,
+        "content": "重大危险源监督管理",
+        "importance": 3
+      },
+      {
+        "seq": 91,
+        "content": "工贸企业有限空间作业安全保障",
+        "importance": 3
+      }
+    ]
+  },
+  "安全管理": {
+    "第一章 \n安全生产管理基本理论": [
+      {
+        "seq": 1,
+        "content": "事故隐患",
+        "importance": 4
+      },
+      {
+        "seq": 2,
+        "content": "海因里希法则",
+        "importance": 2
+      },
+      {
+        "seq": 3,
+        "content": "危险源",
+        "importance": 3
+      },
+      {
+        "seq": 4,
+        "content": "本质安全",
+        "importance": 3
+      },
+      {
+        "seq": 5,
+        "content": "事故致因原理",
+        "importance": 4
+      },
+      {
+        "seq": 6,
+        "content": "安全原理",
+        "importance": 2
+      },
+      {
+        "seq": 7,
+        "content": "影响人行为的因素",
+        "importance": 3
+      },
+      {
+        "seq": 8,
+        "content": "安全哲学观",
+        "importance": 2
+      },
+      {
+        "seq": 9,
+        "content": "安全文化的定义与内涵",
+        "importance": 3
+      }
+    ],
+    "第二章 \n安全生产管理内容": [
+      {
+        "seq": 10,
+        "content": "安全生产责任制的主要内容",
+        "importance": 3
+      },
+      {
+        "seq": 11,
+        "content": "主体责任",
+        "importance": 2
+      },
+      {
+        "seq": 12,
+        "content": "安全生产规章制度四大体系",
+        "importance": 2
+      },
+      {
+        "seq": 13,
+        "content": "安全生产规章制度建立流程",
+        "importance": 4
+      },
+      {
+        "seq": 14,
+        "content": "安全操作规程的编制",
+        "importance": 4
+      },
+      {
+        "seq": 15,
+        "content": "教育培训的组织",
+        "importance": 2
+      },
+      {
+        "seq": 16,
+        "content": "培训的内容、学时及三级安全教育培训",
+        "importance": 4
+      },
+      {
+        "seq": 17,
+        "content": "“三同时”的相关要求及监管责任",
+        "importance": 4
+      },
+      {
+        "seq": 18,
+        "content": "安全设施设计审查与竣工验收",
+        "importance": 4
+      },
+      {
+        "seq": 19,
+        "content": "重大危险源辨识、分级",
+        "importance": 4
+      },
+      {
+        "seq": 20,
+        "content": "重大危险源管理",
+        "importance": 3
+      },
+      {
+        "seq": 21,
+        "content": "特种设备的分类",
+        "importance": 3
+      },
+      {
+        "seq": 22,
+        "content": "特种设备安全管理",
+        "importance": 4
+      },
+      {
+        "seq": 23,
+        "content": "安全技术措施的类别",
+        "importance": 4
+      },
+      {
+        "seq": 24,
+        "content": "安全技术措施计划",
+        "importance": 4
+      },
+      {
+        "seq": 25,
+        "content": "作业现场环境的危险和有害因素",
+        "importance": 4
+      },
+      {
+        "seq": 26,
+        "content": "安全管理要求及方法",
+        "importance": 4
+      },
+      {
+        "seq": 27,
+        "content": "安全生产投入",
+        "importance": 4
+      },
+      {
+        "seq": 28,
+        "content": "安全生产责任保险",
+        "importance": 4
+      },
+      {
+        "seq": 29,
+        "content": "安全生产检查",
+        "importance": 3
+      },
+      {
+        "seq": 30,
+        "content": "隐患排查治理",
+        "importance": 4
+      },
+      {
+        "seq": 31,
+        "content": "个体防护装备分类",
+        "importance": 3
+      },
+      {
+        "seq": 32,
+        "content": "配备管理",
+        "importance": 4
+      },
+      {
+        "seq": 33,
+        "content": "4类人的基本要求",
+        "importance": 2
+      },
+      {
+        "seq": 34,
+        "content": "8大特殊作业",
+        "importance": 4
+      },
+      {
+        "seq": 35,
+        "content": "承包商管理",
+        "importance": 4
+      },
+      {
+        "seq": 36,
+        "content": "企业安全文化建设",
+        "importance": 4
+      },
+      {
+        "seq": 37,
+        "content": "安全生产标准化基本要求",
+        "importance": 4
+      },
+      {
+        "seq": 38,
+        "content": "安全生产标准化定级管理",
+        "importance": 4
+      },
+      {
+        "seq": 39,
+        "content": "企业双重预防机制建设",
+        "importance": 3
+      }
+    ],
+    "第三章 \n安全评价": [
+      {
+        "seq": 40,
+        "content": "安全评价的程序和内容",
+        "importance": 4
+      },
+      {
+        "seq": 41,
+        "content": "危险、有害因素辨识",
+        "importance": 4
+      },
+      {
+        "seq": 42,
+        "content": "安全评价方法",
+        "importance": 4
+      }
+    ],
+    "第四章 \n职业病危害预防和管理": [
+      {
+        "seq": 43,
+        "content": "职业病危害概述",
+        "importance": 2
+      },
+      {
+        "seq": 44,
+        "content": "职业病危害识别与控制",
+        "importance": 4
+      }
+    ],
+    "第五章 \n安全生产管理": [
+      {
+        "seq": 45,
+        "content": "应急管理体系",
+        "importance": 3
+      },
+      {
+        "seq": 46,
+        "content": "应急预案体系",
+        "importance": 4
+      },
+      {
+        "seq": 47,
+        "content": "应急预案的编制程序",
+        "importance": 4
+      },
+      {
+        "seq": 48,
+        "content": "应急演练",
+        "importance": 4
+      }
+    ],
+    "第六章 \n生产安全事故调查与分析": [
+      {
+        "seq": 49,
+        "content": "生产安全事故报告",
+        "importance": 3
+      },
+      {
+        "seq": 50,
+        "content": "事故调查与分析",
+        "importance": 4
+      }
+    ],
+    "第七章 \n安全生产监管监察": [
+      {
+        "seq": 51,
+        "content": "安全生产监管监察的方式",
+        "importance": 2
+      }
+    ],
+    "第八章 \n安全生产统计分析": [
+      {
+        "seq": 52,
+        "content": "统计图表及指标计算",
+        "importance": 4
+      }
+    ]
+  },
+  "技术基础": {
+    "第一章\n机械安全技术": [
+      {
+        "seq": 1,
+        "content": "机械使用过程中的危险有害因素",
+        "importance": 3
+      },
+      {
+        "seq": 2,
+        "content": "机械危险部位及其安全防护措施",
+        "importance": 4
+      },
+      {
+        "seq": 3,
+        "content": "实现机械安全的途径与对策",
+        "importance": 5
+      },
+      {
+        "seq": 4,
+        "content": "机械制造生产场所安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 5,
+        "content": "金属切削机床存在的主要危险",
+        "importance": 2
+      },
+      {
+        "seq": 6,
+        "content": "砂轮机安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 7,
+        "content": "压力机",
+        "importance": 3
+      },
+      {
+        "seq": 8,
+        "content": "剪板机",
+        "importance": 3
+      },
+      {
+        "seq": 9,
+        "content": "木工平刨床安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 10,
+        "content": "带锯机安全技术",
+        "importance": 2
+      },
+      {
+        "seq": 11,
+        "content": "圆锯机安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 12,
+        "content": "铸造作业危险有害因素及安全技术措施",
+        "importance": 4
+      },
+      {
+        "seq": 13,
+        "content": "锻造作业危险有害因素及安全技术措施",
+        "importance": 4
+      },
+      {
+        "seq": 14,
+        "content": "人的特性",
+        "importance": 2
+      },
+      {
+        "seq": 15,
+        "content": "人与机器特性的比较",
+        "importance": 5
+      },
+      {
+        "seq": 16,
+        "content": "人机系统和人机作业环境",
+        "importance": 4
+      }
+    ],
+    "第二章\n电气安全技术": [
+      {
+        "seq": 17,
+        "content": "触电事故种类",
+        "importance": 5
+      },
+      {
+        "seq": 18,
+        "content": "电流对人体的影响",
+        "importance": 4
+      },
+      {
+        "seq": 19,
+        "content": "绝缘、屏护和间距",
+        "importance": 4
+      },
+      {
+        "seq": 20,
+        "content": "保护接地和保护接零",
+        "importance": 5
+      },
+      {
+        "seq": 21,
+        "content": "双重绝缘、安全电压和漏电保护",
+        "importance": 4
+      },
+      {
+        "seq": 22,
+        "content": "电气引燃源",
+        "importance": 4
+      },
+      {
+        "seq": 23,
+        "content": "爆炸危险区域",
+        "importance": 4
+      },
+      {
+        "seq": 24,
+        "content": "防爆电气设备和防爆电气线路",
+        "importance": 3
+      },
+      {
+        "seq": 25,
+        "content": "电气防火防爆技术",
+        "importance": 2
+      },
+      {
+        "seq": 26,
+        "content": "雷电防护技术",
+        "importance": 4
+      },
+      {
+        "seq": 27,
+        "content": "静电防护技术",
+        "importance": 4
+      },
+      {
+        "seq": 28,
+        "content": "低压电气设备",
+        "importance": 3
+      },
+      {
+        "seq": 29,
+        "content": "电气线路",
+        "importance": 4
+      },
+      {
+        "seq": 30,
+        "content": "电气安全检测仪器",
+        "importance": 3
+      }
+    ],
+    "第三章\n特种设备安全技术": [
+      {
+        "seq": 31,
+        "content": "锅炉安全附件",
+        "importance": 3
+      },
+      {
+        "seq": 32,
+        "content": "锅炉使用安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 33,
+        "content": "锅炉事故",
+        "importance": 4
+      },
+      {
+        "seq": 34,
+        "content": "气瓶概述",
+        "importance": 3
+      },
+      {
+        "seq": 35,
+        "content": "气瓶充装",
+        "importance": 4
+      },
+      {
+        "seq": 36,
+        "content": "充装站对气瓶的日常管理",
+        "importance": 3
+      },
+      {
+        "seq": 37,
+        "content": "压力容器基础知识",
+        "importance": 2
+      },
+      {
+        "seq": 38,
+        "content": "压力容器安全附件、仪表及安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 39,
+        "content": "压力管道基础知识",
+        "importance": 2
+      },
+      {
+        "seq": 40,
+        "content": "压力管道安全技术及事故",
+        "importance": 3
+      },
+      {
+        "seq": 41,
+        "content": "起重机械使用安全管理",
+        "importance": 4
+      },
+      {
+        "seq": 42,
+        "content": "起重机械使用安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 43,
+        "content": "场（厂）内专用机动车辆使用安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 44,
+        "content": "大型游乐设施使用安全管理及其安全装置",
+        "importance": 2
+      }
+    ],
+    "第四章\n防火防爆安全技术": [
+      {
+        "seq": 45,
+        "content": "燃烧与火灾",
+        "importance": 4
+      },
+      {
+        "seq": 46,
+        "content": "爆炸",
+        "importance": 4
+      },
+      {
+        "seq": 47,
+        "content": "点火源及其控制",
+        "importance": 4
+      },
+      {
+        "seq": 48,
+        "content": "爆炸控制",
+        "importance": 3
+      },
+      {
+        "seq": 49,
+        "content": "防火防爆安全装置及技术",
+        "importance": 4
+      },
+      {
+        "seq": 50,
+        "content": "烟花爆竹基本安全知识",
+        "importance": 2
+      },
+      {
+        "seq": 51,
+        "content": "民用爆炸物品生产安全基础知识",
+        "importance": 2
+      },
+      {
+        "seq": 52,
+        "content": "消防器材",
+        "importance": 4
+      }
+    ],
+    "第五章\n危险化学品安全基础知识": [
+      {
+        "seq": 53,
+        "content": "危险化学品安全基础知识",
+        "importance": 2
+      },
+      {
+        "seq": 54,
+        "content": "危险化学品的主要危险特性",
+        "importance": 3
+      },
+      {
+        "seq": 55,
+        "content": "化学品安全技术说明书和安全标签的内容及要求",
+        "importance": 4
+      },
+      {
+        "seq": 56,
+        "content": "燃烧爆炸的分类",
+        "importance": 3
+      },
+      {
+        "seq": 57,
+        "content": "危险化学品火灾、爆炸事故的预防",
+        "importance": 3
+      },
+      {
+        "seq": 58,
+        "content": "危险化学品储存的基本要求",
+        "importance": 4
+      },
+      {
+        "seq": 59,
+        "content": "危险化学品经营企业的条件和要求",
+        "importance": 2
+      },
+      {
+        "seq": 60,
+        "content": "危险化学品火灾控制",
+        "importance": 3
+      },
+      {
+        "seq": 61,
+        "content": "毒性、放射性危险化学品",
+        "importance": 2
+      },
+      {
+        "seq": 62,
+        "content": "劳动防护用品选用原则",
+        "importance": 3
+      }
+    ]
+  },
+  "煤矿安全": {
+    "第一章\n煤矿安全基础知识": [
+      {
+        "seq": 1,
+        "content": "概述",
+        "importance": 2
+      },
+      {
+        "seq": 2,
+        "content": "矿山开采",
+        "importance": 3
+      }
+    ],
+    "第二章\n矿井通风": [
+      {
+        "seq": 3,
+        "content": "矿井有害气体及气候条件",
+        "importance": 3
+      },
+      {
+        "seq": 4,
+        "content": "矿井通风阻力",
+        "importance": 4
+      },
+      {
+        "seq": 5,
+        "content": "矿井通风动力",
+        "importance": 4
+      },
+      {
+        "seq": 6,
+        "content": "矿井通风系统",
+        "importance": 4
+      },
+      {
+        "seq": 7,
+        "content": "矿井通风设计",
+        "importance": 4
+      },
+      {
+        "seq": 8,
+        "content": "矿井通风技能",
+        "importance": 4
+      }
+    ],
+    "第三章\n矿井瓦斯灾害治理": [
+      {
+        "seq": 9,
+        "content": "瓦斯来源及其危害",
+        "importance": 4
+      },
+      {
+        "seq": 10,
+        "content": "煤层瓦斯参数测定及矿井瓦斯涌出",
+        "importance": 4
+      },
+      {
+        "seq": 11,
+        "content": "瓦斯灾害的防治",
+        "importance": 4
+      },
+      {
+        "seq": 12,
+        "content": "瓦斯检测",
+        "importance": 3
+      }
+    ],
+    "第四章\n防灭火技术": [
+      {
+        "seq": 13,
+        "content": "煤矿火灾及防治",
+        "importance": 4
+      },
+      {
+        "seq": 14,
+        "content": "防灭火系统",
+        "importance": 4
+      }
+    ],
+    "第五章\n防治水技术": [
+      {
+        "seq": 15,
+        "content": "矿井水害管理",
+        "importance": 4
+      },
+      {
+        "seq": 16,
+        "content": "水害防治技术",
+        "importance": 4
+      }
+    ],
+    "第六章\n顶板灾害防治技术": [
+      {
+        "seq": 17,
+        "content": "顶板灾害的概念及成因",
+        "importance": 2
+      },
+      {
+        "seq": 18,
+        "content": "顶板灾害防治技术",
+        "importance": 4
+      },
+      {
+        "seq": 19,
+        "content": "地下矿山顶板事故的救护及处理",
+        "importance": 3
+      }
+    ],
+    "第七章\n粉尘防治": [
+      {
+        "seq": 20,
+        "content": "粉尘的产生、性质及危害",
+        "importance": 3
+      },
+      {
+        "seq": 21,
+        "content": "矿山粉尘防治技术",
+        "importance": 4
+      },
+      {
+        "seq": 22,
+        "content": "煤尘防爆技术",
+        "importance": 4
+      }
+    ],
+    "第八章\n机电运输安全技术": [
+      {
+        "seq": 23,
+        "content": "矿井供电系统及电气设备操作安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 24,
+        "content": "矿井供电三大保护及防爆安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 25,
+        "content": "运输安全技术",
+        "importance": 4
+      }
+    ],
+    "第九章\n露天煤矿灾害防治技术": [
+      {
+        "seq": 26,
+        "content": "露天开采概述",
+        "importance": 2
+      },
+      {
+        "seq": 27,
+        "content": "露天矿山灾害及防治技术",
+        "importance": 3
+      },
+      {
+        "seq": 28,
+        "content": "排土场灾害及防治技术",
+        "importance": 3
+      }
+    ],
+    "第十章\n矿山救护": [
+      {
+        "seq": 29,
+        "content": "矿山救护工作要点",
+        "importance": 2
+      },
+      {
+        "seq": 30,
+        "content": "矿工自救与现场急救",
+        "importance": 3
+      },
+      {
+        "seq": 31,
+        "content": "煤矿重大灾害事故抢险救灾的指挥决策",
+        "importance": 2
+      },
+      {
+        "seq": 32,
+        "content": "矿井六大避险系统简介",
+        "importance": 2
+      }
+    ]
+  },
+  "道路运输": {
+    "第一章\n道路运输安全基础": [
+      {
+        "seq": 1,
+        "content": "道路运输安全生产基本特点",
+        "importance": 4
+      },
+      {
+        "seq": 2,
+        "content": "驾驶员基本心理生理特性",
+        "importance": 3
+      },
+      {
+        "seq": 3,
+        "content": "车辆运行安全基础理论",
+        "importance": 4
+      },
+      {
+        "seq": 4,
+        "content": "道路基本知识",
+        "importance": 4
+      },
+      {
+        "seq": 5,
+        "content": "特殊环境下车辆运行安全",
+        "importance": 3
+      },
+      {
+        "seq": 6,
+        "content": "道路运输劳动安全防护基础",
+        "importance": 4
+      },
+      {
+        "seq": 7,
+        "content": "道路运输风险辨识与隐患排查",
+        "importance": 4
+      }
+    ],
+    "第二章\n道路旅客运输安全技术": [
+      {
+        "seq": 8,
+        "content": "道路旅客运输安全生产基础",
+        "importance": 4
+      },
+      {
+        "seq": 9,
+        "content": "客运驾驶员安全管理",
+        "importance": 4
+      },
+      {
+        "seq": 10,
+        "content": "道路客运车辆安全技术管理",
+        "importance": 4
+      },
+      {
+        "seq": 11,
+        "content": "道路旅客运输组织安全要求及操作规程",
+        "importance": 4
+      }
+    ],
+    "第三章\n道路货物运输安全技术": [
+      {
+        "seq": 12,
+        "content": "道路货物运输安全生产基础",
+        "importance": 3
+      },
+      {
+        "seq": 13,
+        "content": "道路货物运输驾驶员安全管理",
+        "importance": 4
+      },
+      {
+        "seq": 14,
+        "content": "道路货物运输车辆安全技术管理",
+        "importance": 4
+      },
+      {
+        "seq": 15,
+        "content": "道路货物运输组织安全要求及操作规程",
+        "importance": 4
+      },
+      {
+        "seq": 16,
+        "content": "道路货物运输新技术与安全管理",
+        "importance": 4
+      }
+    ],
+    "第四章\n道路危险货物运输安全技术": [
+      {
+        "seq": 17,
+        "content": "危险货物分类及危险特性",
+        "importance": 4
+      },
+      {
+        "seq": 18,
+        "content": "道路危险货物运输安全管理基本内容",
+        "importance": 4
+      },
+      {
+        "seq": 19,
+        "content": "道路危险货物运输车辆及设备",
+        "importance": 4
+      },
+      {
+        "seq": 20,
+        "content": "道路危险货物运输从业人员基本要求",
+        "importance": 4
+      },
+      {
+        "seq": 21,
+        "content": "道路危险货物运输作业规程及个人防护",
+        "importance": 4
+      },
+      {
+        "seq": 22,
+        "content": "道路危险货物运输安全生产风险和隐患",
+        "importance": 4
+      }
+    ],
+    "第五章\n道路运输站场安全生产技术": [
+      {
+        "seq": 23,
+        "content": "汽车客运站安全生产要求及工作规范",
+        "importance": 4
+      },
+      {
+        "seq": 24,
+        "content": "道路货运场站安全生产要求及工作规范",
+        "importance": 3
+      },
+      {
+        "seq": 25,
+        "content": "道路运输站场突发事件应急处置",
+        "importance": 4
+      }
+    ],
+    "第六章\n道路运输安全管理信息化": [
+      {
+        "seq": 26,
+        "content": "道路运输信息化基础知识",
+        "importance": 3
+      },
+      {
+        "seq": 27,
+        "content": "道路运输车辆动态监控",
+        "importance": 4
+      }
+    ],
+    "第七章\n道路运输事故应急处置与救援": [
+      {
+        "seq": 28,
+        "content": "道路运输企业应急预案管理",
+        "importance": 4
+      },
+      {
+        "seq": 29,
+        "content": "常用应急处理器材及使用方法",
+        "importance": 4
+      },
+      {
+        "seq": 30,
+        "content": "道路运输应急处置及救援措施",
+        "importance": 4
+      },
+      {
+        "seq": 31,
+        "content": "道路运输事故调查处理基础知识",
+        "importance": 4
+      }
+    ],
+    "第八章\n其他安全生产技术": [
+      {
+        "seq": 32,
+        "content": "车辆维修作业安全生产及工作规范",
+        "importance": 2
+      },
+      {
+        "seq": 33,
+        "content": "驾驶员培训及培训场地安全规范",
+        "importance": 3
+      }
+    ]
+  },
+  "化工安全": {
+    "第一章\n化工安全生产概述": [
+      {
+        "seq": 1,
+        "content": "变更管理",
+        "importance": 2
+      },
+      {
+        "seq": 2,
+        "content": "危险化学品概念、分类及危险特性",
+        "importance": 3
+      },
+      {
+        "seq": 3,
+        "content": "化学品的标志、标签、安全技术说明书",
+        "importance": 3
+      }
+    ],
+    "第二章\n化工运行安全技术": [
+      {
+        "seq": 4,
+        "content": "吸热反应工艺",
+        "importance": 2
+      },
+      {
+        "seq": 5,
+        "content": "放热反应工艺",
+        "importance": 4
+      },
+      {
+        "seq": 6,
+        "content": "精细化化工工艺",
+        "importance": 3
+      },
+      {
+        "seq": 7,
+        "content": "制定开停工方案",
+        "importance": 3
+      },
+      {
+        "seq": 8,
+        "content": "开停工过程安全管理",
+        "importance": 3
+      },
+      {
+        "seq": 9,
+        "content": "化工设备分类",
+        "importance": 1
+      },
+      {
+        "seq": 10,
+        "content": "特种设备",
+        "importance": 1
+      },
+      {
+        "seq": 11,
+        "content": "安全附件",
+        "importance": 4
+      },
+      {
+        "seq": 12,
+        "content": "动火作业安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 13,
+        "content": "受限空间作业安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 14,
+        "content": "临时用电作业安全技术",
+        "importance": 2
+      },
+      {
+        "seq": 15,
+        "content": "盲板抽堵作业安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 16,
+        "content": "检测报警设施安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 17,
+        "content": "安全仪表系统",
+        "importance": 4
+      },
+      {
+        "seq": 18,
+        "content": "个体防护",
+        "importance": 3
+      }
+    ],
+    "第三章\n化工防火防爆安全技术": [
+      {
+        "seq": 19,
+        "content": "防火防爆基本措施",
+        "importance": 4
+      },
+      {
+        "seq": 20,
+        "content": "工业建筑防火与防爆",
+        "importance": 2
+      },
+      {
+        "seq": 21,
+        "content": "电气防火防爆安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 22,
+        "content": "防静电与防雷安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 23,
+        "content": "化工消防技术基本原理",
+        "importance": 2
+      },
+      {
+        "seq": 24,
+        "content": "消防设施",
+        "importance": 2
+      }
+    ],
+    "第四章\n化学品储运安全技术": [
+      {
+        "seq": 25,
+        "content": "储罐分类与选用及安全附件",
+        "importance": 3
+      },
+      {
+        "seq": 26,
+        "content": "罐区安全管理",
+        "importance": 4
+      },
+      {
+        "seq": 27,
+        "content": "储罐日常操作与检查维护",
+        "importance": 3
+      },
+      {
+        "seq": 28,
+        "content": "储罐清洗与防腐",
+        "importance": 4
+      },
+      {
+        "seq": 29,
+        "content": "气柜的运行管理",
+        "importance": 2
+      },
+      {
+        "seq": 30,
+        "content": "油品装卸安全管理",
+        "importance": 3
+      },
+      {
+        "seq": 31,
+        "content": "油船装卸作业环节",
+        "importance": 3
+      },
+      {
+        "seq": 32,
+        "content": "油气回收设施安全要求",
+        "importance": 3
+      },
+      {
+        "seq": 33,
+        "content": "危险化学品包装安全",
+        "importance": 2
+      }
+    ],
+    "第五章\n化工建设项目安全设计技术": [
+      {
+        "seq": 34,
+        "content": "本质安全化设计",
+        "importance": 3
+      },
+      {
+        "seq": 35,
+        "content": "布局安全设计技术",
+        "importance": 4
+      },
+      {
+        "seq": 36,
+        "content": "生产过程安全设计",
+        "importance": 3
+      },
+      {
+        "seq": 37,
+        "content": "质量验收程序与组织",
+        "importance": 2
+      },
+      {
+        "seq": 38,
+        "content": "管道工程和压力容器质量检验",
+        "importance": 2
+      }
+    ],
+    "第六章\n化工事故应急管理及救援": [
+      {
+        "seq": 39,
+        "content": "化工事故类型及应急处置",
+        "importance": 3
+      },
+      {
+        "seq": 40,
+        "content": "化工企业生产安全事故现场应急处置方案",
+        "importance": 4
+      },
+      {
+        "seq": 41,
+        "content": "化工事故应急演练",
+        "importance": 4
+      },
+      {
+        "seq": 42,
+        "content": "化工事故应急救援装备",
+        "importance": 4
+      }
+    ],
+    "第七章\n化工安全类案例": [
+      {
+        "seq": 43,
+        "content": "重大危险源",
+        "importance": 4
+      },
+      {
+        "seq": 44,
+        "content": "企业职工伤亡事故分类",
+        "importance": 3
+      },
+      {
+        "seq": 45,
+        "content": "生产安全事故专题",
+        "importance": 4
+      }
+    ]
+  },
+  "金属非金属矿山": {
+    "第一章 \n金属非金属矿山概述": [
+      {
+        "seq": 1,
+        "content": "工程地质",
+        "importance": 2
+      },
+      {
+        "seq": 2,
+        "content": "水文地质",
+        "importance": 2
+      },
+      {
+        "seq": 3,
+        "content": "矿床基本概念",
+        "importance": 2
+      },
+      {
+        "seq": 4,
+        "content": "矿床开采方式",
+        "importance": 2
+      }
+    ],
+    "第二章 \n金属非金属露天矿山安全技术": [
+      {
+        "seq": 5,
+        "content": "露天开采基础知识",
+        "importance": 2
+      },
+      {
+        "seq": 6,
+        "content": "露天开拓运输方式",
+        "importance": 2
+      },
+      {
+        "seq": 7,
+        "content": "穿孔爆破",
+        "importance": 4
+      },
+      {
+        "seq": 8,
+        "content": "起爆方案与起爆网络",
+        "importance": 3
+      },
+      {
+        "seq": 9,
+        "content": "采装、运输及排土",
+        "importance": 2
+      },
+      {
+        "seq": 10,
+        "content": "防排水",
+        "importance": 4
+      },
+      {
+        "seq": 11,
+        "content": "露天采场边坡危害类型",
+        "importance": 3
+      },
+      {
+        "seq": 12,
+        "content": "采场边坡危害影响因素和防范措施",
+        "importance": 4
+      },
+      {
+        "seq": 13,
+        "content": "爆破危害类型及影响因素",
+        "importance": 4
+      },
+      {
+        "seq": 14,
+        "content": "爆破危害防范措施",
+        "importance": 4
+      },
+      {
+        "seq": 15,
+        "content": "运输危害防范措施",
+        "importance": 4
+      },
+      {
+        "seq": 16,
+        "content": "矿山水灾防范措施",
+        "importance": 4
+      },
+      {
+        "seq": 17,
+        "content": "露天矿山运行安全技术",
+        "importance": 4
+      }
+    ],
+    "第三章 \n金属非金属地下矿山安全技术": [
+      {
+        "seq": 18,
+        "content": "地下矿山开拓系统",
+        "importance": 2
+      },
+      {
+        "seq": 19,
+        "content": "地下矿山采矿方法",
+        "importance": 3
+      },
+      {
+        "seq": 20,
+        "content": "采矿方法适用条件",
+        "importance": 3
+      },
+      {
+        "seq": 21,
+        "content": "矿井提升",
+        "importance": 2
+      },
+      {
+        "seq": 22,
+        "content": "地下运输",
+        "importance": 2
+      },
+      {
+        "seq": 23,
+        "content": "矿井通风",
+        "importance": 3
+      },
+      {
+        "seq": 24,
+        "content": "矿井排水及充填系统",
+        "importance": 4
+      },
+      {
+        "seq": 25,
+        "content": "矿山供配电",
+        "importance": 4
+      },
+      {
+        "seq": 26,
+        "content": "矿山地压概述及监测方法",
+        "importance": 4
+      },
+      {
+        "seq": 27,
+        "content": "矿山地压的安全防治技术",
+        "importance": 3
+      },
+      {
+        "seq": 28,
+        "content": "地下采空区危害防治技术",
+        "importance": 4
+      },
+      {
+        "seq": 29,
+        "content": "矿山水灾防治技术",
+        "importance": 4
+      },
+      {
+        "seq": 30,
+        "content": "探放水安全技术措施",
+        "importance": 4
+      },
+      {
+        "seq": 31,
+        "content": "矿山火灾类型及防治技术",
+        "importance": 4
+      },
+      {
+        "seq": 32,
+        "content": "矿山火灾的处置措施",
+        "importance": 4
+      },
+      {
+        "seq": 33,
+        "content": "提升与运输危害防治技术",
+        "importance": 4
+      },
+      {
+        "seq": 34,
+        "content": "提升系统防坠罐、防跑车事故措施",
+        "importance": 4
+      },
+      {
+        "seq": 35,
+        "content": "井下运输安全防范措施",
+        "importance": 4
+      },
+      {
+        "seq": 36,
+        "content": "安全避险“六大系统”",
+        "importance": 4
+      },
+      {
+        "seq": 37,
+        "content": "地下矿山重大事故隐患判定标准及《金属非金属矿山安全规程》关于地下开采一般规定",
+        "importance": 4
+      },
+      {
+        "seq": 38,
+        "content": "非煤地下矿山隐蔽致灾因素普查治理技术",
+        "importance": 4
+      }
+    ],
+    "第四章 \n尾矿库安全技术": [
+      {
+        "seq": 39,
+        "content": "尾矿库基础知识",
+        "importance": 4
+      },
+      {
+        "seq": 40,
+        "content": "尾矿库的等别",
+        "importance": 4
+      },
+      {
+        "seq": 41,
+        "content": "尾矿坝安全与稳定性分析",
+        "importance": 4
+      },
+      {
+        "seq": 42,
+        "content": "尾矿库防洪安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 43,
+        "content": "尾矿库隐患及重大险情处理及安全监测及运行管理",
+        "importance": 4
+      },
+      {
+        "seq": 44,
+        "content": "尾矿库安全检查、现状评价、闭库管理及尾矿库重大事故隐患判定标准、溃坝事故分析和防范措施",
+        "importance": 4
+      }
+    ],
+    "第五章 \n排土场（废石场）安全技术": [
+      {
+        "seq": 45,
+        "content": "排土场分类分级及堆置要素",
+        "importance": 4
+      },
+      {
+        "seq": 46,
+        "content": "排土场作业安全要求及防排水",
+        "importance": 4
+      },
+      {
+        "seq": 47,
+        "content": "排土场灾害防治技术",
+        "importance": 4
+      },
+      {
+        "seq": 48,
+        "content": "排土场安全管理",
+        "importance": 4
+      }
+    ],
+    "第六章 \n矿山自然与地质灾害防治技术": [
+      {
+        "seq": 49,
+        "content": "矿山自然与地质灾害防治技术",
+        "importance": 2
+      }
+    ],
+    "第七章 \n金属非金属矿山安全类案例": [
+      {
+        "seq": 50,
+        "content": "案例分析答题方法及高频考点",
+        "importance": 4
+      },
+      {
+        "seq": 51,
+        "content": "金属非金属矿山安全类案例",
+        "importance": 4
+      }
+    ]
+  },
+  "金属冶炼": {
+    "第一章 \n概述": [
+      {
+        "seq": 1,
+        "content": "基础知识",
+        "importance": 2
+      },
+      {
+        "seq": 2,
+        "content": "现代冶金生产工艺",
+        "importance": 2
+      },
+      {
+        "seq": 3,
+        "content": "冶金安全生产特点",
+        "importance": 2
+      }
+    ],
+    "第二章 \n烧结和球团安全技术": [
+      {
+        "seq": 4,
+        "content": "烧结和球团工艺及设备设施概述",
+        "importance": 2
+      },
+      {
+        "seq": 5,
+        "content": "烧结和球团通用安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 6,
+        "content": "储料安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 7,
+        "content": "烧结安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 8,
+        "content": "球团安全技术",
+        "importance": 4
+      }
+    ],
+    "第三章 \n焦化安全技术": [
+      {
+        "seq": 9,
+        "content": "工艺设备设施概述",
+        "importance": 2
+      },
+      {
+        "seq": 10,
+        "content": "备煤安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 11,
+        "content": "炼焦安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 12,
+        "content": "焦炉煤气净化安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 13,
+        "content": "粗（轻）苯加氢及煤焦油加工安全技术",
+        "importance": 4
+      }
+    ],
+    "第四章 \n炼铁安全技术": [
+      {
+        "seq": 14,
+        "content": "高炉炼铁工艺概述",
+        "importance": 2
+      },
+      {
+        "seq": 15,
+        "content": "高炉本体系统安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 16,
+        "content": "供装料系统安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 17,
+        "content": "富氧鼓风系统安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 18,
+        "content": "荒煤气系统安全技术",
+        "importance": 2
+      },
+      {
+        "seq": 19,
+        "content": "煤粉喷吹系统安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 20,
+        "content": "渣铁处理系统安全技术",
+        "importance": 2
+      }
+    ],
+    "第五章 \n炼钢安全技术": [
+      {
+        "seq": 21,
+        "content": "工艺、设备设施概述",
+        "importance": 2
+      },
+      {
+        "seq": 22,
+        "content": "备料安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 23,
+        "content": "转炉炼钢安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 24,
+        "content": "电炉炼钢安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 25,
+        "content": "炉外精炼安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 26,
+        "content": "浇注安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 27,
+        "content": "转炉煤气回收安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 28,
+        "content": "起重（运输）安全技术",
+        "importance": 4
+      }
+    ],
+    "第六章  \n金属压力加工安全技术": [
+      {
+        "seq": 29,
+        "content": "金属压力加工概述",
+        "importance": 2
+      },
+      {
+        "seq": 30,
+        "content": "备料安全技术",
+        "importance": 2
+      },
+      {
+        "seq": 31,
+        "content": "工业炉安全技术",
+        "importance": 3
+      },
+      {
+        "seq": 32,
+        "content": "热轧安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 33,
+        "content": "冷轧安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 34,
+        "content": "精整安全技术",
+        "importance": 2
+      },
+      {
+        "seq": 35,
+        "content": "有色金属压力加工安全技术",
+        "importance": 4
+      }
+    ],
+    "第七章  \n煤气安全技术": [
+      {
+        "seq": 36,
+        "content": "煤气基础知识",
+        "importance": 2
+      },
+      {
+        "seq": 37,
+        "content": "煤气安全要求",
+        "importance": 4
+      },
+      {
+        "seq": 38,
+        "content": "煤气设施",
+        "importance": 4
+      },
+      {
+        "seq": 39,
+        "content": "检测",
+        "importance": 2
+      },
+      {
+        "seq": 40,
+        "content": "煤气事故的预防与抢救",
+        "importance": 3
+      }
+    ],
+    "第八章  \n冶金企业常用气体生产与使用安全技术": [
+      {
+        "seq": 41,
+        "content": "空气的组成和空气分离的基本方法",
+        "importance": 2
+      },
+      {
+        "seq": 42,
+        "content": "氧气、氮气、氩气的生产安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 43,
+        "content": "氢气生产安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 44,
+        "content": "气瓶充装安全技术",
+        "importance": 4
+      }
+    ],
+    "第九章  \n铝冶炼安全技术": [
+      {
+        "seq": 45,
+        "content": "铝冶炼概述",
+        "importance": 2
+      },
+      {
+        "seq": 46,
+        "content": "氧化铝生产安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 47,
+        "content": "铝电解生产安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 48,
+        "content": "预焙阳极生产安全技术",
+        "importance": 2
+      }
+    ],
+    "第十章  \n重金属冶炼安全技术": [
+      {
+        "seq": 49,
+        "content": "重金属冶炼概述",
+        "importance": 2
+      },
+      {
+        "seq": 50,
+        "content": "铜冶炼安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 51,
+        "content": "铅冶炼安全技术",
+        "importance": 4
+      },
+      {
+        "seq": 52,
+        "content": "锌冶炼安全技术",
+        "importance": 4
+      }
+    ],
+    "第十一章  \n金属冶炼安全类案例": [
+      {
+        "seq": 53,
+        "content": "危险、有害因素辨识与安全措施",
+        "importance": 3
+      },
+      {
+        "seq": 54,
+        "content": "安全生产教育培训",
+        "importance": 3
+      },
+      {
+        "seq": 55,
+        "content": "安全生产标准化",
+        "importance": 3
+      },
+      {
+        "seq": 56,
+        "content": "警示标志与劳动防护用品配备",
+        "importance": 3
+      },
+      {
+        "seq": 57,
+        "content": "特种设备与特种作业",
+        "importance": 3
+      },
+      {
+        "seq": 58,
+        "content": "三同时与安全评价",
+        "importance": 3
+      },
+      {
+        "seq": 59,
+        "content": "安全生产检查与隐患排查治理",
+        "importance": 3
+      },
+      {
+        "seq": 60,
+        "content": "承包商管理",
+        "importance": 3
+      },
+      {
+        "seq": 61,
+        "content": "作业许可",
+        "importance": 3
+      },
+      {
+        "seq": 62,
+        "content": "重大危险源辨识",
+        "importance": 3
+      },
+      {
+        "seq": 63,
+        "content": "危险化学品使用管理",
+        "importance": 3
+      },
+      {
+        "seq": 64,
+        "content": "应急管理",
+        "importance": 3
+      },
+      {
+        "seq": 65,
+        "content": "事故管理",
+        "importance": 3
+      }
+    ]
+  },
+  "其他安全": {
+    "第一章 \n危险辨识": [
+      {
+        "seq": 1,
+        "content": "企业职工伤亡事故分类GB 6441",
+        "importance": 4
+      },
+      {
+        "seq": 2,
+        "content": "职业病危害因素辨识",
+        "importance": 4
+      },
+      {
+        "seq": 3,
+        "content": "生产过程危险和有害因素分类与代码GB/T 13861",
+        "importance": 3
+      },
+      {
+        "seq": 4,
+        "content": "重大危险源",
+        "importance": 4
+      },
+      {
+        "seq": 5,
+        "content": "重大事故隐患判定",
+        "importance": 4
+      }
+    ],
+    "第二章 \n安全对策与安全管理": [
+      {
+        "seq": 1,
+        "content": "个体防护装备配备",
+        "importance": 4
+      },
+      {
+        "seq": 2,
+        "content": "安全标志标识",
+        "importance": 4
+      },
+      {
+        "seq": 3,
+        "content": "安全设施（装置）",
+        "importance": 4
+      },
+      {
+        "seq": 4,
+        "content": "安全技术措施",
+        "importance": 4
+      },
+      {
+        "seq": 5,
+        "content": "安全管理措施",
+        "importance": 4
+      },
+      {
+        "seq": 6,
+        "content": "安全检查内容",
+        "importance": 4
+      },
+      {
+        "seq": 7,
+        "content": "安全检查表",
+        "importance": 4
+      },
+      {
+        "seq": 8,
+        "content": "企业主要负责人和安全生产管理人员培训内容和时间",
+        "importance": 2
+      },
+      {
+        "seq": 9,
+        "content": "特种作业人员培训内容和时间",
+        "importance": 4
+      },
+      {
+        "seq": 10,
+        "content": "三级安全教育培训",
+        "importance": 2
+      },
+      {
+        "seq": 11,
+        "content": "作业前的安全教育培训",
+        "importance": 3
+      },
+      {
+        "seq": 12,
+        "content": "建设项目相关方管理",
+        "importance": 4
+      },
+      {
+        "seq": 13,
+        "content": "安全生产费用的适用范围",
+        "importance": 1
+      },
+      {
+        "seq": 14,
+        "content": "企业主要负责人和安全生产管理人员的安全生产职责",
+        "importance": 1
+      },
+      {
+        "seq": 15,
+        "content": "双重预防机制建设",
+        "importance": 1
+      },
+      {
+        "seq": 16,
+        "content": "安全生产标准化",
+        "importance": 3
+      },
+      {
+        "seq": 17,
+        "content": "事故管理",
+        "importance": 3
+      },
+      {
+        "seq": 18,
+        "content": "应急预案",
+        "importance": 2
+      },
+      {
+        "seq": 19,
+        "content": "应急物资",
+        "importance": 4
+      },
+      {
+        "seq": 20,
+        "content": "应急处置措施",
+        "importance": 4
+      }
+    ]
+  }
+}

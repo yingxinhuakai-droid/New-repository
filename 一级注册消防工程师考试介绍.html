@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>一级注册消防工程师考试 · 全面介绍</title>
+<style>
+  :root {
+    --fire-red: #d42e1a;
+    --fire-orange: #ed6c34;
+    --fire-yellow: #f5a623;
+    --blue-900: #0c1f3f;
+    --blue-800: #13294b;
+    --blue-700: #1a3a6b;
+    --blue-600: #1e4d8c;
+    --blue-500: #2563eb;
+    --blue-100: #e0ecff;
+    --blue-50: #f0f5ff;
+    --gray-50: #f8fafc;
+    --gray-100: #f1f5f9;
+    --gray-200: #e2e8f0;
+    --gray-300: #cbd5e1;
+    --gray-400: #94a3b8;
+    --gray-500: #64748b;
+    --gray-600: #475569;
+    --gray-700: #334155;
+    --gray-800: #1e293b;
+    --gray-900: #0f172a;
+    --white: #ffffff;
+    --green-500: #22c55e;
+    --green-100: #dcfce7;
+    --amber-500: #f59e0b;
+    --amber-100: #fef3c7;
+    --radius: 10px;
+    --radius-sm: 6px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,.04);
+    --shadow: 0 1px 3px rgba(0,0,0,.08), 0 1px 2px rgba(0,0,0,.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,.08), 0 2px 4px rgba(0,0,0,.04);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,.1), 0 4px 10px rgba(0,0,0,.05);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    color: var(--gray-800);
+    background: var(--gray-50);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ========== HERO ========== */
+  .hero {
+    background: linear-gradient(135deg, var(--blue-900) 0%, #1a2f5a 40%, #1e3c72 70%, #1a2f5a 100%);
+    position: relative; overflow: hidden;
+    padding: 64px 24px 72px;
+    text-align: center; color: #fff;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(circle at 20% 30%, rgba(237,108,52,.12) 0%, transparent 50%),
+      radial-gradient(circle at 80% 60%, rgba(245,166,35,.1) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(37,99,235,.08) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .hero::after {
+    content: ''; position: absolute;
+    bottom: 0; left: 0; right: 0; height: 80px;
+    background: linear-gradient(to top, var(--gray-50), transparent);
+    pointer-events: none;
+  }
+  .hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+  .hero-badge {
+    display: inline-block; padding: 6px 20px;
+    background: rgba(255,255,255,.12); border: 1px solid rgba(255,255,255,.2);
+    border-radius: 50px; font-size: 13px; letter-spacing: 2px;
+    margin-bottom: 20px; backdrop-filter: blur(4px);
+  }
+  .hero h1 {
+    font-size: clamp(28px, 5vw, 44px); font-weight: 800;
+    letter-spacing: 1px; line-height: 1.25; margin-bottom: 16px;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, var(--fire-orange), var(--fire-yellow));
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 16px; opacity: .85; max-width: 600px; margin: 0 auto 24px;
+    line-height: 1.7;
+  }
+  .hero-meta {
+    display: flex; gap: 32px; justify-content: center; flex-wrap: wrap;
+    font-size: 13px; opacity: .75;
+  }
+  .hero-meta span { display: flex; align-items: center; gap: 6px; }
+
+  /* ========== STICKY NAV ========== */
+  .sticky-nav {
+    position: sticky; top: 0; z-index: 100;
+    background: rgba(255,255,255,.92); backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--gray-200);
+    box-shadow: 0 1px 4px rgba(0,0,0,.04);
+  }
+  .sticky-nav-inner {
+    max-width: 1200px; margin: 0 auto; padding: 0 24px;
+    display: flex; gap: 4px; overflow-x: auto; scrollbar-width: none;
+    align-items: center;
+  }
+  .sticky-nav-inner::-webkit-scrollbar { display: none; }
+  .sticky-nav a {
+    display: block; padding: 14px 18px; font-size: 13.5px; font-weight: 600;
+    color: var(--gray-600); text-decoration: none; white-space: nowrap;
+    border-bottom: 3px solid transparent; transition: all .2s;
+    flex-shrink: 0;
+  }
+  .sticky-nav a:hover { color: var(--fire-red); background: #fef6f2; }
+  .sticky-nav a .nav-icon { margin-right: 4px; }
+
+  /* ========== LAYOUT ========== */
+  .page { max-width: 1200px; margin: 0 auto; padding: 32px 24px 64px; }
+
+  /* ========== TOC SIDEBAR (Desktop) ========== */
+  .layout-grid { display: grid; grid-template-columns: 1fr 260px; gap: 32px; align-items: start; }
+  .content-col { min-width: 0; }
+
+  .toc-sidebar {
+    position: sticky; top: 80px;
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 24px 20px;
+  }
+  .toc-sidebar h4 {
+    font-size: 14px; color: var(--gray-400); text-transform: uppercase;
+    letter-spacing: 2px; margin-bottom: 16px; font-weight: 700;
+  }
+  .toc-sidebar a {
+    display: flex; align-items: center; gap: 10px;
+    padding: 9px 12px; border-radius: var(--radius-sm);
+    font-size: 13.5px; font-weight: 500; color: var(--gray-700);
+    text-decoration: none; transition: all .2s; margin-bottom: 2px;
+  }
+  .toc-sidebar a:hover { background: var(--blue-50); color: var(--blue-500); }
+  .toc-sidebar a .toc-dot {
+    width: 8px; height: 8px; border-radius: 50%;
+    background: var(--gray-300); flex-shrink: 0; transition: all .2s;
+  }
+  .toc-sidebar a:hover .toc-dot { background: var(--fire-orange); transform: scale(1.4); }
+
+  /* ========== SECTION ========== */
+  .section {
+    background: var(--white); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 36px 32px; margin-bottom: 28px;
+    scroll-margin-top: 80px;
+  }
+  .section-header {
+    display: flex; align-items: center; gap: 14px; margin-bottom: 28px;
+    padding-bottom: 20px; border-bottom: 1px solid var(--gray-100);
+  }
+  .section-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; flex-shrink: 0;
+  }
+  .section-icon.overview { background: #fef3c7; color: var(--fire-orange); }
+  .section-icon.requirements { background: #dbeafe; color: var(--blue-500); }
+  .section-icon.subjects { background: #dcfce7; color: #16a34a; }
+  .section-icon.timeline { background: #f3e8ff; color: #9333ea; }
+  .section-icon.faq { background: #fce7f3; color: #db2777; }
+  .section h2 { font-size: 22px; color: var(--gray-900); font-weight: 800; }
+  .section h3 {
+    font-size: 17px; color: var(--gray-800); font-weight: 700;
+    margin: 28px 0 14px; padding-left: 14px;
+    border-left: 3px solid var(--fire-orange);
+  }
+  .section h3:first-of-type { margin-top: 0; }
+
+  /* ========== OVERVIEW CARDS ========== */
+  .overview-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 24px; }
+  .overview-card {
+    border: 1px solid var(--gray-200); border-radius: var(--radius);
+    padding: 20px; transition: all .3s;
+  }
+  .overview-card:hover {
+    border-color: var(--fire-orange);
+    box-shadow: 0 4px 12px rgba(237,108,52,.1);
+    transform: translateY(-2px);
+  }
+  .overview-card .card-icon { font-size: 28px; margin-bottom: 10px; }
+  .overview-card h4 { font-size: 15px; color: var(--gray-900); font-weight: 700; margin-bottom: 6px; }
+  .overview-card p { font-size: 13px; color: var(--gray-600); line-height: 1.7; }
+
+  /* ========== REQUIREMENT TABLE ========== */
+  .req-table {
+    width: 100%; border-collapse: collapse; font-size: 13.5px;
+    border-radius: var(--radius); overflow: hidden;
+    box-shadow: var(--shadow-sm); margin: 16px 0 24px;
+  }
+  .req-table thead th {
+    background: var(--blue-900); color: #fff; padding: 14px 16px;
+    text-align: center; font-weight: 600; font-size: 13px;
+  }
+  .req-table tbody td {
+    padding: 12px 16px; text-align: center;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .req-table tbody tr:nth-child(even) { background: var(--gray-50); }
+  .req-table tbody tr:hover { background: #fef6f2; }
+  .req-table .highlight-cell {
+    color: var(--fire-red); font-weight: 700;
+  }
+
+  /* ========== SUBJECT CARDS ========== */
+  .subject-cards { display: grid; gap: 20px; }
+  .subject-card {
+    border: 1px solid var(--gray-200); border-radius: var(--radius);
+    overflow: hidden; transition: all .3s;
+  }
+  .subject-card:hover {
+    border-color: var(--blue-500);
+    box-shadow: 0 4px 16px rgba(37,99,235,.1);
+  }
+  .subject-card-header {
+    padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+  }
+  .subject-card-header.s1 { background: linear-gradient(135deg, #eff6ff, #dbeafe); }
+  .subject-card-header.s2 { background: linear-gradient(135deg, #fef3c7, #fde68a); }
+  .subject-card-header.s3 { background: linear-gradient(135deg, #dcfce7, #bbf7d0); }
+  .subject-card-header .subject-num {
+    width: 36px; height: 36px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 16px; color: #fff; flex-shrink: 0;
+  }
+  .subject-card-header .s1 .subject-num, .subject-num.s1 { background: var(--blue-500); }
+  .subject-card-header .s2 .subject-num, .subject-num.s2 { background: var(--fire-orange); }
+  .subject-card-header .s3 .subject-num, .subject-num.s3 { background: #16a34a; }
+  .subject-card-header h4 { font-size: 16px; font-weight: 700; color: var(--gray-900); }
+  .subject-card-body { padding: 20px; }
+  .subject-stats {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    gap: 12px;
+  }
+  .subject-stat {
+    background: var(--gray-50); border-radius: var(--radius-sm);
+    padding: 12px; text-align: center;
+  }
+  .subject-stat .stat-val { font-size: 20px; font-weight: 800; color: var(--gray-900); }
+  .subject-stat .stat-label { font-size: 11px; color: var(--gray-500); margin-top: 2px; }
+
+  /* ========== TIMELINE ========== */
+  .timeline { position: relative; padding-left: 32px; }
+  .timeline::before {
+    content: ''; position: absolute; left: 11px; top: 8px;
+    bottom: 8px; width: 2px; background: linear-gradient(to bottom, var(--fire-orange), var(--fire-yellow), #22c55e, var(--blue-500));
+  }
+  .tl-item { position: relative; margin-bottom: 28px; }
+  .tl-item:last-child { margin-bottom: 0; }
+  .tl-dot {
+    position: absolute; left: -26px; top: 4px;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 3px solid #fff; box-shadow: 0 0 0 3px var(--fire-orange);
+    background: var(--fire-orange);
+  }
+  .tl-item:nth-child(2) .tl-dot { background: var(--fire-yellow); box-shadow: 0 0 0 3px var(--fire-yellow); }
+  .tl-item:nth-child(3) .tl-dot { background: #22c55e; box-shadow: 0 0 0 3px #22c55e; }
+  .tl-item:nth-child(4) .tl-dot { background: var(--blue-500); box-shadow: 0 0 0 3px var(--blue-500); }
+  .tl-date {
+    font-size: 13px; font-weight: 700; color: var(--fire-orange);
+    margin-bottom: 4px; text-transform: uppercase; letter-spacing: .5px;
+  }
+  .tl-item:nth-child(2) .tl-date { color: var(--fire-yellow); }
+  .tl-item:nth-child(3) .tl-date { color: #16a34a; }
+  .tl-item:nth-child(4) .tl-date { color: var(--blue-500); }
+  .tl-title { font-size: 16px; font-weight: 700; color: var(--gray-900); margin-bottom: 4px; }
+  .tl-desc { font-size: 13px; color: var(--gray-600); }
+
+  /* ========== FAQ ACCORDION ========== */
+  .faq-item {
+    border: 1px solid var(--gray-200); border-radius: var(--radius);
+    margin-bottom: 10px; overflow: hidden;
+  }
+  .faq-q {
+    padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+    cursor: pointer; font-weight: 600; font-size: 14px; color: var(--gray-800);
+    background: var(--white); transition: all .2s; user-select: none;
+    justify-content: space-between;
+  }
+  .faq-q:hover { background: #fef6f2; }
+  .faq-q::after {
+    content: '+'; font-size: 20px; color: var(--gray-400);
+    font-weight: 300; transition: transform .3s;
+  }
+  .faq-item.open .faq-q::after { transform: rotate(45deg); color: var(--fire-orange); }
+  .faq-a {
+    max-height: 0; overflow: hidden; transition: max-height .4s ease;
+    padding: 0 20px; font-size: 13.5px; color: var(--gray-700); line-height: 1.8;
+    background: var(--gray-50);
+  }
+  .faq-item.open .faq-a { max-height: 600px; padding: 0 20px 20px; }
+
+  /* ========== BADGE ========== */
+  .badge {
+    display: inline-block; padding: 3px 10px;
+    border-radius: 50px; font-size: 11px; font-weight: 600;
+  }
+  .badge-red { background: #fde8e8; color: var(--fire-red); }
+  .badge-green { background: #dcfce7; color: #16a34a; }
+  .badge-blue { background: #dbeafe; color: var(--blue-500); }
+  .badge-yellow { background: #fef3c7; color: #b45309; }
+
+  /* ========== BACK TO TOP ========== */
+  .back-to-top {
+    position: fixed; bottom: 32px; right: 32px; z-index: 99;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--fire-red); color: #fff; border: none;
+    font-size: 18px; cursor: pointer; box-shadow: var(--shadow-md);
+    transition: all .3s; opacity: 0; pointer-events: none;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .back-to-top.visible { opacity: 1; pointer-events: auto; }
+  .back-to-top:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+
+  /* ========== FOOTER ========== */
+  .footer {
+    background: var(--gray-900); color: var(--gray-400);
+    padding: 32px 24px; text-align: center; font-size: 12px;
+    line-height: 2;
+  }
+  .footer a { color: var(--gray-300); text-decoration: none; }
+  .footer a:hover { color: #fff; }
+
+  /* ========== RESPONSIVE ========== */
+  @media (max-width: 900px) {
+    .layout-grid { grid-template-columns: 1fr; }
+    .toc-sidebar { display: none; }
+    .hero { padding: 40px 20px 56px; }
+    .hero h1 { font-size: 24px; }
+    .hero-meta { gap: 16px; }
+    .section { padding: 24px 20px; }
+    .section h2 { font-size: 19px; }
+    .overview-cards { grid-template-columns: 1fr; }
+    .req-table { font-size: 12px; }
+    .req-table thead th,
+    .req-table tbody td { padding: 8px 10px; }
+    .sticky-nav-inner { padding: 0 12px; }
+    .sticky-nav a { padding: 12px 12px; font-size: 12px; }
+    .timeline { padding-left: 24px; }
+    .tl-dot { left: -19px; width: 14px; height: 14px; }
+    .subject-stats { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 480px) {
+    .hero h1 { font-size: 22px; }
+    .hero p { font-size: 14px; }
+    .hero-meta { flex-direction: column; align-items: center; gap: 6px; }
+    .sticky-nav a { font-size: 11px; padding: 10px 8px; }
+    .section { padding: 20px 16px; }
+    .req-table { display: block; overflow-x: auto; -webkit-overflow-scrolling: touch; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ========== HERO ========== -->
+<header class="hero">
+  <div class="hero-content">
+    <div class="hero-badge">国家准入类职业资格</div>
+    <h1>一级<span class="highlight">注册消防工程师</span>考试</h1>
+    <p>由人力资源和社会保障部、应急管理部联合组织，选拔具备消防工程设计、施工、维保及安全评估能力的专业人才。持证者可执业于消防技术服务机构、消防安全重点单位等领域。</p>
+    <div class="hero-meta">
+      <span>📅 每年11月考试</span>
+      <span>📚 三科滚动管理</span>
+      <span>🏅 准入类职业资格</span>
+      <span>📋 成绩3年有效</span>
+    </div>
+  </div>
+</header>
+
+<!-- ========== STICKY NAV ========== -->
+<nav class="sticky-nav">
+  <div class="sticky-nav-inner">
+    <a href="#overview"><span class="nav-icon">📖</span>考试概述</a>
+    <a href="#requirements"><span class="nav-icon">✅</span>报考条件</a>
+    <a href="#subjects"><span class="nav-icon">📝</span>科目与题型</a>
+    <a href="#timeline"><span class="nav-icon">🗓</span>时间线</a>
+    <a href="#faq"><span class="nav-icon">❓</span>常见问题</a>
+  </div>
+</nav>
+
+<!-- ========== PAGE ========== -->
+<div class="page">
+  <div class="layout-grid">
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <div class="content-col">
+
+      <!-- ===== 1. 考试概述 ===== -->
+      <section class="section" id="overview">
+        <div class="section-header">
+          <div class="section-icon overview">📖</div>
+          <h2>考试概述</h2>
+        </div>
+
+        <h3>考试目的</h3>
+        <p style="font-size:14px;color:var(--gray-700);line-height:1.9;margin-bottom:20px;">
+          一级注册消防工程师资格考试是国家为加强消防安全管理、规范消防技术服务市场而设立的准入类职业资格考试。通过考试选拔具备消防安全技术能力的专业人才，为建筑消防设施设计、施工、检测、维保以及消防安全评估、咨询等领域储备核心人才力量。
+        </p>
+
+        <div class="overview-cards">
+          <div class="overview-card">
+            <div class="card-icon">🏛</div>
+            <h4>发证机关</h4>
+            <p>人力资源和社会保障部统一印制，人力资源社会保障部与应急管理部共同用印，在全国范围内有效。</p>
+          </div>
+          <div class="overview-card">
+            <div class="card-icon">💎</div>
+            <h4>证书含金量</h4>
+            <p>准入类职业资格，可担任消防技术服务机构技术负责人、项目负责人。市场需求旺盛，持证人数远未饱和。</p>
+          </div>
+          <div class="overview-card">
+            <div class="card-icon">🔖</div>
+            <h4>执业范围</h4>
+            <p>消防设施检测与维保、消防安全评估、消防安全监测与检查、火灾事故技术分析等消防技术工作。</p>
+          </div>
+          <div class="overview-card">
+            <div class="card-icon">📊</div>
+            <h4>通过率参考</h4>
+            <p>历年通过率约2%~5%，考试难度较高，属工程类执业资格考试中难度较大的考试之一。</p>
+          </div>
+        </div>
+
+        <div style="background:var(--blue-50);border-radius:var(--radius);padding:20px;font-size:13px;color:var(--gray-700);line-height:1.9;">
+          <strong style="color:var(--gray-900);">📌 政策背景：</strong>
+          根据《中华人民共和国消防法》及《注册消防工程师制度暂行规定》（人社部发〔2012〕56号），国家对消防安全重点单位的消防技术服务实行注册消防工程师准入制度。随着消防执法改革推进，市场对持证人才的需求持续增长。
+        </div>
+      </section>
+
+      <!-- ===== 2. 报考条件 ===== -->
+      <section class="section" id="requirements">
+        <div class="section-header">
+          <div class="section-icon requirements">✅</div>
+          <h2>报考条件</h2>
+        </div>
+
+        <p style="font-size:14px;color:var(--gray-700);margin-bottom:20px;">
+          报考一级注册消防工程师须同时满足<strong style="color:var(--fire-red);">学历、工作年限、从事消防安全技术工作年限</strong>三个条件。以下为各学历层次对应的具体要求：
+        </p>
+
+        <div style="overflow-x:auto;">
+          <table class="req-table">
+            <thead>
+              <tr>
+                <th>学历层次</th>
+                <th>专业类别</th>
+                <th>总工作年限</th>
+                <th>消防工作年限</th>
+                <th>状态</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>大学专科</strong></td>
+                <td>消防工程专业</td>
+                <td class="highlight-cell">6年</td>
+                <td class="highlight-cell">4年</td>
+                <td><span class="badge badge-green">符合</span></td>
+              </tr>
+              <tr>
+                <td><strong>大学专科</strong></td>
+                <td>消防工程相关专业</td>
+                <td class="highlight-cell">7年</td>
+                <td class="highlight-cell">5年</td>
+                <td><span class="badge badge-green">符合</span></td>
+              </tr>
+              <tr>
+                <td><strong>大学专科</strong></td>
+                <td>其他专业</td>
+                <td class="highlight-cell">8年</td>
+                <td class="highlight-cell">6年</td>
+                <td><span class="badge badge-yellow">+1年</span></td>
+              </tr>
+              <tr style="border-top:2px solid var(--gray-300);">
+                <td><strong>大学本科</strong></td>
+                <td>消防工程专业</td>
+                <td class="highlight-cell">4年</td>
+                <td class="highlight-cell">3年</td>
+                <td><span class="badge badge-green">符合</span></td>
+              </tr>
+              <tr>
+                <td><strong>大学本科</strong></td>
+                <td>消防工程相关专业</td>
+                <td class="highlight-cell">5年</td>
+                <td class="highlight-cell">4年</td>
+                <td><span class="badge badge-green">符合</span></td>
+              </tr>
+              <tr>
+                <td><strong>大学本科</strong></td>
+                <td>其他专业</td>
+                <td class="highlight-cell">6年</td>
+                <td class="highlight-cell">5年</td>
+                <td><span class="badge badge-yellow">+1年</span></td>
+              </tr>
+              <tr style="border-top:2px solid var(--gray-300);">
+                <td><strong>双学士学位 / 研究生班</strong></td>
+                <td>含消防工程专业</td>
+                <td class="highlight-cell">3年</td>
+                <td class="highlight-cell">2年</td>
+                <td><span class="badge badge-green">符合</span></td>
+              </tr>
+              <tr>
+                <td><strong>双学士学位 / 研究生班</strong></td>
+                <td>其他专业</td>
+                <td class="highlight-cell">4年</td>
+                <td class="highlight-cell">3年</td>
+                <td><span class="badge badge-yellow">+1年</span></td>
+              </tr>
+              <tr style="border-top:2px solid var(--gray-300);">
+                <td><strong>硕士学位</strong></td>
+                <td>消防工程专业</td>
+                <td class="highlight-cell">2年</td>
+                <td class="highlight-cell">1年</td>
+                <td><span class="badge badge-green">符合</span></td>
+              </tr>
+              <tr>
+                <td><strong>硕士学位</strong></td>
+                <td>其他专业</td>
+                <td class="highlight-cell">3年</td>
+                <td class="highlight-cell">2年</td>
+                <td><span class="badge badge-yellow">+1年</span></td>
+              </tr>
+              <tr style="border-top:2px solid var(--gray-300);">
+                <td><strong>博士学位</strong></td>
+                <td>消防工程专业</td>
+                <td class="highlight-cell">—</td>
+                <td class="highlight-cell">1年</td>
+                <td><span class="badge badge-green">符合</span></td>
+              </tr>
+              <tr>
+                <td><strong>博士学位</strong></td>
+                <td>其他专业</td>
+                <td class="highlight-cell">—</td>
+                <td class="highlight-cell">2年</td>
+                <td><span class="badge badge-yellow">+1年</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>相关专业范围</h3>
+        <p style="font-size:13px;color:var(--gray-600);line-height:1.8;">
+          消防工程相关专业包括：<strong>安全工程、电气工程及其自动化、给排水科学与工程、建筑学、土木工程、建筑环境与能源应用工程、化学工程与工艺、工程管理</strong>等工科类专业。具体专业认定以当年报考通知中的专业对照表为准。
+        </p>
+
+        <div style="background:#fef6f2;border:1px solid #fcd34d;border-radius:var(--radius);padding:16px 20px;font-size:13px;color:var(--gray-700);line-height:1.8;">
+          <strong style="color:var(--fire-red);">⚠ 重要提示：</strong>
+          工作年限计算截止日期为报考当年年底（12月31日）。消防安全技术工作年限以实际从事消防设计、施工、检测、维保、安全评估等岗位的工作年限为准，实习期不计入。
+        </div>
+      </section>
+
+      <!-- ===== 3. 考试科目与题型 ===== -->
+      <section class="section" id="subjects">
+        <div class="section-header">
+          <div class="section-icon subjects">📝</div>
+          <h2>考试科目与题型</h2>
+        </div>
+
+        <p style="font-size:14px;color:var(--gray-700);margin-bottom:24px;">
+          一级注册消防工程师考试设<strong style="color:var(--fire-red);">三个科目</strong>，成绩实行<strong style="color:var(--blue-500);">3年滚动管理</strong>。参加全部3科考试的人员须在连续3个考试年度内通过全部科目，方可取得资格证书。
+        </p>
+
+        <div class="subject-cards">
+          <!-- 科目一 -->
+          <div class="subject-card">
+            <div class="subject-card-header s1">
+              <div class="subject-num s1">1</div>
+              <h4>消防安全技术实务</h4>
+              <span class="badge badge-blue" style="margin-left:auto;">基础科目</span>
+            </div>
+            <div class="subject-card-body">
+              <p style="font-size:13px;color:var(--gray-600);margin-bottom:16px;">侧重建筑防火、消防设施基本原理与技术参数，是考试的基础，也是其他两科的知识根基。</p>
+              <div class="subject-stats">
+                <div class="subject-stat">
+                  <div class="stat-val">客观题</div>
+                  <div class="stat-label">考试形式</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">80道</div>
+                  <div class="stat-label">单选题</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">20道</div>
+                  <div class="stat-label">多选题</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">100题</div>
+                  <div class="stat-label">总题量</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">120分</div>
+                  <div class="stat-label">满分</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val" style="color:var(--fire-red);">72分</div>
+                  <div class="stat-label">合格线</div>
+                </div>
+              </div>
+              <div style="margin-top:14px;font-size:12px;color:var(--gray-500);">
+                💡 单选每题1分，多选每题2分（多选、错选不得分，少选每个正确选项得0.5分）。考试时长2.5小时。
+              </div>
+            </div>
+          </div>
+
+          <!-- 科目二 -->
+          <div class="subject-card">
+            <div class="subject-card-header s2">
+              <div class="subject-num s2">2</div>
+              <h4>消防安全技术综合能力</h4>
+              <span class="badge badge-yellow" style="margin-left:auto;">综合科目</span>
+            </div>
+            <div class="subject-card-body">
+              <p style="font-size:13px;color:var(--gray-600);margin-bottom:16px;">侧重消防设施检测、维保、消防安全管理及法律法规的实务应用能力。</p>
+              <div class="subject-stats">
+                <div class="subject-stat">
+                  <div class="stat-val">客观题</div>
+                  <div class="stat-label">考试形式</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">80道</div>
+                  <div class="stat-label">单选题</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">20道</div>
+                  <div class="stat-label">多选题</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">100题</div>
+                  <div class="stat-label">总题量</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">120分</div>
+                  <div class="stat-label">满分</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val" style="color:var(--fire-red);">72分</div>
+                  <div class="stat-label">合格线</div>
+                </div>
+              </div>
+              <div style="margin-top:14px;font-size:12px;color:var(--gray-500);">
+                💡 单选每题1分，多选每题2分（评分规则同上）。考试时长2.5小时。与《技术实务》知识点重合度约60%。
+              </div>
+            </div>
+          </div>
+
+          <!-- 科目三 -->
+          <div class="subject-card">
+            <div class="subject-card-header s3">
+              <div class="subject-num s3">3</div>
+              <h4>消防安全案例分析</h4>
+              <span class="badge badge-red" style="margin-left:auto;">难度最高</span>
+            </div>
+            <div class="subject-card-body">
+              <p style="font-size:13px;color:var(--gray-600);margin-bottom:16px;">综合应用《技术实务》与《综合能力》的知识，以案例场景分析形式考查实际解决问题的能力，是三科中难度最高的一科。</p>
+              <div class="subject-stats">
+                <div class="subject-stat">
+                  <div class="stat-val">主观题</div>
+                  <div class="stat-label">考试形式</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">6道</div>
+                  <div class="stat-label">案例分析</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">—</div>
+                  <div class="stat-label">选择/简答结合</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val">120分</div>
+                  <div class="stat-label">满分</div>
+                </div>
+                <div class="subject-stat">
+                  <div class="stat-val" style="color:var(--fire-red);">72分</div>
+                  <div class="stat-label">合格线</div>
+                </div>
+              </div>
+              <div style="margin-top:14px;font-size:12px;color:var(--gray-500);">
+                💡 题型为综合案例分析（含多选题+简答题），考试时长3小时。建议掌握前两科后再攻此科。
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:20px;background:var(--gray-50);border-radius:var(--radius);padding:20px;font-size:13px;color:var(--gray-700);line-height:1.9;">
+          <strong style="color:var(--gray-900);">📌 合格标准：</strong>
+          三个科目满分均为 <strong>120分</strong>，合格分数线统一为 <strong>72分</strong>（满分的60%）。参加全部科目考试的考生，须在 <strong>连续3个考试年度</strong> 内通过全部科目；符合免考条件的考生，须在 <strong>连续2个考试年度</strong> 内通过应试科目。
+        </div>
+      </section>
+
+      <!-- ===== 4. 报名与考试时间线 ===== -->
+      <section class="section" id="timeline">
+        <div class="section-header">
+          <div class="section-icon timeline">🗓</div>
+          <h2>报名与考试时间线</h2>
+        </div>
+
+        <p style="font-size:14px;color:var(--gray-700);margin-bottom:24px;">
+          以下为一级注册消防工程师考试年度关键时间节点（以历年规律总结，具体以当年各省人事考试中心通知为准）：
+        </p>
+
+        <div class="timeline">
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">8月中下旬 — 9月上旬</div>
+            <div class="tl-title">📝 网上报名</div>
+            <div class="tl-desc">
+              在<strong>中国人事考试网（www.cpta.com.cn）</strong>完成注册、上传照片、填写报名信息并缴费。各省报名时间略有差异，须留意本省人事考试中心通知。实行告知承诺制，需在线核验学历及工作年限信息。
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">11月第一个周末</div>
+            <div class="tl-title">📅 统一考试</div>
+            <div class="tl-desc">
+              全国统一组织，一般安排如下：<br>
+              周六上午 9:00-11:30 《消防安全技术实务》<br>
+              周六下午 14:00-16:30 《消防安全技术综合能力》<br>
+              周日上午 9:00-12:00 《消防安全案例分析》
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">次年1月 — 2月</div>
+            <div class="tl-title">📊 成绩查询</div>
+            <div class="tl-desc">
+              在中国人事考试网查询成绩。对成绩有异议的，可在规定时间内申请成绩复查。各科合格线均为72分（满分120分）。
+            </div>
+          </div>
+          <div class="tl-item">
+            <div class="tl-dot"></div>
+            <div class="tl-date">次年4月 — 6月</div>
+            <div class="tl-title">📜 证书领取</div>
+            <div class="tl-desc">
+              成绩合格并通过考后资格审核的考生，由各省人事考试中心发放《中华人民共和国一级注册消防工程师资格证书》。部分地区支持证书邮寄服务。领取后需在1年内完成初始注册。
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== 5. FAQ ===== -->
+      <section class="section" id="faq">
+        <div class="section-header">
+          <div class="section-icon faq">❓</div>
+          <h2>常见问题 FAQ</h2>
+        </div>
+
+        <div class="faq-item open">
+          <div class="faq-q">免考条件是什么？哪些人可以免试《技术实务》？</div>
+          <div class="faq-a">
+            <p>符合一级注册消防工程师报名条件，并具备下列条件之一者，可<strong style="color:var(--fire-red);">免试《消防安全技术实务》</strong>，只参加《综合能力》和《案例分析》两个科目的考试：</p>
+            <ul style="padding-left:20px;margin-top:8px;">
+              <li>2011年12月31日前，评聘<strong>高级工程师技术职务</strong>的；</li>
+              <li>通过全国统一考试取得<strong>一级注册建筑师资格证书</strong>，或者<strong>勘察设计各专业注册工程师资格证书</strong>的。</li>
+            </ul>
+            <p style="margin-top:8px;">免考人员须在<strong>连续2个考试年度</strong>内通过应试科目。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">成绩滚动周期是多久？如何计算有效期？</div>
+          <div class="faq-a">
+            <p>全科考生成绩实行<strong style="color:var(--fire-red);">3年滚动管理</strong>。例如：2025年通过《技术实务》，2026年通过《综合能力》，则2027年必须通过《案例分析》——若2027年未通过，2025年的成绩将失效，2026年的成绩继续有效至2028年，以此类推。</p>
+            <p style="margin-top:8px;">免考一科人员须在<strong>连续2个考试年度</strong>内通过全部应试科目。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">注册与执业范围有哪些规定？</div>
+          <div class="faq-a">
+            <p>取得资格证书后，须通过聘用单位向省级消防救援机构申请<strong>初始注册</strong>。注册有效期为<strong>3年</strong>，到期需办理延续注册。执业范围包括：</p>
+            <ul style="padding-left:20px;margin-top:8px;">
+              <li>消防技术咨询与消防安全评估</li>
+              <li>消防安全管理与消防技术培训</li>
+              <li>消防设施检测与维护保养</li>
+              <li>消防安全监测与检查</li>
+              <li>火灾事故技术分析</li>
+              <li>公安部或省级公安机关规定的其他消防安全技术工作</li>
+            </ul>
+            <p style="margin-top:8px;">一级注册消防工程师可以在全国范围内执业。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">工作年限如何计算？实习期算不算？</div>
+          <div class="faq-a">
+            <p>工作年限计算截止日期为报考<strong>当年12月31日</strong>。消防安全技术工作年限以取得规定学历<strong>前后</strong>从事消防技术工作的年限总和计算。全日制学历的<strong>实习期不计入</strong>工作年限，非全日制学历的工作年限可以累计计算。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">其他专业考生如何判断是否符合条件？</div>
+          <div class="faq-a">
+            <p>非消防工程及相关专业的考生，在对应学历要求的年限基础上，<strong style="color:var(--fire-red);">工作年限和消防工作年限各增加1年</strong>。例如：本科（其他专业）需总工作满6年且消防工作满5年。专业是否属于"相关专业"以当年报考通知中的《消防工程相关专业新旧对照表》为准。</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">考试难度如何？各科备考重点是什么？</div>
+          <div class="faq-a">
+            <p>历年通过率约2%~5%，属于高难度执业资格考试。备考建议：</p>
+            <ul style="padding-left:20px;margin-top:8px;">
+              <li><strong>技术实务（基础）</strong> — 知识点分散，重在理解记忆，建议先学，打好基础</li>
+              <li><strong>综合能力（核心）</strong> — 与实务高度关联，重在应用，建议实务学完80%后同步推进</li>
+              <li><strong>案例分析（难点）</strong> — 综合性最强，需要前两科知识融会贯通，建议后期集中突破</li>
+            </ul>
+            <p style="margin-top:8px;">推荐备考周期：4~8个月系统学习。</p>
+          </div>
+        </div>
+      </section>
+
+    </div><!-- /content-col -->
+
+    <!-- ===== TOC SIDEBAR ===== -->
+    <aside class="toc-sidebar">
+      <h4>📑 目录导航</h4>
+      <a href="#overview"><span class="toc-dot"></span>考试概述</a>
+      <a href="#requirements"><span class="toc-dot"></span>报考条件</a>
+      <a href="#subjects"><span class="toc-dot"></span>科目与题型</a>
+      <a href="#timeline"><span class="toc-dot"></span>报名与考试时间线</a>
+      <a href="#faq"><span class="toc-dot"></span>常见问题 FAQ</a>
+
+      <div style="margin-top:24px;background:var(--blue-50);border-radius:var(--radius);padding:16px;font-size:13px;color:var(--gray-700);line-height:1.8;">
+        <strong style="color:var(--gray-900);">🔗 官方渠道</strong><br>
+        <a href="https://www.cpta.com.cn" style="color:var(--blue-500);text-decoration:none;font-size:12px;">中国人事考试网</a><br>
+        <a href="https://www.mem.gov.cn" style="color:var(--blue-500);text-decoration:none;font-size:12px;">应急管理部官网</a>
+      </div>
+    </aside>
+
+  </div><!-- /layout-grid -->
+</div><!-- /page -->
+
+<!-- ========== FOOTER ========== -->
+<footer class="footer">
+  <p>人力资源和社会保障部 · 应急管理部  |  全国专业技术人员资格考试报名服务平台</p>
+  <p style="margin-top:4px;">本页面内容仅供参考，具体报考要求以当年官方发布的最新通知为准。</p>
+  <p style="margin-top:8px;">
+    <a href="https://www.cpta.com.cn">中国人事考试网</a>
+    <a href="https://www.mem.gov.cn">应急管理部</a>
+  </p>
+</footer>
+
+<!-- ========== BACK TO TOP ========== -->
+<button class="back-to-top" onclick="window.scrollTo({top:0,behavior:'smooth'})" title="返回顶部">↑</button>
+
+<script>
+  // === FAQ Accordion ===
+  document.querySelectorAll('.faq-q').forEach(q => {
+    q.addEventListener('click', () => {
+      const item = q.parentElement;
+      item.classList.toggle('open');
+    });
+  });
+
+  // === Back to Top visibility ===
+  const btt = document.querySelector('.back-to-top');
+  window.addEventListener('scroll', () => {
+    btt.classList.toggle('visible', window.scrollY > 600);
+  });
+
+  // === Active nav highlight on scroll ===
+  const sections = document.querySelectorAll('.section');
+  const navLinks = document.querySelectorAll('.sticky-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 140) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current ? 'var(--fire-red)' : '';
+      a.style.borderBottomColor = a.getAttribute('href') === '#' + current ? 'var(--fire-red)' : 'transparent';
+    });
+  });
+</script>
+
+</body>
+</html>

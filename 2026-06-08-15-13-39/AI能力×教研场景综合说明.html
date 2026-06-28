@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 能力 × 教研场景 — 环球网校教研团队综合操作说明</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<style>
+  /* ═══════════════ Design Tokens ═══════════════ */
+  :root {
+    --color-bg: #fafbfc;
+    --color-surface: #ffffff;
+    --color-surface-hover: #f8f9fb;
+    --color-text: #0f172a;
+    --color-text-secondary: #475569;
+    --color-text-tertiary: #94a3b8;
+    --color-border: #e2e8f0;
+    --color-border-light: #f1f5f9;
+
+    --color-primary: #4f46e5;
+    --color-primary-light: #eef2ff;
+    --color-primary-dark: #3730a3;
+    --color-primary-ghost: rgba(79,70,229,0.06);
+
+    --color-accent: #0d9488;
+    --color-accent-light: #f0fdfa;
+    --color-accent-dark: #0f766e;
+
+    --color-warm: #f59e0b;
+    --color-warm-light: #fffbeb;
+
+    --color-success: #10b981;
+    --color-success-light: #ecfdf5;
+    --color-danger: #ef4444;
+    --color-danger-light: #fef2f2;
+    --color-info: #3b82f6;
+    --color-info-light: #eff6ff;
+
+    --radius-xs: 6px;
+    --radius-sm: 10px;
+    --radius: 16px;
+    --radius-lg: 20px;
+    --radius-xl: 24px;
+
+    --shadow-xs: 0 1px 2px rgba(0,0,0,0.03);
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.03);
+    --shadow: 0 4px 6px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.02);
+    --shadow-md: 0 8px 24px rgba(0,0,0,0.05), 0 2px 8px rgba(0,0,0,0.03);
+    --shadow-lg: 0 16px 48px rgba(0,0,0,0.06), 0 4px 12px rgba(0,0,0,0.03);
+    --shadow-xl: 0 24px 64px rgba(0,0,0,0.08);
+
+    --font-sans: "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui, sans-serif;
+    --font-mono: "SF Mono", "Fira Code", "Cascadia Code", "Consolas", monospace;
+
+    --transition-fast: 0.15s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-slow: 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    --max-width: 1024px;
+  }
+
+  /* ═══════════════ Reset & Base ═══════════════ */
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* ═══════════════ Scrollbar ═══════════════ */
+  ::-webkit-scrollbar { width: 6px; }
+  ::-webkit-scrollbar-track { background: transparent; }
+  ::-webkit-scrollbar-thumb { background: var(--color-border); border-radius: 3px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--color-text-tertiary); }
+
+  /* ═══════════════ Nav ═══════════════ */
+  .nav {
+    position: sticky; top: 0; z-index: 1000;
+    background: rgba(255,255,255,0.82);
+    backdrop-filter: blur(16px) saturate(1.4);
+    -webkit-backdrop-filter: blur(16px) saturate(1.4);
+    border-bottom: 1px solid transparent;
+    transition: border-color var(--transition), box-shadow var(--transition);
+  }
+  .nav.scrolled { border-bottom-color: var(--color-border); box-shadow: var(--shadow-xs); }
+  .nav-inner {
+    max-width: var(--max-width); margin: 0 auto; padding: 0 32px;
+    display: flex; align-items: center; gap: 4px; overflow-x: auto;
+  }
+  .nav-brand { font-size: 14px; font-weight: 700; color: var(--color-primary); white-space: nowrap; margin-right: 16px; opacity: 0; transition: opacity var(--transition); }
+  .nav.scrolled .nav-brand { opacity: 1; }
+  .nav-link {
+    flex-shrink: 0; padding: 10px 20px; border-radius: 24px; font-size: 13px;
+    font-weight: 600; cursor: pointer; border: none; white-space: nowrap;
+    color: var(--color-text-secondary); background: transparent; text-decoration: none;
+    transition: all var(--transition-fast); position: relative;
+  }
+  .nav-link:hover { background: var(--color-primary-ghost); color: var(--color-primary); }
+  .nav-link.active { background: var(--color-primary); color: #fff; box-shadow: 0 2px 8px rgba(79,70,229,0.25); }
+
+  /* ═══════════════ Hero ═══════════════ */
+  .hero {
+    position: relative; overflow: hidden;
+    background: linear-gradient(160deg, #0f172a 0%, #1e1b4b 30%, #312e81 55%, #4338ca 100%);
+    color: #fff; padding: 80px 0 72px;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 20% 40%, rgba(99,102,241,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 80% at 80% 20%, rgba(20,184,166,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 50% 80%, rgba(139,92,246,0.06) 0%, transparent 60%);
+  }
+  .hero-grid {
+    position: absolute; inset: 0; opacity: 0.04;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+  .hero-inner { max-width: var(--max-width); margin: 0 auto; padding: 0 32px; position: relative; z-index: 2; }
+  .hero-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+    padding: 6px 16px; border-radius: 24px; font-size: 12px; font-weight: 600;
+    margin-bottom: 24px; backdrop-filter: blur(8px);
+    animation: fadeInUp 0.6s ease both;
+  }
+  .hero-badge .dot { width: 6px; height: 6px; border-radius: 50%; background: #34d399; }
+  .hero h1 {
+    font-size: clamp(30px, 4.5vw, 44px); font-weight: 800; letter-spacing: -0.025em;
+    line-height: 1.2; margin-bottom: 16px; animation: fadeInUp 0.6s 0.1s ease both;
+  }
+  .hero h1 .highlight {
+    background: linear-gradient(135deg, #a5b4fc, #67e8f9);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .hero p {
+    font-size: 16px; opacity: 0.78; max-width: 620px; line-height: 1.8;
+    animation: fadeInUp 0.6s 0.2s ease both;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ═══════════════ Main Container ═══════════════ */
+  .main { max-width: var(--max-width); margin: 0 auto; padding: 0 32px; }
+
+  /* ═══════════════ Section ═══════════════ */
+  .section { padding: 64px 0; }
+  .section + .section { border-top: 1px solid var(--color-border-light); }
+
+  .section-header { margin-bottom: 40px; }
+  .section-num {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 36px; height: 36px; border-radius: 10px; font-size: 15px; font-weight: 800;
+    color: #fff; margin-right: 12px; vertical-align: middle; flex-shrink: 0;
+  }
+  .s1 .section-num { background: linear-gradient(135deg, #4f46e5, #7c3aed); }
+  .s2 .section-num { background: linear-gradient(135deg, #0d9488, #14b8a6); }
+  .s3 .section-num { background: linear-gradient(135deg, #f59e0b, #f97316); }
+  .s4 .section-num { background: linear-gradient(135deg, #10b981, #34d399); }
+
+  .section-header h2 {
+    font-size: 26px; font-weight: 800; display: inline; vertical-align: middle;
+    letter-spacing: -0.015em;
+  }
+  .section-header .subtitle {
+    color: var(--color-text-secondary); font-size: 15px; margin-top: 6px; line-height: 1.7;
+  }
+
+  /* ═══════════════ Duo Cards ═══════════════ */
+  .duo {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+    margin-bottom: -16px;
+  }
+  .duo-card {
+    padding: 28px 32px; border-radius: var(--radius-lg); position: relative; overflow: hidden;
+    border: 1px solid var(--color-border); transition: all var(--transition);
+  }
+  .duo-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+  .duo-card::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  }
+  .duo-card.az {
+    background: linear-gradient(160deg, #eef2ff 0%, #fafbff 60%);
+    border-color: #c7d2fe;
+  }
+  .duo-card.az::before { background: linear-gradient(90deg, #4f46e5, #7c3aed); }
+  .duo-card.expert {
+    background: linear-gradient(160deg, #f0fdfa 0%, #fafefc 60%);
+    border-color: #99f6e4;
+  }
+  .duo-card.expert::before { background: linear-gradient(90deg, #0d9488, #14b8a6); }
+
+  .duo-badge {
+    display: inline-flex; align-items: center; gap: 5px;
+    font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 12px;
+    margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.04em;
+  }
+  .duo-card.az .duo-badge { color: var(--color-primary); background: rgba(79,70,229,0.08); }
+  .duo-card.expert .duo-badge { color: var(--color-accent); background: rgba(13,148,136,0.08); }
+  .duo-card h3 { font-size: 18px; font-weight: 800; margin-bottom: 4px; }
+  .duo-card.az h3 { color: var(--color-primary-dark); }
+  .duo-card.expert h3 { color: var(--color-accent-dark); }
+  .duo-card .duo-desc { font-size: 13px; color: var(--color-text-secondary); line-height: 1.65; }
+  .duo-card .duo-label { font-size: 12px; color: var(--color-text-tertiary); margin-top: 10px; font-weight: 600; }
+  .duo-card .duo-label span { color: var(--color-text-secondary); font-weight: 400; }
+
+  /* ═══════════════ Scene Grid ═══════════════ */
+  .scene-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); gap: 14px; }
+  .scene-card {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius); padding: 22px 24px; position: relative;
+    transition: all var(--transition); cursor: default;
+  }
+  .scene-card:hover {
+    box-shadow: var(--shadow-lg); border-color: #c7d2fe;
+    transform: translateY(-2px);
+  }
+  .scene-card::after {
+    content: ''; position: absolute; bottom: 0; left: 24px; right: 24px; height: 1px;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    opacity: 0; transform: scaleX(0); transition: all var(--transition-slow);
+  }
+  .scene-card:hover::after { opacity: 1; transform: scaleX(1); }
+  .scene-icon { font-size: 32px; margin-bottom: 10px; display: block; }
+  .scene-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 8px; color: var(--color-text); }
+  .scene-card .scene-desc { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.65; }
+  .scene-card .scene-pain {
+    margin-top: 12px; font-size: 11.5px; color: var(--color-accent-dark);
+    background: var(--color-accent-light); padding: 8px 12px; border-radius: var(--radius-xs);
+    line-height: 1.55; display: flex; align-items: flex-start; gap: 6px;
+  }
+  .scene-card .scene-pain::before { content: '💡'; flex-shrink: 0; }
+
+  /* ═══════════════ Module Block ═══════════════ */
+  .module {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: 32px 36px; margin-bottom: 18px;
+    transition: all var(--transition); position: relative; overflow: hidden;
+  }
+  .module:hover { box-shadow: var(--shadow-md); }
+  .module::before {
+    content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%;
+    background: var(--color-primary); border-radius: 4px 0 0 4px;
+    transform: scaleY(0.3); transition: transform var(--transition-slow);
+  }
+  .module:hover::before { transform: scaleY(1); }
+  .module-header { display: flex; align-items: flex-start; gap: 14px; margin-bottom: 12px; }
+  .module-emoji { font-size: 28px; flex-shrink: 0; line-height: 1; margin-top: 2px; }
+  .module-title { font-size: 18px; font-weight: 800; color: var(--color-text); }
+  .module-desc { font-size: 14px; color: var(--color-text-secondary); line-height: 1.7; margin-bottom: 20px; }
+  .module-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+  .module-col h5 {
+    font-size: 11px; font-weight: 800; letter-spacing: 0.06em; text-transform: uppercase;
+    color: var(--color-text-tertiary); margin-bottom: 12px;
+    padding-bottom: 8px; border-bottom: 2px solid var(--color-border-light);
+  }
+  .module-col ul { list-style: none; }
+  .module-col li {
+    font-size: 13px; color: var(--color-text-secondary); padding: 5px 0 5px 20px;
+    position: relative; line-height: 1.6;
+  }
+  .module-col li::before {
+    content: ''; position: absolute; left: 0; top: 11px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--color-primary);
+    opacity: 0.5;
+  }
+  .module-steps {
+    background: var(--color-bg); border-radius: var(--radius-sm);
+    padding: 18px 22px; margin-top: 12px;
+  }
+  .module-steps h5 { font-size: 12px; font-weight: 800; color: var(--color-primary); margin-bottom: 10px; }
+  .module-steps ol { padding-left: 20px; }
+  .module-steps li { font-size: 12.5px; color: var(--color-text-secondary); padding: 4px 0; line-height: 1.65; }
+  .module-steps li::marker { color: var(--color-primary); font-weight: 700; }
+  .module-tip {
+    margin-top: 14px; padding: 12px 16px; border-radius: var(--radius-xs);
+    font-size: 12px; line-height: 1.6;
+  }
+  .module-tip.warn { background: var(--color-warm-light); color: #92400e; border: 1px solid #fde68a; }
+  .module-tip.info { background: var(--color-info-light); color: #1e40af; border: 1px solid #bfdbfe; }
+  .module-tip h6 { font-size: 12px; font-weight: 700; margin-bottom: 4px; }
+
+  /* ═══════════════ Expert Section ═══════════════ */
+  .flow-box {
+    background: linear-gradient(160deg, #f0fdfa 0%, #ecfeff 100%);
+    border: 1px solid #99f6e4; border-radius: var(--radius-lg); padding: 36px;
+    margin-bottom: 28px;
+  }
+  .flow-box h3 { font-size: 18px; font-weight: 800; color: #0f766e; margin-bottom: 20px; }
+  .flow-steps { display: flex; gap: 0; align-items: stretch; }
+  .flow-step {
+    flex: 1; text-align: center; padding: 18px 14px; position: relative;
+    background: #fff; border-radius: var(--radius-sm);
+    border: 1px solid #ccfbf1; transition: all var(--transition);
+  }
+  .flow-step:hover { box-shadow: var(--shadow); transform: translateY(-2px); }
+  .flow-step .step-num {
+    width: 32px; height: 32px; line-height: 32px; border-radius: 50%;
+    background: linear-gradient(135deg, #0d9488, #14b8a6); color: #fff;
+    font-weight: 800; font-size: 14px; margin: 0 auto 10px;
+  }
+  .flow-step h5 { font-size: 14px; font-weight: 700; color: #0f766e; margin-bottom: 4px; }
+  .flow-step p { font-size: 12px; color: var(--color-text-secondary); line-height: 1.55; }
+  .flow-arrow {
+    display: flex; align-items: center; justify-content: center;
+    font-size: 22px; color: #0d9488; padding: 0 8px; flex-shrink: 0;
+    opacity: 0.5;
+  }
+
+  .call-table {
+    width: 100%; border-collapse: separate; border-spacing: 0;
+    margin-top: 16px; font-size: 13.5px; border-radius: var(--radius-sm);
+    overflow: hidden; border: 1px solid var(--color-border);
+  }
+  .call-table th {
+    text-align: left; padding: 13px 18px; background: var(--color-bg);
+    font-weight: 800; font-size: 12px; color: var(--color-text);
+    letter-spacing: 0.03em; text-transform: uppercase;
+    border-bottom: 2px solid var(--color-border);
+  }
+  .call-table td {
+    padding: 13px 18px; border-bottom: 1px solid var(--color-border-light);
+    color: var(--color-text-secondary); line-height: 1.6; vertical-align: middle;
+  }
+  .call-table tr:last-child td { border-bottom: none; }
+  .call-table tr { transition: background var(--transition-fast); }
+  .call-table tbody tr:hover { background: var(--color-primary-ghost); }
+  .tag-sm {
+    display: inline-flex; align-items: center; gap: 4px;
+    font-size: 11px; font-weight: 700; padding: 3px 12px; border-radius: 12px;
+    white-space: nowrap;
+  }
+  .tag-az { color: var(--color-primary); background: var(--color-primary-light); }
+  .tag-expert { color: var(--color-accent); background: var(--color-accent-light); }
+  .tag-both { color: #b45309; background: var(--color-warm-light); }
+  .tag-arrow { color: var(--color-text-tertiary); margin: 0 4px; }
+
+  .call-methods { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin: 20px 0; }
+  .call-method {
+    padding: 24px 28px; border-radius: var(--radius);
+    border: 1px solid var(--color-border); background: var(--color-surface);
+    transition: all var(--transition);
+  }
+  .call-method:hover { box-shadow: var(--shadow-md); }
+  .call-method h5 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .call-method p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.65; }
+  .call-method code {
+    display: inline-block; background: var(--color-primary-light); color: var(--color-primary-dark);
+    padding: 2px 10px; border-radius: 6px; font-family: var(--font-mono); font-size: 13px;
+    margin: 0 2px;
+  }
+
+  .summary-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    background: var(--color-bg); border-radius: var(--radius-lg); padding: 28px 32px;
+    border: 1px solid var(--color-border-light);
+  }
+  .summary-col { text-align: center; }
+  .summary-col h5 { font-size: 15px; font-weight: 800; margin-bottom: 6px; }
+  .summary-col p { font-size: 12.5px; color: var(--color-text-secondary); line-height: 1.65; }
+  .summary-col.az h5 { color: var(--color-primary); }
+  .summary-col.expert h5 { color: var(--color-accent); }
+  .summary-divider { width: 1px; background: var(--color-border); }
+
+  /* ═══════════════ Example Block ═══════════════ */
+  .case {
+    background: var(--color-surface); border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg); padding: 32px 36px; margin-bottom: 18px;
+  }
+  .case h4 { font-size: 17px; font-weight: 800; margin-bottom: 4px; display: flex; align-items: center; gap: 10px; }
+  .case .case-flow {
+    display: inline-flex; align-items: center; gap: 8px;
+    font-size: 11px; color: var(--color-text-tertiary); font-weight: 600;
+    margin-bottom: 16px; flex-wrap: wrap;
+  }
+  .case .case-flow .arrow { color: var(--color-primary); font-weight: 800; }
+  .example-step {
+    border-left: 3px solid var(--color-primary); background: var(--color-primary-light);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 16px 20px; margin-bottom: 12px;
+  }
+  .example-step h6 { font-size: 13px; font-weight: 700; color: var(--color-primary-dark); margin-bottom: 8px; }
+  .example-step p { font-size: 13px; color: var(--color-text-secondary); line-height: 1.65; }
+  .prompt-code {
+    background: #0f172a; color: #e2e8f0; padding: 14px 18px; border-radius: var(--radius-xs);
+    font-family: var(--font-mono); font-size: 12.5px; line-height: 1.7;
+    margin-top: 8px; white-space: pre-wrap; word-break: break-word;
+    overflow-x: auto;
+  }
+  .prompt-code .k { color: #a5b4fc; }
+  .prompt-code .v { color: #67e8f9; }
+  .prompt-code .c { color: #64748b; font-style: italic; }
+
+  /* ═══════════════ Scroll Reveal ═══════════════ */
+  .reveal { opacity: 0; transform: translateY(24px); transition: all 0.7s cubic-bezier(0.22, 0.61, 0.36, 1); }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+  .reveal-delay-1 { transition-delay: 0.05s; }
+  .reveal-delay-2 { transition-delay: 0.1s; }
+  .reveal-delay-3 { transition-delay: 0.15s; }
+
+  /* ═══════════════ Footer ═══════════════ */
+  .footer {
+    text-align: center; padding: 40px 0; color: var(--color-text-tertiary);
+    font-size: 12px; border-top: 1px solid var(--color-border-light); margin-top: 16px;
+  }
+  .footer-line { margin-top: 6px; }
+
+  /* ═══════════════ Responsive ═══════════════ */
+  @media (max-width: 768px) {
+    .hero { padding: 56px 0 48px; }
+    .hero h1 { font-size: 26px; }
+    .hero p { font-size: 14px; }
+    .main { padding: 0 20px; }
+    .nav-inner { padding: 0 20px; }
+    .nav-link { padding: 8px 14px; font-size: 12px; }
+    .nav-brand { display: none; }
+    .section { padding: 40px 0; }
+    .section-header h2 { font-size: 22px; }
+    .duo { grid-template-columns: 1fr; }
+    .duo-card { padding: 22px 24px; }
+    .module-cols { grid-template-columns: 1fr; gap: 16px; }
+    .module { padding: 24px; }
+    .scene-grid { grid-template-columns: 1fr; }
+    .call-methods { grid-template-columns: 1fr; }
+    .flow-steps { flex-direction: column; }
+    .flow-arrow { display: none; }
+    .summary-row { grid-template-columns: 1fr; }
+    .summary-divider { display: none; }
+    .case { padding: 24px; }
+  }
+
+  @media (max-width: 480px) {
+    .hero { padding: 40px 0 36px; }
+    .hero h1 { font-size: 22px; }
+    .nav-link { padding: 6px 10px; font-size: 11px; }
+    .section-header h2 { font-size: 20px; }
+    .module { padding: 20px; border-radius: var(--radius-sm); }
+    .module-title { font-size: 16px; }
+    .case { padding: 20px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ═══════════════ Navigation ═══════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">环球网校 · 教研</span>
+    <a class="nav-link active" href="#hero">总览</a>
+    <a class="nav-link" href="#s1">教研场景</a>
+    <a class="nav-link" href="#s2">功能模块</a>
+    <a class="nav-link" href="#s3">专家协作</a>
+    <a class="nav-link" href="#s4">实操案例</a>
+  </div>
+</nav>
+
+<!-- ═══════════════ Hero ═══════════════ -->
+<header class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> 环球网校 · 教研团队专用</div>
+    <h1>AI 能力 <span class="highlight">×</span> 教研场景<br>综合操作说明</h1>
+    <p>一份专为教研老师打造的实操手册。阿七与教研专家如何在日常教研的每一环中，帮你提效、保质量、减重复劳动。</p>
+  </div>
+</header>
+
+<!-- ═══════════════ Main ═══════════════ -->
+<main class="main">
+
+  <!-- ═══════════════ Intro: 角色认知 ═══════════════ -->
+  <div class="section" style="padding-top: 48px;">
+    <div style="text-align: center; margin-bottom: 28px;">
+      <h2 style="font-size: 22px; font-weight: 800;">你的 AI 教研搭档，其实是「两个人」</h2>
+      <p style="color: var(--color-text-secondary); font-size: 14px; margin-top: 6px;">不是割裂的两个工具，而是一对互补的搭档——一个负责「干活」，一个负责「把关」。</p>
+    </div>
+    <div class="duo">
+      <div class="duo-card az reveal">
+        <span class="duo-badge">🔧 通用 AI 助手</span>
+        <h3>阿七</h3>
+        <p class="duo-desc"><strong>定位：万能的教研工具箱。</strong>负责文件读取、联网搜索、数据表格分析、PPT/文档生成、自动化定时任务、飞书/腾讯文档/乐享知识库同步——是所有重复性劳动的加速器。</p>
+        <p class="duo-label">一句话分工：<span>搜、读、算、存、发</span></p>
+      </div>
+      <div class="duo-card expert reveal reveal-delay-1">
+        <span class="duo-badge">🎓 领域专家</span>
+        <h3>教研专家</h3>
+        <p class="duo-desc"><strong>定位：教研总监级 AI 助手。</strong>深耕注安/建工考试培训，专精讲义研发、题库命题、课程设计、师资赋能、学情诊断——输出标准化教研交付物，零知识性错误。</p>
+        <p class="duo-label">一句话分工：<span>写、审、定、评、教</span></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ Part 1: 教研场景 ═══════════════ -->
+  <div class="section s1" id="s1">
+    <div class="section-header">
+      <span class="section-num">1</span><h2>教研工作场景 × AI 能力匹配</h2>
+      <p class="subtitle">以下 10 大教研场景，每一项都标注了 AI 能提供的具体价值和它能解决的真实痛点。</p>
+    </div>
+    <div class="scene-grid">
+      <div class="scene-card reveal">
+        <span class="scene-icon">📖</span>
+        <h4>教材讲义研发</h4>
+        <p class="scene-desc">考纲拆解 → 分层讲义初稿 → 三级审核辅助 → 思维导图/速记口诀/易混对比表自动生成</p>
+        <div class="scene-pain">教研老师从「从零写」变成「审改」，讲义生产效率翻倍</div>
+      </div>
+      <div class="scene-card reveal reveal-delay-1">
+        <span class="scene-icon">📝</span>
+        <h4>题库命题与刷题</h4>
+        <p class="scene-desc">原创命题 + 标准解析（法条依据/计算步骤/得分框架）+ 变式训练 + 套卷自动组卷</p>
+        <div class="scene-pain">告别逐题手写解析和人工组卷，题库更新周期从周级缩到天级</div>
+      </div>
+      <div class="scene-card reveal reveal-delay-2">
+        <span class="scene-icon">🎬</span>
+        <h4>课程设计与磨课</h4>
+        <p class="scene-desc">标准化课件框架 + 逐节教案 + 逐字讲稿 + 跨科知识衔接标注 + 磨课评分表生成</p>
+        <div class="scene-pain">十个老师备出来的课格式统一、话术统一、质量可控</div>
+      </div>
+      <div class="scene-card reveal">
+        <span class="scene-icon">❓</span>
+        <h4>答疑标准化</h4>
+        <p class="scene-desc">标准答案与解析批量生成 → 问答库搭建 → 共性疑点根因分析 → 补漏微课脚本</p>
+        <div class="scene-pain">答疑口径不统一、高频问题反复解释——一次入库全团队复用</div>
+      </div>
+      <div class="scene-card reveal reveal-delay-1">
+        <span class="scene-icon">👨‍🏫</span>
+        <h4>师资培训与赋能</h4>
+        <p class="scene-desc">新讲师培训手册 + 专业知识通关资料 + 磨课评分表 + 统一话术模板 + 备课检查清单</p>
+        <div class="scene-pain">新讲师上手慢、老教师口径不齐——标准化培训材料一键产出</div>
+      </div>
+      <div class="scene-card reveal reveal-delay-2">
+        <span class="scene-icon">📊</span>
+        <h4>学情分析与错题诊断</h4>
+        <p class="scene-desc">Excel/CSV 模考数据导入 → 分层画像 → 薄弱诊断 → 错误根因分类 → 可视化报告</p>
+        <div class="scene-pain">手动拉数据、做透视表——丢个文件就能出完整分析报告</div>
+      </div>
+      <div class="scene-card reveal">
+        <span class="scene-icon">📋</span>
+        <h4>考纲政策研读</h4>
+        <p class="scene-desc">联网搜索最新考纲/政策/新规 → 新旧对比分析 → 考点增减标注 → 资料影响清单</p>
+        <div class="scene-pain">不用一个个翻官网、逐条比对——AI 直接给你对比报告和影响评估</div>
+      </div>
+      <div class="scene-card reveal reveal-delay-1">
+        <span class="scene-icon">🎥</span>
+        <h4>直播/录课支撑</h4>
+        <p class="scene-desc">逐字讲稿 + 配套 PPT 内容 + 随堂练习题 + 互动提问设计 + 短视频脚本</p>
+        <div class="scene-pain">一次对话产出整套备课包，不用分开写讲稿、做 PPT、出练习题</div>
+      </div>
+      <div class="scene-card reveal reveal-delay-2">
+        <span class="scene-icon">📁</span>
+        <h4>资料排版与版本管控</h4>
+        <p class="scene-desc">全文格式校对 + 法条编号核对 + 旧版资料停用通知 + 跨文档批量更新</p>
+        <div class="scene-pain">资料版本混乱、学员学错旧规范——AI 做第一轮机审，人工只做确认</div>
+      </div>
+      <div class="scene-card reveal">
+        <span class="scene-icon">🌐</span>
+        <h4>行业信息与教研复盘</h4>
+        <p class="scene-desc">定期联网抓取行业动态 → 汇总简报 → 季度/年度复盘报告自动生成 → 跨科协同文档</p>
+        <div class="scene-pain">行业信息收集和复盘报告撰写是纯体力活——定时自动化搞定</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ Part 2: 功能模块 ═══════════════ -->
+  <div class="section s2" id="s2">
+    <div class="section-header">
+      <span class="section-num">2</span><h2>每个功能模块：能做什么、怎么用</h2>
+      <p class="subtitle">逐一拆解阿七的 8 大核心功能模块——每个模块都有「能帮教研老师做什么」和「具体操作步骤」。</p>
+    </div>
+
+    <!-- Module 1 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">✍️</span><span class="module-title">模块一：智能内容生成</span>
+      </div>
+      <p class="module-desc">阿七最核心的能力——根据你提供的考纲、教材、数据，生成结构化、可直接审改的教研内容。不是泛泛而谈，而是精确到法条编号、计算步骤、采分点的专业内容。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>根据考纲章节，按基础/提升/冲刺三层输出讲义初稿</li>
+            <li>一道考点 → 生成单选/多选/案例题 + 标准解析</li>
+            <li>一个章节 → 输出"导入→讲解→演示→练习→小结"五段式课件框架</li>
+            <li>一道高频错题 → 生成3-5道同考点变式训练题</li>
+            <li>一组易混法条 → 输出对比表格 + 助记口诀</li>
+            <li>一份模考数据 → 输出完整错题分析报告</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>标准四步操作法</h5>
+            <ol>
+              <li><strong>设角色：</strong>告诉阿七「你现在是注安教研老师」</li>
+              <li><strong>给材料：</strong>粘贴考纲章节 / 法条原文 / 教材内容 / 数据表格</li>
+              <li><strong>定格式：</strong>明确输出格式（讲义/题库/课件/报告模板）</li>
+              <li><strong>加约束：</strong>标注考纲年份、适用层级、字数限制、禁止事项</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 2 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">📊</span><span class="module-title">模块二：数据处理与分析</span>
+      </div>
+      <p class="module-desc">支持 Excel / CSV / 在线表格的读取与分析。你把学员模考成绩、错题统计丢进来，阿七自动完成数据清洗→分类统计→根因分析→可视化报告。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>模考成绩批量导入 → 自动分层（零基础/中等/拔高）→ 班级整体画像</li>
+            <li>全校错题数据 → TOP 错题榜单 + 错误类型自动分类</li>
+            <li>四科成绩横向对比 → 识别全校薄弱科目 → 补弱优先级建议</li>
+            <li>历年通过率 / 模考平均分趋势图</li>
+            <li>题库难度、区分度、考频统计</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>标准三步</h5>
+            <ol>
+              <li><strong>上传文件：</strong>直接把 Excel/CSV 文件拖到对话框发送</li>
+              <li><strong>指定分析维度：</strong>「按科目统计错题率」「按班级划分分数段」「找出薄弱章节 TOP5」</li>
+              <li><strong>指定输出格式：</strong>「输出表格 + 文字分析」「生成柱状图」「写入腾讯文档」</li>
+            </ol>
+          </div>
+          <div class="module-tip warn">
+            <h6>⚠️ 重要提示</h6>
+            学员数据涉及隐私，发送前请务必<strong>脱敏处理</strong>（去掉姓名、手机号等个人信息，仅保留学号或匿名标识）。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 3 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">🌐</span><span class="module-title">模块三：联网信息检索</span>
+      </div>
+      <p class="module-desc">实时搜索互联网获取最新考纲、政策通知、行业动态、新法规标准。自动汇总成简报或对比报告，无需教研手动翻官网。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>第一时间获取应急管理部/人事考试网的最新通知和考纲公告</li>
+            <li>新旧考纲逐条对比，标注考点增减、分值变动、出题风向</li>
+            <li>追踪安全生产领域新法规、新标准出台，评估对教材的影响</li>
+            <li>收集竞品机构教研动态、考生真实考场反馈</li>
+            <li>搜索特定法条原文、规范标准全文</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>直接提问即可</h5>
+            <ol>
+              <li>「搜索 2026 年中级注安考试大纲最新变化」</li>
+              <li>「对比 2025 和 2026 版《安全生产法》新增条款」</li>
+              <li>「帮我查一下最近三个月安全生产领域新出的国家标准」</li>
+              <li>「整理应急管理部本月发布的所有考试相关通知」</li>
+            </ol>
+          </div>
+          <div class="module-tip info">
+            <h6>💡 进阶用法</h6>
+            可以设成<strong>定时任务</strong>：比如「每周一自动搜索应急管理部最新通知，生成简报」，阿七会准时执行并把结果发给你。
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 4 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">📂</span><span class="module-title">模块四：文件处理</span>
+      </div>
+      <p class="module-desc">支持读取 PDF、Word、PPT、Excel、图片等多种格式文件。可以一次性处理大量文件，批量提取内容、核对信息、转换格式。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>批量读取讲义 PDF/Word，核对法条编号是否一致</li>
+            <li>将 PDF 教材章节转为可编辑的 Markdown，方便二次编辑</li>
+            <li>从考生答题卡图片中提取文字进行批改分析</li>
+            <li>对比两个版本的讲义，找出差异点</li>
+            <li>批量转换文件格式（Word→Markdown→飞书文档）</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>三步操作</h5>
+            <ol>
+              <li><strong>发送文件：</strong>直接把 PDF / Word / PPT / Excel / 图片拖到对话框</li>
+              <li><strong>说明意图：</strong>「把这个 PDF 讲义转成可编辑文本」「对比这两版考纲找差异」</li>
+              <li><strong>接收结果：</strong>阿七处理完后直接输出文字，或生成新文件让你下载</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 5 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">⏰</span><span class="module-title">模块五：自动化定时任务</span>
+      </div>
+      <p class="module-desc">把重复性的定期工作设成自动化任务——到时间自动执行，不占教研精力。支持每天/每周/每月/指定日期触发。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>每周一自动抓取最新政策通知 → 生成教研简报</li>
+            <li>每月 1 号自动分析上月错题数据 → 输出分析报告</li>
+            <li>考纲发布后定时提醒更新资料 → 生成待办清单</li>
+            <li>考前 100 天起每天推送冲刺倒计时 + 当日备考建议</li>
+            <li>每周五汇总当周答疑高频问题 TOP10</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>一句话创建</h5>
+            <ol>
+              <li>直接说：「每周一早上 9 点帮我搜索应急管理部最新通知并生成简报」</li>
+              <li>或：「每月 1 号分析 /path/to/错题数据.xlsx，输出各科目错题 TOP10 报告」</li>
+              <li>阿七会自动配置好定时规则，到点执行</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 6 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">🎨</span><span class="module-title">模块六：多模态内容生成</span>
+      </div>
+      <p class="module-desc">支持文本生成图片、视频、3D 模型。特别适合制作教学短视频、考点速记卡片配图、安全操作流程动画等可视化教研素材。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>考点速记短视频：60 秒讲解一个考点，自动配音和画面</li>
+            <li>安全操作流程动画：施工现场安全规范演示视频</li>
+            <li>考点卡片配图：法条对比、计算公式、操作流程的可视化卡片</li>
+            <li>3D 模型演示：安全设备结构、事故场景还原</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>描述即可生成</h5>
+            <ol>
+              <li>「生成一个 60 秒短视频，讲解安全生产许可证的有效期和续期条件」</li>
+              <li>「制作一张考点速记卡片配图：应急预案的五个步骤」</li>
+              <li>「帮我生成安全带正确穿戴步骤的示意图」</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 7 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">🔗</span><span class="module-title">模块七：平台连接器</span>
+      </div>
+      <p class="module-desc">阿七已连接你的飞书、腾讯文档和乐享知识库。生成的教研内容可以直接写入飞书知识库、腾讯文档在线表格、乐享知识库——无需下载再上传。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>讲义/题库/报告 → 一键写入飞书知识库或腾讯文档</li>
+            <li>学员成绩 Excel → 直接读取腾讯在线表格 → 分析 → 结果写回</li>
+            <li>教研资料 → 批量上传到乐享知识库归档</li>
+            <li>培训手册 → 直接发布为飞书 Wiki 页面，全团队可见</li>
+            <li>思维导图 → 生成后导入腾讯文档思维导图</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>直接说目标平台</h5>
+            <ol>
+              <li>「把这个讲义写入飞书知识库」</li>
+              <li>「把错题分析报告写到腾讯文档在线表格」</li>
+              <li>「把这份培训手册发布到乐享知识库」</li>
+              <li>「把我飞书上的模考成绩表读出来，分析后写回新 sheet」</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module 8 -->
+    <div class="module reveal">
+      <div class="module-header">
+        <span class="module-emoji">🛠️</span><span class="module-title">模块八：网页/工具搭建</span>
+      </div>
+      <p class="module-desc">阿七可以直接编写代码生成实用的网页工具——在线题库、培训页面、数据看板、答题卡批改工具等。一次生成，浏览器打开即用。</p>
+      <div class="module-cols">
+        <div class="module-col">
+          <h5>能帮教研老师做什么</h5>
+          <ul>
+            <li>培训手册 HTML 页面——直接分发给教研团队</li>
+            <li>在线刷题小工具——学员打开网页就能练</li>
+            <li>模考成绩数据看板——可视化展示班级/科目/个人成绩</li>
+            <li>答题卡批改辅助工具——导入答案自动比对</li>
+            <li>教研资料版本比对工具</li>
+          </ul>
+        </div>
+        <div class="module-col">
+          <h5>怎么操作使用</h5>
+          <div class="module-steps">
+            <h5>描述需求，阿七生成</h5>
+            <ol>
+              <li>「帮我做一个在线刷题页面，包含 50 道注安法规单选题，答完显示分数和错题解析」</li>
+              <li>「生成一个模考成绩数据看板，支持按科目、班级筛选」</li>
+              <li>「做一个培训手册 HTML 页面，包含...」</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ Part 3: 教研专家 ═══════════════ -->
+  <div class="section s3" id="s3">
+    <div class="section-header">
+      <span class="section-num">3</span><h2>教研专家的调用与协作方式</h2>
+      <p class="subtitle">阿七是「通用工具箱」，教研专家是「领域专家」——知道什么时候找谁、怎么配合，才是效率最大化的关键。</p>
+    </div>
+
+    <!-- 工作流 -->
+    <div class="flow-box reveal">
+      <h3>🎯 「阿七 + 教研专家」四步协作工作流</h3>
+      <div class="flow-steps">
+        <div class="flow-step">
+          <div class="step-num">1</div>
+          <h5>素材准备</h5>
+          <p>阿七联网搜索考纲<br>读取文件提取内容<br>整理原始数据</p>
+        </div>
+        <div class="flow-arrow">⟶</div>
+        <div class="flow-step">
+          <div class="step-num">2</div>
+          <h5>内容生产</h5>
+          <p>教研专家基于素材<br>产出标准化讲义/题库<br>课件/教案/报告</p>
+        </div>
+        <div class="flow-arrow">⟶</div>
+        <div class="flow-step">
+          <div class="step-num">3</div>
+          <h5>审核优化</h5>
+          <p>阿七进行机审<br>核对法条编号/格式<br>生成审核清单</p>
+        </div>
+        <div class="flow-arrow">⟶</div>
+        <div class="flow-step">
+          <div class="step-num">4</div>
+          <h5>交付分发</h5>
+          <p>阿七写入飞书知识库<br>腾讯文档/乐享<br>定时任务自动推送</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 场景对照表 -->
+    <h3 style="font-size: 18px; font-weight: 800; margin: 32px 0 16px;">什么时候该找谁？——场景对照表</h3>
+    <table class="call-table reveal">
+      <thead>
+        <tr>
+          <th style="width: 32%;">场景 / 需求</th>
+          <th style="width: 16%;">用谁</th>
+          <th>原因</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>「帮我写一份注安法规第三章的讲义」</td>
+          <td><span class="tag-sm tag-expert">教研专家</span></td>
+          <td>需要领域知识深度：法条精确引用、考纲对齐、三级分层</td>
+        </tr>
+        <tr>
+          <td>「搜索 2026 年注安考纲最新变化」</td>
+          <td><span class="tag-sm tag-az">阿七</span></td>
+          <td>需要联网搜索能力——阿七有实时网络访问</td>
+        </tr>
+        <tr>
+          <td>「分析这份模考 Excel，找出薄弱章节」</td>
+          <td><span class="tag-sm tag-az">阿七</span> <span class="tag-arrow">→</span> <span class="tag-sm tag-expert">教研专家</span></td>
+          <td>阿七先读数据、做分析，教研专家再基于数据出补弱方案</td>
+        </tr>
+        <tr>
+          <td>「把这份讲义上传到飞书知识库」</td>
+          <td><span class="tag-sm tag-az">阿七</span></td>
+          <td>平台操作类——阿七连接了飞书/腾讯文档/乐享</td>
+        </tr>
+        <tr>
+          <td>「设计一套建筑施工安全的案例题，含采分细则」</td>
+          <td><span class="tag-sm tag-expert">教研专家</span></td>
+          <td>需要命题专业度：案例场景设计、采分点拆解、实务框架</td>
+        </tr>
+        <tr>
+          <td>「每周一自动搜索新政策生成简报」</td>
+          <td><span class="tag-sm tag-az">阿七</span></td>
+          <td>定时自动化任务——阿七的专属能力</td>
+        </tr>
+        <tr>
+          <td>「帮我审核这份讲义的法条引用是否准确」</td>
+          <td><span class="tag-sm tag-az">阿七</span> <span class="tag-arrow">+</span> <span class="tag-sm tag-expert">教研专家</span></td>
+          <td>阿七做格式/编号检查，教研专家做知识点准确性审核</td>
+        </tr>
+        <tr>
+          <td>「生成一份新讲师培训手册」</td>
+          <td><span class="tag-sm tag-expert">教研专家</span> <span class="tag-arrow">→</span> <span class="tag-sm tag-az">阿七</span></td>
+          <td>教研专家出培训内容和框架，阿七排版成页面并发布到飞书</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <!-- 调用方式 -->
+    <h3 style="font-size: 18px; font-weight: 800; margin: 32px 0 16px;">如何调用教研专家？</h3>
+    <div class="call-methods reveal">
+      <div class="call-method">
+        <h5>📌 方式一：@ 提及直接切换</h5>
+        <p>在和阿七的对话中，输入 <code>@教研专家</code> ，跟上需求。阿七把任务转给专家，专家生成结果后返回。——<strong>适合单次任务</strong>：出一套题、写一份讲义。</p>
+        <div class="prompt-code" style="margin-top: 10px;"><span class="k">@教研专家</span> 帮我设计一份中级注册安全工程师《安全生产管理》第二章的精讲讲义，基础版，包含考纲考点拆解、重点标注、配套5道练习题。</div>
+      </div>
+      <div class="call-method">
+        <h5>📌 方式二：从专家中心进入</h5>
+        <p>点击左侧边栏「专家」→ 在分类下找到「教研专家」→ 进入专属对话。——<strong>适合深度工作</strong>：连续设计整套课程体系、反复打磨题库标签。</p>
+        <div class="module-tip info" style="margin-top: 10px;">
+          <h6>💡 两种方式的区别</h6>
+          <strong>@提及</strong>——在阿七对话中穿插，快速单次调用。<br>
+          <strong>专家中心</strong>——独立连续对话，适合多轮深度教研。
+        </div>
+      </div>
+    </div>
+
+    <!-- 一句话总结 -->
+    <div class="summary-row reveal">
+      <div class="summary-col az">
+        <h5>🔧 阿七负责</h5>
+        <p>搜 · 读 · 算 · 存 · 发</p>
+        <p style="margin-top: 6px;">联网搜索 / 文件读取 / 数据分析<br>格式排版 / 平台分发 / 定时任务 / 工具搭建</p>
+      </div>
+      <div class="summary-divider"></div>
+      <div class="summary-col expert">
+        <h5>🎓 教研专家负责</h5>
+        <p>写 · 审 · 定 · 评 · 教</p>
+        <p style="margin-top: 6px;">讲义编写 / 题库命题 / 课件设计<br>教案打磨 / 师资培训 / 学情诊断 / 话术标准化</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ Part 4: 实操案例 ═══════════════ -->
+  <div class="section s4" id="s4">
+    <div class="section-header">
+      <span class="section-num">4</span><h2>端到端实操案例</h2>
+      <p class="subtitle">三个真实工作场景的完整操作演示——从需求到交付，每一步都写清楚了，提示词可直接复制使用。</p>
+    </div>
+
+    <!-- Case 1 -->
+    <div class="case reveal">
+      <h4>📋 案例一：出一套模考卷</h4>
+      <div class="case-flow"><span>阿七</span><span class="arrow">→</span><span>教研专家</span><span class="arrow">→</span><span>阿七</span></div>
+      <p style="font-size:13px; color:var(--color-text-secondary); margin-bottom: 16px;"><strong>需求：</strong>按 2026 年注安考试标准，出一套《安全生产技术基础》模考卷，包含 70 道单选 + 15 道多选，覆盖全部章节，难度匹配真题。</p>
+
+      <div class="example-step">
+        <h6>Step 1 — 阿七：联网搜考纲 + 配比确认</h6>
+        <p>先让阿七搜索最新考纲和题型分值分布，作为后续命题的依据。</p>
+        <div class="prompt-code"><span class="c"># 搜索最新考纲信息</span>
+搜索 2026 年中级注安《安全生产技术基础》考试大纲，告诉我各章节的题型配比和分值权重。</div>
+      </div>
+
+      <div class="example-step">
+        <h6>Step 2 — 教研专家：命题（用 @ 调用）</h6>
+        <p>把阿七搜到的考纲信息作为输入，让教研专家精准命题。</p>
+        <div class="prompt-code"><span class="k">@教研专家</span> <span class="c"># 粘贴阿七搜索到的考纲配比信息</span>
+
+请根据以下考纲和分值配比 [粘贴阿七搜索结果]，出一套完整的《安全生产技术基础》模考卷：
+- 70 道单选题，每题 1 分
+- 15 道多选题，每题 2 分，总分 100 分
+- 覆盖全部章节，难度匹配真题
+- 每道题标注：考点标签 / 难度星级 / 正确答案 / 详细解析（含法条依据和计算步骤）</div>
+      </div>
+
+      <div class="example-step">
+        <h6>Step 3 — 阿七：交付到飞书</h6>
+        <p>专家出完题，阿七负责分发。</p>
+        <div class="prompt-code"><span class="c"># 一键写入飞书知识库</span>
+把刚才生成的模考卷写入飞书知识库，标题「2026注安技术模考卷-6月」。</div>
+      </div>
+    </div>
+
+    <!-- Case 2 -->
+    <div class="case reveal">
+      <h4>📊 案例二：错题数据分析 → 补弱方案</h4>
+      <div class="case-flow"><span>阿七</span><span class="arrow">→</span><span>教研专家</span></div>
+      <p style="font-size:13px; color:var(--color-text-secondary); margin-bottom: 16px;"><strong>需求：</strong>拿到一份全校学员最近模考的错题统计 Excel，分析薄弱科目和章节，产出补弱方案。</p>
+
+      <div class="example-step">
+        <h6>Step 1 — 阿七：数据读取与分析</h6>
+        <p>直接把 Excel 拖到对话框发送。</p>
+        <div class="prompt-code"><span class="c"># 上传 Excel，说明分析需求</span>
+这是最近一次模考的错题统计表。请帮我：
+1. 按四科统计错题率排名
+2. 找出每科错题率最高的 TOP3 章节
+3. 将错误类型分为「法条混淆」「计算失误」「案例逻辑差」三类
+4. 输出一份可视化分析报告</div>
+      </div>
+
+      <div class="example-step">
+        <h6>Step 2 — 教研专家：基于数据出方案</h6>
+        <p>把阿七的分析结果作为输入。</p>
+        <div class="prompt-code"><span class="k">@教研专家</span> <span class="c"># 粘贴阿七的分析报告</span>
+
+基于以下错题分析结果 [粘贴阿七的分析报告]，请：
+1. 针对每科薄弱章节，设计补弱微课大纲（每节 10-15 分钟）
+2. 为三类错误分别设计针对性训练方案
+3. 输出一份完整的「月度补弱执行计划」，包含时间节点、负责人、交付物清单</div>
+      </div>
+    </div>
+
+    <!-- Case 3 -->
+    <div class="case reveal">
+      <h4>👨‍🏫 案例三：新讲师培训材料一条龙</h4>
+      <div class="case-flow"><span>教研专家</span><span class="arrow">→</span><span>阿七</span></div>
+      <p style="font-size:13px; color:var(--color-text-secondary); margin-bottom: 16px;"><strong>需求：</strong>为新入职的注安法规讲师准备一套完整的岗前培训材料——培训手册、专业知识通关资料、试讲评分表、统一话术模板。</p>
+
+      <div class="example-step">
+        <h6>Step 1 — 教研专家：产出培训内容</h6>
+        <div class="prompt-code"><span class="k">@教研专家</span>
+
+请为新入职的注安法规讲师准备一套岗前培训材料，包含：
+1. 三阶段培训路线图（专业知识→授课台风→案例话术）
+2. 法规科目专业知识通关要点（标注重点法条编号）
+3. 试讲评审表（4 维度打分：专业知识/授课台风/案例话术/节奏把控）
+4. 统一授课话术模板（法条解读/案例分析标准口径）
+全部输出为可直接执行的标准化文档。</div>
+      </div>
+
+      <div class="example-step">
+        <h6>Step 2 — 阿七：排版 + 发布</h6>
+        <p>专家产出内容后，阿七负责美化和分发。</p>
+        <div class="prompt-code"><span class="c"># 排版成网页并发布到飞书</span>
+把刚才教研专家生成的培训材料制作成一份美观的 HTML 培训手册页面，然后发布到飞书知识库，标题「注安法规讲师岗前培训手册 v1.0」。</div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<!-- ═══════════════ Footer ═══════════════ -->
+<footer class="footer">
+  <p>环球网校 · 教研团队 AI 能力综合说明</p>
+  <p class="footer-line">阿七 & 教研专家 · 2026 年 6 月 · v1.0</p>
+</footer>
+
+<!-- ═══════════════ Scripts ═══════════════ -->
+<script>
+  // Sticky nav scroll effect
+  const nav = document.getElementById('nav');
+  const navLinks = document.querySelectorAll('.nav-link');
+  const sections = [];
+
+  // Collect section anchors
+  navLinks.forEach(link => {
+    const href = link.getAttribute('href');
+    if (href && href.startsWith('#')) {
+      const sec = document.getElementById(href.slice(1));
+      if (sec) sections.push({ link, sec });
+    }
+  });
+
+  // Scroll observer for nav state & reveal
+  const observerOptions = { rootMargin: '-10% 0px -80% 0px', threshold: 0 };
+
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.target.id) {
+        navLinks.forEach(l => l.classList.remove('active'));
+        const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+        if (activeLink) activeLink.classList.add('active');
+      }
+    });
+  }, observerOptions);
+
+  sections.forEach(({ sec }) => {
+    if (sec.id) sectionObserver.observe(sec);
+  });
+
+  // Observe hero for nav
+  const hero = document.getElementById('hero');
+  if (hero) sectionObserver.observe(hero);
+
+  // Nav shadow on scroll
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  });
+
+  // Scroll reveal
+  const revealObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        revealObserver.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -40px 0px', threshold: 0.05 });
+
+  document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+  // Smooth nav click (handled by CSS scroll-behavior, but ensure it works)
+  navLinks.forEach(link => {
+    link.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      const target = document.getElementById(href.slice(1));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  });
+</script>
+
+</body>
+</html>

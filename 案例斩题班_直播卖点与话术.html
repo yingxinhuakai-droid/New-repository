@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案例斩题班 · 直播卖点与话术手册</title>
+<style>
+  :root {
+    --primary: #E53935;
+    --primary-dark: #C62828;
+    --gold: #F9A825;
+    --bg: #FAFAFA;
+    --card: #FFFFFF;
+    --text: #212121;
+    --text-secondary: #616161;
+    --border: #E0E0E0;
+    --tag-bg: #FFF3E0;
+    --tag-text: #E65100;
+    --price-bg: #FFEBEE;
+    --price-text: #C62828;
+    --highlight: #FFF9C4;
+  }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { font-family: -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif; background: var(--bg); color: var(--text); line-height:1.75; padding:24px; }
+  .container { max-width:820px; margin:0 auto; }
+
+  /* Header */
+  .header { background: linear-gradient(135deg, #E53935 0%, #C62828 100%); color:#fff; border-radius:16px; padding:32px 28px; margin-bottom:28px; text-align:center; }
+  .header .emoji { font-size:40px; display:block; margin-bottom:8px; }
+  .header h1 { font-size:26px; font-weight:700; margin-bottom:6px; }
+  .header .sub { font-size:14px; opacity:.85; }
+
+  /* Sections */
+  .section { background: var(--card); border-radius:12px; padding:24px 28px; margin-bottom:20px; box-shadow: 0 1px 3px rgba(0,0,0,.06); }
+  .section h2 { font-size:20px; font-weight:700; margin-bottom:8px; display:flex; align-items:center; gap:8px; }
+  .section h2 .icon { font-size:22px; }
+  .section h3 { font-size:16px; font-weight:600; color: var(--primary); margin:16px 0 8px; }
+  .section .desc { color: var(--text-secondary); font-size:14px; margin-bottom:12px; }
+
+  /* Info Table */
+  .info-table { width:100%; border-collapse:collapse; margin:12px 0; }
+  .info-table th, .info-table td { border:1px solid var(--border); padding:10px 14px; text-align:left; font-size:14px; }
+  .info-table th { background:#FFF5F5; color:var(--primary-dark); font-weight:600; width:120px; white-space:nowrap; }
+  .info-table .price-tag { color:var(--price-text); font-weight:700; font-size:16px; }
+  .info-table .highlight-row { background:var(--highlight); }
+
+  /* Price Box */
+  .price-box { background: linear-gradient(135deg, #FFF5F5, #FFEBEE); border:2px solid var(--primary); border-radius:12px; padding:20px; margin:16px 0; text-align:center; }
+  .price-box .original { font-size:14px; color:var(--text-secondary); text-decoration:line-through; }
+  .price-box .current { font-size:36px; font-weight:800; color:var(--primary); }
+  .price-box .current span { font-size:18px; }
+  .price-box .deadline { font-size:13px; color:var(--text-secondary); margin-top:4px; }
+  .price-box .discount-note { display:inline-block; background:var(--gold); color:#fff; padding:3px 10px; border-radius:20px; font-size:12px; font-weight:600; margin-top:6px; }
+
+  /* Feature Grid */
+  .feature-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin:12px 0; }
+  @media (max-width:600px) { .feature-grid { grid-template-columns:1fr; } }
+  .feature-card { border:1px solid var(--border); border-radius:10px; padding:16px; text-align:center; }
+  .feature-card .icon { font-size:28px; display:block; margin-bottom:6px; }
+  .feature-card .title { font-weight:700; font-size:15px; margin-bottom:4px; }
+  .feature-card .detail { font-size:13px; color:var(--text-secondary); }
+
+  /* Teacher Grid */
+  .teacher-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:10px; margin:12px 0; }
+  .teacher-card { border:1px solid var(--border); border-radius:8px; padding:12px; text-align:center; }
+  .teacher-card .specialty { font-size:12px; color:var(--text-secondary); }
+  .teacher-card .name { font-size:15px; font-weight:600; color:var(--primary-dark); }
+
+  /* Talk Scripts */
+  .script-card { border-left:4px solid var(--primary); background:#FFFBFB; border-radius:0 10px 10px 0; padding:16px 20px; margin:12px 0; }
+  .script-card .tag { display:inline-block; background:var(--primary); color:#fff; font-size:12px; padding:2px 10px; border-radius:12px; font-weight:600; margin-bottom:8px; }
+  .script-card .lines { font-size:14px; color:#333; line-height:2; }
+
+  /* Pain Points */
+  .pain-list { list-style:none; padding:0; margin:12px 0; }
+  .pain-list li { background:var(--tag-bg); color:var(--tag-text); padding:8px 14px; margin:6px 0; border-radius:8px; font-size:14px; font-weight:600; display:flex; align-items:center; gap:8px; }
+  .pain-list li::before { content:"⚠️"; font-size:16px; }
+
+  /* Solution */
+  .solution-list { list-style:none; padding:0; margin:12px 0; }
+  .solution-list li { padding:10px 14px; margin:6px 0; border-radius:8px; font-size:14px; display:flex; align-items:center; gap:8px; background:#F1F8E9; color:#33691E; }
+  .solution-list li::before { content:"✅"; font-size:16px; }
+
+  /* Guarantee */
+  .guarantee { background:linear-gradient(135deg,#FFF8E1,#FFFDE7); border:2px solid var(--gold); border-radius:12px; padding:20px; text-align:center; margin:16px 0; }
+  .guarantee .main { font-size:18px; font-weight:700; color:#F57F17; }
+  .guarantee .sub { font-size:14px; color:var(--text-secondary); margin-top:4px; }
+
+  /* Tips */
+  .tips { background:#E3F2FD; border-radius:10px; padding:16px 20px; margin-top:16px; font-size:13px; color:#1565C0; }
+  .tips strong { color:#0D47A1; }
+
+  hr { border:none; border-top:1px dashed var(--border); margin:20px 0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<!-- ===== HEADER ===== -->
+<div class="header">
+  <span class="emoji">💥</span>
+  <h1>案例斩题班 · 直播卖点与话术手册</h1>
+  <div class="sub">中级注册安全工程师 · 实务案例专项突破 | 2026年6月</div>
+</div>
+
+<!-- ===== 一、班型核心信息 ===== -->
+<div class="section">
+  <h2><span class="icon">📋</span>一、班型核心信息梳理</h2>
+  <table class="info-table">
+    <tr><th>班型名称</th><td><strong>案例斩题班</strong></td></tr>
+    <tr><th>一句话价值</th><td><span class="price-tag">500搞定案例，注安实务必备👇</span></td></tr>
+    <tr><th>适用人群</th><td>注安实务科目薄弱、案例题得分低、需要系统训练答题思路和模板的考生</td></tr>
+    <tr class="highlight-row"><th>课程价格</th><td>原价 <span class="original">699元</span> → 直播间上新价 <span class="price-tag">¥499</span>（5月7日-7月31日，8月1日起涨至699元）</td></tr>
+    <tr><th>叠加优惠</th><td>⚠️ 已购买「全程突破班」或「学练精进班」实务科的学员，在499元基础上<strong>再减100元</strong>，仅需 <span class="price-tag">¥399</span></td></tr>
+    <tr><th>核心内容</th><td>
+      🤩 <b>拿高分</b>：200道技术选择题 + 20道经典案例题 + 2套实务考前AB卷<br>
+      🤩 <b>理思路</b>：高分答题模板（1套）+ 案例带练专项课（10h）<br>
+      🤩 <b>有素材</b>：墙哥案例30题 + 案例必备50问<br>
+      👉 <b>突破案例 = 考过实务</b>
+    </td></tr>
+    <tr><th>师资亮点</th><td>
+      7位专业方向名师：<br>
+      其他安全·程博悦 &nbsp;|&nbsp; 化工·王培山 &nbsp;|&nbsp; 建筑·杨亚男 &nbsp;|&nbsp; 煤矿·张松<br>
+      非煤·葛跃 &nbsp;|&nbsp; 金冶·王阳 &nbsp;|&nbsp; 道运·杨亚男<br>
+      + IP名师「墙哥」亲自带练案例、出题、给模板
+    </td></tr>
+    <tr><th>学习保障</th><td><strong>不过重学</strong>：26年实务没考过，27年免费重学案例专项课<br>化工/建筑/其他三大专业，还<strong>包邮赠送《口袋书》</strong></td></tr>
+  </table>
+
+  <!-- Price Box -->
+  <div class="price-box">
+    <div class="original">原价 699元</div>
+    <div class="current"><span>¥</span>499</div>
+    <div class="deadline">5月7日 - 7月31日 上新价 · 8月1日后恢复699元</div>
+    <div class="discount-note">全程/学练班学员再减100 → 仅¥399</div>
+  </div>
+</div>
+
+<!-- ===== 二、学员痛点 → 解决方案 ===== -->
+<div class="section">
+  <h2><span class="icon">🎯</span>二、学员痛点 → 解决方案对照</h2>
+
+  <h3>考不过实务的"3个老大难"😢</h3>
+  <ul class="pain-list">
+    <li>没有案例好题练——市面上案例题少、质量差，刷来刷去没效果</li>
+    <li>没人带你练案例——自己做题没人批改、没人讲思路，踩坑反复</li>
+    <li>没法用模板写作——答题不会套模板，写得多得分少</li>
+  </ul>
+
+  <h3>案例斩题班系统化解决方案 👍</h3>
+  <ul class="solution-list">
+    <li><strong>实战题分班</strong>（200道技术选择 + 20道经典案例 + 2套AB卷）→ 解决"没有好题练"</li>
+    <li><strong>案例专项班</strong>（10h带练 + 墙哥案例30题 + 案例必备50问）→ 解决"没人带练"</li>
+    <li><strong>实战模考班</strong>（高分答题模板1套 + 考前模拟）→ 解决"不会用模板"</li>
+  </ul>
+</div>
+
+<!-- ===== 三、师资矩阵 ===== -->
+<div class="section">
+  <h2><span class="icon">👨‍🏫</span>三、师资矩阵</h2>
+  <div class="desc">7大专业方向 × 专职名师，加IP名师「墙哥」全程带练</div>
+  <div class="teacher-grid">
+    <div class="teacher-card"><div class="specialty">其他安全</div><div class="name">程博悦</div></div>
+    <div class="teacher-card"><div class="specialty">化工安全</div><div class="name">王培山</div></div>
+    <div class="teacher-card"><div class="specialty">建筑安全</div><div class="name">杨亚男</div></div>
+    <div class="teacher-card"><div class="specialty">煤矿安全</div><div class="name">张松</div></div>
+    <div class="teacher-card"><div class="specialty">非煤安全</div><div class="name">葛跃</div></div>
+    <div class="teacher-card"><div class="specialty">金冶安全</div><div class="name">王阳</div></div>
+    <div class="teacher-card"><div class="specialty">道运安全</div><div class="name">杨亚男</div></div>
+  </div>
+  <div style="margin-top:12px;padding:12px;background:#FFF3E0;border-radius:8px;font-size:14px;">
+    🌟 <strong>IP名师「墙哥」</strong>——案例必练30题、案例必备50问、答题模板，全是墙哥围绕26年新考试亲自出的写作素材
+  </div>
+</div>
+
+<!-- ===== 四、抖音直播话术 ===== -->
+<div class="section">
+  <h2><span class="icon">🎙️</span>四、抖音直播话术（多角度）</h2>
+
+  <!-- 痛点切入 -->
+  <div class="script-card">
+    <div class="tag">痛点切入型</div>
+    <div class="lines">
+      "你是不是学了这么久，一到案例题还是写不出来？翻开试卷一看，明明知识点都懂，就是不知道怎么组织答案？<br><br>
+      不是你不努力，是你缺三样东西：<strong>缺好题、缺带练、缺模板</strong>。<br><br>
+      今天这个「案例斩题班」，就是专门给实务卡壳的同学准备的——<strong>200道选择题打基础、20道经典案例练手感、2套考前AB卷实战模拟</strong>，还有墙哥亲自出的案例30题和必备50问，<strong>10个小时带练专项课</strong>，从零到冲刺一步到位。<br><br>
+      直播间下单只要<strong style='color:#E53935;font-size:18px;'>¥499</strong>，8月1号就涨到699了，现在拍就是省200！"
+    </div>
+  </div>
+
+  <!-- 师资背书 -->
+  <div class="script-card">
+    <div class="tag">师资背书型</div>
+    <div class="lines">
+      "这个班谁带？来看——7大专业方向，每个方向都是专职名师！其他安全程博悦、化工王培山、建筑杨亚男、煤矿张松……全是实打实的一线教研老师。<br><br>
+      更关键的是，<strong>墙哥亲自下场带练</strong>。墙哥是谁？案例必练30题、案例必备50问，全是墙哥围绕26年新考纲出的独家素材，你在外面买都买不到！<br><br>
+      平时这种配置的班，光案例专项课就要上千。今天整个「案例斩题班」——200道选择题+20道经典案例+2套AB卷+10小时带练+答题模板+墙哥50问，全套只要<strong style='color:#E53935;font-size:18px;'>¥499</strong>。化工、建筑、其他三个专业还包邮送《口袋书》！"
+    </div>
+  </div>
+
+  <!-- 价格对比 -->
+  <div class="script-card">
+    <div class="tag">价格对比型</div>
+    <div class="lines">
+      "来算一笔账——<br>
+      线下报个案例冲刺班，至少两三千起步，还就上几天课，上完老师就不见了。<br>
+      我们这个「案例斩题班」：<strong>200道选择题+20道经典案例+2套AB卷+10h带练课+答题模板+墙哥30题+50问</strong>，这么多东西，直播间直接 <strong style='color:#E53935;font-size:20px;'>¥499</strong> 带走。<br><br>
+      499什么概念？也就是一顿火锅钱，换来的是案例题从不会写到拿高分。<br>
+      而且跟你说，499是上新价，<strong>7月31号之后直接涨到699</strong>。现在不拍，到时候多花200块，内容一模一样，你说亏不亏？"
+    </div>
+  </div>
+
+  <!-- 限时逼单 -->
+  <div class="script-card">
+    <div class="tag">限时逼单型</div>
+    <div class="lines">
+      "<strong style='color:#E53935;'>499的上新价只到7月31号！</strong>现在已经是6月下旬了，留给你的时间不多了！<br><br>
+      而且我问你——这个班最有价值的是什么？是墙哥的案例30题和50问！墙哥一个人精力有限，就出这么多题，<strong>一个班就带这么多人，满了真不加</strong>。<br><br>
+      200道选择+20道案例+2套AB卷+10h带练+答题模板+墙哥50问，全套499。截图付款的已经在刷屏了！<br>
+      还没完——<strong>不过重学</strong>，26年实务没过，27年免费重学案例专项课！绝无仅有！就这个保障你上哪找？"
+    </div>
+  </div>
+
+  <!-- 信任建立 -->
+  <div class="script-card">
+    <div class="tag">信任建立型</div>
+    <div class="lines">
+      "敢不敢把保障写出来？我们敢。<br><br>
+      <strong>报名成功后，如果26年注安实务没考过，27年免费重学案例专项课。</strong>这不是口头承诺，是写在课程里的学习保障。<br><br>
+      为什么敢这么承诺？因为我们对内容和老师有绝对的信心。墙哥的案例30题+50问是围绕26年新考试出的，10小时带练课帮你从看懂到会写，答题模板直接套用得分点。<br>
+      我们不怕你不过，就怕你不来学。这个保障，全网你去找，还有谁？"
+    </div>
+  </div>
+
+  <!-- 场景代入 -->
+  <div class="script-card">
+    <div class="tag">场景代入型</div>
+    <div class="lines">
+      "想象一下这个场景——<br><br>
+      考试前两个月，别人还在满网找案例题，找到的都是些老题、偏题，刷了也没用。你呢？200道精选选择题过了一遍基础，20道经典案例练了手感，2套AB卷模拟了实战，墙哥的答题模板已经背熟了，50问的素材张口就来。<br><br>
+      考试当天翻开案例题，一看——这个题型练过，这个模板能用，这个知识点墙哥讲过。下笔就写，写完全部踩中得分点。<br><br>
+      这就是「案例斩题班」要给你的状态——<strong>不是赌运气，是有底气。</strong>499，500搞定案例，7月31号前拍，上车！"
+    </div>
+  </div>
+
+  <!-- 叠加优惠逼单 -->
+  <div class="script-card">
+    <div class="tag">叠加优惠型（针对老学员）</div>
+    <div class="lines">
+      "直播间有没有已经报过「全程突破班」或者「学练精进班」的同学？扣个1我看看！<br><br>
+      你们有福了——<strong>在499基础上再减100，只要¥399</strong>！399，200道选择+20道案例+2套AB卷+10h带练+答题模板+墙哥50问+不过重学，全部拿走。<br><br>
+      这是给你们老学员的专属福利，别错过。399，外面一顿饭的钱都不够，但你买的是案例题通关的底气。拍了截图发客服，马上升级！"
+    </div>
+  </div>
+</div>
+
+<!-- ===== 五、学习保障 ===== -->
+<div class="section">
+  <h2><span class="icon">🛡️</span>五、学习保障</h2>
+  <div class="guarantee">
+    <div class="main">🎯 不过重学 · 绝无仅有</div>
+    <div class="sub">报名成功后，若26年注安实务未通过，27年可免费重学「案例专项课」</div>
+  </div>
+  <div style="text-align:center;margin-top:8px;font-size:14px;color:var(--text-secondary);">
+    📦 化工 / 建筑 / 其他安全 三大专业，还包邮赠送《口袋书》
+  </div>
+</div>
+
+<!-- ===== 六、使用建议 ===== -->
+<div class="section">
+  <h2><span class="icon">💡</span>六、直播使用建议</h2>
+  <div class="tips">
+    <strong>🔑 节奏切换策略：</strong><br>
+    开场 → 痛点切入（3分钟抓人）→ 师资背书（2分钟建信任）→ 价格对比（2分钟塑价值）→ 场景代入（2分钟促行动）→ 限时逼单（循环）<br><br>
+    <strong>🔑 配合素材：</strong><br>
+    · 直播间挂载班级课程大纲图（三大部分一目了然）<br>
+    · 师资海报轮播（7位名师+墙哥）<br>
+    · 价格对比表（线下 vs 直播间，原价699 vs 上新499）<br>
+    · 「不过重学」保障标识（大字标注，持续在屏幕一侧）<br>
+    · 口袋书实物展示（化工/建筑/其他专业）<br><br>
+    <strong>🔑 逼单节奏：</strong><br>
+    每10-15分钟循环一次限时逼单话术，强调「7月31日截止」「涨到699」「墙哥限额」。老学员专属399优惠作为彩蛋环节抛出，刺激复购和口碑传播。
+  </div>
+</div>
+
+</div>
+</body>
+</html>

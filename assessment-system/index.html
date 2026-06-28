@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注册安全工程师 · 学习诊断测评</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Hiragino Sans GB","Microsoft YaHei",sans-serif;background:#f5f7fa;color:#333;min-height:100vh}
+
+.header{background:linear-gradient(135deg,#1a56db 0%,#1e40af 100%);color:#fff;padding:20px 0;text-align:center;box-shadow:0 2px 12px rgba(26,86,219,.15)}
+.header h1{font-size:22px;font-weight:700;letter-spacing:0.5px}
+.header p{font-size:13px;opacity:.85;margin-top:4px}
+
+.container{max-width:800px;margin:0 auto;padding:0 16px}
+
+.progress-wrap{background:#fff;padding:14px 20px;margin:16px auto;max-width:800px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);display:flex;align-items:center;gap:8px}
+.progress-step{display:flex;align-items:center;gap:6px;flex:1}
+.progress-step .dot{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;flex-shrink:0;background:#e5e7eb;color:#9ca3af;transition:all .3s}
+.progress-step.active .dot{background:#1a56db;color:#fff}
+.progress-step.done .dot{background:#22c55e;color:#fff}
+.progress-step .label{font-size:11px;color:#9ca3af;white-space:nowrap}
+.progress-step.active .label{color:#1a56db;font-weight:600}
+.progress-step.done .label{color:#22c55e}
+.progress-line{flex:0 0 24px;height:2px;background:#e5e7eb}
+
+.card{background:#fff;border-radius:16px;padding:28px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:20px}
+.card h2{font-size:20px;margin-bottom:6px;color:#1a1a2e}
+.card .subtitle{color:#6b7280;font-size:13px;margin-bottom:20px}
+
+.pre-question{margin-bottom:24px;display:none}
+.pre-question.show{display:block}
+.pre-question h3{font-size:17px;margin-bottom:14px;font-weight:600}
+.pre-options{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pre-option{padding:14px 16px;border:2px solid #e5e7eb;border-radius:12px;cursor:pointer;transition:all .2s;font-size:14px;text-align:center;background:#fafbfc}
+.pre-option:hover{border-color:#1a56db;background:#eff6ff}
+.pre-option.selected{border-color:#1a56db;background:#dbeafe;font-weight:600;color:#1a56db}
+
+.quiz-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;padding-bottom:12px;border-bottom:1px solid #f0f0f0}
+.quiz-counter{font-size:18px;font-weight:700;color:#1a56db}
+.quiz-timer{font-size:14px;color:#f59e0b;font-weight:600}
+
+.quiz-subject-tag{display:inline-block;font-size:11px;padding:4px 10px;border-radius:16px;margin-bottom:10px;font-weight:500}
+.quiz-subject-tag.law{background:#fef3c7;color:#b45309}
+.quiz-subject-tag.mgmt{background:#dcfce7;color:#15803d}
+.quiz-subject-tag.tech{background:#ede9fe;color:#6d28d9}
+.quiz-subject-tag.practice{background:#fce7f3;color:#be185d}
+
+.quiz-question{font-size:16px;line-height:1.7;margin-bottom:20px;font-weight:500}
+.quiz-options{display:flex;flex-direction:column;gap:8px}
+.quiz-option{padding:14px 18px;border:2px solid #e5e7eb;border-radius:12px;cursor:pointer;transition:all .2s;font-size:14px;display:flex;align-items:center;gap:10px}
+.quiz-option:hover{border-color:#1a56db;background:#f8faff}
+.quiz-option.selected{border-color:#1a56db;background:#dbeafe}
+.quiz-option.correct{border-color:#22c55e;background:#f0fdf4}
+.quiz-option.wrong{border-color:#ef4444;background:#fef2f2}
+.quiz-option .key{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;background:#f3f4f6;font-weight:700;font-size:13px;flex-shrink:0}
+.quiz-option.selected .key{background:#1a56db;color:#fff}
+.quiz-option.correct .key{background:#22c55e;color:#fff}
+.quiz-option.wrong .key{background:#ef4444;color:#fff}
+
+.explanation-box{margin-top:14px;padding:14px;background:#f8fafc;border-radius:12px;border-left:4px solid #1a56db;display:none}
+.explanation-box.show{display:block}
+.explanation-box .exp-title{font-weight:600;margin-bottom:4px;color:#1a56db;font-size:13px}
+.explanation-box .exp-text{font-size:13px;color:#4b5563;line-height:1.6}
+.explanation-box .exp-hint{margin-top:6px;padding:8px 12px;background:#fef3c7;border-radius:8px;font-size:12px;color:#92400e}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;padding:11px 24px;border:none;border-radius:12px;font-size:15px;font-weight:600;cursor:pointer;transition:all .2s}
+.btn-primary{background:#1a56db;color:#fff}
+.btn-primary:hover{background:#1e40af;transform:translateY(-1px);box-shadow:0 4px 12px rgba(26,86,219,.3)}
+.btn-primary:disabled{background:#a5b4fc;cursor:not-allowed;transform:none;box-shadow:none}
+.btn-outline{background:#fff;color:#1a56db;border:2px solid #1a56db}
+.btn-outline:hover{background:#eff6ff}
+.btn-lg{padding:14px 32px;font-size:16px}
+.btn-block{display:flex;width:100%}
+
+.report-header{text-align:center;padding:36px 20px;background:linear-gradient(135deg,#1a56db 0%,#1e40af 100%);color:#fff;border-radius:16px;margin-bottom:20px}
+.report-score{font-size:56px;font-weight:800;line-height:1}
+.report-score-label{font-size:15px;opacity:.8;margin-top:6px}
+.report-level{display:inline-block;padding:6px 18px;border-radius:20px;font-size:14px;font-weight:600;margin-top:10px;background:rgba(255,255,255,.2)}
+
+.report-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.report-item{background:#fff;padding:18px;border-radius:12px;box-shadow:0 1px 4px rgba(0,0,0,.06);text-align:center}
+.report-item .val{font-size:26px;font-weight:700}
+.report-item .label{font-size:12px;color:#6b7280;margin-top:2px}
+
+.chart-wrap{background:#fff;border-radius:16px;padding:20px;box-shadow:0 1px 6px rgba(0,0,0,.06);margin-bottom:20px}
+.chart-wrap h3{font-size:15px;margin-bottom:14px;color:#1a1a2e}
+
+.knowledge-list{display:flex;flex-direction:column;gap:8px;margin-bottom:20px}
+.knowledge-item{display:flex;align-items:center;gap:10px;padding:10px 14px;background:#fff;border-radius:10px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.knowledge-bar-wrap{flex:1;height:8px;background:#f3f4f6;border-radius:8px;overflow:hidden}
+.knowledge-bar{height:100%;border-radius:8px;transition:width .5s}
+.knowledge-pct{font-size:13px;font-weight:600;width:42px;text-align:right}
+.knowledge-status{font-size:11px;padding:2px 8px;border-radius:8px;width:48px;text-align:center}
+.knowledge-status.good{background:#dcfce7;color:#15803d}
+.knowledge-status.medium{background:#fef3c7;color:#92400e}
+.knowledge-status.poor{background:#fee2e2;color:#991b1b}
+
+/* === Soft CTA Card === */
+.soft-cta{text-align:center;padding:32px 24px;background:linear-gradient(135deg,#f0f9ff,#e0f2fe);border-radius:16px;margin-top:20px;border:1px solid #bae6fd}
+.soft-cta h3{font-size:18px;color:#0c4a6e;margin-bottom:8px}
+.soft-cta p{font-size:14px;color:#0369a1;margin-bottom:6px;line-height:1.6}
+.soft-cta .highlights{display:flex;gap:16px;flex-wrap:wrap;justify-content:center;margin:16px 0}
+.soft-cta .highlight-item{background:#fff;padding:12px 20px;border-radius:12px;font-size:13px;color:#1e40af;box-shadow:0 1px 3px rgba(0,0,0,.06);display:flex;align-items:center;gap:6px}
+.soft-cta .cta-btn{margin-top:16px}
+
+.section{display:none}
+.section.active{display:block}
+.nav-buttons{display:flex;justify-content:space-between;margin-top:20px;gap:12px}
+.footer{text-align:center;padding:28px;color:#9ca3af;font-size:11px}
+
+@media (max-width:600px){
+  .pre-options{grid-template-columns:1fr}
+  .report-grid{grid-template-columns:1fr}
+  .card{padding:20px 14px}
+  .header h1{font-size:19px}
+  .progress-step .label{display:none}
+  .soft-cta .highlights{flex-direction:column;align-items:center}
+  .soft-cta{padding:24px 16px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 注册安全工程师 · 学习诊断测评</h1>
+  <p>3步快速诊断，发现薄弱环节，精准定位备考方向</p>
+</div>
+
+<div class="progress-wrap" id="progressBar">
+  <div class="progress-step active" id="step1"><div class="dot">1</div><div class="label">信息采集</div></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" id="step2"><div class="dot">2</div><div class="label">能力测评</div></div>
+  <div class="progress-line"></div>
+  <div class="progress-step" id="step3"><div class="dot">3</div><div class="label">诊断报告</div></div>
+</div>
+
+<div class="container">
+
+<!-- SECTION 1: 前置诊断 -->
+<div class="section active" id="sectionPre">
+  <div class="card">
+    <h2>📝 基本信息采集</h2>
+    <p class="subtitle">回答几个问题，了解你的备考起点</p>
+    <div id="preQuestions"></div>
+    <div class="nav-buttons">
+      <span></span>
+      <button class="btn btn-primary" id="btnPreNext" disabled>下一题 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 2: 能力测评 -->
+<div class="section" id="sectionQuiz">
+  <div class="card">
+    <div class="quiz-header">
+      <span class="quiz-counter" id="quizCounter">第 1 题 / 共 8 题</span>
+      <span class="quiz-timer" id="quizTimer">⏱ 00:00</span>
+    </div>
+    <span class="quiz-subject-tag" id="quizSubject"></span>
+    <div class="quiz-question" id="quizQuestion"></div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="explanation-box" id="quizExplanation">
+      <div class="exp-title">📖 答案解析</div>
+      <div class="exp-text" id="expText"></div>
+      <div class="exp-hint" id="expHint"></div>
+    </div>
+    <div class="nav-buttons">
+      <button class="btn btn-outline" id="btnPrev" style="display:none">← 上一题</button>
+      <button class="btn btn-primary" id="btnNext">下一题 →</button>
+    </div>
+  </div>
+</div>
+
+<!-- SECTION 3: 诊断报告 -->
+<div class="section" id="sectionReport">
+  <div class="report-header" id="reportHeader">
+    <div class="report-score" id="reportScore">--</div>
+    <div class="report-score-label">测评得分（满分100）</div>
+    <div class="report-level" id="reportLevel"></div>
+  </div>
+
+  <div class="report-grid" id="reportGrid"></div>
+
+  <div class="chart-wrap">
+    <h3>📊 四科能力分布</h3>
+    <canvas id="radarChart" height="260"></canvas>
+  </div>
+
+  <div class="card">
+    <h2>🎯 知识点掌握度</h2>
+    <div class="knowledge-list" id="knowledgeList"></div>
+  </div>
+
+  <div class="card" id="weaknessCard"></div>
+
+  <!-- 柔和CTA -->
+  <div class="soft-cta">
+    <h3>🔍 想要更精准的备考方向吗？</h3>
+    <p>每位学员的基础、时间和目标都不同，一份专属的备考规划能帮你事半功倍</p>
+    <div class="highlights">
+      <div class="highlight-item">📅 三阶段学习规划</div>
+      <div class="highlight-item">🎯 薄弱点突破方案</div>
+      <div class="highlight-item">📺 课程匹配推荐</div>
+      <div class="highlight-item">💬 1对1备考答疑</div>
+    </div>
+    <p style="font-size:13px;color:#0369a1">添加老师微信，获取你的专属诊断报告和详细备考方案</p>
+    <button class="btn btn-primary btn-lg cta-btn" onclick="showWechatModal()">
+      💬 获取专属备考规划
+    </button>
+    <p style="font-size:11px;color:#7dd3fc;margin-top:8px">添加时备注「测评」，老师会优先通过</p>
+  </div>
+
+  <div style="text-align:center;margin-top:14px">
+    <button class="btn btn-outline" onclick="restartAssessment()">🔄 重新测评</button>
+  </div>
+</div>
+
+</div>
+
+<div class="footer">注安学习诊断测评系统 · 结果仅供参考</div>
+
+<!-- WeChat Modal -->
+<div id="wechatModal" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,.5);z-index:1000;align-items:center;justify-content:center">
+  <div style="background:#fff;border-radius:20px;padding:32px 28px;text-align:center;max-width:360px;width:90%;position:relative">
+    <button onclick="closeWechatModal()" style="position:absolute;top:12px;right:16px;background:none;border:none;font-size:22px;cursor:pointer;color:#9ca3af">&times;</button>
+    <div style="font-size:48px;margin-bottom:12px">📱</div>
+    <h3 style="font-size:20px;color:#1a1a2e;margin-bottom:8px">添加老师微信</h3>
+    <p style="font-size:14px;color:#6b7280;margin-bottom:16px">获取专属备考规划 + 高频考点资料</p>
+    <div style="width:140px;height:140px;margin:0 auto 16px;border-radius:12px;background:#f3f4f6;display:flex;align-items:center;justify-content:center;font-size:56px;border:3px solid #1a56db">📱</div>
+    <div style="font-size:20px;font-weight:700;color:#1a1a2e;margin-bottom:16px">
+      <span style="color:#22c55e;margin-right:6px">💬</span>微信号：zhuan_anquan
+    </div>
+    <button class="btn btn-primary btn-block" onclick="copyWechat()">📋 复制微信号</button>
+    <p style="font-size:11px;color:#9ca3af;margin-top:10px">长按复制，打开微信添加 👆</p>
+  </div>
+</div>
+
+<script src="data/questions.js"></script>
+<script>
+// ===== DEMO QUESTIONS: 8道精选题（每科2道）=====
+const DEMO_QUESTIONS = [
+  QUESTION_BANK[0],  // law_001: 安全生产法适用范围
+  QUESTION_BANK[4],  // law_005: 事故等级划分
+  QUESTION_BANK[5],  // mgmt_001: 安全责任制核心
+  QUESTION_BANK[7],  // mgmt_003: LEC评价法
+  QUESTION_BANK[10], // tech_001: 防护装置
+  QUESTION_BANK[12], // tech_003: 锅炉安全附件
+  QUESTION_BANK[15], // practice_001: 危险因素辨识
+  QUESTION_BANK[18], // practice_004: 整改措施建议
+];
+
+// ===== STATE =====
+const STATE = {
+  currentSection: 'pre',
+  preAnswers: {},
+  preCurrentIndex: 0,
+  currentQuizIndex: 0,
+  quizAnswers: [],
+  quizStartTime: null,
+  timerElapsed: 0,
+  timerInterval: null,
+};
+
+// ===== PRE-DIAGNOSIS =====
+function renderPreQuestion(idx) {
+  if (idx >= PRE_DIAGNOSIS_QUESTIONS.length) { finishPreDiagnosis(); return; }
+  const q = PRE_DIAGNOSIS_QUESTIONS[idx];
+  const selected = STATE.preAnswers[q.field] || '';
+  let html = `<div class="pre-question show"><h3>${idx + 1}. ${q.title}</h3><div class="pre-options">`;
+  q.options.forEach(opt => {
+    html += `<div class="pre-option${selected === opt.key ? ' selected' : ''}" data-key="${opt.key}">${opt.key}. ${opt.text}</div>`;
+  });
+  html += '</div></div>';
+  document.getElementById('preQuestions').innerHTML = html;
+  STATE.preCurrentIndex = idx;
+  updatePreBtn();
+  document.querySelectorAll('.pre-option').forEach(el => {
+    el.addEventListener('click', function() {
+      document.querySelectorAll('.pre-option').forEach(e => e.classList.remove('selected'));
+      this.classList.add('selected');
+      STATE.preAnswers[q.field] = this.dataset.key;
+      updatePreBtn();
+    });
+  });
+}
+
+function updatePreBtn() {
+  const q = PRE_DIAGNOSIS_QUESTIONS[STATE.preCurrentIndex];
+  const btn = document.getElementById('btnPreNext');
+  btn.disabled = !STATE.preAnswers[q.field];
+  btn.textContent = STATE.preCurrentIndex === PRE_DIAGNOSIS_QUESTIONS.length - 1 ? '完成 → 开始测评' : '下一题 →';
+}
+
+document.getElementById('btnPreNext').addEventListener('click', () => {
+  if (STATE.preCurrentIndex < PRE_DIAGNOSIS_QUESTIONS.length - 1) {
+    renderPreQuestion(STATE.preCurrentIndex + 1);
+  } else {
+    finishPreDiagnosis();
+  }
+});
+
+function finishPreDiagnosis() {
+  switchSection('quiz');
+  startQuiz();
+}
+
+// ===== QUIZ =====
+let quizAnswered = false;
+
+function startQuiz() {
+  STATE.quizAnswers = [];
+  STATE.currentQuizIndex = 0;
+  STATE.quizStartTime = Date.now();
+  STATE.timerElapsed = 0;
+  clearInterval(STATE.timerInterval);
+  STATE.timerInterval = setInterval(updateTimer, 1000);
+  updateTimer();
+  renderQuiz(0);
+}
+
+function updateTimer() {
+  STATE.timerElapsed = Math.floor((Date.now() - STATE.quizStartTime) / 1000);
+  const m = Math.floor(STATE.timerElapsed / 60), s = STATE.timerElapsed % 60;
+  document.getElementById('quizTimer').textContent = `⏱ ${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+}
+
+function renderQuiz(idx) {
+  if (idx >= DEMO_QUESTIONS.length) { finishQuiz(); return; }
+  const q = DEMO_QUESTIONS[idx];
+  quizAnswered = false;
+  document.getElementById('quizExplanation').classList.remove('show');
+  document.getElementById('quizCounter').textContent = `第 ${idx + 1} 题 / 共 ${DEMO_QUESTIONS.length} 题`;
+
+  const subMap = { '安全生产法律法规': 'law', '安全生产管理': 'mgmt', '安全生产技术基础': 'tech', '安全生产专业实务': 'practice' };
+  const subKey = subMap[q.subject] || '';
+  const tag = q.type === 'multi' ? '【多选题】' : q.type === 'case' ? '【案例分析】' : '【单选题】';
+  const el = document.getElementById('quizSubject');
+  el.className = `quiz-subject-tag ${subKey}`;
+  el.textContent = `${q.subject} ${tag}`;
+  document.getElementById('quizQuestion').textContent = q.question;
+
+  document.getElementById('quizOptions').innerHTML = q.options.map(opt =>
+    `<div class="quiz-option" data-key="${opt.key}"><span class="key">${opt.key}</span><span>${opt.text}</span></div>`
+  ).join('');
+
+  document.getElementById('btnPrev').style.display = idx === 0 ? 'none' : '';
+  document.getElementById('btnNext').textContent = idx === DEMO_QUESTIONS.length - 1 ? '查看诊断报告 →' : '下一题 →';
+  STATE.currentQuizIndex = idx;
+
+  document.querySelectorAll('.quiz-option').forEach(el => {
+    el.addEventListener('click', function() { if (!quizAnswered) handleAnswer(this.dataset.key); });
+  });
+}
+
+function handleAnswer(selectedKey) {
+  quizAnswered = true;
+  const q = DEMO_QUESTIONS[STATE.currentQuizIndex];
+  const isMulti = q.type === 'multi';
+  const correct = isMulti ? selectedKey.split('').sort().join('') === q.answer.split('').sort().join('') : selectedKey === q.answer;
+
+  STATE.quizAnswers.push({
+    questionId: q.id, subject: q.subject, knowledge: q.knowledgePoint, subPoint: q.subPoint,
+    difficulty: q.difficulty, type: q.type, selected: selectedKey, correct,
+  });
+
+  document.querySelectorAll('.quiz-option').forEach(el => {
+    el.style.pointerEvents = 'none';
+    if (isMulti) {
+      if (q.answer.includes(el.dataset.key)) el.classList.add('correct');
+      if (selectedKey.includes(el.dataset.key) && !q.answer.includes(el.dataset.key)) el.classList.add('wrong');
+    } else {
+      if (el.dataset.key === q.answer) el.classList.add('correct');
+      if (el.dataset.key === selectedKey && selectedKey !== q.answer) el.classList.add('wrong');
+    }
+  });
+  document.getElementById('expText').textContent = q.explanation;
+  document.getElementById('expHint').textContent = `💡 ${q.hint}`;
+  document.getElementById('quizExplanation').classList.add('show');
+}
+
+document.getElementById('btnPrev').addEventListener('click', () => {
+  if (STATE.currentQuizIndex > 0) { STATE.quizAnswers.pop(); renderQuiz(STATE.currentQuizIndex - 1); }
+});
+document.getElementById('btnNext').addEventListener('click', () => {
+  if (!quizAnswered) { alert('请先选择答案'); return; }
+  if (STATE.currentQuizIndex < DEMO_QUESTIONS.length - 1) { renderQuiz(STATE.currentQuizIndex + 1); }
+  else { finishQuiz(); }
+});
+
+function finishQuiz() {
+  clearInterval(STATE.timerInterval);
+  switchSection('report');
+  renderReport();
+}
+
+// ===== REPORT =====
+function renderReport() {
+  const answers = STATE.quizAnswers;
+  const totalQ = answers.length, correctQ = answers.filter(a => a.correct).length;
+  const score = Math.round((correctQ / totalQ) * 100);
+
+  document.getElementById('reportScore').textContent = score;
+  const lvl = score >= 70 ? { label: '基础扎实', icon: '🌟' } : score >= 40 ? { label: '需要加强', icon: '📚' } : { label: '从零起步', icon: '🎯' };
+  document.getElementById('reportLevel').textContent = `${lvl.icon} ${lvl.label}（${score}分）`;
+
+  // 四科数据
+  const subjects = ['安全生产法律法规', '安全生产管理', '安全生产技术基础', '安全生产专业实务'];
+  const subShort = ['法规', '管理', '技术', '实务'];
+  const subData = subjects.map(sub => {
+    const qs = answers.filter(a => a.subject === sub);
+    return { name: sub, short: subShort[subjects.indexOf(sub)], total: qs.length, correct: qs.filter(a => a.correct).length };
+  });
+
+  document.getElementById('reportGrid').innerHTML = subData.map(s => {
+    const pct = s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0;
+    const clr = pct >= 70 ? '#22c55e' : pct >= 40 ? '#f59e0b' : '#ef4444';
+    return `<div class="report-item"><div class="val" style="color:${clr}">${pct}%</div><div class="label">${s.short}（${s.correct}/${s.total}）</div></div>`;
+  }).join('');
+
+  // 雷达图
+  setTimeout(() => {
+    const ctx = document.getElementById('radarChart');
+    if (!ctx) return;
+    if (window._rc) window._rc.destroy();
+    window._rc = new Chart(ctx, {
+      type: 'radar',
+      data: {
+        labels: subShort,
+        datasets: [{
+          label: '你的得分率', data: subData.map(s => s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0),
+          backgroundColor: 'rgba(26,86,219,.12)', borderColor: '#1a56db', borderWidth: 2,
+          pointBackgroundColor: '#1a56db', pointRadius: 4,
+        }, {
+          label: '及格线(60%)', data: [60, 60, 60, 60],
+          backgroundColor: 'rgba(34,197,94,.04)', borderColor: '#22c55e',
+          borderWidth: 1, borderDash: [6, 4], pointRadius: 0,
+        }],
+      },
+      options: {
+        responsive: true,
+        scales: { r: { beginAtZero: true, max: 100, ticks: { stepSize: 20, backdropColor: 'transparent', font: { size: 10 } } } },
+        plugins: { legend: { position: 'bottom', labels: { font: { size: 11 } } } },
+      },
+    });
+  }, 100);
+
+  // 知识点
+  const kpMap = {};
+  answers.forEach(a => {
+    const key = a.subPoint || a.knowledge;
+    if (!kpMap[key]) kpMap[key] = { total: 0, correct: 0, subject: a.subject };
+    kpMap[key].total++; kpMap[key].correct += a.correct ? 1 : 0;
+  });
+  document.getElementById('knowledgeList').innerHTML = Object.entries(kpMap)
+    .sort((a, b) => (a[1].correct / a[1].total) - (b[1].correct / b[1].total))
+    .map(([name, d]) => {
+      const pct = Math.round((d.correct / d.total) * 100);
+      const cls = pct >= 70 ? 'good' : pct >= 40 ? 'medium' : 'poor';
+      const label = pct >= 70 ? '已掌握' : pct >= 40 ? '待加强' : '薄弱';
+      return `<div class="knowledge-item">
+        <span style="flex:0 0 100px;font-size:12px;color:#374151">${name}</span>
+        <div class="knowledge-bar-wrap"><div class="knowledge-bar" style="width:${pct}%;background:${pct>=70?'#22c55e':pct>=40?'#f59e0b':'#ef4444'}"></div></div>
+        <span class="knowledge-pct">${pct}%</span><span class="knowledge-status ${cls}">${label}</span></div>`;
+    }).join('');
+
+  // 薄弱点
+  const weaks = Object.entries(kpMap).filter(([, d]) => (d.correct / d.total) < 0.5)
+    .sort((a, b) => (a[1].correct / a[1].total) - (b[1].correct / b[1].total));
+  document.getElementById('weaknessCard').innerHTML = `
+    <h2>⚠️ 需重点关注</h2>
+    <p class="subtitle">以下知识点是薄弱环节，在备考中需要优先投入时间</p>
+    ${weaks.length === 0 ? '<p style="color:#22c55e">🎉 各知识点掌握良好！</p>' :
+    weaks.map(([name, d]) => {
+      const pct = Math.round((d.correct / d.total) * 100);
+      return `<div style="display:flex;align-items:center;justify-content:space-between;padding:10px 0;border-bottom:1px solid #f9fafb">
+        <div><span style="color:#ef4444;font-weight:600;font-size:13px">${name}</span><span style="color:#9ca3af;font-size:11px;margin-left:6px">正确率${pct}%</span></div>
+        <span style="color:#1a56db;font-size:11px">📌 需专项突破</span></div>`;
+    }).join('')}
+  `;
+
+  // Save to localStorage for sales dashboard
+  const preInfo = {
+    education: PRE_DIAGNOSIS_QUESTIONS.find(q => q.field === 'education')?.options.find(o => o.key === STATE.preAnswers.education)?.text || '',
+    major: PRE_DIAGNOSIS_QUESTIONS.find(q => q.field === 'major')?.options.find(o => o.key === STATE.preAnswers.major)?.text || '',
+    experience: PRE_DIAGNOSIS_QUESTIONS.find(q => q.field === 'experience')?.options.find(o => o.key === STATE.preAnswers.experience)?.text || '',
+    target: PRE_DIAGNOSIS_QUESTIONS.find(q => q.field === 'target')?.options.find(o => o.key === STATE.preAnswers.target)?.text || '',
+    studyTime: PRE_DIAGNOSIS_QUESTIONS.find(q => q.field === 'studyTime')?.options.find(o => o.key === STATE.preAnswers.studyTime)?.text || '',
+    attempted: PRE_DIAGNOSIS_QUESTIONS.find(q => q.field === 'attempted')?.options.find(o => o.key === STATE.preAnswers.attempted)?.text || '',
+    selfWeakness: PRE_DIAGNOSIS_QUESTIONS.find(q => q.field === 'selfWeakness')?.options.find(o => o.key === STATE.preAnswers.selfWeakness)?.text || '',
+  };
+  const assessmentData = { preInfo, answers, score, subData, kpMap, weaks, timerElapsed: STATE.timerElapsed, timestamp: Date.now() };
+  localStorage.setItem('assessment_data', JSON.stringify(assessmentData));
+}
+
+// ===== WECHAT MODAL =====
+function showWechatModal() { document.getElementById('wechatModal').style.display = 'flex'; }
+function closeWechatModal() { document.getElementById('wechatModal').style.display = 'none'; }
+document.getElementById('wechatModal').addEventListener('click', function(e) { if (e.target === this) closeWechatModal(); });
+
+function copyWechat() {
+  navigator.clipboard.writeText('zhuan_anquan').then(() => alert('微信号已复制！打开微信添加即可')).catch(() => {});
+}
+
+// ===== NAVIGATION =====
+function switchSection(newSection) {
+  STATE.currentSection = newSection;
+  document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
+
+  const sectionMap = { pre: 'sectionPre', quiz: 'sectionQuiz', report: 'sectionReport' };
+  const el = document.getElementById(sectionMap[newSection]);
+  if (el) el.classList.add('active');
+
+  updateProgress(newSection);
+}
+
+function updateProgress(section) {
+  const steps = { pre: 1, quiz: 2, report: 3 };
+  const current = steps[section] || 1;
+  ['step1', 'step2', 'step3'].forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('active', 'done');
+    if (i + 1 < current) el.classList.add('done');
+    if (i + 1 === current) el.classList.add('active');
+  });
+}
+
+function restartAssessment() {
+  clearInterval(STATE.timerInterval);
+  STATE.preAnswers = {};
+  STATE.preCurrentIndex = 0;
+  STATE.currentQuizIndex = 0;
+  STATE.quizAnswers = [];
+  STATE.quizStartTime = null;
+  STATE.timerElapsed = 0;
+  switchSection('pre');
+  renderPreQuestion(0);
+}
+
+// Close modal on Escape
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeWechatModal();
+});
+</script>
+</body>
+</html>

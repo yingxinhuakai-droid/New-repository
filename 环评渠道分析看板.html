@@ -1,0 +1,582 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>环评2026年渠道数据分析看板</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.2.0/dist/chartjs-plugin-datalabels.min.js"></script>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif; background:#f0f2f5; color:#1f2937; }
+.header { background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #3949ab 100%); color:#fff; padding:32px 48px; }
+.header h1 { font-size:26px; font-weight:700; letter-spacing:-0.5px; }
+.header .sub { font-size:14px; opacity:0.85; margin-top:6px; }
+.kpi-row { display:grid; grid-template-columns:repeat(4,1fr); gap:16px; padding:0 48px; margin-top:-24px; }
+.kpi-card { background:#fff; border-radius:12px; padding:22px 24px; box-shadow:0 2px 16px rgba(0,0,0,0.06); }
+.kpi-card .label { font-size:13px; color:#6b7280; margin-bottom:8px; }
+.kpi-card .value { font-size:30px; font-weight:800; color:#111827; }
+.kpi-card .change { font-size:13px; margin-top:6px; font-weight:600; }
+.up { color:#dc2626; } .down { color:#16a34a; } .neutral { color:#6b7280; }
+.container { max-width:1440px; margin:0 auto; padding:0 48px 48px; }
+.section { margin-top:28px; }
+.section-title { font-size:18px; font-weight:700; color:#1a237e; padding:12px 0; border-bottom:2px solid #1a237e; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+.section-title .num { background:#1a237e; color:#fff; width:28px; height:28px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:14px; flex-shrink:0; }
+.chart-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.chart-grid-3 { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; }
+.chart-card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+.chart-card h3 { font-size:15px; font-weight:600; color:#1f2937; margin-bottom:14px; }
+.chart-card.full { grid-column:1/-1; }
+.chart-wrap { position:relative; width:100%; }
+.chart-wrap canvas { width:100% !important; max-height:340px; }
+
+.quadrant-wrap { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+.quadrant-text { background:#fff; border-radius:12px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.05); }
+.quadrant-text h3 { font-size:15px; font-weight:600; margin-bottom:12px; }
+.quadrant-group { margin-bottom:12px; }
+.quadrant-group h4 { font-size:13px; font-weight:700; margin-bottom:4px; padding:3px 10px; border-radius:4px; display:inline-block; }
+.quadrant-group p { font-size:12.5px; color:#4b5563; line-height:1.65; margin-left:4px; }
+.q-hh h4 { background:#d1fae5; color:#065f46; }
+.q-hl h4 { background:#fef3c7; color:#92400e; }
+.q-lh h4 { background:#dbeafe; color:#1e40af; }
+.q-ll h4 { background:#fee2e2; color:#991b1b; }
+
+.table-wrap { max-height:460px; overflow-y:auto; }
+table { width:100%; border-collapse:collapse; font-size:12.5px; }
+th { background:#f9fafb; padding:9px 8px; text-align:right; font-weight:600; position:sticky; top:0; z-index:1; border-bottom:2px solid #e5e7eb; white-space:nowrap; }
+th:first-child { text-align:left; }
+td { padding:7px 8px; text-align:right; border-bottom:1px solid #f3f4f6; }
+td:first-child { text-align:left; font-weight:500; }
+tr:hover td { background:#f0f4ff; }
+
+.insight-box { background:#eef2ff; border-left:4px solid #1a237e; border-radius:0 8px 8px 0; padding:14px 20px; }
+.insight-box p { font-size:13px; color:#374151; line-height:1.75; }
+.insight-box strong { color:#1a237e; }
+
+.anomaly-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:16px; }
+.anomaly-card { background:#fff; border-radius:12px; padding:20px; box-shadow:0 2px 12px rgba(0,0,0,0.05); border-left:4px solid #f59e0b; }
+.anomaly-card.good { border-left-color:#10b981; }
+.anomaly-card.bad { border-left-color:#ef4444; }
+.anomaly-card h4 { font-size:14px; font-weight:700; margin-bottom:8px; }
+.anomaly-card p { font-size:12.5px; color:#4b5563; line-height:1.65; }
+
+.tag { display:inline-block; padding:1px 8px; border-radius:10px; font-size:11px; font-weight:600; }
+.tag-red { background:#fee2e2; color:#991b1b; }
+.tag-orange { background:#fef3c7; color:#92400e; }
+.tag-green { background:#d1fae5; color:#065f46; }
+.tag-blue { background:#dbeafe; color:#1e40af; }
+
+@media (max-width:1000px) {
+  .chart-grid, .chart-grid-3, .quadrant-wrap, .anomaly-grid { grid-template-columns:1fr; }
+  .kpi-row { grid-template-columns:repeat(2,1fr); padding:0 16px; }
+  .header { padding:20px; }
+  .container { padding:0 16px 20px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>&#x1f4ca; 环评2026年各渠道数据分析看板</h1>
+  <div class="sub">环境影响评价师 &middot; 2026年 vs 2025年同比 &middot; 综合维度：新增例子 / 当年库存 / 跨1年库存 / 跨多年库存</div>
+</div>
+
+<div class="kpi-row">
+  <div class="kpi-card">
+    <div class="label">总流水（2026）</div>
+    <div class="value">&yen;54.2万</div>
+    <div class="change up">&#x25b2; +6.0% YoY</div>
+  </div>
+  <div class="kpi-card">
+    <div class="label">总订单量（2026）</div>
+    <div class="value">217单</div>
+    <div class="change up">&#x25b2; +19.0% YoY</div>
+  </div>
+  <div class="kpi-card">
+    <div class="label">综合销转率</div>
+    <div class="value">7.00%</div>
+    <div class="change up">&#x25b2; +93.0% YoY</div>
+  </div>
+  <div class="kpi-card">
+    <div class="label">例子总量（2026）</div>
+    <div class="value">6,243</div>
+    <div class="change down">&#x25bc; -22.2% YoY</div>
+  </div>
+</div>
+
+<div class="container">
+
+<!-- ===== SECTION 1: TRAFFIC ===== -->
+<div class="section">
+  <div class="section-title"><span class="num">1</span> 流量层面 &mdash; 各渠道例子量分布与变化</div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>&#x1f4c8; 各渠道例子量占比 (2026)</h3><div class="chart-wrap"><canvas id="c1_leadShare"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f4c9; 各渠道例子量同比变化率</h3><div class="chart-wrap"><canvas id="c2_leadYoy"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f50d; 例子来源结构 (库存分级)</h3><div class="chart-wrap"><canvas id="c3_leadStructure"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f4ca; 各渠道例子量两年对比</h3><div class="chart-wrap"><canvas id="c4_leadCompare"></canvas></div></div>
+  </div>
+  <div class="insight-box"><p><strong>&#x1f4a1; 关键发现：</strong>新增例子同比暴跌38%，但当年库存暴增+181%。新增流量主力为APP课堂 / 图书兑换 / 神策圈选；当年库存中APP课堂/SEO大幅增长，存量激活效果显著。</p></div>
+</div>
+
+<!-- ===== SECTION 2: REVENUE ===== -->
+<div class="section">
+  <div class="section-title"><span class="num">2</span> 营收层面 &mdash; 各渠道流水贡献与ARPU</div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>&#x1f4b0; 各渠道流水占比 (2026)</h3><div class="chart-wrap"><canvas id="c5_revShare"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f4ca; 各渠道流水两年对比</h3><div class="chart-wrap"><canvas id="c6_revCompare"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f48e; 各渠道客单价 (AP) 对比</h3><div class="chart-wrap"><canvas id="c7_apCompare"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f4d0; 流量占比 vs 营收占比匹配度</h3><div class="chart-wrap"><canvas id="c8_flowRev"></canvas></div></div>
+  </div>
+  <div class="insight-box"><p><strong>&#x1f4a1; 关键发现：</strong>销售录入和APP课堂合计贡献45.5%营收，但销售录入流水下降17.2%而APP课堂暴增265%。AP最高的渠道是微信小程序-公众号（5,815元），神策圈选AP从6,578暴跌至1,479元（-77.5%），说明圈选策略大幅调整。</p></div>
+</div>
+
+<!-- ===== SECTION 3: CONVERSION ===== -->
+<div class="section">
+  <div class="section-title"><span class="num">3</span> 转化层面 &mdash; 各渠道销转率分析</div>
+  <div class="chart-grid">
+    <div class="chart-card"><h3>&#x1f3af; 各渠道综合销转率 (2026 vs 2025)</h3><div class="chart-wrap"><canvas id="c9_convRate"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f4c8; 销转率同比变化幅度</h3><div class="chart-wrap"><canvas id="c10_convYoy"></canvas></div></div>
+    <div class="chart-card full"><h3>&#x1f504; 按例子类型分渠道销转率概览</h3><div class="table-wrap" id="convTable"></div></div>
+  </div>
+  <div class="insight-box"><p><strong>&#x1f4a1; 关键发现：</strong>销转率提升最大的渠道是SEO直接访问（+513.7%）、APP课堂（+345.6%）。代理商SEM综合销转最高达15.8%，销售录入达14.9%。跨多年库存中微信小程序销转惊人达50%，SEO直接访问27.3%，存量老用户付费意愿极高。</p></div>
+</div>
+
+<!-- ===== SECTION 4: CROSS ANALYSIS ===== -->
+<div class="section">
+  <div class="section-title"><span class="num">4</span> 交叉分析 &mdash; 四象限与增长潜力</div>
+  <div class="quadrant-wrap">
+    <div class="chart-card"><h3>&#x1f3af; 渠道四象限分析 (例子量 vs 流水)</h3><div class="chart-wrap"><canvas id="c11_quadrant"></canvas></div></div>
+    <div class="quadrant-text" id="quadrantInsight"></div>
+  </div>
+  <div class="chart-grid" style="margin-top:16px;">
+    <div class="chart-card"><h3>&#x1f680; 增长潜力矩阵 (销转率 x AP)</h3><div class="chart-wrap"><canvas id="c12_growthMatrix"></canvas></div></div>
+    <div class="chart-card"><h3>&#x1f4cb; 各渠道综合分析明细</h3><div class="table-wrap" id="detailTable"></div></div>
+  </div>
+</div>
+
+<!-- ===== SECTION 5: ANOMALIES ===== -->
+<div class="section">
+  <div class="section-title"><span class="num">5</span> 异常与机会 &mdash; 值得关注的信号</div>
+  <div class="anomaly-grid" id="anomalyGrid"></div>
+</div>
+
+</div>
+
+<script>
+// ===== INLINE DATA =====
+var channels = [{"name": "销售录入", "综合": {"流水_2026": 128185.5, "流水_2025": 154745.5, "流水_yoy": -0.17, "订单量_2026": 46.0, "订单量_2025": 54.0, "订单量_yoy": -0.15, "AP_2026": 2786.64, "AP_2025": 2865.66, "AP_yoy": -0.03, "销转_2026": 0.15, "销转_2025": 0.15, "销转_yoy": -0.01}, "新增例子": {"例子量_2026": 309.0, "例子量_2025": 360.0, "例子量_yoy": -0.14, "流水_2026": 60284.0, "流水_2025": 81074.0, "流水_yoy": -0.26, "订单量_2026": 21.0, "订单量_2025": 30.0, "订单量_yoy": -0.3, "AP_2026": 2870.67, "AP_2025": 2702.47, "AP_yoy": 0.06, "销转_2026": 0.07, "销转_2025": 0.08, "销转_yoy": -0.18}, "当年库存": {"例子量_2026": 59.0, "例子量_2025": 51.0, "例子量_yoy": 0.16, "业绩_2026": 6993.0, "业绩_2025": 27855.5, "业绩_yoy": -0.75, "订单量_2026": 7.0, "订单量_2025": 11.0, "订单量_yoy": -0.36, "AP_2026": 999.0, "AP_2025": 2532.32, "AP_yoy": -0.61, "销转_2026": 0.12, "销转_2025": 0.22, "销转_yoy": -0.45}, "跨1年库存": {"例子量_2026": 104.0, "例子量_2025": 159.0, "例子量_yoy": -0.35, "流水_2026": 39510.0, "流水_2025": 28785.0, "流水_yoy": 0.37, "订单量_2026": 9.0, "订单量_2025": 9.0, "订单量_yoy": 0.0, "AP_2026": 4390.0, "AP_2025": 3198.33, "AP_yoy": 0.37, "销转_2026": 0.09, "销转_2025": 0.06, "销转_yoy": 0.53}, "跨多年库存": {"例子量_2026": 74.0, "例子量_2025": 46.0, "例子量_yoy": 0.61, "流水_2026": 21398.5, "流水_2025": 17031.0, "流水_yoy": 0.26, "订单量_2026": 9.0, "订单量_2025": 4.0, "订单量_yoy": 1.25, "AP_2026": 2377.61, "AP_2025": 4257.75, "AP_yoy": -0.44, "销转_2026": 0.12, "销转_2025": 0.09, "销转_yoy": 0.4}, "_total_leads_26": 546.0, "_total_leads_25": 616.0}, {"name": "APP-环球课堂", "综合": {"流水_2026": 118499.0, "流水_2025": 32463.5, "流水_yoy": 2.65, "订单量_2026": 51.0, "订单量_2025": 12.0, "订单量_yoy": 3.25, "AP_2026": 2323.51, "AP_2025": 2705.29, "AP_yoy": -0.14, "销转_2026": 0.11, "销转_2025": 0.02, "销转_yoy": 3.46}, "新增例子": {"例子量_2026": 474.0, "例子量_2025": 497.0, "例子量_yoy": -0.05, "流水_2026": 69141.0, "流水_2025": 16535.5, "流水_yoy": 3.18, "订单量_2026": 32.0, "订单量_2025": 7.0, "订单量_yoy": 3.57, "AP_2026": 2160.66, "AP_2025": 2362.21, "AP_yoy": -0.09, "销转_2026": 0.07, "销转_2025": 0.01, "销转_yoy": 3.79}, "当年库存": {"例子量_2026": 198.0, "例子量_2025": 34.0, "例子量_yoy": 4.82, "业绩_2026": 21769.0, "业绩_2025": 0.0, "业绩_yoy": 0.0, "订单量_2026": 6.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 3628.17, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.03, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨1年库存": {"例子量_2026": 76.0, "例子量_2025": 203.0, "例子量_yoy": -0.63, "流水_2026": 16338.0, "流水_2025": 12188.0, "流水_yoy": 0.34, "订单量_2026": 5.0, "订单量_2025": 3.0, "订单量_yoy": 0.67, "AP_2026": 3267.6, "AP_2025": 4062.67, "AP_yoy": -0.2, "销转_2026": 0.07, "销转_2025": 0.01, "销转_yoy": 3.45}, "跨多年库存": {"例子量_2026": 52.0, "例子量_2025": 78.0, "例子量_yoy": -0.33, "流水_2026": 11251.0, "流水_2025": 3740.0, "流水_yoy": 2.01, "订单量_2026": 8.0, "订单量_2025": 2.0, "订单量_yoy": 3.0, "AP_2026": 1406.38, "AP_2025": 1870.0, "AP_yoy": -0.25, "销转_2026": 0.15, "销转_2025": 0.03, "销转_yoy": 5.0}, "_total_leads_26": 800.0, "_total_leads_25": 812.0}, {"name": "图书兑换（志道）", "综合": {"流水_2026": 60572.0, "流水_2025": 78819.5, "流水_yoy": -0.23, "订单量_2026": 22.0, "订单量_2025": 31.0, "订单量_yoy": -0.29, "AP_2026": 2753.27, "AP_2025": 2542.56, "AP_yoy": 0.08, "销转_2026": 0.05, "销转_2025": 0.03, "销转_yoy": 0.62}, "新增例子": {"例子量_2026": 468.0, "例子量_2025": 1069.0, "例子量_yoy": -0.56, "流水_2026": 6389.0, "流水_2025": 6573.0, "流水_yoy": -0.03, "订单量_2026": 4.0, "订单量_2025": 4.0, "订单量_yoy": 0.0, "AP_2026": 1597.25, "AP_2025": 1643.25, "AP_yoy": -0.03, "销转_2026": 0.01, "销转_2025": 0.0, "销转_yoy": 1.28}, "当年库存": {"例子量_2026": 161.0, "例子量_2025": 65.0, "例子量_yoy": 1.48, "业绩_2026": 7406.0, "业绩_2025": 9796.0, "业绩_yoy": -0.24, "订单量_2026": 2.0, "订单量_2025": 4.0, "订单量_yoy": -0.5, "AP_2026": 3703.0, "AP_2025": 2449.0, "AP_yoy": 0.51, "销转_2026": 0.01, "销转_2025": 0.06, "销转_yoy": -0.8}, "跨1年库存": {"例子量_2026": 97.0, "例子量_2025": 356.0, "例子量_yoy": -0.73, "流水_2026": 21451.0, "流水_2025": 41511.0, "流水_yoy": -0.48, "订单量_2026": 8.0, "订单量_2025": 10.0, "订单量_yoy": -0.2, "AP_2026": 2681.38, "AP_2025": 4151.1, "AP_yoy": -0.35, "销转_2026": 0.08, "销转_2025": 0.03, "销转_yoy": 1.94}, "跨多年库存": {"例子量_2026": 71.0, "例子量_2025": 76.0, "例子量_yoy": -0.07, "流水_2026": 25326.0, "流水_2025": 20939.5, "流水_yoy": 0.21, "订单量_2026": 8.0, "订单量_2025": 13.0, "订单量_yoy": -0.38, "AP_2026": 3165.75, "AP_2025": 1610.73, "AP_yoy": 0.97, "销转_2026": 0.11, "销转_2025": 0.17, "销转_yoy": -0.34}, "_total_leads_26": 797.0, "_total_leads_25": 1566.0}, {"name": "SEO-直接访问", "综合": {"流水_2026": 27352.0, "流水_2025": 9518.5, "流水_yoy": 1.87, "订单量_2026": 10.0, "订单量_2025": 3.0, "订单量_yoy": 2.33, "AP_2026": 2735.2, "AP_2025": 3172.83, "AP_yoy": -0.14, "销转_2026": 0.05, "销转_2025": 0.01, "销转_yoy": 5.14}, "新增例子": {"例子量_2026": 195.0, "例子量_2025": 359.0, "例子量_yoy": -0.46, "流水_2026": 2480.0, "流水_2025": 2980.0, "流水_yoy": -0.17, "订单量_2026": 1.0, "订单量_2025": 1.0, "订单量_yoy": 0.0, "AP_2026": 2480.0, "AP_2025": 2980.0, "AP_yoy": -0.17, "销转_2026": 0.01, "销转_2025": 0.0, "销转_yoy": 0.84}, "当年库存": {"例子量_2026": 61.0, "例子量_2025": 25.0, "例子量_yoy": 1.44, "业绩_2026": 0.0, "业绩_2025": 0.0, "业绩_yoy": 0.0, "订单量_2026": 0.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 0.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.0, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨1年库存": {"例子量_2026": 34.0, "例子量_2025": 71.0, "例子量_yoy": -0.52, "流水_2026": 8374.0, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 6.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 1395.67, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.18, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨多年库存": {"例子量_2026": 11.0, "例子量_2025": 16.0, "例子量_yoy": -0.31, "流水_2026": 16498.0, "流水_2025": 6538.5, "流水_yoy": 1.52, "订单量_2026": 3.0, "订单量_2025": 2.0, "订单量_yoy": 0.5, "AP_2026": 5499.33, "AP_2025": 3269.25, "AP_yoy": 0.68, "销转_2026": 0.27, "销转_2025": 0.12, "销转_yoy": 1.18}, "_total_leads_26": 301.0, "_total_leads_25": 471.0}, {"name": "SEO-品牌", "综合": {"流水_2026": 26384.5, "流水_2025": 11340.0, "流水_yoy": 1.33, "订单量_2026": 10.0, "订单量_2025": 4.0, "订单量_yoy": 1.5, "AP_2026": 2638.45, "AP_2025": 2835.0, "AP_yoy": -0.07, "销转_2026": 0.09, "销转_2025": 0.04, "销转_yoy": 1.35}, "新增例子": {"例子量_2026": 114.0, "例子量_2025": 107.0, "例子量_yoy": 0.07, "流水_2026": 13850.0, "流水_2025": 11340.0, "流水_yoy": 0.22, "订单量_2026": 6.0, "订单量_2025": 4.0, "订单量_yoy": 0.5, "AP_2026": 2308.33, "AP_2025": 2835.0, "AP_yoy": -0.19, "销转_2026": 0.05, "销转_2025": 0.04, "销转_yoy": 0.41}, "当年库存": {"例子量_2026": 31.0, "例子量_2025": 5.0, "例子量_yoy": 5.2, "业绩_2026": 4616.0, "业绩_2025": 0.0, "业绩_yoy": 0.0, "订单量_2026": 2.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 2308.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.06, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨1年库存": {"例子量_2026": 26.0, "例子量_2025": 27.0, "例子量_yoy": -0.04, "流水_2026": 7918.5, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 2.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 3959.25, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.08, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨多年库存": {"例子量_2026": 4.0, "例子量_2025": 5.0, "例子量_yoy": -0.2, "流水_2026": 0.0, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 0.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 0.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.0, "销转_2025": 0.0, "销转_yoy": 0.0}, "_total_leads_26": 175.0, "_total_leads_25": 144.0}, {"name": "神策圈选", "综合": {"流水_2026": 22180.0, "流水_2025": 46045.0, "流水_yoy": -0.52, "订单量_2026": 15.0, "订单量_2025": 7.0, "订单量_yoy": 1.14, "AP_2026": 1478.67, "AP_2025": 6577.86, "AP_yoy": -0.78, "销转_2026": 0.03, "销转_2025": 0.01, "销转_yoy": 3.71}, "新增例子": {"例子量_2026": 460.0, "例子量_2025": 1011.0, "例子量_yoy": -0.55, "流水_2026": 12568.0, "流水_2025": 3880.0, "流水_yoy": 2.24, "订单量_2026": 7.0, "订单量_2025": 1.0, "订单量_yoy": 6.0, "AP_2026": 1795.43, "AP_2025": 3880.0, "AP_yoy": -0.54, "销转_2026": 0.02, "销转_2025": 0.0, "销转_yoy": 14.38}, "当年库存": {"例子量_2026": 123.0, "例子量_2025": 48.0, "例子量_yoy": 1.56, "业绩_2026": 2794.0, "业绩_2025": 30817.0, "业绩_yoy": -0.91, "订单量_2026": 4.0, "订单量_2025": 3.0, "订单量_yoy": 0.33, "AP_2026": 698.5, "AP_2025": 10272.33, "AP_yoy": -0.93, "销转_2026": 0.03, "销转_2025": 0.06, "销转_yoy": -0.48}, "跨1年库存": {"例子量_2026": 66.0, "例子量_2025": 235.0, "例子量_yoy": -0.72, "流水_2026": 6818.0, "流水_2025": 11348.0, "流水_yoy": -0.4, "订单量_2026": 4.0, "订单量_2025": 3.0, "订单量_yoy": 0.33, "AP_2026": 1704.5, "AP_2025": 3782.67, "AP_yoy": -0.55, "销转_2026": 0.06, "销转_2025": 0.01, "销转_yoy": 3.75}, "跨多年库存": {"例子量_2026": 5.0, "例子量_2025": 0.0, "例子量_yoy": 0.0, "流水_2026": 0.0, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 0.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 0.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.0, "销转_2025": 0.0, "销转_yoy": 0.0}, "_total_leads_26": 654.0, "_total_leads_25": 1294.0}, {"name": "SEO-自然搜索", "综合": {"流水_2026": 21905.0, "流水_2025": 21488.0, "流水_yoy": 0.02, "订单量_2026": 6.0, "订单量_2025": 9.0, "订单量_yoy": -0.33, "AP_2026": 3650.83, "AP_2025": 2387.56, "AP_yoy": 0.53, "销转_2026": 0.03, "销转_2025": 0.03, "销转_yoy": 0.08}, "新增例子": {"例子量_2026": 219.0, "例子量_2025": 356.0, "例子量_yoy": -0.38, "流水_2026": 5295.0, "流水_2025": 5679.0, "流水_yoy": -0.07, "订单量_2026": 2.0, "订单量_2025": 3.0, "订单量_yoy": -0.33, "AP_2026": 2647.5, "AP_2025": 1893.0, "AP_yoy": 0.4, "销转_2026": 0.01, "销转_2025": 0.01, "销转_yoy": 0.08}, "当年库存": {"例子量_2026": 66.0, "例子量_2025": 8.0, "例子量_yoy": 7.25, "业绩_2026": 10350.0, "业绩_2025": 0.0, "业绩_yoy": 0.0, "订单量_2026": 2.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 5175.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.03, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨1年库存": {"例子量_2026": 30.0, "例子量_2025": 121.0, "例子量_yoy": -0.75, "流水_2026": 1980.0, "流水_2025": 11968.0, "流水_yoy": -0.83, "订单量_2026": 1.0, "订单量_2025": 4.0, "订单量_yoy": -0.75, "AP_2026": 1980.0, "AP_2025": 2992.0, "AP_yoy": -0.34, "销转_2026": 0.03, "销转_2025": 0.03, "销转_yoy": 0.01}, "跨多年库存": {"例子量_2026": 19.0, "例子量_2025": 18.0, "例子量_yoy": 0.06, "流水_2026": 4280.0, "流水_2025": 3841.0, "流水_yoy": 0.11, "订单量_2026": 1.0, "订单量_2025": 2.0, "订单量_yoy": -0.5, "AP_2026": 4280.0, "AP_2025": 1920.5, "AP_yoy": 1.23, "销转_2026": 0.05, "销转_2025": 0.11, "销转_yoy": -0.53}, "_total_leads_26": 334.0, "_total_leads_25": 503.0}, {"name": "微信小程序", "综合": {"流水_2026": 16706.0, "流水_2025": 8060.0, "流水_yoy": 1.07, "订单量_2026": 9.0, "订单量_2025": 3.0, "订单量_yoy": 2.0, "AP_2026": 1856.22, "AP_2025": 2686.67, "AP_yoy": -0.31, "销转_2026": 0.12, "销转_2025": 0.03, "销转_yoy": 3.08}, "新增例子": {"例子量_2026": 75.0, "例子量_2025": 102.0, "例子量_yoy": -0.26, "流水_2026": 4480.0, "流水_2025": 7560.0, "流水_yoy": -0.41, "订单量_2026": 2.0, "订单量_2025": 2.0, "订单量_yoy": 0.0, "AP_2026": 2240.0, "AP_2025": 3780.0, "AP_yoy": -0.41, "销转_2026": 0.03, "销转_2025": 0.02, "销转_yoy": 0.36}, "当年库存": {"例子量_2026": 31.0, "例子量_2025": 5.0, "例子量_yoy": 5.2, "业绩_2026": 4180.0, "业绩_2025": 0.0, "业绩_yoy": 0.0, "订单量_2026": 2.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 2090.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.06, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨1年库存": {"例子量_2026": 11.0, "例子量_2025": 24.0, "例子量_yoy": -0.54, "流水_2026": 5260.0, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 2.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 2630.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.18, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨多年库存": {"例子量_2026": 6.0, "例子量_2025": 9.0, "例子量_yoy": -0.33, "流水_2026": 2786.0, "流水_2025": 500.0, "流水_yoy": 4.57, "订单量_2026": 3.0, "订单量_2025": 1.0, "订单量_yoy": 2.0, "AP_2026": 928.67, "AP_2025": 500.0, "AP_yoy": 0.86, "销转_2026": 0.5, "销转_2025": 0.11, "销转_yoy": 3.5}, "_total_leads_26": 123.0, "_total_leads_25": 140.0}, {"name": "代理商SEM", "综合": {"流水_2026": 15346.0, "流水_2025": 12118.0, "流水_yoy": 0.27, "订单量_2026": 6.0, "订单量_2025": 5.0, "订单量_yoy": 0.2, "AP_2026": 2557.67, "AP_2025": 2423.6, "AP_yoy": 0.06, "销转_2026": 0.16, "销转_2025": 0.07, "销转_yoy": 1.12}, "新增例子": {"例子量_2026": 38.0, "例子量_2025": 67.0, "例子量_yoy": -0.43, "流水_2026": 6760.0, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 3.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 2253.33, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.08, "销转_2025": 0.0, "销转_yoy": 0.0}, "当年库存": {"例子量_2026": 16.0, "例子量_2025": 12.0, "例子量_yoy": 0.33, "业绩_2026": 0.0, "业绩_2025": 1830.0, "业绩_yoy": -1.0, "订单量_2026": 0.0, "订单量_2025": 1.0, "订单量_yoy": -1.0, "AP_2026": 0.0, "AP_2025": 1830.0, "AP_yoy": -1.0, "销转_2026": 0.0, "销转_2025": 0.08, "销转_yoy": -1.0}, "跨1年库存": {"例子量_2026": 57.0, "例子量_2025": 27.0, "例子量_yoy": 1.11, "流水_2026": 8586.0, "流水_2025": 3473.0, "流水_yoy": 1.47, "订单量_2026": 3.0, "订单量_2025": 1.0, "订单量_yoy": 2.0, "AP_2026": 2862.0, "AP_2025": 3473.0, "AP_yoy": -0.18, "销转_2026": 0.05, "销转_2025": 0.04, "销转_yoy": 0.42}, "跨多年库存": {"例子量_2026": 46.0, "例子量_2025": 43.0, "例子量_yoy": 0.07, "流水_2026": 0.0, "流水_2025": 6815.0, "流水_yoy": -1.0, "订单量_2026": 0.0, "订单量_2025": 3.0, "订单量_yoy": -1.0, "AP_2026": 0.0, "AP_2025": 2271.67, "AP_yoy": -1.0, "销转_2026": 0.0, "销转_2025": 0.07, "销转_yoy": -1.0}, "_total_leads_26": 157.0, "_total_leads_25": 149.0}, {"name": "代理商SEO", "综合": {"流水_2026": 12810.0, "流水_2025": 19572.0, "流水_yoy": -0.35, "订单量_2026": 5.0, "订单量_2025": 7.0, "订单量_yoy": -0.29, "AP_2026": 2562.0, "AP_2025": 2796.0, "AP_yoy": -0.08, "销转_2026": 0.09, "销转_2025": 0.06, "销转_yoy": 0.4}, "新增例子": {"例子量_2026": 55.0, "例子量_2025": 108.0, "例子量_yoy": -0.49, "流水_2026": 499.0, "流水_2025": 483.0, "流水_yoy": 0.03, "订单量_2026": 2.0, "订单量_2025": 1.0, "订单量_yoy": 1.0, "AP_2026": 249.5, "AP_2025": 483.0, "AP_yoy": -0.48, "销转_2026": 0.04, "销转_2025": 0.01, "销转_yoy": 2.93}, "当年库存": {"例子量_2026": 40.0, "例子量_2025": 33.0, "例子量_yoy": 0.21, "业绩_2026": 0.0, "业绩_2025": 3745.0, "业绩_yoy": -1.0, "订单量_2026": 0.0, "订单量_2025": 1.0, "订单量_yoy": -1.0, "AP_2026": 0.0, "AP_2025": 3745.0, "AP_yoy": -1.0, "销转_2026": 0.0, "销转_2025": 0.03, "销转_yoy": -1.0}, "跨1年库存": {"例子量_2026": 112.0, "例子量_2025": 128.0, "例子量_yoy": -0.12, "流水_2026": 0.0, "流水_2025": 3836.0, "流水_yoy": -1.0, "订单量_2026": 0.0, "订单量_2025": 2.0, "订单量_yoy": -1.0, "AP_2026": 0.0, "AP_2025": 1918.0, "AP_yoy": -1.0, "销转_2026": 0.0, "销转_2025": 0.02, "销转_yoy": -1.0}, "跨多年库存": {"例子量_2026": 104.0, "例子量_2025": 58.0, "例子量_yoy": 0.79, "流水_2026": 12311.0, "流水_2025": 11508.0, "流水_yoy": 0.07, "订单量_2026": 3.0, "订单量_2025": 3.0, "订单量_yoy": 0.0, "AP_2026": 4103.67, "AP_2025": 3836.0, "AP_yoy": 0.07, "销转_2026": 0.03, "销转_2025": 0.05, "销转_yoy": -0.44}, "_total_leads_26": 311.0, "_total_leads_25": 327.0}, {"name": "微信小程序-公众号", "综合": {"流水_2026": 11630.0, "流水_2025": 7629.0, "流水_yoy": 0.52, "订单量_2026": 2.0, "订单量_2025": 2.0, "订单量_yoy": 0.0, "AP_2026": 5815.0, "AP_2025": 3814.5, "AP_yoy": 0.52, "销转_2026": 0.04, "销转_2025": 0.02, "销转_yoy": 0.73}, "新增例子": {"例子量_2026": 51.0, "例子量_2025": 88.0, "例子量_yoy": -0.42, "流水_2026": 2830.0, "流水_2025": 7629.0, "流水_yoy": -0.63, "订单量_2026": 1.0, "订单量_2025": 2.0, "订单量_yoy": -0.5, "AP_2026": 2830.0, "AP_2025": 3814.5, "AP_yoy": -0.26, "销转_2026": 0.02, "销转_2025": 0.02, "销转_yoy": -0.14}, "当年库存": {"例子量_2026": 13.0, "例子量_2025": 12.0, "例子量_yoy": 0.08, "业绩_2026": 8800.0, "业绩_2025": 0.0, "业绩_yoy": 0.0, "订单量_2026": 1.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 8800.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.08, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨1年库存": {"例子量_2026": 9.0, "例子量_2025": 12.0, "例子量_yoy": -0.25, "流水_2026": 0.0, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 0.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 0.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.0, "销转_2025": 0.0, "销转_yoy": 0.0}, "跨多年库存": {"例子量_2026": 4.0, "例子量_2025": 6.0, "例子量_yoy": -0.33, "流水_2026": 0.0, "流水_2025": 0.0, "流水_yoy": 0.0, "订单量_2026": 0.0, "订单量_2025": 0.0, "订单量_yoy": 0.0, "AP_2026": 0.0, "AP_2025": 0.0, "AP_yoy": 0.0, "销转_2026": 0.0, "销转_2025": 0.0, "销转_yoy": 0.0}, "_total_leads_26": 77.0, "_total_leads_25": 118.0}];
+var ttl = {"name": "TTL", "综合": {"流水_2026": 541809.0, "流水_2025": 513331.0, "流水_yoy": 0.06, "订单量_2026": 217.0, "订单量_2025": 182.0, "订单量_yoy": 0.19, "AP_2026": 2496.82, "AP_2025": 2820.5, "AP_yoy": -0.11, "销转_2026": 0.07, "销转_2025": 0.04, "销转_yoy": 0.93}, "新增例子": {"例子量_2026": 3167.0, "例子量_2025": 5136.0, "例子量_yoy": -0.38, "流水_2026": 206315.0, "流水_2025": 187709.5, "流水_yoy": 0.1, "订单量_2026": 90.0, "订单量_2025": 73.0, "订单量_yoy": 0.23, "AP_2026": 2292.39, "AP_2025": 2571.36, "AP_yoy": -0.11, "销转_2026": 0.03, "销转_2025": 0.01, "销转_yoy": 1.0}, "当年库存": {"例子量_2026": 1154.0, "例子量_2025": 411.0, "例子量_yoy": 1.81, "业绩_2026": 69558.0, "业绩_2025": 81575.5, "业绩_yoy": -0.15, "订单量_2026": 29.0, "订单量_2025": 24.0, "订单量_yoy": 0.21, "AP_2026": 2398.55, "AP_2025": 3398.98, "AP_yoy": -0.29, "销转_2026": 0.03, "销转_2025": 0.06, "销转_yoy": -0.57}, "跨1年库存": {"例子量_2026": 1303.0, "例子量_2025": 1976.0, "例子量_yoy": -0.34, "流水_2026": 135583.5, "流水_2025": 147046.0, "流水_yoy": -0.08, "订单量_2026": 46.0, "订单量_2025": 42.0, "订单量_yoy": 0.1, "AP_2026": 2947.47, "AP_2025": 3501.1, "AP_yoy": -0.16, "销转_2026": 0.04, "销转_2025": 0.02, "销转_yoy": 0.66}, "跨多年库存": {"例子量_2026": 619.0, "例子量_2025": 505.0, "例子量_yoy": 0.23, "流水_2026": 127572.5, "流水_2025": 91320.0, "流水_yoy": 0.4, "订单量_2026": 51.0, "订单量_2025": 41.0, "订单量_yoy": 0.24, "AP_2026": 2501.42, "AP_2025": 2227.32, "AP_yoy": 0.12, "销转_2026": 0.08, "销转_2025": 0.08, "销转_yoy": 0.01}, "_total_leads_26": 6243.0, "_total_leads_25": 8028.0};
+var colors = ["#1a237e", "#283593", "#3949ab", "#5c6bc0", "#7986cb", "#9fa8da", "#e53935", "#ef5350", "#f44336", "#e57373"];
+var bubbleColors = ["#1a237e", "#283593", "#3949ab", "#5c6bc0", "#7986cb", "#9fa8da", "#e53935", "#ef5350", "#f44336", "#e57373"];
+
+// ===== UTILS =====
+function fmtYuan(v) { return '&yen;' + (v/10000).toFixed(1) + '万'; }
+function fmtPct(v) { return (v*100).toFixed(1) + '%'; }
+function fmtInt(v) { return Math.round(v).toLocaleString(); }
+function yoyStyle(v) { return v >= 0 ? '<span class="up">&#x25b2; +' + fmtPct(v) + '</span>' : '<span class="down">&#x25bc; ' + fmtPct(v) + '</span>'; }
+
+var chNames = channels.map(c => c.name);
+
+// ===== CHART 1: Lead Share Pie =====
+new Chart(document.getElementById('c1_leadShare'), {
+  type: 'doughnut',
+  data: {
+    labels: chNames,
+    datasets: [{
+      data: channels.map(c => c._total_leads_26),
+      backgroundColor: colors,
+      borderWidth: 2, borderColor: '#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'right', labels: { font: { size: 11 }, padding: 12, usePointStyle: true } },
+      tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtInt(ctx.raw) + ' (' + (ctx.raw/ttl._total_leads_26*100).toFixed(1) + '%)' } }
+    }
+  }
+});
+
+// ===== CHART 2: Lead YoY =====
+new Chart(document.getElementById('c2_leadYoy'), {
+  type: 'bar',
+  data: {
+    labels: chNames,
+    datasets: [{
+      label: '例子量同比', data: channels.map(c => {
+        var chg = c._total_leads_25 > 0 ? (c._total_leads_26 - c._total_leads_25)/c._total_leads_25 : 0;
+        return chg * 100;
+      }),
+      backgroundColor: channels.map((c,i) => {
+        var chg = c._total_leads_25 > 0 ? (c._total_leads_26 - c._total_leads_25)/c._total_leads_25 : 0;
+        return chg >= 0 ? '#dc2626' : '#16a34a';
+      }),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => '同比: ' + (ctx.raw >= 0 ? '+' : '') + ctx.raw.toFixed(1) + '%' } }
+    },
+    scales: { x: { title: { display: true, text: '同比变化率 (%)' }, grid: { color: '#f3f4f6' } } }
+  }
+});
+
+// ===== CHART 3: Lead Structure =====
+var leadTypes = ['新增例子', '当年库存', '跨1年库存', '跨多年库存'];
+var leadDatasets = leadTypes.map((t,i) => ({
+  label: t, data: channels.map(c => c[t].例子量_2026 || 0),
+  backgroundColor: ['#1a237e','#3949ab','#7986cb','#c5cae9'][i],
+  borderRadius: i==3 ? 4 : 0
+}));
+new Chart(document.getElementById('c3_leadStructure'), {
+  type: 'bar',
+  data: { labels: chNames, datasets: leadDatasets },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position: 'top', labels: { font:{size:11}, usePointStyle:true, boxWidth:8 } },
+      tooltip: { callbacks: { label: ctx => ctx.dataset.label + ': ' + fmtInt(ctx.raw) } }
+    },
+    scales: {
+      x: { stacked: true, ticks: { maxRotation:45, font:{size:10} } },
+      y: { stacked: true, title: { display:true, text:'例子量' }, grid: { color:'#f3f4f6' } }
+    }
+  }
+});
+
+// ===== CHART 4: Lead 2-year compare =====
+new Chart(document.getElementById('c4_leadCompare'), {
+  type: 'bar',
+  data: {
+    labels: chNames,
+    datasets: [
+      { label: '2026', data: channels.map(c => c._total_leads_26), backgroundColor: '#1a237e', borderRadius: 4 },
+      { label: '2025', data: channels.map(c => c._total_leads_25), backgroundColor: '#c5cae9', borderRadius: 4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position:'top', labels:{font:{size:11},usePointStyle:true} } },
+    scales: { y: { title:{display:true,text:'例子量'}, grid:{color:'#f3f4f6'} }, x: { ticks:{maxRotation:45,font:{size:10}} } }
+  }
+});
+
+// ===== CHART 5: Revenue Share =====
+new Chart(document.getElementById('c5_revShare'), {
+  type: 'doughnut',
+  data: {
+    labels: chNames,
+    datasets: [{
+      data: channels.map(c => c['综合'].流水_2026),
+      backgroundColor: colors,
+      borderWidth:2, borderColor:'#fff'
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { position:'right', labels:{font:{size:11},padding:12,usePointStyle:true} },
+      tooltip: { callbacks: { label: ctx => ctx.label + ': ' + fmtYuan(ctx.raw) + ' (' + (ctx.raw/ttl['综合'].流水_2026*100).toFixed(1) + '%)' } }
+    }
+  }
+});
+
+// ===== CHART 6: Revenue Compare =====
+new Chart(document.getElementById('c6_revCompare'), {
+  type: 'bar',
+  data: {
+    labels: chNames,
+    datasets: [
+      { label:'2026', data: channels.map(c => c['综合'].流水_2026), backgroundColor:'#1a237e', borderRadius:4 },
+      { label:'2025', data: channels.map(c => c['综合'].流水_2025), backgroundColor:'#c5cae9', borderRadius:4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend:{position:'top',labels:{font:{size:11},usePointStyle:true}}, tooltip:{callbacks:{label: ctx => ctx.dataset.label + ': ' + fmtYuan(ctx.raw)}} },
+    scales: { y:{title:{display:true,text:'流水 (元)'}, grid:{color:'#f3f4f6'}, ticks:{callback:v=>fmtYuan(v)} }, x:{ticks:{maxRotation:45,font:{size:10}}} }
+  }
+});
+
+// ===== CHART 7: AP Compare =====
+var ap26 = channels.map(c => c['综合'].AP_2026);
+var ap25 = channels.map(c => c['综合'].AP_2025);
+new Chart(document.getElementById('c7_apCompare'), {
+  type: 'bar',
+  data: {
+    labels: chNames,
+    datasets: [
+      { label:'2026 AP', data: ap26, backgroundColor:'#1a237e', borderRadius:4 },
+      { label:'2025 AP', data: ap25, backgroundColor:'#c5cae9', borderRadius:4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend:{position:'top',labels:{font:{size:11},usePointStyle:true}}, tooltip:{callbacks:{label:ctx => ctx.dataset.label + ': &yen;' + ctx.raw.toFixed(0)}} },
+    scales: { y:{title:{display:true,text:'客单价 (&yen;)'}, grid:{color:'#f3f4f6'}, ticks:{callback:v=>'&yen;'+v} }, x:{ticks:{maxRotation:45,font:{size:10}}} }
+  }
+});
+
+// ===== CHART 8: Flow vs Revenue match =====
+var totalLeads26 = channels.reduce((s,c)=>s+c._total_leads_26,0);
+var totalRev26 = channels.reduce((s,c)=>s+c['综合'].流水_2026,0);
+new Chart(document.getElementById('c8_flowRev'), {
+  type: 'bar',
+  data: {
+    labels: chNames,
+    datasets: [
+      { label:'例子量占比', data: channels.map(c => c._total_leads_26/totalLeads26*100), backgroundColor:'#3949ab', borderRadius:4, yAxisID:'y' },
+      { label:'流水占比', data: channels.map(c => c['综合'].流水_2026/totalRev26*100), backgroundColor:'#e53935', borderRadius:4, yAxisID:'y' }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend:{position:'top',labels:{font:{size:11},usePointStyle:true}}, tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.raw.toFixed(1)+'%'}} },
+    scales: { y:{title:{display:true,text:'占比 (%)'}, grid:{color:'#f3f4f6'} }, x:{ticks:{maxRotation:45,font:{size:10}}} }
+  }
+});
+
+// ===== CHART 9: Conversion Rate =====
+new Chart(document.getElementById('c9_convRate'), {
+  type: 'bar',
+  data: {
+    labels: chNames,
+    datasets: [
+      { label:'2026 销转率', data: channels.map(c => c['综合'].销转_2026*100), backgroundColor:'#1a237e', borderRadius:4 },
+      { label:'2025 销转率', data: channels.map(c => c['综合'].销转_2025*100), backgroundColor:'#c5cae9', borderRadius:4 }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend:{position:'top',labels:{font:{size:11},usePointStyle:true}}, tooltip:{callbacks:{label:ctx=>ctx.dataset.label+': '+ctx.raw.toFixed(2)+'%'}} },
+    scales: { y:{title:{display:true,text:'销转率 (%)'}, grid:{color:'#f3f4f6'} }, x:{ticks:{maxRotation:45,font:{size:10}}} }
+  }
+});
+
+// ===== CHART 10: Conv YoY =====
+new Chart(document.getElementById('c10_convYoy'), {
+  type: 'bar',
+  data: {
+    labels: chNames,
+    datasets: [{
+      label: '销转率同比', data: channels.map(c => c['综合'].销转_yoy*100),
+      backgroundColor: channels.map(c => c['综合'].销转_yoy >= 0 ? '#dc2626' : '#16a34a'),
+      borderRadius: 4
+    }]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { legend:{display:false}, tooltip:{callbacks:{label:ctx=>'同比: '+(ctx.raw>=0?'+':'')+ctx.raw.toFixed(1)+'%'}} },
+    scales: { x:{title:{display:true,text:'同比变化率 (%)'}, grid:{color:'#f3f4f6'} } }
+  }
+});
+
+// ===== CHART 11: Quadrant (scatter) =====
+var quadrantData = channels.map((c,i) => ({
+  x: c._total_leads_26 / totalLeads26 * 100,
+  y: c['综合'].流水_2026 / totalRev26 * 100,
+  name: c.name,
+  rev: c['综合'].流水_2026,
+  leads: c._total_leads_26
+}));
+var avgX = quadrantData.reduce((s,d)=>s+d.x,0)/quadrantData.length;
+var avgY = quadrantData.reduce((s,d)=>s+d.y,0)/quadrantData.length;
+
+new Chart(document.getElementById('c11_quadrant'), {
+  type: 'scatter',
+  data: {
+    datasets: [{
+      label: '渠道',
+      data: quadrantData,
+      backgroundColor: bubbleColors, pointRadius: 0, pointHoverRadius: 0
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => {
+        var d = quadrantData[ctx.dataIndex];
+        return d.name + ': 例子量 ' + fmtInt(d.leads) + ' (' + d.x.toFixed(1) + '%), 流水 ' + fmtYuan(d.rev) + ' (' + d.y.toFixed(1) + '%)';
+      } } }
+    },
+    scales: {
+      x: { title: { display: true, text: '例子量占比 (%)' }, grid: { color: '#f3f4f6' } },
+      y: { title: { display: true, text: '流水占比 (%)' }, grid: { color: '#f3f4f6' } }
+    }
+  },
+  plugins: [{
+    id: 'quadLabels', afterDraw: function(chart) {
+      var ctx = chart.ctx;
+      var xAxis = chart.scales.x, yAxis = chart.scales.y;
+      ctx.font = '11px -apple-system, PingFang SC, sans-serif';
+      ctx.textAlign = 'center';
+      quadrantData.forEach(function(d,i) {
+        var px = xAxis.getPixelForValue(d.x);
+        var py = yAxis.getPixelForValue(d.y);
+        ctx.fillStyle = bubbleColors[i];
+        ctx.beginPath(); ctx.arc(px, py, 7, 0, 2*Math.PI); ctx.fill();
+        ctx.fillStyle = '#1f2937';
+        ctx.fillText(d.name, px, py - 14);
+      });
+    }
+  }]
+});
+
+// Build quadrant insights
+(function() {
+  var html = '<h3>&#x1f4ac; 四象限解读</h3>';
+  var hh=[], hl=[], lh=[], ll=[];
+  quadrantData.forEach(function(d) {
+    if (d.x >= avgX && d.y >= avgY) hh.push(d);
+    else if (d.x >= avgX && d.y < avgY) hl.push(d);
+    else if (d.x < avgX && d.y >= avgY) lh.push(d);
+    else ll.push(d);
+  });
+  function names(arr) { return arr.map(d=>d.name).join('、'); }
+  if (hh.length) html += '<div class="quadrant-group q-hh"><h4>&#x2b50; 高流量高营收</h4><p>' + names(hh) + ' &mdash; 核心渠道，继续保持。</p></div>';
+  if (hl.length) html += '<div class="quadrant-group q-hl"><h4>&#x26a0;&#xfe0f; 高流量低营收</h4><p>' + names(hl) + ' &mdash; 流量大但变现差，需优化转化路径。</p></div>';
+  if (lh.length) html += '<div class="quadrant-group q-lh"><h4>&#x1f4a1; 低流量高营收</h4><p>' + names(lh) + ' &mdash; 转化效率高，值得加大投入。</p></div>';
+  if (ll.length) html += '<div class="quadrant-group q-ll"><h4>&#x1f4cc; 低流量低营收</h4><p>' + names(ll) + ' &mdash; 观察或考虑调整策略。</p></div>';
+  document.getElementById('quadrantInsight').innerHTML = html;
+})();
+
+// ===== CHART 12: Growth Matrix =====
+var growthData = channels.map((c,i) => ({
+  x: c['综合'].销转_2026*100,
+  y: c['综合'].AP_2026,
+  name: c.name, rev: c['综合'].流水_2026, orders: c['综合'].订单量_2026
+}));
+new Chart(document.getElementById('c12_growthMatrix'), {
+  type: 'scatter',
+  data: { datasets: [{ label:'渠道', data: growthData, backgroundColor: bubbleColors }] },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => {
+        var d = growthData[ctx.dataIndex];
+        return d.name + ': 销转 ' + d.x.toFixed(2) + '% / AP &yen;' + d.y.toFixed(0) + ' / 流水 ' + fmtYuan(d.rev);
+      } } }
+    },
+    scales: {
+      x: { title: { display:true, text:'综合销转率 (%)' }, grid:{color:'#f3f4f6'} },
+      y: { title: { display:true, text:'客单价 AP (&yen;)' }, grid:{color:'#f3f4f6'}, ticks:{callback:v=>'&yen;'+v} }
+    }
+  },
+  plugins: [{
+    id: 'growthLabels', afterDraw: function(chart) {
+      var ctx = chart.ctx, xA=chart.scales.x, yA=chart.scales.y;
+      ctx.font = '11px -apple-system, PingFang SC, sans-serif';
+      ctx.textAlign = 'center';
+      growthData.forEach(function(d,i) {
+        var px=xA.getPixelForValue(d.x), py=yA.getPixelForValue(d.y);
+        ctx.fillStyle=bubbleColors[i];
+        ctx.beginPath(); ctx.arc(px,py,7,0,2*Math.PI); ctx.fill();
+        ctx.fillStyle='#1f2937';
+        ctx.fillText(d.name, px, py-14);
+      });
+    }
+  }]
+});
+
+// ===== SECTION 3: Conversion Heatmap Table =====
+(function() {
+  var sections = ['新增例子','当年库存','跨1年库存','跨多年库存'];
+  var html = '<table><thead><tr><th>渠道</th>';
+  sections.forEach(function(s) { html += '<th>' + s + ' 销转(26)</th><th>' + s + ' 销转(25)</th><th>同比</th>'; });
+  html += '</tr></thead><tbody>';
+  channels.forEach(function(c) {
+    html += '<tr><td>' + c.name + '</td>';
+    sections.forEach(function(s) {
+      var v26 = (c[s].销转_2026||0)*100, v25 = (c[s].销转_2025||0)*100, yoy = c[s].销转_yoy||0;
+      var yTag = '';
+      if (yoy > 1) yTag = ' <span class="tag tag-red">+'+Math.round(yoy*100)+'%</span>';
+      else if (yoy > 0) yTag = ' <span class="tag tag-green">+'+Math.round(yoy*100)+'%</span>';
+      else if (yoy < 0) yTag = ' <span class="tag tag-blue">'+Math.round(yoy*100)+'%</span>';
+      html += '<td>' + v26.toFixed(2) + '%</td><td style="color:#9ca3af">' + v25.toFixed(2) + '%</td><td>' + (yoy>=0?'+':'') + Math.round(yoy*100) + '%' + yTag + '</td>';
+    });
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('convTable').innerHTML = html;
+})();
+
+// ===== SECTION 4: Detail Table =====
+(function() {
+  var html = '<table><thead><tr><th>渠道</th><th>流水(26)</th><th>流水同比</th><th>订单量(26)</th><th>AP(26)</th><th>销转(26)</th><th>例子量(26)</th><th>例子量同比</th></tr></thead><tbody>';
+  channels.forEach(function(c) {
+    html += '<tr><td>' + c.name + '</td>';
+    html += '<td>' + fmtYuan(c['综合'].流水_2026) + '</td>';
+    html += '<td>' + yoyStyle(c['综合'].流水_yoy) + '</td>';
+    html += '<td>' + c['综合'].订单量_2026 + '</td>';
+    html += '<td>&yen;' + c['综合'].AP_2026.toFixed(0) + '</td>';
+    html += '<td>' + fmtPct(c['综合'].销转_2026) + '</td>';
+    html += '<td>' + fmtInt(c._total_leads_26) + '</td>';
+    var lyoy = c._total_leads_25>0 ? (c._total_leads_26-c._total_leads_25)/c._total_leads_25 : 0;
+    html += '<td>' + yoyStyle(lyoy) + '</td>';
+    html += '</tr>';
+  });
+  html += '</tbody></table>';
+  document.getElementById('detailTable').innerHTML = html;
+})();
+
+// ===== SECTION 5: Anomalies =====
+(function() {
+  var cards = [];
+
+  // Anomaly detection logic
+  channels.forEach(function(c) {
+    var rev_yoy = c['综合'].流水_yoy;
+    var conv_yoy = c['综合'].销转_yoy;
+    var leadChange = c._total_leads_25>0 ? (c._total_leads_26-c._total_leads_25)/c._total_leads_25 : 0;
+
+    // High growth channels (deserving more investment)
+    if (rev_yoy > 1 && conv_yoy > 2) {
+      cards.push({type:'good', title:'&#x1f680; ' + c.name + ' &mdash; 高增长潜力渠道',
+        text: '流水同比' + fmtPct(rev_yoy) + '，销转同比暴增' + fmtPct(conv_yoy) + '。AP &yen;' + c['综合'].AP_2026.toFixed(0) + '，建议加大投放。'});
+    }
+
+    // Revenue decline channels
+    if (rev_yoy < -0.3 && c['综合'].流水_2026 > 10000) {
+      cards.push({type:'bad', title:'&#x26a0;&#xfe0f; ' + c.name + ' &mdash; 营收大幅下滑',
+        text: '流水同比' + fmtPct(rev_yoy) + '，从' + fmtYuan(c['综合'].流水_2025) + '降至' + fmtYuan(c['综合'].流水_2026) + '。AP从&yen;' + c['综合'].AP_2025.toFixed(0) + '变为&yen;' + c['综合'].AP_2026.toFixed(0) + '，需关注客单价变化。'});
+    }
+
+    // High traffic low conversion
+    if (c._total_leads_26 > 300 && c['综合'].销转_2026 < 0.05) {
+      cards.push({type:'bad', title:'&#x1f4a2; ' + c.name + ' &mdash; 流量大但转化低',
+        text: '例子量' + fmtInt(c._total_leads_26) + '但销转仅' + fmtPct(c['综合'].销转_2026) + '。AP &yen;' + c['综合'].AP_2026.toFixed(0) + '，需优化转化漏斗。'});
+    }
+
+    // Low traffic high conversion
+    if (c._total_leads_26 < 200 && c['综合'].销转_2026 > 0.08 && c['综合'].流水_2026 > 5000) {
+      cards.push({type:'good', title:'&#x1f4a1; ' + c.name + ' &mdash; 小而美高转化',
+        text: '仅' + fmtInt(c._total_leads_26) + '例子但销转高达' + fmtPct(c['综合'].销转_2026) + '。AP &yen;' + c['综合'].AP_2026.toFixed(0) + '，值得扩大规模。'});
+    }
+
+    // AP crash
+    if (c['综合'].AP_yoy < -0.4 && c['综合'].AP_2025 > 2000) {
+      cards.push({type:'bad', title:'&#x1f4c9; ' + c.name + ' &mdash; 客单价暴跌',
+        text: 'AP从&yen;' + c['综合'].AP_2025.toFixed(0) + '降至&yen;' + c['综合'].AP_2026.toFixed(0) + '（' + fmtPct(c['综合'].AP_yoy) + '），可能涌入低价课用户。'});
+    }
+  });
+
+  var html = '';
+  cards.forEach(function(card) {
+    html += '<div class="anomaly-card ' + card.type + '"><h4>' + card.title + '</h4><p>' + card.text + '</p></div>';
+  });
+  if (!cards.length) html = '<div class="anomaly-card good"><h4>&#x2705; 未发现明显异常</h4><p>所有渠道数据在正常范围内波动。</p></div>';
+  document.getElementById('anomalyGrid').innerHTML = html;
+})();
+
+// ===== YOY Arrow Helpers =====
+</script>
+
+</body>
+</html>

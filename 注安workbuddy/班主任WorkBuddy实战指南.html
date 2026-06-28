@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>班主任 WorkBuddy 实战指南</title>
+<style>
+/* ===== Reset & Base ===== */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f8fafc;--card:#fff;--text:#1e293b;--sub:#64748b;--muted:#94a3b8;
+  --border:#e2e8f0;--radius:12px;--radius-sm:8px;
+  --blue:#2563eb;--blue-light:#eff6ff;
+  --teal:#0d9488;--teal-light:#f0fdfa;
+  --amber:#d97706;--amber-light:#fffbeb;
+  --purple:#7c3aed;--purple-light:#faf5ff;
+  --green:#059669;--green-light:#ecfdf5;
+  --red:#dc2626;--red-light:#fef2f2;
+  --slate:#475569;--slate-light:#f8fafc;
+}
+body{
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  font-size:17px;color:var(--text);background:var(--bg);line-height:1.8;
+  max-width:960px;margin:0 auto;padding:48px 24px 80px;
+}
+
+/* ===== Header ===== */
+.page-header{
+  text-align:center;margin-bottom:48px;padding:48px 24px;
+  background:linear-gradient(135deg,#1e40af,#3b82f6);color:#fff;
+  border-radius:var(--radius);position:relative;overflow:hidden;
+}
+.page-header::before{
+  content:'';position:absolute;top:-60px;right:-60px;
+  width:200px;height:200px;border-radius:50%;
+  background:rgba(255,255,255,.06);
+}
+.page-header h1{font-size:34px;font-weight:900;margin-bottom:12px;position:relative}
+.page-header p{font-size:18px;opacity:.9;position:relative}
+.page-header .sub{font-size:15px;opacity:.7;margin-top:8px;position:relative}
+
+/* ===== Module Cards ===== */
+.module{margin-bottom:40px}
+.module-header{
+  display:flex;align-items:center;gap:14px;margin-bottom:20px;
+  padding-bottom:14px;border-bottom:2px solid var(--border);
+}
+.module-header .icon{
+  width:48px;height:48px;border-radius:12px;display:flex;
+  align-items:center;justify-content:center;font-size:24px;flex-shrink:0;
+}
+.module-header .icon.blue{background:var(--blue-light);color:var(--blue)}
+.module-header .icon.teal{background:var(--teal-light);color:var(--teal)}
+.module-header .icon.amber{background:var(--amber-light);color:var(--amber)}
+.module-header .icon.purple{background:var(--purple-light);color:var(--purple)}
+.module-header .icon.green{background:var(--green-light);color:var(--green)}
+.module-header .icon.red{background:var(--red-light);color:var(--red)}
+.module-header .icon.slate{background:var(--slate-light);color:var(--slate)}
+
+.module-header h2{font-size:24px;font-weight:800;color:var(--text)}
+.module-header .tag{
+  display:inline-block;padding:3px 12px;border-radius:10px;font-size:13px;font-weight:600;
+  margin-left:auto;
+}
+.module-header .tag.blue{background:var(--blue-light);color:var(--blue)}
+
+/* ===== Section ===== */
+.section{
+  background:var(--card);border-radius:var(--radius);
+  border:1px solid var(--border);padding:28px 32px;margin-bottom:16px;
+}
+.section h3{
+  font-size:19px;font-weight:700;margin-bottom:12px;color:var(--text);
+  display:flex;align-items:center;gap:8px;
+}
+.section h3 .dot{
+  width:8px;height:8px;border-radius:50%;display:inline-block;flex-shrink:0;
+}
+.dot.blue{background:var(--blue)}.dot.teal{background:var(--teal)}
+.dot.amber{background:var(--amber)}.dot.purple{background:var(--purple)}
+.dot.green{background:var(--green)}.dot.red{background:var(--red)}
+
+.section p{color:var(--sub);margin-bottom:10px}
+.section ul{margin:8px 0 0 20px;color:var(--sub)}
+.section ul li{margin-bottom:6px}
+
+/* ===== Highlight Box ===== */
+.highlight{
+  background:var(--blue-light);border:1px solid #bfdbfe;
+  border-radius:var(--radius-sm);padding:16px 20px;margin:14px 0;
+}
+.highlight.teal{background:var(--teal-light);border-color:#99f6e4}
+.highlight.amber{background:var(--amber-light);border-color:#fde68a}
+.highlight.purple{background:var(--purple-light);border-color:#ddd6fe}
+.highlight.green{background:var(--green-light);border-color:#a7f3d0}
+.highlight.red{background:var(--red-light);border-color:#fecaca}
+.highlight .hl-title{font-weight:700;font-size:16px;margin-bottom:6px;color:var(--text)}
+.highlight .hl-code{
+  background:#1e293b;color:#e2e8f0;padding:12px 16px;border-radius:8px;
+  font-family:"SF Mono","Fira Code",monospace;font-size:14px;line-height:1.7;
+  white-space:pre-wrap;word-break:break-all;margin-top:8px;
+}
+
+/* ===== Scenario Table ===== */
+.scenario-table{
+  width:100%;border-collapse:collapse;margin:14px 0;font-size:15px;
+}
+.scenario-table th{
+  text-align:left;padding:10px 14px;font-weight:700;font-size:13px;
+  color:var(--sub);border-bottom:2px solid var(--border);background:var(--slate-light);
+}
+.scenario-table td{
+  padding:12px 14px;border-bottom:1px solid var(--border);
+  color:var(--text);vertical-align:top;
+}
+.scenario-table td:first-child{white-space:nowrap;font-weight:600}
+.scenario-table tr:last-child td{border-bottom:none}
+.scenario-table .label{
+  display:inline-block;padding:2px 8px;border-radius:6px;font-size:12px;font-weight:600;
+}
+.label.blue{background:var(--blue-light);color:var(--blue)}
+.label.teal{background:var(--teal-light);color:var(--teal)}
+
+/* ===== Steps ===== */
+.steps{counter-reset:step;margin:14px 0}
+.step{
+  counter-increment:step;padding:14px 0 14px 44px;position:relative;
+  border-left:2px solid var(--border);margin-left:16px;
+}
+.step::before{
+  content:counter(step);position:absolute;left:-18px;top:12px;
+  width:34px;height:34px;border-radius:50%;background:var(--blue);
+  color:#fff;display:flex;align-items:center;justify-content:center;
+  font-size:14px;font-weight:700;
+}
+.step:last-child{border-left-color:transparent}
+.step strong{color:var(--text);display:block;margin-bottom:4px}
+.step p{color:var(--sub);font-size:15px;margin:0}
+
+/* ===== Footer ===== */
+.footer-note{
+  margin-top:48px;padding:24px 28px;background:var(--slate-light);
+  border-radius:var(--radius);border:1px solid var(--border);
+  text-align:center;color:var(--sub);font-size:15px;
+}
+.footer-note strong{color:var(--text)}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+  body{padding:20px 12px}
+  .page-header{padding:32px 16px}
+  .page-header h1{font-size:26px}
+  .section{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== HEADER ===== -->
+<div class="page-header">
+  <h1>🛠️ 班主任 WorkBuddy 实战指南</h1>
+  <p>一个功能一个场景，说清楚：什么时候用、怎么用、能解决什么问题</p>
+  <div class="sub">适用于中级注册安全工程师项目 · 班主任日常教务与服务场景</div>
+</div>
+
+<!-- ===== 模块一：助理 ===== -->
+<div class="module">
+  <div class="module-header">
+    <div class="icon blue">💬</div>
+    <h2>一、助理 —— 你的 AI 对话助手</h2>
+    <span class="tag blue">最常用</span>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot blue"></span>这是什么</h3>
+    <p>WorkBuddy 最核心的功能。打开就是对话窗口，你用自然语言说需求，它就能读文件、写内容、做分析、出结果。不需要学任何操作，像跟同事说话一样。</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot blue"></span>班主任什么时候用</h3>
+    <table class="scenario-table">
+      <tr><th>场景</th><th>频率</th><th>你只需要说</th></tr>
+      <tr>
+        <td><span class="label blue">周报</span></td>
+        <td>每周必用</td>
+        <td>「根据这周各班出勤和模考成绩数据，帮我写一份周报，附数据对比」</td>
+      </tr>
+      <tr>
+        <td><span class="label teal">首访话术</span></td>
+        <td>每期高频</td>
+        <td>「我是注安培训班主任，新学员刚报名，帮我写一段首访电话话术，包括自我介绍、学习安排介绍、加微信引导」</td>
+      </tr>
+      <tr>
+        <td><span class="label amber">成绩分析</span></td>
+        <td>模考后</td>
+        <td>「这是本期模考成绩表（上传Excel），帮我分析各科均分、及格率、薄弱知识点分布，再给各分数段学员的督学建议」</td>
+      </tr>
+      <tr>
+        <td><span class="label purple">通知/公告</span></td>
+        <td>按需</td>
+        <td>「帮我写一段群公告：提醒学员下周模考、考试注意事项、复习重点章节」</td>
+      </tr>
+      <tr>
+        <td><span class="label green">学员答疑</span></td>
+        <td>日常</td>
+        <td>「学员问：法规和管理两科总是混淆怎么破？帮我整理一份两科对比速查表，回复学员用」</td>
+      </tr>
+      <tr>
+        <td><span class="label blue">调研问卷</span></td>
+        <td>阶段性</td>
+        <td>「帮我设计一份学员学习满意度调研问卷，涵盖课程质量、服务响应、学习效果三个维度」</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot blue"></span>怎么用 —— 三步上手</h3>
+    <div class="steps">
+      <div class="step"><strong>打开助理，输入需求</strong><p>点左侧「助理」，在底部输入框直接说你要什么。越具体越好——告诉它背景、目标、格式要求。</p></div>
+      <div class="step"><strong>补充上下文</strong><p>把学员数据Excel、往期周报、参考模板拖进去或粘贴截图。AI 有了上下文才能给出更准的结果。</p></div>
+      <div class="step"><strong>持续追问、迭代</strong><p>第一次结果不满意？直接说「再简洁一点」「加上各班对比」「导出成 Word」。像改稿一样来回打磨。</p></div>
+    </div>
+  </div>
+
+  <div class="highlight blue">
+    <div class="hl-title">💡 实战技巧</div>
+    <p style="margin:0">上传学员档案 Excel 后，让助理「读取这份表格，帮我梳理出：①高分学员名单（总分前20%）②需要重点督学的学员（总分后30%）③各科目薄弱学员分组」，一步完成分层。</p>
+  </div>
+</div>
+
+<!-- ===== 模块二：任务管理 ===== -->
+<div class="module">
+  <div class="module-header">
+    <div class="icon teal">📋</div>
+    <h2>二、任务管理 —— 你的工作待办中心</h2>
+    <span class="tag teal">日常高频</span>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot teal"></span>这是什么</h3>
+    <p>WorkBuddy 创建的每个任务都会保存在左侧列表中。你可以随时回到之前的任务继续推进，也可以搜索、筛选、归档。相当于一个带 AI 能力的待办系统。</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot teal"></span>班主任什么时候用</h3>
+    <table class="scenario-table">
+      <tr><th>场景</th><th>说明</th></tr>
+      <tr>
+        <td><span class="label teal">长期任务</span></td>
+        <td>比如「学员首访」这个任务，每次打开继续追问「帮我把这周新报名的3个学员的首访话术生成好」，不用重复交代背景。</td>
+      </tr>
+      <tr>
+        <td><span class="label teal">多线并行</span></td>
+        <td>同一时段有多件事——A任务是写周报、B任务是做模考分析、C任务是写续报方案。三个任务分别开，各管各的上下文。</td>
+      </tr>
+      <tr>
+        <td><span class="label teal">历史回溯</span></td>
+        <td>上期怎么写首访话术的？搜「首访」就能找到当时的任务，参考复用。</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight teal">
+    <div class="hl-title">💡 实战技巧</div>
+    <p style="margin:0">给任务起个好名字，方便以后查找。别叫「帮我写个东西」，叫「2026年7月期_学员首访话术模板」。用「工作空间」按项目归类，比如建一个「注安项目」工作空间，所有相关任务都在里面。</p>
+  </div>
+</div>
+
+<!-- ===== 模块三：项目/工作空间 ===== -->
+<div class="module">
+  <div class="module-header">
+    <div class="icon amber">📁</div>
+    <h2>三、项目（工作空间）—— 按业务模块归类管理</h2>
+    <span class="tag amber">组织利器</span>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot amber"></span>这是什么</h3>
+    <p>「工作空间」是一个按项目归类任务的文件夹。你可以在一个空间下集中管理所有相关任务，切换项目时互不干扰。</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot amber"></span>班主任怎么建工作空间</h3>
+    <p>建议按你的业务模块建 4 个核心工作空间：</p>
+    <table class="scenario-table">
+      <tr><th>工作空间名称</th><th>放什么任务</th></tr>
+      <tr>
+        <td><span class="label amber">C端-学员服务</span></td>
+        <td>首访话术、分层督学、学员答疑、心理疏导话术、续报方案</td>
+      </tr>
+      <tr>
+        <td><span class="label amber">B端-企业交付</span></td>
+        <td>企业培训方案、学员名册整理、结业报告、云企培平台操作指南</td>
+      </tr>
+      <tr>
+        <td><span class="label amber">数据分析</span></td>
+        <td>周报、月考分析、学员画像、续报数据、各班主任业绩对比</td>
+      </tr>
+      <tr>
+        <td><span class="label amber">营销物料</span></td>
+        <td>招生海报、课程卖点、话术库、朋友圈文案、社群内容</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight amber">
+    <div class="hl-title">💡 实战技巧</div>
+    <p style="margin:0">6位班主任共用一个工作空间模版，各自的数据文件放在对应空间里。做周报时切到「数据分析」空间，所有历史周报、成绩数据都在，AI 能基于之前的上下文直接生成。</p>
+  </div>
+</div>
+
+<!-- ===== 模块四：专家 ===== -->
+<div class="module">
+  <div class="module-header">
+    <div class="icon purple">🧠</div>
+    <h2>四、专家 —— 调用专业领域的 AI 能力</h2>
+    <span class="tag purple">进阶能力</span>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot purple"></span>这是什么</h3>
+    <p>「专家」是 WorkBuddy 的特色功能。你可以把它理解为「请一个专业顾问来干活」——通用 AI 什么都知道一点，但专家在特定领域更深、更专业。还能组「专家团」多个专家协作。</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot purple"></span>班主任什么时候用专家</h3>
+    <table class="scenario-table">
+      <tr><th>场景</th><th>用什么专家</th><th>为什么</th></tr>
+      <tr>
+        <td>需要做一份精美的培训PPT</td>
+        <td><span class="label purple">PPT制作专家</span></td>
+        <td>比通用对话生成的PPT更专业，自动配版式、图表、配色</td>
+      </tr>
+      <tr>
+        <td>需要系统化梳理培训内容</td>
+        <td><span class="label purple">培训文档专家</span></td>
+        <td>能把零散素材拆解成结构化培训体系</td>
+      </tr>
+      <tr>
+        <td>需要做数据分析图表</td>
+        <td><span class="label purple">数据分析专家</span></td>
+        <td>自动生成可视化图表、环比/同比分析</td>
+      </tr>
+      <tr>
+        <td>需要设计宣传海报</td>
+        <td><span class="label purple">设计专家</span></td>
+        <td>输出可直接用的海报设计</td>
+      </tr>
+      <tr>
+        <td>复杂项目需要多角色协作</td>
+        <td><span class="label purple">专家团</span></td>
+        <td>同时调项目经理+内容+设计，一条龙产出</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight purple">
+    <div class="hl-title">💡 实战技巧</div>
+    <p style="margin:0">做「月度学员分析报告」时，先让数据分析专家出图表和分析结论，再让PPT专家把结论做成汇报PPT。两步衔接，产出质量比直接让通用助理做高得多。</p>
+  </div>
+</div>
+
+<!-- ===== 模块五：自动化 ===== -->
+<div class="module">
+  <div class="module-header">
+    <div class="icon green">⏰</div>
+    <h2>五、自动化 —— 定时任务，到点自动跑</h2>
+    <span class="tag green">省心利器</span>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot green"></span>这是什么</h3>
+    <p>设置好时间、频率、要做什么，WorkBuddy 就会自动执行。不用你每次手动操作。支持每天、每周、每月等周期。</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot green"></span>班主任必设的自动化场景</h3>
+    <table class="scenario-table">
+      <tr><th>自动化任务</th><th>频率</th><th>效果</th></tr>
+      <tr>
+        <td><span class="label green">周一早报</span></td>
+        <td>每周一早9:00</td>
+        <td>自动生成上周学员数据周报（出勤、完课、模考），推送到群里或生成文档</td>
+      </tr>
+      <tr>
+        <td><span class="label green">每日一练推送</span></td>
+        <td>每天早上8:00</td>
+        <td>自动从题库中抽题生成每日一练，附带答案解析，发到学员群</td>
+      </tr>
+      <tr>
+        <td><span class="label green">阶段测评提醒</span></td>
+        <td>每两周一次</td>
+        <td>到期自动生成阶段测评通知+测评内容，提醒学员参加</td>
+      </tr>
+      <tr>
+        <td><span class="label green">续报时间节点提醒</span></td>
+        <td>考前1个月</td>
+        <td>自动列出即将到期的学员名单，生成续报沟通话术</td>
+      </tr>
+      <tr>
+        <td><span class="label green">出勤异常预警</span></td>
+        <td>每天</td>
+        <td>自动检查学员出勤数据，标记连续3天未上课的学员，生成跟进名单</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight green">
+    <div class="hl-title">💡 实战技巧</div>
+    <p style="margin:0">把重复性、周期性的工作全配成自动化——比如周日晚上设一个「生成下周督学日历」的自动化，周一一早就已经生成好了。6个班主任每个人配一套，省出来的时间去做更重要的学员沟通。</p>
+  </div>
+</div>
+
+<!-- ===== 模块六：连接器 ===== -->
+<div class="module">
+  <div class="module-header">
+    <div class="icon red">🔌</div>
+    <h2>六、连接器 —— 打通外部工具，数据不再搬来搬去</h2>
+    <span class="tag red">效率翻倍</span>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot red"></span>这是什么</h3>
+    <p>「连接器」让 WorkBuddy 直接访问你的外部平台数据——腾讯文档、乐享知识库、ima 知识库等。以前你得先把文件下载、再上传给 AI，现在连上后 AI 直接去读。</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot red"></span>班主任已连了哪些、怎么用</h3>
+    <table class="scenario-table">
+      <tr><th>连接器</th><th>在班主任工作中怎么用</th></tr>
+      <tr>
+        <td><span class="label red">腾讯文档</span></td>
+        <td>
+          <strong>最强生产力连接器。</strong>学员数据表存在腾讯文档里，WorkBuddy 直接读取、分析、写回。<br>
+          实操：说「读一下腾讯文档里的『2026注安学员档案』，把出勤率低于60%的学员列出来，在表里新增一列标记」——全程不需要手动下载上传。
+        </td>
+      </tr>
+      <tr>
+        <td><span class="label red">乐享知识库</span></td>
+        <td>
+          <strong>团队知识沉淀中心。</strong>把考务政策、话术库、SOP文档、常见问题、培训课件都存进去。<br>
+          实操：新人班主任入职，直接让 WorkBuddy 「在乐享知识库里查一下首访SOP和标准话术」，10秒钟搞定不用翻文档。
+        </td>
+      </tr>
+      <tr>
+        <td><span class="label red">ima知识库</span></td>
+        <td>
+          <strong>个人资料库。</strong>适合存你自己的常用资料、灵感素材、优秀案例。<br>
+          实操：平时看到好的培训文案、竞品话术截图存进 ima，写新话术时让 WorkBuddy 「参考 ima 知识库里的话术案例，帮我写一段同风格的」。
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight red">
+    <div class="hl-title">💡 实战技巧</div>
+    <p style="margin:0">连接器的核心价值是<strong>消除「搬运数据」这个环节</strong>。以前的链路是：打开腾讯文档 → 下载 → 拖给AI → AI处理 → 手动贴回去。连上后变成：对AI说一句话 → 它直接读/写腾讯文档。这是质的飞跃。</p>
+  </div>
+</div>
+
+<!-- ===== 模块七：技能 ===== -->
+<div class="module">
+  <div class="module-header">
+    <div class="icon slate">⚡</div>
+    <h2>七、技能 —— 给 AI 装「专业插件」</h2>
+    <span class="tag slate">扩展能力</span>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot slate"></span>这是什么</h3>
+    <p>「技能」是给 WorkBuddy 扩展特定能力的插件包。装完技能后，你不需要手动切换——正常对话就行，AI 在需要的时候会自动调用。比如装了 PPT 技能，说「帮我做一份周报 PPT」，AI 就会自动调用 PPT 能力生成。</p>
+  </div>
+
+  <div class="section">
+    <h3><span class="dot slate"></span>班主任推荐安装的技能</h3>
+    <table class="scenario-table">
+      <tr><th>技能</th><th>能帮你做什么</th></tr>
+      <tr>
+        <td><span class="label slate">PPT制作</span></td>
+        <td>一句话生成培训课件、周报汇报PPT、续报方案PPT</td>
+      </tr>
+      <tr>
+        <td><span class="label slate">Excel/数据分析</span></td>
+        <td>批量处理学员数据表、自动做透视分析、生成图表</td>
+      </tr>
+      <tr>
+        <td><span class="label slate">图片生成</span></td>
+        <td>生成招生海报、每日一练配图、活动宣传图</td>
+      </tr>
+      <tr>
+        <td><span class="label slate">网页抓取</span></td>
+        <td>抓取应急管理部官网最新考试政策、报名时间、考纲变化，自动整理成简报</td>
+      </tr>
+    </table>
+  </div>
+
+  <div class="highlight slate" style="background:var(--slate-light);border-color:#cbd5e1">
+    <div class="hl-title">💡 实战技巧</div>
+    <p style="margin:0">技能不是独立 App，装了之后直接在助理对话中用。比如装了 PPT 技能后，对着助理说「帮我把这个月的数据做成周报 PPT」就行。不要去找技能界面——正常对话，AI 会自动判断该用哪个技能。</p>
+  </div>
+</div>
+
+<!-- ===== 附录：功能全景速查 ===== -->
+<div class="module">
+  <div class="module-header">
+    <h2>📊 附录：班主任 WorkBuddy 功能全景速查</h2>
+  </div>
+
+  <div class="section">
+    <table class="scenario-table">
+      <tr><th>功能模块</th><th>一句话</th><th>班主任最高频场景</th><th>在哪儿找到</th></tr>
+      <tr>
+        <td>💬 助理</td><td>用自然语言对话完成任何任务</td><td>写周报、出话术、做分析、写通知</td><td>左侧「助理」</td>
+      </tr>
+      <tr>
+        <td>📋 任务</td><td>保存所有历史工作，随时继续</td><td>长期任务跟踪、多线并行、历史回溯</td><td>左侧任务列表</td>
+      </tr>
+      <tr>
+        <td>📁 项目</td><td>按业务模块归类管理任务</td><td>分C端/B端/数据/营销四个空间</td><td>左侧「工作空间」</td>
+      </tr>
+      <tr>
+        <td>🧠 专家</td><td>调用领域专业 AI 能力</td><td>PPT、数据分析、培训文档、海报设计</td><td>左侧「专家」</td>
+      </tr>
+      <tr>
+        <td>⏰ 自动化</td><td>设置定时任务，到点自动跑</td><td>每周周报、每日一练、预警检查</td><td>左侧「自动化」</td>
+      </tr>
+      <tr>
+        <td>🔌 连接器</td><td>打通腾讯文档/乐享/ima等外部平台</td><td>直接读写云端数据，不用搬来搬去</td><td>左侧「连接器」</td>
+      </tr>
+      <tr>
+        <td>⚡ 技能</td><td>装插件扩展特定能力</td><td>PPT、Excel分析、图片生成、网页抓取</td><td>设置→技能市场</td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===== Footer ===== -->
+<div class="footer-note">
+  <strong>记住一个核心逻辑：</strong><br>
+  助理对话是入口 → 任务管理是存档 → 工作空间是分类 → 专家是专业深度 → 自动化是省时间 → 连接器是打通数据 → 技能是扩展能力<br><br>
+  七者配合使用，而不是只用其中一个。就像你不会只用手机打电话而不用微信——每个功能解决一类问题。
+</div>
+
+</body>
+</html>

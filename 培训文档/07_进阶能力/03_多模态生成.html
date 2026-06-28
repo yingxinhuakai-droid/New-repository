@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>7.3 多模态内容生成｜WorkBuddy × 中级注安运营培训</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%);
+  color: #2c3e50;
+  line-height: 1.8;
+  padding: 20px;
+}
+.container { max-width: 960px; margin: 0 auto; }
+
+.header {
+  background: linear-gradient(135deg, #c2410c 0%, #ea580c 50%, #f97316 100%);
+  color: white;
+  padding: 40px 30px;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  box-shadow: 0 8px 24px rgba(194, 65, 12, 0.2);
+}
+.breadcrumb { font-size: 13px; opacity: 0.85; margin-bottom: 12px; }
+.breadcrumb a { color: #fbbf24; text-decoration: none; }
+h1 { font-size: 28px; margin-bottom: 12px; font-weight: 700; }
+.subtitle { font-size: 15px; opacity: 0.9; }
+
+.card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(194, 65, 12, 0.06);
+}
+.card h2 {
+  color: #c2410c;
+  font-size: 22px;
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 4px solid #f97316;
+}
+.card h3 { color: #ea580c; font-size: 17px; margin: 20px 0 10px; }
+.card p { margin-bottom: 12px; color: #475569; }
+.card ul, .card ol { margin-left: 24px; margin-bottom: 12px; }
+.card li { margin-bottom: 8px; color: #475569; }
+.card li strong { color: #c2410c; }
+
+/* 能力卡片 */
+.capability-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 18px;
+  margin: 20px 0;
+}
+.capability-card {
+  background: white;
+  border-radius: 14px;
+  padding: 24px;
+  border: 2px solid transparent;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.capability-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+}
+.capability-card.video::before { background: linear-gradient(90deg, #ef4444, #f97316); }
+.capability-card.model3d::before { background: linear-gradient(90deg, #8b5cf6, #06b6d4); }
+.capability-card.image::before { background: linear-gradient(90deg, #ec4899, #f43f5e); }
+.capability-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.1); border-color: #fed7aa; }
+
+.capability-card .icon { font-size: 42px; margin-bottom: 10px; display: block; }
+.capability-card h4 { font-size: 17px; margin-bottom: 8px; }
+.capability-card.video h4 { color: #dc2626; }
+.capability-card.model3d h4 { color: #7c3aed; }
+.capability-card.image h4 { color: #db2777; }
+.capability-card p { font-size: 14px; margin-bottom: 12px; }
+.capability-card .tag-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.capability-card .tag-row span {
+  padding: 3px 10px; border-radius: 5px;
+  font-size: 11px; font-weight: 600;
+}
+.tag-video { background: #fee2e2; color: #991b1b; }
+.tag-3d { background: #ede9fe; color: #5b21b6; }
+.tag-img { background: #fce7f3; color: #9f1239; }
+
+/* 场景表 */
+.scene-table { overflow-x: auto; margin: 16px 0; }
+.scene-table table {
+  width: 100%; border-collapse: collapse;
+  background: white; border-radius: 8px;
+  overflow: hidden; box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+.scene-table th {
+  background: linear-gradient(135deg, #c2410c, #ea580c);
+  color: white; padding: 11px 12px; text-align: left; font-size: 13px;
+}
+.scene-table td {
+  padding: 11px 12px; border-bottom: 1px solid #ffedd5;
+  font-size: 13px; color: #475569;
+}
+.scene-table tr:hover { background: #fff7ed; }
+
+/* prompt框 */
+.prompt-box {
+  background: #1a1a2e;
+  color: #e2e8f0;
+  border-radius: 8px;
+  padding: 18px 20px;
+  margin: 14px 0;
+  font-family: "SF Mono", Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.8;
+  overflow-x: auto;
+}
+.prompt-box.video { border-left: 4px solid #ef4444; }
+.prompt-box.model3d { border-left: 4px solid #8b5cf6; }
+.prompt-box.img { border-left: 4px solid #ec4899; }
+.prompt-box .cmd { color: #34d399; font-weight: 700; }
+.prompt-box .arg { color: #fbbf24; }
+.prompt-box .comment { color: #64748b; }
+.prompt-box .placeholder { color: #f87171; font-style: italic; }
+.prompt-box .tip { color: #60a5fa; }
+
+/* 引用框 */
+.quote {
+  border-left: 4px solid #f97316;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 16px 0;
+  font-size: 14px;
+}
+.quote.orange { background: linear-gradient(135deg, #fff7ed, #ffedd5); color: #9a3412; }
+.quote.blue { background: linear-gradient(135deg, #eff6ff, #dbeafe); color: #1e40af; border-left-color: #3b82f6; }
+
+/* 对比展示 */
+.compare-showcase {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px; margin: 18px 0;
+}
+.showcase-item {
+  border-radius: 10px; padding: 18px;
+}
+.showcase-before { background: #fef2f2; border: 2px solid #fecaca; }
+.showcase-after { background: #f0fdf4; border: 2px solid #bbf7d0; }
+.showcase-item h5 { font-size: 14px; margin-bottom: 8px; }
+.showcase-before h5 { color: #991b1b; }
+.showcase-after h5 { color: #166534; }
+.showcase-item p { font-size: 13px; color: #475569; margin: 0; }
+
+/* 难度指示器 */
+.difficulty { display: flex; align-items: center; gap: 4px; margin: 8px 0; }
+.difficulty .dot {
+  width: 12px; height: 12px; border-radius: 50%;
+  background: #e5e7eb;
+}
+.difficulty .dot.filled { background: #f97316; }
+
+/* 警告/提示 */
+.warn-box {
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  border-left: 4px solid #f59e0b;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 16px 0;
+  color: #92400e;
+  font-size: 14px;
+}
+.tip-box {
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-left: 4px solid #3b82f6;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin: 16px 0;
+  color: #1e40af;
+  font-size: 14px;
+}
+
+/* 导航底栏 */
+.nav-footer {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 32px;
+  padding: 20px;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+}
+.nav-footer a {
+  padding: 10px 20px;
+  background: #ea580c;
+  color: white;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+}
+.nav-footer a.home { background: #64748b; }
+.nav-footer a:hover { opacity: 0.9; }
+
+@media (max-width: 640px) {
+  .header { padding: 24px 20px; }
+  h1 { font-size: 22px; }
+  .capability-grid { grid-template-columns: 1fr; }
+  .compare-showcase { grid-template-columns: 1fr; }
+  .nav-footer { flex-direction: column; gap: 10px; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="header">
+    <div class="breadcrumb">📚 WorkBuddy × 中级注安运营培训 / <a href="index.html">模块七·进阶能力</a> / 7.3 多模态内容生成</div>
+    <h1>🎬 多模态内容生成：从文字到视频到 3D</h1>
+    <p class="subtitle">AI 不只会写字——还能做视频、建 3D 模型、出特效图，让你的营销物料从"能用"升级到"惊艳"</p>
+  </div>
+
+  <!-- ========== 第一部分：三大能力 ========== -->
+  <div class="card">
+    <h2>🎨 AI 的三大视觉能力</h2>
+    <p>前面所有模块教的是让 AI 帮你<strong>处理文字和数据</strong>。多模态生成是进阶玩法——让 AI 直接产出<strong>视觉内容</strong>：</p>
+
+    <div class="capability-grid">
+      <div class="capability-card video">
+        <span class="icon">🎬</span>
+        <h4>文生视频 (Text → Video)</h4>
+        <p>输入一段文字描述，AI 自动生成短视频。适合做产品宣传片、活动预热片、课程亮点展示。</p>
+        <div class="difficulty">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div>
+          <span style="font-size:12px;color:#64748b;margin-left:4px;">中等难度</span>
+        </div>
+        <div class="tag-row">
+          <span class="tag-video">产品宣传</span>
+          <span class="tag-video">活动预热</span>
+          <span class="tag-video">口播视频</span>
+        </div>
+      </div>
+
+      <div class="capability-card model3d">
+        <span class="icon">🧊</span>
+        <h4>图生 3D 模型 (Image → 3D)</h4>
+        <p>上传一张图片，AI 把它变成可旋转查看的 3D 模型。适合展示教材封面、证书效果、立体Logo。</p>
+        <div class="difficulty">
+          <div class="dot filled"></div><div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <span style="font-size:12px;color:#64748b;margin-left:4px;">入门简单</span>
+        </div>
+        <div class="tag-row">
+          <span class="tag-3d">教材展示</span>
+          <span class="tag-3d">证书预览</span>
+          <span class="tag-3d">品牌物料</span>
+        </div>
+      </div>
+
+      <div class="capability-card image">
+        <span class="icon">🖼️</span>
+        <h4>图片生成 &amp; 编辑</h4>
+        <p>文字描述直接出图；或上传图片让 AI 修改风格/替换元素/加特效。海报配图的终极武器。</p>
+        <div class="difficulty">
+          <div class="dot filled"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div><div class="dot"></div>
+          <span style="font-size:12px;color:#64748b;margin-left:4px;">最易上手</span>
+        </div>
+        <div class="tag-row">
+          <span class="tag-img">海报配图</span>
+          <span class="tag-img">头像美化</span>
+          <span class="tag-img">风格转换</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="quote orange">
+      💡 <strong>核心定位：</strong>多模态不是替代设计师，而是在<strong>"需要快速出方案/原型/素材"的场景</strong>给你一个高起点的起点。<br>
+      最终精修还是交给专业设计，但前期的创意验证和快速迭代可以完全靠 AI 完成。
+    </div>
+  </div>
+
+  <!-- ========== 第二部分：场景速查 ========== -->
+  <div class="card">
+    <h2>🎯 场景速查：什么情况用什么能力？</h2>
+    <div class="scene-table">
+      <table>
+        <tr>
+          <th>业务场景</th>
+          <th>推荐能力</th>
+          <th>Prompt 要点</th>
+          <th>产出物</th>
+        </tr>
+        <tr>
+          <td>新班型发布预热</td>
+          <td>🎬 文生视频</td>
+          <td>班型名称 + 核心卖点 + 目标人群 + 视频时长</td>
+          <td>15-30 秒宣传短片</td>
+        </tr>
+        <tr>
+          <td>教材/图书展示</td>
+          <td>🧊 图生 3D</td>
+          <td>上传书籍封面图 + 要求360°旋转展示</td>
+          <td>可交互的 3D 书籍模型</td>
+        </tr>
+        <tr>
+          <td>倒计时海报配图</td>
+          <td>🖼️ 图片生成</td>
+          <td>主题色 + 元素（时钟/日历）+ 文字位置留白</td>
+          <td>高清背景图/主视觉</td>
+        </tr>
+        <tr>
+          <td>老师 IP 形象照</td>
+          <td>🖼️ 图片编辑</td>
+          <td>上传原照 + "专业商务风格""背景换成..."</td>
+          <td>精修后的形象照</td>
+        </tr>
+        <tr>
+          <td>直播预告短视频</td>
+          <td>🎬 文生视频</td>
+          <td>直播主题 + 时间 + 主讲人 + 福利亮点</td>
+          <td>动态预告片（含字幕）</td>
+        </tr>
+        <tr>
+          <td>朋友圈九宫格素材</td>
+          <td>🖼️ 图片生成</td>
+          <td>统一色调 + 每格主题 + 排版风格</td>
+          <td>9 张风格统一的配图</td>
+        </tr>
+        <tr>
+          <td>证书/奖状效果展示</td>
+          <td>🧊 图生 3D</td>
+          <td>上传证书图片 + "立体悬浮效果""金属质感边框"</td>
+          <td>3D 旋转证书模型</td>
+        </tr>
+        <tr>
+          <td>竞品对比可视化</td>
+          <td>🖼️ 图片生成</td>
+          <td>对比维度 + 数据 + 图表类型建议</td>
+          <td>信息图表/对比卡片</td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ========== 第三部分：实战 Prompt 模板 ========== -->
+  <div class="card">
+    <h2>📝 三大能力的 Prompt 模板（复制即用）</h2>
+
+    <!-- 视频 -->
+    <h3>🎬 模板一：文生视频</h3>
+    <div class="prompt-box video">
+<span class="comment">// ====== 产品宣传视频 ======</span>
+<span class="cmd">请生成一段关于</span> <span class="placeholder">[产品名称]</span> <span class="cmd">的宣传视频</span>
+
+<span class="cmd">核心卖点：</span><span class="arg">[卖点1] / [卖点2] / [卖点3]</span>
+<span class="cmd">目标受众：</span><span class="arg">[如：在职备考的工程人员]</span>
+<span class="cmd">视频时长：</span><span class="arg">[建议 15-30 秒]</span>
+<span class="cmd">风格要求：</span>
+  - 节奏紧凑，前 3 秒抓眼球
+  - 配合动感背景音乐（可选指定类型）
+  - 关键卖点用<strong>文字标注</strong>强化
+  - 结尾有明确的行动号召（CTA）
+
+<span class="cmd">参考画面：</span><span class="arg">[可选：描述想要的画面风格或参考链接]</span>
+
+<span class="tip">// 提示：第一次生成的版本可能不是最完美的，可以用"更燃一点""节奏更快""把XXX突出显示"等指令迭代优化</span>
+    </div>
+
+    <div class="compare-showcase">
+      <div class="showcase-item showcase-before">
+        <h5>❌ 效果一般的 Prompt</h5>
+        <p>"帮我做一个云私塾的视频"</p>
+      </div>
+      <div class="showcase-item showcase-after">
+        <h5>✅ 效果好的 Prompt</h5>
+        <p>"为中级注安云私塾7.0做一个25秒宣传视频。核心卖点：AI智能魔方+私教max+不过免费重学。目标用户：35岁左右在职工程师。风格：科技感、深蓝色调、快节奏。前3秒用数据冲击'通过率提升40%'，中间展示三大特色功能，结尾CTA'扫码咨询'。"</p>
+      </div>
+    </div>
+
+    <!-- 3D -->
+    <h3 style="margin-top:28px;">🧊 模板二：图生 3D 模型</h3>
+    <div class="prompt-box model3d">
+<span class="comment">// ====== 图书/教材 3D 展示 ======</span>
+<span class="cmd">将这张图片转换为 3D 模型</span>
+
+<span class="cmd">原始图片：</span>[<span class="placeholder">上传图片文件</span>]
+<span class="cmd">3D 效果要求：</span>
+  - 可 360° 旋转查看
+  - 有真实的书本厚度和翻页感
+  - 光影自然（模拟室内灯光）
+  - 支持缩放查看细节
+
+<span class="cmd">额外效果：</span><span class="arg">[可选]</span>
+  - "悬浮在半空中"
+  - "周围有光晕效果"
+  - "底部有柔和阴影"
+  - "金属质感的书脊文字"
+
+<span class="tip">// 适用场景：新书发布页、教材展示H5、电商详情页首图</span>
+    </div>
+
+    <!-- 图片 -->
+    <h3 style="margin-top:28px;">🖼️ 模板三：图片生成 &amp; 编辑</h3>
+    <div class="prompt-box img">
+<span class="comment">// ====== 海报主视觉生成 ======</span>
+<span class="cmd">生成一张海报主视觉图</span>
+
+<span class="cmd">主题：</span><span class="placeholder">[如：2026年中级注安考试冲刺倒计时]</span>
+<span class="cmd">尺寸比例：</span><span class="arg">[如：16:9 或 3:4]</span>
+<span class="cmd">配色方案：</span><span class="arg">
+  - 主色：<span class="placeholder">[如：#1e3a8a 深蓝]</span>
+  - 辅色：<span class="placeholder">[如：#f59e0b 金黄]</span>
+  - 背景：<span class="placeholder">[如：渐变/纯色/纹理]</span>
+</span>
+<span class="cmd">必须包含的元素：</span>
+  - <span class="arg">[元素1：如 数字倒计时 "距考试还有 XX 天"]</span>
+  - <span class="arg">[元素2：如 书本/铅笔/时钟图标]</span>
+  - <span class="arg">[元素3：如 预留给标题文字的留白区域]</span>
+<span class="cmd">风格关键词：</span><span class="arg">[如：扁平化 / 插画风 / 科技感 / 中国风]</span>
+<span class="cmd">不要：</span><span class="arg">[如：不要人物 / 不要过于花哨 / 不要暗色压抑]</span>
+
+<span class="comment">// ====== 图片编辑 ======</span>
+<span class="cmd">编辑这张图片：</span>[<span class="placeholder">上传图片</span>]
+<span class="cmd">修改要求：</span><span class="arg">[具体修改项，多选]</span>
+  - "把背景换成 <span class="placeholder">[颜色/场景]</span>"
+  - "把 <span class="placeholder">[某元素]</span> 替换为 <span class="placeholder">[新元素]</span>"
+  - "整体调成 <span class="placeholder">[某种风格]</span>"
+  - "加上 <span class="placeholder">[特效/滤镜/文字]</span>"
+    </div>
+  </div>
+
+  <!-- ========== 第四部分：适用 & 不适用 ========== -->
+  <div class="card">
+    <h2>✅ 什么时候用？什么时候别用？</h2>
+    
+    <div class="scene-table">
+      <table>
+        <tr>
+          <th style="background:#166534;">✅ 强烈推荐用的场景</th>
+          <th>原因</th>
+        </tr>
+        <tr><td>快速出方案/原型给领导看</td><td>几分钟就有视觉效果，比纯文字方案有说服力</td></tr>
+        <tr><td>需要大量变体的 A/B 测试</td><td>一次出 5 个版本选最好的，效率碾压人工</td></tr>
+        <tr><td>日常运营物料的配图需求</td><td>朋友圈/社群/推送的配图，质量够用且速度快</td></tr>
+        <tr><td>创意发散阶段</td><td>不知道要什么风格？先让 AI 出几个方向找灵感</td></tr>
+        <tr><td>非正式渠道的轻量物料</td><td>社群海报、个人号文案配图等不需要设计审核的场景</td></tr>
+      </table>
+    </div>
+
+    <div class="scene-table" style="margin-top:16px;">
+      <table>
+        <tr>
+          <th style="background:#991b1b;">⛔ 不推荐用的场景</th>
+          <th>原因</th>
+        </tr>
+        <tr><td>官方大型活动的主视觉/KV</td><td>需要精确的品牌规范和设计把控，AI 还不够稳定</td></tr>
+        <tr><td>包含真实人物的宣传材料</td><td>AI 生成的人物可能有不自然的细节</td></tr>
+        <tr><td>需要精确尺寸/印刷输出的物料</td><td>分辨率和色彩管理不如专业设计工具</td></tr>
+        <tr><td>法律/合规敏感的内容</td><td>版权归属、肖像权等问题需要谨慎</td></tr>
+        <tr><td>客户已经确认了设计稿</td><td>别没事找事改东西 😄</td></tr>
+      </table>
+    </div>
+  </div>
+
+  <!-- ========== 第五部分：工作流 ========== -->
+  <div class="card">
+    <h2>🔄 AI 视觉内容的标准工作流</h2>
+    <p>不要指望一次就完美。高效的做法是一个<strong>迭代循环</strong>：</p>
+
+    <ol>
+      <li>
+        <strong>📝 写清楚需求（最重要的一步）</strong><br>
+        用上面的模板，把能想到的所有细节都写进去。<br>
+        <em>记住：你写得越清楚，AI 返工率越低。</em>
+      </li>
+      <li>
+        <strong>🎯 第一版：追求"可用"，不追求"完美"</strong><br>
+        先看整体方向对不对——构图、色调、元素有没有大问题。<br>
+        <em>这一步只要 60 分就行。</em>
+      </li>
+      <li>
+        <strong>🔧 迭代优化（通常 2-3 轮）</strong><br>
+        用简短的指令调整："字体再大点""颜色换个暖色调""把这个元素往左移"<br>
+        <em>每轮只提 1-2 个修改点，别一口气提 10 个。</em>
+      </li>
+      <li>
+        <strong>✅ 定稿 + 交付</strong><br>
+        达到 85 分以上就可以用了。如果需要更高精度，导出后让设计师精修。<br>
+        <em>AI 完成了 80% 的工作，设计师只需要花 20% 的时间收尾。</em>
+      </li>
+    </ol>
+
+    <div class="quote blue">
+      🔄 <strong>效率公式：</strong>AI 出初稿(10分钟) + 你审核迭代(15分钟) = 25分钟拿到可用素材<br>
+      vs 传统方式：跟设计 briefing(15分钟) + 设计出稿(半天) + 反复修改(2小时) = 一整天<br>
+      <strong>速度提升：约 15-20 倍</strong>
+    </div>
+  </div>
+
+  <!-- ========== 第六部分：避坑 ========== -->
+  <div class="card">
+    <h2>⚠️ 6 个常见坑 &amp; 怎么避开</h2>
+    <ol>
+      <li>
+        <strong>描述太抽象 → 结果跑偏</strong><br>
+        ❌ "做个好看的海报"<br>
+        ✅ "做一个中级注安考前冲刺倒计时海报，深蓝+金色，16:9，左侧放书本右侧放数字30，科技感"<br>
+        <em>💡 具体程度 = 输出质量的正相关指标。</em>
+      </li>
+      <li>
+        <strong>一次要求太多 → 顾此失彼</strong><br>
+        别在一个 prompt 里塞 10 个要求。分步来——先生成基础版，再逐步加细节。<br>
+        <em>💡 每个迭代只聚焦 1-2 个改进点。</em>
+      </li>
+      <li>
+        <strong>忽略了品牌规范 → 风格不统一</strong><br>
+        每次 prompt 都带上你的品牌色/字体偏好/风格关键词，保持输出的一致性。<br>
+        <em>💡 建议维护一套"品牌视觉 Prompt 模板"固定使用。</em>
+      </li>
+      <li>
+        <strong>视频/3D 期望值过高 → 失望</strong><br>
+        当前 AI 视频和 3D 能力还在快速发展中，适合"快速验证创意"，还不适合"直接当最终成品"。预期管理很重要。<br>
+        <em>💡 当作"动态草图"而非"成片"来用。</em>
+      </li>
+      <li>
+        <strong>没有保留好的版本 → 越改越差</strong><br>
+        每次迭代前保存当前最好的版本。AI 的修改不一定每次都更好。<br>
+        <em>💡 好的习惯：V1/V2/V3 分别存一份，随时回退。</em>
+      </li>
+      <li>
+        <strong>忘了检查版权问题 → 法律风险</strong><br>
+        AI 生成的图像在某些情况下可能涉及训练数据的版权争议。用于商业推广时需注意。<br>
+        <em>💡 内部使用风险低；对外公开/广告投放前建议法务审核。</em>
+      </li>
+    </ol>
+  </div>
+
+  <!-- ========== 底部总结 ========== -->
+  <div class="card" style="background: linear-gradient(135deg, #fff7ed 0%, #ffedd5 100%); border: 1px solid #fdba74;">
+    <h2 style="color: #c2410c; border-left-color: #f97316;">🎯 本篇小结 &amp; 你的第一步行动</h2>
+    <p style="color: #9a3412;">
+      <strong>多模态生成 = 给 AI 加上了"眼睛"和"画笔"。</strong><br><br>
+      ✅ <strong>最容易上手：</strong>图片生成 — 今天就能试着生成一张海报配图<br>
+      ✅ <strong>最有差异化价值：</strong>文生视频 — 大多数人还没用起来<br>
+      ✅ <strong>最适合产品展示：</strong>图生 3D — 新书发布/证书展示一绝<br><br>
+      <strong>🚀 建议的第一步：</strong>打开 WorkBuddy，用上面「模板三」的 Prompt 试着生成一张"中级注安考试倒计时"的海报主视觉。<br>
+      不追求完美——体验一下从文字到图像的魔法就够了。<br><br>
+      <strong>恭喜！读到这里，你已经完整掌握了全部 9 个模块 36 篇培训文档的内容。🎉</strong>
+    </p>
+  </div>
+
+  <div class="nav-footer">
+    <a href="02_自动化任务.html">← 上篇：7.2 自动化任务</a>
+    <a href="index.html" class="home">🏠 回到模块七首页</a>
+  </div>
+</div>
+</body>
+</html>

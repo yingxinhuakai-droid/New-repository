@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>注安考生报考规划助手</title>
+    <style>
+        * { margin:0; padding:0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background: #f5f5f5; color: #333; line-height: 1.6;
+        }
+        .page { display: none; min-height: 100vh; padding-bottom: 80px; }
+        .page.active { display: block; }
+
+        /* 欢迎页 */
+        .welcome-page {
+            background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+            color: white; display: flex; flex-direction: column;
+            justify-content: center; align-items: center; text-align: center;
+            padding: 40px 20px;
+        }
+        .welcome-page.active { display: flex; }
+        .welcome-icon { font-size: 80px; margin-bottom: 20px; }
+        .welcome-title { font-size: 26px; font-weight: bold; margin-bottom: 15px; }
+        .welcome-desc { font-size: 15px; opacity: 0.9; margin-bottom: 40px; max-width: 300px; line-height: 1.8; }
+        .start-btn {
+            background: white; color: #07c160; border: none;
+            padding: 15px 50px; font-size: 18px; font-weight: bold;
+            border-radius: 25px; cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        /* 问答页 */
+        .question-page { background: white; }
+        .question-header {
+            background: #07c160; color: white; padding: 18px 20px;
+            font-size: 17px; font-weight: bold; position: sticky; top: 0; z-index: 10;
+        }
+        .progress-bar { height: 3px; background: rgba(255,255,255,0.3); margin-top: 10px; border-radius: 2px; }
+        .progress-fill { height: 100%; background: white; border-radius: 2px; transition: width 0.3s; }
+        .question-body { padding: 30px 20px; }
+        .question-text { font-size: 19px; font-weight: bold; margin-bottom: 25px; color: #333; }
+        .options { display: flex; flex-direction: column; gap: 12px; }
+        .option {
+            background: #f8f8f8; border: 2px solid #e8e8e8; border-radius: 10px;
+            padding: 16px 18px; font-size: 15px; cursor: pointer; transition: all 0.2s;
+            display: flex; align-items: center; gap: 12px;
+        }
+        .option:hover { border-color: #07c160; background: #f0f9f4; }
+        .option.selected { border-color: #07c160; background: #e8f5ec; }
+        .option-radio {
+            width: 22px; height: 22px; border-radius: 50%; border: 2px solid #ccc;
+            flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .option.selected .option-radio { border-color: #07c160; background: #07c160; }
+        .option.selected .option-radio::after { content: '✓'; color: white; font-size: 14px; font-weight: bold; }
+        .option-checkbox {
+            width: 22px; height: 22px; border-radius: 4px; border: 2px solid #ccc;
+            flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            transition: all 0.2s;
+        }
+        .option.selected .option-checkbox { border-color: #07c160; background: #07c160; }
+        .option.selected .option-checkbox::after { content: '✓'; color: white; font-size: 14px; font-weight: bold; }
+        .option-label { flex: 1; }
+        .next-btn {
+            background: #07c160; color: white; border: none; width: 100%;
+            padding: 15px; border-radius: 10px; font-size: 17px; font-weight: bold;
+            cursor: pointer; margin-top: 30px; display: none;
+        }
+        .next-btn.show { display: block; }
+
+        /* 加载页 */
+        .loading-page { display: none; flex-direction: column; justify-content: center; align-items: center; background: white; }
+        .loading-page.active { display: flex; }
+        .loading-spinner {
+            width: 50px; height: 50px; border: 4px solid #f3f3f3;
+            border-top: 4px solid #07c160; border-radius: 50%;
+            animation: spin 1s linear infinite; margin-bottom: 25px;
+        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+        .loading-text { font-size: 16px; color: #666; }
+
+        /* 结果页 */
+        .result-page { background: #f5f5f5; }
+        .result-header { background: #07c160; color: white; padding: 20px; }
+        .result-title { font-size: 20px; font-weight: bold; margin-bottom: 8px; }
+        .result-subtitle { font-size: 13px; opacity: 0.85; }
+        .result-content { padding: 12px; }
+
+        .result-card {
+            background: white; border-radius: 12px; padding: 18px;
+            margin-bottom: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        .card-title {
+            font-size: 17px; font-weight: bold; color: #07c160;
+            margin-bottom: 15px; display: flex; align-items: center; gap: 8px;
+        }
+
+        /* 报考建议 */
+        .subject-item {
+            background: #f8f8f8; border-radius: 8px; padding: 14px; margin-bottom: 10px;
+        }
+        .subject-name { font-weight: bold; color: #07c160; font-size: 16px; margin-bottom: 6px; }
+        .subject-reason { font-size: 13px; color: #888; line-height: 1.6; }
+        .tag {
+            display: inline-block; padding: 3px 10px; border-radius: 4px;
+            font-size: 11px; margin-right: 6px; margin-top: 8px;
+        }
+        .tag-green { background: #e8f5ec; color: #07c160; }
+        .tag-orange { background: #fff3e0; color: #ff9800; }
+        .tag-red { background: #ffebee; color: #f44336; }
+
+        /* 个性化备考规划 */
+        .plan-phase {
+            background: #f8f8f8; border-radius: 10px; padding: 16px;
+            margin-bottom: 12px; position: relative;
+        }
+        .plan-phase-header {
+            display: flex; align-items: center; gap: 10px; margin-bottom: 10px;
+        }
+        .plan-phase-num {
+            background: #07c160; color: white; width: 28px; height: 28px;
+            border-radius: 50%; display: flex; align-items: center;
+            justify-content: center; font-size: 14px; font-weight: bold; flex-shrink: 0;
+        }
+        .plan-phase-title { font-weight: bold; font-size: 15px; color: #333; }
+        .plan-phase-time { font-size: 12px; color: #999; margin-left: auto; }
+        .plan-phase-content { font-size: 14px; color: #555; line-height: 1.8; }
+        .plan-phase-tasks {
+            margin-top: 10px; padding: 10px; background: white;
+            border-radius: 6px; font-size: 13px; color: #666; line-height: 2;
+        }
+        .plan-phase-tasks li { margin-bottom: 3px; }
+
+        /* 推荐课程 */
+        .course-item {
+            background: #f8f8f8; border-radius: 8px; padding: 14px;
+            margin-bottom: 10px; border-left: 4px solid #07c160;
+        }
+        .course-name { font-weight: bold; color: #07c160; font-size: 15px; margin-bottom: 6px; }
+        .course-desc { font-size: 13px; color: #666; line-height: 1.7; }
+        .course-match { font-size: 12px; color: #ff9800; margin-top: 8px; }
+
+        /* 时间分配 */
+        .time-allocation { margin-top: 10px; }
+        .time-phase {
+            display: flex; align-items: stretch; margin-bottom: 12px;
+            background: #f8f8f8; border-radius: 8px; overflow: hidden;
+        }
+        .phase-left {
+            background: #07c160; color: white; padding: 12px 15px;
+            min-width: 80px; display: flex; align-items: center;
+            justify-content: center; font-size: 13px; font-weight: bold;
+        }
+        .phase-right { padding: 12px 15px; flex: 1; font-size: 14px; color: #555; line-height: 1.8; }
+
+        /* 复习重点 */
+        .focus-item {
+            background: #f8f8f8; border-radius: 8px; padding: 14px;
+            margin-bottom: 10px; border-left: 4px solid #07c160;
+        }
+        .focus-subject { font-weight: bold; color: #07c160; margin-bottom: 6px; font-size: 15px; }
+        .focus-detail { font-size: 13px; color: #666; line-height: 1.8; }
+
+        /* 方法卡片 */
+        .method-card {
+            background: #f8f8f8; border-radius: 8px; padding: 14px;
+            margin-bottom: 10px;
+        }
+        .method-title { font-weight: bold; color: #333; margin-bottom: 8px; font-size: 15px; }
+        .method-content { font-size: 13px; color: #666; line-height: 1.8; }
+        .method-content li { margin-bottom: 4px; }
+
+        /* 底部导航 */
+        .bottom-nav {
+            position: fixed; bottom: 0; left: 0; right: 0; background: white;
+            display: flex; border-top: 1px solid #e8e8e8; z-index: 100;
+        }
+        .nav-btn {
+            flex: 1; padding: 10px; text-align: center; background: none;
+            border: none; font-size: 12px; color: #999; cursor: pointer;
+        }
+        .nav-btn .nav-icon { font-size: 22px; display: block; margin-bottom: 2px; }
+        .nav-btn.active { color: #07c160; font-weight: bold; }
+
+        .fade-in { animation: fadeIn 0.3s ease-out; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hidden { display: none !important; }
+
+        /* 用户画像 */
+        .user-profile {
+            background: linear-gradient(135deg, #07c160 0%, #06ad56 100%);
+            color: white; border-radius: 12px; padding: 18px; margin-bottom: 15px;
+        }
+        .profile-title { font-size: 16px; font-weight: bold; margin-bottom: 12px; }
+        .profile-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+        .profile-tag {
+            background: rgba(255,255,255,0.2); padding: 5px 12px;
+            border-radius: 20px; font-size: 13px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 第1页：欢迎页 -->
+    <div id="page-welcome" class="page welcome-page active">
+        <div class="welcome-icon">📚</div>
+        <div class="welcome-title">注安报考规划助手</div>
+        <div class="welcome-desc">输入你的情况，获取专属备考规划与课程推荐</div>
+        <button class="start-btn" onclick="startQuiz()">开始规划</button>
+    </div>
+
+    <!-- 第2页：问答页 -->
+    <div id="page-question" class="page question-page">
+        <div class="question-header">
+            <div>报考规划助手</div>
+            <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        </div>
+        <div class="question-body">
+            <div class="question-text" id="question-text"></div>
+            <div class="options" id="options-container"></div>
+            <button class="next-btn" id="next-btn" onclick="nextQuestion()">下一步</button>
+        </div>
+    </div>
+
+    <!-- 第3页：加载页 -->
+    <div id="page-loading" class="page loading-page">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">正在为你生成专属备考方案...</div>
+    </div>
+
+    <!-- 第4页：结果页 -->
+    <div id="page-result" class="page result-page">
+        <div class="result-header">
+            <div class="result-title">🎯 你的专属备考方案</div>
+            <div class="result-subtitle" id="result-subtitle"></div>
+        </div>
+        <div class="result-content">
+
+            <!-- 用户画像 -->
+            <div class="user-profile fade-in" id="user-profile"></div>
+
+            <!-- 报考建议 -->
+            <div class="result-card fade-in" style="animation-delay:0.05s;">
+                <div class="card-title"><span>📋</span><span>报考建议</span></div>
+                <div id="subject-recommendation"></div>
+            </div>
+
+            <!-- 个性化备考规划 -->
+            <div class="result-card fade-in" style="animation-delay:0.1s;">
+                <div class="card-title"><span>🗓️</span><span>你的备考规划</span></div>
+                <div id="personalized-plan"></div>
+            </div>
+
+            <!-- 推荐课程 -->
+            <div class="result-card fade-in" style="animation-delay:0.15s;">
+                <div class="card-title"><span>🎓</span><span>推荐课程</span></div>
+                <div id="course-recommendation"></div>
+            </div>
+
+            <!-- 时间分配建议 -->
+            <div class="result-card fade-in" style="animation-delay:0.2s;">
+                <div class="card-title"><span>⏰</span><span>时间分配建议</span></div>
+                <div class="time-allocation" id="time-allocation"></div>
+            </div>
+
+            <!-- 复习重点 -->
+            <div class="result-card fade-in" style="animation-delay:0.25s;">
+                <div class="card-title"><span>🎯</span><span>各科目复习重点</span></div>
+                <div id="study-focus"></div>
+            </div>
+
+            <!-- 真题利用方法 -->
+            <div class="result-card fade-in" style="animation-delay:0.3s;">
+                <div class="card-title"><span>📝</span><span>真题利用方法</span></div>
+                <div id="past-paper-method"></div>
+            </div>
+
+            <!-- 错题整理方法 -->
+            <div class="result-card fade-in" style="animation-delay:0.35s;">
+                <div class="card-title"><span>📒</span><span>错题整理方法</span></div>
+                <div id="error-note-method"></div>
+            </div>
+
+            <!-- 心态调整 -->
+            <div class="result-card fade-in" style="animation-delay:0.4s;">
+                <div class="card-title"><span>💪</span><span>心态调整建议</span></div>
+                <div id="mindset-tips"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 底部导航 -->
+    <div class="bottom-nav hidden" id="bottom-nav">
+        <button class="nav-btn active" onclick="showPage('page-result')">
+            <span class="nav-icon">📊</span><span>方案</span>
+        </button>
+        <button class="nav-btn" onclick="shareResult()">
+            <span class="nav-icon">📤</span><span>分享</span>
+        </button>
+        <button class="nav-btn" onclick="restartQuiz()">
+            <span class="nav-icon">🔄</span><span>重测</span>
+        </button>
+    </div>
+
+<script>
+const PRACTICE_MAP = {
+    'coal': '煤矿安全', 'chemical': '化工安全', 'metal': '金属非金属矿山',
+    'smelting': '金属冶炼', 'road': '道路运输', 'other': '其他安全'
+};
+
+const BACKGROUND_LABEL = { 'zero': '零基础', 'some_exp': '有安全经验', 'related_major': '安全专业', 'taken_before': '考过未过' };
+const TIME_LABEL = { 'less_1h': '每天&lt;1小时', '1_2h': '每天1-2小时', '2_3h': '每天2-3小时', 'more_3h': '每天3+小时' };
+const TARGET_LABEL = { '1_year': '今年拿证', '2_years': '两年拿证', 'no_rush': '稳扎稳打' };
+
+let currentQuestion = 0;
+let answers = {};
+
+const questions = [
+    {
+        id: 'background',
+        text: '你目前的基础情况是？',
+        options: [
+            { value: 'zero', label: '零基础，完全没接触过' },
+            { value: 'some_exp', label: '有安全相关工作经验' },
+            { value: 'related_major', label: '安全相关专业毕业' },
+            { value: 'taken_before', label: '之前考过但没通过' }
+        ],
+        type: 'single'
+    },
+    {
+        id: 'daily_time',
+        text: '你每天大概能花多少时间学习？',
+        options: [
+            { value: 'less_1h', label: '1小时以内' },
+            { value: '1_2h', label: '1-2小时' },
+            { value: '2_3h', label: '2-3小时' },
+            { value: 'more_3h', label: '3小时以上' }
+        ],
+        type: 'single'
+    },
+    {
+        id: 'purpose',
+        text: '你报考注安的主要目的是？（可多选）',
+        options: [
+            { value: 'promotion', label: '升职加薪' },
+            { value: 'career_change', label: '转行做安全' },
+            { value: 'company_require', label: '公司要求' },
+            { value: 'personal_growth', label: '个人提升' }
+        ],
+        type: 'multiple'
+    },
+    {
+        id: 'first_time',
+        text: '你是否是第一次报考注安？',
+        options: [
+            { value: 'yes', label: '是，第一次考' },
+            { value: 'no', label: '不是，之前考过' }
+        ],
+        type: 'single'
+    },
+    {
+        id: 'failed_subjects',
+        text: '之前考试哪些科目没通过？（可多选）',
+        options: [
+            { value: '法律法规', label: '安全生产法律法规' },
+            { value: '安全管理', label: '安全生产管理' },
+            { value: '技术基础', label: '安全生产技术基础' },
+            { value: '实务', label: '安全生产专业实务' }
+        ],
+        type: 'multiple',
+        showIf: (a) => a.first_time === 'no'
+    },
+    {
+        id: 'practice_subject',
+        text: '你想报考哪个专业实务科目？',
+        options: [
+            { value: 'coal', label: '煤矿安全' },
+            { value: 'chemical', label: '化工安全' },
+            { value: 'metal', label: '金属非金属矿山安全' },
+            { value: 'smelting', label: '金属冶炼安全' },
+            { value: 'road', label: '道路运输安全' },
+            { value: 'other', label: '其他安全' }
+        ],
+        type: 'single'
+    },
+    {
+        id: 'target_year',
+        text: '你希望用多长时间拿证？',
+        options: [
+            { value: '1_year', label: '今年就拿证（一次考4科）' },
+            { value: '2_years', label: '两年拿证（分两次考）' },
+            { value: 'no_rush', label: '不着急，稳扎稳打' }
+        ],
+        type: 'single'
+    }
+];
+
+// ===== 函数 =====
+function startQuiz() {
+    currentQuestion = 0;
+    answers = {};
+    showPage('page-question');
+    displayQuestion();
+}
+
+function showPage(pageId) {
+    document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+    document.getElementById(pageId).classList.add('active');
+    if (pageId === 'page-result') {
+        document.getElementById('bottom-nav').classList.remove('hidden');
+    }
+}
+
+function displayQuestion() {
+    while (currentQuestion < questions.length && questions[currentQuestion].showIf && !questions[currentQuestion].showIf(answers)) {
+        currentQuestion++;
+    }
+    if (currentQuestion >= questions.length) {
+        showLoading();
+        return;
+    }
+    const q = questions[currentQuestion];
+    document.getElementById('question-text').textContent = q.text;
+    const container = document.getElementById('options-container');
+    container.innerHTML = '';
+    const progress = ((currentQuestion) / questions.length * 100).toFixed(0);
+    document.getElementById('progress-fill').style.width = progress + '%';
+    q.options.forEach((opt) => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        const iconClass = q.type === 'multiple' ? 'option-checkbox' : 'option-radio';
+        div.innerHTML = `<div class="${iconClass}"></div><div class="option-label">${opt.label}</div>`;
+        div.onclick = () => selectOption(opt.value, q.type, div);
+        container.appendChild(div);
+    });
+    document.getElementById('next-btn').classList.remove('show');
+}
+
+function selectOption(value, type, element) {
+    if (type === 'single') {
+        document.querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        element.classList.add('selected');
+        answers[questions[currentQuestion].id] = value;
+    } else {
+        element.classList.toggle('selected');
+        if (!answers[questions[currentQuestion].id]) {
+            answers[questions[currentQuestion].id] = [];
+        }
+        const arr = answers[questions[currentQuestion].id];
+        const idx = arr.indexOf(value);
+        if (idx > -1) arr.splice(idx, 1);
+        else arr.push(value);
+    }
+    document.getElementById('next-btn').classList.add('show');
+}
+
+function nextQuestion() {
+    currentQuestion++;
+    if (currentQuestion >= questions.length) {
+        showLoading();
+    } else {
+        displayQuestion();
+    }
+}
+
+function showLoading() {
+    showPage('page-loading');
+    setTimeout(() => {
+        generateResult();
+        showPage('page-result');
+    }, 2200);
+}
+
+// ===== 生成结果 =====
+function generateResult() {
+    const result = calculateResult();
+
+    // 用户画像
+    document.getElementById('user-profile').innerHTML = `
+        <div class="profile-title">📊 你的情况</div>
+        <div class="profile-tags">
+            <span class="profile-tag">${BACKGROUND_LABEL[answers.background] || ''}</span>
+            <span class="profile-tag">${TIME_LABEL[answers.daily_time] || ''}</span>
+            <span class="profile-tag">${TARGET_LABEL[answers.target_year] || ''}</span>
+            ${answers.first_time === 'no' ? '<span class="profile-tag">非首次报考</span>' : ''}
+        </div>
+    `;
+
+    document.getElementById('result-subtitle').textContent = result.summary;
+
+    // 报考建议
+    document.getElementById('subject-recommendation').innerHTML = result.subjects.map(s => `
+        <div class="subject-item">
+            <div class="subject-name">${s.name}</div>
+            <div class="subject-reason">${s.reason}</div>
+            <div>${s.tags.map(t => `<span class="tag ${t.class}">${t.text}</span>`).join('')}</div>
+        </div>
+    `).join('');
+
+    // 个性化备考规划
+    document.getElementById('personalized-plan').innerHTML = result.plan.map((p, i) => `
+        <div class="plan-phase">
+            <div class="plan-phase-header">
+                <div class="plan-phase-num">${i+1}</div>
+                <div class="plan-phase-title">${p.title}</div>
+                <div class="plan-phase-time">${p.time}</div>
+            </div>
+            <div class="plan-phase-content">${p.content}</div>
+            <div class="plan-phase-tasks">
+                <ul style="padding-left:18px;">${p.tasks.map(t => `<li>${t}</li>`).join('')}</ul>
+            </div>
+        </div>
+    `).join('');
+
+    // 推荐课程
+    document.getElementById('course-recommendation').innerHTML = result.courses.map(c => `
+        <div class="course-item">
+            <div class="course-name">${c.name}</div>
+            <div class="course-desc">${c.desc}</div>
+            <div class="course-match">✅ ${c.match}</div>
+        </div>
+    `).join('');
+
+    // 时间分配
+    document.getElementById('time-allocation').innerHTML = result.timeAllocation.map(t => `
+        <div class="time-phase">
+            <div class="phase-left">${t.phase}</div>
+            <div class="phase-right">${t.content}</div>
+        </div>
+    `).join('');
+
+    // 复习重点
+    document.getElementById('study-focus').innerHTML = result.focus.map(f => `
+        <div class="focus-item">
+            <div class="focus-subject">${f.subject}</div>
+            <div class="focus-detail">${f.detail}</div>
+        </div>
+    `).join('');
+
+    // 真题利用
+    document.getElementById('past-paper-method').innerHTML = result.paperMethod;
+
+    // 错题整理
+    document.getElementById('error-note-method').innerHTML = result.errorMethod;
+
+    // 心态调整
+    document.getElementById('mindset-tips').innerHTML = result.mindset;
+}
+
+// ===== 核心计算逻辑 =====
+function calculateResult() {
+    const { background, daily_time, first_time, failed_subjects, practice_subject, target_year } = answers;
+
+    let weeklyHours = 0;
+    if (daily_time === 'less_1h') weeklyHours = 5;
+    else if (daily_time === '1_2h') weeklyHours = 10;
+    else if (daily_time === '2_3h') weeklyHours = 17;
+    else weeklyHours = 25;
+
+    const isZero = (background === 'zero');
+    const isExp = (background === 'some_exp' || background === 'related_major');
+    const hasFailed = (first_time === 'no');
+    const practiceName = PRACTICE_MAP[practice_subject] || '实务科目';
+
+    // ===== 1. 推荐科目 =====
+    let subjects = [];
+    if (target_year === '1_year') {
+        subjects = [
+            { name: '安全生产法律法规', reason: '公共必考科目，相对简单，适合零基础入门', tags: [{text: '⭐ 必考', class: 'tag-green'}] },
+            { name: '安全生产管理', reason: '公共必考科目，与法律法规关联度高，可搭配备考', tags: [{text: '⭐ 必考', class: 'tag-green'}] },
+            { name: '安全生产技术基础', reason: '公共必考科目，需要理解+记忆，建议多花时间', tags: [{text: '⭐ 必考', class: 'tag-green'}] },
+            { name: practiceName, reason: `专业实务科目（${practiceName}），结合工作实践理解`, tags: [{text: '⭐ 必考', class: 'tag-green'}] }
+        ];
+    } else if (target_year === '2_years') {
+        subjects = [
+            { name: '安全生产法律法规', reason: '第一年先考2科公共课，打好基础再考实务', tags: [{text: '第1年', class: 'tag-green'}] },
+            { name: '安全生产管理', reason: '与法律法规一起考，关联度高，备考效率高', tags: [{text: '第1年', class: 'tag-green'}] }
+        ];
+    } else {
+        subjects = [
+            { name: '安全生产法律法规', reason: '零基础首选，内容相对简单，建立信心', tags: [{text: '建议首选', class: 'tag-green'}] }
+        ];
+    }
+
+    if (hasFailed && failed_subjects && failed_subjects.length > 0) {
+        subjects = failed_subjects.map(s => ({
+            name: s,
+            reason: '之前未通过，建议重点复习后重考',
+            tags: [{text: '⚠️ 重点攻克', class: 'tag-orange'}]
+        }));
+    }
+
+    // ===== 2. 个性化备考规划 =====
+    let plan = [];
+    const totalWeeks = 18; // 6月22到10月25约18周
+
+    if (target_year === '1_year') {
+        // 一年考4科
+        if (isZero) {
+            plan = [
+                {
+                    title: '基础入门阶段',
+                    time: '6月下旬 - 7月底（约5周）',
+                    content: `你是零基础，建议从<strong>法律法规</strong>开始，先建立对注安考试的认知。每天至少保证${weeklyHours > 10 ? '1.5小时' : '40分钟'}学习时间。`,
+                    tasks: ['听《认知考试》课程，了解考试全貌', '开始学习《法律法规》基础课程', '搭配做章节练习题，不要只听课不做题', '加入学习群，跟着班级节奏走']
+                },
+                {
+                    title: '基础强化阶段',
+                    time: '8月初 - 9月中旬（约6周）',
+                    content: `完成法律法规和管理的基础学习后，开始<strong>技术基础</strong>的学习。技术基础需要理解，建议多花时间。零基础可结合3D实景教学课程理解难点。`,
+                    tasks: ['完成法律法规+管理基础学习', '开始技术基础课程学习', '每章学完立即做章节题', '整理错题本，按知识点分类']
+                },
+                {
+                    title: '实务+冲刺阶段',
+                    time: '9月中旬 - 10月中旬（约4周）',
+                    content: `开始<strong>${practiceName}</strong>的学习，这是专业科目，需要结合工作实际理解。同时开始刷真题，训练答题思路。`,
+                    tasks: [`学习${practiceName}基础课程`, '刷近5年真题（每天至少1套）', '参加模考，训练答题节奏', '复习错题本高频错题']
+                },
+                {
+                    title: '考前冲刺阶段',
+                    time: '10月中旬 - 10月25日（约1周）',
+                    content: '最后一周，<strong>不做新题</strong>，只看错题和笔记。调整作息，确保考试时间段精力充沛。',
+                    tasks: ['只看错题本和笔记', '复习高频考点和口诀', '调整作息，早睡早起', '准备好准考证、身份证']
+                }
+            ];
+        } else {
+            // 有基础
+            plan = [
+                {
+                    title: '快速基础阶段',
+                    time: '6月下旬 - 8月初（约6周）',
+                    content: `你有安全相关经验，基础学习可以<strong>加快进度</strong>。建议法律法规和管理可以较快过一遍，重点放在技术基础和实务科目。`,
+                    tasks: ['快速过法律法规+管理基础课', '重点学习技术基础', `开始${practiceName}基础学习`, '每章立即做章节题检验']
+                },
+                {
+                    title: '强化刷题阶段',
+                    time: '8月初 - 9月底（约8周）',
+                    content: '有基础的优势是可以<strong>多刷题</strong>。通过做题发现薄弱点，再针对性复习。建议参加强化刷题集训直播课。',
+                    tasks: ['刷章节题+真题（按知识点）', '参加《强化刷题集训》直播', '整理错题，分析错误原因', '参加模考，检验学习效果']
+                },
+                {
+                    title: '冲刺模考阶段',
+                    time: '10月初 - 10月25日（约3周）',
+                    content: '冲刺阶段以<strong>套卷</strong>为主，完整做卷，训练答题节奏。实务科目要多写案例，练习答题思路。',
+                    tasks: ['每天做1套真题/模拟卷', '参加《冲刺线上面授》集训', '复习错题本', '背诵高频考点和答题模板']
+                }
+            ];
+        }
+    } else {
+        // 两年拿证或稳扎稳打
+        plan = [
+            {
+                title: '第一年基础阶段',
+                time: '6月下旬 - 8月底（约9周）',
+                content: `你计划分两年拿证，第一年只考<strong>法律法规和管理</strong>两科，时间相对充裕。建议把基础打牢，不要再第二年还要重新学。`,
+                tasks: ['听《认知考试》+《备考指导》', '学习法律法规基础课程', '学习管理基础课程', '两科交叉学习，避免遗忘']
+            },
+            {
+                title: '第一年强化冲刺',
+                time: '9月初 - 10月25日（约7周）',
+                content: '第一年科目少，可以<strong>多轮复习</strong>。第一轮打基础，第二轮做真题，第三轮复习错题。',
+                tasks: ['刷近5年真题（法律法规+管理）', '参加《真题解析》+《临考密训》', '整理错题本', '考前带背，冲刺记忆']
+            },
+            {
+                title: '第二年规划建议',
+                time: '次年1月 - 次年10月',
+                content: `第二年再考<strong>技术基础+${practiceName}</strong>。有了第一年的基础，第二年学习会轻松很多。建议提前开始准备，不要等到6月。`,
+                tasks: [`提前学习技术基础`, `提前学习${practiceName}`, '报一个含私教服务的班型', '第二年一次通过剩余2科']
+            }
+        ];
+    }
+
+    // ===== 3. 推荐课程 =====
+    let courses = [];
+    if (isZero && weeklyHours < 10) {
+        courses = [
+            {
+                name: '零基础畅学班',
+                desc: '适合零基础、每天学习时间较少的考生。包含认知考试、备考指导、考点精讲等基础课程，帮助建立知识体系。',
+                match: '匹配你的零基础情况，课程讲解细致，适合入门'
+            },
+            {
+                name: '云私塾7.0',
+                desc: '含个性化学习方案、遗忘补强算法、按得分智能推荐省时方式。系统根据你的做题情况，智能推送薄弱知识点课程。',
+                match: '智能学习系统特别适合时间零碎、需要高效备考的你'
+            }
+        ];
+    } else if (isZero && weeklyHours >= 10) {
+        courses = [
+            {
+                name: '全程突破班',
+                desc: '适合零基础但能保证学习时间的考生。包含完整的基础、强化、冲刺三阶段课程，配套云私塾7.0智能学习系统。',
+                match: '你的学习时间充足，跟完全程班课程效果最好'
+            },
+            {
+                name: '云私塾7.0',
+                desc: '个性化学习方案+遗忘补强算法+智能互动学习。双屏学习、答疑小程序、扫码答疑等功能，让学习更高效。',
+                match: '智能系统帮你高效利用时间，遗忘补强功能特别实用'
+            }
+        ];
+    } else if (hasFailed) {
+        courses = [
+            {
+                name: '线上魔鬼训练营',
+                desc: '适合考过但没通过、需要高强度训练的学员。含魔鬼云面授（两期）、强化刷题集训、考点突破集训等高强度课程。',
+                match: '针对性强化训练，帮你攻克未通过科目的薄弱点'
+            },
+            {
+                name: '私教营',
+                desc: '45-60天私教营专属课程，含一对一批改、专属社群服务。针对实务科目案例题，有老师专门批改指导。',
+                match: '之前考过说明有基础，私教营帮你精准提分'
+            }
+        ];
+    } else {
+        courses = [
+            {
+                name: '全程突破班/云私塾7.0',
+                desc: '适合有基础、目标一次通过的考生。含完整三阶段课程+云私塾智能学习系统，性价比高。',
+                match: '你的基础+时间配置，跟完全程班课程通过率很高'
+            },
+            {
+                name: '考点精讲（录播）',
+                desc: '必学课程，适合所有备考学员。按官方教材顺序，知识点详细讲解。有基础可以直接刷真题找薄弱点，再针对性听课。',
+                match: '核心基础课程，无论报哪个班型都包含此课程'
+            }
+        ];
+    }
+
+    // ===== 4. 时间分配 =====
+    let timeAllocation = [];
+    if (target_year === '1_year') {
+        const lawPct = isZero ? 25 : 20;
+        const mgmtPct = isZero ? 25 : 20;
+        const techPct = isZero ? 25 : 30;
+        const pracPct = isZero ? 25 : 30;
+        timeAllocation = [
+            { phase: '基础阶段', content: `法律法规占${lawPct}%、管理占${mgmtPct}%、技术基础占${techPct}%、实务占${pracPct}%。零基础建议先从法律法规入手，建立信心后再学生动有趣的内容。` },
+            { phase: '强化阶段', content: `加大做题比例，建议听课:做题:复习 = 3:4:3。每天保证${weeklyHours > 10 ? '2小时以上' : '1小时左右'}有效学习。周末可集中做套卷。` },
+            { phase: '冲刺阶段', content: `以真题为主，每天至少做1套真题并仔细分析错题。实务科目要多写案例分析，练习答题思路。参加冲刺线上面授集训效果更佳。` }
+        ];
+    } else {
+        timeAllocation = [
+            { phase: '第一年', content: `法律法规和管理各占50%。先学生动有趣的法律法规，再学偏记忆的管理。两科交叉复习，避免遗忘。` },
+            { phase: '第二年规划', content: `第二年再加技术基础和实务科目。有了第一年的基础，学习会轻松很多。建议提前开始准备。` }
+        ];
+    }
+
+    // ===== 5. 复习重点 =====
+    const focusSubjects = subjects.filter(s => s.name !== '安全生产专业实务');
+    if (subjects.find(s => s.name === practiceName)) {
+        focusSubjects.push({ name: practiceName, reason: '', tags: [] });
+    }
+    const focus = focusSubjects.map(s => {
+        const subName = s.name;
+        let detail = '';
+        if (subName === '安全生产法律法规') {
+            detail = `<div>📌 <strong>共7章、91个知识点</strong></div>
+                <div>🔑 <strong>复习重点：</strong>安全生产法是绝对重点（17个核心考点），单行法律、相关法律也常考。</div>
+                <div>💡 <strong>备考建议：</strong>${isZero ? '先听课程再看书，不要死磕教材。重点章节多听几遍。' : '可直接刷题找薄弱点，再针对性复习。'}</div>`;
+        } else if (subName === '安全生产管理') {
+            detail = `<div>📌 <strong>共8章、52个知识点</strong></div>
+                <div>🔑 <strong>复习重点：</strong>安全生产管理内容（30个考点）是绝对重点，应急管理也常考。</div>
+                <div>💡 <strong>备考建议：</strong>管理偏记忆，建议听完课立即做章节题巩固。与法律法规一起学，关联度高。</div>`;
+        } else if (subName === '安全生产技术基础') {
+            detail = `<div>📌 <strong>共5章、62个知识点</strong></div>
+                <div>🔑 <strong>复习重点：</strong>机械安全、电气安全、特种设备、防火防爆是四大重点，分值占比高。</div>
+                <div>💡 <strong>备考建议：</strong>技术基础偏理解，建议结合3D实景教学课程。零基础需要多花时间，不要只背不练。</div>`;
+        } else {
+            detail = `<div>📌 <strong>${practiceName}</strong></div>
+                <div>🔑 <strong>复习重点：</strong>结合你从事的工作，重点学习与你工作相关的章节。案例题是拿分关键。</div>
+                <div>💡 <strong>备考建议：</strong>多写案例题，练习答题思路。有工作经验的理解起来会更容易。</div>`;
+        }
+        return { subject: subName, detail };
+    });
+
+    // ===== 6. 真题利用方法 =====
+    const paperMethod = `
+        <div class="method-card">
+            <div class="method-title">📝 真题利用的3个关键步骤</div>
+            <div class="method-content">
+                <ul style="padding-left:18px;">
+                    <li><strong>第一步：按科目刷（8月-9月）</strong><br>学完一科再刷该科真题，不要混着刷。近5年真题（2021-2025）最重要，能覆盖80%以上考点。</li>
+                    <li><strong>第二步：按套卷刷（9月-10月）</strong><br>按照考试时间完整做一套卷，训练答题节奏和时间分配。建议上午考的科目上午做，培养考试状态。</li>
+                    <li><strong>第三步：分析错题（贯穿全程）</strong><br>每道错题都要弄清：考点是什么？为什么错？正确思路是什么？把错题按知识点分类整理，考前只看错题本。</li>
+                </ul>
+                <div style="margin-top:12px;padding:10px;background:#fff3e0;border-radius:6px;font-size:13px;color:#e65100;">
+                    ⚠️ <strong>注意：</strong>真题不要只做一遍！第一遍做，第二遍分析考点，第三遍复习错题。建议至少刷3遍。
+                </div>
+            </div>
+        </div>
+    `;
+
+    // ===== 7. 错题整理方法 =====
+    const errorMethod = `
+        <div class="method-card">
+            <div class="method-title">📒 错题本这样做才有效</div>
+            <div class="method-content">
+                <ul style="padding-left:18px;">
+                    <li><strong>错题分类：</strong>按科目+章节分类，不要混在一起。方便后期按知识点复习。推荐用Excel或云私塾系统的错题功能。</li>
+                    <li><strong>记录内容：</strong>题目简要描述 + 错误答案 + 正确答案 + 错误原因（概念不清/粗心/审题错误）+ 相关知识点。</li>
+                    <li><strong>定期回顾：</strong>每周回顾一次本周错题，每月回顾一次本月错题。考试前2周只看错题本，这是提分最快的方式。</li>
+                    <li><strong>工具推荐：</strong>云私塾7.0系统有自动错题收集功能，做题时系统自动记录错题，按知识点分类，复习效率高。</li>
+                </ul>
+                <div style="margin-top:12px;padding:10px;background:#e8f5ec;border-radius:6px;font-size:13px;color:#07c160;">
+                    ✅ <strong>小技巧：</strong>把高频错题知识点标记出来，这些就是你的提分关键点！云私塾系统的"遗忘补强算法"会自动帮你安排错题复习时间。
+                </div>
+            </div>
+        </div>
+    `;
+
+    // ===== 8. 心态调整 =====
+    const mindset = `
+        <div class="method-card">
+            <div class="method-title">💪 备考心态调整建议</div>
+            <div class="method-content">
+                <ul style="padding-left:18px;">
+                    <li><strong>接受遗忘是正常的：</strong>学完后面忘前面很正常，这是大脑的记忆规律。解决方法是定期回顾，不是学得更慢。云私塾的"遗忘补强算法"就是专门解决这个问题的。</li>
+                    <li><strong>不要和别人比进度：</strong>每个人的基础和时间不同，按自己的节奏来。重要的是每天都有进步，而不是跟别人比谁学得快。</li>
+                    <li><strong>做题错得多很正常：</strong>刚开始做题正确率不高是正常的，真题就是用来发现薄弱点的，不是用来打击自信的。错的越多，发现的问题越多，考试时避开的坑就越多。</li>
+                    <li><strong>考前焦虑是正常的：</strong>适度紧张有助于发挥，不要刻意"放松"。按平时的节奏复习就好，相信自己的付出。</li>
+                    <li><strong>坚持比聪明更重要：</strong>注安考试难度适中，只要你坚持学完教材、做完真题，通过概率很高。很多没通过的不是因为笨，是因为没坚持到最后。</li>
+                </ul>
+            </div>
+        </div>
+    `;
+
+    const summary = `基于你的情况，推荐${subjects.length}个科目${target_year === '1_year' ? '，今年一次冲刺' : '，分两年稳妥拿证'}`;
+
+    return { summary, subjects, plan, courses, timeAllocation, focus, paperMethod, errorMethod, mindset };
+}
+
+function shareResult() {
+    alert('📤 分享功能\n\n你可以：\n1. 截图保存当前页面\n2. 发送给朋友参考\n\n完整版分享功能后续上线！');
+}
+
+function restartQuiz() {
+    if (confirm('确定要重新测试吗？当前结果将丢失。')) {
+        showPage('page-welcome');
+    }
+}
+</script>
+</body>
+</html>

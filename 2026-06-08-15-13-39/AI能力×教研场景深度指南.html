@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AI 能力 × 教研场景深度指南 — 环球网校教研团队</title>
+<style>
+:root{--bg:#fafbfc;--surface:#fff;--surface-alt:#f7f8fa;--text:#0f172a;--text-2:#475569;--text-3:#94a3b8;--border:#e2e8f0;--border-l:#f1f5f9;--primary:#4f46e5;--primary-l:#eef2ff;--primary-d:#3730a3;--accent:#0d9488;--accent-l:#f0fdfa;--accent-d:#0f766e;--warm:#f59e0b;--warm-l:#fffbeb;--success:#10b981;--success-l:#ecfdf5;--danger:#ef4444;--danger-l:#fef2f2;--info:#3b82f6;--info-l:#eff6ff;--r-xs:6px;--r-sm:10px;--r:16px;--r-lg:20px;--shadow-xs:0 1px 2px rgba(0,0,0,.03);--shadow-sm:0 1px 3px rgba(0,0,0,.04),0 1px 2px rgba(0,0,0,.03);--shadow:0 4px 6px rgba(0,0,0,.03),0 2px 4px rgba(0,0,0,.02);--shadow-md:0 8px 24px rgba(0,0,0,.05),0 2px 8px rgba(0,0,0,.03);--shadow-lg:0 16px 48px rgba(0,0,0,.06),0 4px 12px rgba(0,0,0,.03);--font:"PingFang SC","Hiragino Sans GB","Microsoft YaHei",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;--mono:"SF Mono","Fira Code","Cascadia Code","Consolas",monospace;--t-fast:.15s cubic-bezier(.4,0,.2,1);--t:.3s cubic-bezier(.4,0,.2,1);--t-slow:.5s cubic-bezier(.4,0,.2,1);--mw:1040px}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:72px}
+body{font-family:var(--font);background:var(--bg);color:var(--text);line-height:1.75;-webkit-font-smoothing:antialiased}
+::-webkit-scrollbar{width:6px}::-webkit-scrollbar-track{background:transparent}::-webkit-scrollbar-thumb{background:var(--border);border-radius:3px}
+
+.nav{position:sticky;top:0;z-index:1000;background:rgba(255,255,255,.82);backdrop-filter:blur(16px) saturate(1.4);-webkit-backdrop-filter:blur(16px) saturate(1.4);border-bottom:1px solid transparent;transition:border-color var(--t),box-shadow var(--t)}
+.nav.scrolled{border-bottom-color:var(--border);box-shadow:var(--shadow-xs)}
+.nav-inner{max-width:var(--mw);margin:0 auto;padding:0 32px;display:flex;align-items:center;gap:4px;overflow-x:auto}
+.nav-brand{font-size:14px;font-weight:700;color:var(--primary);white-space:nowrap;margin-right:16px;opacity:0;transition:opacity var(--t)}
+.nav.scrolled .nav-brand{opacity:1}
+.nav-link{flex-shrink:0;padding:10px 18px;border-radius:24px;font-size:13px;font-weight:600;cursor:pointer;border:none;white-space:nowrap;color:var(--text-2);background:transparent;text-decoration:none;transition:all var(--t-fast)}
+.nav-link:hover{background:var(--primary-l);color:var(--primary)}
+.nav-link.active{background:var(--primary);color:#fff;box-shadow:0 2px 8px rgba(79,70,229,.25)}
+
+.hero{position:relative;overflow:hidden;background:linear-gradient(160deg,#0f172a 0%,#1e1b4b 30%,#312e81 55%,#4338ca 100%);color:#fff;padding:72px 0 64px}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 80% 60% at 20% 40%,rgba(99,102,241,.12) 0%,transparent 60%),radial-gradient(ellipse 60% 80% at 80% 20%,rgba(20,184,166,.08) 0%,transparent 60%)}
+.hero-grid{position:absolute;inset:0;opacity:.04;background-image:linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px);background-size:60px 60px}
+.hero-inner{max-width:var(--mw);margin:0 auto;padding:0 32px;position:relative;z-index:2}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.15);padding:6px 16px;border-radius:24px;font-size:12px;font-weight:600;margin-bottom:24px}
+.hero-badge .dot{width:6px;height:6px;border-radius:50%;background:#34d399}
+.hero h1{font-size:clamp(28px,4.5vw,42px);font-weight:800;letter-spacing:-.025em;line-height:1.25;margin-bottom:16px}
+.hero h1 .hl{background:linear-gradient(135deg,#a5b4fc,#67e8f9);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.hero p{font-size:16px;opacity:.78;max-width:640px;line-height:1.8}
+.hero-meta{display:flex;gap:24px;margin-top:28px;flex-wrap:wrap}
+.hero-meta-item{font-size:13px;opacity:.7}
+.hero-meta-item strong{display:block;font-size:22px;font-weight:800;opacity:1;color:#a5b4fc}
+
+.main{max-width:var(--mw);margin:0 auto;padding:0 32px}
+.intro{padding:48px 0;text-align:center}
+.intro h2{font-size:24px;font-weight:800;margin-bottom:8px}
+.intro p{color:var(--text-2);font-size:15px;max-width:680px;margin:0 auto;line-height:1.8}
+
+.scene-list{padding-bottom:48px}
+.scene-item{margin-bottom:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;transition:box-shadow var(--t),border-color var(--t)}
+.scene-item:hover{box-shadow:var(--shadow-sm)}
+.scene-item.open{box-shadow:var(--shadow-md);border-color:#c7d2fe}
+.scene-head{display:flex;align-items:center;gap:16px;padding:24px 32px;cursor:pointer;user-select:none;transition:background var(--t-fast)}
+.scene-head:hover{background:var(--surface-alt)}
+.scene-head .s-icon{font-size:32px;flex-shrink:0;width:48px;height:48px;display:flex;align-items:center;justify-content:center;border-radius:12px;background:var(--primary-l)}
+.scene-head .s-info{flex:1;min-width:0}
+.scene-head .s-info h3{font-size:17px;font-weight:700;margin-bottom:2px}
+.scene-head .s-info p{font-size:13px;color:var(--text-2);line-height:1.5;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.scene-head .s-num{font-size:12px;font-weight:800;color:var(--text-3);flex-shrink:0}
+.scene-head .s-chev{flex-shrink:0;font-size:20px;color:var(--text-3);transition:transform var(--t)}
+.scene-item.open .s-chev{transform:rotate(180deg)}
+
+.scene-body{max-height:0;overflow:hidden;transition:max-height var(--t-slow)}
+.scene-item.open .scene-body{max-height:8000px}
+.scene-body-inner{padding:0 32px 32px}
+
+.ss-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:var(--text-3);margin-bottom:10px;margin-top:24px}
+.ss-label .ss-num{width:20px;height:20px;line-height:20px;text-align:center;border-radius:6px;font-size:11px;color:#fff}
+.ss-label.l1 .ss-num{background:var(--primary)}
+.ss-label.l2 .ss-num{background:var(--danger)}
+.ss-label.l3 .ss-num{background:var(--accent)}
+.ss-label.l4 .ss-num{background:var(--warm)}
+.ss-label.l5 .ss-num{background:var(--info)}
+.ss-label.l6 .ss-num{background:var(--success)}
+.ss-block{margin-bottom:8px}
+
+.def-box{background:var(--surface-alt);border-radius:var(--r-sm);padding:18px 22px;font-size:14px;color:var(--text-2);line-height:1.75}
+.def-box strong{color:var(--text)}
+.def-flow{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;align-items:center}
+.def-flow .step{background:var(--primary-l);color:var(--primary-d);padding:4px 12px;border-radius:8px;font-size:12px;font-weight:600}
+.def-flow .arrow{color:var(--text-3);font-size:14px}
+
+.pain-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
+.pain-card{background:var(--danger-l);border:1px solid #fecaca;border-radius:var(--r-sm);padding:14px 18px}
+.pain-card h6{font-size:13px;font-weight:700;color:#991b1b;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.pain-card h6::before{content:'🔥';font-size:14px}
+.pain-card p{font-size:12px;color:#7f1d1d;line-height:1.6}
+
+.empower-list{display:flex;flex-direction:column;gap:10px}
+.empower-item{display:flex;gap:14px;padding:16px 20px;background:var(--accent-l);border:1px solid #99f6e4;border-radius:var(--r-sm)}
+.empower-item .e-icon{font-size:22px;flex-shrink:0}
+.empower-item .e-body h6{font-size:13px;font-weight:700;color:var(--accent-d);margin-bottom:3px}
+.empower-item .e-body p{font-size:12.5px;color:#134e4a;line-height:1.65}
+.empower-item .e-body .e-result{display:inline-block;margin-top:6px;font-size:11px;font-weight:700;color:var(--accent-d);background:rgba(13,148,136,.1);padding:2px 10px;border-radius:8px}
+
+.prompt-list{display:flex;flex-direction:column;gap:12px}
+.prompt-card{border:1px solid var(--border);border-radius:var(--r-sm);overflow:hidden}
+.prompt-card .pc-head{padding:10px 16px;background:var(--warm-l);border-bottom:1px solid #fde68a;font-size:12px;font-weight:700;color:#92400e;display:flex;align-items:center;gap:6px}
+.prompt-card .pc-body{background:#0f172a;color:#e2e8f0;padding:14px 18px;font-family:var(--mono);font-size:12.5px;line-height:1.75;white-space:pre-wrap;word-break:break-word;overflow-x:auto}
+.prompt-card .pc-body .k{color:#a5b4fc}
+.prompt-card .pc-body .v{color:#67e8f9}
+.prompt-card .pc-body .c{color:#64748b;font-style:italic}
+.prompt-card .pc-copy{padding:8px 16px;background:var(--surface-alt);font-size:11px;color:var(--text-3);text-align:right}
+
+.case-box{border:1px solid var(--border);border-radius:var(--r);overflow:hidden}
+.case-head{padding:14px 20px;background:var(--info-l);border-bottom:1px solid #bfdbfe;font-size:14px;font-weight:700;color:#1e40af;display:flex;align-items:center;gap:8px}
+.case-body{padding:20px 24px}
+.case-body p{font-size:13.5px;color:var(--text-2);line-height:1.8;margin-bottom:12px}
+.case-body p strong{color:var(--text)}
+.case-dialog{margin:14px 0}
+.case-turn{margin-bottom:14px}
+.case-turn .ct-role{font-size:12px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.case-turn .ct-role.user{color:var(--primary)}
+.case-turn .ct-role.ai{color:var(--accent)}
+.case-turn .ct-bubble{padding:12px 16px;border-radius:var(--r-sm);font-size:13px;line-height:1.7}
+.case-turn .ct-bubble.user{background:var(--primary-l);color:var(--primary-d);border:1px solid #c7d2fe}
+.case-turn .ct-bubble.ai{background:var(--accent-l);color:#134e4a;border:1px solid #99f6e4}
+.case-result{margin-top:14px;padding:14px 18px;background:var(--success-l);border:1px solid #a7f3d0;border-radius:var(--r-sm)}
+.case-result h6{font-size:13px;font-weight:700;color:#065f46;margin-bottom:6px;display:flex;align-items:center;gap:6px}
+.case-result p{font-size:12.5px;color:#064e3b;line-height:1.65;margin:0}
+
+.link-box{background:var(--success-l);border:1px solid #a7f3d0;border-radius:var(--r-sm);padding:16px 20px}
+.link-box h6{font-size:13px;font-weight:700;color:#065f46;margin-bottom:8px}
+.link-flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.link-flow .lf-item{background:#fff;border:1px solid #a7f3d0;padding:5px 14px;border-radius:8px;font-size:12px;font-weight:600;color:#065f46}
+.link-flow .lf-arrow{color:var(--success);font-size:16px;font-weight:800}
+
+.reveal{opacity:0;transform:translateY(20px);transition:all .6s cubic-bezier(.22,.61,.36,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+
+.footer{text-align:center;padding:40px 0;color:var(--text-3);font-size:12px;border-top:1px solid var(--border-l)}
+
+@media(max-width:768px){.hero{padding:48px 0 40px}.hero h1{font-size:24px}.hero p{font-size:14px}.hero-meta{flex-direction:column;gap:12px}.main{padding:0 20px}.nav-inner{padding:0 20px}.nav-link{padding:8px 12px;font-size:12px}.nav-brand{display:none}.scene-head{padding:18px 20px;gap:12px}.scene-head .s-icon{width:40px;height:40px;font-size:24px}.scene-head .s-info h3{font-size:15px}.scene-head .s-info p{font-size:12px}.scene-body-inner{padding:0 20px 24px}.pain-grid{grid-template-columns:1fr}.empower-item{flex-direction:column;gap:8px}}
+</style>
+</head>
+<body>
+
+<nav class="nav" id="nav">
+  <div class="nav-inner">
+    <span class="nav-brand">环球网校 · 教研深度指南</span>
+    <a class="nav-link active" href="#hero">总览</a>
+    <a class="nav-link" href="#s1">讲义研发</a>
+    <a class="nav-link" href="#s2">题库命题</a>
+    <a class="nav-link" href="#s3">课程磨课</a>
+    <a class="nav-link" href="#s4">答疑标准</a>
+    <a class="nav-link" href="#s5">师资培训</a>
+    <a class="nav-link" href="#s6">学情诊断</a>
+    <a class="nav-link" href="#s7">考纲研读</a>
+    <a class="nav-link" href="#s8">直播录课</a>
+    <a class="nav-link" href="#s9">资料管控</a>
+    <a class="nav-link" href="#s10">行业复盘</a>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-grid"></div>
+  <div class="hero-inner">
+    <div class="hero-badge"><span class="dot"></span> 环球网校 · 教研团队深度指南 v2.0</div>
+    <h1>AI 能力 <span class="hl">×</span> 教研场景<br>十景深度操作手册</h1>
+    <p>每个场景六层递进：场景定义 → 核心痛点 → 赋能方案 → 提示词模板 → 完整案例 → 延伸联动。教研老师打开即用，一看就懂。</p>
+    <div class="hero-meta">
+      <div class="hero-meta-item"><strong>10</strong>大教研场景</div>
+      <div class="hero-meta-item"><strong>40+</strong>条痛点拆解</div>
+      <div class="hero-meta-item"><strong>25+</strong>提示词模板</div>
+      <div class="hero-meta-item"><strong>10</strong>个完整案例</div>
+    </div>
+  </div>
+</header>
+
+<main class="main">
+  <div class="intro">
+    <h2>点击任意场景卡片，展开六层深度解读</h2>
+    <p>每个场景包含完整的「定义→痛点→赋能→提示词→案例→联动」六层结构。建议从最熟悉的场景开始，对照痛点看赋能方案，复制提示词直接试用，最后看案例理解全流程。</p>
+  </div>
+  <div class="scene-list" id="sceneList"></div>
+</main>
+
+<footer class="footer">
+  <p>环球网校 · 教研团队 AI 能力深度指南</p>
+  <p style="margin-top:6px">阿七 & 教研专家 · 2026 年 6 月 · v2.0</p>
+</footer>
+
+<script>
+const S=[{
+id:"s1",icon:"📖",title:"教材讲义研发",sub:"考纲拆解 → 分层讲义 → 三级审核 → 思维导图/背诵手册",
+def:`教材讲义研发是教研团队的核心生产环节。教研老师对照官方考纲，将法规、管理、技术、实务四大科目的教材内容，按基础、提升、冲刺三个层级编写讲义、考点清单和背诵手册。<br><br><strong>参与角色：</strong>学科负责人（把控方向）→ 教研编写老师（执笔初稿）→ 审核老师（三级校对法条/计算/实务要点）→ 排版老师（统一格式）<br><br><strong>典型工作流：</strong>每年考纲发布后，学科负责人划章节分工 → 教研老师按基础/提升/冲刺三层编写 → 三级审核校对 → 统一排版定稿 → 按考纲年份版本归档。`,
+flow:["考纲拆解","章节分工","分层编写","三级审核","排版定档","版本归档"],
+pains:[
+{t:"从零写初稿耗时惊人",d:"每章讲义从空白文档开始写，一章约 8000-12000 字，一位教研老师花 2-3 天才能完成一章初稿，全年四科合计数百章，编写占掉教研团队70%以上的精力。"},
+{t:"法条编号容易出错",d:"讲义中大量引用《安全生产法》《矿山安全法》等法条，编号、条款序号手抄极易出错。一个编号错了可能导致学员考试答错——但人工核查数百页讲义中的每一个法条编号几乎不可能。"},
+{t:"三层分级标准不统一",d:"基础/提升/冲刺三层讲义的边界模糊——不同老师写的'基础版'深浅不一，有的过深让零基础学员看不懂，有的过浅变成大纲摘要，缺少统一的分层模板和内容标准。"},
+{t:"考纲变动后返工成本高",d:"每年考纲微调后，需要逐章逐节排查哪些内容受影响——法条废止、考点新增、分值调整——手动比对新旧考纲找到变动点再批量修改讲义，效率极低。"},
+{t:"配套素材制作费时",d:"讲义写完后还要单独做思维导图、速记口诀、易混对比表、背诵卡片等配套素材。这些辅助材料制作耗时但不产生核心知识增量，却缺一不可。"}
+],
+empowers:[
+{i:"✍️",h:"智能内容生成 → 初稿从「写」变「审改」",d:"教研老师提供考纲章节和参考教材内容，阿七按指定层级输出结构化讲义初稿（含法条引用、考点提炼、易错提醒），教研只需审核修改。",r:"单章用时：2-3天 → 2-3小时"},
+{i:"🔍",h:"联网检索 + 文件读取 → 法条精准核对",d:"阿七联网搜索最新法条原文，逐条核对讲义中的法条编号、条款序号、规范标准编号是否准确，输出逐条核对清单。",r:"法条错误率趋近于零"},
+{i:"📋",h:"考纲新旧对比 → 变动点自动标注",d:"新旧两版考纲同时丢给阿七，逐条对比输出增删改考点清单，标注每项变动对现有讲义的影响范围，生成待修改资料清单。",r:"考纲比对：1-2天 → 30分钟"},
+{i:"🧩",h:"配套素材一键生成",d:"讲义定稿后，阿七自动生成对应章节的思维导图、速记口诀、易混法条对比表格、背诵卡片，无需教研单独花时间制作。",r:"配套素材：半天 → 10分钟"}
+],
+prompts:[
+{h:"模板一：分层讲义初稿生成",body:`你是一位中级注册安全工程师教研老师，专精<span class="v">[科目名称]</span>。
+请帮我编写<span class="v">[章节名称]</span>的<span class="v">[基础/提升/冲刺]</span>层级讲义。
+
+参考考纲与教材内容：
+<span class="c">[粘贴考纲章节 + 教材原文]</span>
+
+输出结构：
+1. 本章考情分析（近5年分值、常见题型、命题规律）
+2. 考点清单（按掌握/熟悉/了解三级标注考频）
+3. 逐考点精讲（法条原文引用、关键词标注、易错提醒）
+4. 本章小结 + 思维导图框架
+
+要求：法条引用精确到条/款，基础层重概念理解，冲刺层重应试技巧。`,c:"复制模板，替换 [ ] 内容即可"},
+{h:"模板二：法条编号逐条核对",body:`请核对以下讲义中所有法条/规范编号是否准确：
+<span class="c">[粘贴讲义文本]</span>
+
+逐条列出引用法条，标注：✅ 正确 / ❌ 错误（附正确编号）
+额外检查：是否有已废止或已更新的法条需要替换`,c:"三级审核的第一轮机审"},
+{h:"模板三：配套素材一键生成",body:`基于以下讲义内容生成配套学习素材：
+<span class="c">[粘贴定稿讲义]</span>
+
+输出：
+1. 速记口诀（3-5条，押韵易记，含法条关键字）
+2. 易混淆考点对比表（表格，含适用条件/时限/责任人/处罚）
+3. 思维导图大纲（Markdown缩进格式）`,c:"讲义定稿后一键产出全套配套"}
+],
+_case:{t:"编写《安全生产许可证》章节基础层讲义",bg:"教研老师小王负责编写 2026 版注安法规科目讲义。本章'安全生产许可证的取得与管理'属于高频考点（年均4-6分），需按基础层编写，面向零基础学员。小王打开阿七，直接粘贴考纲要求与参考教材内容。",turns:[
+{r:"user",t:"你是一位中级注册安全工程师教研老师。请帮我编写《安全生产法》'安全生产许可证'章节的基础层讲义。考纲要求：取得条件、有效期、延期变更、监督管理。参考教材：[粘贴教材约2000字]。请按：考情分析→考点清单→逐考点精讲→小结，四部分输出。"},
+{r:"ai",t:"输出约6000字结构化讲义：①近5年命题规律与分值分布 ②6个考点按掌握/熟悉/了解分级 ③逐考点精讲含法条原文引用、关键词标注、典型例题 ④本章小结。法条引用精确到《安全生产许可证条例》具体条款。"}
+],iter:"小王审阅后发现内容准确但基础层讲得太深，零基础学员信息密度过高。于是迭代追问：",iterTurns:[
+{r:"user",t:"内容没问题，但基础层太深了。请调整：①每个考点加一句大白话解释 ②法条原文移到「拓展阅读」框，正文只讲核心要点 ③例题只保留1道最基础的 ④增加2个生活类比帮助零基础理解"},
+{r:"ai",t:"重新输出了调整版：每个考点开头加了白话解释（如'安全生产许可证就是企业的安全营业执照'），法条原文移到灰色拓展框，例题精简为1道基础题，并增加了2个生活类比。"}
+],iter2:"小王接着要求生成配套素材：",iter2Turns:[
+{r:"user",t:"基于刚才的讲义，生成：①速记口诀 ②易混淆对比表（许可证 vs 营业执照 vs 三同时）③思维导图大纲"},
+{r:"ai",t:"3条押韵口诀 + 三列对比表 + Markdown思维导图大纲。口诀如'许可条件十三项，安全投入不能忘，延期提前三个月，变更三十日内办'。"}
+],result:"最终产出：一份约5000字的基础层讲义（含白话解释、生活类比、基础例题）+ 3条速记口诀 + 1张易混对比表 + 思维导图大纲。全程约2小时（含审核修改），传统方式需2-3天。小王将定稿讲义发给阿七写入飞书知识库归档。"},
+links:["讲义定稿 → 课件制作（场景3）","考点清单 → 题库命题标签（场景2）","易混对比表 → 答疑知识库（场景4）","考情分析 ↔ 学情诊断对照（场景6）"]
+},
+{
+id:"s2",icon:"📝",title:"题库命题与刷题体系",sub:"原创命题 → 标准解析 → 变式训练 → 套卷组卷 → 错题分析",
+def:`题库命题是检验学员考点掌握程度的核心手段。教研团队围绕注安专属标签题库，收纳历年真题、模拟题、实务案例题，筛选剔除老旧超纲题型，自主改编和原创贴合考情的新题，分层配置课堂练习、课后作业、单元模考和考前冲刺套卷。<br><br><strong>参与角色：</strong>命题老师（出题+解析）→ 审核老师（核对答案与法条）→ 标签管理员（维护考点标签体系）→ 数据分析师（错题统计报告）`,
+flow:["考点标签维护","命题/改编","标准解析编写","审核入库","分层配置","错题统计分析"],
+pains:[
+{t:"原创命题质量参差不齐",d:"命题老师水平不一——有的题干表述不严谨、选项干扰性不够、答案存在争议——导致学员做题时产生困惑甚至投诉，严重影响刷题体验和备考信心。"},
+{t:"标准解析编写极其耗时",d:"每道题都要写详细解析——法条依据精确到条、计算步骤逐步列出、实务得分框架拆解——一道案例题的解析可能超过800字，50道题的模考卷就得写几万字解析。"},
+{t:"老旧题目清理不及时",d:"题库中积累多年的题目，部分已不符合新考纲或新法条（如废止的《职业病防治法》旧条款），但逐题排查工作量大到难以完成，学员可能做到过时题甚至错误题。"},
+{t:"变式训练手动出题效率低",d:"针对高频错题需要出3-5道同考点变式题专门攻克，但手动出题很难找到新角度，容易和原题重复，效率极低。"},
+{t:"套卷组卷靠人工拼凑",d:"月度模考、阶段测评需要按章节权重、难度分布、题型比例科学组卷。人工拼凑很难做到精准配比，且每次组卷要花半天，难以高频组织模考。"}
+],
+empowers:[
+{i:"✍️",h:"AI原创命题 → 质量统一可控",d:"给一个考点+难度要求，阿七生成单选/多选/案例分析题+标准答案+完整解析（法条依据/计算步骤/得分点），题干表述严谨、选项干扰性科学。",r:"单题命题：30分钟 → 5分钟"},
+{i:"🔄",h:"老旧题目智能改编",d:"把过时真题丢给阿七，按新考纲要求改编题干、替换过时法条、调整选项。保留好题骨架但更新到最新标准，批量处理效率极高。",r:"改编效率提升5倍以上"},
+{i:"🔀",h:"变式训练自动生成",d:"一道高频错题→阿七生成3-5道同考点不同角度的变式题，角度覆盖概念辨析/情景应用/计算变形/法条反向/综合对比，攻克概念混淆。",r:"变式出题：1小时 → 3分钟"},
+{i:"📊",h:"智能组卷 → 科学配比",d:"设定章节权重、难度分布、题型比例，阿七从题库自动搭配完整试卷，确保覆盖率与区分度，模考卷质量稳定可控。",r:"组卷用时：半天 → 15分钟"}
+],
+prompts:[
+{h:"模板一：原创命题 + 标准解析",body:`你是一位中级注册安全工程师命题专家。
+请围绕考点「<span class="v">[考点名称]</span>」出一道<span class="v">[单选/多选/案例分析]</span>题。
+难度：<span class="v">[基础/提升/冲刺]</span>　科目：<span class="v">[法规/管理/技术/实务]</span>
+
+输出：
+1. 题干（表述严谨无歧义）
+2. 选项（A-D，干扰项有合理性）
+3. 正确答案　4. 详细解析（法条依据精确到条/款、计算步骤、易错提醒）
+5. 考点标签 + 难度星级（1-5星）`,c:"单题命题标准模板，直接复制"},
+{h:"模板二：批量变式训练生成",body:`以下是学员高频错题：
+<span class="c">[粘贴错题正文+解析]</span>
+
+生成5道变式题，角度：概念辨析/情景应用/计算变形/法条反向/综合对比
+每题附答案+简短解析，难度持平或略高，确保题干不重复`,c:"攻克高频错点的专项训练包"},
+{h:"模板三：智能套卷组卷",body:`帮我组一套《<span class="v">[科目]</span>》<span class="v">[阶段]</span>模考卷：
+题型配比：70道单选×1分 + 15道多选×2分 = 100分
+章节权重：<span class="c">[粘贴各章分值占比]</span>
+难度分布：基础40% / 提升40% / 冲刺20%
+每题标注：考点标签/难度/答案/解析。输出：试卷正文 + 答案解析附册`,c:"月度模考/阶段测评一键组卷"}
+],
+_case:{t:"为高频错点生成变式训练专项包",bg:"数据分析显示《安全生产管理》'重大危险源辨识'考点错题率高达62%，是全校最薄弱点。命题老师需快速出5道变式题做专项训练。",turns:[
+{r:"user",t:"以下为一道高频错题，请围绕同一考点生成5道变式题：\n错题：某企业储罐区有3个汽油储罐，单罐容积200/300/250m³，是否构成重大危险源？\n答案：是\n解析：根据GB18218，总储量750m³>临界量200m³×3=600m³\n请5道变式题角度：概念辨析/情景应用/计算变形/法条反向/综合对比"},
+{r:"ai",t:"生成5道变式题：①概念辨析'重大危险源vs危险源' ②情景应用'多储罐混合存储不同危化品辨识' ③计算变形'改变储罐数量

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<title>模块八·真实案例库 | WorkBuddy × 中级注安培训文档</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:linear-gradient(135deg,#FEF2F2 0%,#FFF7ED 100%);min-height:100vh}
+.header{background:linear-gradient(135deg,#DC2626 0%,#EA580C 50%,#F59E0B 100%);color:#fff;padding:60px 40px;text-align:center}
+.header h1{font-size:42px;font-weight:800;margin-bottom:14px;letter-spacing:2px}
+.header .sub{font-size:16px;opacity:.92;max-width:780px;margin:0 auto}
+.header .crumb{font-size:13px;opacity:.85;margin-bottom:20px}
+.header .crumb a{color:#fff;text-decoration:none;opacity:.85}
+.wrap{max-width:1100px;margin:0 auto;padding:40px 30px}
+.intro{background:#fff;border-radius:14px;padding:32px;margin-bottom:30px;box-shadow:0 2px 14px rgba(220,38,38,.08);border:1px solid #fee2e2}
+.intro h2{font-size:24px;color:#991B1B;margin-bottom:16px;padding-bottom:10px;border-bottom:3px solid #DC2626;display:inline-block}
+.intro p{color:#333;line-height:1.8;margin-bottom:10px}
+.intro .highlight{background:#FEF3C7;border-left:4px solid #F59E0B;padding:14px;border-radius:6px;margin:14px 0;color:#78350F}
+.case-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:20px;margin:30px 0}
+.case-card{background:#fff;border-radius:12px;padding:28px;box-shadow:0 2px 12px rgba(220,38,38,.08);border:1px solid #fee2e2;transition:all .2s;text-decoration:none;color:inherit;display:block;position:relative;overflow:hidden}
+.case-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(220,38,38,.18);border-color:#DC2626}
+.case-card .tag{position:absolute;top:14px;right:14px;background:#FEE2E2;color:#991B1B;padding:4px 10px;border-radius:12px;font-size:11px;font-weight:700}
+.case-card .file-icon{font-size:32px;margin-bottom:12px}
+.case-card h3{color:#991B1B;font-size:20px;margin-bottom:8px}
+.case-card .meta{color:#666;font-size:13px;margin-bottom:10px;line-height:1.6}
+.case-card .highlight-data{background:#FEF3C7;color:#78350F;padding:8px 12px;border-radius:6px;font-size:13px;margin:10px 0;font-weight:600}
+.case-card p{color:#555;font-size:14px;line-height:1.6;margin-bottom:12px}
+.case-card .link{color:#DC2626;font-weight:700;font-size:14px}
+.back{display:inline-block;margin-top:30px;padding:12px 24px;background:#DC2626;color:#fff;border-radius:8px;text-decoration:none;font-weight:600;transition:all .2s}
+.back:hover{background:#B91C1C}
+.usage{background:#fff;border-radius:14px;padding:32px;margin-bottom:30px;box-shadow:0 2px 14px rgba(220,38,38,.08);border:1px solid #fee2e2}
+.usage h2{font-size:24px;color:#991B1B;margin-bottom:16px;padding-bottom:10px;border-bottom:3px solid #DC2626;display:inline-block}
+.usage-step{display:flex;align-items:flex-start;margin:14px 0;padding:14px;background:#FEF2F2;border-radius:8px;border-left:4px solid #DC2626}
+.usage-step .num{background:#DC2626;color:#fff;width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;flex-shrink:0;margin-right:14px}
+.usage-step h4{color:#991B1B;margin-bottom:4px}
+.usage-step p{color:#555;font-size:14px;margin:0;line-height:1.6}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumb">📚 <a href="../index.html">培训文档总目录</a> / 模块八·真实案例库</div>
+  <h1>📂 模块八·真实业务案例库</h1>
+  <p class="sub">基于 5 个真实 Excel 业务文件的全景拆解：复购方案、直播安排、竞品调研、运营手册、5月数据复盘</p>
+</div>
+
+<div class="wrap">
+
+<div class="intro">
+  <h2>📖 模块说明</h2>
+  <p>本模块收录了猴哥日常工作的 5 个真实业务文件，把每一份文件当作"活教材"，<strong>逐字段拆解、提炼方法论、生成可复用工具</strong>。</p>
+  <p><strong>学习方式：</strong>先看原文（看真实数据）→ 看拆解（看门道）→ 看工具（看怎么用）→ 自己改一遍（上手）</p>
+  <div class="highlight">
+    💡 <strong>为什么这一模块重要？</strong>前面的模块讲的是"通用方法"，本模块把方法落到<strong>真实业务场景</strong>里。看完这 5 个案例，团队就能在 80% 的工作场景里直接套用。
+  </div>
+</div>
+
+<div class="usage">
+  <h2>🚀 怎么用这个模块？</h2>
+  <div class="usage-step">
+    <div class="num">1</div>
+    <div>
+      <h4>📥 第一步：找原始文件</h4>
+      <p>5 个 Excel 都在 <code>注安workbuddy/</code> 根目录，与本培训文档并列。可双击用 Excel/WPS 打开对照看。</p>
+    </div>
+  </div>
+  <div class="usage-step">
+    <div class="num">2</div>
+    <div>
+      <h4>🔍 第二步：看案例拆解</h4>
+      <p>点击下面 5 张卡片，每张都从"原始数据"→"结构拆解"→"方法论沉淀"3 层解读。</p>
+    </div>
+  </div>
+  <div class="usage-step">
+    <div class="num">3</div>
+    <div>
+      <h4>🔧 第三步：用模板改造自己的业务</h4>
+      <p>每个案例都附"提问模板"，下次遇到类似业务，直接复用模板，让 AI 帮你出方案。</p>
+    </div>
+  </div>
+  <div class="usage-step">
+    <div class="num">4</div>
+    <div>
+      <h4>📊 第四步：搭配 Sales 工作台</h4>
+      <p>本模块 + 模块九 Sales 工作台 = 销售/运营的完整弹药库。</p>
+    </div>
+  </div>
+</div>
+
+<h2 style="font-size:24px;color:#991B1B;margin:30px 0 16px">📑 5 个真实案例</h2>
+
+<div class="case-grid">
+  <a href="01_复购活动方案.html" class="case-card">
+    <span class="tag">12 sheets</span>
+    <div class="file-icon">🔄</div>
+    <h3>① 复购活动方案规划</h3>
+    <div class="meta">📁 复购活动方案规划.xlsx | 1.0 MB</div>
+    <p>覆盖 30+ 考试项目复购数据、跨项目优惠政策、复购话术物料、复购直播全流程 SOP。</p>
+    <div class="highlight-data">💡 关键发现：注安复购占比 16%，城规出分（11.8-30）是复购黄金期</div>
+    <div class="link">查看完整拆解 →</div>
+  </a>
+
+  <a href="02_云私塾直播安排.html" class="case-card">
+    <span class="tag">6 sheets</span>
+    <div class="file-icon">🎥</div>
+    <h3>② 25年云私塾发布会直播</h3>
+    <div class="meta">📁 25年中级注安云私塾发布会直播安排.xlsx | 0.6 MB</div>
+    <p>主推产品：云私塾正价课/9元定金。完整直播 SOP：策划→准备→宣发→标签→复盘。</p>
+    <div class="highlight-data">💡 关键发现：AI 赋能+逆袭新路径 是核心传播点，9元定金是引流钩子</div>
+    <div class="link">查看完整拆解 →</div>
+  </a>
+
+  <a href="03_竞品调研.html" class="case-card">
+    <span class="tag">10 sheets</span>
+    <div class="file-icon">⚔️</div>
+    <h3>③ 26年竞品调研</h3>
+    <div class="meta">📁 26年中级注安竞品调研.xlsx | 26 MB</div>
+    <p>对标 233/优路/嗨学/本质注安。涵盖综合对比、套餐对比、师资、智能系统、调研问卷。</p>
+    <div class="highlight-data">💡 关键发现：233 价格 2200 < 环球 < 嗨学 < 优路，环球的差异化在"智能魔方+私教max"</div>
+    <div class="link">查看完整拆解 →</div>
+  </a>
+
+  <a href="04_运营手册.html" class="case-card">
+    <span class="tag">25 sheets</span>
+    <div class="file-icon">📘</div>
+    <h3>④ 26年运营手册</h3>
+    <div class="meta">📁 26年中级注安运营手册.xlsx | 209 MB</div>
+    <p>完整的项目手册：课程体系、班次定价、师资安排、销售话术、复购规则、班次定位。</p>
+    <div class="highlight-data">💡 关键发现：26年主推云私塾7.0（2999元）、私教营（3980元）、央企定制</div>
+    <div class="link">查看完整拆解 →</div>
+  </a>
+
+  <a href="05_5月数据复盘.html" class="case-card">
+    <span class="tag">9 sheets</span>
+    <div class="file-icon">📊</div>
+    <h3>⑤ 5月数据复盘</h3>
+    <div class="meta">📁 安全项目26年5月数据复盘.xlsx | 9.3 MB</div>
+    <p>完整业绩+流量+销售+电商+产品复盘。覆盖端口/团队/流量来源/班型/产品多维度。</p>
+    <div class="highlight-data">💡 关键洞察：业绩 -13% 但订单 +14% = ARPU 下滑 19%，客单价是最大问题</div>
+    <div class="link">查看完整拆解 →</div>
+  </a>
+</div>
+
+<a href="../index.html" class="back">🏠 返回培训文档总目录</a>
+
+</div>
+</body>
+</html>

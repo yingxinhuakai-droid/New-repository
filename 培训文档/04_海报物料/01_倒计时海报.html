@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>4.1 倒计时海报 · WorkBuddy 培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafafa;color:#1f2937;line-height:1.7}
+.header{background:linear-gradient(135deg,#0c4a6e 0%,#0ea5e9 100%);color:#fff;padding:48px 32px 56px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.08);border-radius:50%}
+.crumbs{font-size:13px;opacity:0.9;margin-bottom:14px}
+.crumbs a{color:#fff;text-decoration:none}
+h1{font-size:34px;margin-bottom:12px;position:relative;z-index:1}
+.subtitle{font-size:16px;opacity:0.95;position:relative;z-index:1}
+.container{max-width:1100px;margin:-32px auto 60px;padding:0 24px}
+.card{background:#fff;border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h2{font-size:24px;color:#0c4a6e;margin-bottom:16px;padding-left:14px;border-left:5px solid #0ea5e9}
+.card h3{font-size:18px;color:#0c4a6e;margin:18px 0 10px}
+.tip{background:linear-gradient(135deg,#f0f9ff,#bae6fd);border-left:4px solid #0ea5e9;padding:16px 20px;border-radius:8px;margin:20px 0;color:#0c4a6e}
+.tip strong{color:#075985}
+.warn{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:8px;margin:20px 0;color:#78350f}
+.strategy{background:linear-gradient(135deg,#d1fae5,#a7f3d0);border-radius:10px;padding:20px;margin:20px 0}
+.strategy h4{color:#065f46;margin-bottom:8px;font-size:16px}
+.strategy p{color:#064e3b;font-size:14px;margin:6px 0}
+table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+th{background:linear-gradient(135deg,#0c4a6e,#0ea5e9);color:#fff;padding:14px 12px;text-align:left;font-size:14px}
+td{padding:12px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+tr:hover td{background:#f0f9ff}
+.poster-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:24px 0}
+.poster-card{background:#fff;border-radius:12px;overflow:hidden;box-shadow:0 4px 14px rgba(0,0,0,0.08);position:relative}
+.poster-img{height:200px;display:flex;align-items:center;justify-content:center;color:#fff;font-size:48px;font-weight:900;letter-spacing:2px;position:relative;overflow:hidden}
+.poster-img::before{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.15)}
+.poster-img span{position:relative;z-index:1;text-shadow:0 4px 12px rgba(0,0,0,0.4)}
+.poster-meta{padding:14px}
+.poster-meta h4{font-size:15px;color:#0c4a6e;margin-bottom:6px}
+.poster-meta p{font-size:12px;color:#6b7280;line-height:1.5}
+.tone-1{background:linear-gradient(135deg,#0ea5e9,#06b6d4)}
+.tone-2{background:linear-gradient(135deg,#1e3a8a,#3b82f6)}
+.tone-3{background:linear-gradient(135deg,#f59e0b,#ef4444)}
+.tone-4{background:linear-gradient(135deg,#7c3aed,#db2777)}
+.tone-5{background:linear-gradient(135deg,#dc2626,#991b1b)}
+.tone-6{background:linear-gradient(135deg,#059669,#0d9488)}
+.tone-7{background:linear-gradient(135deg,#0f172a,#1e293b)}
+.tone-8{background:linear-gradient(135deg,#fbbf24,#f97316)}
+.tone-9{background:linear-gradient(135deg,#0e7490,#22d3ee)}
+.template{background:#f8fafc;border-left:4px solid #0ea5e9;padding:18px;border-radius:8px;margin:16px 0;font-family:Menlo,monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;color:#0c4a6e}
+.checklist{background:#fff;border:2px solid #0ea5e9;border-radius:10px;padding:18px;margin:20px 0}
+.checklist li{list-style:none;padding:6px 0;color:#0f172a;font-size:14px}
+.checklist li::before{content:"☐ ";color:#0ea5e9;font-weight:bold;margin-right:6px}
+.nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb}
+.nav a{padding:12px 24px;background:#fff;border:2px solid #0ea5e9;color:#0c4a6e;text-decoration:none;border-radius:8px;font-weight:600}
+.nav a:hover{background:#0ea5e9;color:#fff}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumbs"><a href="../index.html">培训首页</a> / <a href="index.html">模块四·海报物料</a> / 4.1</div>
+  <h1>⏰ 倒计时海报（9 张系列套图）</h1>
+  <div class="subtitle">考试/报名/开课倒计时 —— 从 100 天到考试当天的完整节奏</div>
+</div>
+<div class="container">
+
+<div class="card">
+  <h2>一、为什么倒计时海报最有效？</h2>
+  <p>心理学研究：<b>损失厌恶</b>比"机会收益"更能驱动行动。当学员每天看到"还剩 X 天"，紧迫感会被持续放大。</p>
+  <p>你提供的真实业务场景：26 年中级注安考试时间大约在 10 月底 / 11 月初（具体看当年人事考试网通知），9 月报名、考前冲刺。倒计时海报必须在 8 月底启动。</p>
+  <div class="tip"><strong>📌 投放节奏：</strong>从考前 100 天（7 月底）开始，每天 1 张，3 个月 90 张不停。</div>
+</div>
+
+<div class="card">
+  <h2>二、9 张套图 · 主题与文案模板</h2>
+
+<div class="poster-grid">
+  <div class="poster-card">
+    <div class="poster-img tone-1"><span>100天</span></div>
+    <div class="poster-meta">
+      <h4>① 启动期 · 100 天</h4>
+      <p>主题：<b>从今天起，每天进步一点点</b><br>文案：100 天后你将在考场，60% 的考生此刻还没开始。<br>主推：零基础全程班 ¥1,249</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-2"><span>60天</span></div>
+    <div class="poster-meta">
+      <h4>② 基础期 · 60 天</h4>
+      <p>主题：<b>4 科 1000+ 考点，现在开始刚刚好</b><br>文案：每天 2 小时，吃透高频考点。<br>主推：高频考点班</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-3"><span>30天</span></div>
+    <div class="poster-meta">
+      <h4>③ 强化期 · 30 天</h4>
+      <p>主题：<b>30 天定胜负！</b><br>文案：去年 30 天冲刺班学员通过率 87%。<br>主推：冲刺班 / 云私塾 ¥2,999</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-4"><span>15天</span></div>
+    <div class="poster-meta">
+      <h4>④ 押题期 · 15 天</h4>
+      <p>主题：<b>命题人密押，命中才是王道</b><br>文案：今年押题覆盖 4 科核心考点 92%。<br>主推：私教营 ¥3,980 / 命题人密押卷</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-5"><span>7天</span></div>
+    <div class="poster-meta">
+      <h4>⑤ 最后 1 周</h4>
+      <p>主题：<b>稳住心态，3 套密卷+1 套真题</b><br>文案：准考证打印入口已开放，速领！<br>主推：考前 7 天急救包</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-7"><span>1天</span></div>
+    <div class="poster-meta">
+      <h4>⑥ 考前 1 天</h4>
+      <p>主题：<b>明天上考场，今晚就做这 3 件事</b><br>文案：① 看 1 遍高频错题 ② 准备准考证+身份证 ③ 早睡。<br>主推：心理减压指南</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-6"><span>今天</span></div>
+    <div class="poster-meta">
+      <h4>⑦ 考试当天</h4>
+      <p>主题：<b>加油！你的努力会得到回报</b><br>文案：环球网校 30 万学员与你同在！<br>主推：考后估分通道</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-8"><span>估分</span></div>
+    <div class="poster-meta">
+      <h4>⑧ 考后估分</h4>
+      <p>主题：<b>真题答案已出，对答案估分！</b><br>文案：考后当晚 8 点名师直播估分。<br>主推：考后真题解析课</p>
+    </div>
+  </div>
+
+  <div class="poster-card">
+    <div class="poster-img tone-9"><span>出分</span></div>
+    <div class="poster-meta">
+      <h4>⑨ 查分日</h4>
+      <p>主题：<b>成绩已出，速查！</b><br>文案：恭喜过关的学员，记得来晒分领证书！<br>主推：考后证书班 / 复购课程</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+  <h2>三、提问模板（直接复制用）</h2>
+  <div class="template">帮我做一张"中级注安考试倒计时 30 天"海报，9 张套图中的第 3 张。
+
+要求：
+- 主标题：30 天定胜负！（字号 80pt，醒目）
+- 副标题：每天 1 小时，吃透高频考点
+- 数据点：去年冲刺班通过率 87%
+- 行动号召：扫码领冲刺资料
+- 配色：橙红渐变（强调紧迫感）
+- 二维码占位：右下角
+- 尺寸：1080×1440px（朋友圈 4:5 竖版）
+
+输出：单页 HTML，可直接截图使用。</div>
+</div>
+
+<div class="card">
+  <h2>四、海报自检清单（设计前必看）</h2>
+  <ul class="checklist">
+    <li>主标题字号 ≥ 60pt（手机 5 米外可读）</li>
+    <li>总字数 ≤ 50 字（避免视觉噪音）</li>
+    <li>颜色不超过 3 种（主色 + 强调色 + 文字色）</li>
+    <li>CTA（行动号召）必须有：扫码 / 咨询 / 点击</li>
+    <li>二维码 / 联系方式放在视觉黄金位（右下次方）</li>
+    <li>品牌 Logo / 课程名必出现 1 次</li>
+    <li>主推价格必须明确（¥X,XXX）</li>
+    <li>避免用低分辨率图片（≥ 1MB）</li>
+    <li>同一系列风格必须统一（字体/色系/版式）</li>
+    <li>考试日期 / 报名截止日期要核对准确</li>
+  </ul>
+</div>
+
+<div class="warn"><strong>⚠️ 真实业务提醒：</strong>考试日期必须以<b>中国人事考试网</b>最新公告为准，不要套用往年日期。每年 8 月报名、10 月底/11 月初考试是大致节奏。</div>
+
+<div class="nav">
+  <a href="index.html">← 返回模块四</a>
+  <a href="02_课程亮点海报.html">下一篇：4.2 课程亮点海报 →</a>
+</div>
+
+</div>
+</body>
+</html>

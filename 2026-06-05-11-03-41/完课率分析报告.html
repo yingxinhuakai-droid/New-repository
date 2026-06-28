@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>云私塾系统完课率分析报告</title>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f5f7fa; color: #2c3e50; line-height: 1.6; }
+.header { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 32px 40px; }
+.header h1 { font-size: 26px; font-weight: 700; margin-bottom: 6px; }
+.header p { font-size: 14px; opacity: 0.85; }
+.container { max-width: 1200px; margin: 0 auto; padding: 24px; }
+
+.kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-bottom: 24px; }
+.kpi-card { background: white; border-radius: 12px; padding: 20px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); text-align: center; transition: transform 0.2s; }
+.kpi-card:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(0,0,0,0.1); }
+.kpi-value { font-size: 32px; font-weight: 800; margin: 8px 0 4px; }
+.kpi-label { font-size: 13px; color: #7f8c8d; }
+.kpi-card:nth-child(1) .kpi-value { color: #e74c3c; }
+.kpi-card:nth-child(2) .kpi-value { color: #f39c12; }
+.kpi-card:nth-child(3) .kpi-value { color: #27ae60; }
+.kpi-card:nth-child(4) .kpi-value { color: #3498db; }
+
+.section { background: white; border-radius: 12px; padding: 24px; margin-bottom: 20px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.section h2 { font-size: 18px; font-weight: 700; margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #eee; display: flex; align-items: center; gap: 8px; }
+.section h2::before { content: ''; width: 4px; height: 20px; background: linear-gradient(135deg, #667eea, #764ba2); border-radius: 2px; }
+
+.chart-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+.chart-container { position: relative; }
+canvas { max-height: 380px; }
+
+.insight-box { background: #fff8e1; border-left: 4px solid #ffc107; border-radius: 8px; padding: 16px 20px; margin: 16px 0; font-size: 14px; line-height: 1.8; }
+.insight-box.danger { background: #fce4ec; border-left-color: #e74c3c; }
+.insight-box.success { background: #e8f5e9; border-left-color: #27ae60; }
+.insight-box.info { background: #e3f2fd; border-left-color: #2196f3; }
+.insight-box strong { color: #333; }
+
+.rec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.rec-card { background: #f8f9fa; border-radius: 10px; padding: 18px; border: 1px solid #e9ecef; }
+.rec-card h3 { font-size: 15px; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.rec-card p { font-size: 13px; color: #555; line-height: 1.7; }
+.tag { display: inline-block; font-size: 11px; padding: 2px 8px; border-radius: 10px; color: white; font-weight: 600; }
+.tag-red { background: #e74c3c; }
+.tag-orange { background: #f39c12; }
+.tag-green { background: #27ae60; }
+.tag-blue { background: #3498db; }
+
+.summary-section { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border-radius: 12px; padding: 28px; margin-bottom: 20px; }
+.summary-section h2 { border-bottom-color: rgba(255,255,255,0.3); color: white; }
+.summary-section h2::before { background: white; }
+.summary-item { margin-bottom: 12px; font-size: 14px; line-height: 1.8; }
+.summary-item::before { content: '▸'; margin-right: 6px; }
+
+@media (max-width: 768px) {
+  .kpi-row { grid-template-columns: repeat(2, 1fr); }
+  .chart-row { grid-template-columns: 1fr; }
+  .rec-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📊 云私塾系统完课率分析报告</h1>
+  <p>2025新退费班 · 数据截止2025年11月26日 · 覆盖1,495名学员 · 43个商品</p>
+</div>
+
+<div class="container">
+  <!-- KPI Cards -->
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <div class="kpi-label">学员总数</div>
+      <div class="kpi-value" id="kpi1">1,495</div>
+      <div class="kpi-label">人</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">人均完课率</div>
+      <div class="kpi-value" id="kpi2">49.9%</div>
+      <div class="kpi-label">中位数 52.0%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">零完课学员</div>
+      <div class="kpi-value" id="kpi3">57</div>
+      <div class="kpi-label">占比 3.8%</div>
+    </div>
+    <div class="kpi-card">
+      <div class="kpi-label">记录级零完课</div>
+      <div class="kpi-value" id="kpi4">44.5%</div>
+      <div class="kpi-label">超4成记录未启动</div>
+    </div>
+  </div>
+
+  <!-- Distribution Chart -->
+  <div class="section">
+    <h2>学员完课率分布</h2>
+    <div class="insight-box danger">
+      <strong>⚠️ 两极分化严重：</strong>低完课率（≤10%）学员253人占16.9%，高完课率（≥90%）学员193人占12.9%。超半数学员（53.6%）完课率不足50%。
+    </div>
+    <div class="chart-container">
+      <canvas id="distChart" height="260"></canvas>
+    </div>
+  </div>
+
+  <!-- Teaching Method + Category -->
+  <div class="chart-row">
+    <div class="section">
+      <h2>各教学方式完课率</h2>
+      <div class="insight-box info">
+        <strong>考点精讲</strong>完课率最高(64.8%)，仅6.4%零完课；<strong>案例专项班</strong>和<strong>实战模考班</strong>完课率最低(约24%)，近6-7成学员未启动。
+      </div>
+      <canvas id="methodChart"></canvas>
+    </div>
+    <div class="section">
+      <h2>各商品类别完课率</h2>
+      <div class="insight-box info">
+        <strong>OMO线下集训营</strong>完课率最高(51.2%)；<strong>精英私教营</strong>完课率最低(31.9%)，且50.8%学员未启动任何学习。
+      </div>
+      <canvas id="catChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Exam Direction -->
+  <div class="section">
+    <h2>各考试方向完课率对比</h2>
+    <div class="insight-box">
+      <strong>管理(43.5%)</strong>和<strong>技术(40.3%)</strong>方向完课率较高；<strong>道路(24.4%)</strong>方向完课率最低，55%学员零完课，需重点关注。
+    </div>
+    <canvas id="dirChart" height="280"></canvas>
+  </div>
+
+  <!-- Cross Analysis Heatmap -->
+  <div class="section">
+    <h2>商品类别 × 教学方式 交叉完课率</h2>
+    <div class="insight-box success">
+      <strong>规律发现：</strong>所有类别中<strong>考点精讲</strong>完课率均为最高；OMO线下集训营在所有教学方式上完课率均领先，说明线下+线上结合模式更能推动学员完成学习。
+    </div>
+    <canvas id="crossChart" height="260"></canvas>
+  </div>
+
+  <!-- Media Type -->
+  <div class="section">
+    <h2>录播 vs 试卷完成率对比</h2>
+    <div class="insight-box danger">
+      <strong>试卷完成率极低：</strong>录播平均完成率36.5%，而试卷仅24.1%，中位数为0%。说明学员普遍不做题，仅看视频，这与考试通过的核心需求严重脱节。
+    </div>
+    <canvas id="mediaChart"></canvas>
+  </div>
+
+  <!-- Recommendations -->
+  <div class="summary-section">
+    <h2>📌 核心结论与改进建议</h2>
+    <div class="summary-item">整体完课率偏低，人均仅49.9%，超半数学员未过半，44.5%的教学记录从未启动</div>
+    <div class="summary-item">教学方式差异显著：考点精讲(64.8%) >> 其他方式(24-33%)，后段教学方式弃课严重</div>
+    <div class="summary-item">商品类别中OMO线下集训营表现最优(51.2%)，纯线上模式（精英私教营31.9%）效果最差</div>
+    <div class="summary-item">道路方向学员完课率仅24.4%，需专项帮扶；试卷完成率中位数为0，学员基本不做题</div>
+  </div>
+
+  <div class="section">
+    <h2>🚀 改进建议</h2>
+    <div class="rec-grid">
+      <div class="rec-card">
+        <h3><span class="tag tag-red">紧急</span> 建立"零完课"学员预警机制</h3>
+        <p>开课后3天内未登录/7天内完课率<5%的学员，班主任主动电话跟进，了解弃课原因（时间/难度/动机），制定个性化学习计划。</p>
+      </div>
+      <div class="rec-card">
+        <h3><span class="tag tag-red">紧急</span> 重构案例专项班和实战模考班</h3>
+        <p>这两类完课率仅24%且69%/56%零完课。建议拆分为更小模块，降低启动门槛；加入即时反馈机制和进度徽章，提升完成动力。</p>
+      </div>
+      <div class="rec-card">
+        <h3><span class="tag tag-orange">重要</span> 强化试卷练习环节</h3>
+        <p>试卷完成率中位数为0%，学员普遍"只看不练"。建议将试卷设为解锁下一模块的必要条件，或增加每日一练推送，培养做题习惯。</p>
+      </div>
+      <div class="rec-card">
+        <h3><span class="tag tag-orange">重要</span> 推广OMO混合式教学模式</h3>
+        <p>OMO线下集训营完课率领先其他类别近20个百分点。建议在更多商品中增加线下辅导/直播互动环节，用"见面效应"提升学习粘性。</p>
+      </div>
+      <div class="rec-card">
+        <h3><span class="tag tag-blue">优化</span> 道路方向专项帮扶</h3>
+        <p>道路方向完课率仅24.4%，55%零完课，远低于其他方向。建议组建道路方向专属学习群，安排班主任重点跟进，分析是否有课程内容/难度问题。</p>
+      </div>
+      <div class="rec-card">
+        <h3><span class="tag tag-green">长效</span> 建立学习里程碑激励体系</h3>
+        <p>当前"考点精讲"完课率最高(64.8%)，说明内容驱动有效。建议在所有教学方式中设置阶段性里程碑（25%/50%/75%/100%），配合证书/奖励/排名，增强完成动力。</p>
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center; color:#aaa; font-size:12px; padding:20px 0;">
+    报告生成时间：2026年6月5日 · 数据来源：云私塾系统完课率数据
+  </div>
+</div>
+
+<script>
+const DATA = {
+  method_stats: [
+    {教学方式:"案例专项班【实务】",avg_rate:0.2478,zero_pct:0.696,count:1436},
+    {教学方式:"实战模考班",avg_rate:0.2424,zero_pct:0.562,count:1752},
+    {教学方式:"实战题分班",avg_rate:0.3336,zero_pct:0.391,count:1752},
+    {教学方式:"备考指导",avg_rate:0.3256,zero_pct:0.526,count:1752},
+    {教学方式:"考点突破班",avg_rate:0.3235,zero_pct:0.478,count:1752},
+    {教学方式:"考点精讲",avg_rate:0.6478,zero_pct:0.064,count:1752}
+  ],
+  cat_stats: [
+    {商品类别:"精英私教营",avg_rate:0.3191,zero_pct:0.508,students:79},
+    {商品类别:"魔鬼训练营",avg_rate:0.3236,zero_pct:0.447,students:1111},
+    {商品类别:"魔鬼训练营plus",avg_rate:0.4446,zero_pct:0.445,students:219},
+    {商品类别:"OMO线下集训营",avg_rate:0.5124,zero_pct:0.292,students:60}
+  ],
+  dir_stats: [
+    {考试方向:"道路",avg_rate:0.2437,zero_pct:0.549,students:44},
+    {考试方向:"化工",avg_rate:0.3284,zero_pct:0.465,students:257},
+    {考试方向:"矿山",avg_rate:0.3431,zero_pct:0.423,students:39},
+    {考试方向:"其他",avg_rate:0.3464,zero_pct:0.44,students:749},
+    {考试方向:"煤矿",avg_rate:0.3536,zero_pct:0.394,students:47},
+    {考试方向:"金属",avg_rate:0.3633,zero_pct:0.364,students:27},
+    {考试方向:"建筑",avg_rate:0.3835,zero_pct:0.424,students:230},
+    {考试方向:"技术",avg_rate:0.4027,zero_pct:0.481,students:89},
+    {考试方向:"管理",avg_rate:0.4347,zero_pct:0.451,students:118}
+  ],
+  cross_labels: ["备考指导","实战模考班","实战题分班","案例专项班【实务】","考点突破班","考点精讲"],
+  cross_rows: ["OMO线下集训营","精英私教营","魔鬼训练营","魔鬼训练营plus"],
+  cross_values: [
+    [0.445,0.416,0.486,0.462,0.477,0.774],
+    [0.183,0.237,0.356,0.388,0.302,0.473],
+    [0.323,0.204,0.294,0.209,0.280,0.631],
+    [0.362,0.313,0.408,0.384,0.420,0.745]
+  ],
+  dist_labels: ["0-10%","10-30%","30-50%","50-70%","70-90%","90-100%"],
+  dist_values: [253,180,220,404,245,193]
+};
+
+const COLORS = {
+  red: '#e74c3c', orange: '#f39c12', green: '#27ae60', blue: '#3498db',
+  purple: '#9b59b6', teal: '#1abc9c', pink: '#e91e63', indigo: '#3f51b5'
+};
+const GRADIENT_PAIRS = [
+  ['#667eea','#764ba2'],['#f093fb','#f5576c'],['#4facfe','#00f2fe'],
+  ['#43e97b','#38f9d7'],['#fa709a','#fee140'],['#a18cd1','#fbc2eb']
+];
+
+Chart.defaults.font.family = '-apple-system, "PingFang SC", "Microsoft YaHei", sans-serif';
+Chart.defaults.font.size = 12;
+
+// 1. Distribution Chart
+new Chart(document.getElementById('distChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.dist_labels,
+    datasets: [{
+      label: '学员人数',
+      data: DATA.dist_values,
+      backgroundColor: ['#e74c3c','#f39c12','#f1c40f','#2ecc71','#3498db','#9b59b6'],
+      borderRadius: 6,
+      barPercentage: 0.7
+    }]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      legend: { display: false },
+      tooltip: { callbacks: { label: ctx => `${ctx.parsed.y}人 (${(ctx.parsed.y/1495*100).toFixed(1)}%)` } }
+    },
+    scales: {
+      y: { title: { display: true, text: '学员人数' }, grid: { color: '#f0f0f0' } },
+      x: { title: { display: true, text: '完课率区间' }, grid: { display: false } }
+    }
+  }
+});
+
+// 2. Method Chart
+new Chart(document.getElementById('methodChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.method_stats.map(d => d.教学方式),
+    datasets: [
+      {
+        label: '平均完课率',
+        data: DATA.method_stats.map(d => (d.avg_rate*100).toFixed(1)),
+        backgroundColor: '#667eea',
+        borderRadius: 4,
+        barPercentage: 0.5
+      },
+      {
+        label: '零完课占比',
+        data: DATA.method_stats.map(d => (d.zero_pct*100).toFixed(1)),
+        backgroundColor: '#e74c3c88',
+        borderRadius: 4,
+        barPercentage: 0.5
+      }
+    ]
+  },
+  options: {
+    indexAxis: 'y',
+    responsive: true,
+    plugins: { tooltip: { callbacks: { label: ctx => `${ctx.dataset.label}: ${ctx.parsed.x}%` } } },
+    scales: {
+      x: { title: { display: true, text: '百分比(%)' }, max: 100, grid: { color: '#f0f0f0' } },
+      y: { grid: { display: false } }
+    }
+  }
+});
+
+// 3. Category Chart
+new Chart(document.getElementById('catChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.cat_stats.map(d => d.商品类别),
+    datasets: [
+      {
+        label: '平均完课率',
+        data: DATA.cat_stats.map(d => (d.avg_rate*100).toFixed(1)),
+        backgroundColor: ['#764ba2','#667eea','#4facfe','#27ae60'],
+        borderRadius: 6,
+        barPercentage: 0.6
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { display: false } },
+    scales: {
+      y: { title: { display: true, text: '完课率(%)' }, max: 70, grid: { color: '#f0f0f0' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// 4. Direction Chart
+new Chart(document.getElementById('dirChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.dir_stats.map(d => d.考试方向),
+    datasets: [
+      {
+        label: '平均完课率(%)',
+        data: DATA.dir_stats.map(d => (d.avg_rate*100).toFixed(1)),
+        backgroundColor: DATA.dir_stats.map(d => d.avg_rate < 0.3 ? '#e74c3c' : d.avg_rate < 0.38 ? '#f39c12' : '#27ae60'),
+        borderRadius: 6,
+        barPercentage: 0.6,
+        yAxisID: 'y'
+      },
+      {
+        label: '学员人数',
+        data: DATA.dir_stats.map(d => d.students),
+        type: 'line',
+        borderColor: '#3498db',
+        backgroundColor: '#3498db22',
+        pointBackgroundColor: '#3498db',
+        pointRadius: 5,
+        yAxisID: 'y1',
+        tension: 0.3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { title: { display: true, text: '完课率(%)' }, max: 55, grid: { color: '#f0f0f0' } },
+      y1: { position: 'right', title: { display: true, text: '学员人数' }, grid: { display: false } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// 5. Cross Analysis Chart
+const crossColors = ['#667eea','#e74c3c','#f39c12','#27ae60','#9b59b6','#1abc9c'];
+new Chart(document.getElementById('crossChart'), {
+  type: 'bar',
+  data: {
+    labels: DATA.cross_rows,
+    datasets: DATA.cross_labels.map((label, i) => ({
+      label,
+      data: DATA.cross_values.map(row => (row[i]*100).toFixed(1)),
+      backgroundColor: crossColors[i] + 'cc',
+      borderRadius: 3,
+      barPercentage: 0.8
+    }))
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top', labels: { font: { size: 11 } } } },
+    scales: {
+      y: { title: { display: true, text: '完课率(%)' }, max: 90, grid: { color: '#f0f0f0' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+
+// 6. Media Chart
+new Chart(document.getElementById('mediaChart'), {
+  type: 'bar',
+  data: {
+    labels: ['录播', '试卷'],
+    datasets: [
+      {
+        label: '平均完成率',
+        data: [36.54, 24.09],
+        backgroundColor: ['#667eea', '#e74c3c'],
+        borderRadius: 8,
+        barPercentage: 0.4
+      },
+      {
+        label: '中位完成率',
+        data: [5.88, 0],
+        backgroundColor: ['#667eea88', '#e74c3c88'],
+        borderRadius: 8,
+        barPercentage: 0.4
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: { legend: { position: 'top' } },
+    scales: {
+      y: { title: { display: true, text: '完成率(%)' }, max: 50, grid: { color: '#f0f0f0' } },
+      x: { grid: { display: false } }
+    }
+  }
+});
+</script>
+</body>
+</html>

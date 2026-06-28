@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初级注安 · 全国考务提醒（6月23日）</title>
+<style>
+  :root {
+    --bg: #f5f5f5;
+    --card-bg: #fff;
+    --text: #1a1a1a;
+    --text-secondary: #666;
+    --border: #e8e8e8;
+    --red: #d93025;
+    --orange: #e37400;
+    --blue: #1a73e8;
+    --green: #188038;
+    --tag-bg: #f0f0f0;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    padding: 16px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+  .header {
+    text-align: center;
+    padding: 24px 0 16px;
+  }
+  .header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 4px;
+    letter-spacing: 1px;
+  }
+  .header .date {
+    font-size: 13px;
+    color: var(--text-secondary);
+  }
+  .tip-card {
+    background: linear-gradient(135deg, #e8f0fe, #f0f7ff);
+    border-radius: 12px;
+    padding: 16px 18px;
+    margin-bottom: 16px;
+    border-left: 4px solid var(--blue);
+  }
+  .tip-card h3 {
+    font-size: 14px;
+    color: var(--blue);
+    margin-bottom: 6px;
+  }
+  .tip-card p {
+    font-size: 13px;
+    color: #333;
+    line-height: 1.7;
+  }
+  .section-title {
+    font-size: 16px;
+    font-weight: 700;
+    margin: 20px 0 10px;
+    padding-left: 10px;
+    border-left: 3px solid var(--red);
+  }
+  .section-title.green { border-left-color: var(--green); }
+  .section-title.orange { border-left-color: var(--orange); }
+  .section-title.blue { border-left-color: var(--blue); }
+  .section-title.gray { border-left-color: #999; }
+  .province-card {
+    background: var(--card-bg);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  .province-card.urgent {
+    border-color: #f5c6cb;
+    background: #fff5f5;
+  }
+  .province-card.soon {
+    border-color: #ffeeba;
+    background: #fffdf5;
+  }
+  .province-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 8px;
+  }
+  .province-name {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .badge {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge.red { background: #fce8e6; color: var(--red); }
+  .badge.orange { background: #fef7e0; color: var(--orange); }
+  .badge.blue { background: #e8f0fe; color: var(--blue); }
+  .badge.green { background: #e6f4ea; color: var(--green); }
+  .badge.gray { background: #f0f0f0; color: #666; }
+  .info-row {
+    display: flex;
+    font-size: 13px;
+    margin-bottom: 3px;
+    line-height: 1.5;
+  }
+  .info-label {
+    color: var(--text-secondary);
+    min-width: 72px;
+    flex-shrink: 0;
+  }
+  .info-value {
+    color: #333;
+    flex: 1;
+  }
+  .info-value strong { color: var(--red); font-weight: 700; }
+  .countdown {
+    display: inline-block;
+    background: #d93025;
+    color: #fff;
+    font-size: 11px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    font-weight: 700;
+    margin-left: 4px;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+  }
+  .reminder-box {
+    background: #fff8e1;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin: 16px 0;
+    border: 1px solid #ffe0b2;
+  }
+  .reminder-box h3 {
+    font-size: 14px;
+    color: var(--orange);
+    margin-bottom: 8px;
+  }
+  .reminder-box ul {
+    font-size: 13px;
+    color: #555;
+    padding-left: 18px;
+    line-height: 1.8;
+  }
+  .reminder-box ul li { margin-bottom: 2px; }
+  .divider {
+    border: none;
+    border-top: 1px dashed var(--border);
+    margin: 14px 0;
+  }
+  .footer {
+    text-align: center;
+    font-size: 12px;
+    color: #aaa;
+    margin: 24px 0 16px;
+  }
+  .conditions-box {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 14px;
+    border: 1px solid var(--border);
+    font-size: 13px;
+    line-height: 1.8;
+  }
+  .conditions-box h4 {
+    font-size: 13px;
+    color: #555;
+    margin-bottom: 6px;
+  }
+  .conditions-box .cond-row {
+    padding: 3px 0;
+    border-bottom: 1px dotted #e8e8e8;
+  }
+  .conditions-box .cond-row:last-child { border-bottom: none; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>📋 初级注册安全工程师 · 全国考务提醒</h1>
+  <div class="date">2026年6月23日（周二）更新 | 数据截至当日 08:50</div>
+</div>
+
+<!-- 备考小贴士 -->
+<div class="tip-card">
+  <h3>💡 今日备考小贴士</h3>
+  <p>
+    <strong>法规科目冲刺口诀：</strong>"三法一条例一办法"——《安全生产法》《消防法》《矿山安全法》+《生产安全事故报告和调查处理条例》+《安全生产许可证条例》，这五部是法规科目的绝对核心，占分超50%。<br>
+    <strong>实务答题技巧：</strong>案例分析题先看问题再读材料，答案按"①违反了什么法规→②存在什么隐患→③应如何整改"三段式作答，踩分更稳。<br>
+    <strong>时间管理：</strong>距离考试仅剩数日的考生，每天保持2套真题模拟手感，适应做题节奏。
+  </p>
+</div>
+
+<!-- ============ 🔴 紧急提醒 ============ -->
+<div class="section-title">🔴 紧急提醒 — 今日起关键节点</div>
+
+<!-- 北京 -->
+<div class="province-card urgent">
+  <div class="province-header">
+    <span class="province-name">🏙️ 北京</span>
+    <span class="badge red">距考试仅4天</span>
+  </div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value"><strong>6月27日</strong><span class="countdown">4天</span></span></div>
+  <div class="info-row"><span class="info-label">准考证</span><span class="info-value"><strong>🔥 今日（6.23）开始打印！</strong> 6月23日-27日</span></div>
+  <div class="info-row"><span class="info-label">打印入口</span><span class="info-value">北京市人社局官网 → 人事考试服务频道 → 打印准考证<br>rsj.beijing.gov.cn/ywsite/bjpta/kszl/ksbm/zkzdy/</span></div>
+  <div class="info-row"><span class="info-label">报名状态</span><span class="info-value">5月7日-11日（已截止）</span></div>
+  <div class="info-row"><span class="info-label">审核方式</span><span class="info-value">告知承诺制 + 考前网上审核</span></div>
+  <div class="info-row"><span class="info-label">官方通知</span><span class="info-value">北京市人社局「关于北京市2026年度初级注册安全工程师职业资格考试工作的通知」</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">电子证书，不发放纸质版；考试成绩8月下旬可查；迟到5分钟禁止入场</span></div>
+</div>
+
+<!-- 浙江 -->
+<div class="province-card soon">
+  <div class="province-header">
+    <span class="province-name">🌊 浙江</span>
+    <span class="badge orange">报名4天后开始</span>
+  </div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value"><strong>6月27日9:00 — 7月7日17:00</strong><span class="countdown">4天</span></span></div>
+  <div class="info-row"><span class="info-label">报名入口</span><span class="info-value">浙江人事考试网 zjks.rlsbt.zj.gov.cn</span></div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">9月5日</span></div>
+  <div class="info-row"><span class="info-label">审核方式</span><span class="info-value">告知承诺制 + 考后资格审核</span></div>
+  <div class="info-row"><span class="info-label">官方通知</span><span class="info-value">浙江人事考试网「2026年度初级注册安全工程师考务通知」</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">考后审核需提交工作年限证明+社保证明，报名时务必准确填写工作经历</span></div>
+</div>
+
+<!-- 广东 -->
+<div class="province-card soon">
+  <div class="province-header">
+    <span class="province-name">🌴 广东</span>
+    <span class="badge orange">距考试11天</span>
+  </div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value"><strong>7月4日</strong><span class="countdown">11天</span></span></div>
+  <div class="info-row"><span class="info-label">准考证</span><span class="info-value">6月30日9:00 — 7月3日17:00</span></div>
+  <div class="info-row"><span class="info-label">打印入口</span><span class="info-value">广东人事考试网 rsks.gd.gov.cn</span></div>
+  <div class="info-row"><span class="info-label">报名状态</span><span class="info-value">5月11日9:00-5月19日17:00（已截止）</span></div>
+  <div class="info-row"><span class="info-label">缴费截止</span><span class="info-value">5月20日17:00（已截止）</span></div>
+  <div class="info-row"><span class="info-label">审核方式</span><span class="info-value">告知承诺制 + 考后在线人工核查</span></div>
+  <div class="info-row"><span class="info-label">考试安排</span><span class="info-value">下午14:00-15:30《法规》；16:30-18:30《实务》</span></div>
+  <div class="info-row"><span class="info-label">官方通知</span><span class="info-value">广东人事考试网「2026年度初级注册安全工程师职业资格考试报考须知」</span></div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ 🟠 报名已截止 / 待考省份 ============ -->
+<div class="section-title orange">🟠 报名已截止 · 等待考试</div>
+
+<!-- 上海 -->
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">🏗️ 上海</span>
+    <span class="badge blue">9月5日考试</span>
+  </div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value">6月8日10:00 — 6月18日16:00（已截止）</span></div>
+  <div class="info-row"><span class="info-label">缴费截止</span><span class="info-value">6月18日17:00（已截止）</span></div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">9月5日</span></div>
+  <div class="info-row"><span class="info-label">准考证</span><span class="info-value">考前一周左右（预计8月底）</span></div>
+  <div class="info-row"><span class="info-label">审核方式</span><span class="info-value">告知承诺制</span></div>
+  <div class="info-row"><span class="info-label">官方通知</span><span class="info-value">上海市应急管理局「2026年上海初级注册安全工程师考试考务通知」</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">报名窗口仅10天，无补报补缴。错过等明年。</span></div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ 🟡 报名待开始 ============ -->
+<div class="section-title blue">🟡 报名即将开始 · 提前准备</div>
+
+<!-- 安徽 -->
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">⛰️ 安徽</span>
+    <span class="badge blue">报名7.18开始</span>
+  </div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value">7月18日9:00 — 8月1日16:00（预计）</span></div>
+  <div class="info-row"><span class="info-label">报名入口</span><span class="info-value">安徽人事考试网 www.apta.gov.cn</span></div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">9月5日</span></div>
+  <div class="info-row"><span class="info-label">审核方式</span><span class="info-value">告知承诺制 + 考后复核</span></div>
+  <div class="info-row"><span class="info-label">官方通知</span><span class="info-value">安徽人事考试网「2026年度初级注册安全工程师职业资格考试考务通知」</span></div>
+</div>
+
+<!-- 贵州 -->
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">🏔️ 贵州</span>
+    <span class="badge blue">报名7.29开始</span>
+  </div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value"><strong>7月29日9:00 — 8月4日17:00（仅7天！）</strong></span></div>
+  <div class="info-row"><span class="info-label">报名入口</span><span class="info-value">贵州人事考试网 gzrsks.com.cn</span></div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">10月25日</span></div>
+  <div class="info-row"><span class="info-label">审核方式</span><span class="info-value">告知承诺制 + 考后资格复审</span></div>
+  <div class="info-row"><span class="info-label">官方通知</span><span class="info-value">贵州人事考试网「2026年度初级注册安全工程师资格考务通知」</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">报名窗口仅7天，无补报！设好闹钟，7.29准点开抢</span></div>
+</div>
+
+<!-- 山东 -->
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">⛩️ 山东</span>
+    <span class="badge">报名9.8开始</span>
+  </div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value">9月8日9:00 — 9月17日17:00（参考2025年）</span></div>
+  <div class="info-row"><span class="info-label">报名入口</span><span class="info-value">山东省初级注安考试考务管理系统</span></div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">待公告（参考25年为11月）</span></div>
+  <div class="info-row"><span class="info-label">审核方式</span><span class="info-value">告知承诺制</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">此为参考2025年时间，2026年正式公告待发布，持续关注</span></div>
+</div>
+
+<!-- 天津 -->
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">🎡 天津</span>
+    <span class="badge">报名10月</span>
+  </div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value">10月10日 — 10月19日（参考2025年）</span></div>
+  <div class="info-row"><span class="info-label">报名入口</span><span class="info-value">天津市人才考评中心网上报名服务平台</span></div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">待2026年公告</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">参考25年时间，2026年正式公告待发布</span></div>
+</div>
+
+<!-- 广西 -->
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">🌿 广西</span>
+    <span class="badge">报名9月</span>
+  </div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value">9月10日 — 9月26日（参考2025年）</span></div>
+  <div class="info-row"><span class="info-label">报名入口</span><span class="info-value">广西应急管理微信公众号 / 广西人事考试网</span></div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">待2026年公告</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">参考25年时间，报名通过微信公众号操作，提前关注</span></div>
+</div>
+
+<!-- 江苏下半年 -->
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">🏞️ 江苏（下半年）</span>
+    <span class="badge blue">9月5日考试</span>
+  </div>
+  <div class="info-row"><span class="info-label">考试时间</span><span class="info-value">9月5日</span></div>
+  <div class="info-row"><span class="info-label">报名时间</span><span class="info-value">预计7月（上半年已考完5.25）</span></div>
+  <div class="info-row"><span class="info-label">报名入口</span><span class="info-value">江苏省人力资源和社会保障厅</span></div>
+  <div class="info-row"><span class="info-label">⚠️ 提醒</span><span class="info-value">下半年报名预计7月启动，蹲守江苏人社厅官网</span></div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ 🟢 已考完省份 ============ -->
+<div class="section-title green">🟢 已考完省份（2026年上半年）</div>
+
+<div class="province-card">
+  <div class="province-header">
+    <span class="province-name">📋 已结束一览</span>
+    <span class="badge green">6省已考</span>
+  </div>
+  <div class="info-row"><span class="info-label">重庆</span><span class="info-value">报名3.24-3.30 | 机考5.10 | 已考完</span></div>
+  <div class="info-row"><span class="info-label">河北</span><span class="info-value">报名4.21-5.14 | 考试5.31 | 已考完</span></div>
+  <div class="info-row"><span class="info-label">江苏(上)</span><span class="info-value">报名3.16-3.30 | 考试5.25 | 已考完</span></div>
+  <div class="info-row"><span class="info-label">福建</span><span class="info-value">报名4.1-4.10 | 考试6.6 | 已考完</span></div>
+  <div class="info-row"><span class="info-label">宁夏</span><span class="info-value">报名4.13-4.27 | 考试6.14 | 已考完</span></div>
+  <div class="info-row"><span class="info-label">四川</span><span class="info-value">报名4.15-4.27 | 考试6.14 | 已考完</span></div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ ⚪ 未出公告省份 ============ -->
+<div class="section-title gray">⚪ 持续蹲公告 · 2026年尚未发布通知</div>
+
+<div class="province-card">
+  <div class="info-row"><span class="info-label">吉林</span><span class="info-value">2026年考试处于征求意见阶段，尚未发布正式考务通知。建议关注吉林省应急管理厅官网。</span></div>
+  <div class="info-row"><span class="info-label">云南</span><span class="info-value">官方回复"考试准备好后将组织开展"，具体时间待定。关注云南省应急管理厅。</span></div>
+  <div class="info-row"><span class="info-label">陕西</span><span class="info-value">是否组织2026年初级注安考试及时间安排待进一步明确。持续关注陕西省应急管理厅。</span></div>
+  <div class="info-row"><span class="info-label">内蒙古</span><span class="info-value">考试实施方案处于征求意见阶段，正式通知待发。关注内蒙古应急管理厅。</span></div>
+  <div class="info-row"><span class="info-label">黑龙江</span><span class="info-value">官方回复"暂未开展初级注册安全工程师考试"，2026年大概率仍不组织。</span></div>
+</div>
+
+<hr class="divider">
+
+<!-- ============ 报考条件速查 ============ -->
+<div class="conditions-box">
+  <h4>📖 报考条件速查（全国统一最低标准）</h4>
+  <div class="cond-row">① 安全工程及相关专业<strong>中专</strong> → 从事安全生产业务满 <strong>4年</strong></div>
+  <div class="cond-row">② 其他专业<strong>中专</strong> → 从事安全生产业务满 <strong>5年</strong></div>
+  <div class="cond-row">③ 安全工程及相关专业<strong>大专</strong> → 从事安全生产业务满 <strong>2年</strong></div>
+  <div class="cond-row">④ 其他专业<strong>大专</strong> → 从事安全生产业务满 <strong>3年</strong></div>
+  <div class="cond-row">⑤ <strong>本科及以上</strong> → 从事安全生产业务（无年限硬性要求）</div>
+  <p style="margin-top:8px;font-size:12px;color:#888;">⚠️ 工作年限计算至考试当年12月31日。安全工程及相关专业范围含：安全工程、安全科学与工程、消防工程、采矿工程、化学工程与工艺等（详见《安全工程及相关专业参考目录》）。</p>
+</div>
+
+<hr class="divider">
+
+<!-- ============ 报名避坑提醒 ============ -->
+<div class="reminder-box">
+  <h3>⚠️ 报名避坑提醒 — 6月重点</h3>
+  <ul>
+    <li><strong>照片要求：</strong>白底彩色1寸免冠正面证件照（近期），JPG/JPEG格式，大小约10-30KB。照片不合格是审核被驳回的第一大原因。</li>
+    <li><strong>学历认证：</strong>大专及以上学历需提前在学信网（www.chsi.com.cn）申请电子注册备案表，有效期选6个月。中专学历需提前准备毕业证原件扫描件。</li>
+    <li><strong>工作年限证明：</strong>考后审核省份（浙江、广东、安徽等）需提交单位盖章的工作年限证明。提前与单位HR确认安全生产相关岗位的证明材料，切勿临时造假。</li>
+    <li><strong>告知承诺制：</strong>勾选"采用告知承诺制"后，信息填报须100%真实。虚假承诺将记入专业技术人员资格考试诚信档案，影响后续所有职业资格考试。</li>
+    <li><strong>缴费后才算报名成功：</strong>每年都有考生填完信息忘记缴费被取消资格。缴费后立即截图保存凭证，系统关闭后无法补缴。</li>
+    <li><strong>报名信息不可逆：</strong>缴费后姓名、身份证号、报考级别、专业科目均不能修改。提交前检查三遍。</li>
+    <li><strong>设多闹钟：</strong>贵州（仅7天窗口）、上海（仅10天窗口）等短窗口省份，建议提前3天设提醒，报名首日尽早操作。</li>
+    <li><strong>跨省报考：</strong>初级注安按属地管理，一般要求在工作地或居住地所在省份报考。跨省报考可能被拒。</li>
+  </ul>
+</div>
+
+<div class="footer">
+  <p>数据来源：各省应急管理厅/人社局/人事考试网官方公告 · 环球网校 · 233网校</p>
+  <p>自动推送时间：每日 09:00 | 下次推送：2026年6月24日</p>
+  <p style="font-size:11px;color:#ccc;">本提醒仅汇总初级注册安全工程师考务信息，不含中级注安内容。</p>
+</div>
+
+</body>
+</html>
