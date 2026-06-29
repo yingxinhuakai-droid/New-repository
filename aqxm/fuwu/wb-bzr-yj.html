@@ -1,0 +1,1076 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WorkBuddy 赋能服务班主任培训演讲版</title>
+  <style>
+    :root {
+      --ink: #112033;
+      --muted: #5f6f86;
+      --line: rgba(191, 207, 229, 0.72);
+      --glass: rgba(255, 255, 255, 0.66);
+      --glass-strong: rgba(255, 255, 255, 0.82);
+      --blue: #2258b8;
+      --teal: #0f766e;
+      --green: #2f7d32;
+      --amber: #b45309;
+      --red: #b42318;
+      --purple: #7652c5;
+      --shadow: 0 28px 86px rgba(17, 32, 51, 0.18);
+      --radius: 28px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      font-size: 20px;
+      line-height: 1.7;
+      background:
+        radial-gradient(circle at 8% 8%, rgba(34, 88, 184, 0.24), transparent 28%),
+        radial-gradient(circle at 92% 12%, rgba(15, 118, 110, 0.20), transparent 26%),
+        radial-gradient(circle at 72% 86%, rgba(118, 82, 197, 0.16), transparent 30%),
+        linear-gradient(135deg, #f7fbff 0%, #edf4fb 48%, #f8f7ff 100%);
+      background-attachment: fixed;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.30) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.22) 1px, transparent 1px);
+      background-size: 48px 48px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.48), transparent 74%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+    button { font: inherit; cursor: pointer; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      padding: 14px min(4vw, 52px);
+      border-bottom: 1px solid rgba(255,255,255,0.50);
+      background: rgba(248, 251, 255, 0.72);
+      box-shadow: 0 10px 34px rgba(17, 32, 51, 0.08);
+      backdrop-filter: blur(28px) saturate(155%);
+      -webkit-backdrop-filter: blur(28px) saturate(155%);
+    }
+
+    .brand {
+      font-size: 22px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+      scrollbar-width: none;
+    }
+
+    .nav::-webkit-scrollbar { display: none; }
+
+    .nav a {
+      min-height: 38px;
+      padding: 7px 13px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.58);
+      color: #344054;
+      font-size: 15px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .nav a:hover {
+      color: #fff;
+      background: var(--blue);
+      border-color: var(--blue);
+    }
+
+    .progress {
+      min-width: 150px;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(34, 88, 184, 0.14);
+      overflow: hidden;
+    }
+
+    .progress span {
+      display: block;
+      width: 10%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, var(--blue), var(--teal));
+    }
+
+    .hero {
+      min-height: calc(100vh - 68px);
+      display: grid;
+      place-items: end start;
+      padding: 72px min(6vw, 86px);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-card {
+      width: min(1120px, 100%);
+      padding: clamp(34px, 5vw, 64px);
+      border: 1px solid rgba(255,255,255,0.62);
+      border-radius: 38px;
+      color: #fff;
+      background:
+        linear-gradient(135deg, rgba(13, 27, 48, 0.88), rgba(24, 54, 92, 0.74)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1280' height='760' viewBox='0 0 1280 760'%3E%3Crect width='1280' height='760' fill='%232258b8'/%3E%3Cg opacity='.30' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath d='M120 150h360v165H120zM570 120h470v190H570zM190 425h340v160H190zM635 405h430v178H635z'/%3E%3Cpath d='M175 205h235M175 250h150M635 182h320M635 230h235M250 482h220M705 475h285M705 526h190'/%3E%3C/g%3E%3Cg opacity='.24' fill='%230f766e'%3E%3Ccircle cx='1100' cy='106' r='104'/%3E%3Ccircle cx='130' cy='650' r='126'/%3E%3C/g%3E%3C/svg%3E")
+        center / cover;
+      box-shadow: var(--shadow);
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      min-height: 42px;
+      padding: 7px 15px;
+      border: 1px solid rgba(255,255,255,0.34);
+      border-radius: 999px;
+      background: rgba(255,255,255,0.12);
+      color: #e9f2ff;
+      font-size: 16px;
+      font-weight: 900;
+    }
+
+    h1 {
+      margin: 24px 0 16px;
+      font-size: clamp(48px, 7vw, 92px);
+      line-height: 1.05;
+      letter-spacing: 0;
+    }
+
+    .hero-card p {
+      max-width: 980px;
+      margin: 0;
+      color: #dceaff;
+      font-size: clamp(22px, 2.4vw, 30px);
+      line-height: 1.56;
+    }
+
+    .container {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 12px min(4.5vw, 60px) 88px;
+    }
+
+    section {
+      scroll-margin-top: 92px;
+      margin-top: 34px;
+      padding: clamp(26px, 3vw, 42px);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--glass);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(28px) saturate(155%);
+      -webkit-backdrop-filter: blur(28px) saturate(155%);
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: start;
+      margin-bottom: 24px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(34px, 3.8vw, 54px);
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 30px 0 14px;
+      font-size: clamp(25px, 2.4vw, 34px);
+      line-height: 1.28;
+    }
+
+    h4 {
+      margin: 0 0 10px;
+      font-size: 23px;
+      line-height: 1.35;
+    }
+
+    .lead {
+      max-width: 980px;
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 22px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 38px;
+      padding: 7px 14px;
+      border-radius: 999px;
+      font-size: 16px;
+      font-weight: 950;
+      white-space: nowrap;
+    }
+
+    .blue { color: #17458f; background: rgba(232, 240, 255, 0.90); }
+    .teal { color: #0f625b; background: rgba(229, 247, 245, 0.90); }
+    .green { color: #286a2c; background: rgba(233, 247, 236, 0.90); }
+    .amber { color: #8a3f00; background: rgba(255, 243, 223, 0.92); }
+    .red { color: #9f1d14; background: rgba(255, 240, 239, 0.92); }
+    .purple { color: #5a3aa0; background: rgba(240, 235, 255, 0.92); }
+
+    .grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .grid.two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+
+    .card {
+      padding: 24px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.62);
+      box-shadow: 0 14px 38px rgba(17,32,51,0.08);
+    }
+
+    .card p,
+    .card li {
+      color: #42526a;
+      font-size: 18px;
+    }
+
+    ul, ol {
+      margin: 10px 0 0;
+      padding-left: 25px;
+    }
+
+    li { margin: 8px 0; }
+
+    table {
+      width: 100%;
+      margin-top: 18px;
+      border-collapse: separate;
+      border-spacing: 0;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.64);
+      font-size: 18px;
+    }
+
+    th, td {
+      padding: 17px 18px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #1e2b42;
+      background: rgba(238, 244, 252, 0.84);
+      font-weight: 950;
+    }
+
+    tr:last-child td { border-bottom: 0; }
+
+    .module {
+      margin-top: 28px;
+      padding: 30px;
+      border: 1px solid rgba(255,255,255,0.68);
+      border-radius: 26px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.46)),
+        radial-gradient(circle at 0% 0%, rgba(34,88,184,0.11), transparent 32%);
+    }
+
+    .module-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+
+    .module h3 { margin: 0; }
+
+    .tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 20px 0 16px;
+    }
+
+    .tab {
+      min-height: 42px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #344054;
+      background: rgba(255,255,255,0.64);
+      font-weight: 900;
+    }
+
+    .tab.active {
+      color: #fff;
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .prompt {
+      margin-top: 14px;
+      padding: 20px;
+      border: 1px solid rgba(34, 88, 184, 0.24);
+      border-radius: 20px;
+      color: #21324a;
+      background: rgba(239, 246, 255, 0.86);
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", "Microsoft YaHei", monospace;
+      white-space: pre-wrap;
+      font-size: 16px;
+      line-height: 1.68;
+      overflow-x: auto;
+    }
+
+    .demo {
+      margin-top: 14px;
+      padding: 19px 22px;
+      border-left: 6px solid var(--teal);
+      border-radius: 18px;
+      background: rgba(232, 248, 246, 0.80);
+      color: #24423f;
+      font-size: 18px;
+    }
+
+    .practice {
+      margin-top: 14px;
+      padding: 19px 22px;
+      border-left: 6px solid var(--amber);
+      border-radius: 18px;
+      background: rgba(255, 247, 232, 0.84);
+      color: #604016;
+      font-size: 18px;
+    }
+
+    .homework {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .homework-item {
+      display: grid;
+      grid-template-columns: 130px minmax(0, 1fr) auto;
+      gap: 16px;
+      align-items: center;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.64);
+    }
+
+    .homework-item strong {
+      font-size: 20px;
+    }
+
+    .homework-item span {
+      color: var(--muted);
+      font-size: 17px;
+    }
+
+    .timeline {
+      display: grid;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .step {
+      display: grid;
+      grid-template-columns: 54px minmax(0, 1fr);
+      gap: 14px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      background: rgba(255,255,255,0.62);
+    }
+
+    .num {
+      display: grid;
+      place-items: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 950;
+    }
+
+    .footer {
+      max-width: 1320px;
+      margin: 0 auto;
+      padding: 0 min(4.5vw, 60px) 52px;
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    @media (max-width: 1120px) {
+      .topbar { grid-template-columns: 1fr; }
+      .progress { display: none; }
+      .grid.two, .grid.three { grid-template-columns: 1fr; }
+      .section-head { grid-template-columns: 1fr; }
+      .homework-item { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 720px) {
+      body { font-size: 17px; }
+      .hero { min-height: 620px; padding: 42px 16px; }
+      .hero-card { padding: 28px; border-radius: 26px; }
+      section { padding: 22px; }
+      table { font-size: 15px; }
+      th, td { padding: 13px 12px; }
+      .prompt { font-size: 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">WorkBuddy 班主任培训</div>
+    <nav class="nav">
+      <a href="#value">工具价值</a>
+      <a href="#method">提问方法</a>
+      <a href="#onboard">新生承接</a>
+      <a href="#coach">督学规划</a>
+      <a href="#upgrade">课程升级</a>
+      <a href="#save">风险挽单</a>
+      <a href="#support">辅助场景</a>
+      <a href="#data">数据导出</a>
+      <a href="#homework">课后作业</a>
+    </nav>
+    <div class="progress" aria-hidden="true"><span id="progressBar"></span></div>
+  </header>
+
+  <main>
+    <section class="hero" id="cover">
+      <div class="hero-card">
+        <span class="eyebrow">中级注安项目 · 服务班主任内部培训</span>
+        <h1>WorkBuddy 赋能服务班主任</h1>
+        <p>围绕首访、督学、学习规划、课程升级、风险回访和挽单，把 AI 工具变成班主任真实服务动作的辅助系统。</p>
+      </div>
+    </section>
+
+    <div class="container">
+      <section id="value">
+        <div class="section-head">
+          <div>
+            <h2>01 WorkBuddy 对班主任工作的价值</h2>
+            <p class="lead">培训主线不是介绍工具功能，而是让班主任知道：在自己的服务场景里，什么时候用、怎么用、用完能交付什么。</p>
+          </div>
+          <span class="badge blue">10-15 分钟</span>
+        </div>
+
+        <div class="grid three">
+          <div class="card">
+            <h4>把沟通变标准</h4>
+            <p>首访、督学、风险回访、挽单不再只靠个人经验，先生成结构化方案，再由班主任判断和调整。</p>
+          </div>
+          <div class="card">
+            <h4>把数据变动作</h4>
+            <p>完课率、做题率、正确率、模考成绩不只是查看，而是转成分层、风险、计划和跟进名单。</p>
+          </div>
+          <div class="card">
+            <h4>把记录变沉淀</h4>
+            <p>把口语化沟通整理成档案摘要、督学记录、周报内容和团队模板，减少重复劳动。</p>
+          </div>
+        </div>
+
+        <h3>WorkBuddy 功能板块如何服务班主任</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>功能板块</th>
+              <th>班主任怎么用</th>
+              <th>适合场景</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>创建任务</td>
+              <td>用自然语言说明目标，上传表格、截图、文档，让 WorkBuddy 生成具体交付物。</td>
+              <td>首访方案、督学建议、学习规划、数据分析、周报。</td>
+            </tr>
+            <tr>
+              <td>项目</td>
+              <td>建立“中级注安班主任服务项目”，统一运营手册、课程安排、服务 SOP、模板和规则。</td>
+              <td>团队标准化服务、班主任培训、新人交接。</td>
+            </tr>
+            <tr>
+              <td>助理</td>
+              <td>配置班主任专用助理，让它按固定角色输出首访、督学、挽单、通知和记录。</td>
+              <td>高频服务动作快速生成。</td>
+            </tr>
+            <tr>
+              <td>自动化</td>
+              <td>定时生成低完课名单、风险提醒、模考复盘、周报初稿。</td>
+              <td>每日待办、每周复盘、模考后跟进。</td>
+            </tr>
+            <tr>
+              <td>知识库/文档</td>
+              <td>引用运营手册、课程表、学员档案模板、服务规则，减少到处找资料。</td>
+              <td>课程规则查询、通知生成、问题回复。</td>
+            </tr>
+            <tr>
+              <td>表格与数据</td>
+              <td>分析完课率、做题率、错题、模考、风险名单，并生成导出字段。</td>
+              <td>学情诊断、班型对比、班主任跟进。</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="method">
+        <div class="section-head">
+          <div>
+            <h2>02 班主任如何正确向 WorkBuddy 提需求</h2>
+            <p class="lead">只输入“帮我写个话术”通常不够。要让工具产生可用结果，需要把角色、场景、学员信息、服务目标、输出格式和边界说清楚。</p>
+          </div>
+          <span class="badge purple">通用方法</span>
+        </div>
+
+        <div class="grid three">
+          <div class="card"><h4>说清楚角色</h4><p>例如：你是中级注安项目服务班主任、督学老师、学情规划师、退费挽单助手。</p></div>
+          <div class="card"><h4>说清楚目标</h4><p>例如：完成首访、恢复学习动作、生成 7 天计划、判断是否适合升级、安抚退费情绪。</p></div>
+          <div class="card"><h4>说清楚边界</h4><p>例如：不能承诺通过，协议、价格、退费、考试政策必须人工复核。</p></div>
+        </div>
+
+        <h3>标准提问模板</h3>
+        <div class="prompt">你是中级注安项目的服务班主任。
+
+请根据以下学员情况，帮我生成{具体任务}。
+
+学员情况：
+【班型】{班型}
+【报考科目】{科目}
+【基础情况】{基础}
+【学习进度】{完课率/做题率/正确率}
+【学员反馈】{原话或情况}
+【当前问题】{问题}
+
+服务目标：
+{希望通过这次沟通或分析达成什么结果}
+
+请输出：
+1. 判断结论
+2. 对外沟通话术
+3. 班主任处理建议
+4. 下次跟进动作
+5. 可填写进档案/督学表的摘要
+
+注意：
+语气专业、可执行。
+不承诺通过。
+涉及协议、价格、退费、考试政策时提醒人工复核。</div>
+      </section>
+
+      <section id="onboard">
+        <div class="section-head">
+          <div>
+            <h2>03 新生承接与学员建档</h2>
+            <p class="lead">把新生欢迎、首访、未加微跟进、档案整理、首周学习建议合并成一个完整服务场景。</p>
+          </div>
+          <span class="badge green">核心模块 1</span>
+        </div>
+
+        <div class="module">
+          <div class="module-top">
+            <h3>工作场景</h3>
+            <span class="badge blue">首访 / 建档 / 入学指导</span>
+          </div>
+          <div class="grid two">
+            <div class="card">
+              <h4>核心痛点</h4>
+              <ul>
+                <li>新生刚购课，不知道从哪里开始。</li>
+                <li>班主任首访问题不系统，档案字段缺失。</li>
+                <li>首访话术过于模板化，缺少个性化学习建议。</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>WorkBuddy 怎么帮</h4>
+              <ul>
+                <li>生成欢迎语、首访问题、未加微跟进话术。</li>
+                <li>把沟通记录整理为学员档案摘要。</li>
+                <li>生成首周学习建议并提示缺失字段。</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>提示词模板</h3>
+          <div class="prompt">你是中级注安项目的服务班主任。
+
+请根据以下学员信息，生成一套新生承接方案。
+
+学员信息：
+【班型】{班型}
+【报考科目】{科目}
+【基础情况】{零基础/有基础/考过}
+【是否已加微信】{是/否}
+【每天可学习时间】{时间}
+【主要顾虑】{顾虑}
+【购课后状态】{刚购课/已开课未学习/已学习一点}
+
+服务目标：
+完成首次沟通，建立信任，了解学员基础和学习条件，并整理可填写进学员档案的信息。
+
+请输出：
+1. 微信欢迎语
+2. 首访问题清单
+3. 入学指导提醒
+4. 首周学习建议
+5. 学员档案填写摘要
+6. 还需要补问的信息
+
+要求：
+语气专业、亲切，不要像销售催单。
+不要承诺考试结果。</div>
+          <div class="demo"><strong>案例演示：</strong>线上魔鬼训练营，其他全科，零基础，每天 1 小时，担心课程多、看不完。演示欢迎语、首访问题、首周计划、档案摘要。</div>
+          <div class="practice"><strong>现场练习：</strong>学员购买云私塾 PRO，报考建筑全科，有二建基础，每天晚上 1.5 小时，担心实务案例题不会写。请生成新生承接方案。</div>
+        </div>
+      </section>
+
+      <section id="coach">
+        <div class="section-head">
+          <div>
+            <h2>04 督学跟进与学习规划</h2>
+            <p class="lead">督学和规划必须合并讲。只催学没有价值，必须结合学员数据给出可执行任务。</p>
+          </div>
+          <span class="badge teal">核心模块 2</span>
+        </div>
+
+        <div class="module">
+          <div class="grid two">
+            <div class="card">
+              <h4>覆盖场景</h4>
+              <ul>
+                <li>日常督学、上次计划复盘、进度提醒。</li>
+                <li>7 天、14 天、30 天学习规划。</li>
+                <li>进度滞后追赶、模考后复盘、案例专项、考前冲刺。</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>工具价值</h4>
+              <ul>
+                <li>根据完课率、做题率、正确率判断学员类型。</li>
+                <li>生成学员版计划和班主任版督学记录。</li>
+                <li>减少班主任手动写计划和记录的时间。</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>提示词模板</h3>
+          <div class="prompt">你是中级注安项目的督学班主任和学情规划师。
+
+请根据以下学员学习情况，生成督学方案和学习规划。
+
+学员信息：
+【班型】{班型}
+【报考科目】{科目}
+【当前课程阶段】{基础/强化/刷题/案例/冲刺}
+【基础情况】{零基础/有基础/考过}
+【每天学习时间】{时间}
+【周末学习时间】{时间}
+【完课率】{完课率}
+【做题率】{做题率}
+【正确率】{正确率}
+【最近学习时间】{时间}
+【上次计划完成情况】{完成/部分完成/未完成}
+【学员反馈】{原话}
+【主要痛点】{没时间/记不住/不会案例/做题错多}
+
+服务目标：
+判断学员当前问题，生成本次督学话术，并安排一份可执行的学习计划。
+
+请输出：
+1. 学员当前分层
+2. 当前主要问题
+3. 微信督学话术
+4. 电话沟通提纲
+5. 7 天学习计划
+6. 每日任务安排
+7. 班主任跟进节点
+8. 督学表填写摘要
+
+要求：
+不要只说“多学习、多刷题”。
+计划必须可执行。
+先认可，再指出风险，再给具体任务。</div>
+          <div class="demo"><strong>案例演示：</strong>完课率 32%，10 天未学习，正确率 58%，工作日每天 1 小时，学员说“后面集中学”。演示学员分层、风险判断、督学话术、7 天恢复计划。</div>
+          <div class="practice"><strong>现场练习：</strong>学员报考建筑实务，之前考过但未通过，每天晚上 2 小时，做题正确率 45%，案例题没有思路。请生成督学方案和 14 天提升计划。</div>
+        </div>
+      </section>
+
+      <section id="upgrade">
+        <div class="section-head">
+          <div>
+            <h2>05 课程升级与服务转化</h2>
+            <p class="lead">升级不是强推销售，而是基于学情和服务需求给出自然的课程服务建议。</p>
+          </div>
+          <span class="badge amber">核心模块 3</span>
+        </div>
+
+        <div class="module">
+          <div class="grid two">
+            <div class="card">
+              <h4>核心痛点</h4>
+              <ul>
+                <li>直接推荐升级容易被理解成销售。</li>
+                <li>班主任不知道哪些学员适合升级，哪些不适合。</li>
+                <li>权益、价格、协议不能乱讲。</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>WorkBuddy 怎么帮</h4>
+              <ul>
+                <li>判断是否适合升级引导。</li>
+                <li>生成服务建议型话术和顾虑回应。</li>
+                <li>生成转交销售/负责人说明和禁止承诺事项。</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>提示词模板</h3>
+          <div class="prompt">你是中级注安项目的服务班主任。
+
+请根据以下学员情况，判断是否适合做课程升级引导，并生成沟通方案。
+
+学员信息：
+【当前班型】{当前班型}
+【可升级班型】{目标班型}
+【报考科目】{科目}
+【基础情况】{基础}
+【学习进度】{完课率/做题率/正确率}
+【学习问题】{问题}
+【学员诉求】{希望督学/希望答疑/担心不过/需要规划}
+【当前服务反馈】{满意/一般/有不满}
+
+服务目标：
+从学员学习需求出发，判断是否适合升级，并生成自然、不销售化的沟通话术。
+
+请输出：
+1. 是否适合升级引导
+2. 适合/不适合的原因
+3. 学员当前核心需求
+4. 当前班型可能不足
+5. 目标班型能解决的问题
+6. 微信沟通话术
+7. 电话沟通提纲
+8. 学员顾虑回应
+9. 转交销售或负责人说明
+10. 禁止承诺事项
+
+要求：
+不能强推。
+不能夸大课程效果。
+不能承诺通过。
+价格、协议、优惠以负责人或销售确认为准。</div>
+          <div class="demo"><strong>案例演示：</strong>当前云私塾，零基础，主动性差，经常问“老师能不能盯我”，完课率低，对考试焦虑。演示是否适合升级、服务建议型话术、转交说明。</div>
+          <div class="practice"><strong>现场练习：</strong>学员当前全程班，报考化工全科，基础薄弱，完课率低，经常问有没有老师带着学，对考试信心不足。请判断是否适合升级并生成沟通方案。</div>
+        </div>
+      </section>
+
+      <section id="save">
+        <div class="section-head">
+          <div>
+            <h2>06 退费挽单与风险回访</h2>
+            <p class="lead">风险和挽单合并讲。好的挽单不是临时救火，而是提前识别风险、及时回访。</p>
+          </div>
+          <span class="badge red">核心模块 4</span>
+        </div>
+
+        <div class="module">
+          <div class="grid two">
+            <div class="card">
+              <h4>覆盖场景</h4>
+              <ul>
+                <li>长期未学习、多次未回复、情绪消极。</li>
+                <li>投诉课程、老师、系统。</li>
+                <li>提出退费、担心考不过、觉得课程不值。</li>
+              </ul>
+            </div>
+            <div class="card">
+              <h4>工具价值</h4>
+              <ul>
+                <li>判断风险等级和真实诉求。</li>
+                <li>生成安抚话术、电话提纲、挽回策略。</li>
+                <li>提醒禁止承诺事项和是否需要负责人介入。</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>提示词模板</h3>
+          <div class="prompt">你是中级注安项目的风险回访和退费挽单辅助助手。
+
+请根据以下学员情况，生成风险判断和沟通方案。
+
+学员信息：
+【班型】{班型}
+【报考科目】{科目}
+【学习进度】{完课率/做题率/最近学习时间}
+【风险表现】{长期未学习/多次未回复/投诉/情绪消极/提出退费}
+【学员原话】{原话}
+【是否涉及协议】{是/否/不确定}
+【已处理动作】{已安抚/已解释/未处理}
+
+服务目标：
+判断学员风险和真实诉求，先安抚情绪，再给出可执行解决方案，并判断是否需要升级。
+
+请输出：
+1. 风险等级
+2. 真实诉求判断
+3. 情绪安抚话术
+4. 微信回复话术
+5. 电话沟通提纲
+6. 可提供的解决方案
+7. 挽回策略
+8. 禁止承诺事项
+9. 是否需要负责人介入
+10. 内部处理记录
+
+要求：
+不直接争辩。
+不承诺退费结果。
+不承诺通过。
+协议和金额问题必须提示人工复核。</div>
+          <div class="demo"><strong>案例演示：</strong>学员说“工作太忙了，根本没时间学，想退了。”演示风险等级、真实诉求、安抚话术、低压力学习方案、禁止承诺事项。</div>
+          <div class="practice"><strong>现场练习：</strong>分别处理“课程太多看不完”“老师不适合我”“系统不好用”“我感觉肯定考不过”“我想直接退费”。</div>
+        </div>
+      </section>
+
+      <section id="support">
+        <div class="section-head">
+          <div>
+            <h2>07 问题处理、通知素材与服务复盘</h2>
+            <p class="lead">这些是辅助模块，不抢核心主线，但能明显提升班主任效率。</p>
+          </div>
+          <span class="badge purple">辅助模块</span>
+        </div>
+
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="faq">问题处理</button>
+          <button class="tab" data-tab="notice">通知素材</button>
+          <button class="tab" data-tab="weekly">服务复盘</button>
+        </div>
+        <div class="tab-panel active" id="faq">
+          <div class="grid two">
+            <div class="card"><h4>适用场景</h4><p>课程资料、系统显示、云私塾、答疑、图书、报名考试、师资反馈。</p></div>
+            <div class="card"><h4>WorkBuddy 帮助</h4><p>生成标准回复、处理步骤、追问信息、是否升级，并沉淀为 FAQ。</p></div>
+          </div>
+        </div>
+        <div class="tab-panel" id="notice">
+          <div class="grid two">
+            <div class="card"><h4>适用场景</h4><p>开课通知、直播通知、课程更新、模考通知、报名缴费、学习计划图。</p></div>
+            <div class="card"><h4>WorkBuddy 帮助</h4><p>生成群公告、私聊提醒、朋友圈文案、图片文案和 AI 作图提示词。</p></div>
+          </div>
+        </div>
+        <div class="tab-panel" id="weekly">
+          <div class="grid two">
+            <div class="card"><h4>适用场景</h4><p>督学记录、风险回访、退费处理、学员问题记录、班主任周报。</p></div>
+            <div class="card"><h4>WorkBuddy 帮助</h4><p>把口语化沟通整理成标准记录，汇总高频问题，提炼下周重点。</p></div>
+          </div>
+        </div>
+
+        <h3>通用提示词模板</h3>
+        <div class="prompt">你是中级注安项目班主任服务助手。
+
+请根据以下场景，生成标准处理方案。
+
+场景类型：
+{课程资料/系统问题/云私塾/答疑/图书/报名考试/课程通知/周报复盘}
+
+具体情况：
+{粘贴学员问题、通知信息或本周服务数据}
+
+服务目标：
+快速生成班主任可使用的回复、通知、记录或复盘内容。
+
+请输出：
+1. 标准回复或通知文案
+2. 班主任处理步骤
+3. 需要追问的信息
+4. 是否需要升级
+5. 可沉淀进 FAQ/语料库的内容
+6. 服务记录或周报摘要</div>
+      </section>
+
+      <section id="data">
+        <div class="section-head">
+          <div>
+            <h2>08 数据分析与导出</h2>
+            <p class="lead">这部分主要面向项目负责人、班主任组长和需要做复盘的班主任，作为管理增强模块。</p>
+          </div>
+          <span class="badge blue">管理增强</span>
+        </div>
+
+        <div class="grid three">
+          <div class="card"><h4>完课数据</h4><p>不同班型完课率、考点精讲整体完课率、低完课名单。</p></div>
+          <div class="card"><h4>做题错题</h4><p>做题量、正确率、错题高频章节、低正确率学员名单。</p></div>
+          <div class="card"><h4>模考风险</h4><p>模考参与率、各科成绩、未参加名单、低分预警名单。</p></div>
+        </div>
+
+        <h3>数据导出提示词模板</h3>
+        <div class="prompt">你是中级注安项目数据分析助手。
+
+请根据以下数据目标，设计导出字段和分析口径。
+
+数据目标：
+{班型完课率/考点精讲完课率/做题情况/错题分析/模考分析/风险名单}
+
+已有字段：
+{UID、班型、科目、课程、完课率、做题量、正确率、模考成绩、最近学习时间等}
+
+输出对象：
+{班主任/项目负责人/管理层}
+
+请输出：
+1. 建议导出字段
+2. 统计口径
+3. 风险判断规则
+4. 班主任跟进动作
+5. 可放入周报的总结</div>
+      </section>
+
+      <section id="homework">
+        <div class="section-head">
+          <div>
+            <h2>09 培训作业与落地机制</h2>
+            <p class="lead">作业要围绕真实服务动作设计，不能只让班主任“试着问一下”。建议用脱敏真实案例完成，并收集团队优秀模板。</p>
+          </div>
+          <span class="badge green">课后落地</span>
+        </div>
+
+        <div class="homework">
+          <div class="homework-item">
+            <strong>作业 1</strong>
+            <span>选择 1 名新生脱敏案例，生成新生承接方案：欢迎语、首访问题、首周学习建议、档案摘要。</span>
+            <span class="badge blue">必做</span>
+          </div>
+          <div class="homework-item">
+            <strong>作业 2</strong>
+            <span>选择 1 名进度滞后学员，生成督学方案和 7 天恢复学习计划，并写出督学表摘要。</span>
+            <span class="badge teal">必做</span>
+          </div>
+          <div class="homework-item">
+            <strong>作业 3</strong>
+            <span>选择 1 名需要规划的学员，生成 14 天学习计划，要求包含每日任务、周末复盘、班主任跟进节点。</span>
+            <span class="badge purple">必做</span>
+          </div>
+          <div class="homework-item">
+            <strong>作业 4</strong>
+            <span>选择 1 个课程升级场景，判断是否适合升级引导，生成自然沟通话术和转交负责人说明。</span>
+            <span class="badge amber">选做</span>
+          </div>
+          <div class="homework-item">
+            <strong>作业 5</strong>
+            <span>选择 1 个退费或高风险案例，生成风险等级、安抚话术、电话提纲、解决方案和禁止承诺清单。</span>
+            <span class="badge red">必做</span>
+          </div>
+          <div class="homework-item">
+            <strong>作业 6</strong>
+            <span>整理 3 个高频问题，生成标准回复、处理步骤、是否升级和可沉淀进机器人语料库的 FAQ。</span>
+            <span class="badge green">选做</span>
+          </div>
+          <div class="homework-item">
+            <strong>作业 7</strong>
+            <span>使用一份脱敏学员数据，设计“完课率/做题/模考”导出字段，并生成班主任跟进名单规则。</span>
+            <span class="badge blue">组长</span>
+          </div>
+          <div class="homework-item">
+            <strong>作业 8</strong>
+            <span>提交自己认为最实用的 3 条提示词，项目负责人汇总成团队模板库。</span>
+            <span class="badge purple">沉淀</span>
+          </div>
+        </div>
+
+        <h3>90 分钟培训流程建议</h3>
+        <div class="timeline">
+          <div class="step"><span class="num">1</span><div><strong>10 分钟：价值导入</strong><br />说明 WorkBuddy 如何服务首访、督学、规划、升级、挽单，而不是单纯写话术。</div></div>
+          <div class="step"><span class="num">2</span><div><strong>15 分钟：提问方法</strong><br />讲清角色、场景、学员信息、服务目标、输出格式、风险边界。</div></div>
+          <div class="step"><span class="num">3</span><div><strong>35 分钟：核心场景演示</strong><br />演示新生承接、督学规划、课程升级、风险挽单四个核心场景。</div></div>
+          <div class="step"><span class="num">4</span><div><strong>20 分钟：现场练习</strong><br />每组使用脱敏案例生成一个服务方案，现场点评是否可执行。</div></div>
+          <div class="step"><span class="num">5</span><div><strong>10 分钟：作业布置</strong><br />明确提交内容、验收标准和团队模板库沉淀方式。</div></div>
+        </div>
+
+        <h3>使用规范</h3>
+        <div class="grid two">
+          <div class="card">
+            <h4>必须人工复核</h4>
+            <ul>
+              <li>退费协议、课程价格、升级优惠、课程权益。</li>
+              <li>考试报名政策、报考条件、缴费时间。</li>
+              <li>通过承诺、押题命中、师资承诺。</li>
+              <li>投诉处理结果和退款结果。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h4>验收标准</h4>
+            <ul>
+              <li>输出内容是否基于具体学员情况。</li>
+              <li>是否有明确下一步动作。</li>
+              <li>是否能直接复制使用或填入表格。</li>
+              <li>是否避开了承诺和协议风险。</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="footer">
+    本文档用于中级注安项目服务班主任内部培训。WorkBuddy 输出内容需由班主任结合项目规则、课程权益、协议和考试政策复核后使用。
+  </footer>
+
+  <script>
+    const tabs = document.querySelectorAll(".tab");
+    tabs.forEach((tab) => {
+      tab.addEventListener("click", () => {
+        const id = tab.dataset.tab;
+        const group = tab.parentElement;
+        group.querySelectorAll(".tab").forEach((x) => x.classList.remove("active"));
+        tab.classList.add("active");
+        document.querySelectorAll(".tab-panel").forEach((panel) => {
+          panel.classList.toggle("active", panel.id === id);
+        });
+      });
+    });
+
+    const bar = document.getElementById("progressBar");
+    window.addEventListener("scroll", () => {
+      const total = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = total > 0 ? (window.scrollY / total) * 100 : 0;
+      bar.style.width = Math.max(10, progress) + "%";
+    }, { passive: true });
+  </script>
+</body>
+</html>

@@ -166,5 +166,189 @@
     "desc": "班主任使用 WorkBuddy 的完整操作手册与最佳实践",
     "url": "za/班主任WorkBuddy实战指南.html",
     "tags": ["班主任", "实战", "指南"]
+  },
+  {
+    "id": "op04",
+    "category": "运营策略",
+    "title": "Codex常用插件教程",
+    "desc": "运营人员常用 Codex 插件安装与使用指南",
+    "url": "aqxm/yunying/codex-cj-plugins.html",
+    "tags": ["Codex", "插件", "教程"]
+  },
+  {
+    "id": "op05",
+    "category": "运营策略",
+    "title": "Codex项目运营培训",
+    "desc": "完整的 Codex 项目运营培训文档，覆盖全流程操作",
+    "url": "aqxm/yunying/codex-yy-px.html",
+    "tags": ["Codex", "培训", "运营"]
+  },
+  {
+    "id": "op06",
+    "category": "运营策略",
+    "title": "消安工程Codex培训",
+    "desc": "消安工程项目专用的 Codex 培训课件",
+    "url": "aqxm/yunying/xiaoan-codex-px.html",
+    "tags": ["消安", "Codex", "培训"]
+  },
+  {
+    "id": "sl08",
+    "category": "销售支持",
+    "title": "云私塾销售培训互动页",
+    "desc": "三维一体销售培训互动页面，沉浸式学习体验",
+    "url": "aqxm/yunying/yss-xspx.html",
+    "tags": ["云私塾", "培训", "互动"]
+  },
+  {
+    "id": "sl09",
+    "category": "销售支持",
+    "title": "教材痛点·主播销售话术",
+    "desc": "基于中级注安官方教材痛点的全套主播与销售落地话术",
+    "url": "aqxm/yunying/za-jc-hs.html",
+    "tags": ["教材", "话术", "主播"]
+  },
+  {
+    "id": "sl10",
+    "category": "销售支持",
+    "title": "6套教辅全渠道推广方案",
+    "desc": "2026中级注安6套教辅产品矩阵全渠道并行推广方案",
+    "url": "aqxm/outputs/za-6tao-tgfa/index.html",
+    "tags": ["教辅", "推广", "方案"]
+  },
+  {
+    "id": "sl11",
+    "category": "销售支持",
+    "title": "6套教辅体系培训页",
+    "desc": "2026中级注安6套教辅完整体系介绍与培训页面",
+    "url": "aqxm/outputs/za-6tao-px/index.html",
+    "tags": ["教辅", "培训", "体系"]
+  },
+  {
+    "id": "sl12",
+    "category": "销售支持",
+    "title": "6套教辅HTML演示稿",
+    "desc": "2026中级注安6套教辅产品HTML可视化演示",
+    "url": "aqxm/outputs/za-6tao-demo/index.html",
+    "tags": ["教辅", "演示", "可视化"]
+  },
+  {
+    "id": "sl13",
+    "category": "销售支持",
+    "title": "6套教辅销售主播培训手册",
+    "desc": "面向销售与主播的教辅产品专项培训手册",
+    "url": "aqxm/outputs/za-6tao-px/za-6tao-sc-zb-px.html",
+    "tags": ["教辅", "主播", "培训"]
+  },
+  {
+    "id": "sl14",
+    "category": "销售支持",
+    "title": "6套教辅手机宣传页",
+    "desc": "6套教辅产品移动端宣传HTML合集",
+    "url": "aqxm/outputs/za-6tao-mobile/index.html",
+    "tags": ["教辅", "手机", "宣传"]
+  },
+  {
+    "id": "ai04",
+    "category": "教研智课",
+    "title": "安全速记卡·KT板",
+    "desc": "安全生产知识速记卡KT板展示，辅助课堂教学",
+    "url": "aqxm/jiaoyan/aq-sjk-ktb.html",
+    "tags": ["速记卡", "KT板", "教学"]
+  },
+  {
+    "id": "ai05",
+    "category": "教研智课",
+    "title": "安全速记卡·主播使用手册",
+    "desc": "安全速记卡在直播销售中的使用指南与话术",
+    "url": "aqxm/jiaoyan/aq-sjk-xs-sc.html",
+    "tags": ["速记卡", "主播", "销售"]
+  },
+  {
+    "id": "ai06",
+    "category": "教研智课",
+    "title": "Codex赋能教研高频场景培训",
+    "desc": "中级注安教研团队在核心场景中应用Codex的培训文档",
+    "url": "aqxm/jiaoyan/codex-jiaoyan-px.html",
+    "tags": ["Codex", "教研", "培训"]
+  },
+  {
+    "id": "ai07",
+    "category": "教研智课",
+    "title": "WB×Codex AI成果展示",
+    "desc": "WorkBuddy与Codex在教研场景中的AI应用案例与成果",
+    "url": "aqxm/jiaoyan/wb-codex-ai-cg.html",
+    "tags": ["AI", "成果", "案例"]
+  },
+  {
+    "id": "ai08",
+    "category": "教研智课",
+    "title": "注安精讲讲义·安全管理",
+    "desc": "中级注安《安全生产管理》科目完整精讲讲义",
+    "url": "aqxm/jiaoyan/za-aqgl-jjjy.html",
+    "tags": ["精讲", "讲义", "管理"]
+  },
+  {
+    "id": "ai09",
+    "category": "教研智课",
+    "title": "教研团队AI提效培训",
+    "desc": "AI在教研工作流中的提效方法论与实践培训",
+    "url": "aqxm/yunying/jy-ai-tx-px.html",
+    "tags": ["AI", "提效", "教研"]
+  },
+  {
+    "id": "sv02",
+    "category": "课程服务",
+    "title": "班主任AI工作台原型",
+    "desc": "班主任专属AI工作台功能原型与设计说明",
+    "url": "aqxm/fuwu/bzr-ai-gzt.html",
+    "tags": ["班主任", "AI", "工作台"]
+  },
+  {
+    "id": "sv03",
+    "category": "课程服务",
+    "title": "Codex赋能班主任培训",
+    "desc": "班主任使用Codex等AI工具提升工作效率的培训文档",
+    "url": "aqxm/fuwu/codex-bzr-px.html",
+    "tags": ["Codex", "班主任", "培训"]
+  },
+  {
+    "id": "sv04",
+    "category": "课程服务",
+    "title": "WB班主任培训手册",
+    "desc": "WorkBuddy赋能班主任的完整操作培训手册",
+    "url": "aqxm/fuwu/wb-bzr-sc.html",
+    "tags": ["WorkBuddy", "班主任", "手册"]
+  },
+  {
+    "id": "sv05",
+    "category": "课程服务",
+    "title": "WB班主任培训演讲版",
+    "desc": "WorkBuddy赋能班主任培训的演讲展示版本",
+    "url": "aqxm/fuwu/wb-bzr-yj.html",
+    "tags": ["WorkBuddy", "演讲", "培训"]
+  },
+  {
+    "id": "sv06",
+    "category": "课程服务",
+    "title": "WB服务端培训文档",
+    "desc": "Workbuddy服务端操作培训文档（优化版）",
+    "url": "aqxm/fuwu/wb-fwd-px.html",
+    "tags": ["WorkBuddy", "服务端", "培训"]
+  },
+  {
+    "id": "yl08",
+    "category": "引流工具",
+    "title": "注安知识宝典集",
+    "desc": "2026注安备考知识宝典HTML合集，学员引流素材",
+    "url": "aqxm/outputs/za-baodian-html/index.html",
+    "tags": ["宝典", "备考", "引流"]
+  },
+  {
+    "id": "yl09",
+    "category": "引流工具",
+    "title": "初级注安报考信息汇总",
+    "desc": "2026初级注册安全工程师报考信息一站式汇总站",
+    "url": "aqxm/outputs/cj-za-bkxx/index.html",
+    "tags": ["报考", "初级", "汇总"]
   }
 ]

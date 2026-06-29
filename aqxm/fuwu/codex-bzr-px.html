@@ -1,0 +1,1381 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Codex 赋能服务班主任工作培训手册</title>
+  <style>
+    :root {
+      --ink: #1f2933;
+      --muted: #667085;
+      --line: #d8dee8;
+      --paper: #ffffff;
+      --bg: #f5f7fb;
+      --blue: #2458a6;
+      --cyan: #0f766e;
+      --green: #2f7d32;
+      --orange: #b45309;
+      --red: #b42318;
+      --nav: #152238;
+      --soft-blue: #eaf2ff;
+      --soft-cyan: #e7f7f5;
+      --soft-green: #ecf8ef;
+      --soft-orange: #fff4e5;
+      --soft-red: #fff0ef;
+      --shadow: 0 18px 45px rgba(22, 34, 51, 0.08);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--bg);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.72;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 276px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    aside {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      padding: 28px 22px;
+      color: #eef4ff;
+      background: var(--nav);
+      overflow-y: auto;
+    }
+
+    .brand {
+      margin-bottom: 28px;
+      padding-bottom: 22px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+    }
+
+    .brand b {
+      display: block;
+      font-size: 20px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 8px;
+      color: #b8c7dc;
+      font-size: 13px;
+    }
+
+    nav {
+      display: grid;
+      gap: 6px;
+    }
+
+    nav a {
+      padding: 8px 10px;
+      border-radius: 6px;
+      color: #d8e5f7;
+      font-size: 14px;
+    }
+
+    nav a:hover {
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+    }
+
+    main {
+      min-width: 0;
+    }
+
+    .hero {
+      color: #fff;
+      background:
+        linear-gradient(rgba(13, 25, 45, 0.78), rgba(13, 25, 45, 0.72)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1440' height='760' viewBox='0 0 1440 760'%3E%3Crect width='1440' height='760' fill='%23295883'/%3E%3Cg opacity='.35'%3E%3Cpath d='M0 510 C220 420 340 590 540 500 S880 400 1080 500 1280 620 1440 520 L1440 760 L0 760Z' fill='%230f766e'/%3E%3Cpath d='M0 280 C170 170 320 310 510 240 S850 120 1060 260 1270 390 1440 250 L1440 0 L0 0Z' fill='%234268ad'/%3E%3C/g%3E%3Cg opacity='.22' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath d='M170 142h330v140H170zM790 152h420v160H790zM260 430h300v150H260zM790 440h360v130H790z'/%3E%3Cpath d='M220 190h220M220 230h150M850 210h280M850 250h200M320 490h160M850 500h230'/%3E%3C/g%3E%3C/svg%3E")
+        center / cover;
+      padding: 72px min(7vw, 80px) 44px;
+    }
+
+    .hero h1 {
+      max-width: 980px;
+      margin: 0;
+      font-size: clamp(34px, 5vw, 60px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .hero p {
+      max-width: 860px;
+      margin: 22px 0 0;
+      color: #dce8f8;
+      font-size: 18px;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 28px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 5px 12px;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      border-radius: 999px;
+      color: #eef6ff;
+      background: rgba(255, 255, 255, 0.1);
+      font-size: 13px;
+    }
+
+    .content {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 38px min(5vw, 56px) 76px;
+    }
+
+    section {
+      margin-top: 34px;
+      padding: 34px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+
+    section:first-child {
+      margin-top: 0;
+    }
+
+    h2 {
+      margin: 0 0 18px;
+      font-size: 28px;
+      line-height: 1.28;
+      letter-spacing: 0;
+    }
+
+    h3 {
+      margin: 28px 0 10px;
+      font-size: 20px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 16px;
+    }
+
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+
+    .grid.two {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .grid.three {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .mini-card {
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .mini-card h3,
+    .mini-card h4 {
+      margin-top: 0;
+    }
+
+    .mini-card h4 {
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 3px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .tag.blue { color: var(--blue); background: var(--soft-blue); }
+    .tag.cyan { color: var(--cyan); background: var(--soft-cyan); }
+    .tag.green { color: var(--green); background: var(--soft-green); }
+    .tag.orange { color: var(--orange); background: var(--soft-orange); }
+    .tag.red { color: var(--red); background: var(--soft-red); }
+
+    ul,
+    ol {
+      margin: 10px 0 0;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 6px 0;
+    }
+
+    table {
+      width: 100%;
+      margin-top: 16px;
+      border-collapse: collapse;
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      font-size: 14px;
+    }
+
+    th,
+    td {
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      color: #223047;
+      background: #eef3f9;
+      font-weight: 700;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    .prompt {
+      margin-top: 14px;
+      padding: 16px;
+      border-left: 4px solid var(--blue);
+      border-radius: 6px;
+      color: #21324a;
+      background: #f0f5ff;
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      white-space: pre-wrap;
+      line-height: 1.62;
+      overflow-x: auto;
+    }
+
+    .workflow {
+      counter-reset: step;
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .step {
+      position: relative;
+      padding: 16px 16px 16px 54px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fbfcff;
+    }
+
+    .step::before {
+      counter-increment: step;
+      content: counter(step);
+      position: absolute;
+      left: 16px;
+      top: 17px;
+      display: grid;
+      place-items: center;
+      width: 26px;
+      height: 26px;
+      border-radius: 50%;
+      color: #fff;
+      background: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .notice {
+      margin-top: 18px;
+      padding: 16px 18px;
+      border: 1px solid #ffd9a6;
+      border-radius: 8px;
+      color: #6d3b00;
+      background: #fff8eb;
+    }
+
+    .checklist {
+      columns: 2;
+      column-gap: 34px;
+    }
+
+    .checklist li {
+      break-inside: avoid;
+    }
+
+    .footer {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 0 min(5vw, 56px) 40px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      aside {
+        position: relative;
+        height: auto;
+      }
+
+      nav {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .grid.two,
+      .grid.three {
+        grid-template-columns: 1fr;
+      }
+
+      .checklist {
+        columns: 1;
+      }
+    }
+
+    @media print {
+      aside {
+        display: none;
+      }
+
+      .layout {
+        display: block;
+      }
+
+      section {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="layout">
+    <aside>
+      <div class="brand">
+        <b>Codex 赋能服务班主任</b>
+        <span>中级注册安全工程师项目内部培训文档</span>
+      </div>
+      <nav aria-label="目录">
+        <a href="#position">01 定位与目标</a>
+        <a href="#map">02 能力地图</a>
+        <a href="#scenarios">03 工作场景</a>
+        <a href="#cases">04 案例演练</a>
+        <a href="#project">05 注安项目配套</a>
+        <a href="#prompts">06 提示词模板</a>
+        <a href="#data">07 学员数据应用</a>
+        <a href="#robot">08 机器人优化</a>
+        <a href="#workflow">09 推荐工作流</a>
+        <a href="#training">10 培训安排</a>
+        <a href="#rules">11 使用规范</a>
+      </nav>
+    </aside>
+
+    <main>
+      <header class="hero">
+        <h1>Codex 赋能服务班主任工作培训手册</h1>
+        <p>
+          面向中级注册安全工程师项目服务团队，把新生沟通、学员建档、1v1 督学、问题处理、风险回访、退费挽单、机器人语料优化和服务复盘，整理成可复制、可训练、可沉淀的工作方法。
+        </p>
+        <div class="hero-meta">
+          <span class="pill">适用对象：项目负责人、服务班主任、学管负责人</span>
+          <span class="pill">适用项目：2026 中级注册安全工程师</span>
+          <span class="pill">使用方式：培训讲解、日常查询、提示词复用</span>
+        </div>
+      </header>
+
+      <div class="content">
+        <section id="position">
+          <h2>01 定位与目标</h2>
+          <p class="lead">
+            Codex 在班主任工作中的定位，不是替代班主任与学员建立关系，而是帮助班主任更快整理信息、更准判断学情、更稳定输出服务内容。
+          </p>
+
+          <div class="grid three">
+            <div class="mini-card">
+              <span class="tag blue">效率提升</span>
+              <h3>把重复劳动变成模板</h3>
+              <p>新生欢迎语、课程提醒、模考通知、催学话术、回访记录、服务周报，都可以由 Codex 先生成初稿，班主任再根据学员情况调整。</p>
+            </div>
+            <div class="mini-card">
+              <span class="tag cyan">服务质量</span>
+              <h3>把经验判断变成标准</h3>
+              <p>将学员画像、学习进度、做题情况、情绪状态、退费协议风险等信息转成分层规则，降低不同班主任之间的服务差异。</p>
+            </div>
+            <div class="mini-card">
+              <span class="tag green">管理复盘</span>
+              <h3>把过程记录变成分析</h3>
+              <p>对学员问题、风险学员、退费原因、机器人异常、刷题数据进行汇总，帮助项目负责人看到服务瓶颈和下一步动作。</p>
+            </div>
+          </div>
+
+          <h3>班主任工作的三个核心结果</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>结果</th>
+                <th>班主任要做到什么</th>
+                <th>Codex 可以提供什么支持</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>学员愿意学</td>
+                <td>建立信任，解释课程价值，降低新生迷茫感，帮助学员形成可执行的学习节奏。</td>
+                <td>生成新生沟通话术、首访问题清单、学员画像总结、个性化学习建议。</td>
+              </tr>
+              <tr>
+                <td>学员学得动</td>
+                <td>持续跟进完课率、做题率、正确率、学习反馈，发现掉队及时干预。</td>
+                <td>识别学员分层，输出督学策略、追赶计划、错题复盘建议、阶段性提醒。</td>
+              </tr>
+              <tr>
+                <td>问题能闭环</td>
+                <td>课程资料、系统显示、答疑、图书、报名考试、投诉退费等问题要快速分流并记录。</td>
+                <td>生成处理路径、回复口径、升级判断、问题分类统计和复盘报告。</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="map">
+          <h2>02 Codex 能力地图</h2>
+          <p class="lead">
+            对服务班主任来说，Codex 最有价值的能力可以理解为“写、拆、判、算、查、改、复盘”。
+          </p>
+
+          <div class="grid two">
+            <div class="mini-card">
+              <h3>写：生成高质量文本</h3>
+              <ul>
+                <li>新生欢迎语、学习规划话术、催学提醒。</li>
+                <li>投诉安抚、退费挽单、情绪疏导。</li>
+                <li>直播开课通知、模考提醒、报名提醒。</li>
+                <li>服务周报、月报、复盘总结。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <h3>拆：把复杂任务拆成步骤</h3>
+              <ul>
+                <li>拆解新学员首访流程。</li>
+                <li>拆解云私塾配置和使用问题处理流程。</li>
+                <li>拆解刷题集训前、中、后的工作清单。</li>
+                <li>拆解退费挽单所需的信息、判断和动作。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <h3>判：辅助学员分层</h3>
+              <ul>
+                <li>判断进度超前、进度达标、效果不佳、进度滞后、消极掉队等类型。</li>
+                <li>识别未加微、长期未学习、投诉、协议风险等重点人群。</li>
+                <li>给出回访优先级和干预建议。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <h3>算：处理表格和数据</h3>
+              <ul>
+                <li>整理学员档案字段，统计加微率、完课率、做题率。</li>
+                <li>汇总问题类型、风险学员数量、退费原因。</li>
+                <li>生成刷题集训参与率、完成率、正确率分析。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <h3>查：辅助查找资料</h3>
+              <ul>
+                <li>从运营手册中提取班型、课程阶段、师资、服务说明。</li>
+                <li>根据商品名称和班型匹配服务口径。</li>
+                <li>整理高频问题对应的标准答案。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <h3>改：优化已有材料</h3>
+              <ul>
+                <li>把零散话术改成统一风格。</li>
+                <li>把旧表格改成更适合录入、筛选、统计的模板。</li>
+                <li>把机器人错误回复改成更准确的语料。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="scenarios">
+          <h2>03 班主任高频工作场景</h2>
+          <p class="lead">
+            下面按照班主任真实工作流列出可以直接使用 Codex 的场景。培训时建议让班主任逐个场景演练。
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>场景</th>
+                <th>班主任输入给 Codex 的内容</th>
+                <th>Codex 输出</th>
+                <th>班主任最终动作</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>新学员沟通</td>
+                <td>课程班型、报考科目、基础情况、是否加微、购课时间。</td>
+                <td>欢迎语、首访问题、学习工具说明、下一步引导。</td>
+                <td>根据学员语气微调后发送，补充到学员档案。</td>
+              </tr>
+              <tr>
+                <td>学员建档</td>
+                <td>首访记录、工作情况、家庭压力、学习时间、备考目标。</td>
+                <td>学员画像、备考痛点、风险标签、服务建议。</td>
+                <td>写入档案表，为后续督学做依据。</td>
+              </tr>
+              <tr>
+                <td>1v1 督学</td>
+                <td>完课率、做题率、正确率、上次计划完成情况、学员反馈。</td>
+                <td>学情诊断、分层判断、学习规划、督学话术。</td>
+                <td>和学员沟通，并记录本次督学结果。</td>
+              </tr>
+              <tr>
+                <td>课程资料问题</td>
+                <td>学员问题原文、课程名称、资料类型、当前系统显示。</td>
+                <td>安抚回复、查询路径、内部升级说明。</td>
+                <td>先回复学员，再按流程排查或升级。</td>
+              </tr>
+              <tr>
+                <td>系统和云私塾问题</td>
+                <td>设备、页面、错误提示、学员操作步骤、截图描述。</td>
+                <td>排查清单、学员端回复、反馈研发或运营的说明。</td>
+                <td>让学员按步骤尝试，无法解决则升级。</td>
+              </tr>
+              <tr>
+                <td>课程直播通知</td>
+                <td>直播主题、时间、适用科目、适合人群、学习动作。</td>
+                <td>微信群通知、私聊提醒、未参加补学提醒。</td>
+                <td>按学员类型分批触达。</td>
+              </tr>
+              <tr>
+                <td>风险学员回访</td>
+                <td>最近学习记录、沟通记录、投诉点、情绪状态。</td>
+                <td>风险等级、回访目标、电话提纲、微信跟进话术。</td>
+                <td>优先处理高风险学员，回访后更新状态。</td>
+              </tr>
+              <tr>
+                <td>未添加学员电话跟进</td>
+                <td>课程、购课时间、未添加原因、过往联系记录。</td>
+                <td>电话开场白、短信内容、二次跟进策略。</td>
+                <td>电话触达，记录接通情况和后续动作。</td>
+              </tr>
+              <tr>
+                <td>退费挽单</td>
+                <td>退费原因、课程价格、协议情况、学习进度、学员诉求。</td>
+                <td>原因分析、挽留策略、沟通话术、可提供的解决方案。</td>
+                <td>先安抚再定位原因，必要时升级项目负责人。</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="cases">
+          <h2>04 案例演练：让班主任一看就会用</h2>
+          <p class="lead">
+            培训时不要只讲“Codex 可以生成话术”，要拿脱敏案例现场演示：班主任给出背景，Codex 输出初稿，班主任再按项目规则和学员状态做最后判断。
+          </p>
+
+          <h3>案例 1：新生已购高端班，但迟迟不添加班主任</h3>
+          <div class="mini-card">
+            <span class="tag orange">场景</span>
+            <p><strong>背景：</strong>学员购买中级注安高端/魔鬼类课程 3 天，系统显示未添加班主任微信。电话第一次未接，短信未回复。班主任需要再次触达，但不能让学员感觉被催促或骚扰。</p>
+            <p><strong>班主任可以输入给 Codex：</strong></p>
+            <div class="prompt">请帮我写一套“未添加班主任微信”的跟进话术。
+
+背景：
+学员已购买中级注安高端班课程 3 天，还没有添加班主任微信。
+第一次电话未接，短信未回复。
+目标是让学员知道添加班主任后可以获得入学指导、课程路径说明、资料和学习计划提醒。
+要求语气专业、温和，不要像销售催单。
+
+请输出：
+1. 电话开场白
+2. 电话未接后的短信
+3. 微信好友申请备注
+4. 第二天再次跟进话术</div>
+            <p><strong>输出示例：</strong></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>触达方式</th>
+                  <th>可用话术</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>电话开场</td>
+                  <td>同学您好，我是您中级注安课程的班主任，今天联系您主要是做一下入学服务确认，帮您核对课程、学习工具和后续学习安排，大概占用您 2 分钟。</td>
+                </tr>
+                <tr>
+                  <td>电话未接短信</td>
+                  <td>同学您好，我是您的中级注安班主任。看到您已开通课程，后续入学指导、课程更新、模考和报名提醒都会由班主任协助同步，方便时可以添加一下微信，我这边帮您做学习路径说明。</td>
+                </tr>
+                <tr>
+                  <td>好友申请备注</td>
+                  <td>中级注安班主任-入学指导</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>班主任动作：</strong>发送前补充真实班主任姓名和企业身份；电话记录写入未添加原因；第二次仍未联系上时标记为待回访。</p>
+          </div>
+
+          <h3>案例 2：零基础学员买了全科，但每天只有 1 小时</h3>
+          <div class="mini-card">
+            <span class="tag blue">场景</span>
+            <p><strong>背景：</strong>学员报考其他安全全科，零基础，工作日每天晚上约 1 小时，周末半天。学员担心课程太多、看不完、记不住。</p>
+            <p><strong>班主任可以输入给 Codex：</strong></p>
+            <div class="prompt">请你作为中级注安班主任，根据以下情况给学员做 14 天入门学习规划。
+
+学员情况：
+零基础，报考其他安全全科。
+工作日每天晚上 1 小时，周末半天。
+主要担心：课程太多、看不完、记不住。
+当前阶段：基础输入阶段，重点是建立学习节奏。
+
+请输出：
+1. 学情判断
+2. 14 天学习安排
+3. 每天学习动作
+4. 给学员的安抚和鼓励话术
+5. 班主任 7 天后需要检查什么</div>
+            <p><strong>输出示例：</strong></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>模块</th>
+                  <th>示例内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>学情判断</td>
+                  <td>该学员目前不适合追求快速刷完全部课程，应先建立稳定学习动作，以法规/管理基础知识为切入点，降低入门难度。</td>
+                </tr>
+                <tr>
+                  <td>14 天安排</td>
+                  <td>工作日每天 1 小时：40 分钟看课，15 分钟整理关键词，5 分钟记录问题。周末半天：复盘本周知识点并完成少量课后题。</td>
+                </tr>
+                <tr>
+                  <td>安抚话术</td>
+                  <td>您现在最重要的不是一下子学很多，而是先把每天 1 小时固定下来。零基础前两周感觉慢很正常，只要能连续学习，后面理解速度会明显提升。</td>
+                </tr>
+                <tr>
+                  <td>7 天检查</td>
+                  <td>是否连续学习 5 天以上；是否能说出本周学过的核心概念；是否完成少量题目；是否出现明显焦虑或放弃倾向。</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>班主任动作：</strong>不要给学员排满所有科目；先让学员完成一个低压力闭环：看课、记关键词、做少量题、反馈问题。</p>
+          </div>
+
+          <h3>案例 3：学员进度滞后，但自称“考前冲刺就行”</h3>
+          <div class="mini-card">
+            <span class="tag red">场景</span>
+            <p><strong>背景：</strong>学员购课金额高，已加微信，但 30 天内学习很少。沟通时表示“我以前考过，有基础，后面集中学就行”。班主任判断有掉队和退费风险。</p>
+            <p><strong>班主任可以输入给 Codex：</strong></p>
+            <div class="prompt">请帮我设计一次风险学员回访。
+
+学员情况：
+已购买中级注安高端班，已加微信。
+近 30 天学习记录很少，完课率明显低于当前阶段要求。
+学员反馈：“我以前考过，有基础，后面集中学就行。”
+班主任判断：有进度滞后和投机学习风险。
+
+请输出：
+1. 学员风险判断
+2. 不能直接批评学员的原因
+3. 微信沟通话术
+4. 电话沟通提纲
+5. 3 天追赶计划
+6. 下次回访要看哪些数据</div>
+            <p><strong>输出示例：</strong></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>项目</th>
+                  <th>示例内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>风险判断</td>
+                  <td>属于“进度滞后但自我判断偏乐观”的风险学员。风险不只是没学习，而是低估了全科备考和持续输出的难度。</td>
+                </tr>
+                <tr>
+                  <td>微信话术</td>
+                  <td>同学，我看了下您最近的学习记录，确实还没有完全进入节奏。您之前有基础是优势，但注安备考后期题量和记忆压力会比较集中，建议咱们先用 3 天把学习动作恢复起来。</td>
+                </tr>
+                <tr>
+                  <td>3 天计划</td>
+                  <td>第 1 天补 1 节核心精讲并做 5 道题；第 2 天复盘错题和关键词；第 3 天再完成 1 节课并反馈卡点。目标不是追完进度，而是恢复连续学习。</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>班主任动作：</strong>先认同“有基础”这一点，再说明风险；不要直接说“你这样肯定不行”；3 天后必须用数据跟进。</p>
+          </div>
+
+          <h3>案例 4：学员反馈云私塾看不懂，不知道学习报告怎么看</h3>
+          <div class="mini-card">
+            <span class="tag cyan">场景</span>
+            <p><strong>背景：</strong>学员购买云私塾相关班型后，觉得功能多、入口多，不知道学习计划、摸底测评、学习报告分别有什么用。</p>
+            <p><strong>班主任可以输入给 Codex：</strong></p>
+            <div class="prompt">请把云私塾功能解释成学员能听懂的话术。
+
+学员问题：
+“云私塾里面东西太多了，我不知道怎么看，也不知道学习报告有什么用。”
+
+需要解释的功能：
+学习计划、摸底测评、学习报告、视频智览、记忆卡。
+要求：
+不要写成产品宣传，要像班主任在微信里指导学员使用。
+输出一段完整回复，并附一个“今天先做哪三步”的行动清单。</div>
+            <p><strong>输出示例：</strong></p>
+            <div class="prompt">同学，云私塾功能确实比较多，您不用一开始都研究明白。可以先把它理解成一个“帮您少走弯路的学习工具”：
+
+1. 学习计划：告诉您先学什么、后学什么，避免自己乱翻课程。
+2. 摸底测评：先看您哪里薄弱，后面学习更有重点。
+3. 学习报告：看您最近学了多久、学到哪里、有没有掉队。
+4. 视频智览：帮您快速抓视频里的重点内容。
+5. 记忆卡：适合零碎时间复习容易忘的知识点。
+
+今天先做三步就可以：
+第一步，打开学习计划，看今天系统推荐的任务。
+第二步，完成一小节课程，不追求多。
+第三步，看一下学习报告，把不懂的地方发我，我帮您判断下一步怎么学。</div>
+            <p><strong>班主任动作：</strong>把复杂功能变成当天动作，不要一次性灌输全部卖点；后续可把这类问题沉淀进机器人语料库。</p>
+          </div>
+
+          <h3>案例 5：学员提出退费，理由是“工作太忙，没时间学”</h3>
+          <div class="mini-card">
+            <span class="tag red">场景</span>
+            <p><strong>背景：</strong>学员没有强烈投诉，只是觉得工作忙、跟不上、课程浪费。此时重点不是讲一堆课程价值，而是先识别真实障碍：时间问题、焦虑问题，还是信心问题。</p>
+            <p><strong>班主任可以输入给 Codex：</strong></p>
+            <div class="prompt">请帮我设计退费挽单沟通方案。
+
+学员说：“工作太忙了，我根本没时间学，想退了。”
+学员情况：
+中级注安全科，基础一般。
+近两周学习时间少，未明显投诉课程内容。
+目标：
+先安抚，不强硬挽留；判断是真的无时间，还是计划不合理导致焦虑；给出一个低压力学习方案。
+
+请输出：
+1. 学员真实诉求判断
+2. 微信回复话术
+3. 电话追问问题
+4. 7 天低压力学习方案
+5. 哪些话不能说</div>
+            <p><strong>输出示例：</strong></p>
+            <table>
+              <thead>
+                <tr>
+                  <th>模块</th>
+                  <th>示例内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>真实诉求</td>
+                  <td>学员表达的是退费，但底层可能是“时间失控 + 看不到进展 + 担心考不过”。优先处理学习压力，而不是直接争论退费。</td>
+                </tr>
+                <tr>
+                  <td>微信回复</td>
+                  <td>同学，我理解您最近工作忙的时候确实很难进入学习状态。咱们先不急着否定您现在的感受，我想先帮您看一下，是完全没有时间，还是原来的学习安排太重，导致您觉得跟不上。</td>
+                </tr>
+                <tr>
+                  <td>不能说</td>
+                  <td>不要说“别人忙也能学”“现在退很亏”“你坚持一下就行”；不要承诺一定通过；不要随意解释退费条件。</td>
+                </tr>
+              </tbody>
+            </table>
+            <p><strong>班主任动作：</strong>如果学员明显情绪化，先安抚；如果涉及协议和金额，按内部规则升级确认后再回复。</p>
+          </div>
+
+          <h3>课堂演练题：让班主任现场操作</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>演练题</th>
+                <th>给班主任的任务</th>
+                <th>验收标准</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>新生首访</td>
+                <td>用一个脱敏新生信息，让 Codex 生成首访话术和 6 个问题。</td>
+                <td>话术不销售化；问题能补齐档案；结尾有下一步动作。</td>
+              </tr>
+              <tr>
+                <td>学情规划</td>
+                <td>给一个零基础、时间少、报全科的学员生成 14 天计划。</td>
+                <td>计划可执行；没有把任务排满；能体现阶段重点。</td>
+              </tr>
+              <tr>
+                <td>风险回访</td>
+                <td>给一个 30 天未学习的学员生成微信和电话回访方案。</td>
+                <td>先共情再提醒风险；有短期追赶目标；有下次检查指标。</td>
+              </tr>
+              <tr>
+                <td>退费挽单</td>
+                <td>根据“没时间学”生成挽单话术。</td>
+                <td>不强硬、不承诺、不乱讲协议；能定位真实原因。</td>
+              </tr>
+              <tr>
+                <td>机器人语料</td>
+                <td>把“讲义在哪下载”整理成机器人 FAQ。</td>
+                <td>包含常见问法、关键词、标准回复、是否转人工。</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+
+        <section id="project">
+          <h2>05 中级注安项目配套服务思路</h2>
+          <p class="lead">
+            运营手册中的课程体系、班次定位、课程更新、师资安排、云私塾亮点和服务细节，可以转化为班主任服务知识库。
+          </p>
+
+          <h3>按学习阶段配套服务</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>阶段</th>
+                <th>课程或活动</th>
+                <th>学员常见问题</th>
+                <th>班主任服务重点</th>
+                <th>Codex 支持</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>认知和基础输入</td>
+                <td>认知考试、备考指导、考点精讲、小白思维导图课。</td>
+                <td>不知道先学哪科、看不懂教材、时间排不开。</td>
+                <td>完成新生首访，建立学习计划，解释课程路径。</td>
+                <td>生成入学指导、30 天学习规划、零基础学习建议。</td>
+              </tr>
+              <tr>
+                <td>基础巩固</td>
+                <td>基础考霸复盘集训、基础阶段测评模考。</td>
+                <td>记不住知识点、做题错得多、开始焦虑。</td>
+                <td>引导复盘错题，提醒不要只追进度，关注理解质量。</td>
+                <td>生成错题复盘模板、焦虑安抚话术、测评后学习建议。</td>
+              </tr>
+              <tr>
+                <td>强化输出</td>
+                <td>实战题分班、考点突破集训、强化刷题集训。</td>
+                <td>刷题正确率低、不会总结题型、拖延参与集训。</td>
+                <td>盯参与率、完成率、正确率，及时催学和分层干预。</td>
+                <td>汇总刷题数据，识别低参与和低正确率学员，生成跟进话术。</td>
+              </tr>
+              <tr>
+                <td>案例提升</td>
+                <td>案例带刷课、案例专项班。</td>
+                <td>主观题不会写、答题没结构、实务科目没信心。</td>
+                <td>强调答题模板、关键词、步骤分，督促提交练习。</td>
+                <td>生成案例题练习计划、答题复盘表、实务学员鼓励话术。</td>
+              </tr>
+              <tr>
+                <td>考前冲刺</td>
+                <td>考前模考、押题、考前提醒、报名缴费提醒。</td>
+                <td>临考焦虑、复习混乱、担心不过、忘记报名缴费。</td>
+                <td>明确最后冲刺任务，提醒重要时间节点，稳定情绪。</td>
+                <td>生成考前 7 天计划、考试提醒清单、情绪安抚话术。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>按班型配套服务</h3>
+          <div class="grid two">
+            <div class="mini-card">
+              <span class="tag orange">高端与魔鬼类</span>
+              <h3>服务强调“个性化”和“过程陪伴”</h3>
+              <ul>
+                <li>重点使用学员档案、督学记录、风险回访和学习规划。</li>
+                <li>高客单学员对响应速度、规划细致度、问题解决效率更敏感。</li>
+                <li>Codex 可帮助班主任把每次沟通整理成专业的督学建议。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <span class="tag cyan">云私塾类</span>
+              <h3>服务强调“工具使用”和“学习效率”</h3>
+              <ul>
+                <li>重点解释学习计划、摸底测评、学习报告、视频智览、记忆卡等功能。</li>
+                <li>学员问题多集中在系统使用、学习路径、数据怎么看。</li>
+                <li>Codex 可把功能亮点转成学员听得懂的使用话术。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <span class="tag green">私教和央企类</span>
+              <h3>服务强调“班型权益”和“学习闭环”</h3>
+              <ul>
+                <li>重点说明课程权益、答疑路径、老师安排、学习任务。</li>
+                <li>对师资反馈、课程安排、作业提交要有清晰记录。</li>
+                <li>Codex 可生成权益说明、老师反馈整理、学习闭环表。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <span class="tag blue">基础班型</span>
+              <h3>服务强调“路径清晰”和“减少流失”</h3>
+              <ul>
+                <li>重点解决不知道怎么学、低价课预期不清、学习动力不足。</li>
+                <li>班主任要用标准话术减少反复解释。</li>
+                <li>Codex 可生成低基础学员学习计划和高频问题回复。</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <section id="prompts">
+          <h2>06 班主任常用提示词模板</h2>
+          <p class="lead">
+            使用 Codex 时，最重要的是把“背景、学员情况、目标、输出格式”说清楚。以下模板可以直接复制后替换变量。
+          </p>
+
+          <h3>1. 新生首访话术</h3>
+          <div class="prompt">你是中级注册安全工程师项目的服务班主任。请根据以下学员情况，生成一段微信首访沟通话术，要求亲切、专业、不要太销售化。
+
+学员课程：{课程名称}
+报考专业：{报考专业}
+基础情况：{是否零基础/是否考过}
+学习时间：{每天或每周可学习时间}
+主要顾虑：{学员担心的问题}
+
+请输出：
+1. 开场问候
+2. 需要了解的 6 个问题
+3. 学习工具和课程路径提醒
+4. 结束语和下一步动作</div>
+
+          <h3>2. 学员画像总结</h3>
+          <div class="prompt">请根据以下首访记录，整理一份学员画像。输出要适合填写进学员档案表。
+
+首访记录：
+{粘贴沟通记录或要点}
+
+请按以下格式输出：
+1. 工作情况
+2. 家庭和时间压力
+3. 过往考试情况
+4. 备考目标
+5. 学习能力和自律性判断
+6. 主要备考痛点
+7. 学员类型标签
+8. 班主任服务建议</div>
+
+          <h3>3. 1v1 督学建议</h3>
+          <div class="prompt">你是注安项目督学老师。请根据学员当前学习情况，判断学员分层，并生成本次督学建议。
+
+学员课程：{课程}
+报考科目：{科目}
+完课率：{完课率}
+做题率：{做题率}
+正确率：{正确率}
+上次计划完成情况：{完成/未完成/原因}
+学员反馈：{反馈}
+距离考试：{天数}
+
+请输出：
+1. 学员当前分层
+2. 主要问题
+3. 本周学习目标
+4. 每日学习安排
+5. 微信沟通话术
+6. 下次跟进重点</div>
+
+          <h3>4. 风险学员回访</h3>
+          <div class="prompt">请帮我分析以下学员是否存在服务风险，并给出回访方案。
+
+学员情况：
+{学习进度、沟通记录、投诉点、情绪状态、是否加微、是否提出退费}
+
+请输出：
+1. 风险等级：高/中/低
+2. 风险原因
+3. 回访目标
+4. 电话沟通提纲
+5. 微信跟进话术
+6. 需要内部协同的问题</div>
+
+          <h3>5. 退费挽单</h3>
+          <div class="prompt">请根据以下退费学员情况，帮我设计挽单方案。要求先安抚情绪，再分析原因，再给出可执行解决方案，避免强硬或过度承诺。
+
+退费原因：{原因}
+课程班型：{班型}
+付款金额：{金额}
+学习进度：{完课率/做题率}
+协议情况：{是否涉及退费条件}
+学员原话：{原话}
+
+请输出：
+1. 学员真实诉求判断
+2. 沟通策略
+3. 微信回复话术
+4. 电话沟通提纲
+5. 可提供的解决方案
+6. 不建议承诺的内容</div>
+
+          <h3>6. 课程通知</h3>
+          <div class="prompt">请帮我写一条中级注安课程通知，适合发到学员群和私聊提醒。语气专业、简洁、有行动要求。
+
+课程名称：{课程名称}
+直播时间：{时间}
+适用科目：{科目}
+适合人群：{人群}
+学习要求：{课前预习/课后作业/回放要求}
+
+请分别输出：
+1. 群公告版本
+2. 私聊提醒版本
+3. 未参加学员补学提醒版本</div>
+
+          <h3>7. 高频问题标准回复</h3>
+          <div class="prompt">请把以下学员问题整理成标准回复，适合放入班主任话术库和机器人语料库。
+
+学员问题：{问题原文}
+问题类型：{课程资料/系统/云私塾/答疑/图书/报名/退费/师资}
+已知规则：{项目规则或处理流程}
+
+请输出：
+1. 学员常见问法
+2. 标准回复
+3. 需要追问的信息
+4. 是否需要转人工或升级
+5. 关键词</div>
+        </section>
+
+        <section id="data">
+          <h2>07 学员档案与数据分析应用</h2>
+          <p class="lead">
+            学员档案不是简单登记表，而是班主任做个性化服务和项目负责人做过程管理的基础数据源。
+          </p>
+
+          <h3>学员档案字段可以分成六类</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>字段类别</th>
+                <th>典型字段</th>
+                <th>服务用途</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>基本信息</td>
+                <td>UID、课程、转正时间、购课手机号、报考省份、报课专业、是否加微。</td>
+                <td>确认服务对象，判断是否完成承接，筛选未加微和信息不完整学员。</td>
+              </tr>
+              <tr>
+                <td>协议与结果</td>
+                <td>完课率/做题率、各科成绩、是否符合退费条件、预计退费金额。</td>
+                <td>考后退费判断、过程风险预警、协议提醒。</td>
+              </tr>
+              <tr>
+                <td>学员画像</td>
+                <td>年龄、学历、专业、家庭情况、工作情况、学习干扰、性格情绪。</td>
+                <td>决定沟通方式和服务频率，避免统一话术失效。</td>
+              </tr>
+              <tr>
+                <td>学习习惯</td>
+                <td>考证目的、备考目标、学习能力、固定学习时间、零碎时间。</td>
+                <td>生成个性化学习计划，判断计划是否可执行。</td>
+              </tr>
+              <tr>
+                <td>学习监控</td>
+                <td>看课情况、做题情况、学员类型。</td>
+                <td>识别掉队、低效、焦虑、投机取巧等情况。</td>
+              </tr>
+              <tr>
+                <td>督学记录</td>
+                <td>日期、上次计划完成情况、学习建议、截图。</td>
+                <td>形成服务闭环，支撑复盘和交接。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>推荐的学员分层</h3>
+          <div class="grid three">
+            <div class="mini-card">
+              <span class="tag green">A 类</span>
+              <h4>进度超前，态度积极</h4>
+              <p>减少低价值催促，重点提供难点突破、真题复盘、信心强化。</p>
+            </div>
+            <div class="mini-card">
+              <span class="tag blue">B 类</span>
+              <h4>进度达标，态度认真</h4>
+              <p>保持两周一次深度沟通，关注做题正确率和学习质量。</p>
+            </div>
+            <div class="mini-card">
+              <span class="tag orange">C 类</span>
+              <h4>进度达标，效果不好</h4>
+              <p>降低焦虑，减少盲目刷题，强化基础理解和错题复盘。</p>
+            </div>
+            <div class="mini-card">
+              <span class="tag orange">D 类</span>
+              <h4>进度滞后，有一定基础</h4>
+              <p>制定追赶计划，拆小目标，增加学习反馈频率。</p>
+            </div>
+            <div class="mini-card">
+              <span class="tag red">E 类</span>
+              <h4>进度滞后，零基础或消极</h4>
+              <p>从低门槛任务开始，先恢复学习动作，再谈完整计划。</p>
+            </div>
+            <div class="mini-card">
+              <span class="tag red">R 类</span>
+              <h4>服务风险学员</h4>
+              <p>存在退费、投诉、失联、协议风险或强烈负面情绪，需要优先回访。</p>
+            </div>
+          </div>
+
+          <h3>可以定期输出的数据报告</h3>
+          <ul class="checklist">
+            <li>班主任负责学员总数、已加微人数、未加微人数。</li>
+            <li>不同班型、不同专业、不同省份的学员分布。</li>
+            <li>高风险、中风险、低风险学员名单。</li>
+            <li>本周完成督学人数、待督学人数、逾期未跟进人数。</li>
+            <li>完课率低于阈值、做题率低于阈值、长期未学习名单。</li>
+            <li>退费原因分类和挽回结果。</li>
+            <li>学员问题类型占比和重复出现的问题。</li>
+            <li>机器人错误回复和未命中问题清单。</li>
+          </ul>
+        </section>
+
+        <section id="robot">
+          <h2>08 助学机器人语料优化</h2>
+          <p class="lead">
+            机器人不是一次配置就结束，而是需要班主任持续核查、纠错、补充和复盘。Codex 可以帮助把零散问题变成结构化语料。
+          </p>
+
+          <h3>机器人语料库建议结构</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>字段</th>
+                <th>说明</th>
+                <th>示例</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>问题类型</td>
+                <td>用于分类统计和后续维护。</td>
+                <td>课程资料、系统问题、云私塾、答疑、图书、报名考试、退费。</td>
+              </tr>
+              <tr>
+                <td>学员常见问法</td>
+                <td>尽量保留学员真实表达。</td>
+                <td>“讲义在哪下载？”“为什么我看不到直播？”“云私塾学习报告怎么看？”</td>
+              </tr>
+              <tr>
+                <td>关键词</td>
+                <td>帮助机器人命中问题。</td>
+                <td>讲义、资料、下载、直播入口、回放、学习报告。</td>
+              </tr>
+              <tr>
+                <td>标准回复</td>
+                <td>要准确、简洁、可执行。</td>
+                <td>先说明路径，再说明异常情况怎么反馈。</td>
+              </tr>
+              <tr>
+                <td>是否转人工</td>
+                <td>明确机器人处理边界。</td>
+                <td>涉及退款、投诉、账号异常、支付金额争议，建议转人工。</td>
+              </tr>
+              <tr>
+                <td>质检备注</td>
+                <td>记录错误回复、优化日期、责任人。</td>
+                <td>原回复过度承诺，已改为标准处理口径。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>机器人回复质检标准</h3>
+          <ul>
+            <li>是否准确：不能和项目规则、协议、课程安排冲突。</li>
+            <li>是否完整：是否给出路径、条件、下一步动作。</li>
+            <li>是否克制：不能承诺退费、通过、押题命中等敏感内容。</li>
+            <li>是否友好：语气不能机械、冷淡、推责。</li>
+            <li>是否可转接：复杂问题要明确引导学员联系班主任。</li>
+          </ul>
+        </section>
+
+        <section id="workflow">
+          <h2>09 推荐日常工作流</h2>
+          <p class="lead">
+            班主任可以把 Codex 嵌入到每天工作中，而不是等到写报告时才使用。
+          </p>
+
+          <div class="workflow">
+            <div class="step">
+              <strong>早上：看待办和风险名单</strong>
+              <p>把昨日未解决问题、未加微名单、低学习活跃学员、投诉退费线索整理给 Codex，让它生成今日优先级。</p>
+            </div>
+            <div class="step">
+              <strong>上午：处理新生和问题咨询</strong>
+              <p>新生首访、学员档案补充、课程资料和系统问题，用提示词快速生成回复和记录。</p>
+            </div>
+            <div class="step">
+              <strong>下午：做督学和风险回访</strong>
+              <p>根据学习数据生成分层建议，对 C/D/E/R 类学员进行重点回访。</p>
+            </div>
+            <div class="step">
+              <strong>晚上或次日：沉淀复盘</strong>
+              <p>把当天高频问题、机器人异常、学员情绪反馈、退费原因汇总成日报或周报素材。</p>
+            </div>
+          </div>
+
+          <div class="notice">
+            <strong>关键原则：</strong>Codex 先出初稿，班主任必须结合真实规则和学员情况复核。尤其是退费、协议、考试报名、课程权益、价格审批等内容，不能直接照发。
+          </div>
+        </section>
+
+        <section id="training">
+          <h2>10 培训落地安排</h2>
+          <p class="lead">
+            建议把这份文档用于一次 90 分钟内部培训，再安排 1 周试运行。
+          </p>
+
+          <table>
+            <thead>
+              <tr>
+                <th>环节</th>
+                <th>时间</th>
+                <th>培训内容</th>
+                <th>产出物</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>理念导入</td>
+                <td>10 分钟</td>
+                <td>说明 Codex 在班主任工作中的定位和边界。</td>
+                <td>统一认知，不把 AI 当万能客服。</td>
+              </tr>
+              <tr>
+                <td>场景讲解</td>
+                <td>25 分钟</td>
+                <td>按新生、督学、问题处理、风险回访、退费挽单逐个讲。</td>
+                <td>班主任知道什么时候该用。</td>
+              </tr>
+              <tr>
+                <td>提示词演练</td>
+                <td>30 分钟</td>
+                <td>用真实但脱敏的学员案例，现场生成话术和督学建议。</td>
+                <td>每人沉淀 3 条常用提示词。</td>
+              </tr>
+              <tr>
+                <td>数据应用</td>
+                <td>15 分钟</td>
+                <td>演示如何基于学员档案做分层、风险名单、服务周报。</td>
+                <td>明确档案填写质量的重要性。</td>
+              </tr>
+              <tr>
+                <td>规范提醒</td>
+                <td>10 分钟</td>
+                <td>强调隐私、协议、价格、退费、考试政策等敏感边界。</td>
+                <td>形成使用规范。</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <h3>培训后的 1 周试运行任务</h3>
+          <ul>
+            <li>每位班主任至少用 Codex 生成 5 条新生或督学话术。</li>
+            <li>每位班主任至少用 Codex 整理 3 个学员画像。</li>
+            <li>项目负责人收集班主任觉得最有用和最不准确的输出。</li>
+            <li>每周沉淀一版“班主任提示词库”和“机器人语料优化清单”。</li>
+          </ul>
+        </section>
+
+        <section id="rules">
+          <h2>11 使用规范与风险边界</h2>
+          <p class="lead">
+            Codex 可以提高效率，但培训中必须讲清楚哪些内容能交给它，哪些内容必须人工复核。
+          </p>
+
+          <div class="grid two">
+            <div class="mini-card">
+              <span class="tag green">适合使用</span>
+              <ul>
+                <li>生成内部初稿、话术、表格模板、服务流程。</li>
+                <li>整理脱敏学员画像和学习建议。</li>
+                <li>汇总问题类型和复盘服务数据。</li>
+                <li>优化机器人 FAQ 和标准回复。</li>
+              </ul>
+            </div>
+            <div class="mini-card">
+              <span class="tag red">必须复核</span>
+              <ul>
+                <li>退费协议、价格审批、课程权益、考试报名政策。</li>
+                <li>涉及投诉升级、师资承诺、通过承诺、押题命中等敏感表达。</li>
+                <li>学员个人隐私、手机号、地址、身份证、付款记录等信息。</li>
+                <li>对外发送前的所有正式通知和承诺类内容。</li>
+              </ul>
+            </div>
+          </div>
+
+          <h3>对学员信息的处理要求</h3>
+          <ul>
+            <li>对外培训或演示时，必须使用脱敏案例，不展示真实姓名、手机号、地址、UID、付款金额等敏感信息。</li>
+            <li>内部分析可以使用真实表格，但结果分享时应尽量使用汇总数据，不扩散明细。</li>
+            <li>涉及退费、投诉、协议争议时，Codex 只能辅助整理和起草，最终口径以项目规则和负责人确认为准。</li>
+          </ul>
+
+          <h3>最小可行落地清单</h3>
+          <ul class="checklist">
+            <li>一份班主任常用提示词库。</li>
+            <li>一份学员档案填写标准。</li>
+            <li>一份督学分层规则。</li>
+            <li>一份风险学员识别规则。</li>
+            <li>一份退费挽单话术库。</li>
+            <li>一份机器人语料库模板。</li>
+            <li>一份服务周报模板。</li>
+            <li>一份中级注安项目问题处理导航。</li>
+          </ul>
+        </section>
+      </div>
+
+      <footer class="footer">
+        本文档为内部培训材料草案，可继续扩展为班主任工作台、提示词库、机器人语料库和学员服务数据看板。
+      </footer>
+    </main>
+  </div>
+</body>
+</html>

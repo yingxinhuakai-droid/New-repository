@@ -1,0 +1,676 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>WorkBuddy + Codex 阶段成果分享</title>
+  <style>
+    :root {
+      --bg: #eef3f8;
+      --panel: rgba(255, 255, 255, .72);
+      --panel-strong: rgba(255, 255, 255, .86);
+      --ink: #182235;
+      --muted: #617089;
+      --line: rgba(255, 255, 255, .64);
+      --blue: #2563eb;
+      --cyan: #0891b2;
+      --green: #0f8a6a;
+      --orange: #c66a14;
+      --red: #c24132;
+      --violet: #6d5bd0;
+      --shadow: 0 24px 70px rgba(32, 47, 78, .16);
+      --soft-shadow: 0 14px 34px rgba(32, 47, 78, .1);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(37, 99, 235, .16), transparent 34%),
+        linear-gradient(225deg, rgba(15, 138, 106, .12), transparent 32%),
+        linear-gradient(180deg, #f9fbff 0%, var(--bg) 45%, #f7f8fb 100%);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(47, 68, 104, .05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(47, 68, 104, .05) 1px, transparent 1px);
+      background-size: 36px 36px;
+      mask-image: linear-gradient(180deg, rgba(0, 0, 0, .9), transparent 78%);
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 28px;
+      border-bottom: 1px solid rgba(255, 255, 255, .62);
+      background: rgba(255, 255, 255, .58);
+      backdrop-filter: blur(22px) saturate(1.45);
+      box-shadow: 0 10px 30px rgba(30, 42, 70, .08);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 220px;
+      font-weight: 700;
+    }
+
+    .mark {
+      width: 28px;
+      height: 28px;
+      display: grid;
+      place-items: center;
+      border-radius: 8px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 10px 22px rgba(37, 99, 235, .28);
+      font-size: 15px;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      padding: 7px 10px;
+      border-radius: 8px;
+      color: #45556e;
+      font-size: 14px;
+      transition: .18s ease;
+    }
+
+    .nav a:hover {
+      color: var(--ink);
+      background: rgba(255, 255, 255, .68);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .8);
+    }
+
+    .hero {
+      min-height: 72vh;
+      display: grid;
+      align-items: center;
+      padding: 76px 28px 34px;
+      border-bottom: 1px solid rgba(255, 255, 255, .58);
+    }
+
+    .wrap {
+      width: min(1120px, calc(100vw - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      width: fit-content;
+      margin: 0 auto 14px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, .68);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .62);
+      backdrop-filter: blur(18px);
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    h1 {
+      margin: 0 auto;
+      max-width: 960px;
+      text-align: center;
+      font-size: clamp(38px, 5.6vw, 66px);
+      line-height: 1.12;
+      letter-spacing: 0;
+    }
+
+    .lead {
+      margin: 20px auto 0;
+      max-width: 850px;
+      text-align: center;
+      color: var(--muted);
+      font-size: 18px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr .8fr;
+      gap: 18px;
+      align-items: stretch;
+      margin-top: 36px;
+    }
+
+    .summary, .agenda {
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 18px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px) saturate(1.35);
+      padding: 22px;
+    }
+
+    .summary h2, .agenda h2, section h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .summary p, .agenda p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      min-height: 32px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .62);
+      color: #334155;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .78);
+      font-size: 13px;
+      font-weight: 650;
+    }
+
+    .agenda ol {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .agenda li + li { margin-top: 6px; }
+
+    main {
+      padding: 34px 0 64px;
+    }
+
+    section {
+      scroll-margin-top: 86px;
+      margin-top: 24px;
+      background: var(--panel);
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(24px) saturate(1.35);
+      overflow: hidden;
+    }
+
+    .section-head {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 16px;
+      align-items: start;
+      padding: 24px 24px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, .6);
+      background: rgba(255, 255, 255, .32);
+    }
+
+    .num {
+      width: 42px;
+      height: 42px;
+      display: grid;
+      place-items: center;
+      border-radius: 14px;
+      color: #fff;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 14px 28px rgba(37, 99, 235, .28);
+    }
+
+    section:nth-of-type(2) .num { background: linear-gradient(135deg, var(--green), #22a66e); }
+    section:nth-of-type(3) .num { background: linear-gradient(135deg, var(--orange), #e09a34); }
+    section:nth-of-type(4) .num { background: linear-gradient(135deg, var(--red), #ee6a5b); }
+    section:nth-of-type(5) .num { background: linear-gradient(135deg, var(--violet), #7c8cf0); }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    .section-body {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 20px;
+      padding: 22px 24px 24px;
+    }
+
+    .talk-card {
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 18px;
+      padding: 18px;
+      background: rgba(255, 255, 255, .56);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .talk-card h3, .demo-list h3 {
+      margin: 0 0 10px;
+      font-size: 16px;
+      letter-spacing: 0;
+    }
+
+    .talk-card ul {
+      margin: 0;
+      padding-left: 20px;
+      color: var(--muted);
+    }
+
+    .talk-card li + li { margin-top: 7px; }
+
+    .demo-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .demo-item {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 12px;
+      align-items: center;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, .7);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, .66);
+      box-shadow: 0 10px 24px rgba(32, 47, 78, .08);
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    .demo-item:hover {
+      transform: translateY(-2px);
+      background: rgba(255, 255, 255, .86);
+      box-shadow: 0 18px 42px rgba(32, 47, 78, .13);
+    }
+
+    .demo-title {
+      margin: 0;
+      font-weight: 750;
+      line-height: 1.35;
+    }
+
+    .demo-desc {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 86px;
+      min-height: 36px;
+      padding: 7px 12px;
+      border: 1px solid rgba(255, 255, 255, .5);
+      border-radius: 12px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--cyan));
+      box-shadow: 0 12px 24px rgba(37, 99, 235, .22);
+      font-weight: 700;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .btn:hover {
+      border-color: rgba(255, 255, 255, .78);
+      filter: brightness(1.04);
+    }
+
+    .quote {
+      margin-top: 12px;
+      padding: 12px 14px;
+      border-left: 4px solid rgba(37, 99, 235, .72);
+      background: rgba(244, 247, 255, .72);
+      color: #31415f;
+      border-radius: 0 14px 14px 0;
+      font-size: 14px;
+    }
+
+    .close {
+      margin-top: 22px;
+      padding: 26px;
+      border-radius: 22px;
+      color: #fff;
+      background: linear-gradient(135deg, rgba(24, 34, 53, .94), rgba(33, 55, 89, .92));
+      box-shadow: var(--shadow);
+    }
+
+    .close h2 { margin: 0 0 8px; font-size: 24px; }
+    .close p { margin: 0; color: #cbd3df; }
+
+    @media (max-width: 900px) {
+      .topbar {
+        position: static;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav { justify-content: flex-start; }
+      .hero { min-height: auto; padding-top: 42px; }
+      .hero-grid, .section-body { grid-template-columns: 1fr; }
+      .demo-item { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+    }
+
+    @media print {
+      .topbar { position: static; }
+      .btn { border: 1px solid #999; background: #fff; color: #000; }
+      body { background: #fff; }
+      section, .summary, .agenda { box-shadow: none; break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#top" aria-label="返回顶部">
+      <span class="mark">AI</span>
+      <span>WorkBuddy + Codex 成果分享</span>
+    </a>
+    <nav class="nav" aria-label="分享目录">
+      <a href="#mindset">心态</a>
+      <a href="#sales-anchor">销售主播</a>
+      <a href="#analysis">数据分析</a>
+      <a href="#assistant">运营引流</a>
+      <a href="#teaching">教研物料</a>
+    </nav>
+  </header>
+
+  <div id="top" class="hero">
+    <div class="wrap">
+      <p class="eyebrow">下午内部分享 · 轻量演示稿</p>
+      <h1>用 AI 学 AI：把想法快速变成可展示、可培训、可复用的工作成果</h1>
+      <p class="lead">
+        这次分享不讲复杂概念，重点展示我最近用 WorkBuddy 和 Codex 做出来的内容：培训页、销售资料、数据分析、运营留资工具和教研物料。核心方法是边学边做，把 AI 当成协作伙伴，一步一步把模糊需求落成可演示成果。
+      </p>
+
+      <div class="hero-grid">
+        <div class="summary">
+          <h2>分享主线</h2>
+          <p>
+            先建立接触 Agent AI 的心态，再展示不同业务场景下的实际成果。每个板块都按照“业务问题是什么、AI 怎么协助、最后产出是什么、下一步怎么复用”来讲。
+          </p>
+          <div class="pill-row">
+            <span class="pill">从真实工作出发</span>
+            <span class="pill">用 AI 学 AI</span>
+            <span class="pill">先做出原型</span>
+            <span class="pill">再沉淀方法</span>
+          </div>
+        </div>
+        <div class="agenda">
+          <h2>建议节奏</h2>
+          <ol>
+            <li>3 分钟：为什么要用 AI 做展示和培训</li>
+            <li>12 分钟：四类培训文档和工作台成果</li>
+            <li>8 分钟：销售主播可视化培训资料</li>
+            <li>7 分钟：数据分析和运营引流工具</li>
+            <li>8 分钟：教研物料批量产出和排版</li>
+            <li>2 分钟：总结下一步可复制的做法</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <section id="mindset">
+      <div class="section-head">
+        <div class="num">01</div>
+        <div>
+          <h2>接触 Agent AI 的心态</h2>
+          <p>不要一开始就追求完美，而是像做口碑项目一样，从真实需求切入，让 AI 帮我们拆任务、补结构、做页面、改表达。</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="talk-card">
+          <h3>讲解重点</h3>
+          <ul>
+            <li>先把 AI 当成一个能协作的执行同事，而不是单纯问答工具。</li>
+            <li>用 AI 学 AI：不会的地方继续问、继续改、继续验证。</li>
+            <li>展示成果比讲概念更重要，大家看到页面和文档后更容易理解价值。</li>
+            <li>目前已经覆盖运营、教研、服务端、销售端多个场景。</li>
+          </ul>
+          <div class="quote">可用开场：我最近的体会是，不要等完全懂 AI 以后再用，而是在做具体工作的过程中反过来理解 AI。</div>
+        </div>
+        <div class="demo-list">
+          <h3>现场演示材料</h3>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">运营培训文档</p>
+              <p class="demo-desc">展示运营侧如何把流程、话术和执行要点整理成可阅读页面。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/WorkBuddy/%E5%9F%B9%E8%AE%AD%E6%96%87%E6%A1%A3/index.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">教研培训文档</p>
+              <p class="demo-desc">展示 Codex 如何赋能中级注安教研高频场景，适合作为本次分享的核心案例。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E6%95%99%E7%A0%94%E5%B7%A5%E4%BD%9C/Codex%E8%B5%8B%E8%83%BD%E4%B8%AD%E7%BA%A7%E6%B3%A8%E5%AE%89%E6%95%99%E7%A0%94%E9%AB%98%E9%A2%91%E5%9C%BA%E6%99%AF%E5%9F%B9%E8%AE%AD.html#appendix" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">服务端培训文档</p>
+              <p class="demo-desc">展示服务端培训内容的结构化呈现，让班主任和服务团队更容易按场景学习。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/WorkBuddy/%E6%B3%A8%E5%AE%89workbuddy/%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%9F%B9%E8%AE%AD/Workbuddy%E6%9C%8D%E5%8A%A1%E7%AB%AF%E5%9F%B9%E8%AE%AD%E6%96%87%E6%A1%A3.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">班主任 AI 工作台原型</p>
+              <p class="demo-desc">展示服务端从“培训文档”进一步延伸到“可操作工作台”的方向。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E6%9C%8D%E5%8A%A1%E5%B7%A5%E4%BD%9C/%E7%8F%AD%E4%B8%BB%E4%BB%BBAI%E5%B7%A5%E4%BD%9C%E5%8F%B0%E5%8E%9F%E5%9E%8B.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">销售端培训文档</p>
+              <p class="demo-desc">展示销售侧如何把产品理解、卖点表达和培训路径页面化。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/WorkBuddy/sales_training/index.html" target="_blank">打开</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="sales-anchor">
+      <div class="section-head">
+        <div class="num">02</div>
+        <div>
+          <h2>销售主播培训文档</h2>
+          <p>用 Codex 和 WorkBuddy 把资料做成视觉化、交互性更好的培训页面，帮助销售主播更快理解产品结构、讲解顺序和核心卖点。</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="talk-card">
+          <h3>讲解重点</h3>
+          <ul>
+            <li>传统文字资料不容易被主播快速吸收，HTML 页面可以把信息分层展示。</li>
+            <li>页面可以承载图书介绍、PPT 演示、产品体系讲解等不同形式。</li>
+            <li>培训目标不是让资料更花，而是让销售更快知道“先讲什么、重点讲什么、怎么转化”。</li>
+          </ul>
+          <div class="quote">可用表达：AI 的价值不是替代业务判断，而是把已有内容包装成更容易理解和传播的形式。</div>
+        </div>
+        <div class="demo-list">
+          <h3>现场演示材料</h3>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">环球网校 2026 中级注安 6 套教辅培训页</p>
+              <p class="demo-desc">适合展示图书培训介绍如何从零散卖点变成清晰页面。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E8%BF%90%E8%90%A5%E5%B7%A5%E4%BD%9C/outputs/%E7%8E%AF%E7%90%83%E7%BD%91%E6%A0%A12026%E4%B8%AD%E7%BA%A7%E6%B3%A8%E5%AE%896%E5%A5%97%E6%95%99%E8%BE%85%E5%9F%B9%E8%AE%AD%E9%A1%B5/index.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">图书 HTML 演示稿</p>
+              <p class="demo-desc">适合展示把图书资料做成类 PPT 的讲解版本。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E8%BF%90%E8%90%A5%E5%B7%A5%E4%BD%9C/outputs/%E7%8E%AF%E7%90%83%E7%BD%91%E6%A0%A12026%E4%B8%AD%E7%BA%A7%E6%B3%A8%E5%AE%896%E5%A5%97%E6%95%99%E8%BE%85_HTML%E6%BC%94%E7%A4%BA%E7%A8%BF/index.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">云私塾三维一体销售培训互动页</p>
+              <p class="demo-desc">适合展示复杂产品体系如何通过交互页降低理解门槛。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E8%BF%90%E8%90%A5%E5%B7%A5%E4%BD%9C/%E4%BA%91%E7%A7%81%E5%A1%BE%E4%B8%89%E7%BB%B4%E4%B8%80%E4%BD%93%E9%94%80%E5%94%AE%E5%9F%B9%E8%AE%AD%E4%BA%92%E5%8A%A8%E9%A1%B5.html" target="_blank">打开</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="analysis">
+      <div class="section-head">
+        <div class="num">03</div>
+        <div>
+          <h2>数据分析</h2>
+          <p>数据分析不能只让 AI “直接给结论”。更好的方式是先让它看见数据结构、指标口径和异常位置，再基于能看到的信息做进一步分析。</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="talk-card">
+          <h3>讲解重点</h3>
+          <ul>
+            <li>先明确数据能回答什么问题，避免上来就让 AI 泛泛分析。</li>
+            <li>让 AI 先做可视化和基础统计，再追问原因、差异和机会点。</li>
+            <li>最终产出要能支撑业务动作，比如销售重点、内容优化、转化提升。</li>
+          </ul>
+          <div class="quote">可用表达：先让 AI 看见事实，再让 AI 帮我们解释事实，这样结论才更稳。</div>
+        </div>
+        <div class="demo-list">
+          <h3>现场演示材料</h3>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">销售数据分析报告</p>
+              <p class="demo-desc">展示从数据读取、图表呈现到结论归纳的完整链路。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/outputs/sales_analysis_2606_report/report.html" target="_blank">打开</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="assistant">
+      <div class="section-head">
+        <div class="num">04</div>
+        <div>
+          <h2>运营引流小助手</h2>
+          <p>把用户常问的问题做成模拟工具，通过自测降低沟通成本，同时完成用户留资和加微承接。</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="talk-card">
+          <h3>讲解重点</h3>
+          <ul>
+            <li>用户不是只想看资料，而是想知道自己能不能报名、该怎么准备。</li>
+            <li>模拟报名工具把“咨询问题”变成“自助判断”，运营承接更自然。</li>
+            <li>后续可以扩展到报名条件、资料领取、学习规划、课程推荐等场景。</li>
+          </ul>
+          <div class="quote">可用表达：引流工具的重点不是炫技，而是把用户的第一个问题接住。</div>
+        </div>
+        <div class="demo-list">
+          <h3>现场演示材料</h3>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">中级注安报考条件自测</p>
+              <p class="demo-desc">模拟人事考试网报名流程，完成用户判断、留资和加微动作。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E8%BF%90%E8%90%A5%E5%B7%A5%E4%BD%9C/%E4%B8%AD%E7%BA%A7%E6%B3%A8%E5%AE%89%E6%8A%A5%E8%80%83%E6%9D%A1%E4%BB%B6%E8%87%AA%E6%B5%8B/index.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">注安诊断完整原型 v1.2</p>
+              <p class="demo-desc">通过诊断式互动承接用户需求，适合展示从“资料领取”升级到“个性化判断”的引流思路。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/.qclaw/workspace-agent-52ff81a6/%E6%B3%A8%E5%AE%89%E8%AF%8A%E6%96%AD-%E5%AE%8C%E6%95%B4%E5%8E%9F%E5%9E%8B-v1.2.html" target="_blank">打开</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="teaching">
+      <div class="section-head">
+        <div class="num">05</div>
+        <div>
+          <h2>教研物料产出</h2>
+          <p>教研侧最适合用 AI 做结构整理、内容排版、题库处理、讲义生成和资料成品化。重点是把重复劳动降下来，把老师和教研的精力留给判断和校验。</p>
+        </div>
+      </div>
+      <div class="section-body">
+        <div class="talk-card">
+          <h3>讲解重点</h3>
+          <ul>
+            <li>讲义排版可以更统一，阅读体验更好，也方便后续复用模板。</li>
+            <li>题库、模拟卷、解析类资料适合用 AI 做初步整理，再由专业人员审核。</li>
+            <li>教研产出不是一次性文件，而是可以沉淀成持续复用的资料生产流程。</li>
+          </ul>
+          <div class="quote">可用表达：AI 先帮我们把资料整理到 70 分，教研再把专业判断补到 90 分。</div>
+        </div>
+        <div class="demo-list">
+          <h3>现场演示材料</h3>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">中级注安《安全生产管理》精讲讲义</p>
+              <p class="demo-desc">展示管理科目讲义的页面化和阅读排版效果。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E6%95%99%E7%A0%94%E5%B7%A5%E4%BD%9C/%E4%B8%AD%E7%BA%A7%E6%B3%A8%E5%AE%89%E3%80%8A%E5%AE%89%E5%85%A8%E7%94%9F%E4%BA%A7%E7%AE%A1%E7%90%86%E3%80%8B%E7%B2%BE%E8%AE%B2%E8%AE%B2%E4%B9%89.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">中级注安技术讲义排版</p>
+              <p class="demo-desc">展示技术科目内容如何做成结构清晰的 HTML 讲义。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/%E5%AE%89%E5%85%A8%E9%A1%B9%E7%9B%AE/%E6%95%99%E7%A0%94%E5%B7%A5%E4%BD%9C/2026%E4%B8%AD%E7%BA%A7%E6%B3%A8%E5%AE%89-%E6%8A%80%E6%9C%AF-%E7%AC%AC1%E8%AE%B2-%E7%AC%AC%E4%B8%80%E7%AB%A0%E7%AC%AC%E4%B8%80%E8%8A%82%E6%9C%BA%E6%A2%B0%E5%AE%89%E5%85%A8%E5%9F%BA%E7%A1%80%E7%9F%A5%E8%AF%86.html" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">注册电气工程师基础考试基础题库 160 题</p>
+              <p class="demo-desc">展示 Word 成品资料，适合说明题库整理和资料成品化能力。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/安全项目/教研工作/注册电气工程师资料整理/Word成品/02_注册电气工程师基础考试_基础题库160题.docx" target="_blank">打开</a>
+          </article>
+          <article class="demo-item">
+            <div>
+              <p class="demo-title">注册电气工程师基础考试模拟试卷 2 套及解析</p>
+              <p class="demo-desc">展示模拟卷和解析类资料的结构化产出。</p>
+            </div>
+            <a class="btn" href="file:///Users/houjiasanshao/Documents/安全项目/教研工作/注册电气工程师资料整理/Word成品/03_注册电气工程师基础考试_模拟试卷2套及解析.docx" target="_blank">打开</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <div class="close">
+      <h2>最后收束</h2>
+      <p>
+        这批成果可以总结成一句话：AI 不只是帮我们写几段文字，而是把“想法、资料、数据、流程”快速变成可以展示、可以培训、可以继续迭代的工作资产。下一步可以把这些成果按部门沉淀成固定模板，让更多同事用同样的方法做出自己的 AI 工作样板。
+      </p>
+    </div>
+  </main>
+</body>
+</html>

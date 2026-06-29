@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=1080, initial-scale=1.0">
+<title>安全速记卡 · KT板 v3</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "PingFang SC", "Microsoft YaHei", "Source Han Sans CN", sans-serif;
+    background: #0a0a0a;
+    color: #fff;
+  }
+  .kt {
+    width: 1080px;
+    height: 1920px;
+    margin: 0 auto;
+    background: linear-gradient(180deg, #0a0a0a 0%, #141414 50%, #0a0a0a 100%);
+    position: relative;
+    overflow: hidden;
+    padding: 60px 70px 50px;
+    display: flex;
+    flex-direction: column;
+  }
+  .kt::before {
+    content: "";
+    position: absolute;
+    top: -200px; right: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(216,30,6,.35) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+  .kt::after {
+    content: "";
+    position: absolute;
+    bottom: -200px; left: -200px;
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(244,160,36,.25) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  /* 持续更新徽标 */
+  .update-badge {
+    position: absolute;
+    top: 70px; right: 70px;
+    background: linear-gradient(135deg, #00A86B 0%, #00C97A 100%);
+    color: #fff;
+    font-size: 22px; font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 30px;
+    display: flex; align-items: center; gap: 8px;
+    box-shadow: 0 4px 16px rgba(0,168,107,.4);
+    z-index: 3;
+  }
+  .pulse-dot {
+    width: 10px; height: 10px;
+    background: #fff;
+    border-radius: 50%;
+  }
+
+  /* 顶部品牌 */
+  .brand {
+    display: flex; align-items: center; gap: 22px;
+    margin-bottom: 24px;
+    position: relative; z-index: 2;
+  }
+  .brand-logo {
+    background: #F4A024; color: #0a0a0a;
+    width: 90px; height: 90px;
+    border-radius: 20px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 54px; font-weight: 900;
+    transform: rotate(-5deg);
+    box-shadow: 0 8px 32px rgba(244,160,36,.4);
+  }
+  .brand-text { font-size: 54px; font-weight: 900; letter-spacing: 3px; }
+  .brand-tag { font-size: 24px; color: #F4A024; margin-top: 6px; letter-spacing: 2px; }
+
+  /* ============== 四大优势 - 顶部核心区 ============== */
+  .advantage-top {
+    background: linear-gradient(135deg, rgba(30,91,170,.25) 0%, rgba(216,30,6,.15) 100%);
+    border: 2px solid rgba(244,160,36,.5);
+    border-radius: 20px;
+    padding: 24px 26px 22px;
+    margin-bottom: 26px;
+    position: relative; z-index: 2;
+    box-shadow: 0 0 40px rgba(244,160,36,.15);
+  }
+  .advantage-top-title {
+    text-align: center;
+    font-size: 32px; font-weight: 900;
+    color: #F4A024;
+    letter-spacing: 4px;
+    margin-bottom: 18px;
+  }
+  .advantage-top-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+  .adv-top-item {
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    background: rgba(0,0,0,.4);
+    padding: 16px 8px;
+    border-radius: 12px;
+    border: 1px solid rgba(255,255,255,.1);
+  }
+  .adv-top-icon {
+    font-size: 32px;
+    line-height: 1;
+  }
+  .adv-top-text {
+    font-size: 26px; font-weight: 800;
+    color: #fff;
+    letter-spacing: 1px;
+  }
+
+  /* ============== 主问题 ============== */
+  .question-block {
+    text-align: center;
+    margin-bottom: 24px;
+    position: relative; z-index: 2;
+  }
+  .question {
+    font-size: 64px; font-weight: 900;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .question .accent { color: #F4A024; text-shadow: 0 0 30px rgba(244,160,36,.5); }
+  .question-sub {
+    font-size: 24px;
+    color: #999;
+    font-weight: 500;
+    letter-spacing: 2px;
+  }
+
+  /* ============== 三个核心 ============== */
+  .three {
+    display: flex; flex-direction: column;
+    gap: 14px;
+    margin-bottom: 22px;
+    position: relative; z-index: 2;
+  }
+  .three-item {
+    display: flex; align-items: center; gap: 24px;
+    background: rgba(255,255,255,.05);
+    border-left: 10px solid;
+    padding: 18px 24px;
+    border-radius: 14px;
+  }
+  .three-item.speed { border-color: #F4A024; }
+  .three-item.memo  { border-color: #D81E06; }
+  .three-item.card  { border-color: #00A86B; }
+
+  .three-emoji { font-size: 56px; line-height: 1; }
+  .three-word {
+    font-size: 80px; font-weight: 900;
+    color: #F4A024;
+    line-height: 1;
+    width: 100px; text-align: center;
+  }
+  .three-item.memo .three-word { color: #D81E06; }
+  .three-item.card .three-word { color: #00A86B; }
+
+  .three-desc { flex: 1; }
+  .three-desc .title {
+    font-size: 28px; font-weight: 700;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  .three-desc .detail {
+    font-size: 20px; color: #bbb;
+    line-height: 1.4;
+    font-weight: 400;
+  }
+
+  /* ============== 子系列 ============== */
+  .series {
+    background: rgba(255,255,255,.04);
+    border-radius: 18px;
+    padding: 20px 24px;
+    margin-bottom: 22px;
+    position: relative; z-index: 2;
+  }
+  .series-head {
+    display: flex; justify-content: space-between; align-items: center;
+    margin-bottom: 12px;
+  }
+  .series-title { font-size: 28px; color: #888; letter-spacing: 1px; font-weight: 600; }
+  .series-count {
+    font-size: 20px;
+    background: rgba(244,160,36,.15);
+    color: #F4A024;
+    padding: 4px 12px;
+    border-radius: 12px;
+    font-weight: 600;
+  }
+  .series-list { display: flex; flex-direction: column; gap: 8px; }
+  .series-item {
+    display: flex; align-items: center; gap: 14px;
+    font-size: 28px; font-weight: 600;
+  }
+  .dot { width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0; }
+  .dot.green { background: #00A86B; }
+  .dot.red   { background: #D81E06; }
+  .dot.yellow{ background: #F4A024; }
+  .dot.gray  { background: #555; }
+
+  /* ============== 底部行动 ============== */
+  .action {
+    margin-top: auto;
+    background: linear-gradient(135deg, #D81E06 0%, #F4A024 100%);
+    border-radius: 22px;
+    padding: 26px 40px;
+    text-align: center;
+    position: relative; z-index: 2;
+    box-shadow: 0 12px 40px rgba(216,30,6,.4);
+  }
+  .action-main {
+    font-size: 56px; font-weight: 900;
+    color: #fff;
+    line-height: 1.2;
+    text-shadow: 0 4px 12px rgba(0,0,0,.3);
+  }
+  .action-sub {
+    font-size: 24px;
+    color: rgba(255,255,255,.9);
+    margin-top: 4px;
+    font-weight: 500;
+  }
+  .footer {
+    text-align: center;
+    color: #555;
+    font-size: 20px;
+    margin-top: 14px;
+    letter-spacing: 3px;
+    position: relative; z-index: 2;
+  }
+</style>
+</head>
+<body>
+
+<div class="kt">
+
+  <!-- 持续更新徽标 -->
+  <div class="update-badge">
+    <span class="pulse-dot"></span>
+    持续更新中
+  </div>
+
+  <!-- 顶部品牌 -->
+  <div class="brand">
+    <div class="brand-logo">速</div>
+    <div>
+      <div class="brand-text">安全速记卡</div>
+      <div class="brand-tag">中级注安 · 一图一考点</div>
+    </div>
+  </div>
+
+  <!-- ====== 四大优势 - 顶部核心区（最先抓眼球） ====== -->
+  <div class="advantage-top">
+    <div class="advantage-top-title">★ 四大核心优势 ★</div>
+    <div class="advantage-top-grid">
+      <div class="adv-top-item">
+        <span class="adv-top-icon">⚡</span>
+        <span class="adv-top-text">快速记忆</span>
+      </div>
+      <div class="adv-top-item">
+        <span class="adv-top-icon">📈</span>
+        <span class="adv-top-text">高效复习</span>
+      </div>
+      <div class="adv-top-item">
+        <span class="adv-top-icon">📱</span>
+        <span class="adv-top-text">随时随地</span>
+      </div>
+      <div class="adv-top-item">
+        <span class="adv-top-icon">🎯</span>
+        <span class="adv-top-text">系统完整</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 主问题 -->
+  <div class="question-block">
+    <div class="question">为什么叫"<span class="accent">速记卡</span>"？</div>
+    <div class="question-sub">三个字 · 说透备考工具精髓</div>
+  </div>
+
+  <!-- 三个核心 -->
+  <div class="three">
+    <div class="three-item speed">
+      <div class="three-emoji">⚡</div>
+      <div class="three-word">速</div>
+      <div class="three-desc">
+        <div class="title">3 分钟 1 张，刷手机就能背</div>
+        <div class="detail">零碎时间高效吸收，下班路上/午休/睡前都能学</div>
+      </div>
+    </div>
+    <div class="three-item memo">
+      <div class="three-emoji">🧠</div>
+      <div class="three-word">记</div>
+      <div class="three-desc">
+        <div class="title">一图一考点，背完就拿分</div>
+        <div class="detail">图解+口诀+数字，应试导向精准提分</div>
+      </div>
+    </div>
+    <div class="three-item card">
+      <div class="three-emoji">💳</div>
+      <div class="three-word">卡</div>
+      <div class="three-desc">
+        <div class="title">装进口袋，拿起就能用</div>
+        <div class="detail">手机/平板随时翻看，碎片化学习无压力</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 子系列 -->
+  <div class="series">
+    <div class="series-head">
+      <div class="series-title">— 3 大子系列 · 1 章 3 节 —</div>
+      <div class="series-count">已更新 28 张</div>
+    </div>
+    <div class="series-list">
+      <div class="series-item">
+        <div class="dot green"></div>
+        <span><b>安全基石卡</b> · 1章1节 通用基础</span>
+      </div>
+      <div class="series-item">
+        <div class="dot red"></div>
+        <span><b>机械危情卡</b> · 1章2节 机床与砂轮机</span>
+      </div>
+      <div class="series-item">
+        <div class="dot yellow"></div>
+        <span><b>冲压红线卡</b> · 1章3节 剪板机和压力机</span>
+      </div>
+      <div class="series-item" style="color:#888; font-size:24px; margin-top:4px;">
+        <div class="dot gray"></div>
+        <span>更多章节 <b style="color:#F4A024;">持续更新中</b></span>
+      </div>
+    </div>
+  </div>
+
+  <!-- 底部行动 -->
+  <div class="action">
+    <div class="action-main">扣 1 · 领 5 张试试</div>
+    <div class="action-sub">先看再报，零套路</div>
+  </div>
+
+  <div class="footer">安 全 速 记 卡 · 教 研 出 品</div>
+
+</div>
+
+</body>
+</html>

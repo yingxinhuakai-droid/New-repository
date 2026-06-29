@@ -1,0 +1,957 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>中级注册安全工程师教研团队 AI 提效培训文档</title>
+  <style>
+    :root {
+      --bg: #f4f7f8;
+      --paper: #ffffff;
+      --ink: #182431;
+      --muted: #5f6d7a;
+      --line: #dce5e8;
+      --teal: #0f766e;
+      --blue: #2563eb;
+      --green: #18844f;
+      --amber: #b7791f;
+      --red: #bd3b3b;
+      --slate: #263849;
+      --soft-teal: #e6f4f1;
+      --soft-blue: #eaf1ff;
+      --soft-green: #e8f5ee;
+      --soft-amber: #fff4dd;
+      --soft-red: #fff0ef;
+      --shadow: 0 18px 48px rgba(24, 36, 49, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at top left, rgba(15, 118, 110, .08), transparent 32rem),
+        linear-gradient(90deg, rgba(37, 99, 235, .035) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(15, 118, 110, .035) 1px, transparent 1px),
+        var(--bg);
+      background-size: auto, 44px 44px, 44px 44px, auto;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    h1, h2, h3, h4, p { margin-top: 0; }
+    p { line-height: 1.8; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, .94);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 10px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 235px;
+      color: var(--slate);
+      font-weight: 800;
+    }
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .brand-mark::before {
+      content: "";
+      position: absolute;
+      inset: 7px 8px 8px 7px;
+      border: 2px solid rgba(255, 255, 255, .9);
+      border-top: 0;
+      transform: skew(-10deg);
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    nav a {
+      color: var(--muted);
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+    nav a:hover {
+      color: var(--ink);
+      background: #eef3f5;
+    }
+    .print-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; }
+    .hero {
+      min-height: calc(100vh - 52px);
+      display: grid;
+      grid-template-columns: 1fr .86fr;
+      gap: 34px;
+      align-items: center;
+      padding: 48px 22px 42px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--teal);
+      font-weight: 800;
+      font-size: 14px;
+      margin-bottom: 16px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      border-radius: 8px;
+      background: var(--teal);
+    }
+    h1 {
+      max-width: 780px;
+      margin-bottom: 18px;
+      color: var(--slate);
+      font-size: 52px;
+      line-height: 1.12;
+      font-weight: 860;
+    }
+    .hero-sub {
+      max-width: 790px;
+      margin-bottom: 24px;
+      color: #405160;
+      font-size: 18px;
+      line-height: 1.85;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      border: 1px solid transparent;
+      font-size: 14px;
+      font-weight: 760;
+    }
+    .btn.primary { background: var(--teal); color: #fff; }
+    .btn.secondary { background: #fff; border-color: var(--line); color: var(--slate); }
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 780px;
+    }
+    .hero-chip {
+      min-height: 92px;
+      background: rgba(255, 255, 255, .82);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px;
+      box-shadow: 0 8px 22px rgba(24, 36, 49, .045);
+    }
+    .hero-chip b {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--ink);
+      font-size: 15px;
+    }
+    .hero-chip span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .hero-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .panel-head {
+      padding: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, #0f766e, #2563eb);
+    }
+    .panel-head h2 {
+      margin-bottom: 6px;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+    .panel-head p {
+      margin: 0;
+      color: rgba(255, 255, 255, .86);
+      font-size: 13px;
+      line-height: 1.65;
+    }
+    .flow {
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+    }
+    .flow-step {
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 12px;
+      align-items: start;
+    }
+    .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: grid;
+      place-items: center;
+      color: var(--teal);
+      background: var(--soft-teal);
+      font-weight: 820;
+    }
+    .flow-step strong {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--slate);
+    }
+    .flow-step span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    section {
+      padding: 34px 22px;
+      scroll-margin-top: 72px;
+    }
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .section-head h2 {
+      margin-bottom: 0;
+      color: var(--slate);
+      font-size: 32px;
+      line-height: 1.25;
+    }
+    .section-head p {
+      max-width: 540px;
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .band {
+      background: rgba(255, 255, 255, .68);
+      border-top: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+    }
+    .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      box-shadow: 0 10px 28px rgba(24, 36, 49, .05);
+    }
+    .card h3 {
+      margin-bottom: 10px;
+      color: var(--slate);
+      font-size: 20px;
+      line-height: 1.35;
+    }
+    .card h4 {
+      margin-bottom: 8px;
+      color: var(--slate);
+      font-size: 16px;
+    }
+    .card p, .card li {
+      color: #536371;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .card p:last-child { margin-bottom: 0; }
+    ul, ol { margin: 0; padding-left: 20px; }
+    li + li { margin-top: 6px; }
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      margin-bottom: 10px;
+      padding: 4px 9px;
+      border-radius: 8px;
+      color: var(--teal);
+      background: var(--soft-teal);
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .pill.blue { color: var(--blue); background: var(--soft-blue); }
+    .pill.green { color: var(--green); background: var(--soft-green); }
+    .pill.amber { color: var(--amber); background: var(--soft-amber); }
+    .pill.red { color: var(--red); background: var(--soft-red); }
+    .note {
+      border-left: 4px solid var(--teal);
+      background: #f8fbfb;
+      padding: 14px 16px;
+      border-radius: 0 8px 8px 0;
+      color: #435462;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .compare {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .bad { border-top: 4px solid var(--red); }
+    .good { border-top: 4px solid var(--green); }
+    .example-box {
+      background: #fbfcfd;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+    }
+    .example-box strong {
+      display: block;
+      color: var(--slate);
+      margin-bottom: 8px;
+    }
+    .prompt {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+      padding: 16px;
+      color: #20303d;
+      background: #f7fafb;
+      border: 1px solid #d8e3e6;
+      border-radius: 8px;
+      font: 13px/1.75 ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+    }
+    .template-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .template-list {
+      display: grid;
+      gap: 10px;
+    }
+    .template-list div {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      background: #fff;
+    }
+    .template-list b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--slate);
+    }
+    .template-list span {
+      display: block;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      min-width: 820px;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 12px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.65;
+    }
+    th {
+      color: var(--slate);
+      background: #f2f6f7;
+      white-space: nowrap;
+    }
+    tr:last-child td { border-bottom: 0; }
+    .timeline {
+      display: grid;
+      gap: 12px;
+    }
+    .timeline-item {
+      display: grid;
+      grid-template-columns: 130px 1fr;
+      gap: 14px;
+      align-items: start;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+    }
+    .time {
+      color: var(--teal);
+      font-weight: 820;
+    }
+    .footer {
+      padding: 34px 22px 46px;
+      color: #5f6d7a;
+      text-align: center;
+      font-size: 13px;
+    }
+    .checklist li::marker { color: var(--teal); }
+
+    @media (max-width: 980px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      h1 { font-size: 40px; }
+      .hero-grid, .grid-3, .grid-4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid-2, .template-grid, .compare { grid-template-columns: 1fr; }
+      .section-head { display: block; }
+      .section-head h2 { margin-bottom: 8px; }
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+    }
+    @media (max-width: 620px) {
+      .hero, section { padding-left: 16px; padding-right: 16px; }
+      h1 { font-size: 32px; }
+      .hero-sub { font-size: 16px; }
+      .hero-grid, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      .timeline-item { grid-template-columns: 1fr; }
+      .brand { min-width: 0; }
+    }
+    @media print {
+      .topbar, .hero-actions { display: none; }
+      body { background: #fff; }
+      section, .hero { break-inside: avoid; }
+      .card, .hero-panel { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top">
+        <span class="brand-mark"></span>
+        <span>注安教研 AI 培训</span>
+      </a>
+      <nav aria-label="页面导航">
+        <a href="#why">定位</a>
+        <a href="#scenes">场景</a>
+        <a href="#prompt">提问模板</a>
+        <a href="#case">完整案例</a>
+        <a href="#workflow">工作流</a>
+        <a href="#quality">质检</a>
+        <a href="#training">培训安排</a>
+      </nav>
+      <button class="print-btn" onclick="window.print()">打印 / 导出 PDF</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <div class="wrap">
+      <section class="hero">
+        <div>
+          <div class="eyebrow">给环球网校中级注册安全工程师教研团队</div>
+          <h1>把 AI 用成教研团队的第二生产力</h1>
+          <p class="hero-sub">这份培训文档面向第一次使用 AI 的教研老师、讲师、助教和项目协同同事。目标不是让大家“会聊天”，而是让大家能够围绕讲义、题库、课程、答疑、模考和质检，把需求说清楚、把结果审明白、把资料沉淀下来。</p>
+          <div class="hero-actions">
+            <a class="btn primary" href="#prompt">直接看提问模板</a>
+            <a class="btn secondary" href="#case">查看注安案例</a>
+          </div>
+          <div class="hero-grid">
+            <div class="hero-chip"><b>适合对象</b><span>教研老师、题库老师、讲师、助教、项目负责人、质检同事。</span></div>
+            <div class="hero-chip"><b>培训目标</b><span>让小白也能独立提出高质量需求，并判断 AI 输出是否可用。</span></div>
+            <div class="hero-chip"><b>核心方法</b><span>先给背景、再给材料、明确任务、限定格式、要求复核点。</span></div>
+          </div>
+        </div>
+        <aside class="hero-panel" aria-label="学习路径">
+          <div class="panel-head">
+            <h2>推荐学习路径</h2>
+            <p>按这个顺序培训，老师容易理解，也方便现场演练。</p>
+          </div>
+          <div class="flow">
+            <div class="flow-step"><div class="num">1</div><div><strong>先明确 AI 的角色</strong><span>它是初稿助理、整理助理、质检助理，不替代教研最终判断。</span></div></div>
+            <div class="flow-step"><div class="num">2</div><div><strong>再学习标准提问</strong><span>用固定模板把背景、任务、材料、要求、输出格式说完整。</span></div></div>
+            <div class="flow-step"><div class="num">3</div><div><strong>现场跑一个案例</strong><span>以“法规易混淆法条对比表”或“实务案例采分解析”为样例。</span></div></div>
+            <div class="flow-step"><div class="num">4</div><div><strong>建立审核闭环</strong><span>AI 出初稿，教研复核，质检记录问题，再沉淀成模板。</span></div></div>
+          </div>
+        </aside>
+      </section>
+    </div>
+
+    <section id="why" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>一、先讲清楚：AI 在教研里到底是什么</h2>
+          <p>培训小白时，最重要的是避免两个极端：一是完全不用，二是直接相信。正确定位是“提高生产效率，但保留专业复核”。</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <span class="pill">可以放心交给它</span>
+            <h3>整理、归纳、生成初稿</h3>
+            <ul>
+              <li>把教材内容整理成讲义结构。</li>
+              <li>把答疑记录归类成高频问题。</li>
+              <li>把模考数据转成学情分析报告。</li>
+              <li>根据指定考点生成练习题初稿。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill amber">必须人工把关</span>
+            <h3>法条、标准、答案、采分点</h3>
+            <ul>
+              <li>法条编号、规范名称、条文原文必须核对。</li>
+              <li>实务案例采分点必须由学科负责人确认。</li>
+              <li>题目答案是否唯一，要经过题库质检。</li>
+              <li>涉及最新政策时，需要使用权威来源复核。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill green">最终价值</span>
+            <h3>把经验变成可复用资产</h3>
+            <ul>
+              <li>统一讲义模板、解析模板、答疑模板。</li>
+              <li>沉淀题库标签、错题原因、补弱方案。</li>
+              <li>减少重复劳动，让老师把精力放在判断上。</li>
+              <li>让项目负责人更容易追踪进度和质量。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="scenes">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>二、教研团队最适合落地的 8 类场景</h2>
+          <p>下面这些任务不是泛泛而谈，都是注安教研日常会遇到的高频工作。</p>
+        </div>
+        <div class="grid-4">
+          <div class="card">
+            <span class="pill">讲义</span>
+            <h3>教材讲义研发</h3>
+            <p>根据考纲和教材目录，生成章节讲义框架、考点清单、易混淆表、背诵手册初稿。</p>
+          </div>
+          <div class="card">
+            <span class="pill blue">题库</span>
+            <h3>命题与解析</h3>
+            <p>围绕某个考点生成单选、多选、案例题，补充答案解析、错因分析、变式训练。</p>
+          </div>
+          <div class="card">
+            <span class="pill green">课程</span>
+            <h3>课件与教案</h3>
+            <p>拆分精讲、习题、冲刺课型，生成逐节课教学目标、授课逻辑、互动问题。</p>
+          </div>
+          <div class="card">
+            <span class="pill amber">答疑</span>
+            <h3>答疑知识库</h3>
+            <p>把学员问题整理成标准答案、简版答法、展开版答法、关联考点和补弱建议。</p>
+          </div>
+          <div class="card">
+            <span class="pill">数据</span>
+            <h3>模考学情分析</h3>
+            <p>统计薄弱章节、高频错题、错误原因，生成班级补弱方案和教研改进清单。</p>
+          </div>
+          <div class="card">
+            <span class="pill red">质检</span>
+            <h3>资料质量检查</h3>
+            <p>检查讲义、课件、题目、解析之间是否口径一致，标出需人工复核的风险点。</p>
+          </div>
+          <div class="card">
+            <span class="pill blue">运营</span>
+            <h3>直播与活动资料</h3>
+            <p>生成公开课大纲、直播脚本、互动题、考前点拨稿、短视频脚本和活动复盘。</p>
+          </div>
+          <div class="card">
+            <span class="pill green">管理</span>
+            <h3>教研项目管理</h3>
+            <p>建立修订台账、题库台账、答疑台账、会议纪要、责任人和截止时间清单。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="prompt" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>三、小白也能用的标准化提问模板</h2>
+          <p>高质量提问不是写得长，而是让 AI 明确：你是谁、要干什么、依据什么、交付成什么样、哪些地方要谨慎。</p>
+        </div>
+        <div class="template-grid">
+          <div class="template-list">
+            <div><b>1. 角色</b><span>告诉 AI 它要以什么身份工作，例如“注安法规教研老师”“题库质检老师”。</span></div>
+            <div><b>2. 背景</b><span>说明资料用途、学员水平、课程阶段、科目和章节。</span></div>
+            <div><b>3. 材料</b><span>贴入考纲、教材片段、原题、答疑记录、模考数据等原始信息。</span></div>
+            <div><b>4. 任务</b><span>用动词说清楚要做什么：拆解、改写、命题、质检、归类、生成表格。</span></div>
+            <div><b>5. 标准</b><span>限定深度、口径、格式、字数、难度、是否要标注复核点。</span></div>
+            <div><b>6. 输出</b><span>要求表格、清单、讲稿、PPT大纲、题目格式、台账字段等。</span></div>
+          </div>
+          <div class="card">
+            <span class="pill blue">可直接复制</span>
+            <h3>通用提问模板</h3>
+            <pre class="prompt">你现在是一名【中级注册安全工程师】教研助理，请按教研老师的标准帮我处理下面任务。
+
+【使用场景】
+我要用于：【基础精讲 / 强化提升 / 冲刺背诵 / 题库更新 / 答疑知识库 / 模考复盘】
+面向学员：【零基础 / 有基础 / 二战 / 考前冲刺】
+科目与章节：【法规 / 管理 / 技术 / 实务】第【 】章【具体主题】
+
+【原始材料】
+请基于以下材料处理，不要自行编造法律条文、规范编号或教材页码：
+1. 【粘贴考纲/教材/讲义/原题/学员问题/模考数据】
+2. 【如材料不足，请明确提示需要人工补充】
+
+【具体任务】
+请帮我完成：
+1. 【例如：提炼 8 个高频考点】
+2. 【例如：制作易混淆对比表】
+3. 【例如：生成 5 道单选题、3 道多选题、1 道案例题】
+4. 【例如：指出需要教研老师复核的风险点】
+
+【输出要求】
+1. 用表格输出，字段包括：【考点 / 命题方式 / 易错点 / 记忆提示 / 复核提醒】
+2. 语言要适合教研培训，表达清楚，不要堆概念。
+3. 涉及法条、标准、公式、采分点时，请标注“需人工复核”。
+4. 如果你不确定，请不要硬编，直接写“材料不足，建议补充……”。
+
+【质量要求】
+请最后附一份“教研复核清单”，列出我需要人工确认的内容。</pre>
+          </div>
+        </div>
+
+        <div style="height:16px"></div>
+        <div class="compare">
+          <div class="card bad">
+            <span class="pill red">不推荐</span>
+            <h3>模糊提问</h3>
+            <p>“帮我做一份注安法规讲义。”</p>
+            <ul>
+              <li>没有说明章节、学员水平、课程阶段。</li>
+              <li>没有给原始材料，容易泛泛而谈。</li>
+              <li>没有指定输出格式，后续还要大量返工。</li>
+              <li>没有提醒法条复核，存在知识风险。</li>
+            </ul>
+          </div>
+          <div class="card good">
+            <span class="pill green">推荐</span>
+            <h3>标准提问</h3>
+            <p>“请以注安法规教研老师身份，基于我贴入的教材片段，把‘安全生产责任制’整理成基础班讲义，输出考点表、易错点、课堂提问和复核清单。”</p>
+            <ul>
+              <li>角色清楚：法规教研老师。</li>
+              <li>任务清楚：整理基础班讲义。</li>
+              <li>材料清楚：基于贴入片段。</li>
+              <li>结果清楚：考点表、易错点、课堂提问、复核清单。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="case">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>四、完整案例：让 AI 生成一份法规易混淆考点资料</h2>
+          <p>这个案例适合现场演示。培训时可以先展示“原始需求”，再展示“标准提问”，最后让老师判断输出是否可用。</p>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill amber">案例背景</span>
+            <h3>教研老师的真实需求</h3>
+            <p>法规基础班结束后，学员经常把“主要负责人职责”和“安全生产管理机构及安全生产管理人员职责”混在一起。项目组希望做一份课堂补充资料，同时配 5 道选择题和 1 个答疑口径。</p>
+            <div class="note">培训提醒：这里不要让 AI 直接背法条。正确做法是让它先基于教研老师提供的教材或讲义片段整理，再由老师核对条文和表述。</div>
+          </div>
+          <div class="card">
+            <span class="pill blue">标准提问示范</span>
+            <h3>可直接复制给 AI</h3>
+            <pre class="prompt">你现在是一名中级注册安全工程师《安全生产法律法规》教研助理。
+
+【使用场景】
+我要给基础班学员做一份课堂补充资料，解决他们容易混淆“生产经营单位主要负责人职责”和“安全生产管理机构及安全生产管理人员职责”的问题。
+
+【学员情况】
+多数是零基础或在职备考学员，能听懂白话解释，但对法条记忆不牢，容易把责任主体混淆。
+
+【原始材料】
+以下内容来自我们内部讲义，先按这些材料整理。涉及具体法条编号和原文，请标注“需教研复核”。
+材料 A：主要负责人通常负责建立健全并落实本单位全员安全生产责任制、组织制定并实施安全生产规章制度和操作规程、组织制定并实施安全生产教育和培训计划、保证安全生产投入有效实施、组织建立并落实安全风险分级管控和隐患排查治理双重预防工作机制、组织制定并实施生产安全事故应急救援预案、及时如实报告生产安全事故。
+材料 B：安全生产管理机构及安全生产管理人员通常负责组织或者参与拟订本单位安全生产规章制度、操作规程和应急救援预案，组织或者参与安全生产教育和培训，如实记录培训情况，组织开展危险源辨识和评估，督促落实重大危险源安全管理措施，组织或者参与应急救援演练，检查安全生产状况，及时排查事故隐患，制止和纠正违章指挥、强令冒险作业、违反操作规程行为，督促落实整改措施。
+
+【具体任务】
+请输出：
+1. 一张易混淆对比表，字段为：对比维度、主要负责人、安全管理机构/人员、记忆提示、考试易错点。
+2. 5 道单选题，难度为基础到中等，每道题给答案和解析。
+3. 1 个学员答疑标准口径，要求 200 字以内，适合助教回复。
+4. 1 份教研复核清单，列出必须由法规老师确认的点。
+
+【输出要求】
+语言要适合基础班，不要写得像论文。不要编造法条编号。凡是涉及法条原文、条款序号、处罚金额，请标注“需教研复核”。</pre>
+          </div>
+        </div>
+
+        <div style="height:16px"></div>
+        <div class="card">
+          <span class="pill green">预期输出样式</span>
+          <h3>训练老师看懂什么叫“可用结果”</h3>
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>对比维度</th>
+                  <th>主要负责人</th>
+                  <th>安全管理机构/人员</th>
+                  <th>记忆提示</th>
+                  <th>考试易错点</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>角色定位</td>
+                  <td>单位安全生产第一责任层面的组织者和保障者。</td>
+                  <td>具体协助、组织、检查、督促落实的专业管理力量。</td>
+                  <td>负责人看“拍板、保障、组织实施”；管理人员看“参与、检查、督促、制止”。</td>
+                  <td>题干出现“保证投入”“及时如实报告事故”时，通常指向主要负责人。</td>
+                </tr>
+                <tr>
+                  <td>制度相关</td>
+                  <td>组织制定并实施规章制度和操作规程。</td>
+                  <td>组织或者参与拟订规章制度、操作规程和应急预案。</td>
+                  <td>一个偏“组织制定并实施”，一个偏“拟订、参与、推动”。</td>
+                  <td>选项把“拟订”写成主要负责人职责时，要谨慎判断。</td>
+                </tr>
+                <tr>
+                  <td>隐患治理</td>
+                  <td>组织建立并落实双重预防工作机制。</td>
+                  <td>检查安全生产状况，及时排查隐患，督促整改。</td>
+                  <td>负责人建机制，管理人员查问题、促整改。</td>
+                  <td>案例题常把“建立机制”和“现场检查”混在一起考。</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="height:14px"></div>
+          <div class="note">讲师提示：演示时可以告诉老师，AI 生成的表格并不是最终教材内容，而是“可编辑初稿”。教研老师要继续核对条文、调整术语、补充真题链接，再进入资料库。</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflow" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>五、把 AI 融入教研流程，而不是零散使用</h2>
+          <p>真正提效来自固定流程。每个任务都要有输入、产出、复核和归档。</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <span class="pill">流程 A</span>
+            <h3>讲义研发流程</h3>
+            <ol>
+              <li>教研老师提供考纲、教材片段、旧版讲义。</li>
+              <li>AI 生成章节框架、考点清单、易错点。</li>
+              <li>老师核对法条、公式、规范和深度。</li>
+              <li>AI 根据修改意见统一格式并生成复核清单。</li>
+              <li>负责人归档版本，标注适用年份和课程阶段。</li>
+            </ol>
+          </div>
+          <div class="card">
+            <span class="pill blue">流程 B</span>
+            <h3>题库生产流程</h3>
+            <ol>
+              <li>先确定考点、难度、题型和适用阶段。</li>
+              <li>AI 生成题目初稿、答案、解析、易错提醒。</li>
+              <li>题库老师检查是否超纲、重复、多解。</li>
+              <li>AI 按题库字段补全标签。</li>
+              <li>质检通过后进入课堂练习或模考试卷。</li>
+            </ol>
+          </div>
+          <div class="card">
+            <span class="pill green">流程 C</span>
+            <h3>答疑闭环流程</h3>
+            <ol>
+              <li>收集学员高频问题和对应题目。</li>
+              <li>AI 归类为法条混淆、计算失误、案例不会拆等。</li>
+              <li>生成标准答疑口径和补弱建议。</li>
+              <li>教研老师确认答案和讲解口径。</li>
+              <li>反向更新讲义、题库、课件和微课。</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quality">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>六、教研质检：所有 AI 产出都要过这一关</h2>
+          <p>这部分可以作为团队使用 AI 的底线要求。越是考试类内容，越要把“复核”写进流程。</p>
+        </div>
+        <div class="grid-2">
+          <div class="card">
+            <span class="pill red">红线清单</span>
+            <h3>以下内容不能直接发布</h3>
+            <ul class="checklist">
+              <li>未经核对的法条编号、规范编号、处罚金额。</li>
+              <li>AI 自行补充但没有来源的“最新政策”。</li>
+              <li>没有经过题库老师验证的原创题答案。</li>
+              <li>实务案例题没有明确采分点和评分尺度。</li>
+              <li>与最新版考纲、教材、课程口径冲突的内容。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="pill green">复核清单</span>
+            <h3>发布前至少确认 8 件事</h3>
+            <ol>
+              <li>适用年份是否正确。</li>
+              <li>科目、章节、考点标签是否准确。</li>
+              <li>是否存在旧法条、旧规范、旧教材表述。</li>
+              <li>题目答案是否唯一，解析是否能支撑答案。</li>
+              <li>案例采分点是否符合团队统一口径。</li>
+              <li>难度是否匹配基础、强化或冲刺阶段。</li>
+              <li>讲义、课件、题库、答疑是否口径一致。</li>
+              <li>是否记录了复核人、更新时间和版本号。</li>
+            </ol>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <div class="card">
+          <span class="pill blue">质检提问模板</span>
+          <h3>让 AI 帮你先做一轮风险扫描</h3>
+          <pre class="prompt">你现在是一名中级注册安全工程师教研质检助理。请对下面资料做发布前风险检查。
+
+【资料类型】
+这是：【讲义 / 课件 / 题目 / 解析 / 答疑口径 / 模考试卷】
+适用：【2026 年注安备考】第【 】阶段。
+
+【检查重点】
+请重点检查：
+1. 是否有表述不清、前后矛盾、答案与解析不一致。
+2. 是否疑似出现过期法条、旧规范、超纲内容。
+3. 是否有题目答案不唯一、选项边界不清、解析支撑不足。
+4. 是否需要教研老师人工复核法条、公式、采分点。
+
+【输出格式】
+请用表格输出：问题位置 / 问题类型 / 风险说明 / 修改建议 / 是否必须人工复核。
+
+【待检查内容】
+粘贴资料内容：</pre>
+        </div>
+      </div>
+    </section>
+
+    <section id="training" class="band">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>七、建议你这样给教研团队培训</h2>
+          <p>这份安排适合 60 到 90 分钟内部培训，也可以拆成两次。</p>
+        </div>
+        <div class="timeline">
+          <div class="timeline-item">
+            <div class="time">0-10 分钟</div>
+            <div>
+              <h3>建立共识</h3>
+              <p>讲清楚 AI 不是替代老师，而是帮助老师做初稿、整理、质检和复盘。强调考试类内容必须人工复核。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">10-25 分钟</div>
+            <div>
+              <h3>展示 8 类使用场景</h3>
+              <p>用讲义、题库、课程、答疑、模考、质检、直播活动、项目管理这些真实场景，让老师知道可以从哪里开始用。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">25-45 分钟</div>
+            <div>
+              <h3>讲解标准提问模板</h3>
+              <p>重点训练“角色、背景、材料、任务、标准、输出”六要素。让老师比较模糊提问和标准提问的差异。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">45-70 分钟</div>
+            <div>
+              <h3>现场演练注安案例</h3>
+              <p>选择一个真实考点，例如“主要负责人职责 vs 安全管理人员职责”，现场生成对比表、练习题、答疑口径和复核清单。</p>
+            </div>
+          </div>
+          <div class="timeline-item">
+            <div class="time">70-90 分钟</div>
+            <div>
+              <h3>制定团队落地规则</h3>
+              <p>明确哪些任务可以用 AI，哪些内容必须复核，资料如何命名归档，问题如何回收进模板库。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="wrap">
+        <div class="section-head">
+          <h2>八、培训后可以直接布置的作业</h2>
+          <p>用小任务让团队马上形成使用习惯。</p>
+        </div>
+        <div class="grid-3">
+          <div class="card">
+            <span class="pill">作业 1</span>
+            <h3>每人提交 1 个标准提问</h3>
+            <p>要求围绕自己负责的章节，使用六要素模板，生成讲义、题目或答疑资料。</p>
+          </div>
+          <div class="card">
+            <span class="pill blue">作业 2</span>
+            <h3>复核 1 份 AI 输出</h3>
+            <p>用质检清单标出可用内容、需修改内容、必须人工核对内容，训练老师的判断能力。</p>
+          </div>
+          <div class="card">
+            <span class="pill green">作业 3</span>
+            <h3>沉淀 1 个可复用模板</h3>
+            <p>把自己验证有效的提问整理成团队模板，例如“题库命题模板”“答疑归类模板”。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    中级注册安全工程师教研团队 AI 提效培训文档 · 建议配合真实讲义、题库、答疑记录现场演练
+  </footer>
+</body>
+</html>

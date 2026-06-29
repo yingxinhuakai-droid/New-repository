@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>《安全速记卡》销售/主播使用手册</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f5f5f7;
+    color: #222;
+    line-height: 1.7;
+  }
+  .topbar {
+    position: sticky;
+    top: 0;
+    background: linear-gradient(90deg, #D81E06 0%, #F4A024 100%);
+    color: white;
+    padding: 16px 24px;
+    z-index: 100;
+    box-shadow: 0 2px 12px rgba(0,0,0,.12);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .topbar h1 { font-size: 18px; font-weight: 700; }
+  .topbar .meta { font-size: 13px; opacity: .9; }
+  .container { max-width: 920px; margin: 0 auto; padding: 32px 20px 80px; }
+  .hero {
+    background: linear-gradient(135deg, #1E5BAA 0%, #D81E06 100%);
+    color: white;
+    border-radius: 20px;
+    padding: 40px 32px;
+    margin-bottom: 32px;
+    box-shadow: 0 8px 24px rgba(30,91,170,.18);
+  }
+  .hero h2 { font-size: 30px; margin-bottom: 12px; font-weight: 800; }
+  .hero p { font-size: 15px; opacity: .95; }
+  .hero .tag {
+    display: inline-block;
+    background: rgba(255,255,255,.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    margin-top: 16px;
+  }
+  .nav {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 32px;
+    box-shadow: 0 2px 8px rgba(0,0,0,.05);
+  }
+  .nav h3 { color: #D81E06; margin-bottom: 12px; font-size: 15px; }
+  .nav ol { padding-left: 20px; }
+  .nav li { margin: 4px 0; }
+  .nav a { color: #1E5BAA; text-decoration: none; }
+  .nav a:hover { text-decoration: underline; }
+  .section {
+    background: white;
+    border-radius: 16px;
+    padding: 32px 28px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 12px rgba(0,0,0,.05);
+  }
+  .section-num {
+    display: inline-block;
+    background: #D81E06;
+    color: white;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 12px;
+  }
+  .section h2 {
+    font-size: 24px;
+    margin-bottom: 8px;
+    color: #1a1a1a;
+  }
+  .section h3 {
+    font-size: 18px;
+    margin: 24px 0 12px;
+    color: #1E5BAA;
+    padding-left: 12px;
+    border-left: 4px solid #D81E06;
+  }
+  .section h4 {
+    font-size: 15px;
+    margin: 16px 0 8px;
+    color: #D81E06;
+    font-weight: 700;
+  }
+  .section p { margin: 10px 0; }
+  .section ul, .section ol { padding-left: 22px; margin: 8px 0; }
+  .section li { margin: 6px 0; }
+  .highlight-box {
+    background: linear-gradient(135deg, #fff8e1 0%, #ffecb3 100%);
+    border-left: 4px solid #F4A024;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  .quote {
+    background: #f8f9fb;
+    border-left: 4px solid #1E5BAA;
+    padding: 16px 20px;
+    border-radius: 8px;
+    margin: 16px 0;
+    font-style: normal;
+    color: #333;
+  }
+  .quote .label {
+    display: inline-block;
+    background: #1E5BAA;
+    color: white;
+    font-size: 12px;
+    padding: 2px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+  }
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .grid-3 {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin: 16px 0;
+  }
+  .card-mini {
+    background: #fafbfc;
+    border: 1px solid #eee;
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .card-mini h4 { color: #D81E06; margin: 0 0 8px 0; font-size: 14px; }
+  .card-mini p { font-size: 13px; color: #555; margin: 4px 0; }
+  .template-box {
+    background: #1a1a1a;
+    color: #f0f0f0;
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin: 12px 0;
+    font-family: "SF Mono", Consolas, Monaco, monospace;
+    font-size: 13.5px;
+    line-height: 1.9;
+    position: relative;
+  }
+  .template-box .label {
+    position: absolute;
+    top: -10px;
+    left: 16px;
+    background: #F4A024;
+    color: #1a1a1a;
+    padding: 2px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    font-family: -apple-system, sans-serif;
+  }
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 12px 0;
+  }
+  .do, .dont {
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+  .do {
+    background: #e8f5e9;
+    border-left: 4px solid #00A86B;
+  }
+  .dont {
+    background: #ffebee;
+    border-left: 4px solid #D81E06;
+  }
+  .do::before {
+    content: "✅ 推荐：";
+    font-weight: 700;
+    color: #00A86B;
+  }
+  .dont::before {
+    content: "❌ 避免：";
+    font-weight: 700;
+    color: #D81E06;
+  }
+  .scenarios {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin: 16px 0;
+  }
+  .scenario {
+    background: linear-gradient(135deg, #f8fbff 0%, #fff5f5 100%);
+    border: 1px solid #e0e8f5;
+    border-radius: 12px;
+    padding: 20px;
+  }
+  .scenario h4 {
+    color: #1E5BAA;
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .scenario h4 .icon {
+    background: #1E5BAA;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  .scenario ul { margin: 8px 0; }
+  .scenario li { font-size: 13.5px; color: #444; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 16px 0;
+    font-size: 14px;
+  }
+  th, td {
+    border: 1px solid #e0e0e0;
+    padding: 10px 14px;
+    text-align: left;
+  }
+  th {
+    background: #1E5BAA;
+    color: white;
+    font-weight: 600;
+  }
+  tr:nth-child(even) { background: #f8f9fb; }
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    margin-right: 4px;
+  }
+  .badge-red { background: #ffebee; color: #D81E06; }
+  .badge-blue { background: #e3f2fd; color: #1E5BAA; }
+  .badge-green { background: #e8f5e9; color: #00A86B; }
+  .badge-yellow { background: #fff8e1; color: #F4A024; }
+  .footer {
+    text-align: center;
+    color: #888;
+    font-size: 13px;
+    margin-top: 40px;
+    padding: 24px;
+    border-top: 1px solid #eee;
+  }
+  .big-tip {
+    background: linear-gradient(135deg, #1E5BAA 0%, #1a4480 100%);
+    color: white;
+    padding: 24px 28px;
+    border-radius: 12px;
+    margin: 20px 0;
+    font-size: 15px;
+  }
+  .big-tip h3 { color: #F4A024; margin-bottom: 12px; font-size: 18px; padding: 0; border: 0; }
+  .big-tip ol { padding-left: 22px; }
+  .big-tip li { margin: 8px 0; }
+  .three-line {
+    background: white;
+    border: 2px dashed #D81E06;
+    border-radius: 12px;
+    padding: 24px;
+    margin: 16px 0;
+  }
+  .three-line .line {
+    font-size: 16px;
+    margin: 12px 0;
+    padding-left: 36px;
+    position: relative;
+  }
+  .three-line .line::before {
+    content: attr(data-num);
+    position: absolute;
+    left: 0;
+    top: 0;
+    background: #D81E06;
+    color: white;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 14px;
+  }
+  .three-line .line strong { color: #1E5BAA; }
+  @media (max-width: 640px) {
+    .grid-2, .grid-3, .scenarios, .do-dont { grid-template-columns: 1fr; }
+    .hero h2 { font-size: 22px; }
+    .section h2 { font-size: 20px; }
+    .section { padding: 24px 18px; }
+    .container { padding: 20px 12px 60px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <h1>🔥 《安全速记卡》销售/主播使用手册</h1>
+  <span class="meta">v1.0 · 2026.06</span>
+</div>
+
+<div class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <h2>拿到卡就能讲，讲完就能转化</h2>
+    <p>这本手册是给一线销售和主播的"作战指南"。每一句话术、每一个动作、每一个坑，都写明白了。你只管照着用，拿结果。</p>
+    <span class="tag">📍 适用：销售 / 主播 / 私域运营</span>
+  </div>
+
+  <!-- NAV -->
+  <div class="nav">
+    <h3>📑 目录速览</h3>
+    <ol>
+      <li><a href="#s1">三句话读懂「安全速记卡」</a></li>
+      <li><a href="#s2">适用场景清单</a></li>
+      <li><a href="#s3">主播话术库（3 套现成版本）</a></li>
+      <li><a href="#s4">销售私聊话术（按人群分）</a></li>
+      <li><a href="#s5">朋友圈文案库（30 条）</a></li>
+      <li><a href="#s6">销售避坑指南（10 条铁律）</a></li>
+      <li><a href="#s7">数据反馈表</a></li>
+      <li><a href="#s8">速查卡片</a></li>
+    </ol>
+  </div>
+
+  <!-- S1 -->
+  <div class="section" id="s1">
+    <span class="section-num">第一部分</span>
+    <h2>三句话读懂「安全速记卡」</h2>
+    <p><strong>先背这三句——学员/粉丝问起来，你能 5 秒内答完。</strong></p>
+
+    <div class="three-line">
+      <div class="line" data-num="1"><strong>定位：</strong>中级注安备考的「一图一考点」速记工具。</div>
+      <div class="line" data-num="2"><strong>卖点：</strong>不是题库，是考点速记；不是书本，是「刷抖音就能背」。</div>
+      <div class="line" data-num="3"><strong>钩子：</strong>加我领 5 张试试。</div>
+    </div>
+
+    <h3>📦 三个子系列介绍（一句话）</h3>
+    <div class="grid-3">
+      <div class="card-mini">
+        <h4>🟢 安全基石卡（1章1节 通用基础）</h4>
+        <p>覆盖安全色、安全防护、生产场所等通用考点，是所有安全人的"必修地基"。</p>
+      </div>
+      <div class="card-mini">
+        <h4>🔴 机械危情卡（1章2节 机床/砂轮机）</h4>
+        <p>机加工高频考点合集，机械伤害的"危情时刻"全在这。</p>
+      </div>
+      <div class="card-mini">
+        <h4>🟡 冲压红线卡（1章3节 剪板机/压力机）</h4>
+        <p>冲压作业的"红线"清单，考一次错一次的高危点全收齐。</p>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      💡 <strong>记住：</strong>讲卡片时永远先说"速记卡"三个字，再说章节——别一上来就讲技术细节。先让人记住"速记卡"这个产品名，再讲内容。
+    </div>
+  </div>
+
+  <!-- S2 -->
+  <div class="section" id="s2">
+    <span class="section-num">第二部分</span>
+    <h2>适用场景清单</h2>
+    <p>「安全速记卡」不是只能发朋友圈。挑对场景，转化率能差 3 倍。</p>
+
+    <h3>📱 引流场景（4 个主战场）</h3>
+    <div class="scenarios">
+      <div class="scenario">
+        <h4><span class="icon">1</span>抖音 / 视频号 / 小红书</h4>
+        <ul>
+          <li>竖屏发卡 + 15 秒讲解</li>
+          <li>配文：#中级注安 #安全速记 #考点速记</li>
+          <li>置顶视频用「考前必背 5 张」</li>
+        </ul>
+      </div>
+      <div class="scenario">
+        <h4><span class="icon">2</span>朋友圈</h4>
+        <ul>
+          <li>1 卡 1 文案，每天 1 张</li>
+          <li>早 8 点 / 晚 9 点发效果最好</li>
+          <li>每周 1 次"合集"型推送</li>
+        </ul>
+      </div>
+      <div class="scenario">
+        <h4><span class="icon">3</span>私域社群</h4>
+        <ul>
+          <li>每天早 8 点 1 张 + 1 句话讲解</li>
+          <li>每周三「本周 5 张速记」</li>
+          <li>月底「章节合集」拉新</li>
+        </ul>
+      </div>
+      <div class="scenario">
+        <h4><span class="icon">4</span>公众号 / 视频号文章</h4>
+        <ul>
+          <li>每周 1 期「本周 5 张速记」</li>
+          <li>推文结尾放"完整版领取入口"</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>💰 转化场景（关键 3 个动作）</h3>
+    <table>
+      <tr>
+        <th>场景</th>
+        <th>动作</th>
+        <th>话术关键词</th>
+      </tr>
+      <tr>
+        <td>私信回复</td>
+        <td>粉丝咨询时主动推</td>
+        <td>"发您 5 张试试"</td>
+      </tr>
+      <tr>
+        <td>直播间互动</td>
+        <td>讲完卡引导加微/入群</td>
+        <td>"扣 1 发原图"</td>
+      </tr>
+      <tr>
+        <td>评论区互动</td>
+        <td>评论"想要"自动回复</td>
+        <td>"私我领完整版"</td>
+      </tr>
+    </table>
+
+    <h3>🔁 续费/复购场景</h3>
+    <ul>
+      <li><strong>老学员福利：</strong>每周发新卡，保持粘性，让"没报班也天天看你"</li>
+      <li><strong>考试前 1 个月：</strong>密集发"考前必背卡"，强化"不报班过不了"的心智</li>
+      <li><strong>考后 1 周：</strong>发"考后估分卡 + 明年备考福利"，把高分学员转介绍人</li>
+    </ul>
+  </div>
+
+  <!-- S3 -->
+  <div class="section" id="s3">
+    <span class="section-num">第三部分</span>
+    <h2>主播话术库（3 套现成版本）</h2>
+    <p>直接念，不会卡壳。每套都配真实可用的样例（基于现有 1-1/1-2/1-3 卡片改写）。</p>
+
+    <h3>🎬 模板 A：数字型（15 秒短视频）</h3>
+    <div class="template-box">
+<span class="label">脚本结构</span>
+【0-3 秒】钩子：抛一个让人惊掉下巴的数字
+"注安 90% 的人都记不住这个数！"
+【3-10 秒】知识点：把数字讲清楚
+"机床安全色——警告色是黄+黑，禁止色是红+白……"
+【10-13 秒】口诀
+"红禁黄警蓝指令，绿——提示！"
+【13-15 秒】互动钩子
+"评论区扣 1，发你完整 8 张！"
+    </div>
+
+    <h4>📌 可直接套用的样例（基于现有卡片）</h4>
+    <div class="quote">
+      <span class="label">样例 1</span>
+      "来，安全人——注安考试 90% 的人都搞错：<strong>安全通道的最小宽度不是 1m，是 1.4m</strong>！背下来，安全速记卡·第 04 张，原图评论区扣 1。"
+    </div>
+    <div class="quote">
+      <span class="label">样例 2</span>
+      "砂轮机最危险的不是砂片——<strong>是托架和工件的间距，超过 3mm 必出事</strong>！这是安全速记卡·机械危情卡第 X 张，记不住的兄弟先存一下。"
+    </div>
+
+    <h3>🎬 模板 B：反常识型（15 秒短视频）</h3>
+    <div class="template-box">
+<span class="label">脚本结构</span>
+【0-3 秒】误区：先说一个 90% 人都信的错观点
+"你以为冲压机手不能进危险区？错了！"
+【3-10 秒】真相：实际规则是什么
+"正确做法是——必须使用双手操作的安全装置，单手按钮不算数！"
+【10-13 秒】记忆点
+"双手按钮 + 光幕 = 标配！"
+【13-15 秒】互动钩子
+"想看完整版？扣个'安全'！"
+    </div>
+
+    <h4>📌 可直接套用的样例</h4>
+    <div class="quote">
+      <span class="label">样例 1</span>
+      "你以为安全帽颜色随便戴？<strong>红检、白管、蓝技、黄普——错一个就扣分</strong>。安全速记卡·安全基石卡第 02 张，背完再去考场。"
+    </div>
+    <div class="quote">
+      <span class="label">样例 2</span>
+      "压力机不是装个光幕就安全了——<strong>必须双手按钮 + 光幕 + 防护栏三重防护</strong>。少一个，工人出事就是你的责任！"
+    </div>
+
+    <h3>🎬 模板 C：对比型（15 秒短视频）</h3>
+    <div class="template-box">
+<span class="label">脚本结构</span>
+【0-3 秒】对比钩子
+"机床 vs 砂轮机，安全要求差在哪？"
+【3-10 秒】并列讲清 A 和 B
+"机床：防护罩 + 急停 + 联锁；砂轮机：托架间距 + 防护罩 + 挡屑板……"
+【10-13 秒】一句话总结
+"一个偏机械伤害，一个偏粉尘爆炸！"
+【13-15 秒】互动钩子
+"想要的兄弟扣 1，下期讲冲压！"
+    </div>
+
+    <h4>📌 可直接套用的样例</h4>
+    <div class="quote">
+      <span class="label">样例 1</span>
+      "剪板机 vs 压力机——都是冲压，<strong>一个用脚踏，一个用手按</strong>。安全要求差在哪？安全速记卡·冲压红线卡全说透了。"
+    </div>
+
+    <div class="highlight-box">
+      💡 <strong>主播小技巧：</strong>前 3 秒一定要"出意外"——数字、反常识、对比都行。平平无奇的开场，完播率直接掉一半。
+    </div>
+
+    <h3>🎙️ 直播间讲解话术（30 秒一循环）</h3>
+    <div class="grid-2">
+      <div class="do-dont" style="display:contents;">
+        <div class="do">
+          <strong>开场 30 秒：</strong>"来家人们，今天继续《安全速记卡》精讲——上一张我们讲了安全色，今天我们讲更狠的：<strong>机床安全的 4 个核心数字</strong>，考一次错一次！"
+        </div>
+        <div class="do">
+          <strong>互动 30 秒：</strong>"觉得有用的兄弟扣个 6，要原图的家人们扣 1——我等下私发你们完整版。"
+        </div>
+        <div class="do">
+          <strong>转化 30 秒：</strong>"想要系统学？咱们注安全程班已经开课了，<strong>扫这个码 / 主页有链接</strong>，现在报名送全套速记卡实体版！"
+        </div>
+        <div class="dont">
+          <strong>避雷 3 件事：</strong>
+          ① 不要直接念图（学员自己看得懂）
+          ② 不要超过 60 秒（观众会走）
+          ③ 不要忘了引导（讲完没转化=白讲）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- S4 -->
+  <div class="section" id="s4">
+    <span class="section-num">第四部分</span>
+    <h2>销售私聊话术（按人群分）</h2>
+    <p>私聊最忌"群发感"。用这套模板，每句话都像"一对一"在说。</p>
+
+    <h3>🗨️ 第一句开场（3 种风格，按人挑）</h3>
+
+    <h4>① 寒暄型（适合：老学员/朋友介绍来的人）</h4>
+    <div class="template-box">
+<span class="label">话术</span>
+[称呼]哥/姐好~ 看到您加我啦！
+您是今年打算考注安对吧？
+我这边刚整理了一份《安全速记卡》——
+咱们教研自己做的，1 张图 1 个高频考点，
+先发您 5 张试试，有用您再要完整版~
+    </div>
+
+    <h4>② 痛点型（适合：主动咨询/留言的人）</h4>
+    <div class="template-box">
+<span class="label">话术</span>
+[称呼]哥/姐，您问到点上了——
+注安技术这块，90% 的人卡在"考点多、记不住"。
+我们教研专门做了《安全速记卡》，
+一张图一个考点，零碎时间就能背。
+先发您 5 张，您感受一下？
+    </div>
+
+    <h4>③ 福利型（适合：朋友圈互动/群里加的）</h4>
+    <div class="template-box">
+<span class="label">话术</span>
+[称呼]哥/姐好~ 看到您朋友圈扣 1 啦！
+《安全速记卡》第 1-3 节完整版（28 张）发您了，
+记得保存到相册~
+    </div>
+
+    <h3>🔄 中段推卡（怎么把"发 5 张"讲得自然）</h3>
+    <div class="quote">
+      <span class="label">万能模板</span>
+      "哥/姐，我先发您 5 张——<strong>都是今年必考的</strong>，您先看看感觉。
+      <br>要是觉得有用，我这边还有完整版（28 张全章节），可以一次性发您。
+      <br>当然如果您想系统学，<strong>注安全程班</strong>现在报名有优惠，比外面便宜不少。"
+    </div>
+
+    <h3>🎯 结尾转化（从"看卡"过渡到"报班"）</h3>
+
+    <div class="do-dont">
+      <div class="do">
+        ✅ "看您工作也挺忙的，自学容易走弯路。我们全程班<strong>每天 30 分钟</strong>，半年稳稳过——"
+      </div>
+      <div class="dont">
+        ❌ "您要报班吗？几千块一次过！"（太生硬）
+      </div>
+    </div>
+
+    <h3>👥 不同人群版本（精准触达）</h3>
+
+    <h4>🧑‍🔧 在职党（最常见，占 60%）</h4>
+    <div class="template-box">
+<span class="label">话术</span>
+哥，您是干安全的，肯定时间紧——
+咱们《安全速记卡》就是给您这种
+"白天工地/厂里转、晚上抽空学"的人设计的。
+1 张图 1 个考点，地铁上、午休时
+刷一遍就记个大概。
+        ——报名全程班更省心，每天 30 分钟
+           老师带您划重点，不过退费。
+    </div>
+
+    <h4>🧑‍💼 待业/转行党（占比 30%）</h4>
+    <div class="template-box">
+<span class="label">话术</span>
+哥/姐，您是想转行干安全对吧？
+注安证书是敲门砖——
+咱们速记卡先把考点记熟，
+再配全程班系统学，<strong>最快 6 个月拿证</strong>，
+正好赶上今年/明年招聘黄金期。
+    </div>
+
+    <h4>👨‍🎓 学生/应届（占比 10%）</h4>
+    <div class="template-box">
+<span class="label">话术</span>
+同学，您是相关专业在读对吧？
+注安考试不限工作经验，应届就能考——
+<strong>早考早拿证，毕业就比别人多一个筹码</strong>。
+速记卡先领着，每天记 3 张，3 个月过一遍。
+    </div>
+  </div>
+
+  <!-- S5 -->
+  <div class="section" id="s5">
+    <span class="section-num">第五部分</span>
+    <h2>朋友圈文案库（30 条）</h2>
+    <p>挑合适的发，<strong>不要一次全发</strong>。每条都标了<strong>最佳发布时间</strong>和<strong>配卡建议</strong>。</p>
+
+    <h3>🅰️ 推卡型（纯引流）·15 条</h3>
+    <table>
+      <tr>
+        <th style="width:60%">文案</th>
+        <th>配卡建议</th>
+        <th>最佳时间</th>
+      </tr>
+      <tr>
+        <td>📚注安备考的兄弟姐妹，《安全速记卡》来了。一张图一个考点，每天 3 分钟，零碎时间就能背。想要的扣 1，我拉群发~</td>
+        <td>子系列合集图</td>
+        <td>周一早 8 点</td>
+      </tr>
+      <tr>
+        <td>🟢【安全基石卡·第 01 张】安全色 4 个，<strong>红禁黄警蓝指令绿提示</strong>——记不住这 9 个字，注安别上考场！</td>
+        <td>对应单卡</td>
+        <td>工作日早 8 点</td>
+      </tr>
+      <tr>
+        <td>🔴【机械危情卡·第 X 张】砂轮机最危险的不是砂片——是<strong>托架和工件间距超过 3mm</strong>。你车间达标了吗？</td>
+        <td>砂轮机单卡</td>
+        <td>工作日午 12 点</td>
+      </tr>
+      <tr>
+        <td>🟡【冲压红线卡·第 X 张】冲压机手不能进危险区？错！<strong>必须双手按钮 + 光幕 + 防护栏</strong>，少一个出事就是你的责任。</td>
+        <td>冲压单卡</td>
+        <td>工作日晚 9 点</td>
+      </tr>
+      <tr>
+        <td>💡注安备考最大的坑：<strong>看书 3 小时，记不住 1 个考点</strong>。试试《安全速记卡》，1 张图 1 个考点，背完就拿分。</td>
+        <td>子系列合集</td>
+        <td>周三晚 8 点</td>
+      </tr>
+      <tr>
+        <td>🔥今天这张卡，<strong>去年考过原题</strong>！存一下，关键时刻能救命。</td>
+        <td>高频考点单卡</td>
+        <td>考试前 1 个月</td>
+      </tr>
+      <tr>
+        <td>🛑注安技术 1 章 3 节考点全在这——<strong>剪板机 + 压力机</strong>，收藏这一篇就够了！</td>
+        <td>1-3 合集</td>
+        <td>周五早 8 点</td>
+      </tr>
+      <tr>
+        <td>👀「我想考注安但是没时间」——<strong>每天 3 张速记卡，1 个月过完一章节</strong>，真没你想的那么难。</td>
+        <td>子系列封面</td>
+        <td>周一晚 9 点</td>
+      </tr>
+      <tr>
+        <td>📌收藏！<strong>注安技术高频数字考点 TOP 10</strong>——这张卡帮你全记住。</td>
+        <td>数字型单卡</td>
+        <td>周末早 10 点</td>
+      </tr>
+      <tr>
+        <td>👷你是干安全的吗？<strong>这 8 张卡，不看亏一个亿</strong>。</td>
+        <td>精选 8 张合集</td>
+        <td>工作日午 12 点</td>
+      </tr>
+      <tr>
+        <td>🆘救命！<strong>注安技术怎么记？</strong>——一张图一个考点，背完就能上考场。</td>
+        <td>核心单卡</td>
+        <td>考试前 2 周</td>
+      </tr>
+      <tr>
+        <td>🎯注安备考 5 大错觉：① 看了 = 学会 ② 重点 = 都会 ③ 数字 = 不用背 ④ 口诀 = 没用 ⑤ 速记卡 = 没干货。<strong>第 5 条你试试就知道</strong>。</td>
+        <td>无图/纯文字</td>
+        <td>周二晚 9 点</td>
+      </tr>
+      <tr>
+        <td>🔁明天早上 8 点，免费发《安全速记卡》第 X 张——<strong>定个闹钟，记得来</strong>。</td>
+        <td>预告海报</td>
+        <td>前一天晚 9 点</td>
+      </tr>
+      <tr>
+        <td>📖注安技术教材 600 页，<strong>80% 考点集中在 60 张速记卡里</strong>——信不信，存了下次见。</td>
+        <td>数字冲击感图</td>
+        <td>工作日早 8 点</td>
+      </tr>
+      <tr>
+        <td>🎁今日福利：评论区抽 3 位兄弟，<strong>送《安全速记卡》完整版（28 张）</strong>——扣"速记"参与！</td>
+        <td>福利海报</td>
+        <td>周末午 12 点</td>
+      </tr>
+    </table>
+
+    <h3>🅱️ 故事型（讲学员怎么用）·8 条</h3>
+    <table>
+      <tr>
+        <th style="width:60%">文案</th>
+        <th>配卡建议</th>
+        <th>最佳时间</th>
+      </tr>
+      <tr>
+        <td>👷昨天有个学员问我：哥，砂轮机那道题选啥？——我说你先看《安全速记卡·机械危情卡》第 X 张，背完你自己选。<strong>5 分钟后他回我：选 B，懂了</strong>。这就是速记卡的意义。</td>
+        <td>对应单卡</td>
+        <td>工作日晚 9 点</td>
+      </tr>
+      <tr>
+        <td>🧑‍🏭咱们有个车间主任，<strong>用速记卡给班前会讲课</strong>——工人最爱看的就是这个图，说比看 PPT 强多了。</td>
+        <td>学员使用场景图</td>
+        <td>周五晚 9 点</td>
+      </tr>
+      <tr>
+        <td>📈上周统计：<strong>用速记卡的学员，考点掌握速度提升 3 倍</strong>——真不是吹，数据说话。</td>
+        <td>数据图</td>
+        <td>周一早 8 点</td>
+      </tr>
+      <tr>
+        <td>💬"哥，我考前 1 个月才开始背，<strong>靠速记卡 60 张过了技术 78 分</strong>"——上个月学员真实反馈。</td>
+        <td>成绩截图</td>
+        <td>考后 1 周</td>
+      </tr>
+      <tr>
+        <td>👨‍👩‍👧有个宝妈学员，每天孩子睡了 9 点开始背速记卡，<strong>3 个月过完 4 门</strong>——时间挤挤总是有的。</td>
+        <td>鸡汤型海报</td>
+        <td>工作日晚 9 点</td>
+      </tr>
+      <tr>
+        <td>🔁"哥，我同事看到我的速记卡，问在哪儿领的——我又给他介绍了一遍。"<strong>老带新就是这么来的</strong>。</td>
+        <td>转介绍图</td>
+        <td>周末午 12 点</td>
+      </tr>
+      <tr>
+        <td>🏆去年一个学员把速记卡打印出来贴在工地办公室墙上，<strong>工人每天上下班都能看一眼</strong>——这才是真正"学以致用"。</td>
+        <td>工地场景图</td>
+        <td>工作日午 12 点</td>
+      </tr>
+      <tr>
+        <td>💡有学员问我：<strong>"速记卡能不能代替教材？"</strong>——能，但只针对考点。如果你想懂原理，还是得看教材。<strong>速记卡是"考试工具"，教材是"学习工具"</strong>。</td>
+        <td>对比型图</td>
+        <td>工作日晚 8 点</td>
+      </tr>
+    </table>
+
+    <h3>🅲 痛点型（戳焦虑）·5 条</h3>
+    <table>
+      <tr>
+        <th style="width:60%">文案</th>
+        <th>配卡建议</th>
+        <th>最佳时间</th>
+      </tr>
+      <tr>
+        <td>😱注安通过率<strong>不到 15%</strong>——不是你不行，是没找对方法。试试《安全速记卡》？</td>
+        <td>数字冲击图</td>
+        <td>工作日晚 9 点</td>
+      </tr>
+      <tr>
+        <td>🆘<strong>今年不过，明年教材大改</strong>——所有考过的人都说：早考早解脱。</td>
+        <td>政策预警图</td>
+        <td>政策变化时</td>
+      </tr>
+      <tr>
+        <td>💔我见过太多学员：<strong>教材翻了 5 遍，考点一个没记住</strong>。方法不对，努力白费。</td>
+        <td>无图/纯文字</td>
+        <td>工作日晚 9 点</td>
+      </tr>
+      <tr>
+        <td>⏰距离考试还有 X 天——<strong>你现在的进度，能过吗？</strong></td>
+        <td>倒计时海报</td>
+        <td>考试倒计时</td>
+      </tr>
+      <tr>
+        <td>👀安全人考证，<strong>不是你选不选的问题，是企业逼不逼的问题</strong>——早拿证早安心。</td>
+        <td>职场现状图</td>
+        <td>工作日早 8 点</td>
+      </tr>
+    </table>
+
+    <h3>🅳 福利型（送资料/试听课）·2 条</h3>
+    <table>
+      <tr>
+        <th style="width:60%">文案</th>
+        <th>配卡建议</th>
+        <th>最佳时间</th>
+      </tr>
+      <tr>
+        <td>🎁评论区扣 1，<strong>免费领《安全速记卡》第 1-3 节完整版（28 张）</strong>——每天限 30 名。</td>
+        <td>福利海报</td>
+        <td>周末午 12 点</td>
+      </tr>
+      <tr>
+        <td>📚转发本文到朋友圈，<strong>截图发我，送您《安全速记卡》+ 试听课</strong>。</td>
+        <td>转发福利图</td>
+        <td>周五早 8 点</td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- S6 -->
+  <div class="section" id="s6">
+    <span class="section-num">第六部分</span>
+    <h2>销售避坑指南（10 条铁律）</h2>
+    <p>这 10 条都是真金白银换来的经验。<strong>违反一条，转化率掉一半。</strong></p>
+
+    <div class="do-dont">
+      <div class="dont">❌ <strong>一次发 10 张以上</strong>——学员保存了不会看。控制在 3-5 张。</div>
+      <div class="do">✅ <strong>一次发 3-5 张</strong>，每天发，比一次发 30 张有效 10 倍。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>只发 PDF / Word</strong>——手机上看不清，体验差。</div>
+      <div class="do">✅ <strong>只发 PNG / JPG 图片</strong>，长按可保存到相册。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>只发卡不讲解</strong>——发完没下文 = 白干。</div>
+      <div class="do">✅ <strong>发完卡 + 配 1 句讲解</strong>，引导对话（"看完有问题随时问"）。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>在卡里夹硬广</strong>——显得功利，学员直接屏蔽。</div>
+      <div class="do">✅ <strong>纯干货 + 收一句引导</strong>，"看更多扣 1"。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>讲解里数字 / 比例搞错</strong>——错一个 = 砸招牌。</div>
+      <div class="do">✅ <strong>不确定的就不说</strong>，让学员查官方教材。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>承诺"包过""保过"</strong>——违规且不现实。</div>
+      <div class="do">✅ <strong>说"系统学、考点清晰、通过率更高"</strong>，留有余地。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>追着问"您报不报？"</strong>——被拉黑率 80%。</div>
+      <div class="do">✅ <strong>先给价值，再自然引导</strong>，"看您时间方便吗，可以聊聊"。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>群发一样的消息</strong>——一看就是模板，没人理。</div>
+      <div class="do">✅ <strong>每个人至少改 1 个字</strong>（称呼/关心点）。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>晚上 11 点后发消息</strong>——打扰生活，被拉黑。</div>
+      <div class="do">✅ <strong>早 8 点 / 午 12 点 / 晚 8-9 点</strong>，黄金时间。</div>
+    </div>
+    <div class="do-dont">
+      <div class="dont">❌ <strong>学员问专业问题答不上来就装懂</strong>——露馅就完了。</div>
+      <div class="do">✅ <strong>诚实说"这块我帮您问问教研老师"</strong>，专业感拉满。</div>
+    </div>
+  </div>
+
+  <!-- S7 -->
+  <div class="section" id="s7">
+    <span class="section-num">第七部分</span>
+    <h2>数据反馈表（每周统计）</h2>
+    <p>没有数据的销售，是凭感觉在干。把这 6 个数据每周记下来，<strong>一个月后你就知道该往哪里使劲</strong>。</p>
+
+    <table>
+      <tr>
+        <th>数据项</th>
+        <th>本周</th>
+        <th>上周</th>
+        <th>变化</th>
+        <th>负责人</th>
+      </tr>
+      <tr>
+        <td>本周发卡数量</td>
+        <td>_____ 张</td>
+        <td>_____ 张</td>
+        <td>_____ </td>
+        <td>_____ </td>
+      </tr>
+      <tr>
+        <td>触达人数（朋友圈/群）</td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+      </tr>
+      <tr>
+        <td>领取人数（私聊回复/扣 1）</td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+      </tr>
+      <tr>
+        <td>进群人数</td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+      </tr>
+      <tr>
+        <td>转化人数（报班/试听）</td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+        <td>_____ </td>
+      </tr>
+      <tr>
+        <td>高赞/高转发卡片 TOP 3</td>
+        <td colspan="4">① _____ ② _____ ③ _____</td>
+      </tr>
+      <tr>
+        <td>学员高频问题 TOP 3</td>
+        <td colspan="4">① _____ ② _____ ③ _____</td>
+      </tr>
+    </table>
+
+    <div class="highlight-box">
+      💡 <strong>关键指标：</strong>领取率（领取/触达）反映卡片吸引力；转化率（转化/领取）反映销售跟进能力。<strong>领取率 < 5% 就该改卡片标题；转化率 < 10% 就该改话术</strong>。
+    </div>
+  </div>
+
+  <!-- S8 -->
+  <div class="section" id="s8">
+    <span class="section-num">第八部分</span>
+    <h2>速查卡片（手机截图就能用）</h2>
+
+    <h3>📱 三大场景话术速查</h3>
+    <div class="big-tip">
+      <h3>🟢 引流场景（朋友圈/群/短视频）</h3>
+      <ol>
+        <li>钩子（数字/反常识/对比）</li>
+        <li>讲清 1 个知识点</li>
+        <li>口诀收尾</li>
+        <li>引导扣 1 / 私我 / 转发</li>
+      </ol>
+    </div>
+    <div class="big-tip" style="background:linear-gradient(135deg,#D81E06 0%,#a01507 100%);">
+      <h3 style="color:#FFE082;">🔴 转化场景（私聊/直播间）</h3>
+      <ol>
+        <li>先给干货（发 3-5 张卡）</li>
+        <li>问体验（"看完感觉怎么样"）</li>
+        <li>自然过渡（"想系统学吗"）</li>
+        <li>给方案（报班/试听）</li>
+      </ol>
+    </div>
+    <div class="big-tip" style="background:linear-gradient(135deg,#00A86B 0%,#007a4d 100%);">
+      <h3 style="color:#fff59d;">🟢 续费场景（老学员）</h3>
+      <ol>
+        <li>每周固定时间发新卡</li>
+        <li>评论区互动（让老学员有"归属感"）</li>
+        <li>考前 1 个月密集发"必背卡"</li>
+        <li>考后引导转介绍 / 报进阶班</li>
+      </ol>
+    </div>
+
+    <h3>❓ 常见问题 Q&A</h3>
+    <table>
+      <tr>
+        <th style="width:30%">问题</th>
+        <th>参考回答</th>
+      </tr>
+      <tr>
+        <td>"《安全速记卡》是啥？"</td>
+        <td>"咱们教研自己做的考点速记工具，1 张图 1 个高频考点，零碎时间就能背。先发您 5 张试试？"</td>
+      </tr>
+      <tr>
+        <td>"免费的？"</td>
+        <td>"5 张免费的，您先看。完整版加入学习群就能领。"</td>
+      </tr>
+      <tr>
+        <td>"能代替教材吗？"</td>
+        <td>"针对考点的话，速记卡比教材更聚焦；但原理部分还得看教材。速记卡是'考前冲刺工具'。"</td>
+      </tr>
+      <tr>
+        <td>"保过吗？"</td>
+        <td>"咱们系统学的话通过率比自学高很多，您可以看看往期学员反馈。具体可以聊聊您的实际情况。"</td>
+      </tr>
+      <tr>
+        <td>"我零基础能学吗？"</td>
+        <td>"能，咱们从最基础的开始——安全基石卡就是给您打地基的。先看看？"</td>
+      </tr>
+      <tr>
+        <td>"多少钱？"</td>
+        <td>"完整版速记卡加入学习群免费送；系统全程班有不同班型，我根据您的情况推荐。"</td>
+      </tr>
+      <tr>
+        <td>"我考虑一下"</td>
+        <td>"行，您考虑。这边先把速记卡发您，<strong>有任何备考问题随时问我</strong>。"（不催）</td>
+      </tr>
+    </table>
+
+    <h3>📲 转发模板（带二维码图）</h3>
+    <div class="highlight-box">
+      <strong>适用场景：</strong>学员问"怎么领完整版"时，直接发下面这张图（让设计做成统一海报）<br><br>
+      <strong>海报内容：</strong>《安全速记卡》完整版领取入口<br>
+      📍 扫码加微信 → 备注"速记卡" → 自动发您
+    </div>
+  </div>
+
+  <div class="footer">
+    📘《安全速记卡》销售/主播使用手册 · v1.0<br>
+    教研出品 · 仅供内部使用 · 2026.06
+  </div>
+
+</div>
+
+</body>
+</html>

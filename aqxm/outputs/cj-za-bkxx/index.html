@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2026年初级注册安全工程师全国报考一站式查询</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="nav-inner">
+      <a class="brand" href="#top" aria-label="返回顶部">
+        <span class="brand-mark"><i class="fa-solid fa-shield-halved"></i></span>
+        <span>
+          <span class="brand-title">初安报考查询</span>
+          <span class="brand-subtitle">2026全国省市信息库</span>
+        </span>
+      </a>
+      <label class="global-search" aria-label="全局搜索">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <input id="globalSearch" type="search" placeholder="搜索省份、报名条件、审核方式、报名费、流程关键词" />
+      </label>
+      <nav class="nav-actions" aria-label="页面操作">
+        <a class="btn" href="admin.html"><i class="fa-solid fa-pen-to-square"></i><span>管理后台</span></a>
+        <button class="btn primary" id="downloadCsv" type="button"><i class="fa-solid fa-download"></i><span>下载资料</span></button>
+      </nav>
+    </div>
+  </header>
+
+  <main class="site-shell" id="top">
+    <section class="hero">
+      <div class="hero-main">
+        <span class="eyebrow">实时更新 · 自动倒计时 · 一站式查询</span>
+        <h1>2026年初级注册安全工程师全国报考信息汇总</h1>
+        <p>聚合全国31个省市报名时间、官方入口、报考门槛、审核方式、费用、准考证打印、考试日期和成绩查询节点。页面按本地时间自动计算报名状态，适合招生咨询、社群提醒和学员自助查询。</p>
+        <div class="hero-tags">
+          <span><i class="fa-solid fa-building-columns"></i> 政务级清爽界面</span>
+          <span><i class="fa-solid fa-table-cells-large"></i> 省市卡片全覆盖</span>
+          <span><i class="fa-solid fa-stopwatch"></i> 双倒计时秒级刷新</span>
+          <span><i class="fa-solid fa-database"></i> JSON轻量维护</span>
+        </div>
+      </div>
+
+      <aside class="countdown-panel" aria-label="考试倒计时">
+        <section class="countdown-card">
+          <div>
+            <div class="countdown-label"><i class="fa-solid fa-hourglass-half"></i> 统一考试时间倒计时</div>
+            <div class="countdown-title">2026初安统一考试节点</div>
+            <div class="countdown-grid">
+              <div class="time-box"><div><strong id="examDays">0</strong><span>天</span></div></div>
+              <div class="time-box"><div><strong id="examHours">00</strong><span>时</span></div></div>
+              <div class="time-box"><div><strong id="examMinutes">00</strong><span>分</span></div></div>
+              <div class="time-box"><div><strong id="examSeconds">00</strong><span>秒</span></div></div>
+            </div>
+          </div>
+          <div class="countdown-note" id="examNote">正在读取考试时间</div>
+        </section>
+
+        <section class="countdown-card">
+          <div>
+            <div class="countdown-label"><i class="fa-solid fa-bell"></i> 当前省份报名节点倒计时</div>
+            <div class="countdown-title">
+              <span id="selectedProvinceName">上海</span>
+              <select id="provinceSelect" aria-label="切换倒计时省份"></select>
+            </div>
+            <div class="countdown-grid">
+              <div class="time-box"><div><strong id="provinceDays">0</strong><span>天</span></div></div>
+              <div class="time-box"><div><strong id="provinceHours">00</strong><span>时</span></div></div>
+              <div class="time-box"><div><strong id="provinceMinutes">00</strong><span>分</span></div></div>
+              <div class="time-box"><div><strong id="provinceSeconds">00</strong><span>秒</span></div></div>
+            </div>
+          </div>
+          <div class="countdown-note" id="provinceNote">正在读取报名截止时间</div>
+        </section>
+      </aside>
+    </section>
+
+    <section class="stats" aria-label="数据概览">
+      <div class="stat-card"><div class="num" id="statTotal">0</div><div class="label">省市全覆盖</div></div>
+      <div class="stat-card"><div class="num" id="statOpen">0</div><div class="label">报名进行中</div></div>
+      <div class="stat-card"><div class="num" id="statSoon">0</div><div class="label">即将报名</div></div>
+      <div class="stat-card"><div class="num" id="statAnnounced">0</div><div class="label">已出公告</div></div>
+      <div class="stat-card"><div class="num" id="statLatest">0</div><div class="label">最新更新</div></div>
+    </section>
+
+    <section class="section-card" aria-label="考试基础介绍">
+      <div class="section-head">
+        <div>
+          <h2>考试基础介绍</h2>
+          <p>先看清报考规则，再定位自己的省份节点。</p>
+        </div>
+      </div>
+      <div class="basics-grid">
+        <article class="basic-item">
+          <i class="fa-solid fa-circle-info"></i>
+          <h3>考试性质</h3>
+          <p>初级注册安全工程师属于注册安全工程师职业资格体系，通常采用全国统一大纲、地方组织实施。</p>
+        </article>
+        <article class="basic-item">
+          <i class="fa-solid fa-user-check"></i>
+          <h3>报名条件</h3>
+          <p>一般中专起报，学历、专业和安全生产业务工作年限共同决定是否满足门槛。</p>
+        </article>
+        <article class="basic-item">
+          <i class="fa-solid fa-book-open"></i>
+          <h3>考试科目</h3>
+          <p>常见为《安全生产法律法规》和《安全生产实务》两个科目，实务按专业方向组织。</p>
+        </article>
+        <article class="basic-item">
+          <i class="fa-solid fa-award"></i>
+          <h3>成绩有效期</h3>
+          <p>参加全部科目的考生，通常须在连续两个考试年度内通过全部科目。</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="main-grid">
+      <aside class="sidebar" aria-label="筛选栏">
+        <div class="side-card">
+          <h3><i class="fa-solid fa-filter"></i> 报名状态</h3>
+          <div class="filter-list" id="statusFilters"></div>
+        </div>
+        <div class="side-card">
+          <h3><i class="fa-solid fa-bullhorn"></i> 公告状态</h3>
+          <div class="filter-list" id="noticeFilters"></div>
+        </div>
+        <div class="side-card">
+          <h3><i class="fa-solid fa-location-dot"></i> 地区筛选</h3>
+          <select id="regionFilter" aria-label="地区筛选"></select>
+        </div>
+        <div class="download-card">
+          <h3>备考资料</h3>
+          <p>导出当前信息库为 CSV，方便社群提醒、销售跟进和学员核对。</p>
+          <button class="btn primary" id="downloadCsvSide" type="button" onclick="document.getElementById('downloadCsv').click()"><i class="fa-solid fa-file-arrow-down"></i>下载报考信息表</button>
+        </div>
+      </aside>
+
+      <section>
+        <div class="section-head">
+          <div>
+            <h2>全国各省报考汇总</h2>
+            <p>当前匹配 <strong id="resultCount">0</strong> 个省市；电脑四列、平板双列、手机单列。</p>
+          </div>
+          <div class="updated">最后更新：<strong id="updatedAt">--</strong></div>
+        </div>
+        <div class="province-grid" id="provinceGrid"></div>
+        <div class="empty-state" id="emptyState">没有找到匹配的省份，请调整关键词或筛选条件。</div>
+      </section>
+    </section>
+
+    <section class="section-card" aria-label="FAQ问答库">
+      <div class="section-head">
+        <div>
+          <h2>FAQ问答库</h2>
+          <p>内置高频问题，适合放在咨询页底部承接用户疑问。</p>
+        </div>
+      </div>
+      <div class="faq-list" id="faqList"></div>
+    </section>
+  </main>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="assets/data-inline.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,2342 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>项目运营如何用 Codex 提效：中级注册安全工程师岗位培训课件</title>
+  <style>
+    :root {
+      --bg: #f6f8fb;
+      --paper: #ffffff;
+      --ink: #162033;
+      --muted: #5f6b7a;
+      --line: #dce3ec;
+      --teal: #117a6f;
+      --green: #2f9e6d;
+      --blue: #2f6fe4;
+      --amber: #d49127;
+      --red: #c94949;
+      --violet: #6d5bd0;
+      --slate: #243044;
+      --soft-teal: #e7f4f1;
+      --soft-blue: #eaf1ff;
+      --soft-amber: #fff4df;
+      --soft-red: #fff0ef;
+      --shadow: 0 18px 48px rgba(22, 32, 51, .08);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background:
+        linear-gradient(90deg, rgba(47, 111, 228, .04) 1px, transparent 1px),
+        linear-gradient(0deg, rgba(17, 122, 111, .04) 1px, transparent 1px),
+        var(--bg);
+      background-size: 42px 42px;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      background: rgba(255, 255, 255, .92);
+      border-bottom: 1px solid var(--line);
+      backdrop-filter: blur(14px);
+    }
+    .topbar-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 10px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 210px;
+      font-weight: 760;
+      color: var(--slate);
+    }
+    .brand-mark {
+      width: 30px;
+      height: 30px;
+      border-radius: 8px;
+      background: linear-gradient(135deg, var(--teal), var(--blue));
+      position: relative;
+      flex: 0 0 auto;
+    }
+    .brand-mark::after {
+      content: "";
+      position: absolute;
+      width: 13px;
+      height: 13px;
+      border: 2px solid rgba(255, 255, 255, .88);
+      border-left: 0;
+      border-bottom: 0;
+      top: 8px;
+      left: 7px;
+      transform: rotate(45deg);
+    }
+    nav {
+      display: flex;
+      gap: 4px;
+      overflow-x: auto;
+      padding-bottom: 2px;
+    }
+    nav a {
+      color: var(--muted);
+      font-size: 13px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      white-space: nowrap;
+    }
+    nav a:hover { background: #eef3f8; color: var(--ink); }
+    .print-link {
+      border: 1px solid var(--line);
+      background: #fff;
+      color: var(--ink);
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 13px;
+      white-space: nowrap;
+      cursor: pointer;
+    }
+
+    .wrap { max-width: 1280px; margin: 0 auto; }
+    .hero {
+      min-height: calc(100vh - 52px);
+      display: grid;
+      grid-template-columns: 1.02fr .98fr;
+      gap: 34px;
+      align-items: center;
+      padding: 42px 22px 48px;
+    }
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--teal);
+      font-size: 14px;
+      font-weight: 720;
+      margin-bottom: 16px;
+    }
+    .eyebrow::before {
+      content: "";
+      width: 28px;
+      height: 3px;
+      border-radius: 8px;
+      background: var(--teal);
+    }
+    h1, h2, h3, h4, p { margin-top: 0; }
+    h1 {
+      margin-bottom: 18px;
+      font-size: 50px;
+      line-height: 1.12;
+      max-width: 720px;
+      color: var(--slate);
+      font-weight: 820;
+    }
+    .hero-sub {
+      max-width: 760px;
+      color: #425061;
+      font-size: 18px;
+      line-height: 1.85;
+      margin-bottom: 28px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-weight: 720;
+      font-size: 14px;
+      border: 1px solid transparent;
+    }
+    .btn.primary { background: var(--teal); color: #fff; }
+    .btn.secondary { background: #fff; border-color: var(--line); color: var(--slate); }
+    .hero-tags {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 780px;
+    }
+    .tag {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 12px;
+      color: #415064;
+      font-size: 13px;
+      line-height: 1.55;
+      box-shadow: 0 8px 22px rgba(22, 32, 51, .05);
+    }
+    .tag strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+    .hero-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      max-width: 780px;
+      margin: 18px 0 0;
+    }
+    .hero-metric {
+      border: 1px solid var(--line);
+      background: rgba(255, 255, 255, .72);
+      border-radius: 8px;
+      padding: 12px;
+    }
+    .hero-metric b {
+      display: block;
+      font-size: 22px;
+      color: var(--slate);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+    .hero-metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .hero-visual {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      padding: 18px;
+      min-height: 540px;
+      position: relative;
+      overflow: hidden;
+    }
+    .mock-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+    }
+    .mock-title { font-weight: 760; color: var(--slate); }
+    .mock-pill {
+      color: var(--teal);
+      background: var(--soft-teal);
+      border: 1px solid #c8e7df;
+      border-radius: 999px;
+      padding: 5px 9px;
+      font-size: 12px;
+      font-weight: 720;
+    }
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .flow-step {
+      min-height: 102px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      padding: 12px;
+      position: relative;
+      background: #fbfcfe;
+    }
+    .flow-step b { display: block; font-size: 13px; margin-bottom: 8px; }
+    .flow-step span { display: block; color: var(--muted); font-size: 12px; line-height: 1.55; }
+    .flow-step::after {
+      content: "";
+      position: absolute;
+      right: -9px;
+      top: 45px;
+      width: 14px;
+      height: 2px;
+      background: #9cb0c7;
+      z-index: 2;
+    }
+    .flow-step:last-child::after { display: none; }
+    .mock-grid {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: 14px;
+    }
+    .mock-panel {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 14px;
+      background: #fff;
+    }
+    .mock-panel h3 {
+      margin-bottom: 12px;
+      font-size: 15px;
+      color: var(--slate);
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 72px 1fr 38px;
+      gap: 8px;
+      align-items: center;
+      margin: 11px 0;
+      color: var(--muted);
+      font-size: 12px;
+    }
+    .bar {
+      height: 10px;
+      border-radius: 999px;
+      background: #e8edf3;
+      overflow: hidden;
+    }
+    .bar span { display: block; height: 100%; border-radius: 999px; }
+    .bar.teal span { background: var(--teal); }
+    .bar.blue span { background: var(--blue); }
+    .bar.amber span { background: var(--amber); }
+    .bar.green span { background: var(--green); }
+    .mini-table {
+      display: grid;
+      gap: 8px;
+      font-size: 12px;
+      color: #405066;
+    }
+    .mini-row {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      background: #f7f9fc;
+      border: 1px solid #edf1f6;
+    }
+    .prompt-card {
+      margin-top: 14px;
+      background: #172033;
+      color: #e9eef6;
+      border-radius: 8px;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .band {
+      padding: 66px 22px;
+      border-top: 1px solid rgba(220, 227, 236, .72);
+    }
+    .band.white { background: #fff; }
+    .band.alt {
+      background:
+        linear-gradient(135deg, rgba(17, 122, 111, .045), transparent 34%),
+        linear-gradient(225deg, rgba(47, 111, 228, .05), transparent 38%),
+        #f3f6fa;
+    }
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: flex-end;
+      margin-bottom: 22px;
+    }
+    .section-kicker {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 760;
+      margin-bottom: 9px;
+    }
+    h2 {
+      font-size: 31px;
+      line-height: 1.25;
+      margin-bottom: 0;
+      color: var(--slate);
+    }
+    .section-desc {
+      color: var(--muted);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0;
+      font-size: 15px;
+    }
+    .grid { display: grid; gap: 16px; }
+    .grid.cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .grid.cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .grid.cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 12px 30px rgba(22, 32, 51, .05);
+    }
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: var(--slate);
+    }
+    .card p, .card li {
+      color: #465568;
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .card p { margin-bottom: 0; }
+    .card ul {
+      margin: 10px 0 0;
+      padding-left: 18px;
+    }
+    .num {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: #fff;
+      background: var(--teal);
+    }
+    .num.blue { background: var(--blue); }
+    .num.amber { background: var(--amber); }
+    .num.green { background: var(--green); }
+    .num.red { background: var(--red); }
+    .num.violet { background: var(--violet); }
+    .callout {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-left: 5px solid var(--teal);
+      border-radius: 8px;
+      padding: 18px 20px;
+      color: #405066;
+      line-height: 1.8;
+      box-shadow: 0 12px 30px rgba(22, 32, 51, .05);
+    }
+    .callout strong { color: var(--ink); }
+    .ribbon {
+      border: 1px solid #cfe2e0;
+      background: linear-gradient(135deg, #ecf8f4, #f8fbff);
+      border-radius: 8px;
+      padding: 16px 18px;
+      color: #34505a;
+      line-height: 1.8;
+      font-size: 14px;
+    }
+    .ribbon strong { color: var(--teal); }
+    .matrix {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #fff;
+    }
+    .matrix-cell {
+      padding: 18px;
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+      min-height: 160px;
+    }
+    .matrix-cell:nth-child(3n) { border-right: 0; }
+    .matrix-cell:nth-last-child(-n+3) { border-bottom: 0; }
+    .matrix-cell h3 { margin-bottom: 9px; font-size: 16px; color: var(--slate); }
+    .matrix-cell p { margin-bottom: 0; color: var(--muted); line-height: 1.72; font-size: 14px; }
+    .workflow {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      align-items: stretch;
+    }
+    .workflow .card {
+      position: relative;
+      min-height: 160px;
+    }
+    .workflow .card::after {
+      content: "";
+      position: absolute;
+      right: -9px;
+      top: 50%;
+      width: 16px;
+      height: 2px;
+      background: #a6b4c5;
+    }
+    .workflow .card:last-child::after { display: none; }
+    .prompt {
+      background: #192235;
+      border-radius: 8px;
+      padding: 18px;
+      color: #e7edf5;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 13px;
+      line-height: 1.75;
+      white-space: pre-wrap;
+      overflow-x: auto;
+    }
+    .prompt strong { color: #fff; }
+    .prompt.light {
+      background: #fff;
+      color: #344054;
+      border: 1px solid var(--line);
+      box-shadow: 0 10px 26px rgba(22, 32, 51, .05);
+    }
+    .prompt-title {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--slate);
+      font-weight: 800;
+      margin: 0 0 10px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+    }
+    .prompt-title::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      border-radius: 3px;
+      background: var(--teal);
+    }
+    .scene-deck {
+      display: grid;
+      gap: 24px;
+    }
+    .scene-lesson {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .lesson-head {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 20px;
+      padding: 22px;
+      background:
+        linear-gradient(90deg, rgba(17, 122, 111, .09), transparent),
+        #fbfcfe;
+      border-bottom: 1px solid var(--line);
+    }
+    .lesson-index {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      min-height: 120px;
+      border-radius: 8px;
+      padding: 18px;
+      color: #fff;
+      background: linear-gradient(135deg, var(--slate), var(--teal));
+    }
+    .lesson-index b {
+      font-size: 34px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .lesson-index span {
+      font-size: 13px;
+      opacity: .86;
+      line-height: 1.5;
+    }
+    .lesson-head h3 {
+      margin: 0 0 10px;
+      font-size: 24px;
+      color: var(--slate);
+    }
+    .lesson-head p {
+      margin: 0;
+      color: #455467;
+      line-height: 1.75;
+    }
+    .lesson-body {
+      padding: 22px;
+      display: grid;
+      gap: 16px;
+    }
+    .lesson-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .case-box {
+      border: 1px solid #dce7ef;
+      background: #f8fbff;
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .case-box h4, .mini-panel h4 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      color: var(--slate);
+    }
+    .case-box p, .case-box li, .mini-panel p, .mini-panel li {
+      color: #475467;
+      font-size: 14px;
+      line-height: 1.72;
+    }
+    .case-box ul, .mini-panel ul {
+      margin: 8px 0 0;
+      padding-left: 18px;
+    }
+    .mini-panel {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: 8px;
+      padding: 18px;
+    }
+    .step-list {
+      counter-reset: step;
+      display: grid;
+      gap: 10px;
+    }
+    .step-item {
+      counter-increment: step;
+      display: grid;
+      grid-template-columns: 34px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #465568;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .step-item::before {
+      content: counter(step);
+      width: 28px;
+      height: 28px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 8px;
+      background: var(--soft-teal);
+      color: var(--teal);
+      font-weight: 800;
+      border: 1px solid #c9e5df;
+      margin-top: 2px;
+    }
+    .prompt-bank {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .prompt-chip {
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 13px;
+      color: #435267;
+      font-size: 13px;
+      line-height: 1.65;
+      box-shadow: 0 8px 20px rgba(22, 32, 51, .04);
+    }
+    .prompt-chip strong {
+      display: block;
+      color: var(--slate);
+      margin-bottom: 5px;
+    }
+    .do-dont {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    .do-dont .mini-panel:first-child {
+      border-left: 4px solid var(--green);
+    }
+    .do-dont .mini-panel:last-child {
+      border-left: 4px solid var(--red);
+    }
+    .divider-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--slate);
+      font-size: 18px;
+      font-weight: 820;
+      margin: 8px 0 0;
+    }
+    .divider-title::after {
+      content: "";
+      flex: 1;
+      height: 1px;
+      background: var(--line);
+    }
+    .starter-kit {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 14px;
+    }
+    .kit-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 16px;
+      background: #fff;
+      min-height: 150px;
+    }
+    .kit-card h3 { font-size: 16px; margin-bottom: 8px; }
+    .kit-card p, .kit-card li {
+      font-size: 14px;
+      line-height: 1.7;
+      color: #475467;
+    }
+    .kit-card ul { margin: 8px 0 0; padding-left: 18px; }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #fff;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 780px;
+      font-size: 14px;
+    }
+    th, td {
+      padding: 13px 14px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      vertical-align: top;
+      line-height: 1.65;
+    }
+    th {
+      background: #f7f9fc;
+      color: var(--slate);
+      font-weight: 760;
+    }
+    tr:last-child td { border-bottom: 0; }
+    td { color: #435267; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 12px;
+      font-weight: 720;
+      color: var(--slate);
+      background: #eef3f8;
+      margin-bottom: 8px;
+    }
+    .badge.teal { background: var(--soft-teal); color: var(--teal); }
+    .badge.blue { background: var(--soft-blue); color: var(--blue); }
+    .badge.amber { background: var(--soft-amber); color: #9a620e; }
+    .badge.red { background: var(--soft-red); color: var(--red); }
+    .quote {
+      font-size: 22px;
+      line-height: 1.65;
+      color: var(--slate);
+      padding: 28px;
+      background: #fff;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      box-shadow: var(--shadow);
+    }
+    .quote small {
+      display: block;
+      margin-top: 14px;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .checklist {
+      display: grid;
+      gap: 10px;
+    }
+    .check {
+      display: grid;
+      grid-template-columns: 28px 1fr;
+      gap: 10px;
+      align-items: start;
+      color: #445469;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+    .check::before {
+      content: "";
+      width: 18px;
+      height: 18px;
+      border-radius: 5px;
+      margin-top: 3px;
+      background:
+        linear-gradient(135deg, transparent 48%, #fff 48% 58%, transparent 58%),
+        var(--green);
+      border: 1px solid #24885e;
+    }
+    .footer {
+      padding: 32px 22px 48px;
+      color: var(--muted);
+      text-align: center;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1060px) {
+      .hero { grid-template-columns: 1fr; min-height: auto; }
+      .hero-visual { min-height: auto; }
+      .grid.cols-4, .workflow, .hero-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .grid.cols-3, .matrix, .lesson-head, .lesson-grid, .prompt-bank, .starter-kit { grid-template-columns: 1fr; }
+      .matrix-cell, .matrix-cell:nth-child(3n), .matrix-cell:nth-last-child(-n+3) {
+        border-right: 0;
+        border-bottom: 1px solid var(--line);
+      }
+      .matrix-cell:last-child { border-bottom: 0; }
+      .workflow .card::after { display: none; }
+    }
+    @media (max-width: 720px) {
+      .topbar-inner { align-items: flex-start; flex-direction: column; }
+      nav { width: 100%; }
+      .print-link { display: none; }
+      .hero { padding-top: 30px; }
+      h1 { font-size: 36px; }
+      h2 { font-size: 25px; }
+      .section-head { display: block; }
+      .section-desc { margin-top: 10px; }
+      .hero-tags, .hero-metrics, .flow, .mock-grid, .grid.cols-2, .grid.cols-4, .workflow, .do-dont {
+        grid-template-columns: 1fr;
+      }
+      .flow-step::after { display: none; }
+      .brand { min-width: 0; }
+    }
+    @media print {
+      .topbar { display: none; }
+      body { background: #fff; }
+      .band, .hero { break-inside: avoid; page-break-inside: avoid; }
+      .card, .quote, .callout, .hero-visual { box-shadow: none; }
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-inner">
+      <a class="brand" href="#top" aria-label="返回首页">
+        <span class="brand-mark"></span>
+        <span>项目运营 Codex 培训</span>
+      </a>
+      <nav aria-label="课程导航">
+        <a href="#setup">注册上手</a>
+        <a href="#why">为什么学</a>
+        <a href="#role">岗位地图</a>
+        <a href="#source">资料融入</a>
+        <a href="#scenes">七大场景</a>
+        <a href="#deep-scenes">案例拆解</a>
+        <a href="#prompt">提问方法</a>
+        <a href="#workflows">操作流程</a>
+        <a href="#templates">提示词库</a>
+        <a href="#public">公域增长</a>
+        <a href="#rollout">团队落地</a>
+      </nav>
+      <button class="print-link" type="button" onclick="window.print()">打印/导出 PDF</button>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero wrap">
+      <div>
+        <div class="eyebrow">面向职业培训项目运营岗位</div>
+        <h1>如何用 Codex 把项目运营工作做得更快、更稳、更有增长感</h1>
+        <p class="hero-sub">
+          这是一套给同岗位同事看的实战课件。以中级注册安全工程师项目为例，把周报分析、项目方案、销售支持、调研洞察、海报文案、公域获客和团队协同串成一套可复制方法。
+        </p>
+        <div class="hero-actions">
+          <a class="btn primary" href="#quickstart">从 10 分钟上手开始</a>
+          <a class="btn secondary" href="#templates">查看可复制模板</a>
+        </div>
+        <div class="hero-tags">
+          <div class="tag"><strong>适合谁</strong>项目运营、课程运营、销售支持、活动运营、新媒体协同岗位</div>
+          <div class="tag"><strong>学完会什么</strong>会把零散需求变成方案、话术、周报、复盘和增长动作</div>
+          <div class="tag"><strong>交付标准</strong>小白能照着问，老人能沉淀方法，团队能统一工作语言</div>
+        </div>
+        <div class="hero-metrics">
+          <div class="hero-metric"><b>12</b><span>个培训章节，可直接投屏讲</span></div>
+          <div class="hero-metric"><b>6</b><span>个岗位场景，覆盖日常高频工作</span></div>
+          <div class="hero-metric"><b>30+</b><span>条提示词模板，复制后替换信息即可</span></div>
+          <div class="hero-metric"><b>1</b><span>套团队落地机制，避免培训后不用</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-label="Codex 项目运营工作台示意图">
+        <div class="mock-head">
+          <div class="mock-title">中级注安项目工作台</div>
+          <div class="mock-pill">从信息到交付</div>
+        </div>
+        <div class="flow">
+          <div class="flow-step"><b>输入</b><span>数据、活动背景、课程资料、销售反馈、学员调研</span></div>
+          <div class="flow-step"><b>理解</b><span>判断目标、用户、瓶颈、资源和交付对象</span></div>
+          <div class="flow-step"><b>生成</b><span>周报、方案、话术、问卷、海报文案、复盘</span></div>
+          <div class="flow-step"><b>沉淀</b><span>形成模板、素材库、渠道地图和增长动作</span></div>
+        </div>
+        <div class="mock-grid">
+          <div class="mock-panel">
+            <h3>项目运营高频任务</h3>
+            <div class="bar-row"><span>周报</span><div class="bar teal"><span style="width: 88%"></span></div><span>高频</span></div>
+            <div class="bar-row"><span>话术</span><div class="bar blue"><span style="width: 76%"></span></div><span>高频</span></div>
+            <div class="bar-row"><span>方案</span><div class="bar amber"><span style="width: 68%"></span></div><span>常用</span></div>
+            <div class="bar-row"><span>调研</span><div class="bar green"><span style="width: 58%"></span></div><span>关键</span></div>
+          </div>
+          <div class="mock-panel">
+            <h3>一条可复用增长链路</h3>
+            <div class="mini-table">
+              <div class="mini-row"><span>公域找人</span><b>渠道地图、内容钩子</b></div>
+              <div class="mini-row"><span>私域接住</span><b>资料包、社群、公开课</b></div>
+              <div class="mini-row"><span>销售转化</span><b>分层话术、异议处理</b></div>
+              <div class="mini-row"><span>交付复用</span><b>案例、反馈、复盘</b></div>
+            </div>
+          </div>
+        </div>
+        <div class="prompt-card">请参考项目工作台里的周报模板，根据下面数据写一份本周项目周报。重点分析营收、流量、转化、异常原因和下周动作。</div>
+      </div>
+    </section>
+
+    <section id="setup" class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">00 · 新人先看这里</div>
+            <h2>Codex 能帮什么，以及小白怎么开始用</h2>
+          </div>
+          <p class="section-desc">这一页建议放在培训最前面。不要一开始就讲复杂提示词，先让新人知道：Codex 是一个能帮你整理资料、生成初稿、分析数据、改写话术、沉淀模板的工作助手。</p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card">
+            <span class="badge teal">它是什么</span>
+            <h3>不是搜索框，而是工作协作者</h3>
+            <p>你可以把周报数据、活动方案、产品手册、销售反馈、调研表发给它，让它帮你整理结构、提炼重点、生成初稿、检查逻辑。</p>
+          </div>
+          <div class="card">
+            <span class="badge blue">它适合做什么</span>
+            <h3>重复、复杂、需要结构化的工作</h3>
+            <ul>
+              <li>写周报、月报、复盘。</li>
+              <li>做活动方案、直播方案、复购方案。</li>
+              <li>整理销售话术、竞品对比、调研分析。</li>
+              <li>把历史材料沉淀成模板。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge amber">它不能替你做什么</span>
+            <h3>不能替代业务判断</h3>
+            <p>数据口径、价格政策、考试政策、对外承诺、领导最终口径，仍然需要人工确认。Codex 负责提效，你负责判断和把关。</p>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <div class="lesson-grid">
+          <div class="case-box">
+            <h4>新人注册/登录的简单流程</h4>
+            <div class="step-list">
+              <div class="step-item">打开公司提供的 Codex 入口或 OpenAI/Codex 应用入口。</div>
+              <div class="step-item">使用公司允许的账号方式登录，例如企业邮箱、OpenAI账号或公司统一账号。</div>
+              <div class="step-item">新建或打开一个项目工作区，选择你要处理的资料所在文件夹。</div>
+              <div class="step-item">把周报、方案、表格、截图、产品手册等资料发给 Codex。</div>
+              <div class="step-item">用“身份 + 任务 + 资料 + 输出格式 + 要求”开始第一个问题。</div>
+            </div>
+          </div>
+          <div class="mini-panel">
+            <h4>第一次使用建议</h4>
+            <ul>
+              <li>先从一个真实小任务开始，比如“根据这份数据写周报结论”。</li>
+              <li>不要一次问太大，可以先让它提框架，再让它写全文。</li>
+              <li>输出后继续追问：更具体一点、改成领导汇报版、补行动清单。</li>
+              <li>每次好用的提示词，都保存到团队提示词库。</li>
+            </ul>
+            <div style="height:10px"></div>
+            <div class="prompt light"><div class="prompt-title">新人第一条提问</div>我是一名职业培训机构项目运营，负责中级注册安全工程师项目。
+我现在要做【任务名称】，资料如下：
+【粘贴资料】
+
+请帮我先整理：
+1. 这份资料的核心内容
+2. 可以产出哪些工作成果
+3. 我应该补充哪些信息
+4. 下一步最适合让你帮我做什么</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="why" class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">01 · 先统一认知</div>
+            <h2>Codex 不是替你“写几段话”，而是帮你搭建项目运营工作系统</h2>
+          </div>
+          <p class="section-desc">同岗位同事最容易误解的一点：把 Codex 当搜索框。真正高效的用法，是把它当成能阅读资料、整理结构、生成交付物、检查逻辑、沉淀模板的项目副手。</p>
+        </div>
+        <div class="grid cols-4">
+          <div class="card">
+            <span class="num">1</span>
+            <h3>把零散信息结构化</h3>
+            <p>领导一句要求、销售一堆反馈、表格一堆数据，Codex 可以先帮你拆成目标、问题、动作、责任和风险。</p>
+          </div>
+          <div class="card">
+            <span class="num blue">2</span>
+            <h3>把专业内容销售化</h3>
+            <p>课程模块、师资、资料和服务，可以转成销售听得懂、学员愿意听、海报能呈现的利益点。</p>
+          </div>
+          <div class="card">
+            <span class="num amber">3</span>
+            <h3>把数据变成判断</h3>
+            <p>周报不只是填数，而是判断哪个环节卡住：流量、到课、转化、客单价、渠道质量还是活动主题。</p>
+          </div>
+          <div class="card">
+            <span class="num green">4</span>
+            <h3>把经验沉淀为模板</h3>
+            <p>每次活动、周报、话术和复盘，都能沉淀成下次可复用的文件，让个人经验变成团队资产。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="quickstart" class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">02 · 10 分钟上手</div>
+            <h2>小白第一次用 Codex，按这 5 步就够</h2>
+          </div>
+          <p class="section-desc">不要一开始就追求“提示词大师”。先把工作背景、目标、资料、输出格式说清楚，再让 Codex 生成第一版，你负责判断和补充。</p>
+        </div>
+        <div class="workflow">
+          <div class="card">
+            <span class="badge teal">第 1 步</span>
+            <h3>说清角色</h3>
+            <p>告诉 Codex：你是项目运营，负责中级注安，产出要给谁看。</p>
+          </div>
+          <div class="card">
+            <span class="badge blue">第 2 步</span>
+            <h3>说清任务</h3>
+            <p>是写周报、做方案、训销售、做海报，还是分析调研。</p>
+          </div>
+          <div class="card">
+            <span class="badge amber">第 3 步</span>
+            <h3>给足资料</h3>
+            <p>粘贴数据、课程内容、活动背景、学员反馈或历史模板。</p>
+          </div>
+          <div class="card">
+            <span class="badge red">第 4 步</span>
+            <h3>规定格式</h3>
+            <p>要求输出表格、汇报稿、话术库、行动清单或领导版摘要。</p>
+          </div>
+          <div class="card">
+            <span class="badge">第 5 步</span>
+            <h3>追问优化</h3>
+            <p>让它压缩、换语气、补风险、加数据判断、改成销售语言。</p>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <div class="prompt">万能开头：
+我是一名职业培训机构项目运营，负责中级注册安全工程师项目。现在我要做【任务】，使用对象是【领导/销售/学员/市场/团队】。请结合【资料】，帮我输出【格式】。要求语言【专业/接地气/适合汇报/适合销售转化】，并给出可执行动作。</div>
+      </div>
+    </section>
+
+    <section id="role" class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">03 · 项目运营岗位地图</div>
+            <h2>你的工作不是杂，而是横跨 6 条业务链路</h2>
+          </div>
+          <p class="section-desc">给团队培训时，先帮大家看见自己的工作全貌。Codex 的价值也正是覆盖这些链路：从经营分析到内容生产，从销售转化到外部获客。</p>
+        </div>
+        <div class="matrix">
+          <div class="matrix-cell">
+            <h3>经营分析</h3>
+            <p>周报、月报、营收拆解、渠道表现、销售端口、流量转化、异常归因、下周动作。</p>
+          </div>
+          <div class="matrix-cell">
+            <h3>项目推进</h3>
+            <p>活动方案、时间表、部门分工、会议纪要、风险预案、过程追踪、复盘沉淀。</p>
+          </div>
+          <div class="matrix-cell">
+            <h3>销售赋能</h3>
+            <p>课程卖点、销售培训、私聊话术、电话话术、异议处理、朋友圈文案、成交工具。</p>
+          </div>
+          <div class="matrix-cell">
+            <h3>课程产品</h3>
+            <p>学习路径、班型包装、服务设计、资料权益、阶段课程、用户价值表达。</p>
+          </div>
+          <div class="matrix-cell">
+            <h3>用户洞察</h3>
+            <p>学员调研、访谈提纲、反馈归纳、心理状态分析、未成交原因、需求分层。</p>
+          </div>
+          <div class="matrix-cell">
+            <h3>增长拓展</h3>
+            <p>公域渠道地图、资料包钩子、公开课承接、合作渠道、老学员转介绍、线索质量复盘。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="source" class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">04 · 把真实资料融入课件</div>
+            <h2>这六份材料，正好覆盖项目运营的六种核心能力</h2>
+          </div>
+          <p class="section-desc">你给的资料不需要原样放进课件，而是要提炼成“案例、方法和模板”。这样同事学到的不是某一次具体活动，而是一套以后可以反复迁移的工作方式。</p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card">
+            <span class="badge teal">资料 1 · 月度复盘</span>
+            <h3>经营分析案例库</h3>
+            <p>《安全项目26年5月数据复盘》适合放进周报/月报培训。它的价值是展示：项目运营如何从业绩、流量、销售、电商、产品和举措多维度判断问题。</p>
+            <ul>
+              <li>可提炼数据口径：目标、核算收入、完成率、同比、缺口、季度完成度。</li>
+              <li>可提炼分析框架：整体业绩、端口业绩、销售团队、流量渠道、电商、产品结构。</li>
+              <li>可提炼行动主题：保流量、提转化、变续报、B端团报、扶IP。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge blue">资料 2 · 产品手册</span>
+            <h3>销售赋能案例库</h3>
+            <p>《2026年中级注安云私塾产品手册》适合放进销售话术培训。它的价值是展示：项目运营如何把课程体系、服务权益和平台功能转成销售语言。</p>
+            <ul>
+              <li>可提炼课程亮点：智能学习平台、案例带刷、记忆卡、30天集训刷题、班主任伴学、不过重学。</li>
+              <li>可提炼学习路径：先导、基础、强化、冲刺、临考。</li>
+              <li>可提炼销售表达：省时间、抓重点、会做题、有人盯、有保障。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge amber">资料 3 · 直播安排</span>
+            <h3>项目推进案例库</h3>
+            <p>《25年中级注安云私塾发布会直播安排》适合放进活动方案培训。它的价值是展示：一场直播不是开播当天的事，而是前、中、后全链路项目。</p>
+            <ul>
+              <li>可提炼直播 SOP：基本信息、直播前筹备、直播中互动、直播后标签和复盘。</li>
+              <li>可提炼协同表：项目、销售、服务、市场、老师各自要交付什么。</li>
+              <li>可提炼推广节奏：预约阶段、直播前提醒、直播中触达、直播后跟进。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge red">资料 4 · 竞品调研</span>
+            <h3>市场策略案例库</h3>
+            <p>《26年中级注安竞品调研》适合放进市场判断和产品策略培训。它的价值是展示：项目运营如何把竞品价格、课程、师资、智能系统和用户问卷转成对抗策略。</p>
+            <ul>
+              <li>可提炼竞品维度：产品体系、价格、师资、智能系统、保障、课程内容、战略打法。</li>
+              <li>可提炼对抗策略：价格对标、师资背书、云私塾系统优势、资料和服务差异化。</li>
+              <li>可提炼用户洞察：样本217人，二战和刚开始复习学员居多，关注师资、通关率、价格。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge blue">资料 5 · 完课数据</span>
+            <h3>交付分析案例库</h3>
+            <p>《云私塾系统完课率》适合放进教学交付和学员行为分析培训。它的价值是展示：项目运营不只看成交，也要看学员是否真的学、在哪个环节流失。</p>
+            <ul>
+              <li>可提炼数据口径：商品、教学方式、用户、完成数、配置数、完成率、录播完成情况。</li>
+              <li>可提炼分析发现：约841名用户，考点精讲完成率相对最高，备考指导、案例专项、实战模考偏低。</li>
+              <li>可提炼运营动作：分层提醒、低完课环节干预、班主任跟进、课程节奏优化。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge teal">资料 6 · 复购方案</span>
+            <h3>跨项目复购案例库</h3>
+            <p>《复购活动方案规划》适合放进成绩后/考试后转化培训。它的价值是展示：项目运营如何从考试节点、历史订单、关联考试、优惠政策、直播活动和标签跟进中找到复购机会。</p>
+            <ul>
+              <li>可提炼复购逻辑：相关考试出成绩或考试后，学员会考虑继续购买中级注安。</li>
+              <li>可提炼活动链路：筛选人群、设置政策、准备话术物料、做复购直播、打标签、销售跟进。</li>
+              <li>可提炼数据标签：预约直播、出席直播≥3分钟、浏览详情页、领取资料、下单未支付。</li>
+            </ul>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <div class="callout">
+          <strong>融入方式：</strong>课件不直接展示大段原表，而是把六份材料分别变成可教学案例：月度复盘教经营分析，产品手册教销售赋能，直播安排教项目推进，竞品调研教市场策略，完课数据教交付分析，复购方案教跨项目转化。以后你再发历史材料，也可以按这个逻辑继续扩充案例库。
+        </div>
+      </div>
+    </section>
+
+    <section id="scenes" class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">05 · 七大高频使用场景</div>
+            <h2>同岗位最应该先学会的 7 件事</h2>
+          </div>
+          <p class="section-desc">下面每个场景都可以独立培训 10 分钟。建议团队先统一模板，再统一交付标准，最后沉淀成项目工作台。</p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card">
+            <span class="badge teal">场景 1</span>
+            <h3>周报与经营分析</h3>
+            <p>把数据变成结论，判断业绩、流量、转化、渠道和端口问题。</p>
+            <ul>
+              <li>输入：营收、线索、成交、到课、渠道、端口数据。</li>
+              <li>输出：领导版周报、问题归因、下周动作。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge blue">场景 2</span>
+            <h3>项目运营方案</h3>
+            <p>把活动想法变成可执行项目，明确目标、动作、分工和风险。</p>
+            <ul>
+              <li>输入：活动背景、目标人群、时间节点、可用资源。</li>
+              <li>输出：项目方案、推进表、会议议程。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge amber">场景 3</span>
+            <h3>销售话术与培训</h3>
+            <p>把课程内容翻译成销售能讲、用户能懂、能推动成交的话术。</p>
+            <ul>
+              <li>输入：班型、课程、老师、服务、价格、权益。</li>
+              <li>输出：卖点、异议处理、培训稿。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge red">场景 4</span>
+            <h3>学员调研与洞察</h3>
+            <p>把问卷、访谈和社群反馈整理成学员心理状态和运营动作。</p>
+            <ul>
+              <li>输入：问卷结果、聊天记录、销售反馈。</li>
+              <li>输出：人群分层、痛点分析、下一步策略。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge">场景 5</span>
+            <h3>海报与内容文案</h3>
+            <p>快速生成活动标题、利益点、朋友圈文案和设计说明。</p>
+            <ul>
+              <li>输入：主题、人群、权益、渠道、活动时间。</li>
+              <li>输出：海报文案、版式建议、图片提示词。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge blue">场景 6</span>
+            <h3>公域获客与增长</h3>
+            <p>从内部支持走向外部拓展，主动找渠道、做钩子、建承接。</p>
+            <ul>
+              <li>输入：用户画像、渠道资源、考试节点、资料权益。</li>
+              <li>输出：渠道地图、获客链路、复盘表。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge teal">场景 7</span>
+            <h3>复购活动与跨项目转化</h3>
+            <p>利用相关考试出成绩、考试后、报名期等节点，把高关联学员转化到中级注安。</p>
+            <ul>
+              <li>输入：考试节点、历史订单、关联考试、优惠政策、直播资源、标签数据。</li>
+              <li>输出：复购活动方案、直播SOP、销售话术、标签跟进表。</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="deep-scenes" class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">06 · 场景案例拆解</div>
+            <h2>每个场景都给一个案例，小白照着走就能完成第一版</h2>
+          </div>
+          <p class="section-desc">这一章是整套培训最适合详细讲的部分。建议你现场选 1-2 个案例演示，让同事看到 Codex 不是“会聊天”，而是能把工作推进到交付物。</p>
+        </div>
+
+        <div class="scene-deck">
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>01</b><span>周报与经营分析</span></div>
+              <div>
+                <h3>案例：5月安全项目完成率 86.44%，但线索同比增长，怎么写出有判断的复盘</h3>
+                <p>这个案例来自你的月度复盘材料。小白常见问题是只会罗列数据，不会判断原因。这个场景要训练大家：先看结果，再拆过程，最后给动作。Codex 能帮你把数据转成领导能看的经营语言。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>从原表提炼出的关键事实</h4>
+                  <ul>
+                    <li>安全项目5月目标 480万，核算收入约 414.91万，完成率 86.44%，同比下降 9%。</li>
+                    <li>中级注安核算收入约 378.50万，月度完成率约 86.20%，同比下降 13.28%。</li>
+                    <li>渠道总体例子量 21419，同比实现增长，但收入和转化表现没有同步放大。</li>
+                    <li>原表判断里出现“流量增、转化低、首售平、续报少、IP弱”等核心痛点。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>这个案例要教会小白什么</h4>
+                  <ul>
+                    <li>不能只看业绩结果，还要看流量、转化、客单和产品结构。</li>
+                    <li>“线索增长”不等于“经营健康”，还要看有效线索和成交效率。</li>
+                    <li>复盘结尾要能落到动作，例如保流量、提转化、变续报、B端团报、扶IP。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="divider-title">标准操作步骤</div>
+              <div class="step-list">
+                <div class="step-item">先让 Codex 输出“核心结论”，不要一上来写完整周报。</div>
+                <div class="step-item">追问异常：营收下滑到底是线索质量、到课率、销售转化还是客单价问题。</div>
+                <div class="step-item">让 Codex 把原因分成“数据能证明的”和“需要进一步确认的”。</div>
+                <div class="step-item">要求生成下周动作表，必须包含负责人、截止时间、验收标准。</div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我是一名中级注册安全工程师项目运营，现在要写月度数据复盘。
+已知数据：
+1. 安全项目5月目标 480万，核算收入 414.91万，完成率 86.44%，同比下降 9%
+2. 中级注安核算收入 378.50万，完成率约 86.20%，同比下降 13.28%
+3. 渠道总体例子量 21419，同比实现增长
+4. 当前初步判断是：流量增、转化低、首售平、续报少、IP弱
+补充数据如下：
+【粘贴销售、电商、产品、流量、端口数据】
+
+请先不要直接写全文，先帮我输出：
+1. 本月最重要的 5 条经营结论
+2. 哪些数据是亮点
+3. 哪些数据是风险
+4. 业绩未达标最可能的 3 个原因
+5. 还需要我补充哪些数据才能判断更准</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>追问 1</strong>请把原因按“流量问题、到课问题、转化问题、客单问题、销售动作问题”分类。</div>
+                <div class="prompt-chip"><strong>追问 2</strong>请帮我改成适合发给领导的周报语言，客观、有判断、不甩锅。</div>
+                <div class="prompt-chip"><strong>追问 3</strong>请输出下周重点动作表，包含事项、负责人、截止时间、验收标准。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>02</b><span>项目运营方案</span></div>
+              <div>
+                <h3>案例：中级注安云私塾发布会直播，怎么拆成前、中、后全链路项目</h3>
+                <p>这个案例来自你的直播安排材料。它训练大家把一次直播从“开播当天”升级为完整项目：直播目的、受众定位、宣传排期、物料交付、直播互动、标签圈选和复盘跟进。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>从原方案提炼出的活动目标</h4>
+                  <ul>
+                    <li>品牌宣传：让用户知道云私塾产品升级和学习价值。</li>
+                    <li>直播成单：通过发布会氛围促进定金和课程成交。</li>
+                    <li>直播加微：把观看用户导入销售和私域承接。</li>
+                    <li>激活用户：通过短信、私域、服务部门多触点触达老线索和学员。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>直播方案必须回答 4 个问题</h4>
+                  <ul>
+                    <li>直播前：详情页、海报、课程页、短信、私域推送谁来做。</li>
+                    <li>直播中：谁控场、谁讲产品、谁答疑、谁盯转化。</li>
+                    <li>直播后：预约、观看、互动、讨论区用户如何打标签。</li>
+                    <li>复盘时：看预约、到场、互动、加微、定金、成交和跟进效果。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="divider-title">标准操作步骤</div>
+              <div class="step-list">
+                <div class="step-item">先输入直播目的、平台、师资、主题、目标人群和转化目标。</div>
+                <div class="step-item">让 Codex 按直播前、直播中、直播后拆 SOP。</div>
+                <div class="step-item">继续追问物料排期：详情页、预约海报、短信、私域文案、课程页。</div>
+                <div class="step-item">最后让 Codex 生成标签圈选和直播复盘指标，方便直播后跟进。</div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我要做一场中级注册安全工程师云私塾发布会直播。
+直播目的包括：品牌宣传、直播成单、售卖定金、直播加微、激活用户。
+直播主题是：【填写主题，例如 AI 赋能备考，注安云私塾助力逆袭新路径】。
+直播平台包括：【端内/抖音/视频号/私域】。
+涉及部门有：【项目运营、销售、服务、市场、教研/老师】。
+已有物料包括：【直播详情页、预约海报、课程详情页、短信、私域推送文案】。
+
+请帮我输出一份完整项目运营方案，包含：
+1. 项目背景
+2. 直播目标和关键指标
+3. 目标用户和用户痛点
+4. 直播主题和产品卖点
+5. 直播前/中/后 SOP
+6. 各部门分工
+7. 推广排期和物料清单
+8. 直播标签设计
+9. 风险预案
+10. 直播后复盘指标和销售跟进动作</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>追问 1</strong>请把方案压缩成一页领导汇报版，突出目标、策略、资源需求。</div>
+                <div class="prompt-chip"><strong>追问 2</strong>请生成项目启动会会议议程和会上要确认的问题。</div>
+                <div class="prompt-chip"><strong>追问 3</strong>请补充短信、私域、销售朋友圈和直播前1小时提醒文案。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>03</b><span>销售话术与培训</span></div>
+              <div>
+                <h3>案例：把《云私塾产品手册》讲成销售能直接成交的课程价值</h3>
+                <p>这个案例来自你的产品手册。销售支持的核心不是堆课程功能，而是把“智能平台、课程阶段、资料服务、协议保障”翻译成用户收益。Codex 可以帮你把教研语言、产品语言变成销售语言。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>转换前：产品手册里的功能</h4>
+                  <ul>
+                    <li>云私塾功能升级：定制学习方案、进度智能预警、复习模式、二战模式。</li>
+                    <li>课程阶段完整：先导、基础、强化、冲刺、临考密训、应试技巧。</li>
+                    <li>学习工具丰富：考点闪记卡、30天集训刷题、案例带刷、真题模考。</li>
+                    <li>服务保障：班主任伴学、学习档案、报名指导、不过可享重学。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>转换后：销售表达</h4>
+                  <ul>
+                    <li>不是让学员自己摸索，而是系统根据基础匹配学习路径，节省时间。</li>
+                    <li>遗忘补强、记忆卡和错题训练解决“学了就忘、做题总错”。</li>
+                    <li>案例带刷和实务专项解决“实务主观题不会写、不会答”的问题。</li>
+                    <li>班主任和协议保障解决“怕坚持不下来、怕钱白花”的顾虑。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="divider-title">标准操作步骤</div>
+              <div class="step-list">
+                <div class="step-item">输入课程信息，让 Codex 先做“功能 - 痛点 - 价值”三列表。</div>
+                <div class="step-item">按学员类型拆话术：零基础、在职、二战、临考焦虑、价格敏感。</div>
+                <div class="step-item">按沟通场景拆话术：私聊、电话、朋友圈、公开课后跟进。</div>
+                <div class="step-item">最后生成销售培训稿，让销售知道为什么这么讲。</div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>下面是中级注册安全工程师云私塾产品信息：
+1. 课程亮点：智能学习平台、案例带刷、考点闪记卡、30天集训刷题、班主任伴学、不过可重学
+2. 学习阶段：先导阶段、基础阶段、强化阶段、冲刺阶段、临考阶段
+3. 功能：定制学习方案、学习进度智能预警、复习模式、二战模式、遗忘补强算法、智能答疑
+4. 服务：报名指导、入学指导、学情问题解决、学习档案、班主任服务
+补充资料：
+【粘贴产品手册里的课程、资料、服务、价格、协议等内容】
+
+请站在销售培训负责人的角度，帮我把课程内容转成销售能直接用的话术。
+请先输出一张表：课程功能、对应学员痛点、销售表达、证明材料。
+然后继续输出：
+1. 零基础学员话术
+2. 在职时间少学员话术
+3. 二战学员话术
+4. 临考焦虑学员话术
+5. 价格敏感学员话术
+6. 销售培训讲稿
+要求：接地气、有专业感、不夸大承诺。</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>追问 1</strong>请把话术改得更像销售私聊，不要像宣传文案。</div>
+                <div class="prompt-chip"><strong>追问 2</strong>请补充“没时间、怕考不过、价格贵、再考虑、证书没用”五类异议处理。</div>
+                <div class="prompt-chip"><strong>追问 3</strong>请生成销售新人 3 分钟速记版，只保留最关键表达。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>04</b><span>学员调研与洞察</span></div>
+              <div>
+                <h3>案例：考前阶段学员很焦虑，怎么判断下一步运营动作</h3>
+                <p>调研不是为了收集一堆回答，而是为了指导活动、课程、服务和销售。Codex 可以帮你设计问卷、分析反馈、做人群分层。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>调研要问什么</h4>
+                  <ul>
+                    <li>当前学习进度：没开始、基础期、刷题期、冲刺期。</li>
+                    <li>主要困难：没时间、记不住、做题差、不知道重点。</li>
+                    <li>心理状态：有信心、一般、焦虑、想放弃。</li>
+                    <li>课程需求：规划、重点、刷题、答疑、督学、资料。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>分析要落到动作</h4>
+                  <ul>
+                    <li>焦虑型：给学习路径和冲刺规划。</li>
+                    <li>拖延型：给打卡、督学和阶段任务。</li>
+                    <li>迷茫型：给备考诊断和科目顺序。</li>
+                    <li>价格敏感型：给权益拆解和试听体验。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我想调研中级注册安全工程师学员当前考前备考状态。
+调研目的：
+1. 判断学员现在主要是焦虑、拖延、迷茫，还是价格敏感
+2. 找到影响学习和成交的关键阻碍
+3. 为下一步公开课、冲刺营、销售话术提供依据
+
+请帮我设计一份问卷，包含：
+1. 基础信息题
+2. 备考进度题
+3. 心理状态题
+4. 课程需求题
+5. 转化阻碍题
+6. 开放题
+7. 每道题背后的分析目的
+8. 根据结果可以采取的运营动作</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>分析反馈</strong>下面是问卷结果，请帮我归纳学员状态、高频问题和下一步活动建议。</div>
+                <div class="prompt-chip"><strong>销售跟进</strong>请按高意向、中意向、低意向，把学员分层并给对应跟进话术。</div>
+                <div class="prompt-chip"><strong>内容选题</strong>请把学员高频问题转成 20 个公域短视频/图文选题。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>05</b><span>海报与内容文案</span></div>
+              <div>
+                <h3>案例：做一张“考前冲刺公开课”海报，销售要能直接转发</h3>
+                <p>海报不是好看就行，要让目标学员看懂“这和我有什么关系”。Codex 可以先帮你完成标题、利益点、版式和朋友圈配文。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>海报文案四件套</h4>
+                  <ul>
+                    <li>主标题：一句话说清活动主题。</li>
+                    <li>副标题：说明适合哪类学员。</li>
+                    <li>利益点：用户听完能获得什么。</li>
+                    <li>行动口令：预约、领取资料、进群、听课。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>新手检查点</h4>
+                  <ul>
+                    <li>标题是否太空，比如“重磅来袭”。</li>
+                    <li>是否有明确人群：在职、基础弱、二战、考前焦虑。</li>
+                    <li>是否有真实利益点，不要只写“名师授课”。</li>
+                    <li>是否过度承诺，比如保证通过。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我要做一张中级注册安全工程师考前冲刺公开课海报。
+目标人群是：在职备考、基础一般、进度落后、考前焦虑的学员。
+活动内容是：老师讲考前 60 天复习重点、刷题方法、失分点和冲刺规划。
+核心权益是：免费公开课、备考资料包、学习规划表。
+使用渠道是：销售朋友圈、社群、私聊转发。
+
+请帮我输出：
+1. 8 个主标题，分成专业型、焦虑转行动型、资料领取型
+2. 3 个副标题
+3. 5 个利益点
+4. 按钮文案
+5. 朋友圈配文
+6. 销售私发配文
+7. 海报版式建议
+8. 图片生成提示词
+要求：专业、有紧迫感，但不要过度制造焦虑。</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>改风格</strong>请把标题改得更适合朋友圈，不要太像机构广告。</div>
+                <div class="prompt-chip"><strong>改人群</strong>请针对二战学员重新写一版海报文案。</div>
+                <div class="prompt-chip"><strong>改渠道</strong>请把文案改成适合社群群发的短版本。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>06</b><span>公域获客与增长</span></div>
+              <div>
+                <h3>案例：从5月关键举措看，项目运营如何走出去做增长</h3>
+                <p>这个案例结合你的5月复盘“保流量、提转化、变续报、B端团报、扶IP”。重点不是让大家都去做新媒体，而是让项目运营能设计外部获客闭环：场域、钩子、承接、转化。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>能拓展的场域</h4>
+                  <ul>
+                    <li>内容平台：抖音、小红书、知乎、公众号、B站。</li>
+                    <li>行业渠道：安全生产、EHS、建筑施工、化工制造社群。</li>
+                    <li>相近证书：安全员、建造师、消防、监理人群。</li>
+                    <li>存量裂变：老学员、意向学员、未成交学员转介绍。</li>
+                    <li>B端机会：从C端学员中识别企业员工、开发票、多人报名、团报咨询用户。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>和5月关键举措怎么对应</h4>
+                  <ul>
+                    <li>保流量：SEO、教材联动、题库优化、课堂入口。</li>
+                    <li>提转化：小额客单、私域答疑、书课包消转链路。</li>
+                    <li>变续报：高端产品优化、奖学金活动、售后强化。</li>
+                    <li>扶IP：师资助播、短视频日更、IP矩阵和达人合作。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我负责中级注册安全工程师项目，现在想拓展公域流量和外部获客渠道。
+请帮我建立一张“公域渠道地图”，目标是找到高意向用户和可合作渠道。
+
+请按以下维度输出：
+1. 用户可能出现的平台或场景
+2. 每个场景的用户需求
+3. 适合的引流钩子
+4. 可设计的资料包或公开课主题
+5. 私域承接方式
+6. 销售跟进动作
+7. 关键数据指标
+8. 优先级排序
+
+要求：不要只写内容平台，也要包含行业社群、相近证书、企业安全管理场景和老学员裂变。</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>渠道评估</strong>请帮我把这些渠道按流量空间、获客成本、转化可能、执行难度打分。</div>
+                <div class="prompt-chip"><strong>钩子设计</strong>请为报名期、基础期、冲刺期分别设计 3 个资料包钩子。</div>
+                <div class="prompt-chip"><strong>复盘表</strong>请生成公域线索质量复盘表，包含线索量、有效率、到课率、成交率、客单价。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>07</b><span>竞品调研与策略</span></div>
+              <div>
+                <h3>案例：26年中级注安竞品调研，怎么从“信息收集”变成“对抗策略”</h3>
+                <p>这个案例来自你的竞品调研模板。竞品调研不是把各机构价格、课程、师资抄一遍，而是要回答：我们强在哪里、弱在哪里、销售该怎么讲、产品要怎么补、公域内容该怎么打。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>从原表提炼出的竞品维度</h4>
+                  <ul>
+                    <li>综合对比：产品体系、价格、师资、3D实景、智能系统、课程保障、班次内容、战略打法。</li>
+                    <li>套餐对比：主推班型、零基础班型、冲刺课、价格带、课时、资料和重学保障。</li>
+                    <li>智能系统：学习方案、学习方式、视频智览、学习报告、摸底测评、题集、智能答疑。</li>
+                    <li>用户问卷：样本217人，二战和刚开始复习学员居多，关注师资、通关率、价格。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>调研结果如何转成动作</h4>
+                  <ul>
+                    <li>销售端：形成“对比233/优路/嗨学”的差异化话术。</li>
+                    <li>产品端：判断价格带、保障政策、智能系统、课程内容是否需要调整。</li>
+                    <li>公域端：围绕用户关心的价格、师资、通关率、不过保障做内容。</li>
+                    <li>运营端：建立竞品更新机制，避免调研只做一次就沉没。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="divider-title">标准操作步骤</div>
+              <div class="step-list">
+                <div class="step-item">先让 Codex 把竞品信息按价格、课程、师资、系统、保障、销售打法分类。</div>
+                <div class="step-item">再让它提炼“我们的优势、我们的短板、竞品威胁、可攻击点”。</div>
+                <div class="step-item">要求输出销售话术、公域选题、产品优化建议三类结果。</div>
+                <div class="step-item">最后形成竞品追踪表，明确每月更新哪些信息。</div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我正在做26年中级注册安全工程师竞品调研。
+竞品包括：【233、优路、嗨学、本质注安等】。
+调研维度包括：产品体系、价格、师资、智能系统、课程保障、班次内容、战略打法、用户问卷。
+我会把竞品表格内容粘贴给你：
+【粘贴竞品调研内容】
+
+请帮我输出：
+1. 竞品整体格局判断
+2. 各竞品核心优势和短板
+3. 我们云私塾的可放大优势
+4. 我们需要警惕的短板
+5. 面向销售端的竞品对比话术
+6. 面向产品端的优化建议
+7. 面向公域端的内容选题
+8. 后续竞品追踪表</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>销售对抗</strong>请针对233低价、嗨学退费、优路线下优势，分别写销售回应话术。</div>
+                <div class="prompt-chip"><strong>产品建议</strong>请把竞品差异转成云私塾产品优化建议，按优先级排序。</div>
+                <div class="prompt-chip"><strong>内容选题</strong>请把用户最关心的师资、价格、通关率、不过保障转成公域选题。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>08</b><span>完课数据与交付分析</span></div>
+              <div>
+                <h3>案例：云私塾完课数据，怎么发现学员在哪些环节掉队</h3>
+                <p>这个案例来自你的云私塾系统完课数据。它能训练项目运营从“卖出去”走到“学下去”：看学员是否完成学习、哪个教学方式完成率低、班主任和课程节奏要如何干预。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>从数据中看到的现象</h4>
+                  <ul>
+                    <li>数据约 14711 行，覆盖约 841 名用户。</li>
+                    <li>考点精讲加权完成率约 33.59%，在主要教学方式中相对最高。</li>
+                    <li>备考指导约 15.23%、案例专项约 16.10%、实战模考约 17.17%，完成率偏低。</li>
+                    <li>实战题分班、考点突破班完成率也不高，说明强化和输出环节需要重点干预。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>分析后要转成什么动作</h4>
+                  <ul>
+                    <li>学员分层：0完成、低完成、中完成、高完成分别跟进。</li>
+                    <li>环节干预：低完课教学方式要加提醒、打卡、直播承接或班主任触达。</li>
+                    <li>销售反哺：完课低会影响续报和口碑，不能只看成交。</li>
+                    <li>课程优化：如果某些环节长期低完成，要判断内容难、节奏重还是提醒弱。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="divider-title">标准操作步骤</div>
+              <div class="step-list">
+                <div class="step-item">先让 Codex 按教学方式统计完成率，不要直接看明细。</div>
+                <div class="step-item">再按用户分层：未开始、低完成、正常推进、高完成。</div>
+                <div class="step-item">结合课程阶段判断掉队原因：认知弱、基础长、刷题难、模考压力大。</div>
+                <div class="step-item">输出班主任跟进动作、运营提醒节奏和课程优化建议。</div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我有一份中级注安云私塾系统完课数据，字段包括：
+商品名称、教学方式、uid、完成数、配置数、完成率、录播完成数、录播总数。
+我想分析学员学习交付情况，不只是看成交。
+
+请根据数据帮我输出：
+1. 各教学方式完成率排名
+2. 完成率偏低的教学环节
+3. 学员分层规则：未开始、低完成、中完成、高完成
+4. 可能掉队原因
+5. 班主任跟进动作
+6. 运营提醒节奏
+7. 对课程内容和学习路径的优化建议
+8. 给领导看的交付分析摘要</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>分层动作</strong>请按0完成、低于20%、20%-50%、50%以上设计跟进动作。</div>
+                <div class="prompt-chip"><strong>班主任话术</strong>请给低完课学员写微信提醒话术，要有共情，不要像催作业。</div>
+                <div class="prompt-chip"><strong>复盘摘要</strong>请把完课分析改成领导版，突出风险、原因和下月动作。</div>
+              </div>
+            </div>
+          </article>
+
+          <article class="scene-lesson">
+            <div class="lesson-head">
+              <div class="lesson-index"><b>09</b><span>复购活动与跨项目转化</span></div>
+              <div>
+                <h3>案例：相关考试出成绩后，怎么把高关联学员转化到中级注安</h3>
+                <p>这个案例来自你的复购活动方案。复购的核心不是简单给老学员发优惠，而是抓住考试后、出成绩、报名期这些窗口，把“职业相关、需求相近、学习习惯还在”的学员，用专属政策、直播和销售跟进承接到中级注安。</p>
+              </div>
+            </div>
+            <div class="lesson-body">
+              <div class="lesson-grid">
+                <div class="case-box">
+                  <h4>从复购方案里提炼出的工作链路</h4>
+                  <ul>
+                    <li>筛选目标用户：优先看与中级注安职业相关、知识相关、历史复购率高的考试项目。</li>
+                    <li>抓考试节点：出成绩、考试后、报名期、领证期都是复购沟通窗口。</li>
+                    <li>设置专属政策：凭准考证、历史订单、购买金额、团购人数设计折扣或抵扣。</li>
+                    <li>组织复购直播：讲考试关联、证书价值、学习规划、课程权益，引导加微和咨询。</li>
+                    <li>打标签跟进：预约直播、出席直播≥3分钟、预约未出席、浏览详情页、下单未支付。</li>
+                  </ul>
+                </div>
+                <div class="mini-panel">
+                  <h4>新人要先理解的复购逻辑</h4>
+                  <ul>
+                    <li>复购不是“卖第二个课”，而是基于学员职业路径推荐下一个证书。</li>
+                    <li>考试后学员学习习惯还在，出成绩后会重新评估下一步规划。</li>
+                    <li>销售不能只讲优惠，要讲两个证书为什么相关、为什么现在适合学。</li>
+                    <li>活动不是只有直播，还包括人群圈选、政策确认、物料宣发和后续跟进。</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="divider-title">标准操作步骤</div>
+              <div class="step-list">
+                <div class="step-item">先列出与中级注安高相关的考试项目，例如环评、一消、一建、监理、建造类、工程管理类。</div>
+                <div class="step-item">根据考试节点表，找到哪些项目即将考试、出成绩、报名或领证。</div>
+                <div class="step-item">按历史订单、准考证、浏览行为、直播预约、下单未支付等标签圈选人群。</div>
+                <div class="step-item">设计复购政策：专属优惠、抵扣、团购、限时权益、直播专属福利。</div>
+                <div class="step-item">做复购直播和销售承接：直播讲关联价值，销售跟进高意向标签用户。</div>
+                <div class="step-item">复盘复购活动：看触达、预约、到课、加微、成交、客单价和复购贡献。</div>
+              </div>
+              <div class="prompt light"><div class="prompt-title">可复制提示词</div>我负责中级注册安全工程师项目，现在要做一个跨项目复购活动。
+背景是：一些和中级注安相关度较高的考试，在考试后或出成绩后，会有一批学员考虑继续学习中级注安。
+可用资料包括：
+1. 各项目考试节点表
+2. 历史订单和复购数据
+3. 复购优惠政策
+4. 复购话术和物料
+5. 直播活动安排
+6. 用户标签数据
+
+请帮我输出一份复购活动运营方案，包含：
+1. 活动背景和机会判断
+2. 目标人群筛选规则
+3. 高关联考试项目和推荐理由
+4. 专属优惠政策设计
+5. 直播活动规划
+6. 销售话术和异议处理
+7. 标签圈选和跟进SOP
+8. 各部门分工
+9. 数据复盘指标
+10. 风险点和注意事项</div>
+              <div class="prompt-bank">
+                <div class="prompt-chip"><strong>人群筛选</strong>请帮我设计复购人群分层：高意向、中意向、低意向，以及对应标签规则。</div>
+                <div class="prompt-chip"><strong>复购话术</strong>请针对环评、一消、一建、监理学员，分别写转化到中级注安的话术。</div>
+                <div class="prompt-chip"><strong>直播SOP</strong>请生成复购直播流程：开场、考试关联、证书价值、课程介绍、优惠政策、答疑、加微引导。</div>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="prompt" class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">07 · 提问方法</div>
+            <h2>好问题的公式：身份 + 任务 + 资料 + 标准 + 迭代</h2>
+          </div>
+          <p class="section-desc">培训小白时，把“怎么问”讲透最重要。不会问，就会得到泛泛而谈的回答；会问，Codex 就能接近一个懂业务的助手。</p>
+        </div>
+        <div class="grid cols-2">
+          <div class="card">
+            <h3>一个合格提问长什么样</h3>
+            <div class="prompt">我是一名职业培训机构项目运营，负责中级注册安全工程师。
+现在要给销售做一次课程培训。
+资料如下：
+【粘贴课程内容、价格、服务、权益】
+
+请输出：
+1. 课程核心卖点
+2. 销售私聊话术
+3. 电话沟通话术
+4. 5 个常见异议处理
+5. 一段 10 分钟销售培训讲稿
+
+要求：接地气、有成交感，但不能夸大承诺。</div>
+          </div>
+          <div class="card">
+            <h3>差问题和好问题的区别</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>差问题</th><th>问题在哪里</th><th>改成这样问</th></tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>帮我写个活动方案</td>
+                    <td>缺少背景、目标、人群、资源和输出格式。</td>
+                    <td>我要做中级注安考前冲刺活动，目标是提升到课和成交，请按项目方案输出。</td>
+                  </tr>
+                  <tr>
+                    <td>帮我分析数据</td>
+                    <td>不知道看什么指标，也不知道要给谁看。</td>
+                    <td>请从营收、线索、到课、转化和渠道质量分析本周数据，输出领导版周报。</td>
+                  </tr>
+                  <tr>
+                    <td>帮我写话术</td>
+                    <td>不知道面向谁、场景是什么、用户顾虑是什么。</td>
+                    <td>请针对没时间、怕考不过、价格贵三个异议，写私聊版和电话版回应。</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="workflows" class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">08 · 具体操作流程</div>
+            <h2>把每类工作做成固定流程，团队效率会明显提高</h2>
+          </div>
+          <p class="section-desc">下面这些流程可以直接放到培训里讲。每个流程都包含“准备资料、让 Codex 生成、人工检查、沉淀复用”。</p>
+        </div>
+        <div class="grid cols-2">
+          <div class="card">
+            <span class="badge teal">周报流程</span>
+            <h3>从表格到领导版经营判断</h3>
+            <div class="checklist">
+              <div class="check">准备本周和上周数据：营收、线索、成交、到课、渠道、销售端口。</div>
+              <div class="check">让 Codex 先提 3-5 条核心结论，不急着写全文。</div>
+              <div class="check">继续追问异常原因：是流量、转化、客单价、活动还是销售动作问题。</div>
+              <div class="check">要求输出下周动作表：事项、负责人、截止时间、验收标准。</div>
+              <div class="check">人工检查数据口径和敏感表述，再发给领导。</div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="badge blue">方案流程</span>
+            <h3>从一句需求到跨部门项目方案</h3>
+            <div class="checklist">
+              <div class="check">先明确活动目的：获客、到课、成交、续报、召回还是口碑。</div>
+              <div class="check">说明目标人群和考试节点，比如报名期、基础期、冲刺期、考后期。</div>
+              <div class="check">让 Codex 拆目标、策略、阶段动作、部门分工、物料清单和风险。</div>
+              <div class="check">再要求生成会议议程和推进表，方便拉销售、教研、市场协同。</div>
+              <div class="check">项目结束后用同一套结构做复盘，形成下次活动经验。</div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="badge amber">销售流程</span>
+            <h3>从课程资料到销售能用的话术</h3>
+            <div class="checklist">
+              <div class="check">输入课程模块、服务、老师、资料、价格、优惠和适合人群。</div>
+              <div class="check">先让 Codex 提炼“用户痛点对应课程价值”，避免只罗列功能。</div>
+              <div class="check">按私聊、电话、朋友圈、公开课后跟进拆成不同场景话术。</div>
+              <div class="check">补充异议处理：没时间、怕考不过、价格贵、再考虑、证书价值。</div>
+              <div class="check">最后生成销售培训稿和新人速记版。</div>
+            </div>
+          </div>
+          <div class="card">
+            <span class="badge red">调研流程</span>
+            <h3>从学员反馈到下一步动作</h3>
+            <div class="checklist">
+              <div class="check">先定义调研目的：备考状态、未成交原因、课程满意度还是活动需求。</div>
+              <div class="check">让 Codex 设计问卷，包含选择题、量表题、开放题和分析目的。</div>
+              <div class="check">收集结果后让 Codex 做人群分层：焦虑型、拖延型、迷茫型、价格敏感型。</div>
+              <div class="check">要求给出对应运营动作和销售跟进建议。</div>
+              <div class="check">把高频问题沉淀为公域选题和销售异议库。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="templates" class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">09 · 可复制提问模板</div>
+            <h2>现场培训可以让大家直接复制使用</h2>
+          </div>
+          <p class="section-desc">这些模板适合放在课件后半部分，讲完方法后直接演示。每个模板只需要替换方括号里的内容。</p>
+        </div>
+        <div class="grid cols-2">
+          <div class="prompt">周报模板：
+请参考我的周报模板，根据下面数据写一份中级注册安全工程师项目周报。
+要求：
+1. 先给 3-5 条核心结论
+2. 分析营收、流量、到课、转化、渠道和销售端口
+3. 指出异常数据和可能原因
+4. 给出下周重点动作
+5. 语言适合发给领导
+
+数据如下：
+【粘贴数据】</div>
+          <div class="prompt">项目方案模板：
+我要做一个【活动名称】，目标是【目标】。
+项目背景是【背景】，目标人群是【人群】，涉及部门有【部门】。
+
+请帮我输出完整运营方案：
+1. 项目背景
+2. 目标和指标
+3. 用户痛点
+4. 核心策略
+5. 阶段动作
+6. 部门分工
+7. 时间推进表
+8. 风险预案
+9. 数据复盘指标</div>
+          <div class="prompt">销售话术模板：
+下面是课程信息：
+【粘贴课程模块、老师、服务、资料、价格、权益】
+
+请把它转化成销售能直接使用的话术：
+1. 核心卖点
+2. 每个卖点对应的用户痛点
+3. 私聊话术
+4. 电话话术
+5. 朋友圈文案
+6. 常见异议处理
+7. 销售培训讲稿</div>
+          <div class="prompt">海报文案模板：
+我要做一张中级注册安全工程师【海报类型】海报。
+目标人群是【人群】，活动内容是【内容】，核心权益是【权益】。
+使用渠道是【朋友圈/社群/销售私发/公众号】。
+
+请输出：
+1. 5 个主标题
+2. 3 个副标题
+3. 3-5 个利益点
+4. 按钮文案
+5. 朋友圈配文
+6. 版式建议
+7. 图片生成提示词</div>
+        </div>
+        <div style="height:22px"></div>
+        <div class="ribbon">
+          <strong>给小白的提醒：</strong>第一次提问不要追求完美。先让 Codex 生成“第一版”，然后用追问不断修正。最常用的追问是：更像领导汇报、更像销售私聊、更具体、更短、更有数据感、补风险、补行动表。
+        </div>
+        <div style="height:22px"></div>
+        <div class="divider-title">提示词工具箱：把一个粗稿打磨成可交付版本</div>
+        <div style="height:14px"></div>
+        <div class="starter-kit">
+          <div class="kit-card">
+            <h3>1. 生成初稿</h3>
+            <p>适合刚开始没有结构时使用。先让 Codex 给框架和第一版，不要自己憋半天。</p>
+            <ul>
+              <li>写周报初稿</li>
+              <li>写活动方案初稿</li>
+              <li>写销售话术初稿</li>
+            </ul>
+          </div>
+          <div class="kit-card">
+            <h3>2. 优化表达</h3>
+            <p>适合初稿太空、太像 AI、太啰嗦时使用。让它换成具体场景语言。</p>
+            <ul>
+              <li>改成领导汇报口吻</li>
+              <li>改成销售私聊口吻</li>
+              <li>压缩成一页版</li>
+            </ul>
+          </div>
+          <div class="kit-card">
+            <h3>3. 检查补漏</h3>
+            <p>适合发出前使用。让 Codex 帮你检查逻辑、风险、缺失数据和执行落地性。</p>
+            <ul>
+              <li>检查有没有空话</li>
+              <li>检查风险和责任</li>
+              <li>检查动作是否可执行</li>
+            </ul>
+          </div>
+        </div>
+        <div style="height:18px"></div>
+        <div class="grid cols-2">
+          <div class="prompt">初稿优化：
+下面是我写的初稿，请你帮我优化。
+优化目标：
+1. 逻辑更清楚
+2. 语言更适合【领导/销售/同事/学员】
+3. 删除空话
+4. 补充可执行动作
+5. 保留我的核心意思
+
+初稿如下：
+【粘贴初稿】</div>
+          <div class="prompt">领导汇报压缩：
+请把下面内容压缩成领导汇报版。
+要求：
+1. 先讲结论，再讲原因
+2. 控制在【300/500/800】字以内
+3. 重点突出结果、问题、风险、下一步动作
+4. 语气客观，不甩锅，不夸大
+
+内容如下：
+【粘贴内容】</div>
+          <div class="prompt">行动清单：
+请把下面方案改成可执行清单。
+请按表格输出：
+1. 事项
+2. 目标
+3. 具体动作
+4. 负责人
+5. 协同部门
+6. 截止时间
+7. 验收标准
+8. 风险提醒
+
+方案如下：
+【粘贴方案】</div>
+          <div class="prompt">会议纪要：
+下面是会议记录，请帮我整理成项目运营会议纪要。
+请输出：
+1. 会议核心结论
+2. 已确认事项
+3. 待决策事项
+4. 各部门待办
+5. 风险点
+6. 下次跟进时间
+
+会议记录：
+【粘贴会议内容】</div>
+          <div class="prompt">复盘归因：
+下面是活动数据和过程问题，请帮我做活动复盘。
+请重点判断：
+1. 活动是否达成目标
+2. 哪个环节表现最好
+3. 哪个环节拖累结果
+4. 问题是流量、到课、内容、销售还是承接
+5. 下次怎么改
+
+数据与问题：
+【粘贴内容】</div>
+          <div class="prompt">公域选题：
+请基于中级注册安全工程师项目，帮我生成公域内容选题。
+要求：
+1. 按报名期、基础期、强化期、冲刺期、考后期分类
+2. 每类给 10 个选题
+3. 标注适合平台：抖音/小红书/知乎/公众号/社群
+4. 给出引流钩子
+5. 给出私域承接方式</div>
+          <div class="prompt">复购活动：
+我现在要做中级注册安全工程师跨项目复购活动。
+背景是：【某相关考试考试后/出成绩后/报名期】，学员可能会考虑继续学习中级注安。
+可用资料包括：【考试节点、历史订单、优惠政策、直播资源、销售话术、标签数据】。
+
+请帮我输出：
+1. 复购机会判断
+2. 目标人群筛选规则
+3. 高关联考试项目和推荐理由
+4. 专属优惠政策
+5. 直播活动方案
+6. 销售跟进话术
+7. 标签圈选和跟进SOP
+8. 数据复盘指标</div>
+          <div class="prompt">销售异议库：
+请根据下面销售反馈，整理一份中级注册安全工程师销售异议库。
+请按表格输出：
+1. 异议类型
+2. 学员真实心理
+3. 错误回应方式
+4. 推荐回应思路
+5. 私聊话术
+6. 电话话术
+7. 可配套的证明材料
+
+销售反馈：
+【粘贴反馈】</div>
+          <div class="prompt">检查提示词：
+请你作为项目运营负责人，检查下面这份材料是否能直接交付。
+请重点检查：
+1. 逻辑是否清楚
+2. 是否有空话
+3. 是否缺少数据依据
+4. 动作是否可执行
+5. 是否有风险表述
+6. 是否适合目标对象阅读
+7. 请给出修改建议和优化后的版本
+
+材料如下：
+【粘贴材料】</div>
+        </div>
+      </div>
+    </section>
+
+    <section id="public" class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">10 · 公域增长专题</div>
+            <h2>项目运营往公域走：找场域、做钩子、建承接、看转化</h2>
+          </div>
+          <p class="section-desc">这部分可以结合你们会议研讨使用。它把“项目运营走出去”讲成可落地增长闭环，而不是停留在多发内容。</p>
+        </div>
+        <div class="grid cols-4">
+          <div class="card">
+            <span class="num">1</span>
+            <h3>找场域</h3>
+            <p>中级注安用户在哪里出现：抖音、小红书、知乎、公众号、行业社群、相近证书人群、企业安全管理场景。</p>
+          </div>
+          <div class="card">
+            <span class="num blue">2</span>
+            <h3>做钩子</h3>
+            <p>给用户留下来的理由：报考指南、备考资料包、90 天计划、真题解析、考前清单、公开课、备考诊断。</p>
+          </div>
+          <div class="card">
+            <span class="num amber">3</span>
+            <h3>建承接</h3>
+            <p>把曝光变线索：添加企微、进群、领取资料、预约诊断、参加公开课、销售分层跟进。</p>
+          </div>
+          <div class="card">
+            <span class="num green">4</span>
+            <h3>看转化</h3>
+            <p>不只看播放量，而要看线索量、有效率、到课率、成交率、客单价和 ROI。</p>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <div class="callout">
+          <strong>可用于会议发言：</strong>我理解往公域走，本质是项目运营从内部支持走向外部增长。我们不能只等现有线索，也不能只靠销售末端转化，而要主动去用户所在的平台、行业社群、相近证书人群和企业安全管理场景里找新的获客入口。项目运营的价值，是把内容、渠道、活动、销售和数据串成一条可复用的增长链路。
+        </div>
+        <div style="height:16px"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>公域方向</th>
+                <th>能做什么</th>
+                <th>凭什么做</th>
+                <th>关键指标</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>内容平台</td>
+                <td>考试节点内容、痛点问答、学习路径、政策解读、直播切片。</td>
+                <td>我们懂考试节奏、用户问题和课程价值。</td>
+                <td>曝光、互动、留资、有效线索率。</td>
+              </tr>
+              <tr>
+                <td>行业社群</td>
+                <td>社群讲座、资料包互推、行业公众号合作、企业安全管理主题分享。</td>
+                <td>中级注安背后有岗位、合规、晋升和职业发展场景。</td>
+                <td>进群人数、资料领取、公开课到课。</td>
+              </tr>
+              <tr>
+                <td>相近证书人群</td>
+                <td>安全员、建造师、消防、监理、EHS 人群交叉触达。</td>
+                <td>人群职业路径相近，证书需求存在关联。</td>
+                <td>线索成本、成交率、客单价。</td>
+              </tr>
+              <tr>
+                <td>私域裂变</td>
+                <td>老学员转介绍、案例传播、打卡分享、公开课邀请。</td>
+                <td>我们有真实学员资产和服务触点。</td>
+                <td>转介绍人数、裂变线索、成交贡献。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">11 · 会议议题延伸</div>
+            <h2>现有工作价值排序：最应该守住什么</h2>
+          </div>
+          <p class="section-desc">这部分适合你在项目运营研讨会上使用。它把现有工作从“事项清单”提升到“经营能力”。</p>
+        </div>
+        <div class="grid cols-4">
+          <div class="card">
+            <span class="badge teal">守住 1</span>
+            <h3>用户洞察</h3>
+            <p>持续判断学员卡在哪里：时间、基础、重点、刷题、信心、价格还是证书价值。</p>
+          </div>
+          <div class="card">
+            <span class="badge blue">守住 2</span>
+            <h3>产品价值表达</h3>
+            <p>把课程内容翻译成用户能理解、销售能讲清楚、海报能呈现的利益点。</p>
+          </div>
+          <div class="card">
+            <span class="badge amber">守住 3</span>
+            <h3>销售转化支持</h3>
+            <p>不是只写话术，而是按用户阶段匹配卖点、资料、公开课、案例和异议处理。</p>
+          </div>
+          <div class="card">
+            <span class="badge red">守住 4</span>
+            <h3>数据复盘</h3>
+            <p>通过营收、流量、到课、转化和渠道质量找到真正瓶颈，指导下周动作。</p>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <div class="quote">
+          项目运营不能只证明“我做了很多事”，更要证明“我知道哪些事最有价值、哪些动作能带来增长、哪些经验能被复用”。
+          <small>这句话可以作为你在研讨会里的主线表达。</small>
+        </div>
+      </div>
+    </section>
+
+    <section id="rollout" class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">12 · 团队落地方案</div>
+            <h2>培训结束后，怎么让大家真的用起来</h2>
+          </div>
+          <p class="section-desc">很多工具培训的问题是听完热闹，第二天不用。建议把 Codex 使用变成团队固定动作，而不是个人兴趣。</p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card">
+            <span class="badge teal">第 1 周</span>
+            <h3>统一模板</h3>
+            <ul>
+              <li>建立项目工作台。</li>
+              <li>统一周报、方案、话术、调研、海报、复盘模板。</li>
+              <li>每人用一个真实任务完成一次演练。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge blue">第 2-3 周</span>
+            <h3>固定场景</h3>
+            <ul>
+              <li>每周周报必须先用 Codex 出分析初稿。</li>
+              <li>每次活动必须沉淀方案和复盘。</li>
+              <li>每次销售培训必须沉淀话术库。</li>
+            </ul>
+          </div>
+          <div class="card">
+            <span class="badge amber">第 4 周</span>
+            <h3>复盘优化</h3>
+            <ul>
+              <li>收集团队最好用的 20 条提示词。</li>
+              <li>筛选 3 个最有价值场景继续打磨。</li>
+              <li>形成团队版项目运营 Codex 手册。</li>
+            </ul>
+          </div>
+        </div>
+        <div style="height:16px"></div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>团队规范</th>
+                <th>具体要求</th>
+                <th>为什么重要</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>资料先沉淀</td>
+                <td>课程、价格、权益、活动、销售问题、调研反馈要放进固定文件。</td>
+                <td>Codex 的输出质量取决于输入资料质量。</td>
+              </tr>
+              <tr>
+                <td>结果要审核</td>
+                <td>涉及数据、价格、承诺、政策、考试信息必须人工确认。</td>
+                <td>工具负责提效，人负责业务判断和风险把关。</td>
+              </tr>
+              <tr>
+                <td>好提示词复用</td>
+                <td>每次生成效果好的提问，都沉淀到团队提示词库。</td>
+                <td>让个人经验变成组织资产。</td>
+              </tr>
+              <tr>
+                <td>每周看效果</td>
+                <td>复盘 Codex 帮团队节省了哪些时间、提升了哪些交付质量。</td>
+                <td>避免工具停留在尝鲜阶段。</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="band white">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">13 · 培训讲稿</div>
+            <h2>开场和结尾可以这样讲</h2>
+          </div>
+          <p class="section-desc">这两段适合你作为分享人直接使用。语气偏内部培训，不会太学术，也不会太随意。</p>
+        </div>
+        <div class="grid cols-2">
+          <div class="quote">
+            今天这个分享，不是教大家“让 AI 写几段文字”，而是希望把 Codex 变成我们项目运营的日常工作台。我们平时做周报、活动方案、销售支持、调研、海报、公域获客，其实都有大量重复结构。如果能把这些结构沉淀下来，Codex 就能帮我们更快产出第一版，而我们把精力放在业务判断和资源协调上。
+            <small>建议作为开场。</small>
+          </div>
+          <div class="quote">
+            最后我想强调，Codex 不能替代项目运营的判断，但它可以放大我们的判断。真正有价值的不是工具本身，而是我们能不能把用户洞察、课程价值、销售转化、数据复盘和公域增长沉淀成可复制的方法。谁能更快把经验结构化，谁就能在项目推进里更主动。
+            <small>建议作为结尾。</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="band alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <div class="section-kicker">14 · 课后练习</div>
+            <h2>让同事现场练一次，培训效果会更稳</h2>
+          </div>
+          <p class="section-desc">建议培训最后留 20 分钟实操。不要只讲概念，让大家用自己的真实任务跑一遍。</p>
+        </div>
+        <div class="grid cols-3">
+          <div class="card">
+            <h3>练习 1：写一份周报</h3>
+            <p>给一份简化数据，让每个人用模板生成核心结论、问题归因和下周动作。</p>
+          </div>
+          <div class="card">
+            <h3>练习 2：改一份销售话术</h3>
+            <p>给课程信息和学员异议，让大家生成私聊版、电话版和培训版话术。</p>
+          </div>
+          <div class="card">
+            <h3>练习 3：设计一个公域钩子</h3>
+            <p>围绕报名期、基础期或冲刺期，设计资料包、公开课主题和承接路径。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      项目运营 Codex 培训课件 · 建议配合“中级注册安全工程师项目工作台”模板文件一起使用
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>报考信息管理后台｜2026初级注册安全工程师</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+  <link rel="stylesheet" href="assets/styles.css" />
+</head>
+<body>
+  <main class="admin-shell">
+    <section class="admin-hero">
+      <div>
+        <h1>轻量化管理后台</h1>
+        <p>可视化编辑各省报名时间、审核方式、费用、准考证打印、考试日期和备注。使用本地服务启动时可直接写回 JSON。</p>
+      </div>
+      <div class="nav-actions">
+        <a class="btn" href="index.html"><i class="fa-solid fa-arrow-left"></i>返回前台</a>
+        <button class="btn primary" id="saveBtn" type="button"><i class="fa-solid fa-floppy-disk"></i>保存修改</button>
+      </div>
+    </section>
+
+    <section class="admin-layout">
+      <aside class="admin-card">
+        <h2 style="margin:0 0 14px;font-size:18px;">省市列表</h2>
+        <div class="admin-list" id="provinceList"></div>
+      </aside>
+
+      <section class="admin-card">
+        <h2 style="margin:0 0 14px;font-size:18px;">报考数据编辑</h2>
+        <div class="form-grid">
+          <label class="field">
+            <span>省份</span>
+            <input name="province" />
+          </label>
+          <label class="field">
+            <span>地区</span>
+            <select name="region">
+              <option>华北</option>
+              <option>华东</option>
+              <option>华南</option>
+              <option>华中</option>
+              <option>西南</option>
+              <option>西北</option>
+              <option>东北</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>报名开始时间</span>
+            <input name="registrationStart" type="datetime-local" />
+          </label>
+          <label class="field">
+            <span>报名截止时间</span>
+            <input name="registrationEnd" type="datetime-local" />
+          </label>
+          <label class="field">
+            <span>官方报名网站名称</span>
+            <input name="officialSite" />
+          </label>
+          <label class="field">
+            <span>官方报名网址</span>
+            <input name="officialUrl" />
+          </label>
+          <label class="field">
+            <span>审核方式</span>
+            <input name="auditMethod" placeholder="线上审核/现场审核/考后审核" />
+          </label>
+          <label class="field">
+            <span>报名费金额</span>
+            <input name="fee" placeholder="例如：每科60元，待公告复核" />
+          </label>
+          <label class="field">
+            <span>准考证打印时间</span>
+            <input name="admissionTicketTime" />
+          </label>
+          <label class="field">
+            <span>考试日期</span>
+            <input name="examDate" type="datetime-local" />
+          </label>
+          <label class="field">
+            <span>成绩查询时间</span>
+            <input name="scoreQueryTime" />
+          </label>
+          <label class="field">
+            <span>考试形式</span>
+            <input name="examForm" placeholder="机考/纸笔/待公布" />
+          </label>
+          <label class="field">
+            <span>是否已出公告</span>
+            <select name="announced">
+              <option value="true">已出公告</option>
+              <option value="false">待公布</option>
+            </select>
+          </label>
+          <label class="field">
+            <span>是否标记最新更新</span>
+            <select name="latest">
+              <option value="true">显示红色角标</option>
+              <option value="false">不显示角标</option>
+            </select>
+          </label>
+          <label class="field full">
+            <span>学历/工作年限报考门槛</span>
+            <textarea name="educationThreshold"></textarea>
+          </label>
+          <label class="field full">
+            <span>备注</span>
+            <textarea name="note"></textarea>
+          </label>
+        </div>
+        <div class="form-actions">
+          <button class="btn primary" id="saveBtnBottom" type="button" onclick="document.getElementById('saveBtn').click()"><i class="fa-solid fa-floppy-disk"></i>保存修改</button>
+          <button class="btn" id="downloadJsonBtn" type="button"><i class="fa-solid fa-file-code"></i>导出 JSON</button>
+          <button class="btn" id="resetLocalBtn" type="button"><i class="fa-solid fa-rotate-right"></i>清空本地预览缓存</button>
+        </div>
+        <div class="save-state" id="saveState">正在读取数据...</div>
+      </section>
+    </section>
+  </main>
+  <script src="assets/data-inline.js"></script>
+  <script src="assets/admin.js"></script>
+</body>
+</html>

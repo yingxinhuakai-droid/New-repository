@@ -1,0 +1,1403 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>云私塾三维一体销售培训互动页</title>
+  <style>
+    :root {
+      --ink: #172033;
+      --muted: #667085;
+      --soft: #f5f8ff;
+      --panel: rgba(255, 255, 255, .72);
+      --line: rgba(255, 255, 255, .72);
+      --line-strong: rgba(94, 111, 150, .18);
+      --blue: #4f7cff;
+      --blue-dark: #284a9f;
+      --teal: #41c7bd;
+      --green: #72c891;
+      --orange: #f4a261;
+      --red: #ef6f88;
+      --gold: #f6d77a;
+      --pink: #f3a6ce;
+      --violet: #9b8cff;
+      --sky: #9bdcff;
+      --glass: rgba(255, 255, 255, .58);
+      --shadow: 0 22px 60px rgba(49, 69, 119, .14);
+      --soft-shadow: 0 12px 34px rgba(49, 69, 119, .10);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background:
+        radial-gradient(circle at 12% 10%, rgba(155, 140, 255, .28), transparent 32%),
+        radial-gradient(circle at 88% 0%, rgba(155, 220, 255, .34), transparent 30%),
+        radial-gradient(circle at 72% 42%, rgba(114, 200, 145, .18), transparent 34%),
+        linear-gradient(180deg, #f7faff 0%, #f5f7fb 52%, #ffffff 100%);
+      background-attachment: fixed;
+      letter-spacing: 0;
+    }
+
+    button {
+      font: inherit;
+      color: inherit;
+    }
+
+    .page {
+      width: min(1180px, calc(100vw - 32px));
+      margin: 0 auto;
+      padding: 22px 0 60px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 20px;
+      font-size: 14px;
+      color: var(--blue-dark);
+      font-weight: 800;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid var(--line);
+      backdrop-filter: blur(18px);
+      border-radius: var(--radius);
+    }
+
+    .mark {
+      width: 10px;
+      height: 10px;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .nav {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .nav a {
+      color: var(--blue-dark);
+      text-decoration: none;
+      padding: 8px 11px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.58);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      font-size: 13px;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(360px, .92fr);
+      gap: 18px;
+      align-items: stretch;
+      min-height: 610px;
+    }
+
+    .hero-main {
+      padding: 36px;
+      background:
+        linear-gradient(135deg, rgba(255,255,255,.78), rgba(255,255,255,.42)),
+        radial-gradient(circle at 82% 18%, rgba(79,124,255,.16), transparent 28%);
+      color: var(--ink);
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(26px) saturate(1.24);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-main::after {
+      content: "";
+      position: absolute;
+      right: -70px;
+      top: -80px;
+      width: 280px;
+      height: 280px;
+      background: radial-gradient(circle, rgba(79,124,255,.24), transparent 64%);
+      opacity: 1;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 8px 12px;
+      background: rgba(255,255,255,.62);
+      color: #081326;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 14px;
+      font-weight: 900;
+      margin-bottom: 28px;
+    }
+
+    h1 {
+      margin: 0;
+      max-width: 780px;
+      font-size: 76px;
+      line-height: .98;
+      letter-spacing: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .highlight-word {
+      display: inline-block;
+      padding: 0 8px 4px;
+      background: linear-gradient(135deg, rgba(246,215,122,.86), rgba(243,166,206,.72));
+      border: 1px solid rgba(255,255,255,.76);
+      border-radius: 16px;
+      transform: rotate(-1deg);
+    }
+
+    .lead {
+      max-width: 780px;
+      margin: 24px 0 0;
+      color: #30384b;
+      font-size: 20px;
+      line-height: 1.65;
+      font-weight: 650;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-pain-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 26px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pain-tile {
+      min-height: 126px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--tile, rgba(255,255,255,.58));
+      backdrop-filter: blur(18px);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .pain-tile b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 15px;
+    }
+
+    .pain-tile span {
+      color: #30384b;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 34px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .primary-link,
+    .secondary-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 42px;
+      padding: 10px 15px;
+      text-decoration: none;
+      border-radius: var(--radius);
+      font-weight: 800;
+      border: 1px solid var(--line);
+    }
+
+    .primary-link {
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+    }
+
+    .secondary-link {
+      color: var(--ink);
+      background: rgba(255,255,255,.62);
+      backdrop-filter: blur(16px);
+    }
+
+    .hero-side {
+      display: grid;
+      gap: 12px;
+    }
+
+    .value-card {
+      background: var(--card-bg, rgba(255,255,255,.58));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 20px;
+      backdrop-filter: blur(22px) saturate(1.18);
+    }
+
+    .value-card.big {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      min-height: 238px;
+      background: linear-gradient(145deg, rgba(79,124,255,.9), rgba(155,140,255,.78));
+      color: #fff;
+    }
+
+    .value-card b {
+      display: block;
+      color: inherit;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .value-card p {
+      margin: 0;
+      color: inherit;
+      line-height: 1.72;
+      font-size: 14px;
+    }
+
+    .formula {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .formula span {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      min-height: 44px;
+      padding: 10px 12px;
+      border: 1px solid rgba(255,255,255,.72);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.78);
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .formula em {
+      font-style: normal;
+      font-size: 13px;
+      opacity: .75;
+    }
+
+    .formula span:nth-child(2) { background: rgba(155, 220, 255, .78); }
+    .formula span:nth-child(3) { background: rgba(191, 236, 207, .78); }
+
+    .hero-metric {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .metric-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,.72);
+      color: var(--ink);
+      padding: 12px;
+      backdrop-filter: blur(14px);
+    }
+
+    .metric-box strong {
+      display: block;
+      font-size: 22px;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-box span {
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    section {
+      margin-top: 26px;
+    }
+
+    .training-steps {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .step-card {
+      background: var(--step-bg, rgba(255,255,255,.58));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      padding: 18px;
+      min-height: 150px;
+      backdrop-filter: blur(18px) saturate(1.12);
+    }
+
+    .step-card:nth-child(1) { --step-bg: rgba(207, 246, 239, .62); }
+    .step-card:nth-child(2) { --step-bg: rgba(255, 240, 184, .58); }
+    .step-card:nth-child(3) { --step-bg: rgba(220, 210, 255, .56); }
+    .step-card:nth-child(4) { --step-bg: rgba(255, 226, 234, .58); }
+
+    .step-card span {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      margin-bottom: 12px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-weight: 900;
+    }
+
+    .step-card b {
+      display: block;
+      margin-bottom: 8px;
+      font-size: 17px;
+      color: var(--blue-dark);
+    }
+
+    .step-card p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 14px;
+      padding: 0 4px;
+    }
+
+    .kicker {
+      display: inline-flex;
+      width: fit-content;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255,255,255,.62);
+      backdrop-filter: blur(14px);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 900;
+      margin-bottom: 10px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+      letter-spacing: 0;
+    }
+
+    .section-note {
+      margin: 0;
+      max-width: 500px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .stage-shell,
+    .quick-shell,
+    .media-shell,
+    .closing {
+      background: rgba(255,255,255,.62);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: var(--radius);
+      backdrop-filter: blur(22px) saturate(1.14);
+    }
+
+    .stage-shell {
+      padding: 20px;
+    }
+
+    .stage-tabs {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .stage-controls {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .stage-controls p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .control-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .ghost-btn {
+      min-height: 36px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      border-radius: var(--radius);
+      padding: 8px 12px;
+      color: var(--ink);
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .stage-tab {
+      border: 1px solid var(--line);
+      background: var(--tab-bg, rgba(255,255,255,.62));
+      border-radius: var(--radius);
+      min-height: 78px;
+      padding: 13px 10px;
+      cursor: pointer;
+      text-align: left;
+      transition: .2s ease;
+    }
+
+    .stage-tab:nth-child(1) { --tab-bg: rgba(207, 246, 239, .58); }
+    .stage-tab:nth-child(2) { --tab-bg: rgba(255, 240, 184, .54); }
+    .stage-tab:nth-child(3) { --tab-bg: rgba(255, 214, 227, .54); }
+    .stage-tab:nth-child(4) { --tab-bg: rgba(220, 210, 255, .54); }
+    .stage-tab:nth-child(5) { --tab-bg: rgba(207, 238, 255, .58); }
+
+    .stage-tab:hover,
+    .stage-tab.active {
+      transform: translateY(-2px);
+      box-shadow: var(--soft-shadow);
+    }
+
+    .stage-tab.active {
+      color: #fff;
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+    }
+
+    .stage-tab .num {
+      display: block;
+      color: var(--orange);
+      font-size: 12px;
+      font-weight: 900;
+      margin-bottom: 6px;
+    }
+
+    .stage-tab.active .num { color: #ffd4be; }
+
+    .stage-tab strong {
+      display: block;
+      font-size: 16px;
+      line-height: 1.3;
+    }
+
+    .stage-tab span {
+      display: block;
+      margin-top: 4px;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .stage-tab.active span { color: rgba(255,255,255,.78); }
+
+    .stage-layout {
+      display: grid;
+      grid-template-columns: 310px minmax(0, 1fr);
+      gap: 16px;
+      align-items: stretch;
+    }
+
+    .pain-panel {
+      border: 1px solid var(--line);
+      background: rgba(255, 226, 234, .58);
+      border-radius: var(--radius);
+      padding: 20px;
+      backdrop-filter: blur(18px);
+    }
+
+    .pill {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      font-size: 13px;
+      font-weight: 900;
+    }
+
+    .pain-panel h3,
+    .outcome h3 {
+      margin: 14px 0 10px;
+      font-size: 22px;
+      line-height: 1.25;
+    }
+
+    .pain-panel ul,
+    .dimension ul,
+    .quick-content ul {
+      margin: 0;
+      padding-left: 18px;
+    }
+
+    .pain-panel li,
+    .dimension li,
+    .quick-content li {
+      margin: 8px 0;
+      line-height: 1.65;
+      color: #41506a;
+      font-size: 14px;
+    }
+
+    .goal-box {
+      margin-top: 16px;
+      padding: 14px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+
+    .goal-box b {
+      display: block;
+      margin-bottom: 8px;
+      color: #89310f;
+    }
+
+    .goal-box p {
+      margin: 0;
+      color: #59677b;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .dimension-area {
+      display: grid;
+      gap: 12px;
+    }
+
+    .dimension-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .dimension {
+      position: relative;
+      background: var(--dim-bg, rgba(255,255,255,.58));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      min-height: 240px;
+      padding: 18px;
+      overflow: hidden;
+      backdrop-filter: blur(18px);
+    }
+
+    .dimension::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: var(--tone, var(--blue));
+    }
+
+    .dimension-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .icon {
+      width: 34px;
+      height: 34px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--icon-bg, #eef5ff);
+      border: 1px solid var(--line);
+      color: var(--tone, var(--blue));
+      font-weight: 900;
+    }
+
+    .dimension h4 {
+      margin: 0;
+      font-size: 18px;
+    }
+
+    .connector {
+      display: grid;
+      grid-template-columns: 1fr 42px 1fr 42px 1fr;
+      gap: 0;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+      padding: 0 18px;
+    }
+
+    .line {
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--teal), var(--green));
+      border-radius: 999px;
+    }
+
+    .arrow {
+      text-align: center;
+      color: var(--blue);
+      font-size: 18px;
+    }
+
+    .outcome {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 270px;
+      gap: 14px;
+      align-items: stretch;
+      border: 1px solid var(--line);
+      background: rgba(207, 246, 239, .58);
+      border-radius: var(--radius);
+      padding: 18px;
+    }
+
+    .outcome p {
+      margin: 0;
+      color: #41506a;
+      line-height: 1.75;
+    }
+
+    .stage-script {
+      margin-top: 14px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      border-radius: var(--radius);
+      padding: 13px 14px;
+      color: #24456f;
+      font-size: 15px;
+      line-height: 1.65;
+      font-weight: 800;
+    }
+
+    .stage-script b {
+      color: var(--blue-dark);
+    }
+
+    .always-on {
+      display: grid;
+      gap: 10px;
+    }
+
+    .always-item {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      border-radius: var(--radius);
+      padding: 13px;
+    }
+
+    .always-item b {
+      display: block;
+      margin-bottom: 4px;
+      color: #087a82;
+    }
+
+    .always-item span {
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .quick-shell {
+      padding: 20px;
+    }
+
+    .quick-tabs {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .quick-tab {
+      min-height: 66px;
+      padding: 12px;
+      text-align: left;
+      border-radius: var(--radius);
+      border: 1px solid var(--line);
+      background: var(--quick-bg, rgba(255,255,255,.62));
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    .quick-tab:nth-child(1) { --quick-bg: rgba(207, 238, 255, .58); }
+    .quick-tab:nth-child(2) { --quick-bg: rgba(255, 240, 184, .54); }
+    .quick-tab:nth-child(3) { --quick-bg: rgba(207, 246, 239, .58); }
+    .quick-tab:nth-child(4) { --quick-bg: rgba(255, 214, 227, .54); }
+
+    .quick-tab.active,
+    .quick-tab:hover {
+      background: linear-gradient(135deg, var(--blue), var(--violet));
+      color: #fff;
+      box-shadow: var(--soft-shadow);
+    }
+
+    .quick-tab strong {
+      display: block;
+      color: inherit;
+      font-size: 17px;
+      margin-bottom: 5px;
+    }
+
+    .quick-tab span {
+      color: inherit;
+      font-size: 12px;
+    }
+
+    .quick-content {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1.08fr) 290px;
+      gap: 14px;
+    }
+
+    .talk-card {
+      border: 1px solid var(--line);
+      background: var(--talk-bg, rgba(255,255,255,.62));
+      border-radius: var(--radius);
+      padding: 18px;
+      backdrop-filter: blur(18px);
+    }
+
+    .talk-card:nth-child(1) { --talk-bg: rgba(255, 226, 234, .58); }
+    .talk-card:nth-child(2) { --talk-bg: rgba(255,255,255,.70); }
+
+    .talk-card h3 {
+      margin: 0 0 10px;
+      font-size: 18px;
+    }
+
+    .talk-card p {
+      margin: 0;
+      color: #41506a;
+      line-height: 1.75;
+      font-size: 14px;
+    }
+
+    .talk-line {
+      background: rgba(207, 246, 239, .58);
+    }
+
+    .talk-line h3 { color: #117445; }
+
+    .media-shell {
+      padding: 20px;
+    }
+
+    .media-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .media-card {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: rgba(255,255,255,.64);
+      min-height: 230px;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(18px);
+    }
+
+    .placeholder {
+      min-height: 118px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        linear-gradient(135deg, rgba(255,240,184,.72), rgba(207,238,255,.74)),
+        linear-gradient(90deg, rgba(255,255,255,.42) 1px, transparent 1px),
+        linear-gradient(rgba(255,255,255,.42) 1px, transparent 1px);
+      background-size: auto, 18px 18px, 18px 18px;
+      color: var(--blue-dark);
+      font-weight: 900;
+    }
+
+    .media-body {
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      flex: 1;
+    }
+
+    .media-body b {
+      font-size: 15px;
+    }
+
+    .media-body p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .file-name {
+      margin-top: auto;
+      display: inline-flex;
+      width: fit-content;
+      padding: 5px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.72);
+      color: var(--ink);
+      font-size: 12px;
+      font-weight: 800;
+    }
+
+    .closing {
+      padding: 28px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 280px;
+      gap: 20px;
+      align-items: center;
+      background:
+        linear-gradient(135deg, rgba(79,124,255,.92), rgba(155,140,255,.84) 52%, rgba(243,166,206,.82));
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .closing h2 {
+      font-size: 32px;
+      margin-bottom: 12px;
+    }
+
+    .closing p {
+      margin: 0;
+      color: rgba(255,255,255,.86);
+      line-height: 1.8;
+    }
+
+    .script-box {
+      border: 1px solid rgba(255,255,255,.38);
+      background: rgba(255,255,255,.18);
+      backdrop-filter: blur(14px);
+      border-radius: var(--radius);
+      padding: 18px;
+      font-size: 18px;
+      line-height: 1.55;
+      font-weight: 900;
+    }
+
+    @media (max-width: 1050px) {
+      .hero,
+      .stage-layout,
+      .outcome,
+      .quick-content,
+      .closing {
+        grid-template-columns: 1fr;
+      }
+
+      .stage-tabs,
+      .quick-tabs {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
+      .dimension-grid,
+      .training-steps,
+      .media-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 720px) {
+      .page { width: min(100vw - 20px, 1180px); padding-top: 12px; }
+      .topbar,
+      .section-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .nav { justify-content: flex-start; }
+      .hero { min-height: auto; }
+      .hero-main { padding: 28px 20px; }
+      h1 { font-size: 38px; }
+      .lead { font-size: 18px; }
+      .stage-tabs,
+      .quick-tabs,
+      .training-steps,
+      .hero-pain-grid,
+      .dimension-grid,
+      .media-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .connector { display: none; }
+      .stage-controls { align-items: stretch; flex-direction: column; }
+      .control-actions { justify-content: stretch; }
+      .ghost-btn { flex: 1; }
+      .dimension { min-height: auto; }
+      .closing { padding: 22px; }
+      .closing h2 { font-size: 25px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <div class="brand"><span class="mark"></span> 环球网校云私塾销售培训</div>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#stages">阶段路径</a>
+        <a href="#talk">卖点速讲</a>
+        <a href="#media">素材占位</a>
+      </nav>
+    </div>
+
+    <header class="hero">
+      <div class="hero-main">
+        <div class="eyebrow">中级注安 · 云私塾7.0 · 销售叙事升级</div>
+        <h1>别再把云私塾讲成<span class="highlight-word">功能清单</span></h1>
+        <p class="lead">过去的宣传把“课程、系统、服务”拆开讲，学员听到的是一堆工具名；新的表达要把它们放回备考现场：每个阶段遇到什么痛，三维一体如何一起解决。</p>
+        <div class="hero-pain-grid" aria-label="旧宣传痛点">
+          <div class="pain-tile" style="--tile:rgba(255,226,234,.58)">
+            <b>痛点 01｜价值难感知</b>
+            <span>单独罗列功能，学员很难理解“这和我的备考痛苦有什么关系”。</span>
+          </div>
+          <div class="pain-tile" style="--tile:rgba(255,240,184,.54)">
+            <b>痛点 02｜模块被割裂</b>
+            <span>课程、系统、服务各说各的，优势没有形成一个完整方案。</span>
+          </div>
+          <div class="pain-tile" style="--tile:rgba(207,246,239,.58)">
+            <b>痛点 03｜场景不真实</b>
+            <span>没有嵌入“从何学起、如何不忘、怎么突破、临考怎么稳”。</span>
+          </div>
+        </div>
+        <div class="hero-actions">
+          <a class="primary-link" href="#stages">开始阶段演示</a>
+          <a class="secondary-link" href="#talk">查看四大卖点</a>
+        </div>
+      </div>
+      <aside class="hero-side" aria-label="核心价值">
+        <div class="value-card big">
+          <div>
+            <b>新讲法：一套陪跑通关系统</b>
+            <p>销售不是介绍“有什么功能”，而是讲清楚“它们如何协同解决我这个阶段的备考痛苦”。</p>
+          </div>
+          <div class="formula" aria-label="三维公式">
+            <span>课程引领 <em>给方向</em></span>
+            <span>系统赋能 <em>给路径</em></span>
+            <span>服务护航 <em>给陪伴</em></span>
+          </div>
+        </div>
+        <div class="value-card" style="--card-bg:rgba(255,226,234,.58)">
+          <b>精准对焦阶段痛点</b>
+          <p>先让学员听见自己：不会开始、学了就忘、会听不会做、临考焦虑。</p>
+        </div>
+        <div class="value-card" style="--card-bg:rgba(255,240,184,.54)">
+          <b>三位一体高效闭环</b>
+          <p>课程给方向，系统给数据和任务，服务给陪伴和督促，让学、练、问、改串成一条线。</p>
+        </div>
+        <div class="hero-metric">
+          <div class="metric-box">
+            <strong>5</strong>
+            <span>个备考阶段逐层推进</span>
+          </div>
+          <div class="metric-box">
+            <strong>3D</strong>
+            <span>课程 × 系统 × 服务同场呈现</span>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <section aria-label="销售讲解动线">
+      <div class="section-head">
+        <div>
+          <div class="kicker">00 · 讲解动线</div>
+          <h2>销售不要从功能开场，要按这四步讲</h2>
+        </div>
+        <p class="section-note">先让学员觉得“这说的是我”，再让课程、系统、服务一起出现，优势就不会散。</p>
+      </div>
+      <div class="training-steps">
+        <article class="step-card">
+          <span>1</span>
+          <b>先说阶段痛点</b>
+          <p>不要先报功能名，先说这个阶段学员最容易卡在哪里。</p>
+        </article>
+        <article class="step-card">
+          <span>2</span>
+          <b>再说阶段目标</b>
+          <p>把“要学什么”翻译成“这一阶段要解决什么结果”。</p>
+        </article>
+        <article class="step-card">
+          <span>3</span>
+          <b>展开三维协同</b>
+          <p>课程给内容，系统给路径和数据，服务给陪伴和督促。</p>
+        </article>
+        <article class="step-card">
+          <span>4</span>
+          <b>用一句话收束</b>
+          <p>最后落到学员能感知的确定性，而不是停在功能清单。</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="stages">
+      <div class="section-head">
+        <div>
+          <div class="kicker">01 · 阶段路径互动区</div>
+          <h2>点一个阶段，看三维如何一起解决问题</h2>
+        </div>
+        <p class="section-note">销售讲解时先点阶段，再讲痛点，最后讲课程、系统、服务如何汇合成这一阶段的确定性结果。</p>
+      </div>
+
+      <div class="stage-shell">
+        <div class="stage-tabs" id="stageTabs"></div>
+        <div class="stage-controls">
+          <p>投屏讲解时可按阶段顺序推进；私聊沟通时可直接点学员当前所在阶段。</p>
+          <div class="control-actions">
+            <button class="ghost-btn" type="button" id="prevStage">上一阶段</button>
+            <button class="ghost-btn" type="button" id="nextStage">下一阶段</button>
+          </div>
+        </div>
+        <div class="stage-layout">
+          <article class="pain-panel">
+            <span class="pill" id="stageTag">先导阶段</span>
+            <h3 id="stageTitle">从何学起，不再盲目</h3>
+            <ul id="painList"></ul>
+            <div class="goal-box">
+              <b>本阶段目标</b>
+              <p id="goalText"></p>
+            </div>
+          </article>
+
+          <div class="dimension-area">
+            <div class="dimension-grid">
+              <article class="dimension" style="--tone: var(--blue); --icon-bg: rgba(238,245,255,.78); --dim-bg:rgba(238,245,255,.58)">
+                <div class="dimension-title"><span class="icon">课</span><h4>课程引领</h4></div>
+                <ul id="courseList"></ul>
+              </article>
+              <article class="dimension" style="--tone: var(--teal); --icon-bg: rgba(233,248,247,.78); --dim-bg:rgba(233,248,247,.58)">
+                <div class="dimension-title"><span class="icon">系</span><h4>系统赋能</h4></div>
+                <ul id="systemList"></ul>
+              </article>
+              <article class="dimension" style="--tone: var(--green); --icon-bg: rgba(234,248,240,.78); --dim-bg:rgba(234,248,240,.58)">
+                <div class="dimension-title"><span class="icon">服</span><h4>服务护航</h4></div>
+                <ul id="serviceList"></ul>
+              </article>
+            </div>
+            <div class="connector" aria-hidden="true">
+              <div class="line"></div><div class="arrow">→</div><div class="line"></div><div class="arrow">→</div><div class="line"></div>
+            </div>
+            <div class="outcome">
+              <div>
+                <span class="pill">三维协同价值</span>
+                <h3 id="valueTitle">精准启航</h3>
+                <p id="valueText"></p>
+                <div class="stage-script"><b>销售一句话：</b><span id="scriptText"></span></div>
+              </div>
+              <div class="always-on">
+                <div class="always-item">
+                  <b>在线答疑贯穿全程</b>
+                  <span>看课、做题、看讲义有问题，随时把疑问接住。</span>
+                </div>
+                <div class="always-item">
+                  <b>AI老师贯穿全程</b>
+                  <span>备考建议、学习数据、功能入口和专业答疑都能即时响应。</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="talk">
+      <div class="section-head">
+        <div>
+          <div class="kicker">02 · 销售培训辅助区</div>
+          <h2>四大卖点速讲：先痛点，后证据，再落一句话</h2>
+        </div>
+        <p class="section-note">这部分适合销售练口播。每个卖点都可以作为直播、私聊、电话沟通里的一个切入角度。</p>
+      </div>
+
+      <div class="quick-shell">
+        <div class="quick-tabs" id="quickTabs"></div>
+        <div class="quick-content">
+          <article class="talk-card">
+            <h3>痛点场景</h3>
+            <p id="quickPain"></p>
+          </article>
+          <article class="talk-card">
+            <h3>功能证据</h3>
+            <ul id="quickProof"></ul>
+          </article>
+          <article class="talk-card talk-line">
+            <h3>一句话讲法</h3>
+            <p id="quickLine"></p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="media">
+      <div class="section-head">
+        <div>
+          <div class="kicker">03 · 素材演示区</div>
+          <h2>先放占位，后续替换真实视频或截图</h2>
+        </div>
+        <p class="section-note">每张卡都标了建议展示内容和可替换文件名，拿到素材后直接换成同名视频、截图或动图即可。</p>
+      </div>
+
+      <div class="media-shell">
+        <div class="media-grid" id="mediaGrid"></div>
+      </div>
+    </section>
+
+    <section class="closing">
+      <div>
+        <h2>销售最后要讲出的不是“功能很多”，而是“有人带、有系统推、有课程托底”。</h2>
+        <p>云私塾不是功能堆叠，而是按备考节奏自动组织课程、系统和服务的通关陪跑方案。学员不用自己在一堆课和题里找路，系统会推，老师会答，班主任会盯，每个阶段都有该做的事。</p>
+      </div>
+      <div class="script-box">推荐收束话术：<br>“你不是买一堆课，而是买一套从入学到上考场都有人陪你走的通关系统。”</div>
+    </section>
+  </main>
+
+  <script>
+    const stages = [
+      {
+        name: "先导阶段",
+        sub: "认知规划",
+        title: "从何学起，不再盲目",
+        pains: ["不清楚自己基础如何", "对考试内容和难度无概念", "缺乏明确学习计划，容易盲目开始"],
+        goals: "建立考试整体认知，明确自身起点与差距，制定个性化学习路径。",
+        courses: ["学情测评（1次）", "认知考试讲解（1.5H/科）", "备考策略指导课（1H/科）"],
+        systems: ["智能考情摸底测评", "生成定制学习路径规划", "新手系统内的学习指导"],
+        services: ["入学1V1微信+电话指导", "学习规划、学习方案选择建议", "班主任建立学员档案"],
+        valueTitle: "精准启航",
+        value: "通过测评、AI方案和人工引导，避免学员“一上来就学错”，从源头提升学习效率。",
+        script: "这个阶段不是催你赶紧学，而是先帮你找准起点和路径，避免一开始就走弯路。"
+      },
+      {
+        name: "基础阶段",
+        sub: "知识构建",
+        title: "学得进，记得住，跟得上",
+        pains: ["知识点庞杂，不知从何下手", "学了就忘，缺乏复习机制", "自律性差，容易拖延"],
+        goals: "系统掌握全部考点，建立知识框架，养成规律学习习惯。",
+        courses: ["考点精讲（23-40H/科）", "基础模考（含解析）", "基础考点总结直播（9H/科）"],
+        systems: ["章节摸底练习测评", "视频智览", "智能双屏互动学习", "记忆卡"],
+        services: ["月度1V1督学", "作业打卡督导", "记忆营带学", "学习规划动态调整建议"],
+        valueTitle: "稳扎稳打",
+        value: "系统防遗忘、课程全覆盖、服务强监督，构建“学得进、记得住、跟得上”的基础闭环。",
+        script: "基础阶段最怕学散、学忘、学不下去，云私塾用课程铺底、系统推任务、班主任督学，把节奏稳住。"
+      },
+      {
+        name: "强化阶段",
+        sub: "能力提升",
+        title: "从听懂到会做，弱项被看见",
+        pains: ["会听不会做，题目一变就不会", "案例/主观题无从下手", "刷题无效，错题反复错"],
+        goals: "提升解题思维与实战能力，掌握高频题型和破题技巧，精准定位薄弱环节。",
+        courses: ["实战题分班（10-12H/科）", "案例专项班【实务】（6-8H/科）", "强化模考+深度解析"],
+        systems: ["题集专项练习", "课中弹题", "错题本自动归集与推荐", "集训刷题", "AI案例题批改"],
+        services: ["1V1案例批改（魔鬼班）", "21天集训刷题计划", "督学沟通聚焦提分瓶颈"],
+        valueTitle: "精准提能",
+        value: "以弱项数据驱动课程强化，服务介入关键难点，实现“练得准、改得透、提得快”。",
+        script: "强化阶段不是盲目刷题，而是系统看见你的弱项，课程讲透方法，服务盯住关键瓶颈。"
+      },
+      {
+        name: "冲刺阶段",
+        sub: "模拟实战",
+        title: "知道优先学什么，也稳住考场节奏",
+        pains: ["时间不够，不知优先学什么", "模考分数波动大，心态焦虑", "缺乏真实考场节奏感"],
+        goals: "熟悉真实考试节奏，查漏补缺最后盲区，建立应试信心。",
+        courses: ["真题精讲（4H/科）", "精炼真题训练（6H/科）", "实战模考班（4-8H/科）"],
+        systems: ["学习进度智能预警", "考前7天复习模式统筹", "仿真模考成绩趋势分析"],
+        services: ["考前冲刺带背（魔鬼班）", "模考后1V1复盘建议", "云面授学习追踪（魔鬼班）", "心态疏导与时间管理指导"],
+        valueTitle: "临门一脚",
+        value: "系统聚焦保分项，课程还原考场，服务稳心态和推节奏，帮助学员从容上考场。",
+        script: "冲刺阶段时间最宝贵，云私塾帮你把优先级排出来，模考后知道该补哪里，考前不乱。"
+      },
+      {
+        name: "点睛阶段",
+        sub: "临考冲刺",
+        title: "临考不慌，抓住最后确定性",
+        pains: ["越临近考试越慌，信息过载", "想抓重点但不知哪些最关键", "怕遗漏押题或技巧"],
+        goals: "锁定高频核心考点，掌握应试技巧与时间分配，保持最佳状态走进考场。",
+        courses: ["临考密训直播（2H/科）", "冲刺模考解析（3H）", "应试技巧速成班（1.5H）"],
+        systems: ["考前72小时智能推送", "24小时AI答疑", "应试策略智能推荐"],
+        services: ["考前心理支持", "密训资料包精准推送", "考场注意事项提醒"],
+        valueTitle: "决胜时刻",
+        value: "用最少时间抓最大分值，系统、课程、服务三位一体，为学员注入确定性与安全感。",
+        script: "临考不是信息越多越好，而是该看什么、该问什么、该注意什么都有人帮你收拢。"
+      }
+    ];
+
+    const quickTalks = [
+      {
+        name: "省时间",
+        sub: "时间紧，看不完",
+        pain: "中级注安全科内容多、教材厚，很多学员一算每天要学的页数就焦虑。真正的问题不是不努力，而是不知道哪些必须先学、哪些可以换方式学。",
+        proof: ["3套学习方案：短期冲关、高效优选、全面夯实", "智能摸底测评：正确率高推荐讲义文本，薄弱点推荐视频", "视频智览AI：按知识点拆解视频，一键定位核心考点", "学习报告：记录学习时长、做题量、完课率和掌握情况"],
+        line: "云私塾不是让你把所有东西硬啃一遍，而是先判断你该走哪条路，再把时间花在最该提分的地方。"
+      },
+      {
+        name: "会做题",
+        sub: "一听就会，一做就废",
+        pain: "只听懂不等于会考试。学员常见卡点是不会把知识点用到题里，刷了题也缺少总结，错题下次还错。",
+        proof: ["课中弹题：老师讲完知识点后即时练", "课题对照：哪题做错点哪里，精准定位视频解析", "智能题集：按年份、题型、重要程度和高频易错筛题", "错题本：自动归集、分类、重做和举一反三", "集训刷题：班主任按计划带刷核心必刷题"],
+        line: "云私塾把听课和做题绑在一起，让学员不是被动听懂，而是在正确时间练对题、改透题。"
+      },
+      {
+        name: "抗遗忘",
+        sub: "看课转头就忘",
+        pain: "法条、概念和原理刚听懂，隔天又模糊。不是学员不用功，而是孤立信息天然容易被忘，需要系统反复唤醒。",
+        proof: ["AI遗忘记忆算法：检测即将遗忘的知识点并推送复习任务", "考点记忆卡：高频重难点挖空卡片", "熟记/模糊/忘记三档反馈：模糊和忘记的内容重复推送", "记忆营带学：服务端帮助学员把复习节奏坚持下来"],
+        line: "云私塾比学员更清楚哪些知识快忘了，它会把该复习的内容推回来，让记忆不靠硬扛。"
+      },
+      {
+        name: "真智能",
+        sub: "疑问无处解答",
+        pain: "学员做题卡住时，翻教材慢，网上答案杂，问别人又不一定懂注安考试。疑问拖久了，就会变成下一次错题。",
+        proof: ["专业答疑：看课、做题、讲义划线都能问", "备考指导：迷茫时可问AI老师下一步怎么学", "学习数据问答：快速了解当前学习情况", "找功能：不知道入口在哪里，可直接问AI老师", "官方备案与大模型加持：结合教研训练和学习数据"],
+        line: "云私塾的AI不是泛泛聊天，而是围绕注安备考场景训练，帮学员把问题当场解决。"
+      }
+    ];
+
+    const mediaItems = [
+      ["学习计划演示", "展示3套学习方案如何选择，以及系统如何生成学习路径。", "学习计划.mp4"],
+      ["摸底测评演示", "展示每8个学习任务触发测评，并按正确率推荐学习方式。", "摸底测评.mp4"],
+      ["视频智览演示", "展示AI拆解视频、定位知识点、一键跳转核心考点。", "智览.mp4"],
+      ["课中弹题演示", "展示听课中自动弹题，当堂检测知识点掌握。", "课中弹题.mp4"],
+      ["课题对照演示", "展示错题一键定位视频解析，并继续向AI追问。", "课题对照.mp4"],
+      ["记忆卡演示", "展示熟记、模糊、忘记三档反馈和重复推送机制。", "记忆卡.mp4"],
+      ["AI答疑演示", "展示看课、做题、讲义划线时直接唤起AI答疑。", "课程答疑.mp4"],
+      ["划线答疑演示", "展示文本划线提问，解决讲义理解卡点。", "划线答疑.mp4"]
+    ];
+
+    const stageTabs = document.getElementById("stageTabs");
+    const quickTabs = document.getElementById("quickTabs");
+    const mediaGrid = document.getElementById("mediaGrid");
+
+    function renderList(elementId, items) {
+      const target = document.getElementById(elementId);
+      target.innerHTML = items.map(item => `<li>${item}</li>`).join("");
+    }
+
+    let currentStage = 0;
+
+    function setStage(index) {
+      currentStage = (index + stages.length) % stages.length;
+      const stage = stages[currentStage];
+      document.querySelectorAll(".stage-tab").forEach((tab, tabIndex) => {
+        tab.classList.toggle("active", tabIndex === currentStage);
+        tab.setAttribute("aria-selected", tabIndex === currentStage ? "true" : "false");
+      });
+      document.getElementById("stageTag").textContent = `${stage.name} · ${stage.sub}`;
+      document.getElementById("stageTitle").textContent = stage.title;
+      document.getElementById("goalText").textContent = stage.goals;
+      document.getElementById("valueTitle").textContent = stage.valueTitle;
+      document.getElementById("valueText").textContent = stage.value;
+      document.getElementById("scriptText").textContent = stage.script;
+      renderList("painList", stage.pains);
+      renderList("courseList", stage.courses);
+      renderList("systemList", stage.systems);
+      renderList("serviceList", stage.services);
+    }
+
+    function setQuick(index) {
+      const talk = quickTalks[index];
+      document.querySelectorAll(".quick-tab").forEach((tab, tabIndex) => {
+        tab.classList.toggle("active", tabIndex === index);
+        tab.setAttribute("aria-selected", tabIndex === index ? "true" : "false");
+      });
+      document.getElementById("quickPain").textContent = talk.pain;
+      document.getElementById("quickLine").textContent = talk.line;
+      renderList("quickProof", talk.proof);
+    }
+
+    stageTabs.innerHTML = stages.map((stage, index) => `
+      <button class="stage-tab" type="button" role="tab" aria-selected="${index === 0 ? "true" : "false"}" data-stage="${index}">
+        <span class="num">0${index + 1}</span>
+        <strong>${stage.name}</strong>
+        <span>${stage.sub}</span>
+      </button>
+    `).join("");
+
+    quickTabs.innerHTML = quickTalks.map((talk, index) => `
+      <button class="quick-tab" type="button" role="tab" aria-selected="${index === 0 ? "true" : "false"}" data-quick="${index}">
+        <strong>${talk.name}</strong>
+        <span>${talk.sub}</span>
+      </button>
+    `).join("");
+
+    mediaGrid.innerHTML = mediaItems.map(([title, desc, file]) => `
+      <article class="media-card">
+        <div class="placeholder">视频/截图占位</div>
+        <div class="media-body">
+          <b>${title}</b>
+          <p>${desc}</p>
+          <span class="file-name">${file}</span>
+        </div>
+      </article>
+    `).join("");
+
+    stageTabs.addEventListener("click", event => {
+      const button = event.target.closest("[data-stage]");
+      if (button) setStage(Number(button.dataset.stage));
+    });
+
+    document.getElementById("prevStage").addEventListener("click", () => setStage(currentStage - 1));
+    document.getElementById("nextStage").addEventListener("click", () => setStage(currentStage + 1));
+
+    quickTabs.addEventListener("click", event => {
+      const button = event.target.closest("[data-quick]");
+      if (button) setQuick(Number(button.dataset.quick));
+    });
+
+    setStage(0);
+    setQuick(0);
+  </script>
+</body>
+</html>

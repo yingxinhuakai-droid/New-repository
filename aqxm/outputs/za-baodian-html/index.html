@@ -1,0 +1,788 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>2026年注安知识宝典集｜主播主卖话术页</title>
+  <style>
+    :root {
+      --ink: #13233f;
+      --muted: #63728a;
+      --blue: #1264f6;
+      --blue-dark: #0b3b8d;
+      --blue-soft: #eaf4ff;
+      --orange: #ff6438;
+      --orange-soft: #fff1e9;
+      --green: #17a36b;
+      --paper: #fbfdff;
+      --line: #d7e4f3;
+      --white: #ffffff;
+      --shadow: 0 18px 50px rgba(19, 35, 63, .12);
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      background:
+        linear-gradient(90deg, rgba(18,100,246,.055) 1px, transparent 1px),
+        linear-gradient(rgba(18,100,246,.055) 1px, transparent 1px),
+        linear-gradient(180deg, #f5fbff 0%, #ffffff 42%, #f7fbff 100%);
+      background-size: 42px 42px, 42px 42px, auto;
+      letter-spacing: 0;
+    }
+
+    .page {
+      width: min(1180px, calc(100vw - 36px));
+      margin: 0 auto;
+      padding: 28px 0 72px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 22px;
+      color: var(--blue-dark);
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .tagline {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      padding: 8px 12px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid var(--line);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background: var(--orange);
+      display: inline-block;
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 460px;
+      gap: 34px;
+      align-items: stretch;
+      min-height: 610px;
+    }
+
+    h1 {
+      margin: 34px 0 18px;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .hero-lead {
+      max-width: 720px;
+      margin: 0 0 30px;
+      font-size: 24px;
+      line-height: 1.55;
+      color: #31425f;
+      font-weight: 600;
+    }
+
+    .hero-lead strong,
+    .orange { color: var(--orange); }
+
+    .script-panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 26px;
+      margin-top: 34px;
+    }
+
+    .panel-kicker {
+      color: var(--blue);
+      font-size: 14px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .script-line {
+      margin: 0;
+      font-size: 24px;
+      line-height: 1.52;
+      font-weight: 800;
+    }
+
+    .script-note {
+      margin: 18px 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.7;
+    }
+
+    .product-stack {
+      position: relative;
+      background: linear-gradient(180deg, #dceeff, #ffffff);
+      border: 1px solid #cddff2;
+      min-height: 610px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .product-stack::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,.55), transparent 42%);
+      pointer-events: none;
+    }
+
+    .book {
+      position: absolute;
+      width: 230px;
+      height: 298px;
+      object-fit: cover;
+      box-shadow: 0 22px 38px rgba(19,35,63,.18);
+      border: 1px solid rgba(255,255,255,.75);
+      background: #fff;
+    }
+
+    .book.pocket { left: 42px; top: 82px; transform: rotate(-7deg); z-index: 2; }
+    .book.jz { left: 150px; top: 160px; transform: rotate(3deg); z-index: 3; }
+    .book.true { left: 260px; top: 88px; transform: rotate(7deg); z-index: 1; }
+
+    .stack-title {
+      position: absolute;
+      left: 32px;
+      right: 32px;
+      bottom: 34px;
+      padding: 22px;
+      background: var(--ink);
+      color: white;
+    }
+
+    .stack-title b {
+      display: block;
+      font-size: 24px;
+      margin-bottom: 8px;
+    }
+
+    .stack-title span {
+      color: #cde1ff;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .quick-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin: 30px 0 0;
+    }
+
+    .quick {
+      padding: 16px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid var(--line);
+    }
+
+    .quick b {
+      display: block;
+      color: var(--blue);
+      font-size: 18px;
+      margin-bottom: 6px;
+    }
+
+    .quick span {
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    section {
+      margin-top: 54px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      gap: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: clamp(30px, 4vw, 46px);
+      line-height: 1.16;
+      letter-spacing: 0;
+    }
+
+    .section-head p {
+      margin: 0;
+      max-width: 420px;
+      color: var(--muted);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    .flow {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border: 1px solid var(--line);
+      background: var(--white);
+      box-shadow: var(--shadow);
+    }
+
+    .flow-step {
+      min-height: 260px;
+      padding: 24px;
+      border-right: 1px solid var(--line);
+      position: relative;
+    }
+
+    .flow-step:last-child { border-right: 0; }
+
+    .num {
+      display: inline-flex;
+      width: 38px;
+      height: 38px;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      background: var(--blue);
+      font-weight: 900;
+      margin-bottom: 22px;
+    }
+
+    .flow-step:nth-child(2) .num { background: var(--orange); }
+    .flow-step:nth-child(3) .num { background: var(--green); }
+    .flow-step:nth-child(4) .num { background: var(--ink); }
+
+    .flow-step h3 {
+      margin: 0 0 14px;
+      font-size: 23px;
+      line-height: 1.25;
+    }
+
+    .talk {
+      margin: 0;
+      color: var(--ink);
+      font-size: 17px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .hint {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .matrix {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .book-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 600px;
+    }
+
+    .book-card img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      object-position: center top;
+      background: var(--blue-soft);
+    }
+
+    .book-card .content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      flex: 1;
+    }
+
+    .label {
+      width: fit-content;
+      padding: 7px 10px;
+      background: var(--blue-soft);
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .book-card:nth-child(2) .label { background: var(--orange-soft); color: var(--orange); }
+    .book-card:nth-child(3) .label { background: #eef4ff; color: var(--ink); }
+
+    .book-card h3 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.2;
+    }
+
+    .bullets {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+      color: #30415e;
+      line-height: 1.55;
+      font-size: 15px;
+    }
+
+    .bullets li {
+      padding-left: 18px;
+      position: relative;
+    }
+
+    .bullets li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: .72em;
+      width: 7px;
+      height: 7px;
+      background: var(--orange);
+    }
+
+    .quote {
+      margin-top: auto;
+      padding: 15px;
+      background: #f6f9ff;
+      border-left: 5px solid var(--blue);
+      color: var(--ink);
+      font-size: 16px;
+      line-height: 1.55;
+      font-weight: 800;
+    }
+
+    .book-card:nth-child(2) .quote { border-left-color: var(--orange); background: #fff7f2; }
+    .book-card:nth-child(3) .quote { border-left-color: var(--ink); background: #f4f7fb; }
+
+    .scene-grid {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 22px;
+      align-items: start;
+    }
+
+    .scene-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .scene {
+      display: grid;
+      grid-template-columns: 164px 1fr;
+      gap: 18px;
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 18px;
+      box-shadow: 0 10px 32px rgba(19,35,63,.08);
+    }
+
+    .scene b {
+      color: var(--blue);
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .scene p {
+      margin: 0;
+      color: #2e3f5c;
+      font-size: 16px;
+      line-height: 1.7;
+      font-weight: 650;
+    }
+
+    .anchor-card {
+      position: sticky;
+      top: 18px;
+      background: var(--ink);
+      color: #fff;
+      padding: 28px;
+      box-shadow: var(--shadow);
+    }
+
+    .anchor-card h3 {
+      margin: 0 0 18px;
+      font-size: 30px;
+      line-height: 1.2;
+    }
+
+    .anchor-card p {
+      margin: 0 0 20px;
+      color: #d8e6ff;
+      line-height: 1.75;
+      font-size: 17px;
+    }
+
+    .anchor-lines {
+      display: grid;
+      gap: 10px;
+    }
+
+    .anchor-lines div {
+      padding: 12px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.12);
+      font-weight: 800;
+      line-height: 1.55;
+    }
+
+    .data-band {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+
+    .data-card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      padding: 24px;
+    }
+
+    .data-card h3 {
+      margin: 0 0 16px;
+      font-size: 26px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    th {
+      text-align: left;
+      color: var(--muted);
+      font-size: 12px;
+      padding: 10px 8px;
+      border-bottom: 1px solid var(--line);
+      white-space: nowrap;
+    }
+
+    td {
+      padding: 12px 8px;
+      border-bottom: 1px solid #eef3f8;
+      color: #273a59;
+      font-weight: 650;
+    }
+
+    td:nth-child(2) { color: var(--orange); }
+    td:nth-child(3) { color: var(--blue); }
+
+    .close {
+      background: linear-gradient(135deg, #12315c, #0f2340);
+      color: var(--white);
+      padding: 42px;
+      box-shadow: var(--shadow);
+    }
+
+    .close h2 {
+      max-width: 850px;
+      margin-bottom: 18px;
+    }
+
+    .close p {
+      margin: 0;
+      max-width: 920px;
+      color: #dce8ff;
+      font-size: 22px;
+      line-height: 1.7;
+      font-weight: 700;
+    }
+
+    .close-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    .close-grid div {
+      padding: 18px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
+    .close-grid b {
+      display: block;
+      color: #ffffff;
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .close-grid span {
+      color: #c9d9f2;
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    .footer {
+      margin-top: 36px;
+      color: #8796aa;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 980px) {
+      .hero, .scene-grid, .data-band { grid-template-columns: 1fr; }
+      .product-stack { min-height: 520px; }
+      .flow, .matrix, .close-grid, .quick-grid { grid-template-columns: 1fr; }
+      .flow-step { border-right: 0; border-bottom: 1px solid var(--line); min-height: auto; }
+      .flow-step:last-child { border-bottom: 0; }
+      .scene { grid-template-columns: 1fr; }
+      .anchor-card { position: static; }
+      .book.pocket { left: 28px; top: 74px; }
+      .book.jz { left: 122px; top: 142px; }
+      .book.true { left: 220px; top: 74px; }
+    }
+
+    @media (max-width: 560px) {
+      .page { width: min(100vw - 24px, 1180px); padding-top: 18px; }
+      .book { width: 185px; height: 240px; }
+      .book.pocket { left: 18px; }
+      .book.jz { left: 82px; top: 145px; }
+      .book.true { left: 155px; }
+      .stack-title { left: 16px; right: 16px; }
+      h1 { font-size: 42px; }
+      .hero-lead, .close p { font-size: 19px; }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <div class="tagline"><span class="dot"></span>环球网校｜2026注册安全工程师</div>
+      <div>主播主卖话术版</div>
+    </div>
+
+    <header class="hero">
+      <div>
+        <h1>2026年注安知识宝典集</h1>
+        <p class="hero-lead">这不是三本书简单打包，而是把学员备考最需要的 <strong>考点、习题、真题</strong> 串成一条能照着走的通关路径。</p>
+
+        <div class="script-panel">
+          <div class="panel-kicker">主播开场 30 秒</div>
+          <p class="script-line">“注安备考最怕的不是没资料，而是资料太多、重点太散、刷题太乱。今天这套知识宝典集，就是帮大家把复习顺序理清楚：先知道考什么，再练会怎么答，最后用真题校准考场能力。”</p>
+          <p class="script-note">讲的时候先强调“备考路径”，不要一上来介绍三本书。学员先认同问题，后面才愿意听产品组合。</p>
+        </div>
+
+        <div class="quick-grid">
+          <div class="quick"><b>一本抓点</b><span>口袋书解决重点不清、厚书背不动的问题。</span></div>
+          <div class="quick"><b>一本练题</b><span>决战60+把核心考点和经典考题绑定，主打短时提分。</span></div>
+          <div class="quick"><b>一本吃透真题</b><span>10年真题精解用有效真题反推考法，训练考场能力。</span></div>
+        </div>
+      </div>
+
+      <div class="product-stack" aria-label="三本图书产品图">
+        <img class="book pocket" src="assets/koudaishu.jpg" alt="高频考点口袋书">
+        <img class="book jz" src="assets/juezhan60.jpg" alt="决战注安60+">
+        <img class="book true" src="assets/zhenti10.jpg" alt="10年真题精解">
+        <div class="stack-title">
+          <b>主播讲产品时的核心抓手</b>
+          <span>别把它讲成“三本资料”，要讲成“考点入口 + 练题提分 + 真题校准”的完整学习矩阵。</span>
+        </div>
+      </div>
+    </header>
+
+    <section>
+      <div class="section-head">
+        <h2>直播讲解顺序：先造共鸣，再讲组合价值。</h2>
+        <p>主播照着这个顺序走，话术会自然很多：先让学员点头，再把三本书的角色一层层接上。</p>
+      </div>
+      <div class="flow">
+        <article class="flow-step">
+          <span class="num">01</span>
+          <h3>先讲痛点</h3>
+          <p class="talk">“很多同学不是不努力，是不知道哪些点更值得背，刷了很多题也不知道错在哪里。”</p>
+          <div class="hint">目的：把“资料焦虑”转成“需要一套方法”。</div>
+        </article>
+        <article class="flow-step">
+          <span class="num">02</span>
+          <h3>再讲路径</h3>
+          <p class="talk">“所以复习顺序不能乱：先抓高频考点，再用题把考点练熟，最后回到真题看考试到底怎么考。”</p>
+          <div class="hint">目的：把三本书的组合逻辑讲出来。</div>
+        </article>
+        <article class="flow-step">
+          <span class="num">03</span>
+          <h3>落到三本书</h3>
+          <p class="talk">“口袋书负责抓点，决战60+负责练题和答题模板，10年真题精解负责吃透真题规律。”</p>
+          <div class="hint">目的：让每本书都有清晰角色，不互相打架。</div>
+        </article>
+        <article class="flow-step">
+          <span class="num">04</span>
+          <h3>最后做收口</h3>
+          <p class="talk">“单买一本只能解决一个环节，三本一起用，才是从学、练到考前复盘的一整套闭环。”</p>
+          <div class="hint">目的：把组合装的必要性讲透。</div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>三本书分别怎么讲：每本只抓一个主卖点。</h2>
+        <p>直播里不要把所有信息都倒出来。每本书给主播一个“记得住、讲得顺”的核心表达。</p>
+      </div>
+
+      <div class="matrix">
+        <article class="book-card">
+          <img src="assets/koudaishu.jpg" alt="高频考点口袋书">
+          <div class="content">
+            <span class="label">考点入口</span>
+            <h3>高频考点口袋书</h3>
+            <ul class="bullets">
+              <li>浓缩高频考点精华，内容清晰直观。</li>
+              <li>每个考点用标星方式提示重要程度。</li>
+              <li>标注近年单选、多选形式出现频率，解决“无从入手”。</li>
+              <li>适合基础期扫考点、碎片时间背记、冲刺期快速复盘。</li>
+            </ul>
+            <div class="quote">主播一句话：先别盲目啃厚书，先用口袋书把高频考点抓出来。</div>
+          </div>
+        </article>
+
+        <article class="book-card">
+          <img src="assets/juezhan60.jpg" alt="决战注安60+">
+          <div class="content">
+            <span class="label">提分练题</span>
+            <h3>决战注安60+</h3>
+            <ul class="bullets">
+              <li>主打“60分保命点”，只背教材核心的高价值内容。</li>
+              <li>六科逐科提炼核心考点，法规122点、管理82点、技术55点。</li>
+              <li>核心版块为直击考点、考点解读、经典考题。</li>
+              <li>适合备考时间紧、主观题不会答、容易漏点失分的学员。</li>
+            </ul>
+            <div class="quote">主播一句话：这本不是让你学更多，而是先把能拿分的内容学稳。</div>
+          </div>
+        </article>
+
+        <article class="book-card">
+          <img src="assets/zhenti10.jpg" alt="10年真题精解">
+          <div class="content">
+            <span class="label">真题校准</span>
+            <h3>10年真题精解</h3>
+            <ul class="bullets">
+              <li>从每科6000+题库中筛选有效真题，剔除老旧题型、超纲题与作废考点。</li>
+              <li>用真题链接、真题精解、举一反三、环球君点播形成闭环。</li>
+              <li>每个考点配套3至5道举一反三习题。</li>
+              <li>适合学完基础后训练解题思路、熟悉命题规律、规避高频陷阱。</li>
+            </ul>
+            <div class="quote">主播一句话：真题不是刷完就行，关键是看懂它反复怎么考。</div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>不同学员怎么接话：主播不要千人一面。</h2>
+        <p>先识别学员当下卡点，再把对应书讲出来，最后回到套装闭环。</p>
+      </div>
+      <div class="scene-grid">
+        <div class="scene-list">
+          <div class="scene">
+            <b>零基础 / 刚开始学</b>
+            <p>“你现在最重要的不是马上刷很多题，而是先知道考试重点在哪。口袋书帮你建考点地图，再配合真题精解看这些点怎么考。”</p>
+          </div>
+          <div class="scene">
+            <b>学过但记不牢</b>
+            <p>“你不是没学，是知识点太散。先用口袋书把高频点压缩出来，再用决战60+把这些点和题绑定起来，记忆会更稳。”</p>
+          </div>
+          <div class="scene">
+            <b>题一做就错</b>
+            <p>“这种情况不能只继续刷题，要回到真题精解看命题怎么问、陷阱在哪里，再用举一反三练同类题。”</p>
+          </div>
+          <div class="scene">
+            <b>主观题不会写</b>
+            <p>“决战60+里有考点、模板、经典考题，重点是训练审题、定位考点、组织答案、规范书写，减少漏点失分。”</p>
+          </div>
+          <div class="scene">
+            <b>时间紧 / 想冲刺</b>
+            <p>“别从头铺开了，先抓60分保命点。口袋书负责快速背，决战60+负责提分练，真题精解负责最后校准考场感觉。”</p>
+          </div>
+        </div>
+
+        <aside class="anchor-card">
+          <h3>主播万能串联句</h3>
+          <p>当不知道怎么转场时，就用下面三句，把单本介绍自然串回套装。</p>
+          <div class="anchor-lines">
+            <div>“先抓点，再练题，最后看真题规律，这就是这套宝典集的顺序。”</div>
+            <div>“不是资料越多越好，而是每个阶段都有对应工具。”</div>
+            <div>“你缺哪一环，单本能补；但想系统备考，三本一起用更顺。”</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>关键数据别硬背，挑能增强信任的讲。</h2>
+        <p>数据页给主播做背书，不建议直播中逐行念。讲“逐科筛选、有效真题、覆盖高频”即可。</p>
+      </div>
+      <div class="data-band">
+        <div class="data-card">
+          <h3>决战60+：高频考点 + 经典考题</h3>
+          <table>
+            <thead><tr><th>科目</th><th>核心考点</th><th>配套题量 / 覆盖</th></tr></thead>
+            <tbody>
+              <tr><td>安全法规</td><td>122个</td><td>180题 / 90%</td></tr>
+              <tr><td>安全管理</td><td>82个</td><td>205题 / 78%</td></tr>
+              <tr><td>安全技术</td><td>55个</td><td>142题 / 67%</td></tr>
+              <tr><td>化工安全</td><td>30个</td><td>92题 / 65%</td></tr>
+              <tr><td>其他安全</td><td>28个</td><td>76题 / 79%</td></tr>
+              <tr><td>建筑安全</td><td>28个</td><td>84题 / 80%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="data-card">
+          <h3>10年真题精解：有效真题 + 考法复盘</h3>
+          <table>
+            <thead><tr><th>科目</th><th>甄选真题</th><th>考点 / 覆盖</th></tr></thead>
+            <tbody>
+              <tr><td>安全法规</td><td>300道</td><td>91点 / 80%</td></tr>
+              <tr><td>安全管理</td><td>220道</td><td>52点 / 85%</td></tr>
+              <tr><td>安全技术</td><td>330道</td><td>64点 / 80%</td></tr>
+              <tr><td>化工安全</td><td>140道</td><td>45点 / 75%</td></tr>
+              <tr><td>其他安全</td><td>76道</td><td>40点 / 85%</td></tr>
+              <tr><td>建筑安全</td><td>141道</td><td>260点 / 80%</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="close">
+      <h2>最后收口：把“买书”讲成“买一条备考路线”。</h2>
+      <p>“今天这套2026年注安知识宝典集，核心不是让大家多买几本资料，而是让你复习顺序不乱：一本抓考点，一本练会题，一本吃透真题。基础、强化、冲刺都能用，尤其适合现在想把备考效率提起来的同学。”</p>
+      <div class="close-grid">
+        <div><b>转化点 1</b><span>强调“时间省下来”：不盲目啃厚教材，不无效刷旧题。</span></div>
+        <div><b>转化点 2</b><span>强调“路径完整”：考点、习题、真题三个环节互相衔接。</span></div>
+        <div><b>转化点 3</b><span>强调“全阶段可用”：基础能入门，强化能提分，冲刺能复盘。</span></div>
+      </div>
+    </section>
+
+    <div class="footer">
+      内容依据用户提供的《决战注安60+图书介绍》《10年真题精解图书介绍》及三张产品图片整理。口袋书因未提供独立文档，仅使用图片中出现的卖点，不补造额外数据。
+    </div>
+  </main>
+</body>
+</html>

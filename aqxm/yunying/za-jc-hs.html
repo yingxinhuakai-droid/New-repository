@@ -1,0 +1,1246 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>中级注安官方教材痛点·主播&销售全套落地话术</title>
+  <style>
+    :root {
+      --bg: #f4f6f9;
+      --paper: #ffffff;
+      --ink: #172033;
+      --muted: #657084;
+      --line: #dfe5ee;
+      --navy: #16395d;
+      --blue: #226fd3;
+      --teal: #139a9b;
+      --green: #258b57;
+      --amber: #b7791f;
+      --red: #c84444;
+      --slate: #344054;
+      --shadow: 0 18px 42px rgba(23, 32, 51, .09);
+      --soft-shadow: 0 8px 24px rgba(23, 32, 51, .07);
+      --radius: 8px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(180deg, #eef4fb 0, #f4f6f9 340px, #f8fafc 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      letter-spacing: 0;
+    }
+
+    button, select { font: inherit; color: inherit; }
+    .page { width: min(1360px, calc(100vw - 32px)); margin: 0 auto; padding: 24px 0 56px; }
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--navy);
+      font-weight: 760;
+      font-size: 14px;
+    }
+    .brand-mark {
+      width: 28px;
+      height: 28px;
+      border-radius: 7px;
+      background: linear-gradient(135deg, var(--navy), var(--teal));
+      box-shadow: var(--soft-shadow);
+    }
+    .nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+    }
+    .nav a {
+      color: var(--slate);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.75);
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .nav a:hover { border-color: rgba(34,111,211,.45); color: var(--blue); }
+
+    .hero {
+      min-height: 430px;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 380px;
+      gap: 18px;
+      align-items: stretch;
+    }
+    .hero-main {
+      color: #fff;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 38px;
+      background:
+        linear-gradient(115deg, rgba(19, 43, 76, .98), rgba(21, 73, 111, .94) 55%, rgba(19, 154, 155, .84)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 80px);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow: hidden;
+    }
+    .eyebrow {
+      width: fit-content;
+      color: rgba(255,255,255,.88);
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.09);
+      border-radius: 999px;
+      padding: 7px 11px;
+      font-size: 13px;
+      font-weight: 720;
+      margin-bottom: 20px;
+    }
+    h1 {
+      margin: 0;
+      max-width: 920px;
+      font-size: clamp(36px, 5.4vw, 68px);
+      line-height: 1.06;
+      letter-spacing: 0;
+    }
+    .lead {
+      max-width: 880px;
+      margin: 20px 0 0;
+      color: rgba(255,255,255,.84);
+      font-size: 17px;
+      line-height: 1.85;
+      font-weight: 560;
+    }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 9px;
+      margin-top: 28px;
+    }
+    .hero-tags span {
+      border: 1px solid rgba(255,255,255,.22);
+      background: rgba(255,255,255,.10);
+      color: rgba(255,255,255,.92);
+      padding: 8px 11px;
+      border-radius: 999px;
+      font-size: 13px;
+    }
+    .side-panel {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .side-panel h2, .section-title h2 {
+      margin: 0;
+      font-size: 20px;
+      line-height: 1.35;
+    }
+    .quick-stack { display: grid; gap: 10px; margin-top: 16px; }
+    .quick-item {
+      border-left: 4px solid var(--blue);
+      background: #f8fbff;
+      border-radius: var(--radius);
+      padding: 12px 13px;
+    }
+    .quick-item b { display: block; font-size: 14px; margin-bottom: 5px; }
+    .quick-item span { color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .quick-item:nth-child(2) { border-left-color: var(--teal); }
+    .quick-item:nth-child(3) { border-left-color: var(--amber); }
+    .quick-item:nth-child(4) { border-left-color: var(--green); }
+
+    .section {
+      margin-top: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--soft-shadow);
+      padding: 24px;
+    }
+    .section-title {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .section-title p {
+      max-width: 760px;
+      margin: 6px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .pill {
+      flex: 0 0 auto;
+      color: var(--blue);
+      background: #edf5ff;
+      border: 1px solid #cfdef3;
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-size: 12px;
+      font-weight: 760;
+    }
+
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      gap: 12px;
+    }
+    .pain-card {
+      min-height: 154px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 16px;
+      background: #fbfcfe;
+    }
+    .pain-card .num { color: var(--blue); font-size: 12px; font-weight: 800; }
+    .pain-card h3 { margin: 8px 0 8px; font-size: 19px; }
+    .pain-card p { margin: 0; color: #475467; font-size: 13px; line-height: 1.72; }
+
+    .logic-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+    .logic-box {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 18px;
+      background: #fff;
+    }
+    .logic-box strong { display: block; margin-bottom: 10px; font-size: 16px; }
+    .logic-box p { margin: 0; color: #475467; font-size: 14px; line-height: 1.8; }
+
+    .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .filters select, .filters button {
+      min-height: 38px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 0 12px;
+      cursor: pointer;
+    }
+    .filters button.active {
+      color: #fff;
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 1120px;
+      background: #fff;
+      font-size: 13px;
+    }
+    th, td {
+      padding: 13px 12px;
+      border-bottom: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+      line-height: 1.68;
+    }
+    th {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+      color: #475467;
+      background: #f7f9fc;
+      font-weight: 760;
+      white-space: nowrap;
+    }
+    tbody tr:last-child td { border-bottom: 0; }
+    tbody tr:hover td { background: #fbfdff; }
+    .reg-name { min-width: 168px; font-weight: 760; color: var(--navy); }
+    .date-cell { min-width: 112px; white-space: nowrap; }
+    .score { min-width: 70px; color: var(--red); font-weight: 760; }
+    .stars { min-width: 92px; color: var(--amber); font-weight: 900; letter-spacing: 0; }
+    .status {
+      display: inline-flex;
+      color: #fff;
+      border-radius: 999px;
+      padding: 2px 8px;
+      font-size: 12px;
+      margin-top: 5px;
+      background: var(--green);
+    }
+    .pending { background: var(--amber); }
+    .cards-list { display: none; }
+    .table-note {
+      margin: 12px 0 0;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.75;
+    }
+    .reg-poster-section {
+      max-width: 980px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+      overflow: hidden;
+      background: #fffdf8;
+    }
+    .reg-poster-shell {
+      padding: 26px;
+      border: 1px solid #ecd8b0;
+      border-top: 10px solid var(--navy);
+      position: relative;
+      background:
+        linear-gradient(90deg, rgba(22,57,93,.05) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(22,57,93,.05) 1px, transparent 1px),
+        linear-gradient(135deg, #fffdf8 0%, #ffffff 46%, #f1fbfa 100%);
+      background-size: 34px 34px, 34px 34px, auto;
+    }
+    .reg-poster-shell::before,
+    .reg-poster-shell::after {
+      content: "";
+      position: absolute;
+      width: 136px;
+      height: 136px;
+      border: 3px solid rgba(183, 121, 31, .32);
+      pointer-events: none;
+    }
+    .reg-poster-shell::before {
+      top: 16px;
+      right: 18px;
+      border-left: 0;
+      border-bottom: 0;
+    }
+    .reg-poster-shell::after {
+      left: 18px;
+      bottom: 16px;
+      border-right: 0;
+      border-top: 0;
+    }
+    .reg-board-ribbon {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      color: #fff;
+      background: linear-gradient(90deg, var(--red), #e28b2f);
+      border-radius: 999px;
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 860;
+      box-shadow: 0 10px 22px rgba(200, 68, 68, .18);
+      margin-bottom: 12px;
+      position: relative;
+      z-index: 1;
+    }
+    .reg-board-ribbon::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      background: #fff;
+      border-radius: 50%;
+    }
+    .reg-poster-head {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 230px;
+      gap: 14px;
+      align-items: end;
+      margin-bottom: 18px;
+      position: relative;
+      z-index: 1;
+    }
+    .reg-poster-kicker {
+      color: var(--teal);
+      font-size: 13px;
+      font-weight: 860;
+      margin-bottom: 8px;
+    }
+    .reg-poster-head h2 {
+      margin: 0;
+      color: var(--navy);
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.02;
+      white-space: nowrap;
+      overflow-wrap: normal;
+    }
+    .reg-poster-head p {
+      margin: 12px 0 0;
+      max-width: 690px;
+      color: #475467;
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 650;
+    }
+    .reg-score-badge {
+      border: 2px solid #f0c36c;
+      border-radius: var(--radius);
+      background:
+        linear-gradient(180deg, #fff7de 0%, #ffffff 100%);
+      padding: 18px 16px;
+      text-align: center;
+      box-shadow: var(--soft-shadow);
+    }
+    .reg-score-badge strong {
+      display: block;
+      color: var(--red);
+      font-size: 44px;
+      line-height: 1;
+    }
+    .reg-score-badge span {
+      display: block;
+      margin-top: 8px;
+      color: #6d542c;
+      font-size: 14px;
+      line-height: 1.55;
+      font-weight: 720;
+    }
+    .board-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 8px;
+      max-width: 820px;
+      margin: 0 auto 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .board-stat {
+      border-radius: var(--radius);
+      border: 1px solid #dbe4ef;
+      background: #ffffff;
+      padding: 11px 12px;
+      box-shadow: 0 8px 18px rgba(22, 57, 93, .06);
+    }
+    .board-stat strong {
+      display: block;
+      color: var(--navy);
+      font-size: 20px;
+      line-height: 1;
+      margin-bottom: 7px;
+    }
+    .board-stat span {
+      color: #667085;
+      font-size: 12px;
+      font-weight: 720;
+      line-height: 1.5;
+    }
+    .board-stat:nth-child(1) { border-top: 4px solid var(--red); }
+    .board-stat:nth-child(2) { border-top: 4px solid var(--teal); }
+    .board-stat:nth-child(3) { border-top: 4px solid var(--amber); }
+    .board-stat:nth-child(4) { border-top: 4px solid var(--green); }
+    .reg-poster-section .filters {
+      justify-content: center;
+      margin: 0 auto 16px;
+      position: relative;
+      z-index: 1;
+    }
+    .poster-list {
+      display: grid;
+      gap: 10px;
+      max-width: 820px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+    .poster-reg-card {
+      display: grid;
+      grid-template-columns: 104px minmax(0, 1fr) 76px;
+      gap: 12px;
+      align-items: stretch;
+      border: 1px solid #d8e3f1;
+      border-radius: var(--radius);
+      background: #ffffff;
+      box-shadow: 0 8px 20px rgba(22, 57, 93, .06);
+      overflow: hidden;
+      position: relative;
+    }
+    .poster-reg-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 5px;
+      background: var(--teal);
+    }
+    .poster-reg-card.is-pending::before { background: var(--amber); }
+    .poster-reg-card.is-top::before { background: var(--red); }
+    .poster-date {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 10px;
+      color: #fff;
+      background: linear-gradient(180deg, #123352, #1d5f76);
+      font-weight: 820;
+      text-align: center;
+      line-height: 1.25;
+      margin-left: 5px;
+    }
+    .poster-date span {
+      display: inline-flex;
+      align-self: center;
+      color: var(--navy);
+      background: #fff;
+      border-radius: 999px;
+      padding: 3px 8px;
+      font-size: 12px;
+      font-weight: 760;
+    }
+    .poster-date span.pending { color: #7a4f05; }
+    .poster-main {
+      padding: 12px 0;
+      min-width: 0;
+    }
+    .poster-main h3 {
+      margin: 0 0 8px;
+      color: var(--navy);
+      font-size: 14px;
+      line-height: 1.45;
+      word-break: break-word;
+    }
+    .poster-main p {
+      margin: 6px 0 0;
+      color: #475467;
+      font-size: 12px;
+      line-height: 1.58;
+    }
+    .poster-main b { color: var(--ink); }
+    .poster-score {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 6px;
+      padding: 12px 10px;
+      border-left: 1px solid #edf1f6;
+      background: #fbfdff;
+      text-align: center;
+    }
+    .poster-score strong {
+      color: var(--red);
+      font-size: 18px;
+      line-height: 1.1;
+    }
+    .poster-score span {
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .poster-summary {
+      max-width: 820px;
+      margin: 16px auto 0;
+      border: 1px solid #cfe0f4;
+      border-left: 5px solid var(--blue);
+      border-radius: var(--radius);
+      background: #f3f8ff;
+      padding: 14px 16px;
+      color: #2d405a;
+      font-size: 14px;
+      line-height: 1.8;
+      position: relative;
+      z-index: 1;
+    }
+
+    .script-layout {
+      display: grid;
+      grid-template-columns: 230px minmax(0, 1fr);
+      gap: 16px;
+    }
+    .tablist {
+      display: grid;
+      gap: 8px;
+      align-content: start;
+    }
+    .tab-btn {
+      text-align: left;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      padding: 12px 14px;
+      cursor: pointer;
+      font-weight: 720;
+    }
+    .tab-btn.active {
+      color: #fff;
+      background: var(--navy);
+      border-color: var(--navy);
+    }
+    .script-panel {
+      display: none;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fbfcfe;
+      padding: 18px;
+    }
+    .script-panel.active { display: block; }
+    .script-panel h3 { margin: 0 0 12px; font-size: 18px; }
+    .script-panel p, .script-panel li {
+      color: #344054;
+      font-size: 14px;
+      line-height: 1.9;
+    }
+    .script-panel p { margin: 0 0 12px; }
+    .script-panel ol, .script-panel ul { margin: 0; padding-left: 20px; }
+    .golden-list {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .golden-list li {
+      margin: 0;
+      padding: 13px 14px;
+      border-radius: var(--radius);
+      border: 1px solid #eadfbf;
+      background: #fffaf0;
+      color: #3f3420;
+      font-weight: 720;
+    }
+    .copy-row {
+      display: flex;
+      justify-content: flex-end;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .copy-btn {
+      border: 1px solid var(--line);
+      background: #fff;
+      border-radius: var(--radius);
+      min-height: 36px;
+      padding: 0 12px;
+      cursor: pointer;
+      color: var(--slate);
+    }
+    .copy-btn:hover { border-color: var(--blue); color: var(--blue); }
+
+    .objection-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+    }
+    details {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: #fff;
+      overflow: hidden;
+    }
+    summary {
+      cursor: pointer;
+      padding: 15px 16px;
+      font-weight: 760;
+      color: var(--navy);
+      list-style: none;
+    }
+    summary::-webkit-details-marker { display: none; }
+    details p {
+      margin: 0;
+      padding: 0 16px 16px;
+      color: #475467;
+      font-size: 14px;
+      line-height: 1.88;
+    }
+
+    .closing {
+      background:
+        linear-gradient(115deg, rgba(22,57,93,.97), rgba(28,88,111,.94)),
+        repeating-linear-gradient(90deg, rgba(255,255,255,.08) 0 1px, transparent 1px 78px);
+      color: #fff;
+      border: 0;
+    }
+    .closing p {
+      max-width: 1040px;
+      color: rgba(255,255,255,.86);
+      font-size: 17px;
+      line-height: 1.9;
+      margin: 0;
+    }
+    footer {
+      margin: 16px 4px 0;
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1120px) {
+      .hero { grid-template-columns: 1fr; }
+      .pain-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .script-layout { grid-template-columns: 1fr; }
+      .tablist { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+    @media (max-width: 760px) {
+      .page { width: min(100vw - 20px, 1360px); padding-top: 12px; }
+      .topbar { align-items: flex-start; flex-direction: column; }
+      .nav { justify-content: flex-start; }
+      .hero-main, .section, .side-panel { padding: 18px; }
+      .hero { min-height: auto; }
+      .lead { font-size: 15px; }
+      .section-title { display: block; }
+      .pill { display: inline-flex; margin-top: 10px; }
+      .pain-grid, .logic-grid, .golden-list, .objection-grid, .tablist { grid-template-columns: 1fr; }
+      .table-wrap { display: none; }
+      .cards-list { display: none; }
+      .reg-poster-shell { padding: 18px; }
+      .reg-poster-head { grid-template-columns: 1fr; }
+      .reg-poster-head h2 { font-size: clamp(25px, 8vw, 42px); }
+      .reg-score-badge { text-align: left; }
+      .poster-reg-card {
+        grid-template-columns: 1fr;
+        gap: 0;
+      }
+      .poster-date {
+        flex-direction: row;
+        justify-content: space-between;
+        text-align: left;
+      }
+      .poster-main { padding: 14px; }
+      .poster-score {
+        flex-direction: row;
+        justify-content: space-between;
+        border-left: 0;
+        border-top: 1px solid #edf1f6;
+      }
+      .reg-card {
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: #fff;
+        padding: 15px;
+      }
+      .reg-card h3 { margin: 0 0 8px; color: var(--navy); font-size: 16px; line-height: 1.4; }
+      .reg-card .meta-line { color: var(--muted); font-size: 12px; margin-bottom: 10px; }
+      .reg-card p { margin: 8px 0 0; color: #475467; font-size: 13px; line-height: 1.72; }
+      .reg-card b { color: var(--ink); }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="topbar">
+      <div class="brand"><span class="brand-mark"></span><span>中级注安培训话术库</span></div>
+      <nav class="nav" aria-label="页面导航">
+        <a href="#core">核心认知</a>
+        <a href="#regulations">新规明细</a>
+        <a href="#anchor">主播话术</a>
+        <a href="#sales">销售转化</a>
+        <a href="#objections">异议应对</a>
+      </nav>
+    </div>
+
+    <header class="hero">
+      <section class="hero-main">
+        <div>
+          <div class="eyebrow">主播&销售统一培训页 · 由 PDF 内容重构</div>
+          <h1>中级注安官方教材痛点·主播&销售全套落地话术</h1>
+          <p class="lead">把“官方教材不是备考主力，只能做查阅工具”的底层逻辑，拆成直播间可讲、私聊可用、电话可转化、社群可复述的一套标准表达。</p>
+        </div>
+        <div class="hero-tags">
+          <span>教材定位</span>
+          <span>五大痛点</span>
+          <span>新规缺失佐证</span>
+          <span>直播口播</span>
+          <span>私聊转化</span>
+          <span>高频异议</span>
+        </div>
+      </section>
+
+      <aside class="side-panel" aria-label="培训重点">
+        <div>
+          <h2>培训统一口径</h2>
+          <div class="quick-stack">
+            <div class="quick-item"><b>官方教材定位</b><span>不是备考主力，适合查法条、核对原文、补充细节。</span></div>
+            <div class="quick-item"><b>核心痛点</b><span>厚、旧、乱、偏、答案差，零基础和在职考生尤其容易踩坑。</span></div>
+            <div class="quick-item"><b>转化逻辑</b><span>先共情，再拆缺陷，最后给出轻量化、精准化备考方案。</span></div>
+            <div class="quick-item"><b>成交方向</b><span>主学精讲讲义、高频考点、历年真题，教材仅作辅助兜底。</span></div>
+          </div>
+        </div>
+      </aside>
+    </header>
+
+    <section class="section" id="core">
+      <div class="section-title">
+        <div>
+          <h2>一、全员统一核心认知</h2>
+          <p>所有主播、销售和社群运营统一围绕这套底层逻辑输出，避免一线表达分散。</p>
+        </div>
+        <span class="pill">必背底层逻辑</span>
+      </div>
+
+      <div class="pain-grid">
+        <article class="pain-card">
+          <div class="num">01</div>
+          <h3>厚</h3>
+          <p>上千页内容，海量冗余知识点，很多内容并非考试重点，考生难以快速抓核心。</p>
+        </article>
+        <article class="pain-card">
+          <div class="num">02</div>
+          <h3>旧</h3>
+          <p>年初定稿、5月出版，当年1-5月新增法规、规范和标准存在缺口，新规又是高分考点。</p>
+        </article>
+        <article class="pain-card">
+          <div class="num">03</div>
+          <h3>乱</h3>
+          <p>知识点以材料堆砌为主，缺少重难点划分、考情标注和清晰学习路径。</p>
+        </article>
+        <article class="pain-card">
+          <div class="num">04</div>
+          <h3>偏</h3>
+          <p>冷门、老旧知识占篇幅，高频考点隐藏深，学员容易把时间用在低收益内容上。</p>
+        </article>
+        <article class="pain-card">
+          <div class="num">05</div>
+          <h3>答案差</h3>
+          <p>缺少配套解析和易错点拨，自学刷题时对错原因不清楚，踩坑率高。</p>
+        </article>
+      </div>
+
+      <div class="logic-grid" style="margin-top:14px">
+        <div class="logic-box">
+          <strong>错误路径</strong>
+          <p>死啃官方教材，备考效率减半，高频考点遗漏，新规考点空白，盲目学习冷门内容，考场容易踩坑。</p>
+        </div>
+        <div class="logic-box">
+          <strong>正确路径</strong>
+          <p>主学精讲讲义、高频考点总结、历年真题；官方教材只做工具书，用于查漏补缺和核对原文。</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section reg-poster-section" id="regulations">
+      <div class="reg-poster-shell">
+        <div class="reg-poster-head">
+          <div>
+            <div class="reg-board-ribbon">2026备考重点关注</div>
+            <div class="reg-poster-kicker">新规更新 · 高频考点</div>
+            <h2>26年安全行业新规一览表</h2>
+          </div>
+          <div class="reg-score-badge">
+            <strong>35+</strong>
+            <span>高频分值<br>重点关注</span>
+          </div>
+        </div>
+
+        <div class="board-stats" aria-label="KT板核心读数">
+          <div class="board-stat"><strong>11条</strong><span>新规/国标/细则</span></div>
+          <div class="board-stat"><strong>6条</strong><span>已正式发布实施</span></div>
+          <div class="board-stat"><strong>全科</strong><span>法规/管理/实务覆盖</span></div>
+          <div class="board-stat"><strong>易丢分</strong><span>新规题、案例题重点来源</span></div>
+        </div>
+
+        <div class="filters" aria-label="新规筛选">
+          <button class="filter-btn active" data-status="all">全部</button>
+          <button class="filter-btn" data-status="已落地">已落地</button>
+          <button class="filter-btn" data-status="待落地">待落地</button>
+          <select id="subjectFilter" aria-label="按科目筛选">
+            <option value="all">全部科目</option>
+            <option value="法规">法规</option>
+            <option value="管理">管理</option>
+            <option value="技术基础">技术基础</option>
+            <option value="化工">化工安全</option>
+            <option value="建筑">建筑安全</option>
+            <option value="冶炼">金属冶炼</option>
+            <option value="其他">其他安全</option>
+          </select>
+        </div>
+
+        <div class="poster-list" id="regPoster"></div>
+        <div class="table-wrap" aria-hidden="true">
+          <table>
+            <thead>
+              <tr>
+                <th>发布/实施时间</th>
+                <th>新规/国标/条例名称</th>
+                <th>核心修订变化</th>
+                <th>对应科目</th>
+                <th>高频必考考点</th>
+                <th>预估分值</th>
+                <th>重要星级</th>
+              </tr>
+            </thead>
+            <tbody id="regTable"></tbody>
+          </table>
+        </div>
+        <div class="cards-list" id="regCards"></div>
+        <div class="poster-summary">口播总结句：官方教材年初定稿封存，当年新规、新规范、新法无法完整覆盖；学员只靠教材，会天然缺少年度高分考点。</div>
+      </div>
+    </section>
+
+    <section class="section" id="anchor">
+      <div class="section-title">
+        <div>
+          <h2>三、主播直播间专属话术</h2>
+          <p>适合直播专场、干货讲解、切片标题、评论区刷屏和口播穿插。</p>
+        </div>
+        <span class="pill">公域引流</span>
+      </div>
+
+      <div class="script-layout">
+        <div class="tablist" role="tablist" aria-label="主播话术">
+          <button class="tab-btn active" data-tab="anchor-long">3分钟深度口播</button>
+          <button class="tab-btn" data-tab="anchor-short">短平快金句</button>
+        </div>
+        <div>
+          <article class="script-panel active copy-scope" id="anchor-long">
+            <h3>完整版深度口播</h3>
+            <p>很多同学每年第一件事就是花330块钱买一套最新的中级注安官方教材，觉得备考必须用官方书，不然心里不踏实。但做注安项目这么多年，实话告诉大家：很多考生备考踩的最大坑，就是从头到尾死啃官方教材。</p>
+            <p>我不否定官方教材的权威性，但它的定位从一开始就不是给考生直接备考用的，而是存档、查法条、做官方依据。用它做备考主力，硬伤非常明显。</p>
+            <p>第一，内容严重滞后。官方教材年初定稿，5月才正式发售，当年1-5月应急管理部更新的安全规范、新修订法规、新出台行业标准，很多都不会完整收录。但注安考试有一个铁律：当年新规必考，而且常常是高分大题和核心考点。</p>
+            <p>第二，阅读门槛高。官方教材是专业法条式编撰，句式长、术语多、缺少通俗解读。大部分学员是在职上班族、零基础跨专业，每天下班已经很累，再去啃这种厚书，只会越看越乱。</p>
+            <p>第三，性价比低。一套教材330元，但没有重点标注、没有考情分析、没有例题解析，更多像一本查阅工具书。第四，零配套、零辅助，学员不知道哪里高频、哪里冷门、哪里已经作废、哪里每年必考。</p>
+            <p>所以一定要纠正一个认知：官方教材不是备考主力，只是辅助工具书。真正高效的备考方式，是以精讲讲义、高频考点总结、历年真题为核心，跟着老师学新规、学高频、学真题套路，把冗余内容过滤掉，只学考场要考的内容。</p>
+            <div class="copy-row"><button class="copy-btn">复制本段</button></div>
+          </article>
+          <article class="script-panel copy-scope" id="anchor-short">
+            <h3>短平快洗脑金句</h3>
+            <ul class="golden-list">
+              <li>注安官方教材，只可查、不可啃，啃书等于无效努力。</li>
+              <li>年初定稿五月发，新规考点全落下，新教材照样缺必考分。</li>
+              <li>三百三十买本助眠书，难懂、老旧、无重点，备考纯白费。</li>
+              <li>教材厚、考点散、内容旧、无解析，自学备考必踩坑。</li>
+              <li>备考不用死看书，讲义、考点、真题，精准拿捏注安高分。</li>
+              <li>教材是存档工具书，讲义才是通关备考书。</li>
+            </ul>
+            <div class="copy-row"><button class="copy-btn">复制本段</button></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="sales">
+      <div class="section-title">
+        <div>
+          <h2>四、销售一对一转化话术</h2>
+          <p>私聊、电话、社群都按“共情破冰-专业拆解-教材定位-备考方案”推进。</p>
+        </div>
+        <span class="pill">私域成交</span>
+      </div>
+
+      <div class="script-layout">
+        <div class="tablist" role="tablist" aria-label="销售话术">
+          <button class="tab-btn active" data-tab="sales-ice">痛点破冰</button>
+          <button class="tab-btn" data-tab="sales-defect">四大缺陷</button>
+          <button class="tab-btn" data-tab="sales-position">教材定位</button>
+          <button class="tab-btn" data-tab="sales-plan">备考方案</button>
+        </div>
+        <div>
+          <article class="script-panel active copy-scope" id="sales-ice">
+            <h3>痛点破冰</h3>
+            <p>我特别理解你现在的想法，很多备考注安的学员，第一时间都会想买官方教材，觉得官方的最权威、最靠谱。但每年考完试，很多学员都会反馈：官方教材真的不适合直接备考，越啃越乱，越学越没信心。</p>
+            <p>很多学员前期自学，每天熬夜看教材，学了一两个月，知识点越学越杂，重点完全抓不住，做题全错，新规考点完全不会，最后心态崩了，白白浪费大半年备考时间。</p>
+            <div class="copy-row"><button class="copy-btn">复制本段</button></div>
+          </article>
+          <article class="script-panel copy-scope" id="sales-defect">
+            <h3>专业拆解四大缺陷</h3>
+            <ol>
+              <li><b>内容陈旧：</b>官方教材年初定稿、5月出版，当年1-5月新增法规、规范、标准无法完整收录，而新规通常是高分考点。</li>
+              <li><b>内容晦涩：</b>教材是行业规范性文书，不是通俗备考材料，零基础和跨专业考生很难自学吸收。</li>
+              <li><b>性价比低：</b>售价高，但没有重难点标注、考情分析、易错点拨和配套习题，通关帮助有限。</li>
+              <li><b>无配套体系：</b>没有课程、知识拆解、真题联动和备考规划，学员容易盲目翻书。</li>
+            </ol>
+            <div class="copy-row"><button class="copy-btn">复制本段</button></div>
+          </article>
+          <article class="script-panel copy-scope" id="sales-position">
+            <h3>明确教材正确使用定位</h3>
+            <p>我不是让你完全不用官方教材，而是不要把它当成主力备考资料。它的唯一作用，就是当作“字典式工具书”。平时听课、刷题遇到争议知识点，想核对官方原文、补充细节漏洞的时候，拿出来翻一翻、查一查就够了。</p>
+            <p>如果把它当主力备考书，就会陷入厚、旧、乱、偏、答案差这五大坑，最后导致备考效率低、考场容易踩坑。</p>
+            <div class="copy-row"><button class="copy-btn">复制本段</button></div>
+          </article>
+          <article class="script-panel copy-scope" id="sales-plan">
+            <h3>输出高效备考方案</h3>
+            <ol>
+              <li><b>以精讲讲义为核心：</b>剔除冷门、作废、不考内容，把晦涩术语转化为通俗表达，梳理知识框架。</li>
+              <li><b>以高频考点为重点：</b>对标历年考情，补充当年新规、新规范、新法规，补齐官方教材短板。</li>
+              <li><b>以历年真题为抓手：</b>通过真题摸清出题套路、易错陷阱和答题模板，快速提升正确率。</li>
+              <li><b>教材辅助兜底：</b>全程以课程和资料为主，教材只用来核对原文、补充细节。</li>
+            </ol>
+            <div class="copy-row"><button class="copy-btn">复制本段</button></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="objections">
+      <div class="section-title">
+        <div>
+          <h2>五、高频异议应对</h2>
+          <p>用于解决“必须看教材、已经买教材、不看会漏、只看讲义行不行”等常见疑问。</p>
+        </div>
+        <span class="pill">闭环转化</span>
+      </div>
+
+      <div class="objection-grid">
+        <details open>
+          <summary>异议1：很多人说备考必须看官方教材，不看教材考不过？</summary>
+          <p>这是往年考生最大的误区。考试不考书本厚度，只考核心考点和新规内容。官方教材老旧、有考点空白、重点混乱，死啃教材容易学错、学偏、学漏。教材只做兜底查阅，绝不做主攻。</p>
+        </details>
+        <details>
+          <summary>异议2：我已经买了官方教材，还需要资料/报课吗？</summary>
+          <p>太需要了。教材是查阅工具，我们的讲义、考点和课程是通关工具，两者不冲突。教材解决不了看不懂、抓不住重点、缺失新规、不会做题的问题，配套资料和课程正是为了补齐这些短板。</p>
+        </details>
+        <details>
+          <summary>异议3：不看官方教材，会不会遗漏知识点？</summary>
+          <p>不会。教研团队会基于官方教材、最新考试大纲、新规规范全面梳理知识点。教材必考内容讲义收录，教材缺失的新规考点额外补充，教材冗余冷门内容则过滤掉。</p>
+        </details>
+        <details>
+          <summary>异议4：只看讲义和真题，不用教材可以吗？</summary>
+          <p>零基础、时间少、想高效备考的学员，可以以资料为主通关。追求稳妥的话，把官方教材放在手边当字典，遇到争议知识点、细节盲区时翻一下即可，不需要逐页学习。</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section closing">
+      <div class="section-title">
+        <div>
+          <h2>统一收尾成交引导</h2>
+        </div>
+      </div>
+      <p>备考注安的时间和精力，远比几百块教材更珍贵。别再用老旧低效的备考方式内耗自己，放弃死啃官方教材的误区，跟着我们精准抓新规、抓高频考点、抓真题套路，用更短的时间、更少的精力，稳稳拿下中级注安证书。</p>
+    </section>
+
+    <footer>页面文件名：中级注安官方教材痛点·主播&销售全套落地话术.html。内容依据同名 PDF 重构，重点强化培训场景、销售动线和表格可读性。</footer>
+  </main>
+
+  <script>
+    const regulations = [
+      {
+        date: "2026.05.01",
+        status: "已落地",
+        name: "《中华人民共和国危险化学品安全法》（新法，替代旧条例）",
+        change: "强制危化企业配备专职安工，取消兼职适配条款；上调违规处罚金额，新增关停整顿条款。",
+        subject: "法规、管理、化工安全（全专业通用）",
+        points: "危化品分类及储运管控；专职安工配备要求及处罚；危化事故上报时限与追责；新型储能危化品隐患排查。",
+        score: "5-6分",
+        stars: "★★★★★",
+        note: "年度最重新法"
+      },
+      {
+        date: "2026.05.01",
+        status: "已落地",
+        name: "《特种作业人员安全技术培训考核管理新规》",
+        change: "培训档案强制留存6年；落实考培分离；无证作业企业处罚升级。",
+        subject: "法规、管理、全专业实务",
+        points: "档案留存年限、考培分离规则；无证作业违法判定与整改。",
+        score: "4-5分",
+        stars: "★★★★★",
+        note: "全科目覆盖"
+      },
+      {
+        date: "2026.05.01",
+        status: "已落地",
+        name: "GB 46768-2025《有限空间作业安全技术规范》",
+        change: "强制全程视频监控，细化作业监护、双人作业、应急撤离、通风检测全流程新标准。",
+        subject: "技术基础、建筑安全实务、化工安全实务、其他安全实务",
+        points: "有限空间作业流程改错；气体检测、监护、监控硬性指标；通风、应急撤离新规要求。",
+        score: "3-4分",
+        stars: "★★★★★",
+        note: "通用高频考点"
+      },
+      {
+        date: "2026.05.01",
+        status: "已落地",
+        name: "GB 3608-2025《高处作业分级》",
+        change: "标准由推荐性升级为强制性国标；新增A/B双分级模式；明确10类客观危险因素和坠落半径阈值。",
+        subject: "技术基础、建筑安全实务、其他安全实务",
+        points: "高处作业四级分级标准；10类客观危险因素判定；坠落半径数值考点和分级原则改错。",
+        score: "3-4分",
+        stars: "★★★★☆",
+        note: "数字易考"
+      },
+      {
+        date: "2026.05.01",
+        status: "已落地",
+        name: "GB 6222-2025《工业企业煤气安全规范》",
+        change: "更新煤气检测、管道巡检、动火作业、应急处置标准，新增新型煤气设备管控要求。",
+        subject: "金属冶炼实务、技术基础",
+        points: "煤气作业动火审批规范；管道巡检、气体检测频次；煤气事故隐患排查与应急处置。",
+        score: "2-3分",
+        stars: "★★★★☆",
+        note: "冶炼专属必考"
+      },
+      {
+        date: "2026.06.01",
+        status: "已落地",
+        name: "安全生产违法行为行政处罚新规细则",
+        change: "细化安全培训、隐患整改、特种作业、应急管理处罚梯度，新增轻微违法容错、重大违法顶格处罚条款。",
+        subject: "法规、安全生产管理",
+        points: "安全违法处罚梯度判定；轻微/重大违法适用场景；隐患整改闭环处罚考点。",
+        score: "2-3分",
+        stars: "★★★☆☆",
+        note: "处罚梯度"
+      },
+      {
+        date: "2026.07.01",
+        status: "待落地",
+        name: "GB 6442-2025《生产安全事故调查技术规范》",
+        change: "重构事故调查全流程，新增直接原因需附检测报告、重大事故需第三方专家参与、事故结论公示15天。",
+        subject: "管理、全专业实务",
+        points: "新版事故调查完整流程；直接/间接原因判定新标准；事故调查合规性改错。",
+        score: "4-5分",
+        stars: "★★★★★",
+        note: "年度大题核心"
+      },
+      {
+        date: "2026.07.01",
+        status: "待落地",
+        name: "GB 6721-2025《生产安全事故直接经济损失统计要求》",
+        change: "40年旧标更新为强制性国标，重新划分直接/间接损失，明确消防、医疗救援费等归属。",
+        subject: "管理、全专业实务计算题",
+        points: "事故经济损失分类计算；易混淆费用归属判定；损失统计合规核查。",
+        score: "3-4分",
+        stars: "★★★★☆",
+        note: "易丢分考点"
+      },
+      {
+        date: "2026.07.01",
+        status: "待落地",
+        name: "GB 39800.10-2025《个体防护装备配备规范 第10部分：机械》",
+        change: "更新机械作业防护装备适配标准，细化冲压、切割、打磨等设备专属防护要求。",
+        subject: "技术基础、其他安全实务",
+        points: "机械作业防护装备选型适配；特殊机械作业防护禁忌；个体防护配备合规改错。",
+        score: "2-3分",
+        stars: "★★★☆☆",
+        note: "机械防护"
+      },
+      {
+        date: "2026.09.01",
+        status: "待落地",
+        name: "GB 5725-2025《坠落防护 安全网》",
+        change: "更新安全网选型、安装、检测、报废标准，细化高处作业、临边作业安全网搭设规范。",
+        subject: "技术基础、建筑安全实务",
+        points: "安全网选型与安装规范；检测周期与报废判定；高处坠落防护合规考点。",
+        score: "1-2分",
+        stars: "★★★☆☆",
+        note: "建筑高处"
+      },
+      {
+        date: "2026.09.01",
+        status: "待落地",
+        name: "GB 15599-2025《危险化学品企业雷电安全规范》",
+        change: "针对危化仓储、生产装置更新防雷防静电检测标准，细化防雷等级、检测频次、接地电阻阈值。",
+        subject: "化工安全实务、技术基础",
+        points: "危化企业防雷等级判定；防静电、防雷检测频次与参数；易燃易爆场所防雷合规改错。",
+        score: "2-3分",
+        stars: "★★★★☆",
+        note: "化工专属"
+      }
+    ];
+
+    const tableBody = document.querySelector("#regTable");
+    const cards = document.querySelector("#regCards");
+    const poster = document.querySelector("#regPoster");
+    const subjectFilter = document.querySelector("#subjectFilter");
+    let activeStatus = "all";
+
+    function matchesSubject(item, subject) {
+      return subject === "all" || item.subject.includes(subject);
+    }
+
+    function renderRegs() {
+      const subject = subjectFilter.value;
+      const filtered = regulations.filter(item => {
+        const statusOk = activeStatus === "all" || item.status === activeStatus;
+        return statusOk && matchesSubject(item, subject);
+      });
+
+      tableBody.innerHTML = filtered.map(item => `
+        <tr>
+          <td class="date-cell">${item.date}<br><span class="status ${item.status === "待落地" ? "pending" : ""}">${item.status}</span></td>
+          <td class="reg-name">${item.name}</td>
+          <td>${item.change}</td>
+          <td>${item.subject}</td>
+          <td>${item.points}</td>
+          <td class="score">${item.score}</td>
+          <td class="stars">${item.stars}<br><span style="color:#667085;font-weight:650;font-size:12px">${item.note}</span></td>
+        </tr>
+      `).join("");
+
+      cards.innerHTML = filtered.map(item => `
+        <article class="reg-card">
+          <h3>${item.name}</h3>
+          <div class="meta-line">${item.date} · ${item.status} · ${item.score} · ${item.stars}</div>
+          <p><b>修订变化：</b>${item.change}</p>
+          <p><b>对应科目：</b>${item.subject}</p>
+          <p><b>必考考点：</b>${item.points}</p>
+        </article>
+      `).join("");
+
+      poster.innerHTML = filtered.map(item => `
+        <article class="poster-reg-card ${item.status === "待落地" ? "is-pending" : ""} ${item.stars === "★★★★★" ? "is-top" : ""}">
+          <div class="poster-date">
+            <div>${item.date}</div>
+            <span class="${item.status === "待落地" ? "pending" : ""}">${item.status}</span>
+          </div>
+          <div class="poster-main">
+            <h3>${item.name}</h3>
+            <p><b>变化：</b>${item.change}</p>
+            <p><b>考点：</b>${item.points}</p>
+          </div>
+          <div class="poster-score">
+            <strong>${item.score}</strong>
+            <span>${item.stars}</span>
+          </div>
+        </article>
+      `).join("");
+    }
+
+    document.querySelectorAll(".filter-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll(".filter-btn").forEach(item => item.classList.remove("active"));
+        btn.classList.add("active");
+        activeStatus = btn.dataset.status;
+        renderRegs();
+      });
+    });
+    subjectFilter.addEventListener("change", renderRegs);
+    renderRegs();
+
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => {
+        const group = btn.closest(".script-layout");
+        group.querySelectorAll(".tab-btn").forEach(item => item.classList.remove("active"));
+        group.querySelectorAll(".script-panel").forEach(panel => panel.classList.remove("active"));
+        btn.classList.add("active");
+        group.querySelector(`#${btn.dataset.tab}`).classList.add("active");
+      });
+    });
+
+    document.querySelectorAll(".copy-btn").forEach(btn => {
+      btn.addEventListener("click", async () => {
+        const scope = btn.closest(".copy-scope");
+        const text = Array.from(scope.querySelectorAll("h3, p, li"))
+          .map(node => node.textContent.trim())
+          .filter(Boolean)
+          .join("\n");
+        try {
+          await navigator.clipboard.writeText(text);
+          const old = btn.textContent;
+          btn.textContent = "已复制";
+          setTimeout(() => btn.textContent = old, 1200);
+        } catch (err) {
+          btn.textContent = "复制失败";
+          setTimeout(() => btn.textContent = "复制本段", 1200);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
