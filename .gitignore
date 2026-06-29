@@ -27,3 +27,11 @@ za/
 
 # za/ 中仅保留班主任实战指南
 !za/班主任WorkBuddy实战指南.html
+
+# 构建脚本和部署文件（不对外发布）
+*.command
+aqxm/**/build_*.py
+aqxm/**/server.js
+aqxm/**/package.json
+aqxm/**/README.md
+aqxm/**/source_notes.json
