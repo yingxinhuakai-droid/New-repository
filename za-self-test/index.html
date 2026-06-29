@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="中级注册安全工程师报名全流程模拟演示，非官方报名入口。">
+  <title>中级注册安全工程师模拟报名服务平台</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="conversion.css">
+  <link rel="stylesheet" href="help.css">
+  <style>
+    .demo-photo{width:150px;height:210px;background:linear-gradient(#dce9f1,#f5f8fa);display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid #b9cbd7}.demo-photo span{display:grid;place-items:center;width:78px;height:78px;border-radius:50%;background:#fff;color:#4c82a5;font-size:36px;font-weight:700}.demo-photo small{margin-top:18px;color:#658093}.subheading{font-size:15px;color:#38627e;margin:22px 0 10px}
+    @media print{body *{visibility:hidden}.application-paper,.application-paper *{visibility:visible}.application-paper{position:absolute;left:0;top:0;width:100%;max-width:none;border:0}.safety-banner,.system-header,.mobile-bar,.sidebar,.breadcrumb,.panel-title,.tip-box,.button-row,.system-footer,.float-service{display:none!important}}
+  </style>
+</head>
+<body>
+  <div class="safety-banner">
+    <div class="wrap"><strong>模拟演示</strong><span>本系统为第三方报名流程体验工具，非中国人事考试网，不能进行真实报名、审核或缴费。</span><button id="openNotice">使用说明</button></div>
+  </div>
+
+  <header class="system-header">
+    <div class="wrap header-row">
+      <div class="system-brand">
+        <div class="brand-symbol">专</div>
+        <div><h1>全国专业技术人员资格考试</h1><p>模拟报名服务平台</p></div>
+      </div>
+      <div class="header-user"><span class="online-dot"></span><span id="headerUser">模拟考生</span><button id="clearData">退出并清空</button></div>
+    </div>
+  </header>
+
+  <div class="mobile-bar">
+    <button id="mobileMenu" aria-label="打开菜单">☰</button>
+    <span id="mobileTitle">账户信息</span>
+    <span class="demo-pill">模拟</span>
+  </div>
+
+  <div class="wrap app-layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="candidate-card">
+        <div class="avatar" id="avatarText">模</div>
+        <div><strong id="sideName">模拟考生</strong><span>证件号码：110***********1234</span></div>
+      </div>
+      <div class="completion-card">
+        <div><span>账号信息完整度</span><strong id="sidePercent">25%</strong></div>
+        <div class="mini-progress"><i id="sideProgress"></i></div>
+      </div>
+      <nav class="side-nav" aria-label="功能导航">
+        <p>账号信息维护</p>
+        <button class="active" data-view="dashboard"><i>首</i><span>账户信息</span><b>›</b></button>
+        <button data-view="photo"><i>照</i><span>照片维护</span><b>›</b></button>
+        <button data-view="personal"><i>人</i><span>个人基本信息维护</span><b>›</b></button>
+        <button data-view="education"><i>学</i><span>学历学位信息维护</span><b>›</b></button>
+        <button data-view="work"><i>工</i><span>工作经历维护</span><b>›</b></button>
+        <p>考试报名</p>
+        <button data-view="apply"><i>报</i><span>进入考试报名</span><b>›</b></button>
+        <button data-view="review"><i>核</i><span>资格核查与缴费</span><b>›</b></button>
+        <button data-view="form"><i>表</i><span>报名表预览</span><b>›</b></button>
+        <p>报考帮助</p>
+        <button data-view="faq"><i>问</i><span>报考常见问题</span><b>›</b></button>
+        <button data-view="guide"><i>略</i><span>新考生报名攻略</span><b>›</b></button>
+      </nav>
+      <div class="sidebar-help"><strong>报考填写有疑问？</strong><p>可申请人工复核填报信息</p><button data-open-lead>咨询报考顾问</button></div>
+    </aside>
+
+    <main class="content-area">
+      <div class="breadcrumb"><span>当前位置：</span><a data-go="dashboard">首页</a><b>›</b><strong id="breadcrumbTitle">账户信息</strong></div>
+      <div class="page-panel" id="viewRoot" aria-live="polite"></div>
+    </main>
+  </div>
+
+  <footer class="system-footer">
+    <p>中级注册安全工程师模拟报名服务平台 · 示例教育科技有限公司</p>
+    <p>本系统不收集身份证号码、证件照片原件或支付信息，所有填报内容仅保存在当前浏览器。</p>
+  </footer>
+
+  <div class="float-service"><button data-open-lead><span>客</span>填报咨询</button><button data-go="apply"><span>报</span>继续报名</button><a href="#"><span>↑</span>返回顶部</a></div>
+
+  <div class="register-gate" id="registerGate" aria-hidden="true">
+    <div class="gate-visual">
+      <div class="gate-visual-inner">
+        <span class="gate-kicker">2026年度报考流程体验</span>
+        <h2>中级注册安全工程师<br>模拟报名系统</h2>
+        <p>提前熟悉注册、信息维护、正式报名、资格核查与缴费全流程。</p>
+        <ul><li>报名步骤完整演示</li><li>报考条件智能核对</li><li>填报内容自动保存</li></ul>
+        <div class="gate-warning"><strong>非官方模拟系统</strong><span>无需填写真实身份证、证件照或工作单位，使用模拟数据即可完成体验。</span></div>
+      </div>
+    </div>
+    <div class="gate-form-wrap">
+      <form id="registerForm" class="gate-form" novalidate>
+        <div class="gate-logo"><i>安</i><span><strong>安考通</strong><small>模拟报名服务平台</small></span></div>
+        <h2>注册平台账号</h2><p class="gate-subtitle">注册后即可进入完整模拟报名流程</p>
+        <label><span>姓名/称呼</span><input name="name" required maxlength="20" placeholder="请输入称呼"><small></small></label>
+        <label><span>手机号码</span><input name="phone" required maxlength="11" inputmode="tel" placeholder="请输入11位手机号码"><small></small></label>
+        <label><span>验证码</span><div class="code-control"><input name="code" required maxlength="6" inputmode="numeric" placeholder="请输入验证码"><button type="button" id="sendCode">获取验证码</button></div><small></small></label>
+        <div class="demo-code-tip">当前为前端演示版，不会发送短信；点击“获取验证码”即可自动填入体验码。</div>
+        <label class="gate-check"><input type="checkbox" name="privacy"><span>我已阅读并同意《用户服务协议》和《隐私政策》</span></label>
+        <label class="gate-check"><input type="checkbox" name="disclaimer"><span>我已知晓本系统为模拟工具，可使用虚拟数据，结果不代表官方审核结论</span></label>
+        <small class="gate-error" id="registerError"></small>
+        <button class="primary-btn gate-submit" type="submit">注册并进入模拟报名</button>
+        <p class="gate-foot">正式报名请前往中国人事考试网。本平台不提供真实报名或缴费服务。</p>
+      </form>
+    </div>
+  </div>
+
+  <div class="modal" id="noticeModal" aria-hidden="true">
+    <div class="modal-mask" data-close="noticeModal"></div>
+    <div class="modal-box notice-box"><button class="modal-x" data-close="noticeModal">×</button><h2>模拟报名免责声明</h2><div class="notice-content"><p><strong>1. 本系统不是官方网站</strong><br>仅用于帮助用户熟悉中级注册安全工程师报名步骤，不连接中国人事考试网或任何考试机构。</p><p><strong>2. 可以使用虚拟数据</strong><br>除平台注册所需的称呼和手机号码外，流程内姓名、学历、工作单位、年限等均可填写模拟信息，无需提交真实报名材料。</p><p><strong>3. 请勿填写敏感信息</strong><br>请勿输入真实身份证号码、账号密码、短信验证码、银行卡、证件照片原件等敏感数据。</p><p><strong>4. 结果不具有审核效力</strong><br>条件判断、资格核查、缴费和报名表均为模拟展示，不能替代当地考试机构的正式审核。</p><p><strong>5. 正式报名渠道</strong><br>正式报名请在报名开放后，通过中国人事考试网进入全国专业技术人员资格考试报名服务平台。</p></div><button class="primary-btn full" data-close="noticeModal">我已知晓并继续体验</button></div>
+  </div>
+
+  <div class="modal" id="leadModal" aria-hidden="true">
+    <div class="modal-mask" data-close="leadModal"></div>
+    <div class="modal-box wechat-box"><button class="modal-x" data-close="leadModal">×</button><div class="lead-heading"><span>免费领取 · 限时开放</span><h2 id="wechatTitle">2026注安报考资料包</h2><p id="wechatDesc">添加报考老师微信，免费领取资料并提供填报答疑。</p></div><div class="wechat-content"><div class="qr-placeholder"><div class="qr-grid" aria-label="微信二维码占位图"></div><strong>微信二维码待替换</strong><small>正式上线前替换为客服企微二维码</small></div><div class="wechat-benefits"><h3>扫码可领取</h3><ul id="wechatBenefits"><li>2026报考条件对照表</li><li>安全相关专业参考目录</li><li>报名材料准备清单</li><li>一对一填报问题答疑</li></ul><div class="wechat-tip">添加时备注“注安报名”，便于老师快速通过。</div></div></div><button class="primary-btn full" data-close="leadModal">我已扫码，继续模拟报名</button><button class="plain-btn full" type="button" data-close="leadModal">暂不领取</button></div>
+  </div>
+
+  <div class="toast" id="toast"></div>
+  <script src="app.js"></script>
+</body>
+</html>

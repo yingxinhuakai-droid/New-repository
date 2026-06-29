@@ -132,8 +132,7 @@
     "category": "引流工具",
     "title": "报考条件自测",
     "desc": "中级注安报考条件自动检测，快速判断是否符合报名要求",
-    "url": "https://5b510cc79e65449ca65959c32a730f7e.app.codebuddy.work",
-    "external": true,
+    "url": "za-self-test/index.html",
     "tags": ["报考", "自测", "条件"]
   },
   {
