@@ -6,3 +6,24 @@ node_modules/
 
 # 超大文件（超过100MB）
 za/26年中级注安运营手册.xlsx
+
+# 包含密钥等敏感信息的文件
+2026-06-08-15-13-39/_3d_result.json
+
+# 敏感数据文件（不对外公开）
+dashboard.html
+june_performance_report.html
+yoy_analysis_report.html
+hp.html
+sales_dashboard.html
+sales_dashboard_v2.html
+pxwd/05_周报分析/
+pxwd/07_进阶能力/
+pxwd/08_案例库/
+pxwd/09_Sales工作台/
+za/
+注安竞品调研报告.html
+三工具对比分析*.html
+
+# za/ 中仅保留班主任实战指南
+!za/班主任WorkBuddy实战指南.html
