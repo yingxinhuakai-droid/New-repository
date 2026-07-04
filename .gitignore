@@ -35,3 +35,9 @@ aqxm/**/server.js
 aqxm/**/package.json
 aqxm/**/README.md
 aqxm/**/source_notes.json
+
+# 设计稿生成脚本（设计产物本身已提交）
+generate_mockup.py
+
+# 个人文档（不对外发布）
+*.docx
