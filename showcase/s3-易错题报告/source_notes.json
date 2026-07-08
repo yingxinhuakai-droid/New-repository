@@ -1,0 +1,14 @@
+{
+  "source_file": "/Users/houjiasanshao/Documents/安全项目/教研工作/注安各科目前百错题.xlsx",
+  "output_html": "/Users/houjiasanshao/Documents/安全项目/教研工作/outputs/注安6月易错题分析报告/report.html",
+  "assets": {
+    "subject": "/Users/houjiasanshao/Documents/安全项目/教研工作/outputs/注安6月易错题分析报告/assets/subject_wrong_scale.png",
+    "qtype": "/Users/houjiasanshao/Documents/安全项目/教研工作/outputs/注安6月易错题分析报告/assets/qtype_structure.png",
+    "knowledge": "/Users/houjiasanshao/Documents/安全项目/教研工作/outputs/注安6月易错题分析报告/assets/top_knowledge_by_subject.png"
+  },
+  "notes": [
+    "Matplotlib/Seaborn were unavailable in the local Python runtimes; PNG charts were generated with Pillow using the same static-report intent.",
+    "Knowledge point categorization is rule-based from stems because the source workbook does not include official chapter or knowledge labels.",
+    "subject_id 9105 is inferred as Other Safety and should be confirmed by the user."
+  ]
+}

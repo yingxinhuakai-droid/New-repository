@@ -1,0 +1,1595 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>中级注安服务班主任 AI 工作台</title>
+  <style>
+    :root {
+      --bg: #eef4fb;
+      --panel: rgba(255, 255, 255, 0.68);
+      --panel-2: rgba(248, 250, 252, 0.74);
+      --ink: #132033;
+      --muted: #667085;
+      --line: rgba(196, 210, 229, 0.72);
+      --nav: rgba(13, 24, 42, 0.72);
+      --nav-2: rgba(23, 37, 62, 0.64);
+      --blue: #2258b8;
+      --teal: #0f766e;
+      --green: #2f7d32;
+      --amber: #b45309;
+      --red: #b42318;
+      --purple: #7652c5;
+      --shadow: 0 24px 70px rgba(20, 39, 73, 0.16);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 8% 8%, rgba(70, 125, 230, 0.24), transparent 28%),
+        radial-gradient(circle at 82% 4%, rgba(15, 118, 110, 0.20), transparent 24%),
+        radial-gradient(circle at 72% 82%, rgba(118, 82, 197, 0.18), transparent 30%),
+        linear-gradient(135deg, #f7fbff 0%, #edf4fb 48%, #f6f8ff 100%);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+      line-height: 1.58;
+    }
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.24) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.20) 1px, transparent 1px);
+      background-size: 42px 42px;
+      mask-image: linear-gradient(180deg, rgba(0,0,0,0.44), transparent 70%);
+    }
+
+    button, input, select, textarea {
+      font: inherit;
+    }
+
+    button {
+      cursor: pointer;
+    }
+
+    .app {
+      display: grid;
+      grid-template-columns: 292px minmax(0, 1fr);
+      min-height: 100vh;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      color: #e8eef9;
+      background: linear-gradient(180deg, var(--nav), var(--nav-2));
+      border-right: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(28px) saturate(140%);
+      -webkit-backdrop-filter: blur(28px) saturate(140%);
+      overflow-y: auto;
+    }
+
+    .brand {
+      position: relative;
+      padding: 30px 22px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+      overflow: hidden;
+    }
+
+    .brand::after {
+      content: "";
+      position: absolute;
+      right: -34px;
+      top: 18px;
+      width: 96px;
+      height: 96px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(67, 129, 255, 0.50), transparent 68%);
+    }
+
+    .brand strong {
+      display: block;
+      position: relative;
+      z-index: 1;
+      font-size: 28px;
+      line-height: 1.35;
+      letter-spacing: 0;
+    }
+
+    .brand span {
+      display: block;
+      position: relative;
+      z-index: 1;
+      margin-top: 10px;
+      color: #aab8ce;
+      font-size: 14px;
+    }
+
+    .nav-group {
+      padding: 18px 14px 26px;
+    }
+
+    .nav-title {
+      margin: 16px 8px 8px;
+      color: #8797b1;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .nav-item {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr);
+      gap: 9px;
+      align-items: center;
+      margin: 4px 0;
+      padding: 10px 10px;
+      border: 0;
+      border-radius: 14px;
+      color: #dce6f5;
+      background: transparent;
+      text-align: left;
+    }
+
+    .nav-item:hover,
+    .nav-item.active {
+      color: #fff;
+      background: rgba(255,255,255,0.14);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.16);
+    }
+
+    .icon {
+      display: grid;
+      place-items: center;
+      width: 28px;
+      height: 28px;
+      border-radius: 6px;
+      color: #fff;
+      background: rgba(255,255,255,0.12);
+      font-weight: 800;
+      font-size: 13px;
+    }
+
+    .main {
+      min-width: 0;
+      position: relative;
+      padding: 26px 30px 36px;
+    }
+
+    .main::before,
+    .main::after {
+      content: "";
+      position: fixed;
+      pointer-events: none;
+      border-radius: 999px;
+      filter: blur(2px);
+    }
+
+    .main::before {
+      right: 34px;
+      top: 92px;
+      width: 210px;
+      height: 210px;
+      background: radial-gradient(circle, rgba(34,88,184,0.16), transparent 70%);
+    }
+
+    .main::after {
+      left: 342px;
+      bottom: 58px;
+      width: 170px;
+      height: 170px;
+      background: radial-gradient(circle, rgba(15,118,110,0.14), transparent 70%);
+    }
+
+    .topbar {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 18px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+    .topbar h1 {
+      margin: 0;
+      font-size: 26px;
+      line-height: 1.25;
+      letter-spacing: 0;
+    }
+
+    .topbar p {
+      margin: 5px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .top-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .search {
+      width: 270px;
+      min-height: 40px;
+      padding: 8px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.72);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+
+    .status-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .status-card {
+      padding: 14px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: 0 14px 40px rgba(20,39,73,0.08);
+      backdrop-filter: blur(22px) saturate(142%);
+      -webkit-backdrop-filter: blur(22px) saturate(142%);
+    }
+
+    .status-card span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .status-card b {
+      display: block;
+      margin-top: 6px;
+      font-size: 21px;
+      line-height: 1.2;
+    }
+
+    .workspace {
+      display: grid;
+      grid-template-columns: minmax(0, 1.18fr) 390px;
+      gap: 18px;
+      align-items: start;
+    }
+
+    .section {
+      display: none;
+    }
+
+    .section.active {
+      display: block;
+    }
+
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(26px) saturate(150%);
+      -webkit-backdrop-filter: blur(26px) saturate(150%);
+      overflow: hidden;
+    }
+
+    .panel-head {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.70), rgba(248,250,252,0.48));
+    }
+
+    .panel-head h2 {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.3;
+      letter-spacing: 0;
+    }
+
+    .panel-head p {
+      margin: 7px 0 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .panel-body {
+      padding: 20px;
+    }
+
+    .tool-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .tool-card {
+      min-height: 138px;
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.72);
+      text-align: left;
+      transition: border-color .18s ease, transform .18s ease, box-shadow .18s ease;
+    }
+
+    .tool-card:hover {
+      border-color: rgba(34,88,184,0.45);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 28px rgba(15,23,42,0.08);
+    }
+
+    .tool-card strong {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 16px;
+    }
+
+    .tool-card span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 14px;
+    }
+
+    .field.full {
+      grid-column: 1 / -1;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 7px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #344054;
+    }
+
+    input,
+    select,
+    textarea {
+      width: 100%;
+      min-height: 42px;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: var(--ink);
+      background: #fff;
+      outline: none;
+    }
+
+    textarea {
+      min-height: 104px;
+      resize: vertical;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+      border-color: rgba(34,88,184,0.65);
+      box-shadow: 0 0 0 3px rgba(34,88,184,0.12);
+    }
+
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    .chip {
+      min-height: 32px;
+      padding: 6px 10px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      color: #344054;
+      background: rgba(255,255,255,0.70);
+      font-size: 13px;
+    }
+
+    .chip.active {
+      color: #fff;
+      border-color: var(--blue);
+      background: var(--blue);
+    }
+
+    .actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .btn {
+      min-height: 40px;
+      padding: 8px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      color: #344054;
+      background: #fff;
+      font-weight: 700;
+    }
+
+    .btn.primary {
+      border-color: var(--blue);
+      color: #fff;
+      background: var(--blue);
+    }
+
+    .btn.teal {
+      border-color: var(--teal);
+      color: #fff;
+      background: var(--teal);
+    }
+
+    .right-rail {
+      position: sticky;
+      top: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .result {
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(26px) saturate(150%);
+      -webkit-backdrop-filter: blur(26px) saturate(150%);
+      overflow: hidden;
+    }
+
+    .result-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 15px 16px;
+      border-bottom: 1px solid var(--line);
+      background: rgba(248,250,252,0.62);
+    }
+
+    .result-head strong {
+      font-size: 16px;
+    }
+
+    .result-body {
+      padding: 16px;
+    }
+
+    .output-box {
+      min-height: 270px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(251,252,255,0.74);
+      white-space: pre-wrap;
+      font-size: 14px;
+    }
+
+    .output-box.compact {
+      min-height: 0;
+      max-height: 280px;
+      overflow: auto;
+      font-size: 13px;
+    }
+
+    .note-box {
+      padding: 14px 15px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: var(--panel);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+    }
+
+    .note-box h3 {
+      margin: 0 0 8px;
+      font-size: 16px;
+    }
+
+    .note-box ul {
+      margin: 8px 0 0;
+      padding-left: 20px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .prompt-dock {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: minmax(0, 1.25fr) minmax(320px, 0.75fr);
+      gap: 18px;
+      margin-top: 2px;
+      padding: 18px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.78), rgba(255,255,255,0.44)),
+        radial-gradient(circle at 0% 0%, rgba(34,88,184,0.13), transparent 32%),
+        radial-gradient(circle at 92% 16%, rgba(15,118,110,0.10), transparent 34%);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(26px) saturate(150%);
+      -webkit-backdrop-filter: blur(26px) saturate(150%);
+    }
+
+    .prompt-dock h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+    }
+
+    .prompt-dock p {
+      margin: 0 0 12px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .prompt-side {
+      display: grid;
+      gap: 10px;
+    }
+
+    .mini-list {
+      display: grid;
+      gap: 10px;
+    }
+
+    .task {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.72);
+    }
+
+    .task b {
+      display: block;
+      font-size: 14px;
+    }
+
+    .task span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 800;
+      white-space: nowrap;
+    }
+
+    .badge.blue { color: #17458f; background: #e8f0ff; }
+    .badge.teal { color: #0f625b; background: #e5f7f5; }
+    .badge.green { color: #286a2c; background: #e9f7ec; }
+    .badge.amber { color: #8a3f00; background: #fff3df; }
+    .badge.red { color: #9f1d14; background: #fff0ef; }
+    .badge.purple { color: #5a3aa0; background: #f0ebff; }
+
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+      margin-bottom: 18px;
+    }
+
+    .scenario {
+      padding: 13px 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.72);
+      text-align: left;
+    }
+
+    .scenario.active {
+      border-color: var(--blue);
+      box-shadow: 0 0 0 3px rgba(34,88,184,0.12);
+    }
+
+    .scenario strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 14px;
+    }
+
+    .scenario span {
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .canvas-preview {
+      display: grid;
+      place-items: center;
+      min-height: 330px;
+      padding: 20px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      background: rgba(238,243,249,0.66);
+      backdrop-filter: blur(22px) saturate(140%);
+      -webkit-backdrop-filter: blur(22px) saturate(140%);
+    }
+
+    .poster {
+      width: min(100%, 270px);
+      aspect-ratio: 3 / 4;
+      padding: 22px;
+      color: #fff;
+      border-radius: 8px;
+      background:
+        linear-gradient(rgba(16,34,65,0.86), rgba(16,34,65,0.76)),
+        url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='640' height='860' viewBox='0 0 640 860'%3E%3Crect width='640' height='860' fill='%232258b8'/%3E%3Cg opacity='.32' fill='none' stroke='%23fff' stroke-width='2'%3E%3Cpath d='M90 145h460v145H90zM120 405h400v230H120z'/%3E%3Cpath d='M140 205h260M140 242h210M170 470h300M170 520h220M170 570h260'/%3E%3C/g%3E%3Cg opacity='.25' fill='%230f766e'%3E%3Ccircle cx='535' cy='90' r='70'/%3E%3Ccircle cx='105' cy='730' r='95'/%3E%3C/g%3E%3C/svg%3E")
+        center / cover;
+      box-shadow: 0 18px 40px rgba(15,23,42,0.22);
+    }
+
+    .poster small {
+      display: block;
+      color: #dce8ff;
+      font-weight: 700;
+    }
+
+    .poster h3 {
+      margin: 18px 0 10px;
+      font-size: 28px;
+      line-height: 1.18;
+      letter-spacing: 0;
+    }
+
+    .poster p {
+      margin: 8px 0;
+      color: #eef5ff;
+      font-size: 14px;
+    }
+
+    .poster .poster-foot {
+      margin-top: 46px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,0.28);
+      font-size: 13px;
+    }
+
+    .table-like {
+      display: grid;
+      gap: 8px;
+    }
+
+    .row {
+      display: grid;
+      grid-template-columns: 140px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.72);
+    }
+
+    .student-card {
+      display: grid;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,0.72);
+      border-radius: var(--radius);
+      background:
+        linear-gradient(135deg, rgba(255,255,255,0.82), rgba(255,255,255,0.44)),
+        radial-gradient(circle at 8% 0%, rgba(34,88,184,0.12), transparent 32%);
+      box-shadow: 0 16px 44px rgba(20,39,73,0.10);
+      backdrop-filter: blur(24px) saturate(150%);
+      -webkit-backdrop-filter: blur(24px) saturate(150%);
+    }
+
+    .student-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .student-head h3 {
+      margin: 0;
+      font-size: 19px;
+    }
+
+    .student-metrics {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .metric {
+      padding: 11px 12px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: rgba(255,255,255,0.58);
+    }
+
+    .metric span {
+      display: block;
+      color: var(--muted);
+      font-size: 12px;
+    }
+
+    .metric b {
+      display: block;
+      margin-top: 4px;
+      font-size: 17px;
+    }
+
+    .spark {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(34,88,184,0.42);
+      box-shadow: 0 0 18px rgba(34,88,184,0.58);
+    }
+
+    .spark.one { right: 11%; top: 18%; }
+    .spark.two { right: 5%; bottom: 18%; background: rgba(15,118,110,0.44); }
+    .spark.three { left: 34%; top: 11%; background: rgba(118,82,197,0.34); }
+
+    .row span {
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    @media (max-width: 1180px) {
+      .app { grid-template-columns: 1fr; }
+      .sidebar { position: relative; height: auto; }
+      .nav-group { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0 8px; }
+      .nav-title { grid-column: 1 / -1; }
+      .workspace { grid-template-columns: 1fr; }
+      .right-rail { position: static; }
+      .prompt-dock { grid-template-columns: 1fr; }
+      .status-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    }
+
+    @media (max-width: 760px) {
+      .main { padding: 16px; }
+      .topbar { grid-template-columns: 1fr; }
+      .top-actions { justify-content: flex-start; }
+      .search { width: 100%; }
+      .status-grid, .tool-grid, .form-grid, .scenario-grid { grid-template-columns: 1fr; }
+      .student-metrics { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .row { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <strong>中级注安服务班主任 AI 工作台</strong>
+      </div>
+      <div class="nav-group">
+        <div class="nav-title">日常服务</div>
+        <button class="nav-item active" data-view="home"><span class="icon">总</span><span>首页总览</span></button>
+        <button class="nav-item" data-view="firstVisit"><span class="icon">新</span><span>新生首访助手</span></button>
+        <button class="nav-item" data-view="communication"><span class="icon">聊</span><span>AI 沟通助手</span></button>
+        <button class="nav-item" data-view="supervision"><span class="icon">督</span><span>督学小助手</span></button>
+        <button class="nav-item" data-view="planner"><span class="icon">学</span><span>学情规划师</span></button>
+        <button class="nav-item" data-view="risk"><span class="icon">险</span><span>风险学员雷达</span></button>
+        <button class="nav-item" data-view="refund"><span class="icon">退</span><span>退费挽单助手</span></button>
+
+        <div class="nav-title">内容生成</div>
+        <button class="nav-item" data-view="notice"><span class="icon">通</span><span>通知文案生成器</span></button>
+        <button class="nav-item" data-view="image"><span class="icon">图</span><span>图片素材工坊</span></button>
+        <button class="nav-item" data-view="course"><span class="icon">课</span><span>课程节点助手</span></button>
+        <button class="nav-item" data-view="privateSchool"><span class="icon">云</span><span>云私塾问题助手</span></button>
+
+        <div class="nav-title">沉淀管理</div>
+        <button class="nav-item" data-view="archive"><span class="icon">档</span><span>学员档案助手</span></button>
+        <button class="nav-item" data-view="record"><span class="icon">记</span><span>服务记录生成器</span></button>
+        <button class="nav-item" data-view="robot"><span class="icon">机</span><span>机器人语料库助手</span></button>
+        <button class="nav-item" data-view="scripts"><span class="icon">库</span><span>班主任话术库</span></button>
+        <button class="nav-item" data-view="reports"><span class="icon">报</span><span>服务报表中心</span></button>
+      </div>
+    </aside>
+
+    <main class="main">
+      <span class="spark one"></span>
+      <span class="spark two"></span>
+      <span class="spark three"></span>
+      <div class="topbar">
+        <div>
+          <h1 id="pageTitle">首页总览</h1>
+          <p id="pageSubtitle">今日待办、风险提醒、快捷工具入口和当前课程阶段集中展示。</p>
+        </div>
+        <div class="top-actions">
+          <input class="search" id="searchBox" placeholder="搜索工具、场景、话术类型" />
+          <button class="btn">导入学员表</button>
+          <button class="btn primary">保存当前方案</button>
+        </div>
+      </div>
+
+      <div class="status-grid">
+        <div class="status-card"><span>考试倒计时</span><b>129 天</b></div>
+        <div class="status-card"><span>当前阶段</span><b>强化输出</b></div>
+        <div class="status-card"><span>今日待跟进</span><b>36 人</b></div>
+        <div class="status-card"><span>高风险提醒</span><b>8 人</b></div>
+      </div>
+
+      <div class="workspace">
+        <div class="left-area">
+          <section class="section active" id="home">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>首页总览</h2>
+                <p>班主任每天打开后先看这里：该联系谁、该处理什么、应该用哪个工具。</p>
+              </div>
+              <div class="panel-body">
+                <div class="student-card">
+                  <div class="student-head">
+                    <div>
+                      <h3>示例学员：张同学</h3>
+                      <div class="chips">
+                        <span class="badge blue">线上魔鬼训练营</span>
+                        <span class="badge amber">进度滞后</span>
+                        <span class="badge red">需风险回访</span>
+                      </div>
+                    </div>
+                    <button class="btn primary" data-open="risk">引用该学员生成方案</button>
+                  </div>
+                  <div class="student-metrics">
+                    <div class="metric"><span>报考科目</span><b>其他全科</b></div>
+                    <div class="metric"><span>完课率</span><b>32%</b></div>
+                    <div class="metric"><span>做题正确率</span><b>58%</b></div>
+                    <div class="metric"><span>最近学习</span><b>10 天前</b></div>
+                  </div>
+                </div>
+
+                <div class="tool-grid">
+                  <button class="tool-card" data-open="firstVisit"><strong>新生首访</strong><span>根据课程、基础、目标生成首访问题、欢迎语和建档摘要。</span></button>
+                  <button class="tool-card" data-open="communication"><strong>AI 沟通助手</strong><span>覆盖督学、回访、投诉、退费、系统问题等所有沟通场景。</span></button>
+                  <button class="tool-card" data-open="planner"><strong>学情规划师</strong><span>输入学员学习时间和基础，生成 7/14/30 天备考计划。</span></button>
+                  <button class="tool-card" data-open="risk"><strong>风险学员雷达</strong><span>根据失联、低进度、情绪、退费等标签判断风险等级。</span></button>
+                  <button class="tool-card" data-open="notice"><strong>通知生成器</strong><span>生成开课、直播、模考、报名、刷题集训通知文案。</span></button>
+                  <button class="tool-card" data-open="image"><strong>图片素材工坊</strong><span>生成海报文案、排版建议和 AI 作图提示词。</span></button>
+                </div>
+
+                <h3>今日任务建议</h3>
+                <div class="mini-list">
+                  <div class="task"><div><b>新生首访未完成</b><span>建议先处理购课 48 小时内仍未建档学员。</span></div><span class="badge blue">12 人</span></div>
+                  <div class="task"><div><b>学习停滞风险</b><span>7 天以上无学习记录，优先电话或强提醒。</span></div><span class="badge red">8 人</span></div>
+                  <div class="task"><div><b>直播通知待发送</b><span>今晚课程建议群公告 + 私聊重点学员。</span></div><span class="badge teal">1 场</span></div>
+                  <div class="task"><div><b>机器人异常待整理</b><span>将学员常问但未命中的问题补入语料库。</span></div><span class="badge amber">6 条</span></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="firstVisit">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>新生首访助手</h2>
+                <p>用于新学员首次沟通、信息采集、建档摘要和初步学习建议。</p>
+              </div>
+              <div class="panel-body">
+                <div class="scenario-grid">
+                  <button class="scenario active"><strong>首次加微</strong><span>欢迎语 + 首访问题</span></button>
+                  <button class="scenario"><strong>电话首访</strong><span>电话提纲 + 记录</span></button>
+                  <button class="scenario"><strong>未添加微信</strong><span>短信 + 备注</span></button>
+                  <button class="scenario"><strong>建档摘要</strong><span>画像 + 风险标签</span></button>
+                </div>
+                <div class="form-grid">
+                  <div class="field"><label>课程班型</label><select><option>线上魔鬼训练营</option><option>高端钻石定制护航计划</option><option>云私塾 PRO</option><option>央企私教班</option></select></div>
+                  <div class="field"><label>报考科目</label><input value="其他安全全科" /></div>
+                  <div class="field"><label>基础情况</label><select><option>零基础</option><option>有基础但未通过</option><option>考过部分科目</option><option>老学员续报</option></select></div>
+                  <div class="field"><label>每天可学习时间</label><select><option>0.5-1 小时</option><option>1-2 小时</option><option>2-3 小时</option><option>3 小时以上</option></select></div>
+                  <div class="field full"><label>已知学员情况</label><textarea placeholder="例如：工作忙，晚上才能学习，担心课程多、记不住。"></textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="firstVisit">生成首访方案</button>
+                  <button class="btn">生成建档字段</button>
+                  <button class="btn">生成学习建议</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="communication">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>AI 沟通助手</h2>
+                <p>输入学员背景和沟通目标，自动生成微信话术、电话提纲、短信版本和内部记录。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>沟通场景</label><select><option>日常督学提醒</option><option>进度落后提醒</option><option>长期未学习回访</option><option>焦虑安抚</option><option>投诉安抚</option><option>退费承接</option><option>系统问题解释</option></select></div>
+                  <div class="field"><label>话术风格</label><select><option>温和专业</option><option>强提醒</option><option>安抚型</option><option>挽留型</option><option>简短直接</option></select></div>
+                  <div class="field"><label>学员状态</label><input value="进度滞后、工作忙、回复不稳定" /></div>
+                  <div class="field"><label>沟通目标</label><input value="恢复学习动作，约定 3 天反馈" /></div>
+                  <div class="field full"><label>学员原话或背景</label><textarea>最近工作太忙了，课程还没怎么看，后面有时间再集中学吧。</textarea></div>
+                </div>
+                <div class="chips">
+                  <button class="chip active">微信版</button><button class="chip">电话版</button><button class="chip">短信版</button><button class="chip">强提醒版</button><button class="chip">服务记录版</button>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="communication">生成沟通话术</button>
+                  <button class="btn">更温和</button>
+                  <button class="btn">更简短</button>
+                  <button class="btn">生成记录摘要</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="supervision">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>督学小助手</h2>
+                <p>适合 1v1 督学。根据上次计划、完成情况和学习数据，生成本次督学建议。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>上次计划完成情况</label><select><option>基本完成</option><option>部分完成</option><option>未完成</option><option>无法联系</option></select></div>
+                  <div class="field"><label>督学强度</label><select><option>轻提醒</option><option>正常督学</option><option>重点干预</option><option>负责人介入</option></select></div>
+                  <div class="field"><label>当前完课率</label><input value="32%" /></div>
+                  <div class="field"><label>做题正确率</label><input value="58%" /></div>
+                  <div class="field full"><label>本次沟通备注</label><textarea placeholder="填写学员最近反馈、未完成原因、学习卡点。"></textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="supervision">生成督学建议</button>
+                  <button class="btn">生成督学表内容</button>
+                  <button class="btn">生成下次计划</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="planner">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>学情规划师</h2>
+                <p>根据基础、科目、学习时间和当前阶段，生成可执行备考规划。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>计划周期</label><select><option>7 天计划</option><option>14 天计划</option><option>30 天计划</option><option>考前冲刺计划</option></select></div>
+                  <div class="field"><label>当前阶段</label><select><option>基础输入</option><option>强化输出</option><option>刷题集训</option><option>案例专项</option><option>考前冲刺</option></select></div>
+                  <div class="field"><label>每天学习时间</label><select><option>0.5-1 小时</option><option>1-2 小时</option><option>2-3 小时</option><option>3 小时以上</option></select></div>
+                  <div class="field"><label>备考目标</label><select><option>全科一次过</option><option>报二争四</option><option>先过一科</option><option>保协议条件</option></select></div>
+                  <div class="field full"><label>学习痛点</label><textarea>记不住法规条文，技术听课慢，案例题没有答题思路。</textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="planner">生成学习规划</button>
+                  <button class="btn">生成学员版</button>
+                  <button class="btn">生成图片版文案</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="risk">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>风险学员雷达</h2>
+                <p>通过风险标签和学习数据判断优先级，生成回访方案。</p>
+              </div>
+              <div class="panel-body">
+                <label>风险标签</label>
+                <div class="chips">
+                  <button class="chip active">7 天未学习</button><button class="chip active">多次未回复</button><button class="chip">未加微信</button><button class="chip active">进度低</button><button class="chip">投诉</button><button class="chip">退费倾向</button><button class="chip">高金额班型</button><button class="chip">协议风险</button>
+                </div>
+                <div class="form-grid" style="margin-top:16px;">
+                  <div class="field"><label>最近学习时间</label><input value="10 天前" /></div>
+                  <div class="field"><label>最近沟通状态</label><select><option>偶尔回复</option><option>多次未回复</option><option>明确不满</option><option>已提出退费</option></select></div>
+                  <div class="field full"><label>风险备注</label><textarea placeholder="填写学员近期表现和班主任判断。"></textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="risk">生成风险判断</button>
+                  <button class="btn">生成电话提纲</button>
+                  <button class="btn">生成回访记录</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="refund">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>退费挽单助手</h2>
+                <p>用于退费初步承接、真实原因判断、挽回策略和禁止承诺提醒。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>退费原因</label><select><option>没时间学</option><option>觉得课程不值</option><option>担心考不过</option><option>老师不满意</option><option>系统不满意</option><option>协议理解偏差</option></select></div>
+                  <div class="field"><label>处理阶段</label><select><option>初次提出</option><option>已投诉</option><option>已提交申请</option><option>挽回中</option></select></div>
+                  <div class="field full"><label>学员原话</label><textarea>最近工作太忙，根本没时间学，感觉买了也浪费，想退了。</textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="refund">生成挽单方案</button>
+                  <button class="btn">生成禁止承诺清单</button>
+                  <button class="btn">生成升级说明</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="notice">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>通知文案生成器</h2>
+                <p>生成开课、直播、课程更新、模考、报名缴费、刷题集训等通知。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>通知类型</label><select><option>直播通知</option><option>开课通知</option><option>课程更新通知</option><option>模考通知</option><option>刷题集训通知</option><option>报名缴费提醒</option></select></div>
+                  <div class="field"><label>文案风格</label><select><option>正式通知</option><option>紧迫提醒</option><option>温和提醒</option><option>打卡型</option></select></div>
+                  <div class="field"><label>课程名称</label><input value="考点突破集训" /></div>
+                  <div class="field"><label>时间</label><input value="今晚 19:00" /></div>
+                  <div class="field full"><label>学习要求</label><textarea>课前完成上一阶段错题复盘，课后完成对应章节练习。</textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="notice">生成通知文案</button>
+                  <button class="btn">生成群公告</button>
+                  <button class="btn">生成私聊版</button>
+                  <button class="btn">转到图片工坊</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="image">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>图片素材工坊</h2>
+                <p>生成通知图、直播图、学习计划图、打卡图、倒计时图的文案和作图提示词。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>图片类型</label><select><option>直播提醒图</option><option>开课通知海报</option><option>课程更新图</option><option>学习计划图</option><option>刷题打卡图</option><option>考前倒计时图</option></select></div>
+                  <div class="field"><label>尺寸</label><select><option>微信群竖版</option><option>朋友圈方图</option><option>手机长图</option><option>公众号封面</option></select></div>
+                  <div class="field"><label>主标题</label><input value="考点突破集训开课提醒" /></div>
+                  <div class="field"><label>副标题</label><input value="今晚 19:00 准时开播" /></div>
+                  <div class="field full"><label>核心信息</label><textarea>适合强化阶段学员，重点梳理高频考点和易错题。建议提前准备错题本。</textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="image">生成图片方案</button>
+                  <button class="btn">生成 AI 作图提示词</button>
+                  <button class="btn">生成海报文案</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="course">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>课程节点助手</h2>
+                <p>把课程更新节奏、师资安排、班次定位转化为班主任提醒动作。</p>
+              </div>
+              <div class="panel-body">
+                <div class="table-like">
+                  <div class="row"><b>基础阶段</b><span>认知考试、备考指导、考点精讲、基础测评。</span><span class="badge blue">入门规划</span></div>
+                  <div class="row"><b>强化阶段</b><span>实战题分班、考点突破、强化刷题集训。</span><span class="badge teal">输出训练</span></div>
+                  <div class="row"><b>案例阶段</b><span>案例带刷、案例专项、实务答题训练。</span><span class="badge amber">主观题</span></div>
+                  <div class="row"><b>考前阶段</b><span>模考、冲刺、报名缴费、考前提醒。</span><span class="badge red">优先级高</span></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="course">生成本周课程服务动作</button>
+                  <button class="btn">生成课程通知</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="privateSchool">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>云私塾问题助手</h2>
+                <p>把云私塾功能解释成学员能执行的学习动作。</p>
+              </div>
+              <div class="panel-body">
+                <div class="scenario-grid">
+                  <button class="scenario active"><strong>学习计划</strong><span>今天学什么</span></button>
+                  <button class="scenario"><strong>摸底测评</strong><span>先测再学</span></button>
+                  <button class="scenario"><strong>学习报告</strong><span>看进度</span></button>
+                  <button class="scenario"><strong>记忆卡</strong><span>碎片复习</span></button>
+                </div>
+                <div class="form-grid">
+                  <div class="field full"><label>学员问题</label><textarea>云私塾里面功能太多了，我不知道该怎么看，也不知道学习报告有什么用。</textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="privateSchool">生成解释话术</button>
+                  <button class="btn">生成操作步骤</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="archive">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>学员档案助手</h2>
+                <p>将沟通记录整理为可填入档案表的标准字段。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field full"><label>沟通记录</label><textarea placeholder="粘贴首访记录或督学沟通内容。"></textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="archive">生成档案摘要</button>
+                  <button class="btn">提取风险标签</button>
+                  <button class="btn">提取学习习惯</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="record">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>服务记录生成器</h2>
+                <p>把每次沟通转为标准服务记录，方便填写督学表、日报和交接记录。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>记录类型</label><select><option>首访记录</option><option>督学记录</option><option>风险回访</option><option>退费处理</option><option>问题反馈</option></select></div>
+                  <div class="field"><label>处理结果</label><select><option>已解决</option><option>待跟进</option><option>需升级</option><option>学员未回复</option></select></div>
+                  <div class="field full"><label>沟通过程</label><textarea placeholder="填写本次沟通要点。"></textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="record">生成服务记录</button>
+                  <button class="btn">生成下次待办</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="robot">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>机器人语料库助手</h2>
+                <p>整理 FAQ、错误回复、关键词和转人工规则。</p>
+              </div>
+              <div class="panel-body">
+                <div class="form-grid">
+                  <div class="field"><label>问题类型</label><select><option>课程资料</option><option>系统问题</option><option>云私塾</option><option>答疑</option><option>图书</option><option>报名考试</option><option>退费</option></select></div>
+                  <div class="field"><label>是否转人工</label><select><option>否，机器人可回复</option><option>是，需要班主任</option><option>是，需要负责人</option></select></div>
+                  <div class="field full"><label>学员常见问法</label><textarea>讲义在哪里下载？我怎么看不到直播入口？学习报告是什么意思？</textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="robot">生成语料</button>
+                  <button class="btn">扩展常见问法</button>
+                  <button class="btn">生成关键词</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="scripts">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>班主任话术库</h2>
+                <p>沉淀可复用话术，支持按场景、语气、班型快速查找。</p>
+              </div>
+              <div class="panel-body">
+                <div class="table-like">
+                  <div class="row"><b>新生欢迎</b><span>首次加微、入学指导、学习工具说明。</span><button class="btn">查看</button></div>
+                  <div class="row"><b>督学提醒</b><span>轻提醒、强提醒、焦虑安抚、追赶计划。</span><button class="btn">查看</button></div>
+                  <div class="row"><b>问题处理</b><span>资料、系统、答疑、图书、师资反馈。</span><button class="btn">查看</button></div>
+                  <div class="row"><b>退费挽单</b><span>没时间、觉得贵、担心不过、协议争议。</span><button class="btn">查看</button></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="section" id="reports">
+            <div class="panel">
+              <div class="panel-head">
+                <h2>服务报表中心</h2>
+                <p>面向项目负责人和班主任，导出完课、做题、错题、模考、风险和服务复盘数据。</p>
+              </div>
+              <div class="panel-body">
+                <div class="student-card">
+                  <div class="student-head">
+                    <div>
+                      <h3>固定数据模板导出</h3>
+                      <div class="chips">
+                        <span class="badge blue">Excel 模板</span>
+                        <span class="badge teal">班主任跟进</span>
+                        <span class="badge purple">项目复盘</span>
+                      </div>
+                    </div>
+                    <button class="btn primary" data-generate="reportTemplates">生成模板清单</button>
+                  </div>
+                  <div class="table-like">
+                    <div class="row"><b>班型完课率</b><span>按高端钻石、线上魔鬼、云私塾、央企私教班等班型统计完课率、低完课名单。</span><span class="badge blue">导出</span></div>
+                    <div class="row"><b>课程完课率</b><span>重点看考点精讲、考点突破、强化刷题、案例专项等课程整体完课情况。</span><span class="badge teal">导出</span></div>
+                    <div class="row"><b>做题与错题</b><span>统计做题量、正确率、错题高频章节、低正确率学员名单。</span><span class="badge amber">导出</span></div>
+                    <div class="row"><b>模考数据</b><span>统计模考参与率、各科成绩、未参加名单、低分预警名单。</span><span class="badge red">导出</span></div>
+                  </div>
+                </div>
+                <div class="form-grid">
+                  <div class="field"><label>报表类型</label><select><option>班型完课率导出</option><option>考点精讲整体完课率</option><option>学员做题情况导出</option><option>错题高频章节分析</option><option>模考参与和成绩分析</option><option>服务周报</option><option>风险学员复盘</option><option>退费原因分析</option><option>机器人异常报告</option><option>刷题集训复盘</option></select></div>
+                  <div class="field"><label>输出对象</label><select><option>项目负责人</option><option>班主任团队</option><option>管理层汇报</option></select></div>
+                  <div class="field full"><label>数据字段或要点</label><textarea placeholder="可粘贴学员 UID、班型、课程、科目、完课率、做题量、正确率、模考成绩、最近学习时间等字段。"></textarea></div>
+                </div>
+                <div class="actions">
+                  <button class="btn primary" data-generate="reports">生成报表</button>
+                  <button class="btn teal" data-generate="reportTemplates">生成导出字段</button>
+                  <button class="btn">生成改进建议</button>
+                  <button class="btn">生成下周重点</button>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="right-rail">
+          <div class="result">
+            <div class="result-head">
+              <strong>生成结果预览</strong>
+              <button class="btn" id="copyBtn">复制</button>
+            </div>
+            <div class="result-body">
+              <div class="output-box" id="outputBox">【示例学员数据引用】
+
+学员：张同学
+班型：线上魔鬼训练营
+报考：其他安全全科
+完课率：32%
+做题正确率：58%
+最近学习：10 天前
+当前标签：进度滞后、需风险回访
+
+可生成内容：
+1. 风险等级判断
+2. 微信回访话术
+3. 电话沟通提纲
+4. 3 天恢复学习计划
+5. 督学表记录摘要</div>
+            </div>
+          </div>
+
+          <div class="note-box" id="usageNote">
+            <h3>当前工具怎么用</h3>
+            <ul>
+              <li>先选左侧工具。</li>
+              <li>填写学员情况或服务场景。</li>
+              <li>点击生成后复制结果到微信、档案或周报。</li>
+            </ul>
+          </div>
+
+          <div class="canvas-preview" id="posterPreview" style="display:none;">
+            <div class="poster">
+              <small>中级注册安全工程师</small>
+              <h3>考点突破集训开课提醒</h3>
+              <p>今晚 19:00 准时开播</p>
+              <p>强化阶段重点课程，建议提前准备错题本。</p>
+              <div class="poster-foot">班主任提醒：课后完成对应章节练习</div>
+            </div>
+          </div>
+        </aside>
+
+        <div class="prompt-dock" id="promptNote">
+          <div>
+            <h3>标准 AI 提问模板</h3>
+            <p>班主任如果直接在 AI 里提问，可以按这个格式写；网页工具则把这些字段拆成了表单，减少手动组织问题的成本。</p>
+            <div class="output-box compact" id="promptBox">你是中级注安项目服务班主任。
+
+请根据以下学员情况，生成可直接用于微信沟通的话术，并给出班主任内部记录摘要。
+
+学员情况：
+【班型】线上魔鬼训练营
+【科目】其他全科
+【学习进度】完课率 32%，10 天未学习
+【问题】工作忙，回复不稳定
+【目标】恢复学习动作，约定 3 天反馈
+
+输出格式：
+1. 学情判断
+2. 微信话术
+3. 电话提纲
+4. 下次跟进重点
+5. 档案记录摘要</div>
+          </div>
+          <div class="prompt-side">
+            <h3>工具已内置的内容</h3>
+            <div class="task"><div><b>身份设定</b><span>默认按“中级注安项目服务班主任/督学/数据分析助手”的角色生成。</span></div><span class="badge blue">内置</span></div>
+            <div class="task"><div><b>学员字段</b><span>班型、科目、完课率、做题率、最近学习、情绪、风险标签。</span></div><span class="badge teal">表单化</span></div>
+            <div class="task"><div><b>输出格式</b><span>微信话术、电话提纲、学习计划、记录摘要、导出字段。</span></div><span class="badge purple">标准化</span></div>
+            <div class="task"><div><b>复核提醒</b><span>退费、协议、价格、考试政策等内容仍需人工确认。</span></div><span class="badge red">必看</span></div>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const meta = {
+      home: ["首页总览", "今日待办、风险提醒、快捷工具入口和当前课程阶段集中展示。", "首页用于快速判断今天先做什么。可引用示例学员或真实学员数据，一键进入沟通、规划、风险回访等工具。"],
+      firstVisit: ["新生首访助手", "新学员首次沟通、信息采集、建档摘要和初步学习建议。", "适合新生加微后使用。填写班型、科目、基础和已知情况，生成欢迎语、首访问题和建档摘要。"],
+      communication: ["AI 沟通助手", "生成首访、督学、风险回访、投诉安抚、退费承接等沟通内容。", "先选择沟通场景和语气，再填入学员原话。输出内容建议人工复核后再发送。"],
+      supervision: ["督学小助手", "根据上次计划和当前学习数据生成本次督学建议。", "适合 1v1 督学前使用。重点输入上次完成情况、完课率、做题率和学员反馈。"],
+      planner: ["学情规划师", "生成 7 天、14 天、30 天学习计划和班主任跟进节点。", "适合新生入门、进度滞后、考前冲刺、刷题集训前使用。计划要按学员真实时间调整。"],
+      risk: ["风险学员雷达", "识别未加微、失联、学习停滞、投诉、退费等风险。", "勾选风险标签后生成风险等级、回访方式、话术和下次跟进时间。"],
+      refund: ["退费挽单助手", "处理退费初步承接、真实诉求判断和挽回策略。", "适合学员提出退费时使用。涉及协议、金额、承诺事项必须人工复核。"],
+      notice: ["通知文案生成器", "生成开课、直播、课程更新、模考、报名缴费等通知。", "填写通知类型、课程、时间、学习要求，可输出群公告、私聊版、短信版和补学提醒。"],
+      image: ["图片素材工坊", "生成通知图、直播图、学习计划图、打卡图的文案和作图提示词。", "选择图片类型和尺寸，填写标题、时间和核心信息。右侧可查看示意海报结构。"],
+      course: ["课程节点助手", "把课程阶段转成班主任服务动作。", "适合项目负责人维护课程节奏，也适合班主任生成本周提醒和学习建议。"],
+      privateSchool: ["云私塾问题助手", "解释学习计划、摸底测评、学习报告、视频智览、记忆卡等功能。", "适合学员不会用云私塾时，把功能说明转成今天能执行的三步动作。"],
+      archive: ["学员档案助手", "把沟通记录整理成学员画像、学习习惯、痛点和风险标签。", "粘贴首访或督学记录，生成可填入学员档案表的字段。"],
+      record: ["服务记录生成器", "把沟通过程转成规范记录和下次待办。", "适合每次服务后使用，减少班主任重复写记录的时间。"],
+      robot: ["机器人语料库助手", "生成 FAQ、关键词、标准回复和转人工规则。", "适合整理机器人答错、未命中或高频重复问题。"],
+      scripts: ["班主任话术库", "沉淀高频场景话术并支持查找复用。", "这个模块后续应支持收藏、分类、搜索和版本管理。"],
+      reports: ["服务报表中心", "导出完课率、做题、错题、模考、风险和服务复盘数据。", "选择固定模板后，系统给出建议字段、统计口径和班主任跟进动作。适合导出班型完课率、考点精讲完课率、做题正确率、错题章节和模考结果。"]
+    };
+
+    const samples = {
+      firstVisit: `【新生首访方案】\n\n微信开场：\n同学您好，我是您的中级注安班主任。后续课程路径、学习工具、直播提醒、模考提醒和学习规划都会由我来协助您。今天先帮您做一个简短入学了解，方便后面给您安排更合适的学习节奏。\n\n建议了解 6 个问题：\n1. 目前从事什么行业和岗位，是否安全相关？\n2. 之前是否参加过中级注安考试？\n3. 今年计划考几科，目标是一次过还是分阶段？\n4. 工作日和周末分别能学习多久？\n5. 目前最担心的是没时间、记不住、听不懂，还是不会做题？\n6. 是否需要我先帮您排一个 7 天入门计划？\n\n档案摘要：\n零基础/时间有限/需要先建立学习习惯。建议首周以低压力入门为主，不直接安排高强度刷题。`,
+      communication: `【微信沟通话术】\n\n同学，我看了下您最近的学习记录，确实还没有完全进入节奏。工作忙的时候很容易想着“后面集中学”，但注安全科内容比较多，后面全部压在一起压力会更大。\n\n咱们先不追求一下子补很多，先用 3 天把学习动作恢复起来：\n第 1 天：完成 1 小节课程，记录 3 个关键词。\n第 2 天：做 5 道对应题，错题不用多，重点看原因。\n第 3 天：把这两天卡住的问题发我，我帮您判断下一步先学哪块。\n\n我后天再跟您确认一次，不看总进度，只看这 3 天有没有重新开始。`,
+      supervision: `【本次督学建议】\n\n学员判断：进度滞后，但仍可通过短周期任务恢复学习动作。\n\n主要问题：上次计划只完成部分内容，当前做题正确率偏低，说明基础理解和复盘还不够稳定。\n\n本周目标：\n1. 不追求大范围赶进度，先完成 2 个核心小节。\n2. 每次学习后记录 3 个关键词和 1 个不懂点。\n3. 周末集中复盘错题，不新增过多任务。\n\n督学记录版：\n本次沟通已提醒学员调整学习节奏，建议以小任务恢复连续学习。下次重点检查课程完成情况、错题原因和是否形成固定学习时间。`,
+      planner: `【14 天学习规划】\n\n学情诊断：学员基础偏弱，时间有限，不适合全科同时铺开。建议先建立稳定学习节奏，再逐步增加刷题量。\n\n第 1-3 天：完成法规/管理基础课程各 1 小节，每天整理关键词。\n第 4-6 天：补对应课后题，每天 5-10 题，重点复盘错因。\n第 7 天：周复盘，整理本周 5 个易错点。\n第 8-11 天：进入技术或实务基础内容，保持每天 1 小时。\n第 12-13 天：完成小范围混合练习。\n第 14 天：向班主任反馈完成情况，调整下一阶段计划。\n\n给学员版：\n这两周目标不是追完所有课，而是把每天学习动作固定下来。每天完成一个小任务，比周末一次性补很多更有效。`,
+      risk: `【风险判断】\n\n风险等级：高风险\n\n风险原因：\n1. 7 天以上未学习。\n2. 多次回复不稳定。\n3. 当前进度低于阶段要求。\n4. 若继续拖延，后续容易转为退费或投诉风险。\n\n建议动作：\n优先电话回访。电话目标不是批评进度，而是确认真实阻碍：工作时间、学习难度、情绪压力还是课程使用问题。\n\n微信预热：\n同学，我看您最近学习节奏有点断，我想帮您判断一下是时间安排问题，还是课程内容卡住了。方便的话今天我给您打个电话，咱们用几分钟把后面 3 天的学习安排定下来。`,
+      refund: `【退费挽单方案】\n\n真实诉求判断：学员表面原因是没时间学，底层可能是学习压力大、看不到进展、担心后面跟不上。\n\n微信承接：\n同学，我理解您最近工作忙的时候确实很难进入学习状态。咱们先不急着否定您的感受，我想先帮您看一下，是完全没有时间，还是原来的学习安排太重，导致您觉得跟不上。\n\n电话追问：\n1. 最近一周具体能学习的时间有哪些？\n2. 是没时间打开课程，还是打开后不知道怎么学？\n3. 如果先安排每天 20-30 分钟，您能接受吗？\n\n禁止承诺：\n不承诺一定通过；不随意解释退费条件；不说“别人忙也能学”。`,
+      notice: `【群公告版】\n\n各位同学，今晚 19:00 中级注安《考点突破集训》准时开播。\n\n本次课程适合强化阶段同学参加，重点梳理高频考点和易错题。建议大家提前准备错题本，课后完成对应章节练习。\n\n未能参加直播的同学，记得在回放上线后 24 小时内补学，并把不懂的问题及时发给班主任。\n\n【私聊提醒版】\n同学，今晚这节考点突破课建议您参加，尤其适合现在进入刷题和强化阶段的同学。您可以提前把最近错题准备一下，听课时重点对照。`,
+      image: `【图片素材方案】\n\n图片类型：直播提醒图\n尺寸：微信群竖版\n主标题：考点突破集训开课提醒\n副标题：今晚 19:00 准时开播\n核心信息：强化阶段重点课程，梳理高频考点和易错题。\n\n排版建议：\n顶部放项目名称，中间突出课程标题和时间，底部放学习要求：提前准备错题本，课后完成章节练习。\n\nAI 作图提示词：\n设计一张面向职业资格考试学员的课程直播提醒海报，竖版手机尺寸，专业、清晰、培训机构内部通知风格。主标题为“考点突破集训开课提醒”，突出“今晚 19:00”，包含错题本、学习计划、在线直播等元素，颜色稳重，信息层级明确。`,
+      course: `【本周课程服务动作】\n\n当前阶段：强化输出阶段。\n\n班主任重点动作：\n1. 提醒学员从“看课输入”转为“做题输出”。\n2. 对低正确率学员安排错题复盘。\n3. 对长期只看课不做题学员进行强提醒。\n4. 直播前发送课程通知，直播后 24 小时提醒未参加学员补回放。\n\n建议搭配工具：通知文案生成器、督学小助手、风险学员雷达。`,
+      privateSchool: `【云私塾解释话术】\n\n同学，云私塾功能比较多，您不用一开始全部研究明白。可以先把它当成一个帮您安排学习顺序、记录学习情况的工具。\n\n今天先做三步：\n1. 打开学习计划，看系统建议您今天学什么。\n2. 完成一小节课程，不追求多。\n3. 看学习报告，确认今天学习时长和完成情况。\n\n如果报告里显示进度偏慢，您不用着急，把截图发我，我帮您判断后面怎么调整。`,
+      archive: `【档案摘要】\n\n学员画像：在职备考，学习时间有限，倾向晚上学习。对考试有目标感，但容易因工作忙导致学习中断。\n\n备考痛点：时间不稳定，基础内容吸收慢，担心后期课程堆积。\n\n学习建议：首阶段以建立固定学习动作和完成基础课程为主，暂不安排高强度刷题。\n\n风险标签：时间不足、进度滞后风险、需要定期督学。`,
+      record: `【服务记录】\n\n服务类型：督学沟通\n沟通结果：已完成沟通，学员认可先执行 3 天低压力学习任务。\n\n沟通要点：学员近期因工作忙学习中断，已提醒其后期集中学习压力较大，建议先恢复每日短时学习。\n\n本次安排：未来 3 天完成 2 个小节课程和少量课后题，第三天反馈卡点。\n\n下次跟进：3 天后检查学习记录、错题情况和是否形成固定学习时间。`,
+      robot: `【机器人语料】\n\n问题类型：课程资料\n常见问法：\n1. 讲义在哪里下载？\n2. 为什么我看不到资料？\n3. 课程资料什么时候更新？\n\n关键词：讲义、资料、下载、课件、看不到、更新\n\n标准回复：\n同学，课程讲义一般可在对应课程详情页或学习中心资料入口查看。若您当前看不到，建议先确认课程名称和科目是否选择正确；如果仍无法查看，请将课程页面截图发给班主任，我们会协助核查。\n\n转人工规则：涉及账号权限、资料缺失、页面异常时转人工。`,
+      reports: `【服务周报摘要】\n\n本周重点：新生承接、强化阶段课程提醒、风险学员回访、机器人语料补充。\n\n数据摘要：\n1. 新生首访完成率需重点跟进。\n2. 风险学员主要集中在长期未学习和多次未回复。\n3. 高频问题为课程入口、讲义下载、云私塾学习报告解释。\n\n下周动作：\n1. 优先处理 7 天以上未学习学员。\n2. 对强化阶段低正确率学员安排错题复盘提醒。\n3. 补充机器人关于讲义下载、直播入口、学习报告的标准语料。`,
+      reportTemplates: `【固定数据模板设计】
+
+一、班型完课率导出
+字段：班主任、UID、学员姓名、班型、报考科目、课程阶段、整体完课率、考点精讲完课率、最近学习时间、风险等级、建议动作。
+
+二、课程完课率导出
+字段：课程名称、科目、应学人数、已开始人数、完课人数、平均完课率、低于 30% 人数、低于 60% 人数、需提醒名单。
+
+三、做题与错题导出
+字段：UID、学员姓名、班型、科目、做题量、正确率、错题数、高频错题章节、最近做题时间、建议复盘动作。
+
+四、模考数据导出
+字段：UID、学员姓名、班型、科目、是否参加模考、模考成绩、班级排名、低分预警、未参加原因、跟进状态。
+
+五、班主任跟进看板
+字段：班主任、负责人数、待首访、待督学、高风险、退费倾向、未加微、7 天未学习、已完成回访、待升级问题。`,
+      scripts: `【话术库说明】\n\n这里用于沉淀经过验证的话术。后续建议支持：\n1. 按场景筛选。\n2. 按语气筛选。\n3. 收藏高频话术。\n4. 标记适用班型。\n5. 记录最后更新时间和维护人。`
+    };
+
+    const navButtons = document.querySelectorAll(".nav-item");
+    const sections = document.querySelectorAll(".section");
+    const title = document.getElementById("pageTitle");
+    const subtitle = document.getElementById("pageSubtitle");
+    const note = document.getElementById("usageNote");
+    const promptBox = document.getElementById("promptBox");
+    const output = document.getElementById("outputBox");
+    const posterPreview = document.getElementById("posterPreview");
+
+    const promptTemplates = {
+      home: `你是中级注安项目服务班主任。
+
+请根据以下学员数据，判断今天应该优先做哪些服务动作。
+
+学员数据：
+【班型】线上魔鬼训练营
+【科目】其他全科
+【完课率】32%
+【做题正确率】58%
+【最近学习】10 天前
+【状态】进度滞后、回复不稳定
+
+请输出：
+1. 今日优先级
+2. 风险原因
+3. 推荐使用的工具
+4. 班主任跟进动作`,
+      firstVisit: `你是中级注安项目服务班主任。
+
+请根据以下新生信息，生成首访沟通方案。
+
+学员信息：
+【班型】{班型}
+【报考科目】{科目}
+【基础】{零基础/有基础/考过}
+【学习时间】{每天可学习时间}
+【主要顾虑】{学员担心点}
+
+请输出：
+1. 微信欢迎语
+2. 首访需要了解的问题
+3. 入学指导提醒
+4. 初步学习建议
+5. 可填写进档案的摘要`,
+      communication: `你是中级注安项目服务班主任。
+
+请根据以下沟通场景，生成适合微信发送的话术。
+
+场景：{新生/督学/风险回访/投诉/退费/系统问题}
+学员情况：{班型、科目、学习进度、情绪状态}
+学员原话：{粘贴学员原话}
+沟通目标：{希望学员完成什么动作}
+语气要求：{温和/强提醒/安抚/挽留}
+
+请输出：
+1. 微信话术
+2. 电话提纲
+3. 注意不要承诺的内容
+4. 服务记录摘要`,
+      supervision: `你是中级注安项目督学老师。
+
+请根据以下信息生成本次 1v1 督学方案。
+
+上次计划：{内容}
+完成情况：{完成/部分完成/未完成}
+完课率：{百分比}
+做题情况：{做题量、正确率}
+学员反馈：{反馈}
+本周课程节点：{课程}
+
+请输出：
+1. 学员当前分层
+2. 本次督学重点
+3. 微信督学话术
+4. 下次学习计划
+5. 督学表填写内容`,
+      planner: `你是中级注安备考规划师。
+
+请根据以下情况生成学习规划。
+
+班型：{班型}
+科目：{科目}
+基础：{基础情况}
+每天学习时间：{时间}
+当前阶段：{基础/强化/刷题/案例/冲刺}
+完课率：{百分比}
+做题正确率：{百分比}
+痛点：{没时间/记不住/不会案例/错题多}
+
+请输出：
+1. 学情诊断
+2. 7 天学习计划
+3. 每日任务
+4. 周末复盘任务
+5. 班主任跟进节点`,
+      risk: `你是中级注安项目风险学员分析助手。
+
+请根据以下信息判断风险等级并生成回访方案。
+
+风险标签：{未加微/7天未学习/多次未回复/投诉/退费倾向/协议风险}
+学习数据：{完课率、做题率、正确率}
+最近沟通：{沟通记录}
+班型金额：{班型/是否高金额}
+
+请输出：
+1. 风险等级
+2. 风险原因
+3. 微信回访话术
+4. 电话沟通提纲
+5. 是否需要负责人介入
+6. 下次跟进时间`,
+      refund: `你是中级注安项目退费挽单助手。
+
+请根据以下退费场景生成处理方案。
+
+退费原因：{原因}
+学员原话：{原话}
+班型：{班型}
+学习进度：{完课率/做题率}
+是否涉及协议：{是/否}
+当前处理阶段：{初次提出/已投诉/已申请}
+
+请输出：
+1. 真实诉求判断
+2. 微信承接话术
+3. 电话追问问题
+4. 可提供解决方案
+5. 禁止承诺事项
+6. 升级建议`,
+      notice: `你是中级注安项目班主任。
+
+请生成一条课程通知。
+
+通知类型：{直播/开课/课程更新/模考/报名缴费}
+课程名称：{课程}
+时间：{时间}
+科目：{科目}
+适用学员：{人群}
+学习要求：{课前/课后动作}
+
+请输出：
+1. 群公告版
+2. 私聊提醒版
+3. 短信版
+4. 未参加补学提醒版`,
+      image: `你是培训机构运营设计助手。
+
+请根据以下信息生成通知图片方案和 AI 作图提示词。
+
+图片类型：{直播提醒/开课通知/学习计划/模考提醒}
+尺寸：{微信群竖版/朋友圈方图/手机长图}
+主标题：{标题}
+副标题：{时间或重点}
+核心信息：{3条以内}
+风格：{正式通知/学习打卡/考前冲刺/高端服务}
+
+请输出：
+1. 图片文案
+2. 排版结构
+3. 配色建议
+4. AI 作图提示词`,
+      reports: `你是中级注安项目数据分析助手。
+
+请根据以下数据生成固定导出模板和分析口径。
+
+数据目标：{班型完课率/考点精讲完课率/做题情况/错题分析/模考分析}
+已有字段：{UID、班型、科目、课程、完课率、做题量、正确率、模考成绩等}
+输出对象：{班主任/项目负责人/管理层}
+
+请输出：
+1. 建议导出字段
+2. 统计口径
+3. 风险判断规则
+4. 班主任跟进动作
+5. 可放入周报的总结`
+    };
+
+    function setView(id) {
+      sections.forEach(s => s.classList.toggle("active", s.id === id));
+      navButtons.forEach(b => b.classList.toggle("active", b.dataset.view === id));
+      const m = meta[id] || meta.home;
+      title.textContent = m[0];
+      subtitle.textContent = m[1];
+      note.innerHTML = `<h3>当前工具怎么用</h3><ul><li>${m[2]}</li><li>生成结果会显示在右侧，可复制、改写或保存为记录。</li><li>涉及退费、协议、价格、考试政策时必须人工复核。</li></ul>`;
+      promptBox.textContent = promptTemplates[id] || promptTemplates.communication;
+      posterPreview.style.display = id === "image" ? "grid" : "none";
+      output.textContent = samples[id] || "选择左侧工具并点击“生成”，这里会展示可复制的话术、学习计划、风险判断、通知文案或图片提示词。";
+    }
+
+    navButtons.forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.view)));
+    document.querySelectorAll("[data-open]").forEach(btn => btn.addEventListener("click", () => setView(btn.dataset.open)));
+    document.querySelectorAll("[data-generate]").forEach(btn => btn.addEventListener("click", () => {
+      const id = btn.dataset.generate;
+      output.textContent = samples[id] || "已生成示例结果。";
+      posterPreview.style.display = id === "image" ? "grid" : "none";
+    }));
+    document.querySelectorAll(".chip").forEach(btn => btn.addEventListener("click", () => btn.classList.toggle("active")));
+    document.querySelectorAll(".scenario").forEach(btn => btn.addEventListener("click", () => {
+      const group = btn.parentElement.querySelectorAll(".scenario");
+      group.forEach(x => x.classList.remove("active"));
+      btn.classList.add("active");
+    }));
+    document.getElementById("copyBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(output.textContent);
+        document.getElementById("copyBtn").textContent = "已复制";
+        setTimeout(() => document.getElementById("copyBtn").textContent = "复制", 1200);
+      } catch (e) {
+        document.getElementById("copyBtn").textContent = "请手动复制";
+        setTimeout(() => document.getElementById("copyBtn").textContent = "复制", 1200);
+      }
+    });
+    document.getElementById("searchBox").addEventListener("input", (e) => {
+      const q = e.target.value.trim();
+      if (!q) return;
+      const hit = Object.entries(meta).find(([, v]) => v.join("").includes(q));
+      if (hit) setView(hit[0]);
+    });
+  </script>
+</body>
+</html>

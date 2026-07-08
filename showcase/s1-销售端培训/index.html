@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>注安销售团队培训文档</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; line-height: 1.6; }
+.hero { background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%); padding: 48px 32px 40px; color: #fff; }
+.hero-inner { max-width: 880px; margin: 0 auto; }
+.hero-title { font-size: 32px; font-weight: 700; margin-bottom: 8px; }
+.hero-sub { font-size: 16px; color: rgba(255,255,255,0.8); margin-bottom: 24px; }
+.hero-stats { display: flex; gap: 24px; flex-wrap: wrap; }
+.hero-stat { background: rgba(255,255,255,0.12); border-radius: 12px; padding: 16px 24px; min-width: 140px; }
+.hero-stat-num { font-size: 24px; font-weight: 700; }
+.hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 4px; }
+.breadcrumb { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.container { max-width: 880px; margin: 0 auto; padding: 32px; }
+.modules { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+.module-card { background: #fff; border-radius: 16px; overflow: hidden; border: 1px solid #e5e5e7; transition: all 0.2s; cursor: pointer; }
+.module-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,0.08); }
+.module-header { padding: 24px; }
+.module-header.m1 { background: linear-gradient(135deg, #1e3a8a, #2563eb); }
+.module-header.m2 { background: linear-gradient(135deg, #be185d, #e11d48); }
+.module-header.m3 { background: linear-gradient(135deg, #7c3aed, #8b5cf6); }
+.module-header.m4 { background: linear-gradient(135deg, #991b1b, #dc2626); }
+.module-num { font-size: 12px; color: rgba(255,255,255,0.6); font-weight: 600; letter-spacing: 1px; text-transform: uppercase; }
+.module-title { font-size: 18px; font-weight: 700; color: #fff; margin-top: 4px; }
+.module-desc { font-size: 13px; color: rgba(255,255,255,0.75); margin-top: 8px; }
+.module-body { padding: 20px 24px; }
+.module-articles { display: flex; flex-direction: column; gap: 8px; }
+.article-link { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: #f5f5f7; color: #1d1d1f; font-size: 14px; font-weight: 500; transition: all 0.15s; text-decoration: none; }
+.article-link:hover { background: #e8e8ed; }
+.article-link .tag { font-size: 11px; padding: 2px 8px; border-radius: 100px; font-weight: 600; }
+.tag-core { background: rgba(30,58,138,0.1); color: #1e3a8a; }
+.tag-req { background: rgba(190,24,93,0.1); color: #be185d; }
+.tag-new { background: rgba(124,58,237,0.1); color: #7c3aed; }
+.tag-data { background: rgba(153,27,27,0.1); color: #991b1b; }
+.article-link .arrow { color: #86868b; margin-left: auto; }
+.section-intro { background: #fff; border-radius: 16px; padding: 24px; border: 1px solid #e5e5e7; margin-top: 24px; }
+.section-intro h2 { font-size: 16px; font-weight: 700; margin-bottom: 12px; }
+.section-intro p { font-size: 14px; color: #6e6e73; }
+.section-intro ul { margin-top: 12px; padding-left: 20px; }
+.section-intro li { font-size: 14px; color: #6e6e73; margin-bottom: 6px; }
+.footer { text-align: center; padding: 32px; font-size: 12px; color: #86868b; }
+@media (max-width: 600px) {
+  .modules { grid-template-columns: 1fr; }
+  .hero-stats { flex-direction: column; }
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb">注安销售团队 · 内部培训资料</div>
+    <div class="hero-title">销售团队培训文档</div>
+    <div class="hero-sub">中级注册安全工程师考试培训项目 · 覆盖70人全部销售团队</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">核心模块</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">20+</div>
+        <div class="hero-stat-label">培训文档</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">70人</div>
+        <div class="hero-stat-label">覆盖团队</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3类</div>
+        <div class="hero-stat-label">团队类型</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="modules">
+
+    <!-- 模块1 -->
+    <div class="module-card" onclick="location.href='01_用户分层与跟进SOP/index.html'">
+      <div class="module-header m1">
+        <div class="module-num">模块一</div>
+        <div class="module-title">用户分层与跟进SOP</div>
+        <div class="module-desc">6层用户模型 + 三大团队跟进路径 + 线索流转规则</div>
+      </div>
+      <div class="module-body">
+        <div class="module-articles">
+          <a class="article-link" href="01_用户分层与跟进SOP/01_用户分层体系.html"><span class="tag tag-core">核心</span> 用户分层体系：6层用户模型 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="01_用户分层与跟进SOP/02_社群微销跟进SOP.html"><span class="tag tag-core">核心</span> 社群微销14天培育SOP <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="01_用户分层与跟进SOP/03_纯电销跟进SOP.html"><span class="tag tag-core">核心</span> 纯电销7天双触达SOP <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="01_用户分层与跟进SOP/04_升级电销跟进SOP.html"><span class="tag tag-req">必读</span> 升级电销30天存量激活SOP <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="01_用户分层与跟进SOP/05_线索流转规则.html"><span class="tag tag-req">必读</span> 线索跨团队流转规则 <span class="arrow">&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 模块2 -->
+    <div class="module-card">
+      <div class="module-header m2">
+        <div class="module-num">模块二</div>
+        <div class="module-title">话术库与异议处理</div>
+        <div class="module-desc">各场景话术模板 + 常见拒绝应对 + 升级说服技巧</div>
+      </div>
+      <div class="module-body">
+        <div class="module-articles">
+          <a class="article-link" href="02_话术库与异议处理/01_首次加微话术.html"><span class="tag tag-req">必读</span> 首次加微话术模板 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="02_话术库与异议处理/02_电话开场与破冰.html"><span class="tag tag-req">必读</span> 电话开场与破冰脚本 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="02_话术库与异议处理/03_报价与促单话术.html"><span class="tag tag-core">核心</span> 报价与促单话术 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="02_话术库与异议处理/04_异议处理大全.html"><span class="tag tag-core">核心</span> 常见异议处理大全 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="02_话术库与异议处理/05_升级说服话术.html"><span class="tag tag-new">进阶</span> 高端班升级说服话术 <span class="arrow">&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 模块3 -->
+    <div class="module-card">
+      <div class="module-header m3">
+        <div class="module-num">模块三</div>
+        <div class="module-title">产品知识与卖点</div>
+        <div class="module-desc">课程体系全览 + 注安考试介绍 + 卖点提炼 + 竞品对比</div>
+      </div>
+      <div class="module-body">
+        <div class="module-articles">
+          <a class="article-link" href="03_产品知识与卖点/01_课程体系全览.html"><span class="tag tag-req">必读</span> 课程体系全览 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="03_产品知识与卖点/02_注安考试介绍.html"><span class="tag tag-req">必读</span> 注安考试介绍与政策解读 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="03_产品知识与卖点/03_基础班卖点提炼.html"><span class="tag tag-core">核心</span> 基础班（¥2,500）卖点提炼 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="03_产品知识与卖点/04_高端班卖点与升级逻辑.html"><span class="tag tag-new">进阶</span> 高端班（¥16,800）卖点与升级逻辑 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="03_产品知识与卖点/05_竞品对比话术.html"><span class="tag tag-new">进阶</span> 竞品对比与应对话术 <span class="arrow">&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 模块4 -->
+    <div class="module-card">
+      <div class="module-header m4">
+        <div class="module-num">模块四</div>
+        <div class="module-title">数据分析与目标拆解</div>
+        <div class="module-desc">核心指标解读 + 漏斗理解 + 目标设定 + 数据驱动跟进</div>
+      </div>
+      <div class="module-body">
+        <div class="module-articles">
+          <a class="article-link" href="04_数据分析与目标拆解/01_销售核心指标解读.html"><span class="tag tag-data">数据</span> 销转率/客单价/人效解读 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="04_数据分析与目标拆解/02_转化漏斗理解.html"><span class="tag tag-data">数据</span> 转化漏斗理解与应用 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="04_数据分析与目标拆解/03_个人目标设定方法.html"><span class="tag tag-req">必读</span> 个人目标设定与拆解 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="04_数据分析与目标拆解/04_数据驱动跟进策略.html"><span class="tag tag-new">进阶</span> 数据驱动的跟进策略 <span class="arrow">&#8594;</span></a>
+          <a class="article-link" href="04_数据分析与目标拆解/05_周报看板使用指南.html"><span class="tag tag-new">进阶</span> 周报看板使用指南 <span class="arrow">&#8594;</span></a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="section-intro">
+    <h2>如何使用这套文档</h2>
+    <p>这套文档覆盖全部70人销售团队（社群微销 / 纯电销 / 升级电销），按模块组织。建议的学习路径：</p>
+    <ul>
+      <li><strong>新人入职（第1周）</strong>：先读完模块一全部 + 模块二前2篇 + 模块三前2篇</li>
+      <li><strong>日常查阅</strong>：话术库（模块二）和异议处理是最高频使用，建议收藏</li>
+      <li><strong>升级电销专属</strong>：重点看模块一的"升级SOP" + 模块二的"升级说服话术" + 模块三的"高端班卖点"</li>
+      <li><strong>每月复盘</strong>：看模块四的指标解读和目标拆解，对照自己的数据做复盘</li>
+    </ul>
+  </div>
+</div>
+
+<div class="footer">注安销售团队培训文档 · 内部资料 · 请勿外传</div>
+
+</body>
+</html>

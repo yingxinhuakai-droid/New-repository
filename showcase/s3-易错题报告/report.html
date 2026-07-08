@@ -1,0 +1,585 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>中级注安6月易错题分析报告</title>
+  <style>
+    :root {
+      --surface:#FCFCFD; --panel:#FFFFFF; --ink:#1F2430; --muted:#6F768A; --grid:#E6E8F0;
+      --blue:#A3BEFA; --orange:#F0986E; --olive:#A3D576; --gold:#FFE15B; --pink:#F390CA;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--surface); color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Segoe UI", sans-serif; line-height: 1.62; }
+    .page { max-width: 1180px; margin: 0 auto; padding: 44px 28px 72px; }
+    header { border-bottom: 1px solid var(--grid); padding-bottom: 24px; margin-bottom: 28px; }
+    h1 { font-size: 34px; line-height: 1.18; margin: 0 0 12px; letter-spacing: 0; }
+    .subtitle { color: var(--muted); font-size: 15px; margin: 0; }
+    section { margin: 34px 0; }
+    h2 { font-size: 23px; margin: 0 0 12px; line-height: 1.35; }
+    h3 { font-size: 18px; margin: 24px 0 10px; }
+    p { margin: 10px 0; }
+    ul, ol { padding-left: 22px; margin: 10px 0; }
+    li { margin: 6px 0; }
+    .summary-list { display: grid; gap: 10px; margin-top: 8px; }
+    .summary-list p { margin: 0; background: #fff; border: 1px solid var(--grid); border-left: 5px solid var(--orange); padding: 13px 16px; border-radius: 8px; }
+    .metric-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; margin-top: 18px; }
+    .metric-card { background: var(--panel); border: 1px solid var(--grid); border-radius: 8px; padding: 16px; min-height: 118px; }
+    .metric-label { font-size: 13px; color: var(--muted); }
+    .metric-value { margin-top: 8px; font-size: 27px; font-weight: 700; line-height: 1.15; }
+    .metric-note { margin-top: 8px; color: var(--muted); font-size: 13px; }
+    .figure { margin: 18px 0 22px; background: var(--panel); border: 1px solid var(--grid); border-radius: 8px; padding: 12px; }
+    .figure img { width: 100%; display: block; border-radius: 6px; }
+    .caption { color: var(--muted); font-size: 13px; margin: 8px 2px 0; }
+    table { width: 100%; border-collapse: collapse; background: var(--panel); border: 1px solid var(--grid); border-radius: 8px; overflow: hidden; font-size: 14px; }
+    th, td { border-bottom: 1px solid var(--grid); padding: 10px 11px; vertical-align: top; text-align: left; }
+    th { background: #F4F5F7; color: #464C55; font-weight: 700; white-space: nowrap; }
+    tr:last-child td { border-bottom: 0; }
+    .num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .mono { font-family: "SF Mono", Menlo, Consolas, monospace; white-space: nowrap; }
+    .compact { font-size: 13px; }
+    .callout { background: #FFF7E8; border: 1px solid #FFEA8F; border-left: 5px solid var(--gold); padding: 14px 16px; border-radius: 8px; }
+    .tag { display: inline-block; padding: 2px 8px; background: #EAF1FE; color: #2E4780; border-radius: 999px; font-size: 12px; font-weight: 600; }
+    footer { margin-top: 42px; padding-top: 18px; border-top: 1px solid var(--grid); color: var(--muted); font-size: 13px; }
+    @media (max-width: 820px) {
+      .page { padding: 28px 16px 48px; }
+      h1 { font-size: 27px; }
+      .metric-grid { grid-template-columns: 1fr 1fr; }
+      table { display: block; overflow-x: auto; white-space: normal; }
+    }
+    @media (max-width: 520px) {
+      .metric-grid { grid-template-columns: 1fr; }
+    }
+    </style>
+</head>
+<body>
+<main class="page">
+  <header>
+    <h1>中级注安6月易错题分析报告</h1>
+    <p class="subtitle">基于《注安各科目前百错题.xlsx》Result 1 主表，样本为6个 subject_id 各100道高频错题；生成日期：2026-06-26。</p>
+  </header>
+
+  <section data-contract-section="executive-summary">
+    <h2>Executive Summary</h2>
+    <div class="summary-list">
+      <p><strong>错题工作量集中在公共科目。</strong> 安全生产法律法规错题次数合计 214,055，安全生产管理为 106,332，两科占全部错题次数的 68.6%。这说明6月教研补强应先覆盖法规条文、管理原理、事故致因和隐患判定。</p>
+      <p><strong>真正的问题不是“不会背”，而是易混条款和场景辨析不稳。</strong> 高频错题集中在改革发展意见、安全生产法、重大隐患判定、机械/电气防护、重大危险源、建筑人员配置等考点，题目通常通过反向判断、多选和场景条件隐藏关键变量。</p>
+      <p><strong>各专业科目需要按“标准规则 + 场景条件”重做讲评。</strong> 化工、建筑、其他安全的错题量较公共科低，但高错题多指向新规、临界量、人员配置、TN-S、危险有害因素分类等规则性强的考点，适合做短专题和错选项拆解。</p>
+      <p><strong>报告中的科目名称有一处需要确认。</strong> 文件只有 subject_id，没有科目中文名和章节标签；7345、7346、7347、8512、8514按题干可较稳定推断，9105暂按“其他安全”处理，建议后续补充正式映射和章节标签。</p>
+    </div>
+    <div class="metric-grid">
+            <div class="metric-card">
+              <div class="metric-label">题目样本</div>
+              <div class="metric-value">600题</div>
+              <div class="metric-note">6个subject_id，各100道易错题</div>
+            </div>
+            
+
+            <div class="metric-card">
+              <div class="metric-label">错题次数合计</div>
+              <div class="metric-value">467,051</div>
+              <div class="metric-note">用于衡量当前错题工作量</div>
+            </div>
+            
+
+            <div class="metric-card">
+              <div class="metric-label">本科内均错最高</div>
+              <div class="metric-value">安全生产法律法规</div>
+              <div class="metric-note">均值 2140.6/题</div>
+            </div>
+            
+
+            <div class="metric-card">
+              <div class="metric-label">Top10集中度最高</div>
+              <div class="metric-value">建筑施工安全</div>
+              <div class="metric-note">Top10占 23.3%</div>
+            </div>
+            </div>
+  </section>
+
+  <section data-contract-section="key-findings">
+    <h2>公共科目承担了主要错题压力，但跨科比较要谨慎</h2>
+    <p><strong>法规和管理两科的错题次数显著高于专业科目，优先级更像“教研工作量”而不是单纯难度。</strong> 由于表里没有学员基数、题目曝光次数和作答人数，错题次数不能直接等同于错题率；更稳妥的用法是：先按本科内排序找补强点，再用跨科总量安排讲评资源。</p>
+    <div class="figure">
+      <img src="assets/subject_wrong_scale.png" alt="各科错题次数规模">
+      <p class="caption">图1：按科目汇总错题次数，显示当前讲评和教研修订的工作量优先级。</p>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>科目</th><th>subject_id</th><th>题量</th><th>错题次数合计</th><th>均错/题</th><th>最高错题次数</th><th>Top10集中度</th><th>题型风险</th>
+        </tr>
+      </thead>
+      <tbody>
+            <tr>
+              <td>安全生产法律法规</td>
+              <td class="mono">7345</td>
+              <td class="num">100</td>
+              <td class="num">214,055</td>
+              <td class="num">2140.6</td>
+              <td class="num">8,425</td>
+              <td class="num">23.0%</td>
+              <td>47多选 / 6反向</td>
+            </tr>
+            
+            <tr>
+              <td>安全生产管理</td>
+              <td class="mono">7346</td>
+              <td class="num">100</td>
+              <td class="num">106,332</td>
+              <td class="num">1063.3</td>
+              <td class="num">2,183</td>
+              <td class="num">16.1%</td>
+              <td>45多选 / 12反向</td>
+            </tr>
+            
+            <tr>
+              <td>安全生产技术基础</td>
+              <td class="mono">7347</td>
+              <td class="num">100</td>
+              <td class="num">96,302</td>
+              <td class="num">963.0</td>
+              <td class="num">2,119</td>
+              <td class="num">15.1%</td>
+              <td>57多选 / 11反向</td>
+            </tr>
+            
+            <tr>
+              <td>其他安全（待确认）</td>
+              <td class="mono">9105</td>
+              <td class="num">100</td>
+              <td class="num">19,462</td>
+              <td class="num">194.6</td>
+              <td class="num">465</td>
+              <td class="num">19.6%</td>
+              <td>33多选 / 22反向</td>
+            </tr>
+            
+            <tr>
+              <td>建筑施工安全</td>
+              <td class="mono">8514</td>
+              <td class="num">100</td>
+              <td class="num">18,626</td>
+              <td class="num">186.3</td>
+              <td class="num">737</td>
+              <td class="num">23.3%</td>
+              <td>3多选 / 31反向</td>
+            </tr>
+            
+            <tr>
+              <td>化工安全</td>
+              <td class="mono">8512</td>
+              <td class="num">100</td>
+              <td class="num">12,274</td>
+              <td class="num">122.7</td>
+              <td class="num">300</td>
+              <td class="num">18.0%</td>
+              <td>1多选 / 25反向</td>
+            </tr>
+            </tbody>
+    </table>
+    
+  </section>
+
+  <section data-contract-section="key-findings">
+    <h2>多选、反向判断和数值规则题是主要失分形态</h2>
+    <p><strong>题型结构显示，学员在“多个正确项是否完整”“错误项如何识别”“标准数字是否适用”上最容易失分。</strong> 法规和技术基础的多选辨析更突出，管理、化工、建筑则同时受反向判断和规则引用影响。讲评时不宜只给正确答案，应把每个选项对应到“为什么选/为什么不选”。</p>
+    <div class="figure">
+      <img src="assets/qtype_structure.png" alt="易错题型结构">
+      <p class="caption">图2：每科100道题的题型关注点结构。分类基于题干和答案字段的规则识别。</p>
+    </div>
+  </section>
+
+  <section data-contract-section="key-findings">
+    <h2>知识点补强应从每科 Top 3 开始</h2>
+    <p><strong>Top知识点反映的是“当前最值得改课和加练”的地方。</strong> 法规优先拆条文和政策文件，管理优先拆事故致因与重大隐患判定，技术基础优先拆机械/电气/特种设备，化工优先拆重大危险源和试车条件，建筑优先拆人员配置、重大隐患、临电系统，其他安全优先拆事故分类和危险有害因素辨识。</p>
+    <div class="figure">
+      <img src="assets/top_knowledge_by_subject.png" alt="各科Top易错知识点">
+      <p class="caption">图3：每科按知识点错题次数合计排序，展示前5类。</p>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>科目</th><th>优先补强知识点</th><th>题量</th><th>错题次数</th><th>问题判断</th><th>教研改进方向</th>
+        </tr>
+      </thead>
+      <tbody>
+                <tr>
+                  <td>安全生产法律法规</td>
+                  <td>安全生产法与主体责任</td>
+                  <td class="num">54</td>
+                  <td class="num">103,092</td>
+                  <td>条文主体、义务、罚则、事故等级边界交叉，学员容易记住关键词但不稳。</td>
+                  <td>建立“主体-义务-行为-后果”条文卡，配套新旧/易混条款对照和反向判断训练。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产法律法规</td>
+                  <td>综合辨析与易混概念</td>
+                  <td class="num">11</td>
+                  <td class="num">24,428</td>
+                  <td>属于跨章节综合辨析，当前数据无法进一步定位到教材小节，需要补充章节标签。</td>
+                  <td>建立“主体-义务-行为-后果”条文卡，配套新旧/易混条款对照和反向判断训练。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产法律法规</td>
+                  <td>安全生产领域改革发展意见</td>
+                  <td class="num">4</td>
+                  <td class="num">23,622</td>
+                  <td>宏观政策、法理概念和制度清单容易被当作纯记忆点，选项替换后辨析能力不足。</td>
+                  <td>建立“主体-义务-行为-后果”条文卡，配套新旧/易混条款对照和反向判断训练。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产管理</td>
+                  <td>安全管理原理与事故致因理论</td>
+                  <td class="num">21</td>
+                  <td class="num">23,958</td>
+                  <td>事故致因理论和管理原则与案例的对应关系不牢，容易被情境材料干扰。</td>
+                  <td>用案例短材料训练“理论关键词→事故链条→控制措施”的三步判断，减少概念孤立讲解。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产管理</td>
+                  <td>制度、规程与安全投入</td>
+                  <td class="num">16</td>
+                  <td class="num">17,925</td>
+                  <td>属于跨章节综合辨析，当前数据无法进一步定位到教材小节，需要补充章节标签。</td>
+                  <td>补充章节标签后再拆到小节，先按代表题建立易错选项库。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产管理</td>
+                  <td>特种设备、危险源与作业许可</td>
+                  <td class="num">13</td>
+                  <td class="num">15,309</td>
+                  <td>设备场景多、风险源与防护措施一一对应关系弱，多选题漏选错选明显。</td>
+                  <td>增加设备结构图、危险部位标注和防护措施匹配练习，多选题按选项逐项归因讲评。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产技术基础</td>
+                  <td>机械安全防护</td>
+                  <td class="num">31</td>
+                  <td class="num">32,290</td>
+                  <td>设备场景多、风险源与防护措施一一对应关系弱，多选题漏选错选明显。</td>
+                  <td>增加设备结构图、危险部位标注和防护措施匹配练习，多选题按选项逐项归因讲评。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产技术基础</td>
+                  <td>电气安全与防雷防静电</td>
+                  <td class="num">21</td>
+                  <td class="num">21,366</td>
+                  <td>设备场景多、风险源与防护措施一一对应关系弱，多选题漏选错选明显。</td>
+                  <td>增加设备结构图、危险部位标注和防护措施匹配练习，多选题按选项逐项归因讲评。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产技术基础</td>
+                  <td>综合辨析与易混概念</td>
+                  <td class="num">20</td>
+                  <td class="num">19,116</td>
+                  <td>属于跨章节综合辨析，当前数据无法进一步定位到教材小节，需要补充章节标签。</td>
+                  <td>补充章节标签后再拆到小节，先按代表题建立易错选项库。</td>
+                </tr>
+                
+                <tr>
+                  <td>化工安全</td>
+                  <td>危险化学品重大危险源</td>
+                  <td class="num">13</td>
+                  <td class="num">2,100</td>
+                  <td>判定标准、临界量、责任人和排查频次等规则集中，细节差异导致失分。</td>
+                  <td>做判定流程图和阈值表，课堂中加入“为什么不是重大隐患/重大危险源”的反例。</td>
+                </tr>
+                
+                <tr>
+                  <td>化工安全</td>
+                  <td>化工过程安全与试车</td>
+                  <td class="num">17</td>
+                  <td class="num">2,085</td>
+                  <td>新规、标准术语和化工流程节点混在一起，单点记忆难以迁移到案例题。</td>
+                  <td>围绕重点监管工艺、SDS/GHS、试车条件做流程卡，并单独讲清新规关键词。</td>
+                </tr>
+                
+                <tr>
+                  <td>化工安全</td>
+                  <td>综合辨析与易混概念</td>
+                  <td class="num">16</td>
+                  <td class="num">1,716</td>
+                  <td>属于跨章节综合辨析，当前数据无法进一步定位到教材小节，需要补充章节标签。</td>
+                  <td>围绕重点监管工艺、SDS/GHS、试车条件做流程卡，并单独讲清新规关键词。</td>
+                </tr>
+                
+                <tr>
+                  <td>建筑施工安全</td>
+                  <td>脚手架、模板与高处作业</td>
+                  <td class="num">23</td>
+                  <td class="num">4,331</td>
+                  <td>规范数字、人员配置和危险等级判断规则多，题目常用场景条件隐藏关键变量。</td>
+                  <td>把规范数字和适用条件做成场景判断表，专题训练“条件识别→规范条款→答案”。</td>
+                </tr>
+                
+                <tr>
+                  <td>建筑施工安全</td>
+                  <td>项目安全管理人员配置</td>
+                  <td class="num">9</td>
+                  <td class="num">2,758</td>
+                  <td>规范数字、人员配置和危险等级判断规则多，题目常用场景条件隐藏关键变量。</td>
+                  <td>把规范数字和适用条件做成场景判断表，专题训练“条件识别→规范条款→答案”。</td>
+                </tr>
+                
+                <tr>
+                  <td>建筑施工安全</td>
+                  <td>综合辨析与易混概念</td>
+                  <td class="num">17</td>
+                  <td class="num">2,357</td>
+                  <td>属于跨章节综合辨析，当前数据无法进一步定位到教材小节，需要补充章节标签。</td>
+                  <td>把规范数字和适用条件做成场景判断表，专题训练“条件识别→规范条款→答案”。</td>
+                </tr>
+                
+                <tr>
+                  <td>其他安全（待确认）</td>
+                  <td>综合辨析与易混概念</td>
+                  <td class="num">32</td>
+                  <td class="num">5,269</td>
+                  <td>属于跨章节综合辨析，当前数据无法进一步定位到教材小节，需要补充章节标签。</td>
+                  <td>用分类树整合事故类型、危险有害因素和矿山/电气场景，强化案例归类边界。</td>
+                </tr>
+                
+                <tr>
+                  <td>其他安全（待确认）</td>
+                  <td>机械、焊接与设备防护</td>
+                  <td class="num">15</td>
+                  <td class="num">2,881</td>
+                  <td>设备场景多、风险源与防护措施一一对应关系弱，多选题漏选错选明显。</td>
+                  <td>增加设备结构图、危险部位标注和防护措施匹配练习，多选题按选项逐项归因讲评。</td>
+                </tr>
+                
+                <tr>
+                  <td>其他安全（待确认）</td>
+                  <td>危险有害因素与事故类型</td>
+                  <td class="num">10</td>
+                  <td class="num">2,820</td>
+                  <td>分类框架和事故原因层级相近，学员在概念边界和案例归类上不稳定。</td>
+                  <td>用分类树整合事故类型、危险有害因素和矿山/电气场景，强化案例归类边界。</td>
+                </tr>
+                </tbody>
+    </table>
+    
+  </section>
+
+  <section data-contract-section="recommended-next-steps">
+    <h2>教研改进方向：从讲答案转成讲判断路径</h2>
+    <ol>
+      <li><strong>建立6月易错知识点清单。</strong> 每科先锁定Top 3知识点，形成“代表题-错因-易混项-讲评话术-加练题”五列表。</li>
+      <li><strong>公共科目做条文和理论的结构化复盘。</strong> 法规按“主体、义务、责任、罚则”拆卡；管理按“理论关键词、事故链条、控制措施”拆案例。</li>
+      <li><strong>专业科目做场景条件识别训练。</strong> 化工突出重大危险源、SDS/GHS、试车条件；建筑突出人员配置、临时用电、重大隐患判定；技术基础突出设备危险部位和防护措施匹配。</li>
+      <li><strong>每道高错题保留错选项拆解。</strong> 对多选题记录漏选项，对反向判断题记录干扰词，对数值题记录适用条件，避免下一轮只重复刷题。</li>
+      <li><strong>下一版数据增加章节和作答分母。</strong> 加入章节、知识点、正确率、作答人数、班型/阶段后，可以从“错题次数分析”升级为“错因和教学效果追踪”。</li>
+    </ol>
+  </section>
+
+  <section data-contract-section="key-findings">
+    <h2>代表性高错题清单</h2>
+    <p><strong>这些题适合作为每科讲评入口。</strong> 下表每科取错题次数最高的3道题，便于教研先建立样例库和讲评模板。</p>
+    
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>科目</th><th>question_id</th><th>错题次数</th><th>归类知识点</th><th>题型</th><th>代表题干</th>
+        </tr>
+      </thead>
+      <tbody>
+                <tr>
+                  <td>安全生产法律法规</td>
+                  <td class="mono">2778452</td>
+                  <td class="num">8,425</td>
+                  <td>安全生产领域改革发展意见</td>
+                  <td>多选辨析</td>
+                  <td>《中共中央国务院关于推进安全生产领域改革发展的意见》中指出，推进安全生产领域改革发展，建立安全预防控制体系，具体包括（）。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产法律法规</td>
+                  <td class="mono">2907988</td>
+                  <td class="num">6,020</td>
+                  <td>安全生产领域改革发展意见</td>
+                  <td>概念应用</td>
+                  <td>《中共中央国务院关于推进安全生产领域改革发展的意见》提出，安全生产领域改革发展的基本原则是 ( )</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产法律法规</td>
+                  <td class="mono">2778468</td>
+                  <td class="num">5,490</td>
+                  <td>安全生产领域改革发展意见</td>
+                  <td>反向判断</td>
+                  <td>《中共中央国务院关于推进安全生产领域改革发展的意见》以问题为导向，提出了五方面制度性改革举措和工作要求，下列制度中不属于安全改革发展制度的是（）。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产管理</td>
+                  <td class="mono">4043875</td>
+                  <td class="num">2,183</td>
+                  <td>安全管理原理与事故致因理论</td>
+                  <td>多选辨析</td>
+                  <td>在生产系统的设计过程中需要考虑能量隔离措施，以避免因能量意外释放达及人体，导致人身伤害事故。根据能量意外释放理论，下列观点中，符合该理论的有（ ）。（2025真题）</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产管理</td>
+                  <td class="mono">4043111</td>
+                  <td class="num">2,065</td>
+                  <td>隐患排查治理与双重预防</td>
+                  <td>数值/期限/标准值</td>
+                  <td>某省安委会在2022年全国“安全生产月”期间，组织工贸和矿山行业的专家，进行现场督查时，发现某集团公司下属企业存在以下生产安全事故隐患：根据工贸和矿山行业类重大生产事故隐患判定标准，全部隐患属于重大事故隐患的是（ ）。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产管理</td>
+                  <td class="mono">3910783</td>
+                  <td class="num">1,886</td>
+                  <td>安全管理原理与事故致因理论</td>
+                  <td>多选辨析</td>
+                  <td>…</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产技术基础</td>
+                  <td class="mono">4043805</td>
+                  <td class="num">2,119</td>
+                  <td>机械安全防护</td>
+                  <td>多选辨析</td>
+                  <td>旋转机械的运动部位是最容易造成卷入危险的部位，为此，应针对不同类型的机械采取不同的防护措施以减少卷入危险的发生，下列针对机械转动部位的防卷入措施的要求中，正确的有（ ）。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产技术基础</td>
+                  <td class="mono">3873989</td>
+                  <td class="num">1,516</td>
+                  <td>机械安全防护</td>
+                  <td>多选辨析</td>
+                  <td>某机械加工厂对全厂冲床进行技术升级改造，重点针对安全隐患进行治理。增设光电保护装置，提高了安全性能。关于光电保护装置的说法，正确的有（ ）。</td>
+                </tr>
+                
+                <tr>
+                  <td>安全生产技术基础</td>
+                  <td class="mono">4049256</td>
+                  <td class="num">1,439</td>
+                  <td>电气安全与防雷防静电</td>
+                  <td>多选辨析</td>
+                  <td>关于电力变压器运行安全技术要求的说法，正确的有（ ）。</td>
+                </tr>
+                
+                <tr>
+                  <td>化工安全</td>
+                  <td class="mono">3337629</td>
+                  <td class="num">300</td>
+                  <td>化学灼伤与职业健康</td>
+                  <td>概念应用</td>
+                  <td>某化工企业的员工可能接触到环氧树脂、苯、苯酚、硫黄等危险化学品。下列伤害类型中，属于化学灼伤的是（ ）。</td>
+                </tr>
+                
+                <tr>
+                  <td>化工安全</td>
+                  <td class="mono">3966515</td>
+                  <td class="num">279</td>
+                  <td>危险化学品重大危险源</td>
+                  <td>数值/期限/标准值</td>
+                  <td>【新】根据危险化学品重大危险源包保责任制规定，重大危险源的技术负责人应当（ ）组织对重大危险源进行针对性安全风险隐患排查。</td>
+                </tr>
+                
+                <tr>
+                  <td>化工安全</td>
+                  <td class="mono">3966495</td>
+                  <td class="num">251</td>
+                  <td>化工过程安全与试车</td>
+                  <td>反向判断</td>
+                  <td>【新】某化工企业准备进行联动试车，根据《化工安全管理规定》，联动试车应具备的条件不包括（ ）。</td>
+                </tr>
+                
+                <tr>
+                  <td>建筑施工安全</td>
+                  <td class="mono">4045824</td>
+                  <td class="num">737</td>
+                  <td>项目安全管理人员配置</td>
+                  <td>反向判断</td>
+                  <td>项目安全总监应当具备的条件不包括的是（）。</td>
+                </tr>
+                
+                <tr>
+                  <td>建筑施工安全</td>
+                  <td class="mono">4045828</td>
+                  <td class="num">651</td>
+                  <td>项目安全管理人员配置</td>
+                  <td>数值/期限/标准值</td>
+                  <td>某施工总承包企业承建一项市政基础设施工程项目，工程合同价款为6亿元，施工活动涉及建筑起重机械。施工期间在岗履职的专职安全生产管理人员人数至少应为（）。</td>
+                </tr>
+                
+                <tr>
+                  <td>建筑施工安全</td>
+                  <td class="mono">4048834</td>
+                  <td class="num">469</td>
+                  <td>重大事故隐患判定标准</td>
+                  <td>多选辨析</td>
+                  <td>《房屋市政工程重大事故隐患判定标准2024版》是根据（）等法律法规制定。</td>
+                </tr>
+                
+                <tr>
+                  <td>其他安全（待确认）</td>
+                  <td class="mono">4118147</td>
+                  <td class="num">465</td>
+                  <td>建设项目与施工安全管理</td>
+                  <td>多选辨析</td>
+                  <td>根据建设项目施工安全管理要求，施工单位项目负责人应当履行的安全管理职责有（ ）。</td>
+                </tr>
+                
+                <tr>
+                  <td>其他安全（待确认）</td>
+                  <td class="mono">4117813</td>
+                  <td class="num">451</td>
+                  <td>事故分类与原因分析</td>
+                  <td>概念应用</td>
+                  <td>地下水大量涌入矿井采空区造成损失，该事故属于（）。</td>
+                </tr>
+                
+                <tr>
+                  <td>其他安全（待确认）</td>
+                  <td class="mono">4117885</td>
+                  <td class="num">442</td>
+                  <td>建设项目与施工安全管理</td>
+                  <td>多选辨析</td>
+                  <td>下列安全管理措施中，属于 “制度 - 审批” 环节核心要求的有（ ）。</td>
+                </tr>
+                </tbody>
+    </table>
+    
+  </section>
+
+  <section data-contract-section="further-questions">
+    <h2>后续需要补齐的问题</h2>
+    <ul>
+      <li>9105 的正式科目名称需要确认，目前按题干主题暂归为“其他安全”。</li>
+      <li>需要补充章节/知识点标准映射，才能把当前规则归类升级为教材章节级分析。</li>
+      <li>需要作答人数、曝光量和正确率，才能判断“高错题次数”到底来自难度、流量，还是某批学员集中薄弱。</li>
+      <li>如果能拿到学员错选项分布，可以进一步判断是漏选、误选、反向题误读，还是标准数字记忆错误。</li>
+    </ul>
+  </section>
+
+  <section data-contract-section="caveats-assumptions">
+    <h2>口径和假设</h2>
+    <div class="callout">
+      <p>本报告只使用 Excel 中已有字段：subject_id、question_id、题干、选项内容、正确答案、错题次数。知识点归类来自题干关键词规则，不等同于官方章节标签；跨科错题次数受学员规模和题目曝光影响，不建议直接解释为科目难度。</p>
+    </div>
+  </section>
+
+  <footer>
+    数据来源：注安各科目前百错题.xlsx，工作表 Result 1；主表共 600 道题。图表为本地静态 PNG 资源，保存在同级 assets 文件夹。
+  </footer>
+</main>
+</body>
+</html>

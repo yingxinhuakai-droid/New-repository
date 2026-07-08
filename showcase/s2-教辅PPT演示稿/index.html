@@ -1,0 +1,1494 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0d2b52">
+  <link rel="icon" href="data:,">
+  <title>环球网校2026中级注安6套教辅体系</title>
+  <style>
+    :root {
+      --navy: #0d2b52;
+      --navy-2: #163b6a;
+      --blue: #1769df;
+      --cyan: #00a6b8;
+      --green: #18864b;
+      --purple: #7051b8;
+      --orange: #ed8b16;
+      --red: #d8473c;
+      --ink: #12253f;
+      --muted: #687b93;
+      --mist: #eef4fb;
+      --line: #d9e3ef;
+      --white: #ffffff;
+    }
+
+    * { box-sizing: border-box; }
+
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      margin: 0;
+      overflow: hidden;
+      background: #071629;
+      color: var(--ink);
+      font-family: "Microsoft YaHei", "PingFang SC", "Noto Sans CJK SC", Arial, sans-serif;
+    }
+
+    button { font: inherit; }
+
+    #viewport {
+      position: fixed;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      background: #071629;
+      touch-action: pan-y;
+    }
+
+    #stage {
+      position: absolute;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: var(--white);
+      transform-origin: center center;
+      box-shadow: 0 28px 90px rgba(0, 0, 0, 0.38);
+    }
+
+    .slide {
+      position: absolute;
+      inset: 0;
+      display: none;
+      overflow: hidden;
+      background: var(--white);
+      opacity: 0;
+    }
+
+    .slide.active {
+      display: flex;
+      opacity: 1;
+      animation: slide-in 360ms ease-out;
+    }
+
+    @keyframes slide-in {
+      from { opacity: 0; transform: translateX(20px); }
+      to { opacity: 1; transform: translateX(0); }
+    }
+
+    .slide-page {
+      position: absolute;
+      right: 54px;
+      bottom: 35px;
+      z-index: 8;
+      color: #8da0b6;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .eyebrow {
+      margin: 0 0 22px;
+      color: var(--blue);
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    h1,
+    h2,
+    h3,
+    p { margin-top: 0; }
+
+    h1,
+    h2,
+    h3 { letter-spacing: 0; }
+
+    .display-title {
+      margin-bottom: 28px;
+      font-size: 84px;
+      line-height: 1.12;
+      font-weight: 900;
+    }
+
+    .section-title {
+      margin-bottom: 18px;
+      font-size: 66px;
+      line-height: 1.18;
+      font-weight: 900;
+    }
+
+    .lead {
+      color: var(--muted);
+      font-size: 32px;
+      line-height: 1.6;
+    }
+
+    .brand-logo {
+      display: block;
+      width: 220px;
+      height: auto;
+      object-fit: contain;
+    }
+
+    .top-logo {
+      position: absolute;
+      top: 62px;
+      right: 82px;
+      z-index: 10;
+      width: 205px;
+      padding: 12px 18px;
+      background: rgba(255,255,255,0.94);
+    }
+
+    /* Slide 1 */
+    .cover {
+      background: var(--mist);
+    }
+
+    .cover-left {
+      position: relative;
+      width: 57%;
+      height: 100%;
+      padding: 94px 92px 82px 104px;
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .cover-left::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      right: -18px;
+      width: 18px;
+      height: 100%;
+      background: var(--blue);
+    }
+
+    .cover-left > .brand-logo {
+      padding: 12px 18px;
+      background: var(--white);
+    }
+
+    .cover-kicker {
+      margin: 58px 0 22px;
+      color: #95c0ff;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .cover h1 {
+      max-width: 800px;
+      margin: 0 0 30px;
+      font-size: 98px;
+      line-height: 1.1;
+      font-weight: 900;
+    }
+
+    .cover-subtitle {
+      max-width: 780px;
+      margin-bottom: 56px;
+      color: #d8e7fb;
+      font-size: 35px;
+      line-height: 1.55;
+    }
+
+    .cover-rule {
+      width: 560px;
+      height: 2px;
+      margin-bottom: 28px;
+      background: #5d82ac;
+    }
+
+    .cover-meta {
+      color: #b7cbe2;
+      font-size: 26px;
+      line-height: 1.55;
+    }
+
+    .cover-right {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      justify-content: center;
+      padding: 118px 76px 80px 92px;
+    }
+
+    .product-wall {
+      display: grid;
+      width: 700px;
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 20px;
+      align-items: center;
+    }
+
+    .product-wall figure {
+      display: flex;
+      height: 340px;
+      margin: 0;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 2px solid #dce6f2;
+    }
+
+    .product-wall img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* Shared editorial slides */
+    .editorial {
+      padding: 82px 104px 70px;
+      flex-direction: column;
+    }
+
+    .editorial-header {
+      max-width: 1320px;
+    }
+
+    .premise-layout {
+      display: grid;
+      flex: 1;
+      grid-template-columns: 530px 1fr;
+      gap: 120px;
+      align-items: center;
+    }
+
+    .giant-number {
+      display: flex;
+      align-items: baseline;
+      color: var(--blue);
+    }
+
+    .giant-number strong {
+      font-size: 260px;
+      line-height: 0.9;
+      font-weight: 900;
+    }
+
+    .giant-number span {
+      margin-left: 26px;
+      color: var(--ink);
+      font-size: 52px;
+      font-weight: 900;
+    }
+
+    .premise-list {
+      display: grid;
+      gap: 40px;
+    }
+
+    .premise-item {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 24px;
+      padding-bottom: 30px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .premise-item:last-child { border-bottom: 0; }
+
+    .premise-item b {
+      color: var(--blue);
+      font-size: 28px;
+    }
+
+    .premise-item h3 {
+      margin-bottom: 10px;
+      font-size: 38px;
+      font-weight: 900;
+    }
+
+    .premise-item p {
+      margin-bottom: 0;
+      color: var(--muted);
+      font-size: 27px;
+      line-height: 1.55;
+    }
+
+    /* Slide 3 */
+    .action-track {
+      position: relative;
+      display: grid;
+      flex: 1;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      align-items: center;
+      margin-top: 25px;
+    }
+
+    .action-track::before {
+      content: "";
+      position: absolute;
+      left: 88px;
+      right: 88px;
+      top: 45%;
+      height: 3px;
+      background: #cfdbea;
+    }
+
+    .action {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+    }
+
+    .action-num {
+      display: grid;
+      width: 112px;
+      height: 112px;
+      margin: 0 auto 34px;
+      place-items: center;
+      border: 12px solid var(--white);
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--accent);
+      box-shadow: 0 0 0 2px #d9e3ef;
+      font-size: 27px;
+      font-weight: 900;
+    }
+
+    .action h3 {
+      margin-bottom: 9px;
+      font-size: 31px;
+      font-weight: 900;
+    }
+
+    .action b {
+      display: block;
+      margin-bottom: 11px;
+      color: var(--accent);
+      font-size: 26px;
+    }
+
+    .action p {
+      margin: 0 auto;
+      max-width: 210px;
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.45;
+    }
+
+    .training-line {
+      margin: 0;
+      padding: 23px 30px;
+      color: var(--navy);
+      background: var(--mist);
+      font-size: 28px;
+      font-weight: 800;
+      text-align: center;
+    }
+
+    /* Slide 4 */
+    .route-list {
+      display: grid;
+      flex: 1;
+      gap: 20px;
+      align-content: center;
+      margin-top: 22px;
+    }
+
+    .route-row {
+      display: grid;
+      min-height: 145px;
+      grid-template-columns: 100px 260px 220px 1fr;
+      align-items: center;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .route-row:last-child { border-bottom: 0; }
+
+    .route-row .route-no {
+      color: var(--accent);
+      font-size: 31px;
+      font-weight: 900;
+    }
+
+    .route-row h3 {
+      margin: 0;
+      font-size: 38px;
+      font-weight: 900;
+    }
+
+    .route-row .time {
+      color: var(--muted);
+      font-size: 26px;
+    }
+
+    .route-band {
+      width: var(--band-width);
+      max-width: 100%;
+      padding: 18px 32px;
+      border-radius: 6px;
+      color: var(--white);
+      background: var(--accent);
+      font-size: 27px;
+      font-weight: 800;
+    }
+
+    /* Product slides */
+    .product-slide {
+      --accent: var(--blue);
+      display: none;
+      padding: 0;
+      background: var(--white);
+    }
+
+    .product-slide.active { display: grid; }
+
+    .product-slide .product-copy {
+      position: relative;
+      padding: 74px 70px 62px 98px;
+      border-right: 5px solid var(--accent);
+      background: var(--white);
+    }
+
+    .product-slide.reverse .product-copy {
+      grid-column: 2;
+      grid-row: 1;
+      padding: 74px 98px 62px 70px;
+      border-right: 0;
+      border-left: 5px solid var(--accent);
+    }
+
+    .product-slide .product-visual {
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 70px 80px;
+      background: var(--mist);
+    }
+
+    .product-slide.reverse .product-visual {
+      grid-column: 1;
+      grid-row: 1;
+    }
+
+    .product-slide {
+      grid-template-columns: 51% 49%;
+    }
+
+    .product-visual::before {
+      content: "";
+      position: absolute;
+      width: 650px;
+      height: 650px;
+      border: 2px solid #dbe6f3;
+      border-radius: 50%;
+    }
+
+    .product-image {
+      position: relative;
+      z-index: 2;
+      width: 760px;
+      height: 790px;
+      object-fit: contain;
+      filter: drop-shadow(0 30px 30px rgba(25, 48, 80, 0.18));
+    }
+
+    .product-slide[data-book="koudaishu"] .product-image {
+      width: 810px;
+      height: 940px;
+      transform: translateY(28px) scale(1.08);
+    }
+
+    .product-slide[data-book="juezhan60"] .product-image {
+      width: 650px;
+      height: 760px;
+    }
+
+    .book-no {
+      margin-bottom: 16px;
+      color: var(--accent);
+      font-size: 25px;
+      font-weight: 900;
+    }
+
+    .book-title {
+      margin-bottom: 10px;
+      font-size: 76px;
+      line-height: 1.1;
+      font-weight: 900;
+    }
+
+    .book-position {
+      margin-bottom: 27px;
+      color: var(--accent);
+      font-size: 30px;
+      font-weight: 800;
+    }
+
+    .book-promise {
+      margin-bottom: 33px;
+      font-size: 46px;
+      line-height: 1.3;
+      font-weight: 900;
+    }
+
+    .book-facts {
+      display: grid;
+      gap: 19px;
+    }
+
+    .book-fact {
+      padding-left: 24px;
+      border-left: 6px solid var(--accent);
+    }
+
+    .book-fact b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--accent);
+      font-size: 23px;
+    }
+
+    .book-fact span {
+      color: var(--ink);
+      font-size: 27px;
+      line-height: 1.45;
+      font-weight: 700;
+    }
+
+    .book-footer {
+      position: absolute;
+      left: 98px;
+      right: 70px;
+      bottom: 52px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      padding-top: 20px;
+      border-top: 2px solid var(--line);
+    }
+
+    .reverse .book-footer {
+      left: 70px;
+      right: 98px;
+    }
+
+    .book-stage {
+      color: var(--muted);
+      font-size: 22px;
+      line-height: 1.45;
+    }
+
+    .book-stage strong {
+      display: block;
+      color: var(--accent);
+      font-size: 28px;
+    }
+
+    .book-price {
+      color: var(--orange);
+      font-size: 30px;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .book-price small {
+      display: block;
+      margin-bottom: 3px;
+      color: var(--muted);
+      font-size: 20px;
+      font-weight: 700;
+    }
+
+    /* Slide 11 */
+    .linkage {
+      padding: 82px 96px 68px;
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .linkage .eyebrow { color: #83b7ff; }
+    .linkage .section-title { max-width: 900px; }
+
+    .linkage-layout {
+      display: grid;
+      flex: 1;
+      grid-template-columns: 610px 1fr;
+      gap: 75px;
+      align-items: center;
+    }
+
+    .linkage-copy p {
+      margin-bottom: 34px;
+      color: #c7d9ee;
+      font-size: 28px;
+      line-height: 1.65;
+    }
+
+    .linkage-copy b {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--white);
+      font-size: 34px;
+    }
+
+    .system-loop {
+      position: relative;
+      width: 760px;
+      height: 760px;
+      margin: auto;
+    }
+
+    .loop-ring {
+      position: absolute;
+      inset: 92px;
+      border: 3px solid #5f7ea3;
+      border-radius: 50%;
+    }
+
+    .loop-center {
+      position: absolute;
+      inset: 260px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      color: var(--navy);
+      background: var(--white);
+      font-size: 38px;
+      line-height: 1.3;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .loop-node {
+      position: absolute;
+      display: grid;
+      width: 138px;
+      height: 138px;
+      place-items: center;
+      border: 10px solid var(--navy);
+      border-radius: 50%;
+      color: var(--white);
+      background: var(--accent);
+      font-size: 27px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    .loop-node:nth-child(2) { left: 311px; top: 6px; }
+    .loop-node:nth-child(3) { right: 42px; top: 178px; }
+    .loop-node:nth-child(4) { right: 76px; bottom: 90px; }
+    .loop-node:nth-child(5) { left: 311px; bottom: 4px; }
+    .loop-node:nth-child(6) { left: 48px; bottom: 90px; }
+    .loop-node:nth-child(7) { left: 14px; top: 178px; }
+
+    /* Slide 12 */
+    .price-board {
+      display: grid;
+      flex: 1;
+      grid-template-columns: 1fr 1fr;
+      column-gap: 100px;
+      align-content: center;
+      margin-top: 18px;
+    }
+
+    .price-item {
+      display: grid;
+      min-height: 150px;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 24px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .price-item h3 {
+      margin: 0 0 8px;
+      font-size: 35px;
+      font-weight: 900;
+    }
+
+    .price-item p {
+      margin: 0;
+      color: var(--muted);
+      font-size: 24px;
+    }
+
+    .price-item strong {
+      max-width: 440px;
+      color: var(--accent);
+      font-size: 31px;
+      line-height: 1.35;
+      font-weight: 900;
+      text-align: right;
+    }
+
+    .price-note {
+      margin: 18px 0 0;
+      color: var(--red);
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    /* Slide 13 */
+    .combo-list {
+      display: grid;
+      flex: 1;
+      align-content: center;
+      margin-top: 15px;
+    }
+
+    .combo-row {
+      display: grid;
+      min-height: 158px;
+      grid-template-columns: 110px 390px 1fr 390px;
+      gap: 25px;
+      align-items: center;
+      border-bottom: 2px solid var(--line);
+    }
+
+    .combo-row:last-child { border-bottom: 0; }
+
+    .combo-no {
+      color: var(--accent);
+      font-size: 31px;
+      font-weight: 900;
+    }
+
+    .combo-person {
+      font-size: 34px;
+      font-weight: 900;
+    }
+
+    .combo-books {
+      color: var(--accent);
+      font-size: 30px;
+      line-height: 1.45;
+      font-weight: 900;
+    }
+
+    .combo-reason {
+      color: var(--muted);
+      font-size: 24px;
+      line-height: 1.55;
+    }
+
+    /* Slide 14 */
+    .closing {
+      flex-direction: column;
+      padding: 82px 94px 0;
+      color: var(--white);
+      background: var(--navy);
+    }
+
+    .closing .brand-logo {
+      position: absolute;
+      top: 64px;
+      right: 82px;
+      width: 205px;
+      padding: 12px 17px;
+      background: var(--white);
+    }
+
+    .closing h2 {
+      max-width: 1250px;
+      margin: 90px 0 20px;
+      font-size: 86px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .closing-lead {
+      max-width: 1250px;
+      color: #c5d8ef;
+      font-size: 33px;
+      line-height: 1.55;
+    }
+
+    .closing-products {
+      display: grid;
+      flex: 1;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 25px;
+      align-items: center;
+      margin: 5px 0 0;
+    }
+
+    .closing-products figure {
+      height: 370px;
+      margin: 0;
+      text-align: center;
+    }
+
+    .closing-products img {
+      width: 100%;
+      height: 300px;
+      object-fit: contain;
+      filter: drop-shadow(0 20px 18px rgba(0,0,0,0.24));
+    }
+
+    .closing-products figcaption {
+      margin-top: 12px;
+      color: #d8e6f6;
+      font-size: 24px;
+      font-weight: 800;
+    }
+
+    .closing-footer {
+      margin: 0 -94px;
+      padding: 34px 94px;
+      color: var(--navy);
+      background: var(--white);
+      font-size: 32px;
+      font-weight: 900;
+      text-align: center;
+    }
+
+    /* Controls */
+    .chrome {
+      position: fixed;
+      z-index: 1000;
+      transition: opacity 180ms ease;
+    }
+
+    body.idle .chrome { opacity: 0; pointer-events: none; }
+
+    .controls {
+      right: max(18px, env(safe-area-inset-right));
+      bottom: max(18px, env(safe-area-inset-bottom));
+      display: flex;
+      gap: 9px;
+      padding: 9px;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 8px;
+      background: rgba(6, 20, 39, 0.78);
+      backdrop-filter: blur(10px);
+    }
+
+    .control-btn {
+      display: grid;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      place-items: center;
+      border: 0;
+      border-radius: 5px;
+      color: var(--white);
+      background: transparent;
+      cursor: pointer;
+      font-size: 25px;
+      font-weight: 800;
+    }
+
+    .control-btn:hover,
+    .control-btn:focus-visible {
+      outline: none;
+      background: rgba(255,255,255,0.16);
+    }
+
+    .progress-shell {
+      left: 0;
+      right: 0;
+      bottom: 0;
+      height: 4px;
+      background: rgba(255,255,255,0.12);
+    }
+
+    #progressBar {
+      width: 0;
+      height: 100%;
+      background: var(--blue);
+      transition: width 220ms ease;
+    }
+
+    #overview {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      display: none;
+      overflow: auto;
+      padding: 54px 60px 80px;
+      background: rgba(5, 17, 33, 0.97);
+    }
+
+    #overview.open { display: block; }
+
+    .overview-head {
+      display: flex;
+      max-width: 1500px;
+      margin: 0 auto 28px;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--white);
+    }
+
+    .overview-head h2 {
+      margin: 0;
+      font-size: 34px;
+    }
+
+    #overviewGrid {
+      display: grid;
+      max-width: 1500px;
+      margin: 0 auto;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 28px;
+    }
+
+    .thumb-button {
+      padding: 0;
+      overflow: hidden;
+      border: 2px solid transparent;
+      border-radius: 7px;
+      background: #10233e;
+      cursor: pointer;
+      text-align: left;
+    }
+
+    .thumb-button:hover,
+    .thumb-button:focus-visible {
+      outline: none;
+      border-color: #6aa5ff;
+    }
+
+    .thumb-canvas {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      background: var(--white);
+    }
+
+    .thumb-canvas .slide {
+      display: flex !important;
+      width: 1920px;
+      height: 1080px;
+      opacity: 1 !important;
+      transform-origin: top left;
+      animation: none !important;
+      pointer-events: none;
+    }
+
+    .thumb-canvas .product-slide {
+      display: grid !important;
+    }
+
+    .thumb-label {
+      display: flex;
+      min-height: 52px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      color: #dce8f6;
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    .portrait-note {
+      display: none;
+      left: 50%;
+      bottom: 82px;
+      transform: translateX(-50%);
+      padding: 10px 15px;
+      border-radius: 5px;
+      color: #dce8f6;
+      background: rgba(7,22,41,0.78);
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    @media (orientation: portrait) and (max-width: 800px) {
+      .portrait-note { display: block; }
+      .controls { right: 10px; bottom: 12px; }
+      .control-btn { width: 38px; height: 38px; font-size: 21px; }
+      #overview { padding: 24px 16px 60px; }
+      #overviewGrid { grid-template-columns: 1fr; gap: 18px; }
+      .overview-head { margin-bottom: 18px; }
+      .overview-head h2 { font-size: 24px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .slide.active { animation: none; }
+      #progressBar { transition: none; }
+    }
+
+    @page { size: 13.333in 7.5in; margin: 0; }
+
+    @media print {
+      html,
+      body {
+        width: auto;
+        height: auto;
+        overflow: visible;
+        background: var(--white);
+      }
+
+      #viewport {
+        position: static;
+        display: block;
+        overflow: visible;
+        background: var(--white);
+      }
+
+      #stage {
+        position: static;
+        width: 1920px;
+        height: auto;
+        overflow: visible;
+        transform: none !important;
+        box-shadow: none;
+      }
+
+      .slide,
+      .slide.active,
+      .product-slide,
+      .product-slide.active {
+        position: relative;
+        display: flex !important;
+        width: 1920px;
+        height: 1080px;
+        opacity: 1 !important;
+        page-break-after: always;
+        break-after: page;
+        animation: none !important;
+      }
+
+      .product-slide,
+      .product-slide.active { display: grid !important; }
+      .chrome,
+      #overview { display: none !important; }
+    }
+  </style>
+</head>
+<body>
+  <main id="viewport" aria-label="环球网校2026中级注安6套教辅HTML演示稿">
+    <div id="stage">
+      <section class="slide cover active" data-title="封面">
+        <div class="cover-left">
+          <img class="brand-logo" src="assets/hqwx-logo.png" alt="环球网校">
+          <p class="cover-kicker">环球网校 2026 中级注册安全工程师</p>
+          <h1>6套教辅<br>体系介绍</h1>
+          <p class="cover-subtitle">基础搭建 / 同步刷题 / 真题强化 / 碎片记忆 / 浓缩冲刺 / 全真模考</p>
+          <div class="cover-rule"></div>
+          <p class="cover-meta">内部培训版<br>产品逻辑、适配人群、价格口径与推荐组合</p>
+        </div>
+        <div class="cover-right">
+          <div class="product-wall" aria-label="六套教辅产品图">
+            <figure><img src="assets/jiaocai.png" alt="专用教材"></figure>
+            <figure><img src="assets/xitiji.png" alt="章节习题集"></figure>
+            <figure><img src="assets/zhenti.jpg" alt="十年真题精解"></figure>
+            <figure><img src="assets/koudaishu.png" alt="口袋书"></figure>
+            <figure><img src="assets/juezhan60.png" alt="决战60+"></figure>
+            <figure><img src="assets/monijuan.png" alt="模拟卷"></figure>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide editorial" data-title="为什么需要完整体系">
+        <img class="top-logo" src="assets/hqwx-logo.png" alt="环球网校">
+        <header class="editorial-header">
+          <p class="eyebrow">核心判断</p>
+          <h2 class="section-title">不是资料越多越好，而是路径越清楚</h2>
+          <p class="lead">内部培训先讲清楚“备考动作”，再讲单本卖点。</p>
+        </header>
+        <div class="premise-layout">
+          <div class="giant-number"><strong>6</strong><span>本书</span></div>
+          <div class="premise-list">
+            <article class="premise-item">
+              <b>01</b>
+              <div><h3>学习动作清晰</h3><p>输入、练习、校准、记忆、冲刺、测评，每本书对应一个动作。</p></div>
+            </article>
+            <article class="premise-item">
+              <b>02</b>
+              <div><h3>产品解释更有力</h3><p>学员购买的不是六本孤立资料，而是一条完整且可执行的备考路线。</p></div>
+            </article>
+            <article class="premise-item">
+              <b>03</b>
+              <div><h3>推荐组合更准确</h3><p>根据基础、剩余时间、目标分数和记忆习惯，匹配不同组合。</p></div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide editorial" data-title="6本书解决什么问题">
+        <img class="top-logo" src="assets/hqwx-logo.png" alt="环球网校">
+        <header class="editorial-header">
+          <p class="eyebrow">体系总览</p>
+          <h2 class="section-title">6本书 = 6个学习动作</h2>
+          <p class="lead">每本书只解决一个关键问题，组合起来形成闭环。</p>
+        </header>
+        <div class="action-track">
+          <article class="action" style="--accent:#18864b"><div class="action-num">01</div><h3>系统输入</h3><b>专用教材</b><p>搭建完整知识体系</p></article>
+          <article class="action" style="--accent:#00a6b8"><div class="action-num">02</div><h3>第一轮输出</h3><b>章节习题集</b><p>同步检验理解程度</p></article>
+          <article class="action" style="--accent:#1769df"><div class="action-num">03</div><h3>命题校准</h3><b>十年真题精解</b><p>摸清规律与得分重心</p></article>
+          <article class="action" style="--accent:#7051b8"><div class="action-num">04</div><h3>滚动复盘</h3><b>口袋书</b><p>碎片时间反复记忆</p></article>
+          <article class="action" style="--accent:#ed8b16"><div class="action-num">05</div><h3>稳线提分</h3><b>决战60+</b><p>锁定高频过线考点</p></article>
+          <article class="action" style="--accent:#5e7179"><div class="action-num">06</div><h3>考前验收</h3><b>模拟卷</b><p>测分数、速度与心态</p></article>
+        </div>
+        <p class="training-line">培训口径：先让学员看懂“我现在处于哪个阶段”，再推荐对应图书。</p>
+      </section>
+
+      <section class="slide editorial" data-title="四阶段备考路径">
+        <img class="top-logo" src="assets/hqwx-logo.png" alt="环球网校">
+        <header class="editorial-header">
+          <p class="eyebrow">使用路径</p>
+          <h2 class="section-title">从基础到临考，按阶段推进</h2>
+          <p class="lead">这四段不是固定日期，而是学习顺序。</p>
+        </header>
+        <div class="route-list">
+          <article class="route-row" style="--accent:#18864b;--band-width:78%"><span class="route-no">01</span><h3>基础期</h3><span class="time">前期 3–5个月</span><div class="route-band">专用教材 + 章节习题集 + 口袋书</div></article>
+          <article class="route-row" style="--accent:#1769df;--band-width:92%"><span class="route-no">02</span><h3>强化期</h3><span class="time">中期 2–3个月</span><div class="route-band">十年真题精解 + 口袋书，错题回流教材</div></article>
+          <article class="route-row" style="--accent:#ed8b16;--band-width:70%"><span class="route-no">03</span><h3>冲刺期</h3><span class="time">考前 1–2个月</span><div class="route-band">决战60+ + 口袋书</div></article>
+          <article class="route-row" style="--accent:#d8473c;--band-width:58%"><span class="route-no">04</span><h3>临考期</h3><span class="time">考前 2–4周</span><div class="route-band">模拟卷 + 错题回流</div></article>
+        </div>
+      </section>
+
+      <section class="slide product-slide" data-title="专用教材" data-book="jiaocai" style="--accent:#18864b">
+        <div class="product-copy">
+          <p class="book-no">图书 01</p>
+          <h2 class="book-title">专用教材</h2>
+          <p class="book-position">基础搭建 · 知识库底座</p>
+          <p class="book-promise">把基础讲明白</p>
+          <div class="book-facts">
+            <div class="book-fact"><b>适合人群</b><span>零基础 / 长线备考 / 二战低分 / 纯自学</span></div>
+            <div class="book-fact"><b>三项核心作用</b><span>拆解新考纲 · 删除废止内容 · 学练同步例题</span></div>
+            <div class="book-fact"><b>体系位置</b><span>所有习题、真题和冲刺资料的标准答案参照</span></div>
+            <div class="book-fact"><b>前后联动</b><span>学完一章接章节习题；薄本看不懂时回教材查完整释义</span></div>
+          </div>
+          <div class="book-footer"><div class="book-stage"><strong>推荐阶段：基础期</strong>每天可投入1.5小时以上</div><div class="book-price"><small>内部价格口径</small>待确认</div></div>
+        </div>
+        <div class="product-visual"><img class="product-image" src="assets/jiaocai.png" alt="专用教材产品图"></div>
+      </section>
+
+      <section class="slide product-slide reverse" data-title="章节习题集" data-book="xitiji" style="--accent:#00a6b8">
+        <div class="product-copy">
+          <p class="book-no">图书 02</p>
+          <h2 class="book-title">章节习题集</h2>
+          <p class="book-position">同步刷题 · 第一轮输出</p>
+          <p class="book-promise">把知识练扎实</p>
+          <div class="book-facts">
+            <div class="book-fact"><b>适合人群</b><span>看懂不会做 / 需要定量任务 / 实务案例不会踩分</span></div>
+            <div class="book-fact"><b>三项核心作用</b><span>章节同步 · 分层题型 · 解析溯源教材页码</span></div>
+            <div class="book-fact"><b>体系位置</b><span>专用教材后的第一轮输出，及时检查理解漏洞</span></div>
+            <div class="book-fact"><b>前后联动</b><span>错题回流教材；章节题练熟后再进入整套真题</span></div>
+          </div>
+          <div class="book-footer"><div class="book-stage"><strong>推荐阶段：基础期</strong>与专用教材同步推进</div><div class="book-price"><small>内部价格口径</small>单科 ¥56 / 全科 ¥188</div></div>
+        </div>
+        <div class="product-visual"><img class="product-image" src="assets/xitiji.png" alt="章节习题集产品图"></div>
+      </section>
+
+      <section class="slide product-slide" data-title="十年真题精解" data-book="zhenti" style="--accent:#1769df">
+        <div class="product-copy">
+          <p class="book-no">图书 03</p>
+          <h2 class="book-title">十年真题精解</h2>
+          <p class="book-position">强化进阶 · 命题校准工具</p>
+          <p class="book-promise">把命题规律看清楚</p>
+          <div class="book-facts">
+            <div class="book-fact"><b>适合人群</b><span>完成基础一轮 / 抓不住分值重心 / 二战查薄弱</span></div>
+            <div class="book-fact"><b>三项核心作用</b><span>十年考情统计 · 四层逐题解析 · 举一反三扩练</span></div>
+            <div class="book-fact"><b>体系位置</b><span>把零散知识点放回真实卷面，识别高频和冷门</span></div>
+            <div class="book-fact"><b>前后联动</b><span>高频点进入口袋书和决战60+；薄弱章节回教材二刷</span></div>
+          </div>
+          <div class="book-footer"><div class="book-stage"><strong>推荐阶段：强化期</strong>教材与章节题完成后使用</div><div class="book-price"><small>内部价格口径</small>¥49</div></div>
+        </div>
+        <div class="product-visual"><img class="product-image" src="assets/zhenti.jpg" alt="十年真题精解产品图"></div>
+      </section>
+
+      <section class="slide product-slide reverse" data-title="口袋书" data-book="koudaishu" style="--accent:#7051b8">
+        <div class="product-copy">
+          <p class="book-no">图书 04</p>
+          <h2 class="book-title">口袋书</h2>
+          <p class="book-position">全周期 · 碎片速记手册</p>
+          <p class="book-promise">把高频点反复记住</p>
+          <div class="book-facts">
+            <div class="book-fact"><b>适合人群</b><span>通勤倒班 / 记忆偏弱 / 时间碎片化 / 每日复盘</span></div>
+            <div class="book-fact"><b>三项核心作用</b><span>考点提纯 · 表格口诀对比 · 微型小题自测</span></div>
+            <div class="book-fact"><b>体系位置</b><span>贯穿全程的滚动复盘工具，不替代完整理解</span></div>
+            <div class="book-fact"><b>前后联动</b><span>术语不懂回教材；真题与模拟错点加入每日背诵清单</span></div>
+          </div>
+          <div class="book-footer"><div class="book-stage"><strong>推荐阶段：全周期</strong>每天15–30分钟滚动记忆</div><div class="book-price"><small>内部价格口径</small>公共单科 ¥9.9 / 实务全科 ¥39.9</div></div>
+        </div>
+        <div class="product-visual"><img class="product-image" src="assets/koudaishu.png" alt="口袋书产品图"></div>
+      </section>
+
+      <section class="slide product-slide" data-title="决战60+" data-book="juezhan60" style="--accent:#ed8b16">
+        <div class="product-copy">
+          <p class="book-no">图书 05</p>
+          <h2 class="book-title">决战60+</h2>
+          <p class="book-position">浓缩冲刺 · 过线主讲义</p>
+          <p class="book-promise">把得分大头稳住</p>
+          <div class="book-facts">
+            <div class="book-fact"><b>适合人群</b><span>只剩1–2个月 / 基础薄弱 / 二战差几分 / 只求稳过</span></div>
+            <div class="book-fact"><b>三项核心作用</b><span>分值定向压缩 · 考点例题闭环 · 案例采分模板</span></div>
+            <div class="book-fact"><b>体系位置</b><span>冲刺阶段主力蓝本，替代厚教材做系统梳理</span></div>
+            <div class="book-fact"><b>前后联动</b><span>整合教材与真题精华；模拟卷后对照本书集中补漏</span></div>
+          </div>
+          <div class="book-footer"><div class="book-stage"><strong>推荐阶段：冲刺期</strong>整块2–3小时系统复习</div><div class="book-price"><small>内部价格口径</small>单科 ¥12.9 / 实务全科 ¥39.9</div></div>
+        </div>
+        <div class="product-visual"><img class="product-image" src="assets/juezhan60.png" alt="决战60+产品图"></div>
+      </section>
+
+      <section class="slide product-slide reverse" data-title="模拟卷" data-book="monijuan" style="--accent:#5e7179">
+        <div class="product-copy">
+          <p class="book-no">图书 06</p>
+          <h2 class="book-title">模拟卷</h2>
+          <p class="book-position">考前测评 · 全真验收</p>
+          <p class="book-promise">把过线能力测出来</p>
+          <div class="book-facts">
+            <div class="book-fact"><b>适合人群</b><span>考前2–4周 / 做题慢 / 分数不稳 / 容易紧张</span></div>
+            <div class="book-fact"><b>三项核心作用</b><span>限时闭卷训练 · 真题难度对标 · 阅卷式解析</span></div>
+            <div class="book-fact"><b>体系位置</b><span>完整备考路径的终点测评，检验真实应试状态</span></div>
+            <div class="book-fact"><b>前后联动</b><span>失分章节回决战60+和教材；错点加入口袋书复盘</span></div>
+          </div>
+          <div class="book-footer"><div class="book-stage"><strong>推荐阶段：临考期</strong>每套卷严格计时完成</div><div class="book-price"><small>内部价格口径</small>待确认</div></div>
+        </div>
+        <div class="product-visual"><img class="product-image" src="assets/monijuan.png" alt="模拟卷产品图"></div>
+      </section>
+
+      <section class="slide linkage" data-title="六本书联动关系">
+        <img class="top-logo" src="assets/hqwx-logo.png" alt="环球网校">
+        <div class="linkage-layout">
+          <div class="linkage-copy">
+            <p class="eyebrow">联动关系</p>
+            <h2 class="section-title">不是六本并列，而是一条回流路径</h2>
+            <p><b>教材是源头</b>习题、真题与薄本都以教材知识体系为参照。</p>
+            <p><b>真题定方向</b>反复出现的考点进入口袋书和决战60+。</p>
+            <p><b>模拟做验收</b>失分点重新回到冲刺讲义和教材完成最后补漏。</p>
+          </div>
+          <div class="system-loop" aria-label="六本书学习回流关系图">
+            <div class="loop-ring"></div>
+            <div class="loop-node" style="--accent:#18864b">教材</div>
+            <div class="loop-node" style="--accent:#00a6b8">习题</div>
+            <div class="loop-node" style="--accent:#1769df">真题</div>
+            <div class="loop-node" style="--accent:#7051b8">口袋书</div>
+            <div class="loop-node" style="--accent:#ed8b16">60+</div>
+            <div class="loop-node" style="--accent:#5e7179">模拟</div>
+            <div class="loop-center">学<br><span style="font-size:22px">练 / 测 / 回</span></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="slide editorial" data-title="产品价格总览">
+        <img class="top-logo" src="assets/hqwx-logo.png" alt="环球网校">
+        <header class="editorial-header">
+          <p class="eyebrow">价格参考</p>
+          <h2 class="section-title">内部培训价格看板</h2>
+          <p class="lead">用于培训认知与组合推荐。</p>
+        </header>
+        <div class="price-board">
+          <article class="price-item" style="--accent:#18864b"><div><h3>专用教材</h3><p>体系底座 / 系统学习</p></div><strong>待确认</strong></article>
+          <article class="price-item" style="--accent:#00a6b8"><div><h3>章节习题集</h3><p>章节同步 / 第一轮输出</p></div><strong>单科 ¥56 / 全科 ¥188</strong></article>
+          <article class="price-item" style="--accent:#1769df"><div><h3>十年真题精解</h3><p>命题校准 / 强化训练</p></div><strong>¥49</strong></article>
+          <article class="price-item" style="--accent:#7051b8"><div><h3>口袋书</h3><p>碎片记忆 / 全周期复盘</p></div><strong>公共单科 ¥9.9 / 实务全科 ¥39.9</strong></article>
+          <article class="price-item" style="--accent:#ed8b16"><div><h3>决战60+</h3><p>高频浓缩 / 冲刺过线</p></div><strong>单科 ¥12.9 / 实务全科 ¥39.9</strong></article>
+          <article class="price-item" style="--accent:#5e7179"><div><h3>模拟卷</h3><p>全真测评 / 临考验收</p></div><strong>待确认</strong></article>
+        </div>
+        <p class="price-note">提示：专用教材、模拟卷已保留“待确认”；正式销售前以产品后台和活动规则为准。</p>
+      </section>
+
+      <section class="slide editorial" data-title="不同学员选书组合">
+        <img class="top-logo" src="assets/hqwx-logo.png" alt="环球网校">
+        <header class="editorial-header">
+          <p class="eyebrow">推荐组合</p>
+          <h2 class="section-title">按人群选书，比逐本介绍更有效</h2>
+          <p class="lead">培训时先判断学习状态，再给组合。</p>
+        </header>
+        <div class="combo-list">
+          <article class="combo-row" style="--accent:#18864b"><span class="combo-no">01</span><div class="combo-person">零基础且时间充足</div><div class="combo-books">6本全套</div><div class="combo-reason">从教材打底到模拟验收，完整走完学习闭环。</div></article>
+          <article class="combo-row" style="--accent:#1769df"><span class="combo-no">02</span><div class="combo-person">二战只差几分</div><div class="combo-books">真题 + 决战60+ + 模拟卷 + 口袋书</div><div class="combo-reason">聚焦规律、高频点、测评和反复记忆。</div></article>
+          <article class="combo-row" style="--accent:#ed8b16"><span class="combo-no">03</span><div class="combo-person">只剩1个月</div><div class="combo-books">决战60+ + 真题 + 模拟卷</div><div class="combo-reason">用最短路径完成抓分、校准和考前验收。</div></article>
+          <article class="combo-row" style="--accent:#7051b8"><span class="combo-no">04</span><div class="combo-person">只缺背诵</div><div class="combo-books">口袋书 + 决战60+ + 真题</div><div class="combo-reason">碎片记忆与系统冲刺结合，用真题检验记忆。</div></article>
+        </div>
+      </section>
+
+      <section class="slide closing" data-title="总结">
+        <img class="brand-logo" src="assets/hqwx-logo.png" alt="环球网校">
+        <h2>按阶段选书，少走弯路</h2>
+        <p class="closing-lead">2026中级注安备考，重点不是资料堆满，而是每个阶段用对资料。</p>
+        <div class="closing-products">
+          <figure><img src="assets/jiaocai.png" alt="专用教材"><figcaption>教材</figcaption></figure>
+          <figure><img src="assets/xitiji.png" alt="章节习题集"><figcaption>习题</figcaption></figure>
+          <figure><img src="assets/zhenti.jpg" alt="十年真题精解"><figcaption>真题</figcaption></figure>
+          <figure><img src="assets/koudaishu.png" alt="口袋书"><figcaption>口袋书</figcaption></figure>
+          <figure><img src="assets/juezhan60.png" alt="决战60+"><figcaption>60+</figcaption></figure>
+          <figure><img src="assets/monijuan.png" alt="模拟卷"><figcaption>模拟</figcaption></figure>
+        </div>
+        <div class="closing-footer">内部培训下一步：补齐待确认价格，可直接用于产品培训与选书统一口径。</div>
+      </section>
+    </div>
+  </main>
+
+  <div class="chrome controls" aria-label="演示控制">
+    <button class="control-btn" id="prevBtn" type="button" aria-label="上一页" title="上一页">‹</button>
+    <button class="control-btn" id="overviewBtn" type="button" aria-label="缩略图总览" title="缩略图总览">▦</button>
+    <button class="control-btn" id="fullscreenBtn" type="button" aria-label="全屏播放" title="全屏播放">⛶</button>
+    <button class="control-btn" id="nextBtn" type="button" aria-label="下一页" title="下一页">›</button>
+  </div>
+  <div class="chrome progress-shell" aria-hidden="true"><div id="progressBar"></div></div>
+  <div class="chrome portrait-note">横屏观看效果更佳，可左右滑动翻页</div>
+
+  <aside id="overview" aria-label="缩略图总览" aria-hidden="true">
+    <div class="overview-head">
+      <h2>全部页面</h2>
+      <button class="control-btn" id="closeOverviewBtn" type="button" aria-label="关闭总览" title="关闭总览">×</button>
+    </div>
+    <div id="overviewGrid"></div>
+  </aside>
+
+  <script>
+    (() => {
+      const BASE_W = 1920;
+      const BASE_H = 1080;
+      const viewport = document.getElementById('viewport');
+      const stage = document.getElementById('stage');
+      const slides = Array.from(document.querySelectorAll('#stage > .slide'));
+      const progressBar = document.getElementById('progressBar');
+      const overview = document.getElementById('overview');
+      const overviewGrid = document.getElementById('overviewGrid');
+      let current = 0;
+      let wheelLock = false;
+      let touchStartX = 0;
+      let touchStartY = 0;
+      let idleTimer;
+      let chromePinned = false;
+
+      slides.forEach((slide, index) => {
+        const page = document.createElement('span');
+        page.className = 'slide-page';
+        page.textContent = String(index + 1).padStart(2, '0');
+        slide.appendChild(page);
+      });
+
+      function resizeStage() {
+        const scale = Math.min(window.innerWidth / BASE_W, window.innerHeight / BASE_H);
+        stage.style.transform = `scale(${scale})`;
+      }
+
+      function showSlide(index) {
+        current = Math.max(0, Math.min(slides.length - 1, index));
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === current);
+          slide.setAttribute('aria-hidden', i === current ? 'false' : 'true');
+        });
+        progressBar.style.width = `${((current + 1) / slides.length) * 100}%`;
+        document.title = `${String(current + 1).padStart(2, '0')} · ${slides[current].dataset.title} | 环球网校2026中级注安6套教辅`;
+      }
+
+      function next() { showSlide(current + 1); }
+      function prev() { showSlide(current - 1); }
+
+      function resizeThumbnails() {
+        document.querySelectorAll('.thumb-canvas').forEach(canvas => {
+          const clone = canvas.firstElementChild;
+          if (clone && canvas.clientWidth) clone.style.transform = `scale(${canvas.clientWidth / BASE_W})`;
+        });
+      }
+
+      function toggleOverview(open) {
+        const shouldOpen = typeof open === 'boolean' ? open : !overview.classList.contains('open');
+        overview.classList.toggle('open', shouldOpen);
+        overview.setAttribute('aria-hidden', shouldOpen ? 'false' : 'true');
+        if (shouldOpen) {
+          requestAnimationFrame(resizeThumbnails);
+          document.getElementById('closeOverviewBtn').focus();
+        }
+      }
+
+      function buildOverview() {
+        slides.forEach((slide, index) => {
+          const button = document.createElement('button');
+          button.type = 'button';
+          button.className = 'thumb-button';
+          button.setAttribute('aria-label', `跳转到第${index + 1}页：${slide.dataset.title}`);
+
+          const canvas = document.createElement('div');
+          canvas.className = 'thumb-canvas';
+          const clone = slide.cloneNode(true);
+          clone.classList.add('active');
+          canvas.appendChild(clone);
+
+          const label = document.createElement('div');
+          label.className = 'thumb-label';
+          label.innerHTML = `<span>${String(index + 1).padStart(2, '0')}</span><span>${slide.dataset.title}</span>`;
+
+          button.append(canvas, label);
+          button.addEventListener('click', () => {
+            showSlide(index);
+            toggleOverview(false);
+          });
+          overviewGrid.appendChild(button);
+        });
+
+        requestAnimationFrame(resizeThumbnails);
+        window.addEventListener('resize', resizeThumbnails);
+      }
+
+      async function toggleFullscreen() {
+        try {
+          if (!document.fullscreenElement) await document.documentElement.requestFullscreen();
+          else await document.exitFullscreen();
+        } catch (error) {
+          console.warn('当前浏览器未允许全屏。', error);
+        }
+      }
+
+      function wakeChrome() {
+        document.body.classList.remove('idle');
+        clearTimeout(idleTimer);
+        if (!chromePinned) idleTimer = setTimeout(() => document.body.classList.add('idle'), 2600);
+      }
+
+      document.getElementById('prevBtn').addEventListener('click', prev);
+      document.getElementById('nextBtn').addEventListener('click', next);
+      document.getElementById('overviewBtn').addEventListener('click', () => toggleOverview());
+      document.getElementById('closeOverviewBtn').addEventListener('click', () => toggleOverview(false));
+      document.getElementById('fullscreenBtn').addEventListener('click', toggleFullscreen);
+
+      document.addEventListener('keydown', event => {
+        if (overview.classList.contains('open') && event.key === 'Escape') {
+          toggleOverview(false);
+          return;
+        }
+        if (overview.classList.contains('open')) return;
+        if (['ArrowRight', 'PageDown', ' ', 'Enter'].includes(event.key)) { event.preventDefault(); next(); }
+        if (['ArrowLeft', 'PageUp', 'Backspace'].includes(event.key)) { event.preventDefault(); prev(); }
+        if (event.key === 'Home') showSlide(0);
+        if (event.key === 'End') showSlide(slides.length - 1);
+        if (event.key.toLowerCase() === 'o') toggleOverview();
+        if (event.key.toLowerCase() === 'f') toggleFullscreen();
+        if (event.key.toLowerCase() === 'h') {
+          chromePinned = !chromePinned;
+          document.body.classList.toggle('idle', chromePinned);
+        }
+      });
+
+      viewport.addEventListener('wheel', event => {
+        if (overview.classList.contains('open') || wheelLock || Math.abs(event.deltaY) < 20) return;
+        wheelLock = true;
+        event.deltaY > 0 ? next() : prev();
+        setTimeout(() => { wheelLock = false; }, 620);
+      }, { passive: true });
+
+      viewport.addEventListener('touchstart', event => {
+        const touch = event.changedTouches[0];
+        touchStartX = touch.clientX;
+        touchStartY = touch.clientY;
+      }, { passive: true });
+
+      viewport.addEventListener('touchend', event => {
+        const touch = event.changedTouches[0];
+        const dx = touch.clientX - touchStartX;
+        const dy = touch.clientY - touchStartY;
+        if (Math.abs(dx) > 48 && Math.abs(dx) > Math.abs(dy)) dx < 0 ? next() : prev();
+      }, { passive: true });
+
+      window.addEventListener('resize', resizeStage);
+      window.addEventListener('mousemove', wakeChrome, { passive: true });
+      window.addEventListener('touchstart', wakeChrome, { passive: true });
+      document.addEventListener('fullscreenchange', resizeStage);
+
+      resizeStage();
+      buildOverview();
+      showSlide(0);
+      wakeChrome();
+    })();
+  </script>
+</body>
+</html>

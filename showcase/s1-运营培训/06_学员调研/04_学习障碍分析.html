@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>6.4 学习障碍分析 · WorkBuddy 培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafafa;color:#1f2937;line-height:1.7}
+.header{background:linear-gradient(135deg,#0f766e 0%,#14b8a6 100%);color:#fff;padding:48px 32px 56px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.08);border-radius:50%}
+.crumbs{font-size:13px;opacity:0.9;margin-bottom:14px}
+.crumbs a{color:#fff;text-decoration:none}
+h1{font-size:34px;margin-bottom:12px;position:relative;z-index:1}
+.subtitle{font-size:16px;opacity:0.95;position:relative;z-index:1}
+.container{max-width:1100px;margin:-32px auto 60px;padding:0 24px}
+.card{background:#fff;border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h2{font-size:24px;color:#0f766e;margin-bottom:16px;padding-left:14px;border-left:5px solid #14b8a6}
+.card h3{font-size:18px;color:#0f766e;margin:18px 0 10px}
+.tip{background:linear-gradient(135deg,#ccfbf1,#99f6e4);border-left:4px solid #14b8a6;padding:16px 20px;border-radius:8px;margin:20px 0;color:#134e4a}
+.tip strong{color:#0f766e}
+.warn{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:8px;margin:20px 0;color:#78350f}
+.journey{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border-radius:12px;padding:24px;margin:20px 0;position:relative}
+.journey::before{content:"→";position:absolute;top:50%;right:-12px;background:#14b8a6;color:#fff;width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;z-index:1}
+.journey-step{background:#fff;padding:16px 20px;border-radius:10px;margin:10px 0;border-left:4px solid #14b8a6;display:grid;grid-template-columns:100px 1fr 100px 100px;gap:14px;align-items:center}
+.journey-step .time{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:8px 12px;border-radius:8px;text-align:center;font-weight:bold;font-size:13px}
+.journey-step .time b{display:block;font-size:18px}
+.journey-step .content b{color:#0f766e;display:block;margin-bottom:4px;font-size:15px}
+.journey-step .content p{color:#374151;font-size:13px;margin:2px 0}
+.journey-step .risk{background:#fee2e2;color:#991b1b;padding:6px 10px;border-radius:6px;font-size:12px;text-align:center;font-weight:bold}
+.journey-step .risk.med{background:#fef3c7;color:#92400e}
+.journey-step .risk.low{background:#d1fae5;color:#065f46}
+table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+th{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:14px 12px;text-align:left;font-size:14px}
+td{padding:12px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+tr:hover td{background:#f0fdfa}
+.bar-chart{background:#fff;border-radius:10px;padding:18px;margin:20px 0}
+.bar-row{display:grid;grid-template-columns:160px 1fr 70px;gap:12px;align-items:center;margin:8px 0}
+.bar-row .label{color:#0f766e;font-size:14px;font-weight:600}
+.bar-row .bar{background:#e0f2fe;height:24px;border-radius:4px;overflow:hidden;position:relative}
+.bar-row .fill{background:linear-gradient(135deg,#0f766e,#14b8a6);height:100%;display:flex;align-items:center;padding-left:8px;color:#fff;font-size:12px;font-weight:bold}
+.bar-row .pct{color:#0f766e;font-weight:bold;font-size:14px;text-align:right}
+.template{background:#f8fafc;border-left:4px solid #14b8a6;padding:18px;border-radius:8px;margin:16px 0;font-family:Menlo,monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;color:#0f766e}
+.nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb}
+.nav a{padding:12px 24px;background:#fff;border:2px solid #14b8a6;color:#0f766e;text-decoration:none;border-radius:8px;font-weight:600}
+.nav a:hover{background:#14b8a6;color:#fff}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumbs"><a href="../index.html">培训首页</a> / <a href="index.html">模块六·学员调研</a> / 6.4</div>
+  <h1>🚧 学习障碍分析（弃考时点 + 干预动作）</h1>
+  <div class="subtitle">识别学员从"报名 → 弃考"的关键时点 + 原因 + 干预动作——让退费率从 25% 降到 10%</div>
+</div>
+<div class="container">
+
+<div class="card">
+  <h2>一、为什么必须做"障碍分析"？</h2>
+  <p>中级注安班的退费/弃考率通常在 <b>20-30%</b>，这是一个巨大的隐性成本。学员的弃考不是"突然决定"，而是沿着 5 个关键时点逐步放弃的：</p>
+  <div class="warn"><strong>⚠️ 真实数据参考：</strong>头部机构退费数据：协议班退费率达 30-40%、零基础班 20-25%、私教营 10-15%。<b>每降低 1 个百分点退费 = 直接利润 +0.5%</b>。</div>
+</div>
+
+<div class="card">
+  <h2>二、5 大弃考时点 + 风险等级</h2>
+  <div class="journey">
+
+    <div class="journey-step">
+      <div class="time"><b>第 1-7 天</b>蜜月期</div>
+      <div class="content">
+        <b>📌 学员状态</b>
+        <p>热情高涨，每天学 2-3 小时，看完第一章</p>
+      </div>
+      <div class="risk low">🟢 低风险</div>
+      <div class="risk low">干预：鼓励</div>
+    </div>
+
+    <div class="journey-step">
+      <div class="time"><b>第 8-30 天</b>倦怠期</div>
+      <div class="content">
+        <b>📌 学员状态</b>
+        <p>进度变慢，工作忙起来，开始"攒"课程</p>
+      </div>
+      <div class="risk med">🟡 中风险</div>
+      <div class="risk med">干预：提醒</div>
+    </div>
+
+    <div class="journey-step">
+      <div class="time"><b>第 31-60 天</b>瓶颈期</div>
+      <div class="content">
+        <b>📌 学员状态</b>
+        <p>难点看不懂，开始怀疑自己，怀疑课程效果</p>
+      </div>
+      <div class="risk" style="background:#fb923c;color:#7c2d12">🟠 高风险</div>
+      <div class="risk" style="background:#fb923c;color:#7c2d12">干预：1V1 答疑</div>
+    </div>
+
+    <div class="journey-step">
+      <div class="time"><b>第 61-90 天</b>放弃期</div>
+      <div class="content">
+        <b>📌 学员状态</b>
+        <p>进度严重落后，开始考虑退费，部分人直接弃学</p>
+      </div>
+      <div class="risk">🔴 极高风险</div>
+      <div class="risk">干预：定制计划</div>
+    </div>
+
+    <div class="journey-step">
+      <div class="time"><b>考前 30 天</b>冲刺期</div>
+      <div class="content">
+        <b>📌 学员状态</b>
+        <p>两极分化——想过的拼命学、放弃的直接躺平</p>
+      </div>
+      <div class="risk med">🟡 中风险</div>
+      <div class="risk med">干预：押题 + 集训</div>
+    </div>
+
+  </div>
+</div>
+
+<div class="card">
+  <h2>三、5 大弃考原因（基于真实调研）</h2>
+  <div class="bar-chart">
+    <div class="bar-row"><span class="label">没时间</span><div class="bar"><div class="fill" style="width:96%">48%</div></div><span class="pct">48%</span></div>
+    <div class="bar-row"><span class="label">学不会</span><div class="bar"><div class="fill" style="width:50%">25%</div></div><span class="pct">25%</span></div>
+    <div class="bar-row"><span class="label">太难了</span><div class="bar"><div class="fill" style="width:30%">15%</div></div><span class="pct">15%</span></div>
+    <div class="bar-row"><span class="label">工作忙</span><div class="bar"><div class="fill" style="width:18%">9%</div></div><span class="pct">9%</span></div>
+    <div class="bar-row"><span class="label">课程质量差</span><div class="bar"><div class="fill" style="width:6%">3%</div></div><span class="pct">3%</span></div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>四、5 大弃考原因的干预方案</h2>
+  <table>
+    <thead><tr><th>弃考原因</th><th>占比</th><th>预警信号</th><th>干预动作</th><th>负责方</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>没时间</b></td>
+        <td>48%</td>
+        <td>连续 7 天未登录</td>
+        <td>① AI 智能推送"碎片化学习包" ② 班主任电话关怀 ③ 推送"每天 30 分钟速学法"</td>
+        <td>班主任 + 销售</td>
+      </tr>
+      <tr>
+        <td><b>学不会</b></td>
+        <td>25%</td>
+        <td>题库正确率 &lt; 50%</td>
+        <td>① 1V1 私教辅导（云私塾/私教营） ② 推送"高频考点精讲" ③ 1V1 学习规划</td>
+        <td>教研 + 班主任</td>
+      </tr>
+      <tr>
+        <td><b>太难了</b></td>
+        <td>15%</td>
+        <td>连续 3 次测评不通过</td>
+        <td>① 推荐"零基础补强包" ② 心理辅导（"考不过正常"） ③ 调整学习目标</td>
+        <td>教研 + 班主任</td>
+      </tr>
+      <tr>
+        <td><b>工作冲突</b></td>
+        <td>9%</td>
+        <td>反馈工作加班/出差</td>
+        <td>① 切换"周末班"学习模式 ② 推送录播回放 ③ 提供弹性进度</td>
+        <td>班主任</td>
+      </tr>
+      <tr>
+        <td><b>课程质量</b></td>
+        <td>3%</td>
+        <td>负面反馈 / 投诉</td>
+        <td>① 1V1 售后沟通 ② 必要时退费 / 换班 ③ 投诉回流到教研改进</td>
+        <td>客服 + 教研</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>五、3 大干预机制（防弃考 SOP）</h2>
+
+  <h3>机制 1：AI 智能预警系统（自动）</h3>
+  <div class="tip">
+    <strong>📌 预警信号触发条件：</strong><br>
+    • 7 天未登录 → 系统自动推送"今日 5 题"<br>
+    • 14 天未学习 → 班主任收到预警，1V1 电话<br>
+    • 连续 3 次测评 &lt; 50 分 → 推送"高频考点精讲"<br>
+    • 30 天进度低于 30% → 邀请 1V1 学习规划
+  </div>
+
+  <h3>机制 2：班主任周关怀（人工）</h3>
+  <div class="tip">
+    <strong>📌 班主任每周 3 件事：</strong><br>
+    ① 周一：发送本周学习计划 + 重点提醒<br>
+    ② 周三：发送"学霸案例"+ 鼓励话术<br>
+    ③ 周五：电话/微信 1V1 关怀（针对预警学员）
+  </div>
+
+  <h3>机制 3：阶段奖励（激励）</h3>
+  <div class="tip">
+    <strong>📌 3 大里程碑奖励：</strong><br>
+    ① 完成 30% → 送"高频考点速记卡"<br>
+    ② 完成 60% → 送"命题人密押卷"前 1 套<br>
+    ③ 完成 90% → 送"考前押题直播"专属名额
+  </div>
+</div>
+
+<div class="card">
+  <h2>六、提问模板（直接复制用）</h2>
+  <div class="template">帮我分析中级注安协议班的"弃考/退费"问题。
+
+输入信息：
+- 班型：协议班（不过退费 80%）
+- 报名学员：200 人
+- 退费人数：60 人（退费率 30%）
+- 退费原因分布：①没时间 50% ②学不会 25% ③太难 15% ④工作冲突 10%
+
+请按"3 段式"输出：
+
+【第一段：问题诊断】
+- 5 大弃考时点（从报名到考前）的风险等级
+- 每个时点最常见的弃考原因
+- 关键拐点在哪里？
+
+【第二段：干预方案】
+- 3 大干预机制（预警 / 班主任 / 奖励）
+- 每个机制的"信号 + 动作 + 责任人"
+- 投入产出比
+
+【第三段：3 个月落地计划】
+- 第 1 个月做什么（预警系统搭建）
+- 第 2 个月做什么（班主任培训）
+- 第 3 个月做什么（激励奖品设计）
+- 预期退费率从 30% 降到多少？</div>
+</div>
+
+<div class="nav">
+  <a href="03_学员心理画像.html">← 上一篇：6.3 学员心理画像</a>
+  <a href="index.html">返回模块六 →</a>
+</div>
+
+</div>
+</body>
+</html>

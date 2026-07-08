@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中级注册安全工程师《安全生产管理》精讲讲义 · 2026版</title>
+<style>
+  :root {
+    --primary: #1a56db;
+    --primary-light: #dbeafe;
+    --primary-dark: #1e3a5f;
+    --danger: #dc2626;
+    --danger-light: #fef2f2;
+    --success: #059669;
+    --success-light: #ecfdf5;
+    --warning: #d97706;
+    --warning-light: #fffbeb;
+    --text: #1f2937;
+    --text-light: #6b7280;
+    --bg: #f8fafc;
+    --border: #e5e7eb;
+    --card-bg: #ffffff;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.8;
+    font-size: 15px;
+  }
+
+  /* ===== 封面 ===== */
+  .cover {
+    background: linear-gradient(135deg, #1e3a5f 0%, #1a56db 50%, #2563eb 100%);
+    color: white;
+    padding: 60px 40px;
+    text-align: center;
+    border-radius: 0 0 20px 20px;
+    margin-bottom: 30px;
+  }
+  .cover h1 { font-size: 32px; margin-bottom: 12px; letter-spacing: 2px; }
+  .cover h2 { font-size: 20px; font-weight: normal; opacity: 0.9; margin-bottom: 24px; }
+  .cover-meta {
+    display: inline-flex; gap: 20px; flex-wrap: wrap; justify-content: center;
+    background: rgba(255,255,255,0.15);
+    padding: 12px 28px; border-radius: 30px; font-size: 14px;
+  }
+  .cover-meta span { display: flex; align-items: center; gap: 6px; }
+  .cover-badge {
+    display: inline-block; background: #fbbf24; color: #78350f;
+    padding: 6px 18px; border-radius: 20px; font-size: 13px; font-weight: 700;
+    margin-top: 16px;
+  }
+
+  /* ===== 容器 ===== */
+  .container { max-width: 980px; margin: 0 auto; padding: 0 20px 40px; }
+
+  /* ===== 目录导航 ===== */
+  .toc {
+    background: var(--card-bg); border-radius: 12px; padding: 24px 28px;
+    margin-bottom: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .toc h3 { font-size: 18px; margin-bottom: 16px; color: var(--primary); }
+  .toc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .toc-item {
+    display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+    border-radius: 8px; text-decoration: none; color: var(--text); font-size: 14px;
+    transition: background 0.2s; border: 1px solid var(--border);
+  }
+  .toc-item:hover { background: var(--primary-light); border-color: var(--primary); }
+  .toc-item .num {
+    background: var(--primary); color: white; width: 26px; height: 26px;
+    border-radius: 6px; display: flex; align-items: center; justify-content: center;
+    font-size: 12px; font-weight: bold; flex-shrink: 0;
+  }
+  .toc-item .score { margin-left: auto; font-size: 12px; font-weight: 600; }
+  .toc-item .score.hot { color: var(--danger); }
+  .toc-item .score.up { color: var(--warning); }
+
+  /* ===== 章节 ===== */
+  .chapter {
+    background: var(--card-bg); border-radius: 12px; padding: 32px 36px;
+    margin-bottom: 24px; box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  }
+  .chapter-header { border-bottom: 3px solid var(--primary); padding-bottom: 16px; margin-bottom: 24px; }
+  .chapter-header .ch-num {
+    display: inline-block; background: var(--primary); color: white;
+    padding: 4px 14px; border-radius: 6px; font-size: 13px; font-weight: 600; margin-bottom: 8px;
+  }
+  .chapter-header h2 { font-size: 22px; color: var(--text); }
+  .chapter-header .ch-meta { display: flex; gap: 16px; margin-top: 10px; font-size: 13px; color: var(--text-light); flex-wrap: wrap; }
+  .chapter-header .ch-meta span { display: flex; align-items: center; gap: 4px; }
+  .chapter-header .ch-meta .high { color: var(--danger); font-weight: 600; }
+  .chapter-header .ch-meta .up { color: var(--warning); font-weight: 600; }
+
+  /* ===== 考纲要求 ===== */
+  .syllabus-box {
+    background: var(--primary-light); border-left: 4px solid var(--primary);
+    border-radius: 0 8px 8px 0; padding: 14px 18px; margin-bottom: 20px;
+  }
+  .syllabus-box .label { font-size: 12px; color: var(--primary); font-weight: 700; margin-bottom: 6px; letter-spacing: 1px; }
+  .syllabus-box p { font-size: 14px; color: var(--text); }
+
+  /* ===== 考点清单 ===== */
+  .point-list {
+    background: var(--warning-light); border: 1px solid #fde68a; border-radius: 10px;
+    padding: 16px 20px; margin-bottom: 24px;
+  }
+  .point-list .label { font-size: 12px; color: var(--warning); font-weight: 700; margin-bottom: 10px; letter-spacing: 1px; }
+  .point-list ul { list-style: none; }
+  .point-list li { padding: 4px 0; font-size: 14px; display: flex; align-items: flex-start; gap: 8px; }
+  .point-list li::before { content: "▸"; color: var(--warning); font-weight: bold; flex-shrink: 0; }
+  .point-list li.high::before { content: "★★"; color: var(--danger); }
+  .point-list li.high { color: var(--danger); font-weight: 500; }
+  .point-list .freq { font-size: 11px; padding: 1px 6px; border-radius: 4px; margin-left: 4px; }
+  .freq.high { background: var(--danger-light); color: var(--danger); }
+  .freq.mid { background: var(--warning-light); color: var(--warning); }
+
+  /* ===== 知识精讲 ===== */
+  .section-block { margin-bottom: 24px; }
+  .section-block h3 {
+    font-size: 17px; color: var(--primary); margin-bottom: 12px;
+    padding-left: 12px; border-left: 4px solid var(--primary);
+  }
+  .section-block h4 { font-size: 15px; color: var(--text); margin: 16px 0 8px; }
+  .section-block p { margin-bottom: 10px; font-size: 14.5px; }
+  .section-block ul, .section-block ol { margin: 8px 0 12px 20px; }
+  .section-block li { margin-bottom: 5px; font-size: 14.5px; }
+
+  /* ===== 重点标注 ===== */
+  .hl-red { background: var(--danger-light); color: var(--danger); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .hl-green { background: var(--success-light); color: var(--success); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .hl-blue { background: var(--primary-light); color: var(--primary); padding: 2px 6px; border-radius: 4px; font-weight: 600; }
+  .star { color: var(--danger); font-weight: bold; }
+
+  /* ===== 知识卡片 ===== */
+  .info-card { background: var(--success-light); border: 1px solid #a7f3d0; border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .info-card .title { font-size: 13px; font-weight: 700; color: var(--success); margin-bottom: 6px; }
+  .info-card p { font-size: 14px; margin: 0; }
+
+  .warn-card { background: var(--danger-light); border: 1px solid #fecaca; border-radius: 10px; padding: 14px 18px; margin: 12px 0; }
+  .warn-card .title { font-size: 13px; font-weight: 700; color: var(--danger); margin-bottom: 6px; }
+  .warn-card p { font-size: 14px; margin: 0; }
+
+  /* ===== 表格 ===== */
+  table { width: 100%; border-collapse: collapse; margin: 12px 0; font-size: 14px; }
+  th { background: var(--primary); color: white; padding: 10px 12px; text-align: left; font-weight: 600; font-size: 13px; }
+  th:first-child { border-radius: 8px 0 0 0; }
+  th:last-child { border-radius: 0 8px 0 0; }
+  td { padding: 9px 12px; border-bottom: 1px solid var(--border); }
+  tr:nth-child(even) td { background: #f8fafc; }
+  tr:hover td { background: var(--primary-light); }
+  .score-table td:nth-child(n+2) { text-align: center; }
+  .score-table .high-score { color: var(--danger); font-weight: 700; }
+  .score-table .mid-score { color: var(--warning); font-weight: 600; }
+
+  /* ===== 速记口诀 ===== */
+  .mnemonic {
+    background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+    border: 2px dashed #f59e0b; border-radius: 10px; padding: 14px 18px; margin: 12px 0; text-align: center;
+  }
+  .mnemonic .label { font-size: 12px; color: #92400e; font-weight: 700; margin-bottom: 6px; }
+  .mnemonic p { font-size: 16px; font-weight: 600; color: #78350f; margin: 0; }
+
+  /* ===== 练习题 ===== */
+  .exercise-section { background: #f0f4ff; border-radius: 10px; padding: 20px 24px; margin-top: 24px; }
+  .exercise-section h3 { font-size: 17px; color: var(--primary); margin-bottom: 16px; padding-bottom: 10px; border-bottom: 2px solid #c7d2fe; }
+  .question { background: white; border-radius: 10px; padding: 18px 22px; margin-bottom: 14px; border: 1px solid #e0e7ff; }
+  .question .q-header { display: flex; align-items: center; gap: 8px; margin-bottom: 10px; flex-wrap: wrap; }
+  .question .q-num { background: var(--primary); color: white; width: 26px; height: 26px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: bold; flex-shrink: 0; }
+  .question .q-type { font-size: 11px; padding: 2px 8px; border-radius: 4px; font-weight: 600; }
+  .q-type.single { background: #dbeafe; color: #1e40af; }
+  .q-type.multi { background: #fce7f3; color: #9d174d; }
+  .question .q-year { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #f3f4f6; color: var(--text-light); }
+  .question .q-diff { font-size: 11px; color: var(--text-light); margin-left: auto; }
+  .question .q-text { font-size: 14.5px; font-weight: 500; margin-bottom: 10px; line-height: 1.7; }
+  .question .q-options { list-style: none; margin-bottom: 0; }
+  .question .q-options li { padding: 5px 0; font-size: 14px; display: flex; gap: 8px; }
+  .question .q-options li .opt { font-weight: 600; color: var(--primary); flex-shrink: 0; }
+  .question .q-answer { margin-top: 10px; padding-top: 10px; border-top: 1px dashed var(--border); }
+  .question .q-answer .ans-label { font-size: 13px; font-weight: 700; color: var(--success); margin-bottom: 4px; }
+  .question .q-answer .ans-text { font-size: 13.5px; }
+  .question .q-answer .ans-text .correct { color: var(--success); font-weight: 700; }
+  .question .q-answer .analysis { font-size: 13px; color: var(--text-light); margin-top: 6px; }
+  .question .q-tags { display: flex; gap: 6px; margin-top: 8px; flex-wrap: wrap; }
+  .q-tag { font-size: 11px; padding: 2px 8px; border-radius: 4px; background: #f3f4f6; color: var(--text-light); }
+  .q-tag.error { background: var(--danger-light); color: var(--danger); }
+
+  /* ===== 本章小结 ===== */
+  .chapter-summary {
+    background: linear-gradient(135deg, #ecfdf5 0%, #d1fae5 100%);
+    border-radius: 10px; padding: 18px 22px; margin-top: 20px; border-left: 4px solid var(--success);
+  }
+  .chapter-summary .label { font-size: 13px; font-weight: 700; color: var(--success); margin-bottom: 8px; }
+  .chapter-summary p { font-size: 14px; margin-bottom: 6px; }
+
+  /* ===== 策略框 ===== */
+  .strategy-box { background: var(--card-bg); border: 2px solid var(--primary); border-radius: 12px; padding: 24px 28px; margin: 20px 0; }
+  .strategy-box h3 { color: var(--primary); font-size: 18px; margin-bottom: 14px; }
+  .strategy-box ol { margin-left: 20px; }
+  .strategy-box li { margin-bottom: 8px; font-size: 14px; }
+
+  /* ===== 考情提示 ===== */
+  .exam-alert {
+    background: linear-gradient(135deg, #fef2f2 0%, #fee2e2 100%);
+    border: 2px solid #fca5a5; border-radius: 10px; padding: 16px 20px; margin: 16px 0;
+  }
+  .exam-alert .title { font-size: 14px; font-weight: 700; color: var(--danger); margin-bottom: 8px; }
+  .exam-alert p { font-size: 13.5px; margin-bottom: 4px; }
+
+  /* ===== 页脚 ===== */
+  .footer { text-align: center; padding: 30px 20px; color: var(--text-light); font-size: 13px; border-top: 1px solid var(--border); margin-top: 30px; }
+  .footer .version { display: inline-block; background: var(--primary-light); color: var(--primary); padding: 4px 12px; border-radius: 6px; font-size: 12px; margin-bottom: 8px; }
+
+  /* ===== 分隔线 ===== */
+  .divider { height: 2px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 24px 0; }
+
+  @media (max-width: 768px) {
+    .toc-grid { grid-template-columns: 1fr; }
+    .chapter { padding: 20px; }
+    .cover h1 { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============ 封面 ============ -->
+<div class="cover">
+  <h1>中级注册安全工程师</h1>
+  <h2>《安全生产管理》精讲讲义</h2>
+  <div class="cover-meta">
+    <span>适用考纲：2026版</span>
+    <span>版本：V2.0</span>
+    <span>适用人群：全程备考学员</span>
+  </div>
+  <div class="cover-badge">基于2026最新核心考点 + 2025考情分析编制</div>
+</div>
+
+<div class="container">
+
+<!-- ============ 目录导航 ============ -->
+<div class="toc">
+  <h3>讲义目录</h3>
+  <div class="toc-grid">
+    <a class="toc-item" href="#ch0"><span class="num">0</span> 考纲总览与2026备考策略 <span class="score hot">必读</span></a>
+    <a class="toc-item" href="#ch1"><span class="num">1</span> 安全生产管理基本理论 <span class="score">~9分</span></a>
+    <a class="toc-item" href="#ch2"><span class="num">2</span> 安全生产管理内容 <span class="score hot">~52分</span></a>
+    <a class="toc-item" href="#ch3"><span class="num">3</span> 安全评价 <span class="score up">~17分</span></a>
+    <a class="toc-item" href="#ch4"><span class="num">4</span> 职业病危害预防和管理 <span class="score">~4分</span></a>
+    <a class="toc-item" href="#ch5"><span class="num">5</span> 安全生产应急管理 <span class="score">~6分</span></a>
+    <a class="toc-item" href="#ch6"><span class="num">6</span> 生产安全事故调查与分析 <span class="score">~6分</span></a>
+    <a class="toc-item" href="#ch7"><span class="num">7</span> 安全生产监管监察 <span class="score">~1分</span></a>
+    <a class="toc-item" href="#ch8"><span class="num">8</span> 安全生产统计分析 <span class="score">~3分</span></a>
+  </div>
+</div>
+
+<!-- ============ 考纲总览 ============ -->
+<div class="chapter" id="ch0">
+  <div class="chapter-header">
+    <span class="ch-num">考纲总览</span>
+    <h2>考纲拆解与2026备考策略</h2>
+  </div>
+
+  <div class="syllabus-box">
+    <div class="label">考试形式</div>
+    <p>考试时间 2.5 小时 ｜ 单选题 70 题 × 1 分 + 多选题 15 题 × 2 分 = <strong>100 分</strong> ｜ 合格标准 60 分</p>
+  </div>
+
+  <h3 style="font-size:17px; color:var(--primary); margin-bottom:12px; border-left:4px solid var(--primary); padding-left:12px;">各章分值分布（2020-2025年真题统计）</h3>
+  <table class="score-table">
+    <thead>
+      <tr>
+        <th>章节</th><th>2025</th><th>2024</th><th>2023</th><th>2022</th><th>2021</th><th>2020</th><th>均值</th><th>趋势</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>第一章 安全生产管理基本理论</td>
+        <td>6</td><td>7</td><td>7</td><td>11</td><td>17</td><td>5</td>
+        <td class="mid-score">~9</td><td>平稳</td>
+      </tr>
+      <tr>
+        <td><strong>第二章 安全生产管理内容</strong></td>
+        <td><strong>44</strong></td><td><strong>52</strong></td><td><strong>62</strong></td><td><strong>52</strong></td><td><strong>41</strong></td><td><strong>63</strong></td>
+        <td class="high-score">~52</td><td style="color:var(--danger)">核心重点</td>
+      </tr>
+      <tr>
+        <td><strong>第三章 安全评价</strong></td>
+        <td><strong>17</strong></td><td>7</td><td>7</td><td>8</td><td>4</td><td>8</td>
+        <td class="high-score">~8-17</td><td style="color:var(--danger)">2025暴涨</td>
+      </tr>
+      <tr>
+        <td>第四章 职业病危害预防和管理</td>
+        <td>4</td><td>3</td><td>5</td><td>3</td><td>5</td><td>0</td>
+        <td class="mid-score">~3</td><td>平稳</td>
+      </tr>
+      <tr>
+        <td>第五章 安全生产应急管理</td>
+        <td>2</td><td>8</td><td>3</td><td>10</td><td>7</td><td>8</td>
+        <td class="mid-score">~6</td><td>波动</td>
+      </tr>
+      <tr>
+        <td>第六章 生产安全事故调查与分析</td>
+        <td>5</td><td>9</td><td>2</td><td>8</td><td>9</td><td>4</td>
+        <td class="mid-score">~6</td><td>波动</td>
+      </tr>
+      <tr>
+        <td>第七章 安全生产监管监察</td>
+        <td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td>
+        <td>~1</td><td>低频</td>
+      </tr>
+      <tr>
+        <td>第八章 安全生产统计分析</td>
+        <td>2</td><td>4</td><td>3</td><td>2</td><td>4</td><td>2</td>
+        <td class="mid-score">~3</td><td>平稳</td>
+      </tr>
+      <tr style="background:var(--warning-light);">
+        <td><strong>超纲规范及安全常识</strong></td>
+        <td colspan="6">2025年考查19分（再创新高）</td>
+        <td class="high-score">~15-19</td><td style="color:var(--danger)">逐年递增</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="exam-alert">
+    <div class="title">2025年考情核心研判</div>
+    <p>1. 整体难度中等偏上，以考查<strong>现场灵活运用</strong>为主，要求考生能用理论知识解决实际问题</p>
+    <p>2. 教材内容考查81分，<strong>超纲规范及安全常识考查19分</strong>，超纲分值再创新高</p>
+    <p>3. <strong>安全评价从7分暴涨到17分</strong>，因注安可从事安全评价工作的政策导向，重点考查安全评价方法的实际使用</p>
+    <p>4. 管理科目考查方向已发生根本变化：整套试卷都是考运用</p>
+  </div>
+
+  <div class="strategy-box">
+    <h3>2026年备考四大策略</h3>
+    <ol>
+      <li><strong>回归教材细节，掌握拉分项。</strong>教材核心必考点是必须掌握的内容，在此基础上抓细节点才能在考场中拉开差距</li>
+      <li><strong>注重灵活掌握，切忌死记死背。</strong>把知识点内化为自己的理解。比如根据预先危险分析方法对氢气泄漏风险的分析结果，应优先采用在储氢区设置气体检测仪防止事故发生</li>
+      <li><strong>紧跟时事政策导向。</strong>安全评价的方法运用及分类，2025年大考特考，分值从7分到17分。因24年年底应急部门出台政策，注安可从事安全评价工作</li>
+      <li><strong>超纲点依然是管理科目每年必须重视的内容。</strong>25年真题超纲题占比19分，主要源于新实施规范（如《特种设备使用单位落实使用安全主体责任监督管理规定》《职业病分类和目录》《安全色和安全标志》GB2894-2025等）+ 安全常识</li>
+    </ol>
+  </div>
+
+  <div class="info-card">
+    <div class="title">备考节奏建议</div>
+    <p><strong>基础阶段（现在-7月）：</strong>通读教材 + 精讲课程，建立知识框架，完成章节练习</p>
+    <p><strong>强化阶段（8月-9月）：</strong>高频考点反复刷题 + 案例专项突破，重点关注第二章和第三章</p>
+    <p><strong>冲刺阶段（10月）：</strong>真题套卷 + 模考 + 超纲规范补充 + 速记口诀强化</p>
+  </div>
+</div>
+
+<!-- ============ 第一章 ============ -->
+<div class="chapter" id="ch1">
+  <div class="chapter-header">
+    <span class="ch-num">第一章</span>
+    <h2>安全生产管理基本理论</h2>
+    <div class="ch-meta">
+      <span>分值：约 6-9 分</span>
+      <span>难度：★★★</span>
+      <span>考频：事故致因原理 <span class="high">高频</span></span>
+    </div>
+  </div>
+
+  <div class="syllabus-box">
+    <div class="label">考纲要求</div>
+    <p>掌握安全生产、安全生产管理的基本概念；熟悉事故、事故隐患、危险源等基本定义；理解海因里希法则、本质安全；掌握事故致因原理（5大理论）和安全原理（4大原理14个原则）；了解安全心理与行为、安全生产管理理念</p>
+  </div>
+
+  <div class="point-list">
+    <div class="label">考点清单</div>
+    <ul>
+      <li class="high">事故隐患的分类（一般隐患 vs 重大隐患）<span class="freq high">高频</span></li>
+      <li class="high">事故致因原理（海因里希因果连锁、能量意外释放、轨迹交叉、系统安全）<span class="freq high">高频</span></li>
+      <li>海因里希法则（1:29:300）<span class="freq mid">中频</span></li>
+      <li>危险源分类（第一类 vs 第二类）<span class="freq high">高频</span></li>
+      <li>本质安全（失误-安全、故障-安全功能）<span class="freq mid">中频</span></li>
+      <li>安全原理4大原则（系统/人本/预防/强制）<span class="freq mid">中频</span></li>
+      <li>影响人行为的因素（性格、气质、情绪等心理状态）<span class="freq mid">中频</span></li>
+      <li>安全文化定义与内涵<span class="freq mid">中频</span></li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <h3>一、安全生产管理基本概念</h3>
+    <h4>1. 事故隐患的分类</h4>
+    <table>
+      <tr><th>类别</th><th>定义</th><th>整改要求</th></tr>
+      <tr><td><span class="hl-blue">一般事故隐患</span></td><td>危害和整改<span class="hl-red">难度较小</span>，发现能<span class="hl-red">立即整改</span>排除的隐患</td><td>立即整改</td></tr>
+      <tr><td><span class="hl-red">重大事故隐患</span></td><td>危害和整改<span class="hl-red">难度较大</span>，应当全部或者局部<span class="hl-red">停产停业</span>，经过一定时间整改治理方能排除；或因外部因素影响致使自身难以排除</td><td>全部或局部停产停业</td></tr>
+    </table>
+
+    <div class="warn-card">
+      <div class="title">易错点</div>
+      <p>重大隐患是<strong>"及时上报"</strong>而不是"立即上报"——2025年真题第15题考查此细节，选项B"对排查出的各类隐患应立即上报主管部门"为错误说法</p>
+    </div>
+
+    <h4>2. 海因里希法则</h4>
+    <p>在机械生产过程中，<strong>每发生330起意外事件，有300件未产生人员伤害，29件造成人员轻伤，1件导致重伤或死亡</strong>（1:29:300）。</p>
+    <div class="info-card">
+      <div class="title">关键细节</div>
+      <p>1. 海因里希法则对应单位是<strong>事故发生的起数</strong>，而不是人数</p>
+      <p>2. 1:29:300是大概率事件，不是必然</p>
+      <p>3. 无数次意外事件必然导致重大伤亡事故发生</p>
+      <p>4. 核心思想：通过降低不安全行为进而降低更严重的事故</p>
+    </div>
+
+    <h4>3. 危险源分类</h4>
+    <table>
+      <tr><th>类别</th><th>定义</th><th>举例</th></tr>
+      <tr><td><span class="hl-blue">第一类危险源</span></td><td>生产过程中存在的，可能发生意外释放的能量（能量载体、危险物质）</td><td>运转的机械、炸药、液氨储罐</td></tr>
+      <tr><td><span class="hl-red">第二类危险源</span></td><td>导致能量或危险物质约束或限制措施破坏或失效的各种因素（人失误、物故障、环境因素）</td><td>操作规程缺失、防护装置失效</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">2025真题考法</div>
+      <p>2025年第1题：胶带机运转时用铁锹清理落料，操作规程缺少禁止清理的内容 → 属于<strong>第二类危险源</strong>（约束措施失效即操作规程缺失）</p>
+    </div>
+
+    <h4>4. 本质安全</h4>
+    <div class="info-card">
+      <div class="title">本质安全两大功能</div>
+      <p>1. <strong>失误-安全功能：</strong>操作者即使发生失误，系统也不会发生事故</p>
+      <p>2. <strong>故障-安全功能：</strong>设备发生故障时能自动转变为安全状态</p>
+      <p>强调设计理念、技术手段。连锁、自动等技术类装置属于典型的本质安全措施</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>二、事故致因原理（高频考点）</h3>
+    <table>
+      <tr><th>理论</th><th>核心内容</th><th>记忆关键词</th></tr>
+      <tr><td><strong>事故频发倾向理论</strong></td><td>个别具有事故频发倾向的人是事故主要原因</td><td>选人</td></tr>
+      <tr><td><strong>海因里希因果连锁</strong></td><td>遗传环境→人的缺点→人的不安全行为/物的不安全状态→事故→伤害</td><td>五块骨牌</td></tr>
+      <tr><td><strong>现代因果连锁理论</strong></td><td>管理缺陷→起源→人的缺点→人的不安全行为/物的不安全状态→事故→伤亡</td><td>博德修正</td></tr>
+      <tr><td><strong>能量意外释放理论</strong></td><td>事故是异常或不正常能量意外释放导致；防范：控制能量源、设置屏障</td><td>能量+屏障</td></tr>
+      <tr><td><strong>轨迹交叉理论</strong></td><td>人的不安全行为轨迹和物的不安全状态轨迹在同一时空交叉时发生事故</td><td>两条线交叉</td></tr>
+      <tr><td><strong>系统安全理论</strong></td><td>安全是相对的，不存在绝对安全；通过系统分析消除危险</td><td>无绝对安全</td></tr>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <h3>三、安全原理（4大原理14个原则）</h3>
+    <table>
+      <tr><th>原理</th><th>包含原则</th><th>记忆要点</th></tr>
+      <tr><td><strong>系统原理</strong></td><td>动态相关性原则、<span class="hl-red">整分合原则</span>、反馈原则、封闭原则</td><td>4个</td></tr>
+      <tr><td><strong>人本原理</strong></td><td>激励原则、动力原则、<span class="hl-red">能级原则</span>、行为原则</td><td>4个</td></tr>
+      <tr><td><strong>预防原理</strong></td><td><span class="hl-red">因果关系原则、偶然损失原则</span>、本质安全化原则、<span class="hl-red">3E原则</span></td><td>4个</td></tr>
+      <tr><td><strong>强制原理</strong></td><td><span class="hl-red">监督原则</span>、安全第一原则</td><td>2个</td></tr>
+    </table>
+    <div class="mnemonic">
+      <div class="label">速记口诀</div>
+      <p>系统「动整反封」｜人本「激动能行」｜预防「因偶本3E」｜强制「监安」</p>
+    </div>
+
+    <div class="info-card">
+      <div class="title">2025真题考法</div>
+      <p>2025年第2题：民航局禁止携带无"3C"标识充电宝乘坐航班 → 遵循<strong>偶然损失原则</strong>（预防原理）</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>四、安全心理与行为</h3>
+    <h4>气质类型与安全</h4>
+    <table>
+      <tr><th>气质类型</th><th>特点</th><th>安全注意</th></tr>
+      <tr><td>胆汁质</td><td>精力旺盛、冲动、易怒</td><td>接近"路怒症"群体</td></tr>
+      <tr><td>多血质</td><td>活泼好动、注意力易转移</td><td>适合多变工作</td></tr>
+      <tr><td>黏液质</td><td>安静稳重、反应缓慢</td><td>适合细致工作</td></tr>
+      <tr><td>抑郁质</td><td>敏感、孤僻、多愁善感</td><td>不适合高危岗位</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">易错心理状态</div>
+      <p>2025年第3题考"侥幸"心理：班长说"我经常干，没事没事"→属于<strong>侥幸心理</strong></p>
+      <p>其他常考心理状态：省能（图省事）、逆反、凑兴、好奇</p>
+    </div>
+  </div>
+
+  <!-- 练习题 -->
+  <div class="exercise-section">
+    <h3>配套练习题</h3>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">1</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2025年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">某企业胶带机运转班长在巡检中发现机尾落料较多，便在胶带机运转时用铁锹清理落料，作业时其衣袖和铁锹一起被卷入皮带造成重伤。事故调查发现，该企业《胶带机运转工操作规程》缺少胶带机运转时禁止清理落料的相关内容。根据危险源在事故发生、发展中的作用，关于运转时清理落料行为的说法，正确的是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 属于第二类危险源</li>
+        <li><span class="opt">B.</span> 属于第一类危险源</li>
+        <li><span class="opt">C.</span> 属于第四类危险源</li>
+        <li><span class="opt">D.</span> 属于第三类危险源</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">A</span></div>
+        <div class="analysis">操作规程缺失属于约束措施失效（人失误/管理缺陷），是导致能量意外释放的因素，属于第二类危险源。第一类危险源是能量本身（运转的胶带机）。</div>
+        <div class="q-tags">
+          <span class="q-tag">考点：危险源分类</span>
+          <span class="q-tag error">易错点：区分第一类/第二类</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">2</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2025年真题</span>
+        <span class="q-diff">★★</span>
+      </div>
+      <div class="q-text">中国民用航空局规定，自2025年6月份起，禁止旅客携带无"3C"标识的充电宝乘坐境内航班。根据预防原理及原则，该规定遵循的原则是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 偶然损失原则</li>
+        <li><span class="opt">B.</span> 因果关系原则</li>
+        <li><span class="opt">C.</span> "3E"原则</li>
+        <li><span class="opt">D.</span> 本质安全化原则</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">A</span></div>
+        <div class="analysis">偶然损失原则指事故所产生的后果是随机的，即使反复同类事故也不一定产生相同损失。禁止无3C标识充电宝是预防偶然损失的发生。</div>
+        <div class="q-tags"><span class="q-tag">考点：预防原理原则</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">3</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2024年真题</span>
+        <span class="q-diff">★★</span>
+      </div>
+      <div class="q-text">下列气质情绪类型中，接近"路怒症"群体气质情绪的是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 胆汁质</li>
+        <li><span class="opt">B.</span> 多血质</li>
+        <li><span class="opt">C.</span> 抑郁质</li>
+        <li><span class="opt">D.</span> 黏液质</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">A</span></div>
+        <div class="analysis">胆汁质的人精力旺盛、脾气急躁、易冲动，接近"路怒症"群体的气质特征。</div>
+        <div class="q-tags"><span class="q-tag">考点：气质类型与安全</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 核心掌握：事故隐患分类、危险源分类（第一类vs第二类）、事故致因5大理论、安全原理4大原则</p>
+    <p>2. 高频考法：结合具体场景判断属于哪类危险源、遵循哪个原则</p>
+    <p>3. 易错提醒：海因里希法则单位是"起数"不是"人数"；重大隐患"及时上报"不是"立即上报"</p>
+  </div>
+</div>
+
+<!-- ============ 第二章 ============ -->
+<div class="chapter" id="ch2">
+  <div class="chapter-header">
+    <span class="ch-num">第二章</span>
+    <h2>安全生产管理内容</h2>
+    <div class="ch-meta">
+      <span>分值：约 44-63 分</span>
+      <span class="high">★★★★★ 核心重点</span>
+      <span>占全卷50%以上</span>
+    </div>
+  </div>
+
+  <div class="syllabus-box">
+    <div class="label">考纲要求</div>
+    <p>本章是管理科目的绝对核心，涵盖安全生产责任制、规章制度、教育培训、三同时、重大危险源、特种设备、安全技术措施、安全生产费用、安全检查、隐患排查、个体防护、8大特殊作业、承包商管理、安全文化、安全生产标准化、双重预防机制等全部管理实务内容</p>
+  </div>
+
+  <div class="point-list">
+    <div class="label">高频考点清单（按考频排序）</div>
+    <ul>
+      <li class="high">8大特殊作业安全要求（动火、受限空间、盲板抽堵、高处、吊装、临时用电、动土、断路）<span class="freq high">2025年13分/2024年17分</span></li>
+      <li class="high">安全生产投入（安全费用使用范围）<span class="freq high">高频</span></li>
+      <li class="high">特种设备安全管理<span class="freq high">高频</span></li>
+      <li class="high">安全技术措施的类别（防止事故发生 vs 减少事故损失）<span class="freq high">高频</span></li>
+      <li class="high">重大危险源辨识、分级<span class="freq high">高频</span></li>
+      <li class="high">培训的内容、学时及三级安全教育培训<span class="freq high">高频</span></li>
+      <li class="high">"三同时"的相关要求及监管责任<span class="freq high">高频</span></li>
+      <li class="high">承包商管理<span class="freq high">高频</span></li>
+      <li class="high">安全生产规章制度建立流程<span class="freq high">高频</span></li>
+      <li class="high">安全操作规程的编制<span class="freq high">高频</span></li>
+      <li class="high">个体防护装备配备管理<span class="freq high">高频</span></li>
+      <li class="high">安全生产标准化定级管理<span class="freq high">高频</span></li>
+      <li class="high">隐患排查治理<span class="freq high">高频</span></li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <h3>一、安全生产责任制（主7条 vs 管7条）</h3>
+    <table>
+      <tr><th>人员</th><th>安全生产职责</th></tr>
+      <tr>
+        <td rowspan="7"><strong>主要负责人<br/>（主7条）</strong></td>
+        <td>1）建立健全并落实本单位全员安全生产责任制，加强安全生产<strong>标准化建设</strong></td>
+      </tr>
+      <tr><td>2）<strong>组织制定并实施</strong>本单位安全生产规章制度和操作规程</td></tr>
+      <tr><td>3）<strong>组织制定并实施</strong>本单位安全生产教育和培训计划</td></tr>
+      <tr><td>4）保证本单位安全生产<strong>投入</strong>的有效实施</td></tr>
+      <tr><td>5）组织建立并落实安全风险分级管控和隐患排查治理<strong>双重预防工作机制</strong>，督促、检查本单位的安全生产工作，及时<strong>消除</strong>生产安全事故隐患</td></tr>
+      <tr><td>6）<strong>组织制定并实施</strong>本单位的生产安全事故应急救援预案</td></tr>
+      <tr><td>7）及时、如实<strong>报告生产安全事故</strong></td></tr>
+      <tr>
+        <td rowspan="7"><strong>安管人员<br/>（管7条）</strong></td>
+        <td>1）<strong>组织或者参与</strong>拟定本单位安全生产规章制度、操作规程和生产安全事故应急救援预案</td>
+      </tr>
+      <tr><td>2）<strong>组织或者参与</strong>本单位安全生产教育和培训，如实记录安全生产教育和培训情况</td></tr>
+      <tr><td>3）组织开展危险源辨识和评估，<strong>督促落实</strong>本单位重大危险源的安全管理措施</td></tr>
+      <tr><td>4）<strong>组织或者参与</strong>本单位应急救援演练</td></tr>
+      <tr><td>5）检查本单位的安全生产状况，及时<strong>排查</strong>生产安全事故隐患，提出改进安全生产管理的建议</td></tr>
+      <tr><td>6）<strong>制止和纠正</strong>违章指挥、强令冒险作业、违反操作规程的行为</td></tr>
+      <tr><td>7）<strong>督促落实</strong>本单位安全生产整改措施</td></tr>
+    </table>
+    <div class="mnemonic">
+      <div class="label">速记口诀</div>
+      <p>主7条：责任制+标准化｜规章+操作规程｜教培计划｜投入｜双重预防+消除隐患｜应急预案｜报告事故</p>
+      <p>管7条：组织/参与（拟定+教培+演练）｜督促落实（重大危险源+整改）｜排查隐患｜制止违章</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>二、安全生产规章制度体系（4大体系）</h3>
+    <table>
+      <tr><th>体系</th><th>内容要点</th></tr>
+      <tr><td><strong>综合管理体系</strong></td><td>涉及全员性制度：安全生产责任制、安全管理定期例行工作制度、承包与发包工程安全管理制度、安全设施和费用管理制度、重大危险源管理制度、隐患排查和治理制度、应急管理制度、安全奖惩制度等</td></tr>
+      <tr><td><strong>人员管理制度体系</strong></td><td>岗健护工教作业：安全教育培训制度、劳动防护用品发放使用制度、特种作业及特殊危险作业管理制度、岗位安全规范、职业健康检查制度、现场作业安全管理制度等</td></tr>
+      <tr><td><strong>设备设施制度体系</strong></td><td>3同3定1操："三同时"制度、定期巡视检查制度、定期维护检修制度、定期检测检验制度、安全操作规程</td></tr>
+      <tr><td><strong>环境制度体系</strong></td><td>环卫标志：安全标志管理制度、作业环境管理制度、职业卫生管理制度</td></tr>
+    </table>
+
+    <h4>规章制度编写流程</h4>
+    <ol>
+      <li><strong>起草：</strong>安全部门或相关职能部门</li>
+      <li><strong>会签：</strong>目的是利于实施，公开征求意见</li>
+      <li><strong>审核：</strong>专业性强的由专家审；全员性的由职工代表审；合规性由法务部门审</li>
+      <li><strong>签发：</strong>专业性强的由生产领导或总工签发；全员性的由<strong>主要负责人</strong>签发</li>
+      <li><strong>发布：</strong>固定方式，红头文件或内部办公网络</li>
+    </ol>
+    <div class="warn-card">
+      <div class="title">易错点</div>
+      <p>安全操作规程类规章制度，除<strong>每年</strong>进行审查和修订外，每<strong>3-5年</strong>应进行一次全面修订。2025年第6题考建设项目管理办法的签发人→企业法定代表人（主要负责人）签发</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>三、安全操作规程编制</h3>
+    <h4>编写依据</h4>
+    <div class="mnemonic">
+      <div class="label">速记口诀</div>
+      <p>"法规说案例" —— 法规标准 + 说明书及设备原理 + 事故案例 + 作业环境条件</p>
+    </div>
+    <h4>编写内容（8项）</h4>
+    <ol>
+      <li>操作前的准备</li>
+      <li>劳动防护用品的穿戴要求</li>
+      <li>操作的先后顺序、方式</li>
+      <li>操作过程中手柄、开关所处位置</li>
+      <li>操作过程需要进行的测试和调整</li>
+      <li>操作人员所处的位置和操作姿势</li>
+      <li>操作过程中禁止的行为</li>
+      <li>异常情况如何处理</li>
+    </ol>
+    <div class="warn-card">
+      <div class="title">不包括的内容</div>
+      <p>操作规程<strong>不包括</strong>维修步骤、设备原理资料及图表</p>
+    </div>
+    <div class="info-card">
+      <div class="title">修订时机</div>
+      <p>根据生产工艺变化、材料变化及<span class="hl-red">"四新"</span>（新技术、新标准、新工艺、新装备）应用，及时修订</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>四、安全教育培训内容及学时</h3>
+    <table>
+      <tr><th>对象</th><th>初次培训学时</th><th>再培训学时</th><th>备注</th></tr>
+      <tr><td colspan="4"><strong>主要负责人 / 安管人员</strong></td></tr>
+      <tr><td>煤矿、非煤矿山、危化、烟花、金属冶炼</td><td><span class="hl-red">48学时</span></td><td><span class="hl-red">16学时</span></td><td>"鲜花金矿"</td></tr>
+      <tr><td>其他单位</td><td>32学时</td><td>12学时</td><td></td></tr>
+      <tr><td colspan="4"><strong>新从业人员三级培训</strong></td></tr>
+      <tr><td>高危企业（煤矿、非煤矿山、危化、烟花、金属冶炼）</td><td><span class="hl-red">72学时</span></td><td><span class="hl-red">20学时/年</span></td><td></td></tr>
+      <tr><td>其他单位</td><td>24学时</td><td>0</td><td></td></tr>
+    </table>
+
+    <div class="info-card">
+      <div class="title">三级培训内容区分</div>
+      <p><strong>厂级：</strong>安全风险辨识、安全生产管理目标、规章制度、劳动纪律、从业人员权利义务、事故案例</p>
+      <p><strong>车间级：</strong>本岗位安全风险辨识、安全设施和防护用品使用、岗位安全职责和操作技能、自救互救、事故案例</p>
+      <p><strong>班组级：</strong>岗位安全操作规程、岗位间工作衔接配合、安全风险分析方法和控制对策、事故案例</p>
+    </div>
+
+    <div class="warn-card">
+      <div class="title">特殊规定</div>
+      <p>1. <strong>劳务派遣：</strong>生产经营单位负责安全操作规程培训</p>
+      <p>2. 矿山新招井下人员、危化新招危险工艺操作人员，应在老师傅带领下实习满<strong>2个月</strong>方可独立顶岗</p>
+      <p>3. 特种作业操作证有效期<strong>6年</strong>，每<strong>3年</strong>复审1次；连续从事本工种10年以上且守法，复审可延长至<strong>每6年1次</strong>；复审前培训不少于<strong>8学时</strong></p>
+      <p>4. 转岗/离岗：原则上车间培训；电力行业离岗3个月以上需车间培训</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>五、建设项目安全设施"三同时"</h3>
+    <h4>1. 监管主体</h4>
+    <p><strong>属地监管：</strong>项目所在地应急管理部门</p>
+    <p><strong>特殊情况（跨区域）：</strong>共同上一级应急部门监管，可向下一级委托</p>
+    <p><strong>由应急管理部直接监管的项目：</strong></p>
+    <ul>
+      <li>海洋石油天然气；陆地油田年产量≥100万吨；天然气年产量≥20亿方</li>
+      <li>露天矿山边坡≥200m或年产量≥1000万吨；地下矿山开采深度≥1000m或年产量≥300万吨</li>
+      <li>尾矿库坝高≥200m或总库容≥1亿方</li>
+    </ul>
+
+    <h4>2. 设计审查</h4>
+    <p>需提交资料：①建设项目审批/核准/备案文件 ②安全设施设计审查申请 ③设计单位资质证明 ④安全设施设计 ⑤安全预评价报告</p>
+    <p>受理时限：5工作日 → 批准时限：20+10工作日</p>
+
+    <h4>3. 竣工验收</h4>
+    <div class="info-card">
+      <div class="title">关键流程与数字</div>
+      <p>1. 先试运行，时间<strong>30-180日</strong>，化工/危化需将试运行方案备案</p>
+      <p>2. 试运行结束后进行验收评价，最后竣工验收</p>
+      <p>3. <strong>所有项目均由甲方组织</strong>，唯一特例是应急管理部监管的项目</p>
+      <p>4. 甲方形成竣工验收报告，高危项目接受监管部门<strong>10%抽查</strong></p>
+      <p>5. 设计变更：甲方到原审批部门再次审查同意</p>
+    </div>
+
+    <h4>4. 危大工程</h4>
+    <p>施工单位编写专项施工方案 → <strong>施工单位技术负责人和监理单位总监</strong>签字后实施</p>
+
+    <div class="warn-card">
+      <div class="title">罚款规定</div>
+      <p>以下情况之一：停工+限期改正；逾期未改，企业<strong>50-100万</strong>，个人<strong>2-5万</strong>：①高危项目未进行安全评价 ②高危项目无安全设施设计或设计未审查同意 ③施工单位未按批准设计施工 ④未验收合格出具合格报告</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>六、重大危险源管理</h3>
+    <h4>1. 单元划分</h4>
+    <ul>
+      <li><strong>生产单元：</strong>一条生产线一个单元，切断阀可以单独划分独立单元</li>
+      <li><strong>储存单元：</strong>库房按独立建筑物划分，罐区以防火堤划分</li>
+    </ul>
+    <h4>2. 辨识</h4>
+    <p><strong>q₁/Q₁ + q₂/Q₂ + … ≥ 1</strong>，构成重大危险源</p>
+    <p>库房按储存能力计算，储罐按设计量计算</p>
+    <h4>3. 分级（R值）</h4>
+    <table>
+      <tr><th>级别</th><th>R值</th><th>厂外暴露人数</th><th>校正系数 α</th></tr>
+      <tr><td><span class="hl-red">一级</span></td><td>R ≥ 100</td><td>≥100人</td><td>2.0</td></tr>
+      <tr><td><span class="hl-red">二级</span></td><td>100 > R ≥ 50</td><td>50-99人</td><td>1.5</td></tr>
+      <tr><td>三级</td><td>50 > R ≥ 10</td><td>30-49人</td><td>1.2</td></tr>
+      <tr><td>四级</td><td>R < 10</td><td>1-29人</td><td>1.0</td></tr>
+      <tr><td>—</td><td>—</td><td>0人</td><td>0.5</td></tr>
+    </table>
+    <h4>4. 关键数字</h4>
+    <div class="info-card">
+      <div class="title">必背数字</div>
+      <p>评估/评价周期：<strong>3年</strong>｜备案时间：<strong>15日</strong>｜电子数据保存：<strong>≥30天</strong>｜造成<strong>10人以上受伤</strong>需重新辨识和评估</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>七、特种设备分类</h3>
+    <table>
+      <tr><th>类别</th><th>参数</th></tr>
+      <tr><td>承压锅炉</td><td>热水：0.1MPa+0.1MW ｜ 蒸汽：0.1MPa+30L ｜ 有机：0.1MW</td></tr>
+      <tr><td>压力容器</td><td>移动/固定式：0.1MPa+30L+150mm ｜ 气瓶：0.2MPa+1.0MPa·L</td></tr>
+      <tr><td>压力管道</td><td>0.1MPa+50mm（<1.6MPa且<150mm无毒无腐蚀不燃气体除外）</td></tr>
+      <tr><td>起重机械</td><td>3t+2m</td></tr>
+      <tr><td>升降机</td><td>0.5t</td></tr>
+      <tr><td>装卸桥</td><td>300t/h+2m</td></tr>
+      <tr><td>塔吊</td><td>40t·m+2m</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">易错点：不属于特种设备的</div>
+      <p>电动葫芦、手动葫芦、卷扬机、汽车起重机<span class="hl-red">不属于</span>特种设备</p>
+      <p>叉车、旅游观光车、客运索道、大型游乐设施、电站锅炉、无缝气瓶、铁路罐车、氧舱<span class="hl-green">属于</span>特种设备</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>八、安全技术措施</h3>
+    <h4>按导致事故的原因分类（核心考点）</h4>
+    <table>
+      <tr><th>类别</th><th>措施</th><th>举例</th></tr>
+      <tr><td rowspan="5"><strong>防止事故发生<br/>（预防）</strong></td><td>①消除危险源</td><td>用新型制冷剂替代液氨（从1→0）</td></tr>
+      <tr><td>②限制能量或危险物质</td><td>安全电压、静电消除器、粉尘通风机、安全接地（从1→0.5）</td></tr>
+      <tr><td>③隔离</td><td>防护罩、防护栏杆</td></tr>
+      <tr><td>④故障-安全设计</td><td>漏电保护器、过载保护、锅炉熄火保护、光控断电（本质安全）</td></tr>
+      <tr><td>⑤减少故障和失误</td><td>无损检测、检维修、探伤</td></tr>
+      <tr><td rowspan="4"><strong>减少事故损失<br/>（减损）</strong></td><td>①隔离</td><td>防火门、阻火器、防爆墙、防爆水袋</td></tr>
+      <tr><td>②设置薄弱环节</td><td>易熔塞、熔断器、爆破片、安全阀、泄压门窗</td></tr>
+      <tr><td>③个体防护</td><td>劳保用品</td></tr>
+      <tr><td>④避难与救援</td><td>安全出口、疏散通道、应急照明</td></tr>
+    </table>
+    <div class="info-card">
+      <div class="title">优先级与特殊情形</div>
+      <p>1. <strong>优先级：</strong>先预防再减损，预防措施按"消限隔+本安"顺序</p>
+      <p>2. 安全监控系统、喷淋系统<strong>既是防止也是减损</strong>的安全技术措施</p>
+    </div>
+
+    <div class="warn-card">
+      <div class="title">2024真题考法</div>
+      <p>2024年第14题：海洋油气平台设置防爆墙保护生活区 → 属于<strong>减少事故损失的隔离</strong>措施。注意区分"防止事故发生的隔离"（防护罩）vs"减少事故损失的隔离"（防爆墙）</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>九、安全生产费用的使用范围（9项）</h3>
+    <ol>
+      <li>完善、改造和维护安全防护设施设备支出（监控、通风、防火、防爆、防毒、防雷、防静电等）</li>
+      <li>应急救援器材、设备支出和队伍建设、预案制修订与演练支出</li>
+      <li>重大危险源检测、评估、监控支出，风险分级管控和隐患排查整改支出，安全生产信息系统建设运维</li>
+      <li>安全生产检查、评估、咨询和标准化建设支出</li>
+      <li>配备和更新现场作业人员安全防护用品支出</li>
+      <li>安全生产宣传、教育、培训和从业人员发现并报告事故隐患的奖励支出</li>
+      <li>安全生产适用的新技术、新标准、新工艺、新装备的推广应用支出</li>
+      <li>安全设施及特种设备检测检验、检定校准支出</li>
+      <li>安全生产责任保险及承运人责任保险支出</li>
+    </ol>
+    <div class="warn-card">
+      <div class="title">易错点：不属于安措费的项目</div>
+      <p>2025年第16题考此点：酿酒设备车间改建项目安全预评价的费用<span class="hl-red">不属于</span>安措费使用范围（属于建设项目投资）</p>
+      <p>2025年第13题：给员工发放报告事故隐患奖励支出<span class="hl-green">属于</span>安措费；火电厂脱硫设备升级改造<span class="hl-red">不属于</span></p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>十、8大特殊作业（超高频考点）</h3>
+    <div class="exam-alert">
+      <div class="title">考情预警</div>
+      <p>2025年考查13分、2024年考查17分，是管理科目分值最高的单一考点！必须重点掌握每个作业的安全要求、审批流程、票证有效期</p>
+    </div>
+    <table>
+      <tr><th>作业</th><th>票证有效期</th><th>关键安全要求</th></tr>
+      <tr><td><strong>动火作业</strong></td><td>特殊动火≤8h；一级动火≤8h；二级动火≤72h</td><td>气体分析（30min内）；特级/一级需色谱分析</td></tr>
+      <tr><td><strong>受限空间作业</strong></td><td>作业中断超60min需重新分析</td><td>氧含量19.5%-21%；先通风、再检测、后作业；专人监护</td></tr>
+      <tr><td><strong>盲板抽堵作业</strong></td><td>—</td><td>降低系统压力0.05MPa；距动火点≥30m；24h无回复≠默认同意</td></tr>
+      <tr><td><strong>高处作业</strong></td><td>—</td><td>分级：2-5m（一级）至h≥30m（四级/特级）；六级以上大风停止作业</td></tr>
+      <tr><td><strong>吊装作业</strong></td><td>—</td><td>一级（≥100t）；两台吊车每台载荷≤额定80%；六级大风停止</td></tr>
+      <tr><td><strong>临时用电</strong></td><td>—</td><td>设置保护开关+接地保护；绝缘导线耐压≥500V；每台工具独立漏电保护</td></tr>
+      <tr><td><strong>动土作业</strong></td><td>—</td><td>地下管线确认；防止坍塌</td></tr>
+      <tr><td><strong>断路作业</strong></td><td>—</td><td>设置警示标志；交通疏导</td></tr>
+    </table>
+
+    <div class="warn-card">
+      <div class="title">2025真题易错点</div>
+      <p>第10题临时用电：临时用电线路应采用耐压等级不低于<strong>500V</strong>（非400V）的绝缘导线；每个移动电动工具应<strong>独立</strong>使用漏电保护器（非共用）</p>
+      <p>第17题盲板抽堵：审批人<strong>不能</strong>在作业现场外完成审批；24h无回复<strong>不等于</strong>默认同意；距动火点≥30m</p>
+    </div>
+
+    <div class="info-card">
+      <div class="title">受限空间关键数字区分</div>
+      <p><strong>危化企业（GB30871）：</strong>作业中断超<strong>60min</strong>需重新分析</p>
+      <p><strong>工贸企业（暂行规定）：</strong>作业中断超<strong>30min</strong>需重新通风、检测</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>十一、承包商管理</h3>
+    <h4>生产经营单位的责任</h4>
+    <ol>
+      <li>签订专门安全管理协议或合同中约定各自职责</li>
+      <li>对项目安全生产工作统一协调、管理</li>
+      <li><strong>严禁以某一部门名义进行发包</strong></li>
+      <li>对承包商人员进行全员安全教育，审查安全作业规程、施工方案、应急预案</li>
+      <li>承包商主管部门先审查<strong>业务资质</strong>，安全管理部门再审查<strong>安全资质</strong></li>
+      <li>向承包商进行安全交底</li>
+      <li>对承包商作业进行全过程监督</li>
+      <li>定期评价安全业绩，不能履职的予以清退</li>
+    </ol>
+    <h4>承包商的责任</h4>
+    <ol>
+      <li>负责施工作业中的隐患排查整改</li>
+      <li>对施工现场危险区域进行隔离（但作业区域与生产区域的隔离由生产经营单位实施）</li>
+      <li>特种设备须取得使用许可证后方可使用</li>
+      <li>分包服从总包协调管理，总包对施工现场负总责</li>
+      <li>事故管理：分包纳入总包，总包纳入生产经营单位</li>
+    </ol>
+  </div>
+
+  <div class="section-block">
+    <h3>十二、安全生产标准化</h3>
+    <h4>8个一级要素、28个二级要素</h4>
+    <table>
+      <tr><th>一级要素</th><th>二级要素</th></tr>
+      <tr><td>1.目标职责</td><td>目标、机构和职责、全员参与、安全生产投入、安全文化建设、安全生产信息化建设</td></tr>
+      <tr><td>2.制度化管理</td><td>法规标准识别、规章制度、操作规程、文档管理</td></tr>
+      <tr><td>3.教育培训</td><td>教育培训管理、人员教育培训</td></tr>
+      <tr><td>4.现场管理</td><td>设备设施管理、作业安全、职业健康、警示标志</td></tr>
+      <tr><td>5.安全风险管控及隐患排查治理</td><td>安全风险管理、重大危险源辨识与管理、隐患排查治理、预测预警</td></tr>
+      <tr><td>6.应急管理</td><td>应急准备、应急处置、应急评估</td></tr>
+      <tr><td>7.事故管理</td><td>报告、调查和处理、管理</td></tr>
+      <tr><td>8.持续改进</td><td>绩效评定、绩效改进</td></tr>
+    </table>
+
+    <h4>定级管理</h4>
+    <div class="warn-card">
+      <div class="title">2024真题考点</div>
+      <p>定级有效期到期再次申请原等级的条件：前2年内未发生人员死亡事故，且前1年内未发生较大及以上事故等。2024年第15题考不具备直接公示条件的企业</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>十三、危险有害因素分类（GB/T 13861）</h3>
+    <table>
+      <tr><th>类别</th><th>内容</th></tr>
+      <tr><td><strong>人的因素</strong></td><td>生理/心理/行为缺陷；加班、脱岗、三违（违章操作、违章指挥、违反劳动纪律）、监护失误</td></tr>
+      <tr><td><strong>物的因素</strong></td><td>物理因素：防护缺陷、设备附件缺陷、电、噪声振动、辐射、运动物、标志缺陷、信号缺陷等；化学因素：粉尘、化学物质</td></tr>
+      <tr><td><strong>环境因素</strong></td><td>地面湿滑、凹凸不平、梯架缺陷、通道狭窄、照明不良、安全出口缺陷等。需结合题干判断室内/室外/地下</td></tr>
+      <tr><td><strong>管理因素</strong></td><td>制度不完善或未执行、投入不足、机构或专职、应急管理</td></tr>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <h3>十四、安全标志</h3>
+    <table>
+      <tr><th>标志类型</th><th>颜色</th><th>含义</th></tr>
+      <tr><td><strong>禁止标志</strong></td><td>圆环与斜杠<strong>红色</strong>，图形符号黑色，背景<strong>白色</strong></td><td>禁止人们不安全行为</td></tr>
+      <tr><td><strong>警告标志</strong></td><td>正三角形<strong>黑色</strong>边框，符号黑色，背景<strong>黄色</strong></td><td>提醒注意可能危险</td></tr>
+      <tr><td><strong>指令标志</strong></td><td>圆形，背景<strong>蓝色</strong>，图形符号白色</td><td>强制人们必须做出动作</td></tr>
+      <tr><td><strong>提示标志</strong></td><td>方形，背景<strong>绿色</strong>，图形符号及文字白色</td><td>提供目标信息</td></tr>
+    </table>
+    <div class="info-card">
+      <div class="title">管理要求</div>
+      <p>标志牌材质：坚固耐用，有触电危险的场所使用绝缘材料</p>
+      <p>悬挂高度：下缘距地面<strong>≥2m</strong></p>
+      <p>检查周期：<strong>半年</strong></p>
+    </div>
+  </div>
+
+  <!-- 练习题 -->
+  <div class="exercise-section">
+    <h3>配套练习题</h3>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">1</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2025年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">某企业安全操作规程制度规定，关于安全操作规程的编制，下列说法正确的是（ ）。（根据操作规程编写内容判断）</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 操作规程中应包含设备原理资料和维修步骤</li>
+        <li><span class="opt">B.</span> 操作规程编写依据包括法规标准、说明书、事故案例和作业环境条件</li>
+        <li><span class="opt">C.</span> 操作规程每1-2年应进行一次全面修订</li>
+        <li><span class="opt">D.</span> 操作规程由安全管理部门单独编写即可</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">B</span></div>
+        <div class="analysis">A错误，操作规程不包括维修步骤、设备原理资料及图表；C错误，全面修订周期为3-5年（每年仅审查修订）；D错误，需征求设备部门和使用部门意见后审核签发。B正确，"法规说案例"。</div>
+        <div class="q-tags"><span class="q-tag">考点：安全操作规程编制</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">2</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2025年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">某电力企业对下属单位上报的安全生产费用计划进行审查。下列支出中，属于安全生产费用列支范围的是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 火电厂脱硫设备升级改造费用</li>
+        <li><span class="opt">B.</span> 给员工发放报告事故隐患奖励支出</li>
+        <li><span class="opt">C.</span> 供配电系统电缆和变压设备支出</li>
+        <li><span class="opt">D.</span> 新建海洋风电场的信息化网络费用</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">B</span></div>
+        <div class="analysis">安措费第6项明确包含"从业人员发现并报告事故隐患的奖励支出"。A、C属于正常生产经营投入，D属于新建项目投资。</div>
+        <div class="q-tags"><span class="q-tag">考点：安全生产费用使用范围</span><span class="q-tag error">高频易错</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">3</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2024年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">海洋油气开采平台由于空间有限，油气分离工艺区往往与生活区紧邻布置，为了保护海上油气开采平台生活区的人员安全，需要设置防爆墙作为重要的防护措施。该防爆墙属于（ ）措施。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 减少事故损失的隔离</li>
+        <li><span class="opt">B.</span> 防止事故发生的隔离</li>
+        <li><span class="opt">C.</span> 防止事故发生的限制能量</li>
+        <li><span class="opt">D.</span> 减少事故损失的设置薄弱环节</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">A</span></div>
+        <div class="analysis">防爆墙是在事故发生后限制事故影响范围的措施，属于"减少事故损失的隔离"。注意与"防止事故发生的隔离"（如防护罩，阻止事故发生）区分。</div>
+        <div class="q-tags"><span class="q-tag">考点：安全技术措施分类</span><span class="q-tag error">高频易错</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">4</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2024年真题</span>
+        <span class="q-diff">★★</span>
+      </div>
+      <div class="q-text">某化肥生产企业开展大检修露天作业，需要对造粒塔部分管线进行拆除更换，其中最大吊物重量为35t。下列吊装作业安全管理要求中，错误的是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 吊装管线长径比大，编制的作业方案经过审批方可作业</li>
+        <li><span class="opt">B.</span> 利用两台额定能力40t的起重机械作业时，每台起重机械最大允许载荷为34t</li>
+        <li><span class="opt">C.</span> 如遇六级以上大风时应停止作业</li>
+        <li><span class="opt">D.</span> 指挥人员应佩戴明显的标志，并按规定的联络信号进行指挥</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">B</span></div>
+        <div class="analysis">两台起重机械共同作业时，每台最大允许载荷不超过额定能力的80%，即40t×80%=32t，而非34t。</div>
+        <div class="q-tags"><span class="q-tag">考点：吊装作业安全管理</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">5</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2025年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">某企业在开展液氨泄漏事故应急演练过程中，当模拟液氨泄漏警报响起后，由于应急指挥中心未能及时联系到抢险组负责人，现场处置人员不熟悉新型堵漏工具的使用，延误了泄漏控制，造成新入职员工受到伤害。根据上述案例，演练评估报告应关注的内容是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 应急预案是否通过专家评审并备案</li>
+        <li><span class="opt">B.</span> 应急物资清单是否覆盖所有设备类型</li>
+        <li><span class="opt">C.</span> 预案修订是否按规定每三年进行一次</li>
+        <li><span class="opt">D.</span> 预案的职责分工与现场处置行动的一致性</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">D</span></div>
+        <div class="analysis">案例核心问题是"未能及时联系到抢险组负责人"（职责分工不清）和"不熟悉新型工具"（培训不到位），评估应关注预案的职责分工与现场处置行动的一致性。</div>
+        <div class="q-tags"><span class="q-tag">考点：应急演练评估</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 本章占全卷50%以上，是绝对核心。8大特殊作业（2025年13分）、安全费用、特种设备、安全技术措施、重大危险源是重中之重</p>
+    <p>2. <strong>主7条vs管7条</strong>必须背熟，注意区分"组织制定并实施"（主要负责人）vs"组织或参与"（安管人员）</p>
+    <p>3. 安全技术措施分类是高频易错点：防爆墙=减损隔离，防护罩=预防隔离</p>
+    <p>4. 安措费9大使用范围要能判断属于/不属于，特别注意新建项目投资≠安措费</p>
+    <p>5. 2025年超纲题占比高，需关注新实施规范如GB2894-2025等</p>
+  </div>
+</div>
+
+<!-- ============ 第三章 ============ -->
+<div class="chapter" id="ch3">
+  <div class="chapter-header">
+    <span class="ch-num">第三章</span>
+    <h2>安全评价</h2>
+    <div class="ch-meta">
+      <span>分值：7→17分（2025暴涨）</span>
+      <span class="high">★★★★ 重点关注</span>
+      <span class="up">政策导向：注安可从事安全评价</span>
+    </div>
+  </div>
+
+  <div class="syllabus-box">
+    <div class="label">考纲要求</div>
+    <p>掌握安全评价的程序和内容；熟悉危险、有害因素辨识方法（GB6441事故分类20类、GB/T13861四类因素）；掌握常用安全评价方法（SCA、PHA、HAZOP、FMEA、ETA、FTA等）的特点和适用范围</p>
+  </div>
+
+  <div class="exam-alert">
+    <div class="title">考情预警</div>
+    <p>2025年安全评价从历年7分暴涨至<strong>17分</strong>！原因：2024年底应急部门出台政策，注册安全工程师可从事安全评价机构的安全评价工作。2026年预计仍将保持高分值，<strong>安全评价方法的实际使用</strong>是核心考查方向</p>
+  </div>
+
+  <div class="point-list">
+    <div class="label">考点清单</div>
+    <ul>
+      <li class="high">安全评价方法（SCA/PHA/HAZOP/FMEA/ETA/FTA等）特点及选用<span class="freq high">2025年13分</span></li>
+      <li class="high">危险、有害因素辨识（GB6441 20类事故分类）<span class="freq high">高频</span></li>
+      <li>安全评价的程序和内容<span class="freq high">高频</span></li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <h3>一、安全评价程序</h3>
+    <table>
+      <tr><th>步骤</th><th>内容</th></tr>
+      <tr><td>1. 前期准备</td><td>备齐设备工具，收集法律法规、技术标准及技术资料</td></tr>
+      <tr><td>2. 辨识危害因素</td><td>确定危险有害因素存在的部位、方式和事故发生途径</td></tr>
+      <tr><td>3. 划分评价单元</td><td>科学合理、便于实施、相对独立、特征界限明显。包括：人力与管理、设备与设施、物料与材料、方法与工艺、环境与场所</td></tr>
+      <tr><td>4. 定性定量评价</td><td>不同评价单元可采用不同评价方法</td></tr>
+      <tr><td>5. 提出对策措施建议</td><td>遵循针对性、技术可行性、经济合理性原则</td></tr>
+      <tr><td>6. 作出评价结论</td><td>安全评价报告是技术性指导文件</td></tr>
+      <tr><td>7. 编制评价报告</td><td>A4幅面，左侧装订</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">2024真题考点</div>
+      <p>2024年第3题：安全评价程序辨析——李某说"根据事故发生的可能性及严重程度，开展定性、定量风险评价工作"<strong>正确</strong>。王某说"先划分评价单元后才能辨识危险有害因素"<strong>错误</strong>（应先辨识后划分）</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>二、GB6441 事故类别20类</h3>
+    <table>
+      <tr><th>类别数</th><th>事故类型</th></tr>
+      <tr><td><strong>11类（最多）</strong></td><td>物体打击、车辆伤害、起重伤害、机械伤害、触电、淹溺、灼烫、火灾、高处坠落、坍塌、中毒和窒息</td></tr>
+      <tr><td><strong>5类（爆炸类）</strong></td><td>火药爆炸、瓦斯爆炸、锅炉爆炸、容器爆炸、其他爆炸</td></tr>
+      <tr><td><strong>3类（矿山类）</strong></td><td>冒顶片帮、透水、放炮</td></tr>
+      <tr><td><strong>1类</strong></td><td>其他伤害</td></tr>
+    </table>
+    <div class="mnemonic">
+      <div class="label">速记口诀</div>
+      <p>11类："物车起机触，淹灼火高坍，中毒窒息" ｜ 5类爆炸："火瓦锅容其他"</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>三、常用安全评价方法（核心必背）</h3>
+    <table>
+      <tr><th>方法</th><th>代号</th><th>定性/定量</th><th>核心特点</th><th>关键词</th></tr>
+      <tr><td>安全检查表法</td><td>SCA</td><td>定性</td><td>编表多、工作量大，受编表人员影响</td><td>检查表</td></tr>
+      <tr><td>危险指数法</td><td>RR</td><td>定量</td><td>以固有属性为基础</td><td>固有属性</td></tr>
+      <tr><td>预先危险分析</td><td>PHA</td><td>定性</td><td>划分四个危险等级，项目初期使用</td><td>预先、在之前</td></tr>
+      <tr><td>故障假设分析</td><td>WI</td><td>定性</td><td>提出问题解决问题，需熟悉工艺的专业人员</td><td>假设</td></tr>
+      <tr><td>危险和可操作性研究</td><td>HAZOP</td><td>定性</td><td>强调工艺、找偏差，背景各异专家组</td><td>偏差</td></tr>
+      <tr><td>故障类型和影响分析</td><td>FMEA</td><td>定性</td><td>辨识故障模式、找出原因</td><td>故障类型</td></tr>
+      <tr><td><strong>事件树分析法</strong></td><td>ETA</td><td>定性/定量</td><td><strong>由原因到结果，归纳推理</strong></td><td>初始事件</td></tr>
+      <tr><td><strong>故障树分析法</strong></td><td>FTA</td><td>定性/定量</td><td><strong>由结果到原因，演绎推理</strong></td><td>顶上事件</td></tr>
+      <tr><td>作业条件危险性评价</td><td>JRA</td><td>定性</td><td>D=L×E×C</td><td>—</td></tr>
+      <tr><td>专家评议法</td><td>—</td><td>定性</td><td>专家评议、专家质疑</td><td>类比工程</td></tr>
+    </table>
+
+    <div class="warn-card">
+      <div class="title">ETA vs FTA 核心区分（必考）</div>
+      <p><strong>ETA（事件树）：</strong>由原因→结果，<strong>归纳推理</strong>，初始事件出发</p>
+      <p><strong>FTA（故障树）：</strong>由结果→原因，<strong>演绎推理</strong>，顶上事件出发</p>
+      <p>2025年第14题考ETA：事件树是一种<strong>归纳逻辑树图</strong>，能够展示事故发生的<strong>动态发展过程</strong>，并提供事故后果的概率计算</p>
+    </div>
+
+    <h4>预先危险分析法（PHA）危险等级划分</h4>
+    <table>
+      <tr><th>等级</th><th>含义</th><th>特征</th></tr>
+      <tr><td>Ⅰ级</td><td>安全的</td><td>不会造成人员伤亡和系统损坏</td></tr>
+      <tr><td>Ⅱ级</td><td>临界的</td><td>处于事故边缘状态，暂时不会造成人员伤亡和系统损坏</td></tr>
+      <tr><td>Ⅲ级</td><td>危险的</td><td>会造成人员伤亡和系统损坏，应立即采取防范措施</td></tr>
+      <tr><td>Ⅳ级</td><td>灾难性的</td><td>造成人员严重伤亡及系统严重破坏</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">2024真题考点</div>
+      <p>2024年第4题考PHA危险等级：液体冻结后液位正常暂时不会造成系统损坏→<strong>Ⅰ级（安全的）</strong>；巡检发现冻裂→<strong>Ⅲ级（危险的）</strong></p>
+    </div>
+  </div>
+
+  <!-- 练习题 -->
+  <div class="exercise-section">
+    <h3>配套练习题</h3>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">1</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2025年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">在某企业大型装置操作失误危险性安全技术讨论会上，员工甲建议采用事件树分析（ETA）方法进行分析。关于事件树分析方法的说法，正确的是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> ETA采用演绎推理方法，从事故结果反向追溯原因，适用于定量计算最小割集</li>
+        <li><span class="opt">B.</span> ETA是一种归纳逻辑树图，能够展示事故发生的动态发展过程，并提供事故后果的概率计算</li>
+        <li><span class="opt">C.</span> ETA主要用于静态系统分析，通过故障类型识别评估设备可靠性</li>
+        <li><span class="opt">D.</span> ETA虽无法结合概率进行定量风险评估，但能进行定性分析</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">B</span></div>
+        <div class="analysis">A描述的是FTA（故障树），ETA是归纳推理不是演绎推理；C描述的是FMEA；ETA既可定性也可定量分析，D错误。</div>
+        <div class="q-tags"><span class="q-tag">考点：安全评价方法-ETA</span><span class="q-tag error">高频必考</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">2</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2024年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">某石油化工企业可燃液体储罐区呼吸阀排出的气体在进入焚烧装置前需进行气液分离。如气液分离罐无保温措施，冬季可能导致液体冻结。按照预先危险性分析方法，关于气液分离罐危险性等级的说法，正确的是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 巡检人员发现液体冻结膨胀导致气液分离罐体破裂，此时危险性为Ⅲ级</li>
+        <li><span class="opt">B.</span> 液体冻结后，液位处于正常范围时，暂时不会造成系统损坏，此时危险性为Ⅰ级</li>
+        <li><span class="opt">C.</span> 巡检人员发现液体冻结后，采取了正确的应急措施，此时危险性为Ⅱ级</li>
+        <li><span class="opt">D.</span> 液体部分冻结后，液位上升直至系统触发高液位报警，此时危险性为Ⅳ级</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">A</span></div>
+        <div class="analysis">罐体破裂会造成人员伤亡和系统损坏，属于Ⅲ级（危险的）。B为Ⅰ级（安全的，暂时不损坏）；C采取应急措施后应为Ⅰ或Ⅱ级；D高液位报警只是预警，未造成损坏，应为Ⅱ级。</div>
+        <div class="q-tags"><span class="q-tag">考点：PHA危险等级划分</span></div>
+      </div>
+    </div>
+
+    <div class="question">
+      <div class="q-header">
+        <span class="q-num">3</span>
+        <span class="q-type single">单选</span>
+        <span class="q-year">2024年真题</span>
+        <span class="q-diff">★★★</span>
+      </div>
+      <div class="q-text">某安全评价机构组织新入职安全评价人员就焦化厂的安全评价报告编制开展研讨。张某说"安全评价应先分析出危险有害因素可能造成的后果，才能开展前期准备工作"；王某说"应先对焦化厂进行评价单元划分后，才能进行危险有害因素辨识工作"；李某说"根据焦化厂事故发生的可能性及严重程度，开展定性、定量风险评价工作"；刘某说"评价报告提出的对策措施建议要求越高越能减弱焦化厂生产过程中危险程度"。四人关于安全评价报告编制的说法，正确的是（ ）。</div>
+      <ul class="q-options">
+        <li><span class="opt">A.</span> 张某</li>
+        <li><span class="opt">B.</span> 王某</li>
+        <li><span class="opt">C.</span> 刘某</li>
+        <li><span class="opt">D.</span> 李某</li>
+      </ul>
+      <div class="q-answer">
+        <div class="ans-label">答案</div>
+        <div class="ans-text"><span class="correct">D</span></div>
+        <div class="analysis">张某错误：前期准备在辨识危害因素之前；王某错误：先辨识危害因素后划分评价单元；刘某错误：对策措施应遵循针对性、技术可行性、经济合理性原则，不是越高越好；李某正确。</div>
+        <div class="q-tags"><span class="q-tag">考点：安全评价程序</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 2025年暴涨至17分，2026年预计仍将高位运行，<strong>安全评价方法的实际使用</strong>是核心方向</p>
+    <p>2. ETA（归纳/原因→结果/初始事件）vs FTA（演绎/结果→原因/顶上事件）必须区分清楚</p>
+    <p>3. PHA危险等级4级（Ⅰ安全/Ⅱ临界/Ⅲ危险/Ⅳ灾难）要能结合场景判断</p>
+    <p>4. GB6441事故20类分类要熟记，区分11+5+3+1的构成</p>
+    <p>5. 安全评价程序：前期准备→辨识危害因素→划分评价单元→定性定量评价→对策措施→评价结论→编制报告</p>
+  </div>
+</div>
+
+<!-- ============ 第四章 ============ -->
+<div class="chapter" id="ch4">
+  <div class="chapter-header">
+    <span class="ch-num">第四章</span>
+    <h2>职业病危害预防和管理</h2>
+    <div class="ch-meta">
+      <span>分值：约 3-5 分</span>
+      <span>难度：★★</span>
+    </div>
+  </div>
+
+  <div class="syllabus-box">
+    <div class="label">考纲要求</div>
+    <p>掌握职业病危害因素分类（按来源划分：生产过程/劳动过程/生产环境）；熟悉《职业病分类和目录》；了解职业病危害识别与控制措施</p>
+  </div>
+
+  <div class="section-block">
+    <h3>一、职业病危害因素按来源划分</h3>
+    <table>
+      <tr><th>分类</th><th>内容</th></tr>
+      <tr><td><strong>生产过程</strong></td><td>物理因素（高温、高湿、低温、异常气压、噪声、振动、辐射）；化学因素（生产性粉尘、化学有毒物质）；生物因素</td></tr>
+      <tr><td><strong>劳动过程</strong></td><td>劳动组织和制度不合理；精神性职业紧张；劳动强度过大；个别器官过度紧张（视力紧张）；长时间不良体位或使用不合理工具</td></tr>
+      <tr><td><strong>生产环境</strong></td><td>自然环境因素（炎热季节太阳辐射）；作业场所建筑卫生学设计缺陷（照明不良、换气不足）</td></tr>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <h3>二、《职业病分类和目录》</h3>
+    <table>
+      <tr><th>分类</th><th>典型举例</th></tr>
+      <tr><td>尘肺病</td><td>矽肺、煤工尘肺、石棉肺、铝尘肺、电焊工尘肺</td></tr>
+      <tr><td>其他呼吸系统疾病</td><td>过敏性肺炎、棉尘病、哮喘</td></tr>
+      <tr><td>职业性皮肤病</td><td>接触性皮炎、电光性皮炎、白斑</td></tr>
+      <tr><td>职业性眼病</td><td>化学性眼部灼伤、电光性眼炎、白内障（"红白字典"）</td></tr>
+      <tr><td>物理因素所致</td><td>中暑、减压病、高原病、航空病、手臂振动病、激光所致眼损伤、冻伤</td></tr>
+      <tr><td>职业性传染病</td><td>炭疽、森林脑炎、布鲁氏菌病、艾滋病、莱姆病</td></tr>
+      <tr><td>职业性耳鼻喉口腔</td><td>噪声聋</td></tr>
+    </table>
+
+    <div class="warn-card">
+      <div class="title">2025真题易错点</div>
+      <p>2025年第11题考粉尘与尘肺病对应：A选项"煤粉肺"错误，应为<strong>"煤尘肺"</strong>（不是煤粉肺）；B选项"石英尘肺"错误，应为<strong>"矽肺"</strong>（虽石英石主要成分是二氧化硅，但不属于《职业病分类目录》列举的名称）；C选项<strong>"石棉肺"</strong>正确</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>三、致癌部位速记</h3>
+    <table>
+      <tr><th>物质</th><th>致癌部位</th></tr>
+      <tr><td>炼焦油</td><td>唇、鼻、皮肤</td></tr>
+      <tr><td>苯</td><td>白血病</td></tr>
+      <tr><td>联苯胺</td><td>泌尿系统膀胱癌</td></tr>
+      <tr><td>甲醛</td><td>鼻咽、鼻窦</td></tr>
+      <tr><td>甲醇</td><td>眼、视神经</td></tr>
+      <tr><td>氨</td><td>肺、哮喘</td></tr>
+      <tr><td>汽油、沥青</td><td>皮肤</td></tr>
+      <tr><td>氯乙烯</td><td>肢端溶骨症、肝癌</td></tr>
+      <tr><td>石棉</td><td>肺、胸膜间皮瘤</td></tr>
+      <tr><td>砷及化合物</td><td>皮肤、肺、喉</td></tr>
+    </table>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 核心掌握职业病危害因素按来源三分类（生产过程/劳动过程/生产环境）</p>
+    <p>2. 尘肺病名称必须严格对照《职业病分类目录》，不能自创名称（如"煤粉肺"应为"煤尘肺"，"石英尘肺"应为"矽肺"）</p>
+    <p>3. 致癌部位速记：苯→白血病、石棉→肺/胸膜间皮瘤、甲醛→鼻咽</p>
+  </div>
+</div>
+
+<!-- ============ 第五章 ============ -->
+<div class="chapter" id="ch5">
+  <div class="chapter-header">
+    <span class="ch-num">第五章</span>
+    <h2>安全生产应急管理</h2>
+    <div class="ch-meta">
+      <span>分值：约 2-10 分（波动较大）</span>
+      <span>难度：★★★</span>
+    </div>
+  </div>
+
+  <div class="point-list">
+    <div class="label">考点清单</div>
+    <ul>
+      <li class="high">应急预案编制程序（8步）<span class="freq high">高频</span></li>
+      <li class="high">应急预案体系（综合/专项/现场处置）<span class="freq high">高频</span></li>
+      <li class="high">应急演练实施与评估<span class="freq high">高频</span></li>
+      <li>应急管理体系4阶段<span class="freq mid">中频</span></li>
+    </ul>
+  </div>
+
+  <div class="section-block">
+    <h3>一、事故应急管理4个阶段</h3>
+    <table>
+      <tr><th>阶段</th><th>主要内容</th></tr>
+      <tr><td><strong>预防</strong></td><td>加大建筑物安全距离、工厂选址安全规划、减少危险物品存量、设置防护墙、公众教育</td></tr>
+      <tr><td><strong>准备</strong></td><td>应急预案体系、风险评估与防范、救援队伍、应急物资储备、应急通信保障、应急培训演练</td></tr>
+      <tr><td><strong>响应</strong></td><td>应急救援并伴随应急恢复、保障生活必需品供应、采取防止次生/衍生事件措施</td></tr>
+      <tr><td><strong>恢复</strong></td><td>短期恢复：食品/避难所/安全保障/医疗卫生 + 防止次生事件；长期恢复：经济/社会/环境/生活恢复，重建设施</td></tr>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <h3>二、应急预案编制程序（8步）</h3>
+    <div class="mnemonic">
+      <div class="label">速记口诀</div>
+      <p>成立工作组 → 资料收集 → 风险评估 → 应急资源调查 → 预案编制 → 桌面推演 → 评审 → 批准实施</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>三、应急预案评审、评估与备案</h3>
+    <table>
+      <tr><th>备案单位</th><th>评审单位</th><th>评估单位</th></tr>
+      <tr><td>矿山</td><td>矿山</td><td>矿山</td></tr>
+      <tr><td>金属冶炼</td><td>金属冶炼</td><td>金属冶炼</td></tr>
+      <tr><td>危险物品生产/经营/储存/运输</td><td>危险物品生产/经营/储存/运输（含烟花生产/批发）</td><td>同评审</td></tr>
+      <tr><td>建筑施工</td><td>—</td><td>建筑施工</td></tr>
+      <tr><td>城市轨道交通运营</td><td>—</td><td>—</td></tr>
+      <tr><td>人员密集场所经营单位</td><td>—</td><td>—</td></tr>
+      <tr><td>—</td><td>中型规模以上其他单位</td><td>中型规模以上其他单位</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">2024真题考点</div>
+      <p>2024年第10题：评审氧枪烧穿事故应急预案时，<strong>县应急部门人员不能作为专家组长主持</strong>（应急预案评审应由企业组织）</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>四、应急演练评估</h3>
+    <div class="warn-card">
+      <div class="title">2025真题考点</div>
+      <p>2025年第9题：液氨泄漏演练中"未能及时联系到抢险组负责人""不熟悉新型堵漏工具"→评估应关注<strong>预案的职责分工与现场处置行动的一致性</strong></p>
+    </div>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 应急预案编制8步必须背熟，注意"桌面推演"在预案编制之后、评审之前</p>
+    <p>2. 评审/评估/备案的对象范围有差异，备案范围最广（含城市轨道交通、人员密集场所），评审和评估范围较窄</p>
+    <p>3. 应急演练评估应聚焦于预案与实际操作的一致性，而非程序合规性</p>
+  </div>
+</div>
+
+<!-- ============ 第六章 ============ -->
+<div class="chapter" id="ch6">
+  <div class="chapter-header">
+    <span class="ch-num">第六章</span>
+    <h2>生产安全事故调查与分析</h2>
+    <div class="ch-meta">
+      <span>分值：约 5-9 分</span>
+      <span>难度：★★★</span>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>一、生产安全事故分级</h3>
+    <table>
+      <tr><th>等级</th><th>死亡</th><th>重伤</th><th>直接经济损失</th></tr>
+      <tr><td><strong>特别重大事故</strong></td><td>≥30人</td><td>≥100人</td><td>≥1亿元</td></tr>
+      <tr><td><strong>重大事故</strong></td><td>10-29人</td><td>50-99人</td><td>5000万-1亿元</td></tr>
+      <tr><td><strong>较大事故</strong></td><td>3-9人</td><td>10-49人</td><td>1000万-5000万元</td></tr>
+      <tr><td><strong>一般事故</strong></td><td>1-2人</td><td>1-9人</td><td>100万-1000万元</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">2025真题考点</div>
+      <p>2025年第8题：1人死亡+6人受伤+直接经济损失800万 → <strong>一般事故</strong>（死亡1-2人或直接损失100万-1000万）</p>
+    </div>
+
+    <h4>注意：分级就高不就低</h4>
+    <p>同时满足多个条件时，按最高等级认定。如死亡2人+重伤50人→按重大事故认定（重伤50人达到重大事故标准）</p>
+  </div>
+
+  <div class="section-block">
+    <h3>二、事故上报时限和部门</h3>
+    <table>
+      <tr><th>事故类型</th><th>上报总时限</th><th>最终上报至</th><th>调查主体</th><th>批复主体</th><th>批复时限</th></tr>
+      <tr><td>一般事故</td><td>1+2小时</td><td>设区市级</td><td>县人民政府（未造成伤亡可授权企业自查）</td><td>县政府</td><td>15日内</td></tr>
+      <tr><td>较大事故</td><td>1+2+2小时</td><td>省级</td><td>市人民政府</td><td>市政府</td><td>15日内</td></tr>
+      <tr><td>重大事故</td><td>1+2+2+2小时</td><td>国务院</td><td>省人民政府</td><td>省政府</td><td>15日内</td></tr>
+      <tr><td>特别重大事故</td><td>—</td><td>国务院</td><td>国务院或授权部门</td><td>国务院</td><td>30+30日</td></tr>
+    </table>
+    <div class="info-card">
+      <div class="title">关键时限</div>
+      <p>1. 事故现场有关人员<strong>立即</strong>向本单位负责人报告</p>
+      <p>2. 单位负责人接到报告后<strong>1小时内</strong>向县级以上应急管理部门报告</p>
+      <p>3. 情况紧急时，现场人员可<strong>直接</strong>向应急管理部门报告</p>
+      <p>4. 必要时可<strong>越级上报</strong></p>
+      <p>5. 事故调查报告自事故发生之日起<strong>60+60日</strong>内提交，技术鉴定时间不计入</p>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>三、直接经济损失与间接经济损失</h3>
+    <table>
+      <tr><th>直接经济损失</th><th>间接经济损失</th></tr>
+      <tr><td>人员伤亡后支出费用（医疗费、丧葬及抚恤费、补助及救济费、歇工工资）</td><td>停产/减产损失价值</td></tr>
+      <tr><td>事故善后处理费用（处理事故的事务性费用、现场抢救费用、清理现场费用、事故罚款）</td><td>工作损失价值</td></tr>
+      <tr><td>财产损失费用（固定资产/流动资产损失）</td><td>资源损失价值</td></tr>
+      <tr><td>—</td><td>处理环境污染费用 + 补充新职工培训费用等</td></tr>
+    </table>
+    <div class="warn-card">
+      <div class="title">2024真题考点</div>
+      <p>2024年第11题：事故罚款属于<strong>事故善后处理费用</strong>（直接经济损失）；丧葬及抚恤费、补助及救济费、歇工工资属于<strong>人员伤亡后支出费用</strong>（直接经济损失）</p>
+    </div>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 事故分级4级（一般/较大/重大/特别重大）数字必须精确记忆，就高不就低</p>
+    <p>2. 上报时限：1小时（单位→部门）+ 逐级2小时，注意越级上报的权利</p>
+    <p>3. 直接经济损失3大类：人员伤亡费用 + 善后处理费用 + 财产损失费用</p>
+    <p>4. 事故调查报告60+60日内提交，技术鉴定不计入</p>
+  </div>
+</div>
+
+<!-- ============ 第七章 ============ -->
+<div class="chapter" id="ch7">
+  <div class="chapter-header">
+    <span class="ch-num">第七章</span>
+    <h2>安全生产监管监察</h2>
+    <div class="ch-meta">
+      <span>分值：约 0-1 分</span>
+      <span>难度：★</span>
+      <span>低频考点，了解即可</span>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>一、安全生产监督管理方式</h3>
+    <table>
+      <tr><th>类型</th><th>内容</th></tr>
+      <tr><td><strong>事前监管</strong></td><td>证的审查、考核、颁发 + 三同时审查</td></tr>
+      <tr><td><strong>事中监管</strong></td><td>行为监管（人、管理）+ 技术监管（物）</td></tr>
+      <tr><td><strong>事后监管</strong></td><td>事故调查处理 + 追责</td></tr>
+    </table>
+    <div class="info-card">
+      <div class="title">2025真题考点</div>
+      <p>2025年第4题：市应急局对化工厂突击安全检查 → 属于<strong>事中监督管理</strong>。A（安全条件审查）属于事前，C（事故调查）属于事后</p>
+    </div>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 本章分值极低（年均约1分），了解事前/事中/事后监管的基本区分即可</p>
+    <p>2. 事前=证照审查+三同时；事中=日常检查（行为+技术）；事后=事故调查处理</p>
+  </div>
+</div>
+
+<!-- ============ 第八章 ============ -->
+<div class="chapter" id="ch8">
+  <div class="chapter-header">
+    <span class="ch-num">第八章</span>
+    <h2>安全生产统计分析</h2>
+    <div class="ch-meta">
+      <span>分值：约 2-4 分</span>
+      <span>难度：★★</span>
+    </div>
+  </div>
+
+  <div class="section-block">
+    <h3>一、统计图选用原则</h3>
+    <table>
+      <tr><th>资料性质/分析目的</th><th>选用统计图</th><th>关键词</th></tr>
+      <tr><td>比较分类资料各类别数值大小</td><td>条图</td><td>"数值"</td></tr>
+      <tr><td>分析事物内部各组成部分所占比重（构成比）</td><td>圆图/百分条图</td><td>"比重"</td></tr>
+      <tr><td>描述事物随时间变化趋势或两现象相互变化趋势</td><td>线图/半对数线图</td><td>"趋势/两现象"</td></tr>
+      <tr><td>描述双变量资料相互关系密切程度/方向</td><td>散点图</td><td>"双变量"</td></tr>
+      <tr><td>描述连续性变量的频数分布</td><td>直方图</td><td>"频数分布"</td></tr>
+      <tr><td>描述某现象数量在地域上的分布</td><td>统计地图</td><td>"地域"</td></tr>
+    </table>
+  </div>
+
+  <div class="section-block">
+    <h3>二、常用统计方法</h3>
+    <div class="warn-card">
+      <div class="title">2024真题考点</div>
+      <p>2024年第9题：省应急管理部门对近70年火灾事故从事故级别、时间、地域、经济发展程度等方面统计分析，得出重特大火灾事故规律 → 属于<strong>综合分析法</strong></p>
+    </div>
+  </div>
+
+  <div class="chapter-summary">
+    <div class="label">本章小结</div>
+    <p>1. 统计图选用原则是核心考点，按关键词匹配：数值→条图、比重→圆图、趋势→线图、双变量→散点图、频数→直方图、地域→统计地图</p>
+    <p>2. 统计分析方法：综合分析法适用于多维度、大跨度的规律性分析</p>
+  </div>
+</div>
+
+<!-- ============ 页脚 ============ -->
+<div class="footer">
+  <div class="version">V2.0 · 适用2026年考纲 · 基于最新核心考点资料编制</div>
+  <p>本讲义基于2026中级注安管理历年核心考点、2025年考情分析、2020-2025年分值分布、三色笔记、近5年真题等最新资料编制</p>
+  <p>环球网校教研中心 · 仅供参考，最终以官方教材为准</p>
+</div>
+
+</div>
+</body>
+</html>

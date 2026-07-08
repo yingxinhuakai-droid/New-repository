@@ -1,0 +1,1845 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注安备考学习诊断系统 - 产品原型</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        * { box-sizing: border-box; }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        
+        /* 手机边框 */
+        .phone-frame {
+            width: 375px;
+            height: 750px;
+            background: #000;
+            border-radius: 40px;
+            padding: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            border-radius: 30px;
+            overflow: hidden;
+            position: relative;
+        }
+        .phone-notch {
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 28px;
+            background: #000;
+            border-radius: 0 0 16px 16px;
+            z-index: 10;
+        }
+        
+        /* 浏览器边框 */
+        .browser-frame {
+            background: #f1f5f9;
+            border-radius: 12px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+        }
+        .browser-header {
+            background: #e2e8f0;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .browser-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+        }
+        .browser-address {
+            flex: 1;
+            background: #fff;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 12px;
+            color: #64748b;
+            margin-left: 12px;
+        }
+        
+        /* Tab切换动画 */
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        
+        /* 步骤切换 */
+        .step { display: none; }
+        .step.active { display: block; animation: fadeIn 0.3s ease; }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateX(10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+        .animate-pulse { animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite; }
+        
+        /* 进度条 */
+        .progress-bar {
+            height: 6px;
+            background: #e2e8f0;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+            border-radius: 3px;
+            transition: width 0.3s ease;
+        }
+        
+        /* 选项按钮 */
+        .option-btn {
+            transition: all 0.2s ease;
+        }
+        .option-btn:hover {
+            border-color: #3b82f6;
+            background: #eff6ff;
+        }
+        .option-btn.selected {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+        
+        /* 滚动条美化 */
+        .scroll-area::-webkit-scrollbar { width: 6px; }
+        .scroll-area::-webkit-scrollbar-track { background: #f1f5f9; }
+        .scroll-area::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 3px; }
+        
+        /* 销售端卡片 */
+        .user-card {
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        .user-card:hover {
+            background: #f8fafc;
+        }
+        .user-card.active {
+            background: #eff6ff;
+            border-left: 3px solid #3b82f6;
+        }
+    </style>
+</head>
+<body class="bg-slate-100 min-h-screen">
+    <!-- 顶部导航 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-xl font-bold text-slate-800">📚 注安备考学习诊断系统 · 产品原型</h1>
+                <div class="text-sm text-slate-500">v1.0 | 产研需求评审用</div>
+            </div>
+            <!-- 主Tab -->
+            <div class="flex gap-1 mt-4">
+                <button onclick="switchMainTab('mini')" id="tab-mini" class="main-tab px-6 py-2.5 text-sm font-medium rounded-t-lg bg-blue-600 text-white">
+                    📱 小程序版
+                </button>
+                <button onclick="switchMainTab('web')" id="tab-web" class="main-tab px-6 py-2.5 text-sm font-medium rounded-t-lg bg-slate-200 text-slate-600 hover:bg-slate-300">
+                    💻 网页版
+                </button>
+                <button onclick="switchMainTab('sales')" id="tab-sales" class="main-tab px-6 py-2.5 text-sm font-medium rounded-t-lg bg-slate-200 text-slate-600 hover:bg-slate-300">
+                    👨‍💼 销售端工作台
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-6 py-8">
+        
+        <!-- ========== 小程序版 ========== -->
+        <div id="content-mini" class="tab-content active">
+            <div class="flex justify-center">
+                <div class="phone-frame">
+                    <div class="phone-screen">
+                        <div class="phone-notch"></div>
+                        <div class="h-full overflow-y-auto scroll-area pt-8 pb-6" id="mini-container">
+                            
+                            <!-- 步骤1：测评首页 -->
+                            <div class="step active" id="mini-step-1">
+                                <div class="px-5 pt-6 pb-4 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+                                    <div class="text-xs opacity-80 mb-1">环球网校 · AI学习诊断</div>
+                                    <h2 class="text-2xl font-bold mb-2">注安备考学习诊断</h2>
+                                    <p class="text-sm opacity-90">3分钟测出你的备考水平<br>生成专属学习计划</p>
+                                </div>
+                                <div class="px-5 py-6">
+                                    <div class="space-y-4 mb-8">
+                                        <div class="flex items-center gap-3 p-3 bg-blue-50 rounded-xl">
+                                            <div class="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">🧠</div>
+                                            <div>
+                                                <div class="font-medium text-slate-800 text-sm">知识点图谱诊断</div>
+                                                <div class="text-xs text-slate-500">基于AI知识图谱精准定位薄弱点</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3 p-3 bg-green-50 rounded-xl">
+                                            <div class="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center text-green-600">📋</div>
+                                            <div>
+                                                <div class="font-medium text-slate-800 text-sm">个性化备考方案</div>
+                                                <div class="text-xs text-slate-500">根据你的基础定制学习计划</div>
+                                            </div>
+                                        </div>
+                                        <div class="flex items-center gap-3 p-3 bg-purple-50 rounded-xl">
+                                            <div class="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center text-purple-600">🎯</div>
+                                            <div>
+                                                <div class="font-medium text-slate-800 text-sm">薄弱点精准定位</div>
+                                                <div class="text-xs text-slate-500">找出提分最快的知识点</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button onclick="nextStep('mini', 2)" class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-200 active:scale-98 transition-transform">
+                                        开始测评
+                                    </button>
+                                    <div class="text-center text-xs text-slate-400 mt-4">
+                                        已有 <span class="text-blue-600 font-medium">12,847</span> 人参与测评
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 步骤2：答题页 -->
+                            <div class="step" id="mini-step-2">
+                                <div class="px-5 pt-6 pb-4">
+                                    <div class="flex items-center justify-between mb-2">
+                                        <span class="text-sm text-slate-500" id="mini-question-num">第 1 题 / 共 12 题</span>
+                                        <span class="text-xs text-blue-600 font-medium" id="mini-question-type">基础信息</span>
+                                    </div>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" id="mini-progress" style="width: 8%"></div>
+                                    </div>
+                                </div>
+                                <div class="px-5 py-4">
+                                    <h3 class="text-lg font-bold text-slate-800 mb-6" id="mini-question-text">你的最高学历是？</h3>
+                                    <div class="space-y-3" id="mini-options">
+                                        <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 text-sm">
+                                            A. 高中/中专及以下
+                                        </button>
+                                        <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 text-sm">
+                                            B. 大专
+                                        </button>
+                                        <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 text-sm">
+                                            C. 本科
+                                        </button>
+                                        <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 text-sm">
+                                            D. 硕士及以上
+                                        </button>
+                                    </div>
+                                </div>
+                                <div class="absolute bottom-0 left-0 right-0 px-5 py-4 bg-white border-t border-slate-100">
+                                    <div class="flex gap-3">
+                                        <button onclick="prevQuestion()" class="flex-1 py-3 border border-slate-200 text-slate-600 rounded-xl text-sm font-medium">
+                                            上一题
+                                        </button>
+                                        <button onclick="nextQuestion()" class="flex-1 py-3 bg-blue-600 text-white rounded-xl text-sm font-medium">
+                                            下一题
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 步骤3：加载页 -->
+                            <div class="step" id="mini-step-3">
+                                <div class="h-full flex flex-col items-center justify-center px-8" style="min-height: 500px;">
+                                    <div class="w-24 h-24 mb-6 relative">
+                                        <div class="absolute inset-0 border-4 border-blue-100 rounded-full"></div>
+                                        <div class="absolute inset-0 border-4 border-blue-600 rounded-full border-t-transparent animate-spin"></div>
+                                        <div class="absolute inset-0 flex items-center justify-center text-2xl">🔍</div>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-slate-800 mb-2">正在生成你的专属报告</h3>
+                                    <p class="text-sm text-slate-500 text-center mb-6">基于知识点图谱深度分析中...</p>
+                                    <div class="w-full space-y-3">
+                                        <div class="flex items-center gap-2 text-sm">
+                                            <span class="text-green-500">✓</span>
+                                            <span class="text-slate-600">答题数据已收集</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-sm">
+                                            <span class="text-green-500">✓</span>
+                                            <span class="text-slate-600">知识点图谱匹配中</span>
+                                        </div>
+                                        <div class="flex items-center gap-2 text-sm animate-pulse">
+                                            <span class="text-blue-500">○</span>
+                                            <span class="text-slate-600">生成备考方案...</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- 步骤4：诊断报告 -->
+                            <div class="step" id="mini-step-4">
+                                <div class="px-5 pt-6 pb-4 bg-gradient-to-br from-blue-600 to-blue-800 text-white">
+                                    <div class="text-xs opacity-80 mb-2">你的诊断报告</div>
+                                    <div class="flex items-end gap-2">
+                                        <span class="text-5xl font-bold">72</span>
+                                        <span class="text-lg pb-1 opacity-80">分</span>
+                                    </div>
+                                    <div class="inline-block mt-2 px-3 py-1 bg-white/20 rounded-full text-xs">
+                                        有基础待强化型
+                                    </div>
+                                </div>
+                                <div class="px-5 py-5">
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 mb-4">
+                                        <h4 class="font-bold text-slate-800 text-sm mb-4">📊 四维度能力分析</h4>
+                                        <div class="h-48">
+                                            <canvas id="mini-radar-chart"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 mb-4">
+                                        <h4 class="font-bold text-slate-800 text-sm mb-3">⚠️ 薄弱知识点 TOP3</h4>
+                                        <div class="space-y-3">
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center gap-2">
+                                                    <span class="w-5 h-5 bg-red-100 text-red-600 text-xs rounded-full flex items-center justify-center font-bold">1</span>
+                                                    <span class="text-sm text-slate-700">安全生产法主要负责人职责</span>
+                                                </div>
+                                                <span class="text-xs text-red-500 font-medium">42%</span>
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center gap-2">
+                                                    <span class="w-5 h-5 bg-orange-100 text-orange-600 text-xs rounded-full flex items-center justify-center font-bold">2</span>
+                                                    <span class="text-sm text-slate-700">事故等级划分标准</span>
+                                                </div>
+                                                <span class="text-xs text-orange-500 font-medium">55%</span>
+                                            </div>
+                                            <div class="flex items-center justify-between">
+                                                <div class="flex items-center gap-2">
+                                                    <span class="w-5 h-5 bg-yellow-100 text-yellow-600 text-xs rounded-full flex items-center justify-center font-bold">3</span>
+                                                    <span class="text-sm text-slate-700">特种设备安全管理</span>
+                                                </div>
+                                                <span class="text-xs text-yellow-600 font-medium">63%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="bg-blue-50 rounded-2xl p-4 mb-4">
+                                        <h4 class="font-bold text-blue-800 text-sm mb-2">💡 备考建议</h4>
+                                        <p class="text-sm text-blue-700 leading-relaxed">
+                                            你有一定基础，但法规科目薄弱点较多。建议从法规开始重点突破，配合管理科目同步学习，每天保证1.5小时学习时间。
+                                        </p>
+                                    </div>
+                                    <button onclick="nextStep('mini', 5)" class="w-full py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-2xl shadow-lg shadow-blue-200">
+                                        查看备考计划
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- 步骤5：备考计划+加微 -->
+                            <div class="step" id="mini-step-5">
+                                <div class="px-5 pt-6 pb-4">
+                                    <h2 class="text-xl font-bold text-slate-800 mb-1">你的专属备考计划</h2>
+                                    <p class="text-sm text-slate-500">基于你的诊断结果生成</p>
+                                </div>
+                                <div class="px-5 py-2">
+                                    <div class="grid grid-cols-3 gap-2 mb-4">
+                                        <div class="bg-blue-50 rounded-xl p-3 text-center">
+                                            <div class="text-xl font-bold text-blue-600">128</div>
+                                            <div class="text-xs text-slate-500">距考试(天)</div>
+                                        </div>
+                                        <div class="bg-green-50 rounded-xl p-3 text-center">
+                                            <div class="text-xl font-bold text-green-600">1.5h</div>
+                                            <div class="text-xs text-slate-500">每日学习</div>
+                                        </div>
+                                        <div class="bg-purple-50 rounded-xl p-3 text-center">
+                                            <div class="text-xl font-bold text-purple-600">3阶段</div>
+                                            <div class="text-xs text-slate-500">备考规划</div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 mb-4">
+                                        <h4 class="font-bold text-slate-800 text-sm mb-3">📅 三阶段备考规划</h4>
+                                        <div class="space-y-3">
+                                            <div class="flex gap-3">
+                                                <div class="w-2 h-2 mt-1.5 bg-blue-500 rounded-full flex-shrink-0"></div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-slate-800">基础阶段（7-8月）</div>
+                                                    <div class="text-xs text-slate-500">系统学习四科，打牢基础</div>
+                                                </div>
+                                            </div>
+                                            <div class="flex gap-3">
+                                                <div class="w-2 h-2 mt-1.5 bg-green-500 rounded-full flex-shrink-0"></div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-slate-800">强化阶段（9月）</div>
+                                                    <div class="text-xs text-slate-500">重点突破，大量刷题</div>
+                                                </div>
+                                            </div>
+                                            <div class="flex gap-3">
+                                                <div class="w-2 h-2 mt-1.5 bg-orange-500 rounded-full flex-shrink-0"></div>
+                                                <div>
+                                                    <div class="text-sm font-medium text-slate-800">冲刺阶段（10月）</div>
+                                                    <div class="text-xs text-slate-500">模考押题，查漏补缺</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-4 mb-4">
+                                        <div class="flex items-center justify-between mb-3">
+                                            <h4 class="font-bold text-slate-800 text-sm">📆 第一周学习计划</h4>
+                                            <span class="text-xs text-slate-400">仅展示前3天</span>
+                                        </div>
+                                        <div class="space-y-2">
+                                            <div class="flex items-center gap-3 p-2 bg-slate-50 rounded-lg">
+                                                <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center text-xs font-bold text-blue-600">D1</div>
+                                                <div class="flex-1">
+                                                    <div class="text-sm text-slate-700">法规 · 第1-2章</div>
+                                                    <div class="text-xs text-slate-400">视频2h + 习题20道</div>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-3 p-2 bg-slate-50 rounded-lg">
+                                                <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center text-xs font-bold text-green-600">D2</div>
+                                                <div class="flex-1">
+                                                    <div class="text-sm text-slate-700">管理 · 第1章</div>
+                                                    <div class="text-xs text-slate-400">视频1.5h + 习题15道</div>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-3 p-2 bg-slate-50 rounded-lg">
+                                                <div class="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center text-xs font-bold text-purple-600">D3</div>
+                                                <div class="flex-1">
+                                                    <div class="text-sm text-slate-700">法规 · 第3章（重点）</div>
+                                                    <div class="text-xs text-slate-400">视频2.5h + 习题30道</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- 加微引导 -->
+                                <div class="mx-5 mb-6 bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-5 border border-amber-200">
+                                    <div class="flex items-center gap-2 mb-3">
+                                        <span class="px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">限时免费</span>
+                                        <span class="text-sm font-bold text-amber-800">领取完整备考计划</span>
+                                    </div>
+                                    <div class="space-y-2 mb-4">
+                                        <div class="flex items-center gap-2 text-sm text-amber-700">
+                                            <span>✓</span> 完整3个月每日学习计划
+                                        </div>
+                                        <div class="flex items-center gap-2 text-sm text-amber-700">
+                                            <span>✓</span> 近5年真题+答案解析
+                                        </div>
+                                        <div class="flex items-center gap-2 text-sm text-amber-700">
+                                            <span>✓</span> 高频考点思维导图
+                                        </div>
+                                        <div class="flex items-center gap-2 text-sm text-amber-700">
+                                            <span>✓</span> 1v1备考指导答疑
+                                        </div>
+                                    </div>
+                                    <div class="flex items-center gap-3">
+                                        <div class="w-16 h-16 bg-white rounded-lg flex items-center justify-center text-3xl border border-amber-200">
+                                            📱
+                                        </div>
+                                        <div class="flex-1">
+                                            <div class="text-xs text-amber-600 mb-1">添加班主任微信领取</div>
+                                            <div class="text-sm font-bold text-amber-800">李老师 · 注安备考顾问</div>
+                                        </div>
+                                    </div>
+                                    <button class="w-full mt-4 py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-xl shadow-lg shadow-orange-200">
+                                        一键复制微信号
+                                    </button>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-6 text-sm text-slate-500">
+                💡 点击「开始测评」体验完整流程 | 小程序版 · 移动端H5展示
+            </div>
+        </div>
+
+        <!-- ========== 网页版 ========== -->
+        <div id="content-web" class="tab-content">
+            <div class="browser-frame">
+                <div class="browser-header">
+                    <div class="browser-dot bg-red-400"></div>
+                    <div class="browser-dot bg-yellow-400"></div>
+                    <div class="browser-dot bg-green-400"></div>
+                    <div class="browser-address">🔒 www.hqwx.com/diagnosis/zhuanan/</div>
+                </div>
+                <div class="bg-white" style="min-height: 600px;" id="web-container">
+                    
+                    <!-- 步骤1：测评首页 -->
+                    <div class="step active" id="web-step-1">
+                        <div class="bg-gradient-to-br from-blue-600 via-blue-700 to-indigo-800 text-white py-16 px-12">
+                            <div class="max-w-4xl mx-auto">
+                                <div class="text-sm opacity-80 mb-2">环球网校 · AI学习诊断系统</div>
+                                <h1 class="text-4xl font-bold mb-4">中级注册安全工程师<br>备考学习诊断</h1>
+                                <p class="text-lg opacity-90 mb-8">3分钟精准测评，AI生成你的专属备考方案</p>
+                                <div class="flex gap-6">
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-2xl">🧠</span>
+                                        <span class="text-sm">知识点图谱诊断</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-2xl">📋</span>
+                                        <span class="text-sm">个性化学习计划</span>
+                                    </div>
+                                    <div class="flex items-center gap-2">
+                                        <span class="text-2xl">🎯</span>
+                                        <span class="text-sm">薄弱点精准定位</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="max-w-4xl mx-auto py-12 px-12">
+                            <div class="grid grid-cols-3 gap-8">
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-2xl flex items-center justify-center text-3xl">📝</div>
+                                    <h3 class="font-bold text-slate-800 mb-2">12道精选题目</h3>
+                                    <p class="text-sm text-slate-500">覆盖基础认知、知识水平、学习习惯三个维度</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 bg-green-100 rounded-2xl flex items-center justify-center text-3xl">⚡</div>
+                                    <h3 class="font-bold text-slate-800 mb-2">3分钟快速完成</h3>
+                                    <p class="text-sm text-slate-500">利用碎片时间，随时随地测一测</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-16 h-16 mx-auto mb-4 bg-purple-100 rounded-2xl flex items-center justify-center text-3xl">📊</div>
+                                    <h3 class="font-bold text-slate-800 mb-2">专业诊断报告</h3>
+                                    <p class="text-sm text-slate-500">AI生成详细分析，给出针对性建议</p>
+                                </div>
+                            </div>
+                            <div class="mt-12 text-center">
+                                <button onclick="nextStep('web', 2)" class="px-12 py-4 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold text-lg rounded-2xl shadow-xl shadow-blue-200 hover:shadow-2xl transition-shadow">
+                                    开始免费测评 →
+                                </button>
+                                <div class="mt-4 text-sm text-slate-400">
+                                    已有 <span class="text-blue-600 font-medium">12,847</span> 位考生完成测评
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤2：答题页 -->
+                    <div class="step" id="web-step-2">
+                        <div class="max-w-2xl mx-auto py-12 px-8">
+                            <div class="mb-8">
+                                <div class="flex items-center justify-between mb-3">
+                                    <span class="text-slate-500" id="web-question-num">第 1 题 / 共 12 题</span>
+                                    <span class="px-3 py-1 bg-blue-100 text-blue-700 text-sm rounded-full" id="web-question-type">基础信息</span>
+                                </div>
+                                <div class="progress-bar h-2">
+                                    <div class="progress-fill" id="web-progress" style="width: 8%"></div>
+                                </div>
+                            </div>
+                            <div class="bg-white border border-slate-200 rounded-2xl p-8 shadow-sm">
+                                <h3 class="text-xl font-bold text-slate-800 mb-8" id="web-question-text">你的最高学历是？</h3>
+                                <div class="space-y-4" id="web-options">
+                                    <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 hover:border-blue-400">
+                                        A. 高中/中专及以下
+                                    </button>
+                                    <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 hover:border-blue-400">
+                                        B. 大专
+                                    </button>
+                                    <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 hover:border-blue-400">
+                                        C. 本科
+                                    </button>
+                                    <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 hover:border-blue-400">
+                                        D. 硕士及以上
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="flex justify-between mt-8">
+                                <button onclick="prevQuestion()" class="px-8 py-3 border border-slate-200 text-slate-600 rounded-xl font-medium hover:bg-slate-50">
+                                    ← 上一题
+                                </button>
+                                <button onclick="nextQuestion()" class="px-8 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700">
+                                    下一题 →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤3：诊断报告 -->
+                    <div class="step" id="web-step-3">
+                        <div class="bg-gradient-to-r from-blue-600 to-indigo-700 text-white py-8 px-12">
+                            <div class="max-w-6xl mx-auto">
+                                <div class="text-sm opacity-80 mb-1">你的学习诊断报告</div>
+                                <div class="flex items-end gap-4">
+                                    <span class="text-6xl font-bold">72</span>
+                                    <span class="text-xl pb-2 opacity-80">分</span>
+                                    <span class="px-4 py-1.5 bg-white/20 rounded-full text-sm mb-2">有基础待强化型</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="max-w-6xl mx-auto py-8 px-12">
+                            <div class="grid grid-cols-3 gap-6">
+                                <!-- 左侧：雷达图 -->
+                                <div class="col-span-1 bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                                    <h4 class="font-bold text-slate-800 mb-4">📊 四维度能力分析</h4>
+                                    <div class="h-64">
+                                        <canvas id="web-radar-chart"></canvas>
+                                    </div>
+                                </div>
+                                <!-- 右侧：详细数据 -->
+                                <div class="col-span-2 space-y-6">
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                                        <h4 class="font-bold text-slate-800 mb-4">📈 各科目掌握率</h4>
+                                        <div class="h-48">
+                                            <canvas id="web-bar-chart"></canvas>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                                        <h4 class="font-bold text-slate-800 mb-4">⚠️ 薄弱知识点 TOP5</h4>
+                                        <div class="space-y-3">
+                                            <div class="flex items-center gap-4">
+                                                <span class="w-6 h-6 bg-red-100 text-red-600 text-xs rounded-full flex items-center justify-center font-bold">1</span>
+                                                <span class="flex-1 text-sm text-slate-700">安全生产法主要负责人职责</span>
+                                                <span class="text-xs text-slate-400">法规</span>
+                                                <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-red-500 rounded-full" style="width: 42%"></div>
+                                                </div>
+                                                <span class="text-xs text-red-500 font-medium w-10 text-right">42%</span>
+                                            </div>
+                                            <div class="flex items-center gap-4">
+                                                <span class="w-6 h-6 bg-orange-100 text-orange-600 text-xs rounded-full flex items-center justify-center font-bold">2</span>
+                                                <span class="flex-1 text-sm text-slate-700">事故等级划分标准</span>
+                                                <span class="text-xs text-slate-400">管理</span>
+                                                <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-orange-500 rounded-full" style="width: 55%"></div>
+                                                </div>
+                                                <span class="text-xs text-orange-500 font-medium w-10 text-right">55%</span>
+                                            </div>
+                                            <div class="flex items-center gap-4">
+                                                <span class="w-6 h-6 bg-yellow-100 text-yellow-600 text-xs rounded-full flex items-center justify-center font-bold">3</span>
+                                                <span class="flex-1 text-sm text-slate-700">特种设备安全管理</span>
+                                                <span class="text-xs text-slate-400">技术</span>
+                                                <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-yellow-500 rounded-full" style="width: 63%"></div>
+                                                </div>
+                                                <span class="text-xs text-yellow-600 font-medium w-10 text-right">63%</span>
+                                            </div>
+                                            <div class="flex items-center gap-4">
+                                                <span class="w-6 h-6 bg-blue-100 text-blue-600 text-xs rounded-full flex items-center justify-center font-bold">4</span>
+                                                <span class="flex-1 text-sm text-slate-700">安全生产责任制</span>
+                                                <span class="text-xs text-slate-400">管理</span>
+                                                <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-blue-500 rounded-full" style="width: 68%"></div>
+                                                </div>
+                                                <span class="text-xs text-blue-500 font-medium w-10 text-right">68%</span>
+                                            </div>
+                                            <div class="flex items-center gap-4">
+                                                <span class="w-6 h-6 bg-green-100 text-green-600 text-xs rounded-full flex items-center justify-center font-bold">5</span>
+                                                <span class="flex-1 text-sm text-slate-700">危险化学品安全技术</span>
+                                                <span class="text-xs text-slate-400">技术</span>
+                                                <div class="w-24 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                    <div class="h-full bg-green-500 rounded-full" style="width: 71%"></div>
+                                                </div>
+                                                <span class="text-xs text-green-500 font-medium w-10 text-right">71%</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mt-6 text-center">
+                                <button onclick="nextStep('web', 4)" class="px-10 py-3.5 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-bold rounded-xl shadow-lg shadow-blue-200">
+                                    查看完整备考计划 →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 步骤4：备考计划 -->
+                    <div class="step" id="web-step-4">
+                        <div class="max-w-6xl mx-auto py-8 px-12">
+                            <div class="flex items-start justify-between mb-8">
+                                <div>
+                                    <h2 class="text-2xl font-bold text-slate-800 mb-2">你的专属备考方案</h2>
+                                    <p class="text-slate-500">基于知识点图谱诊断结果 · AI智能生成</p>
+                                </div>
+                                <button class="px-5 py-2.5 border border-slate-200 text-slate-600 rounded-lg text-sm font-medium hover:bg-slate-50">
+                                    📄 导出PDF报告
+                                </button>
+                            </div>
+                            
+                            <div class="grid grid-cols-4 gap-4 mb-8">
+                                <div class="bg-blue-50 rounded-xl p-5">
+                                    <div class="text-3xl font-bold text-blue-600 mb-1">128</div>
+                                    <div class="text-sm text-slate-500">距离考试（天）</div>
+                                </div>
+                                <div class="bg-green-50 rounded-xl p-5">
+                                    <div class="text-3xl font-bold text-green-600 mb-1">1.5h</div>
+                                    <div class="text-sm text-slate-500">每日建议学习</div>
+                                </div>
+                                <div class="bg-purple-50 rounded-xl p-5">
+                                    <div class="text-3xl font-bold text-purple-600 mb-1">3</div>
+                                    <div class="text-sm text-slate-500">备考阶段</div>
+                                </div>
+                                <div class="bg-amber-50 rounded-xl p-5">
+                                    <div class="text-3xl font-bold text-amber-600 mb-1">4科</div>
+                                    <div class="text-sm text-slate-500">备考科目</div>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-cols-3 gap-6">
+                                <div class="col-span-2 space-y-6">
+                                    <!-- 三阶段规划 -->
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                                        <h4 class="font-bold text-slate-800 mb-5">📅 三阶段备考时间轴</h4>
+                                        <div class="relative">
+                                            <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200"></div>
+                                            <div class="space-y-6">
+                                                <div class="relative pl-12">
+                                                    <div class="absolute left-2 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow"></div>
+                                                    <div class="bg-blue-50 rounded-xl p-4">
+                                                        <div class="font-bold text-blue-800 mb-1">基础阶段 · 7月-8月（60天）</div>
+                                                        <div class="text-sm text-blue-700 mb-2">系统学习四科教材，建立知识框架</div>
+                                                        <div class="text-xs text-slate-500">
+                                                            重点：法规第3章、管理第2章、技术第1章<br>
+                                                            任务：每天1.5h视频 + 20道章节习题
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="relative pl-12">
+                                                    <div class="absolute left-2 w-5 h-5 bg-green-500 rounded-full border-4 border-white shadow"></div>
+                                                    <div class="bg-green-50 rounded-xl p-4">
+                                                        <div class="font-bold text-green-800 mb-1">强化阶段 · 9月（30天）</div>
+                                                        <div class="text-sm text-green-700 mb-2">重点突破薄弱点，大量刷题巩固</div>
+                                                        <div class="text-xs text-slate-500">
+                                                            重点：攻克薄弱知识点、案例分析专项训练<br>
+                                                            任务：每天2h刷题 + 错题复盘
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="relative pl-12">
+                                                    <div class="absolute left-2 w-5 h-5 bg-orange-500 rounded-full border-4 border-white shadow"></div>
+                                                    <div class="bg-orange-50 rounded-xl p-4">
+                                                        <div class="font-bold text-orange-800 mb-1">冲刺阶段 · 10月（30天）</div>
+                                                        <div class="text-sm text-orange-700 mb-2">模考押题，查漏补缺，考前冲刺</div>
+                                                        <div class="text-xs text-slate-500">
+                                                            重点：历年真题、押题卷、高频考点背诵<br>
+                                                            任务：每周2套模考卷 + 错题回顾
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 周计划表 -->
+                                    <div class="bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                                        <h4 class="font-bold text-slate-800 mb-4">📆 第一周学习计划表</h4>
+                                        <table class="w-full text-sm">
+                                            <thead>
+                                                <tr class="border-b border-slate-200">
+                                                    <th class="text-left py-3 text-slate-500 font-medium">日期</th>
+                                                    <th class="text-left py-3 text-slate-500 font-medium">学习内容</th>
+                                                    <th class="text-left py-3 text-slate-500 font-medium">视频时长</th>
+                                                    <th class="text-left py-3 text-slate-500 font-medium">习题数量</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody class="text-slate-700">
+                                                <tr class="border-b border-slate-100">
+                                                    <td class="py-3 font-medium">周一</td>
+                                                    <td>法规 · 第1-2章 安全生产法基础</td>
+                                                    <td>2h</td>
+                                                    <td>20道</td>
+                                                </tr>
+                                                <tr class="border-b border-slate-100">
+                                                    <td class="py-3 font-medium">周二</td>
+                                                    <td>管理 · 第1章 安全生产管理理论</td>
+                                                    <td>1.5h</td>
+                                                    <td>15道</td>
+                                                </tr>
+                                                <tr class="border-b border-slate-100">
+                                                    <td class="py-3 font-medium">周三</td>
+                                                    <td>法规 · 第3章 安全生产法（重点）</td>
+                                                    <td>2.5h</td>
+                                                    <td>30道</td>
+                                                </tr>
+                                                <tr class="border-b border-slate-100">
+                                                    <td class="py-3 font-medium">周四</td>
+                                                    <td>技术 · 第1章 机械安全技术</td>
+                                                    <td>2h</td>
+                                                    <td>20道</td>
+                                                </tr>
+                                                <tr class="border-b border-slate-100">
+                                                    <td class="py-3 font-medium">周五</td>
+                                                    <td>管理 · 第2章 安全生产责任制</td>
+                                                    <td>2h</td>
+                                                    <td>25道</td>
+                                                </tr>
+                                                <tr class="border-b border-slate-100">
+                                                    <td class="py-3 font-medium">周六</td>
+                                                    <td>本周知识点复盘 + 章节测试</td>
+                                                    <td>1h</td>
+                                                    <td>50道</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="py-3 font-medium">周日</td>
+                                                    <td>休息 / 薄弱点回顾</td>
+                                                    <td>-</td>
+                                                    <td>-</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <!-- 右侧：加微引导 -->
+                                <div class="col-span-1">
+                                    <div class="sticky top-8">
+                                        <div class="bg-gradient-to-br from-amber-50 to-orange-50 rounded-2xl p-6 border border-amber-200">
+                                            <div class="flex items-center gap-2 mb-4">
+                                                <span class="px-2 py-0.5 bg-red-500 text-white text-xs rounded-full">限时免费</span>
+                                            </div>
+                                            <h4 class="text-lg font-bold text-amber-800 mb-4">领取完整备考方案</h4>
+                                            <div class="space-y-2 mb-6">
+                                                <div class="flex items-center gap-2 text-sm text-amber-700">
+                                                    <span>✓</span> 完整3个月每日学习计划
+                                                </div>
+                                                <div class="flex items-center gap-2 text-sm text-amber-700">
+                                                    <span>✓</span> 近5年真题+答案解析
+                                                </div>
+                                                <div class="flex items-center gap-2 text-sm text-amber-700">
+                                                    <span>✓</span> 高频考点思维导图
+                                                </div>
+                                                <div class="flex items-center gap-2 text-sm text-amber-700">
+                                                    <span>✓</span> 1v1备考指导答疑
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center gap-3 mb-4 p-3 bg-white rounded-xl">
+                                                <div class="w-12 h-12 bg-blue-100 rounded-full flex items-center justify-center text-xl">👩‍🏫</div>
+                                                <div>
+                                                    <div class="text-sm font-bold text-slate-800">李老师</div>
+                                                    <div class="text-xs text-slate-500">注安备考顾问</div>
+                                                </div>
+                                            </div>
+                                            <button class="w-full py-3 bg-gradient-to-r from-amber-500 to-orange-500 text-white font-bold rounded-xl shadow-lg shadow-orange-200">
+                                                添加微信领取
+                                            </button>
+                                        </div>
+                                        
+                                        <div class="mt-6 bg-white rounded-2xl shadow-sm border border-slate-100 p-6">
+                                            <h5 class="font-bold text-slate-800 mb-3">🎁 推荐课程</h5>
+                                            <div class="space-y-3">
+                                                <div class="p-3 bg-blue-50 rounded-xl">
+                                                    <div class="text-sm font-medium text-slate-800">注安零基础畅学班</div>
+                                                    <div class="text-xs text-slate-500 mt-1">适合：基础薄弱、需要系统学习</div>
+                                                    <div class="text-blue-600 font-bold mt-1">¥2980</div>
+                                                </div>
+                                                <div class="p-3 bg-green-50 rounded-xl">
+                                                    <div class="text-sm font-medium text-slate-800">注安冲刺密训班</div>
+                                                    <div class="text-xs text-slate-500 mt-1">适合：有基础、需要快速提分</div>
+                                                    <div class="text-green-600 font-bold mt-1">¥1980</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="text-center mt-6 text-sm text-slate-500">
+                💡 网页版 · PC端展示，适合官网引流、SEO落地页
+            </div>
+        </div>
+
+        <!-- ========== 销售端工作台 ========== -->
+        <div id="content-sales" class="tab-content">
+            <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden" style="min-height: 700px;">
+                <!-- 顶部栏 -->
+                <div class="bg-slate-800 text-white px-6 py-4 flex items-center justify-between">
+                    <div class="flex items-center gap-3">
+                        <span class="text-xl">👨‍💼</span>
+                        <span class="font-bold">销售端工作台</span>
+                        <span class="text-xs text-slate-400 ml-2">注安项目组</span>
+                    </div>
+                    <div class="flex items-center gap-4">
+                        <span class="text-sm text-slate-300">今日待跟进：<span class="text-yellow-400 font-bold">8</span> 人</span>
+                        <div class="flex items-center gap-2">
+                            <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm">张</div>
+                            <span class="text-sm">张老师</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="flex" style="height: 650px;">
+                    <!-- 左侧用户列表 -->
+                    <div class="w-72 border-r border-slate-200 flex flex-col">
+                        <div class="p-4 border-b border-slate-100">
+                            <div class="relative">
+                                <input type="text" placeholder="搜索学员..." class="w-full pl-9 pr-4 py-2 border border-slate-200 rounded-lg text-sm focus:outline-none focus:border-blue-400">
+                                <span class="absolute left-3 top-2.5 text-slate-400">🔍</span>
+                            </div>
+                            <div class="flex gap-2 mt-3">
+                                <button class="px-3 py-1 bg-blue-100 text-blue-700 text-xs rounded-full">全部</button>
+                                <button class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">未跟进</button>
+                                <button class="px-3 py-1 bg-slate-100 text-slate-600 text-xs rounded-full">跟进中</button>
+                            </div>
+                        </div>
+                        <div class="flex-1 overflow-y-auto scroll-area">
+                            <div class="user-card active p-4 border-b border-slate-100" onclick="selectUser(this)">
+                                <div class="flex items-start justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-9 h-9 bg-blue-100 rounded-full flex items-center justify-center text-sm font-medium text-blue-600">王</div>
+                                        <div>
+                                            <div class="text-sm font-medium text-slate-800">王小明</div>
+                                            <div class="text-xs text-slate-400">10分钟前测评</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded">未跟进</span>
+                                </div>
+                                <div class="flex items-center gap-2 ml-11">
+                                    <span class="text-lg font-bold text-blue-600">72</span>
+                                    <span class="text-xs text-slate-500">分·有基础型</span>
+                                </div>
+                                <div class="flex gap-1 mt-2 ml-11">
+                                    <span class="px-1.5 py-0.5 bg-red-50 text-red-600 text-xs rounded">法规弱</span>
+                                    <span class="px-1.5 py-0.5 bg-orange-50 text-orange-600 text-xs rounded">管理弱</span>
+                                </div>
+                            </div>
+                            <div class="user-card p-4 border-b border-slate-100" onclick="selectUser(this)">
+                                <div class="flex items-start justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-9 h-9 bg-green-100 rounded-full flex items-center justify-center text-sm font-medium text-green-600">李</div>
+                                        <div>
+                                            <div class="text-sm font-medium text-slate-800">李小红</div>
+                                            <div class="text-xs text-slate-400">30分钟前测评</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 bg-green-100 text-green-700 text-xs rounded">跟进中</span>
+                                </div>
+                                <div class="flex items-center gap-2 ml-11">
+                                    <span class="text-lg font-bold text-green-600">85</span>
+                                    <span class="text-xs text-slate-500">分·基础扎实型</span>
+                                </div>
+                                <div class="flex gap-1 mt-2 ml-11">
+                                    <span class="px-1.5 py-0.5 bg-yellow-50 text-yellow-600 text-xs rounded">技术弱</span>
+                                </div>
+                            </div>
+                            <div class="user-card p-4 border-b border-slate-100" onclick="selectUser(this)">
+                                <div class="flex items-start justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-9 h-9 bg-purple-100 rounded-full flex items-center justify-center text-sm font-medium text-purple-600">张</div>
+                                        <div>
+                                            <div class="text-sm font-medium text-slate-800">张伟</div>
+                                            <div class="text-xs text-slate-400">1小时前测评</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 bg-yellow-100 text-yellow-700 text-xs rounded">未跟进</span>
+                                </div>
+                                <div class="flex items-center gap-2 ml-11">
+                                    <span class="text-lg font-bold text-red-600">45</span>
+                                    <span class="text-xs text-slate-500">分·零基础型</span>
+                                </div>
+                                <div class="flex gap-1 mt-2 ml-11">
+                                    <span class="px-1.5 py-0.5 bg-red-50 text-red-600 text-xs rounded">全面薄弱</span>
+                                </div>
+                            </div>
+                            <div class="user-card p-4 border-b border-slate-100" onclick="selectUser(this)">
+                                <div class="flex items-start justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-9 h-9 bg-orange-100 rounded-full flex items-center justify-center text-sm font-medium text-orange-600">刘</div>
+                                        <div>
+                                            <div class="text-sm font-medium text-slate-800">刘芳</div>
+                                            <div class="text-xs text-slate-400">2小时前测评</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 bg-blue-100 text-blue-700 text-xs rounded">已转化</span>
+                                </div>
+                                <div class="flex items-center gap-2 ml-11">
+                                    <span class="text-lg font-bold text-blue-600">68</span>
+                                    <span class="text-xs text-slate-500">分·有基础型</span>
+                                </div>
+                                <div class="flex gap-1 mt-2 ml-11">
+                                    <span class="px-1.5 py-0.5 bg-orange-50 text-orange-600 text-xs rounded">实务弱</span>
+                                </div>
+                            </div>
+                            <div class="user-card p-4 border-b border-slate-100" onclick="selectUser(this)">
+                                <div class="flex items-start justify-between mb-2">
+                                    <div class="flex items-center gap-2">
+                                        <div class="w-9 h-9 bg-slate-100 rounded-full flex items-center justify-center text-sm font-medium text-slate-600">陈</div>
+                                        <div>
+                                            <div class="text-sm font-medium text-slate-800">陈强</div>
+                                            <div class="text-xs text-slate-400">昨天测评</div>
+                                        </div>
+                                    </div>
+                                    <span class="px-2 py-0.5 bg-slate-100 text-slate-600 text-xs rounded">跟进中</span>
+                                </div>
+                                <div class="flex items-center gap-2 ml-11">
+                                    <span class="text-lg font-bold text-slate-600">58</span>
+                                    <span class="text-xs text-slate-500">分·基础薄弱型</span>
+                                </div>
+                                <div class="flex gap-1 mt-2 ml-11">
+                                    <span class="px-1.5 py-0.5 bg-red-50 text-red-600 text-xs rounded">法规弱</span>
+                                    <span class="px-1.5 py-0.5 bg-red-50 text-red-600 text-xs rounded">管理弱</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 右侧详情区 -->
+                    <div class="flex-1 flex flex-col">
+                        <!-- 子Tab -->
+                        <div class="border-b border-slate-200 px-6">
+                            <div class="flex gap-6">
+                                <button onclick="switchSalesTab('profile')" id="sales-tab-profile" class="sales-tab py-3 text-sm font-medium border-b-2 border-blue-600 text-blue-600">
+                                    📊 用户画像 & 测评数据
+                                </button>
+                                <button onclick="switchSalesTab('plan')" id="sales-tab-plan" class="sales-tab py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700">
+                                    📋 AI备考方案
+                                </button>
+                                <button onclick="switchSalesTab('scripts')" id="sales-tab-scripts" class="sales-tab py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700">
+                                    💬 跟进策略 & 话术库
+                                </button>
+                                <button onclick="switchSalesTab('followup')" id="sales-tab-followup" class="sales-tab py-3 text-sm font-medium border-b-2 border-transparent text-slate-500 hover:text-slate-700">
+                                    📝 跟进记录
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- 内容区 -->
+                        <div class="flex-1 overflow-y-auto scroll-area p-6">
+                            
+                            <!-- Tab1：用户画像 -->
+                            <div class="sales-content" id="sales-content-profile">
+                                <div class="grid grid-cols-3 gap-6 mb-6">
+                                    <!-- 基本信息 -->
+                                    <div class="col-span-1 bg-slate-50 rounded-xl p-5">
+                                        <div class="flex items-center gap-3 mb-4">
+                                            <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center text-xl font-medium text-blue-600">王</div>
+                                            <div>
+                                                <div class="font-bold text-slate-800">王小明</div>
+                                                <div class="text-xs text-slate-500">来源：公众号测评</div>
+                                            </div>
+                                        </div>
+                                        <div class="space-y-2 text-sm">
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-500">手机号</span>
+                                                <span class="text-slate-700">138****5678</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-500">学历</span>
+                                                <span class="text-slate-700">本科</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-500">专业</span>
+                                                <span class="text-slate-700">机械工程</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-500">工作年限</span>
+                                                <span class="text-slate-700">5年</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-500">相关经验</span>
+                                                <span class="text-slate-700">2年安全相关</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-500">备考目标</span>
+                                                <span class="text-slate-700">今年一次过四科</span>
+                                            </div>
+                                            <div class="flex justify-between">
+                                                <span class="text-slate-500">每日学习时长</span>
+                                                <span class="text-slate-700">1-2小时</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- 测评总分 -->
+                                    <div class="col-span-2 bg-gradient-to-br from-blue-600 to-blue-800 rounded-xl p-6 text-white">
+                                        <div class="flex items-start justify-between">
+                                            <div>
+                                                <div class="text-sm opacity-80 mb-1">测评总分</div>
+                                                <div class="text-5xl font-bold">72<span class="text-xl opacity-80">分</span></div>
+                                                <div class="mt-3 inline-block px-3 py-1 bg-white/20 rounded-full text-sm">
+                                                    有基础待强化型
+                                                </div>
+                                            </div>
+                                            <div class="text-right text-sm">
+                                                <div class="opacity-80">测评时间</div>
+                                                <div>2026-07-07 14:30</div>
+                                                <div class="mt-3 opacity-80">用时</div>
+                                                <div>4分28秒</div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-6 pt-4 border-t border-white/20 grid grid-cols-4 gap-4 text-center">
+                                            <div>
+                                                <div class="text-2xl font-bold">65%</div>
+                                                <div class="text-xs opacity-80">法规</div>
+                                            </div>
+                                            <div>
+                                                <div class="text-2xl font-bold">72%</div>
+                                                <div class="text-xs opacity-80">管理</div>
+                                            </div>
+                                            <div>
+                                                <div class="text-2xl font-bold">78%</div>
+                                                <div class="text-xs opacity-80">技术</div>
+                                            </div>
+                                            <div>
+                                                <div class="text-2xl font-bold">73%</div>
+                                                <div class="text-xs opacity-80">实务认知</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-2 gap-6">
+                                    <!-- 雷达图 -->
+                                    <div class="bg-white rounded-xl border border-slate-200 p-5">
+                                        <h4 class="font-bold text-slate-800 mb-4">📊 四维度能力雷达图</h4>
+                                        <div class="h-64">
+                                            <canvas id="sales-radar-chart"></canvas>
+                                        </div>
+                                    </div>
+                                    <!-- 柱状图 -->
+                                    <div class="bg-white rounded-xl border border-slate-200 p-5">
+                                        <h4 class="font-bold text-slate-800 mb-4">📈 各科目正确率对比</h4>
+                                        <div class="h-64">
+                                            <canvas id="sales-bar-chart"></canvas>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 薄弱知识点 -->
+                                <div class="mt-6 bg-white rounded-xl border border-slate-200 p-5">
+                                    <div class="flex items-center justify-between mb-4">
+                                        <h4 class="font-bold text-slate-800">⚠️ 薄弱知识点 TOP5</h4>
+                                        <span class="text-xs text-slate-400">按掌握率从低到高排序</span>
+                                    </div>
+                                    <table class="w-full text-sm">
+                                        <thead>
+                                            <tr class="border-b border-slate-200">
+                                                <th class="text-left py-2 text-slate-500 font-medium w-10">排名</th>
+                                                <th class="text-left py-2 text-slate-500 font-medium">知识点</th>
+                                                <th class="text-left py-2 text-slate-500 font-medium w-20">所属科目</th>
+                                                <th class="text-left py-2 text-slate-500 font-medium w-32">掌握率</th>
+                                                <th class="text-left py-2 text-slate-500 font-medium w-20">优先级</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody class="text-slate-700">
+                                            <tr class="border-b border-slate-100">
+                                                <td class="py-3"><span class="w-5 h-5 bg-red-100 text-red-600 text-xs rounded-full inline-flex items-center justify-center font-bold">1</span></td>
+                                                <td>安全生产法主要负责人职责</td>
+                                                <td><span class="px-2 py-0.5 bg-red-50 text-red-600 text-xs rounded">法规</span></td>
+                                                <td>
+                                                    <div class="flex items-center gap-2">
+                                                        <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                            <div class="h-full bg-red-500 rounded-full" style="width: 42%"></div>
+                                                        </div>
+                                                        <span class="text-xs text-red-500 font-medium">42%</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-red-600 font-medium text-xs">最高</span></td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="py-3"><span class="w-5 h-5 bg-orange-100 text-orange-600 text-xs rounded-full inline-flex items-center justify-center font-bold">2</span></td>
+                                                <td>事故等级划分标准</td>
+                                                <td><span class="px-2 py-0.5 bg-orange-50 text-orange-600 text-xs rounded">管理</span></td>
+                                                <td>
+                                                    <div class="flex items-center gap-2">
+                                                        <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                            <div class="h-full bg-orange-500 rounded-full" style="width: 55%"></div>
+                                                        </div>
+                                                        <span class="text-xs text-orange-500 font-medium">55%</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-orange-600 font-medium text-xs">高</span></td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="py-3"><span class="w-5 h-5 bg-yellow-100 text-yellow-600 text-xs rounded-full inline-flex items-center justify-center font-bold">3</span></td>
+                                                <td>特种设备安全管理</td>
+                                                <td><span class="px-2 py-0.5 bg-yellow-50 text-yellow-600 text-xs rounded">技术</span></td>
+                                                <td>
+                                                    <div class="flex items-center gap-2">
+                                                        <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                            <div class="h-full bg-yellow-500 rounded-full" style="width: 63%"></div>
+                                                        </div>
+                                                        <span class="text-xs text-yellow-600 font-medium">63%</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-yellow-600 font-medium text-xs">中</span></td>
+                                            </tr>
+                                            <tr class="border-b border-slate-100">
+                                                <td class="py-3"><span class="w-5 h-5 bg-blue-100 text-blue-600 text-xs rounded-full inline-flex items-center justify-center font-bold">4</span></td>
+                                                <td>安全生产责任制</td>
+                                                <td><span class="px-2 py-0.5 bg-blue-50 text-blue-600 text-xs rounded">管理</span></td>
+                                                <td>
+                                                    <div class="flex items-center gap-2">
+                                                        <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                            <div class="h-full bg-blue-500 rounded-full" style="width: 68%"></div>
+                                                        </div>
+                                                        <span class="text-xs text-blue-500 font-medium">68%</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-blue-600 font-medium text-xs">中</span></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-3"><span class="w-5 h-5 bg-green-100 text-green-600 text-xs rounded-full inline-flex items-center justify-center font-bold">5</span></td>
+                                                <td>危险化学品安全技术</td>
+                                                <td><span class="px-2 py-0.5 bg-green-50 text-green-600 text-xs rounded">技术</span></td>
+                                                <td>
+                                                    <div class="flex items-center gap-2">
+                                                        <div class="flex-1 h-2 bg-slate-100 rounded-full overflow-hidden">
+                                                            <div class="h-full bg-green-500 rounded-full" style="width: 71%"></div>
+                                                        </div>
+                                                        <span class="text-xs text-green-500 font-medium">71%</span>
+                                                    </div>
+                                                </td>
+                                                <td><span class="text-green-600 font-medium text-xs">低</span></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <!-- Tab2：AI备考方案 -->
+                            <div class="sales-content hidden" id="sales-content-plan">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="text-lg font-bold text-slate-800">AI智能备考方案</h3>
+                                    <div class="flex gap-2">
+                                        <button class="px-4 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm hover:bg-slate-50">
+                                            🔄 重新生成
+                                        </button>
+                                        <button class="px-4 py-2 bg-blue-600 text-white rounded-lg text-sm hover:bg-blue-700">
+                                            📤 发送给学员
+                                        </button>
+                                        <button class="px-4 py-2 border border-slate-200 text-slate-600 rounded-lg text-sm hover:bg-slate-50">
+                                            📄 导出方案
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <div class="space-y-6">
+                                    <!-- 诊断总结 -->
+                                    <div class="bg-blue-50 rounded-xl p-5 border border-blue-100">
+                                        <h4 class="font-bold text-blue-800 mb-3">📝 学员情况诊断总结</h4>
+                                        <p class="text-sm text-blue-700 leading-relaxed">
+                                            王小明同学本科机械工程专业毕业，有5年工作经验，其中2年安全相关工作经验，有一定的基础。
+                                            从测评结果来看，技术基础掌握较好（78%），但法规科目薄弱点较多（65%），尤其是安全生产法相关内容掌握不足。
+                                            管理科目处于中等水平（72%），事故等级划分等知识点需要加强。
+                                            备考目标是今年一次过四科，每日可学习1-2小时，时间相对紧张，需要高效规划。
+                                            <strong class="text-blue-800">建议重点突破法规科目，配合管理同步学习，技术科目保持刷题巩固即可。</strong>
+                                        </p>
+                                    </div>
+
+                                    <!-- 三阶段规划 -->
+                                    <div class="bg-white rounded-xl border border-slate-200 p-5">
+                                        <h4 class="font-bold text-slate-800 mb-4">📅 分阶段备考规划</h4>
+                                        <div class="space-y-4">
+                                            <div class="p-4 bg-blue-50 rounded-lg">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="font-bold text-blue-800">第一阶段：基础夯实（7月-8月 · 60天）</span>
+                                                    <span class="text-xs text-blue-600 bg-blue-100 px-2 py-0.5 rounded">重点阶段</span>
+                                                </div>
+                                                <div class="text-sm text-blue-700 space-y-1">
+                                                    <p><strong>学习重点：</strong>法规第3章（安全生产法）、管理第2章（安全生产责任制）、技术第1章（机械安全）</p>
+                                                    <p><strong>每日任务：</strong>1.5小时视频课 + 20道章节习题</p>
+                                                    <p><strong>推荐资料：</strong>官方教材 + 精讲班课程 + 章节题库</p>
+                                                    <p><strong>目标：</strong>建立完整知识框架，正确率提升到70%以上</p>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 bg-green-50 rounded-lg">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="font-bold text-green-800">第二阶段：强化突破（9月 · 30天）</span>
+                                                    <span class="text-xs text-green-600 bg-green-100 px-2 py-0.5 rounded">提分阶段</span>
+                                                </div>
+                                                <div class="text-sm text-green-700 space-y-1">
+                                                    <p><strong>学习重点：</strong>薄弱知识点专项突破、案例分析专项训练、错题复盘</p>
+                                                    <p><strong>每日任务：</strong>2小时刷题 + 1小时错题回顾</p>
+                                                    <p><strong>推荐资料：</strong>历年真题 + 习题班课程 + 错题本</p>
+                                                    <p><strong>目标：</strong>正确率提升到80%以上，攻克案例分析</p>
+                                                </div>
+                                            </div>
+                                            <div class="p-4 bg-orange-50 rounded-lg">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="font-bold text-orange-800">第三阶段：冲刺提分（10月 · 30天）</span>
+                                                    <span class="text-xs text-orange-600 bg-orange-100 px-2 py-0.5 rounded">冲刺阶段</span>
+                                                </div>
+                                                <div class="text-sm text-orange-700 space-y-1">
+                                                    <p><strong>学习重点：</strong>模考实战、押题预测、高频考点背诵</p>
+                                                    <p><strong>每日任务：</strong>每周2套模考卷 + 高频考点背诵</p>
+                                                    <p><strong>推荐资料：</strong>押题卷 + 冲刺班课程 + 高频考点手册</p>
+                                                    <p><strong>目标：</strong>模考分数稳定在85分以上</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 科目优先级 -->
+                                    <div class="bg-white rounded-xl border border-slate-200 p-5">
+                                        <h4 class="font-bold text-slate-800 mb-4">📚 科目优先级 & 学习建议</h4>
+                                        <div class="space-y-3">
+                                            <div class="flex items-center gap-4 p-3 bg-red-50 rounded-lg">
+                                                <div class="w-8 h-8 bg-red-500 text-white rounded-full flex items-center justify-center font-bold text-sm">1</div>
+                                                <div class="flex-1">
+                                                    <div class="font-medium text-slate-800">安全生产法规 <span class="text-xs text-red-600 ml-2">最高优先级</span></div>
+                                                    <div class="text-xs text-slate-500 mt-0.5">当前掌握率65%，是最大薄弱项，需要重点攻克</div>
+                                                </div>
+                                                <div class="text-xs text-slate-500">建议投入：40%时间</div>
+                                            </div>
+                                            <div class="flex items-center gap-4 p-3 bg-orange-50 rounded-lg">
+                                                <div class="w-8 h-8 bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm">2</div>
+                                                <div class="flex-1">
+                                                    <div class="font-medium text-slate-800">安全生产管理 <span class="text-xs text-orange-600 ml-2">高优先级</span></div>
+                                                    <div class="text-xs text-slate-500 mt-0.5">当前掌握率72%，中等水平，事故等级等知识点需加强</div>
+                                                </div>
+                                                <div class="text-xs text-slate-500">建议投入：30%时间</div>
+                                            </div>
+                                            <div class="flex items-center gap-4 p-3 bg-yellow-50 rounded-lg">
+                                                <div class="w-8 h-8 bg-yellow-500 text-white rounded-full flex items-center justify-center font-bold text-sm">3</div>
+                                                <div class="flex-1">
+                                                    <div class="font-medium text-slate-800">安全生产技术基础 <span class="text-xs text-yellow-600 ml-2">中优先级</span></div>
+                                                    <div class="text-xs text-slate-500 mt-0.5">当前掌握率78%，基础较好，保持刷题巩固即可</div>
+                                                </div>
+                                                <div class="text-xs text-slate-500">建议投入：20%时间</div>
+                                            </div>
+                                            <div class="flex items-center gap-4 p-3 bg-green-50 rounded-lg">
+                                                <div class="w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm">4</div>
+                                                <div class="flex-1">
+                                                    <div class="font-medium text-slate-800">实务（其他安全） <span class="text-xs text-green-600 ml-2">低优先级</span></div>
+                                                    <div class="text-xs text-slate-500 mt-0.5">认知水平尚可，建议基础阶段后再重点学习案例</div>
+                                                </div>
+                                                <div class="text-xs text-slate-500">建议投入：10%时间</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- 推荐课程 -->
+                                    <div class="bg-white rounded-xl border border-slate-200 p-5">
+                                        <h4 class="font-bold text-slate-800 mb-4">🎁 推荐课程 & 资料包</h4>
+                                        <div class="grid grid-cols-2 gap-4">
+                                            <div class="p-4 border border-blue-200 rounded-xl bg-blue-50">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="font-bold text-slate-800">注安零基础畅学班</span>
+                                                    <span class="text-blue-600 font-bold">¥2980</span>
+                                                </div>
+                                                <p class="text-xs text-slate-500 mb-3">适合基础薄弱、需要系统学习的学员，全程班课+题库+答疑</p>
+                                                <div class="text-xs text-blue-600 bg-blue-100 inline-block px-2 py-0.5 rounded">
+                                                    推荐理由：法规薄弱，需要系统精讲
+                                                </div>
+                                            </div>
+                                            <div class="p-4 border border-slate-200 rounded-xl">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="font-bold text-slate-800">法规单科强化班</span>
+                                                    <span class="text-orange-600 font-bold">¥980</span>
+                                                </div>
+                                                <p class="text-xs text-slate-500 mb-3">针对性突破法规科目，适合其他科目基础较好的学员</p>
+                                                <div class="text-xs text-orange-600 bg-orange-100 inline-block px-2 py-0.5 rounded">
+                                                    推荐理由：精准解决法规薄弱问题
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="mt-4 p-3 bg-green-50 rounded-lg">
+                                            <div class="text-sm font-medium text-green-800 mb-2">📦 免费赠送资料包</div>
+                                            <div class="flex flex-wrap gap-2">
+                                                <span class="px-2 py-1 bg-white text-green-700 text-xs rounded">近5年真题集</span>
+                                                <span class="px-2 py-1 bg-white text-green-700 text-xs rounded">高频考点手册</span>
+                                                <span class="px-2 py-1 bg-white text-green-700 text-xs rounded">法规思维导图</span>
+                                                <span class="px-2 py-1 bg-white text-green-700 text-xs rounded">学习计划表</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Tab3：话术库 -->
+                            <div class="sales-content hidden" id="sales-content-scripts">
+                                <div class="mb-6">
+                                    <h3 class="text-lg font-bold text-slate-800 mb-2">跟进策略 & 话术库</h3>
+                                    <p class="text-sm text-slate-500">基于学员测评结果AI生成，可直接复制使用</p>
+                                </div>
+
+                                <!-- 跟进时间线 -->
+                                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-5 mb-6">
+                                    <h4 class="font-bold text-slate-800 mb-4">⏰ 建议跟进时间线</h4>
+                                    <div class="flex items-center gap-4">
+                                        <div class="flex-1 text-center">
+                                            <div class="w-10 h-10 mx-auto bg-blue-500 text-white rounded-full flex items-center justify-center font-bold text-sm mb-2">1</div>
+                                            <div class="text-sm font-medium text-slate-800">首次联系</div>
+                                            <div class="text-xs text-slate-500">加微当天 · 19:00-21:00</div>
+                                            <div class="text-xs text-blue-600 mt-1">破冰 + 发报告</div>
+                                        </div>
+                                        <div class="text-slate-300">→</div>
+                                        <div class="flex-1 text-center">
+                                            <div class="w-10 h-10 mx-auto bg-green-500 text-white rounded-full flex items-center justify-center font-bold text-sm mb-2">2</div>
+                                            <div class="text-sm font-medium text-slate-800">二次跟进</div>
+                                            <div class="text-xs text-slate-500">3天后 · 周末下午</div>
+                                            <div class="text-xs text-green-600 mt-1">痛点挖掘 + 课程植入</div>
+                                        </div>
+                                        <div class="text-slate-300">→</div>
+                                        <div class="flex-1 text-center">
+                                            <div class="w-10 h-10 mx-auto bg-orange-500 text-white rounded-full flex items-center justify-center font-bold text-sm mb-2">3</div>
+                                            <div class="text-sm font-medium text-slate-800">三次跟进</div>
+                                            <div class="text-xs text-slate-500">7天后 · 工作日晚</div>
+                                            <div class="text-xs text-orange-600 mt-1">逼单 + 优惠促成</div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 话术模板 -->
+                                <div class="space-y-4">
+                                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                                            <span class="font-medium text-slate-800">👋 开场白话术（首次联系）</span>
+                                            <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700">复制</button>
+                                        </div>
+                                        <div class="p-5 text-sm text-slate-700 leading-relaxed bg-blue-50/30">
+                                            王小明你好，我是环球网校的李老师~ 看到你刚做了我们的注安备考学习诊断，
+                                            你的测评得分是<span class="text-blue-600 font-medium">72分</span>，属于<span class="text-blue-600 font-medium">有基础待强化型</span>。
+                                            <br><br>
+                                            我看了下你的详细报告，发现你<span class="text-red-600 font-medium">法规科目</span>的薄弱点比较多，
+                                            尤其是安全生产法主要负责人职责这块掌握率只有42%，这部分可是每年的必考点哦。
+                                            <br><br>
+                                            我给你整理了一份对应的<span class="text-blue-600 font-medium">备考计划和资料包</span>，
+                                            发给你参考一下，对你应该会有帮助~
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                                            <span class="font-medium text-slate-800">🎯 痛点挖掘话术（二次跟进）</span>
+                                            <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700">复制</button>
+                                        </div>
+                                        <div class="p-5 text-sm text-slate-700 leading-relaxed">
+                                            小明，上次发你的备考计划看了吗？感觉怎么样？
+                                            <br><br>
+                                            从你的测评结果来看，法规确实是你最大的短板。法规这科看着简单，其实知识点特别碎，
+                                            很多人学了半天还是抓不住重点，尤其是安全生产法那块，每年考20多分，是重中之重。
+                                            <br><br>
+                                            你现在是自己在看书还是有报班学习呀？有没有感觉哪部分学起来特别吃力？
+                                            <br><br>
+                                            我可以根据你的情况，给你一些具体的学习方法建议~
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                                            <span class="font-medium text-slate-800">💎 课程植入话术</span>
+                                            <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700">复制</button>
+                                        </div>
+                                        <div class="p-5 text-sm text-slate-700 leading-relaxed">
+                                            像你这种有一定基础，但法规特别薄弱的情况，其实最适合报我们的<span class="text-blue-600 font-medium">零基础畅学班</span>。
+                                            <br><br>
+                                            我们的法规是由张老师主讲的，她讲法规特别有一套，会把零散的知识点串成体系，
+                                            还有很多记忆口诀和应试技巧，很多学员听完都说法规再也不用死记硬背了。
+                                            <br><br>
+                                            而且你现在开始学的话，时间刚好，跟着我们的节奏走，一次过四科问题不大。
+                                            要不要我给你详细介绍下课程内容和学习安排？
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                                            <span class="font-medium text-slate-800">❓ 异议处理：太贵了</span>
+                                            <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700">复制</button>
+                                        </div>
+                                        <div class="p-5 text-sm text-slate-700 leading-relaxed">
+                                            我理解你的顾虑，2980确实不是小数目。
+                                            <br><br>
+                                            不过你可以算一笔账：注安证书考下来，每年的证书补贴+薪资涨幅，基本上一年就能回本了，
+                                            后面都是纯收益。而且我们的课程是两年有效期，今年没过明年还能接着学。
+                                            <br><br>
+                                            最重要的是，跟着我们学能大大提高通过率，节省你的时间成本。
+                                            自己学万一没过，又要耽误一年，这一年的机会成本可比学费高多了。
+                                            <br><br>
+                                            现在报名还有优惠活动，我给你申请一个最优惠的价格怎么样？
+                                        </div>
+                                    </div>
+
+                                    <div class="bg-white rounded-xl border border-slate-200 overflow-hidden">
+                                        <div class="px-5 py-3 bg-slate-50 border-b border-slate-200 flex items-center justify-between">
+                                            <span class="font-medium text-slate-800">🔥 逼单话术（限时优惠）</span>
+                                            <button class="px-3 py-1 bg-blue-600 text-white text-xs rounded hover:bg-blue-700">复制</button>
+                                        </div>
+                                        <div class="p-5 text-sm text-slate-700 leading-relaxed">
+                                            小明，跟你说个好消息！我们这两天正好有<span class="text-red-600 font-medium">7月特惠活动</span>，
+                                            今天报名的话可以立减500元，还送价值399元的真题解析班。
+                                            <br><br>
+                                            这个活动今天是最后一天了，名额也不多了，我这边就剩3个优惠名额。
+                                            <br><br>
+                                            你看你这边要是确定的话，我先帮你把优惠名额占上？
+                                            反正早报名早学习，早学早通过，早考早拿证~
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mt-6 text-center">
+                                    <button class="px-6 py-3 bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-medium rounded-xl shadow-lg hover:shadow-xl">
+                                        ✨ 生成更多个性化话术
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Tab4：跟进记录 -->
+                            <div class="sales-content hidden" id="sales-content-followup">
+                                <div class="flex items-center justify-between mb-6">
+                                    <h3 class="text-lg font-bold text-slate-800">跟进记录</h3>
+                                    <span class="text-sm text-slate-500">共 2 条记录</span>
+                                </div>
+
+                                <!-- 时间线 -->
+                                <div class="relative mb-8">
+                                    <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-slate-200"></div>
+                                    <div class="space-y-6">
+                                        <div class="relative pl-10">
+                                            <div class="absolute left-2 w-5 h-5 bg-green-500 rounded-full border-4 border-white shadow"></div>
+                                            <div class="bg-white rounded-xl border border-slate-200 p-4">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-sm font-medium text-slate-800">微信沟通</span>
+                                                    <span class="text-xs text-slate-400">2026-07-07 15:30</span>
+                                                </div>
+                                                <p class="text-sm text-slate-600 leading-relaxed">
+                                                    学员通过测评添加微信，已发送测评报告解读和备考计划。
+                                                    学员表示目前在自学，感觉法规比较难，考虑报班但还在对比。
+                                                    已邀请学员听明天的法规公开课。
+                                                </p>
+                                                <div class="mt-3 flex items-center gap-2">
+                                                    <span class="px-2 py-0.5 bg-blue-50 text-blue-600 text-xs rounded">已发资料</span>
+                                                    <span class="px-2 py-0.5 bg-yellow-50 text-yellow-600 text-xs rounded">意向待跟进</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="relative pl-10">
+                                            <div class="absolute left-2 w-5 h-5 bg-blue-500 rounded-full border-4 border-white shadow"></div>
+                                            <div class="bg-white rounded-xl border border-slate-200 p-4">
+                                                <div class="flex items-center justify-between mb-2">
+                                                    <span class="text-sm font-medium text-slate-800">添加微信</span>
+                                                    <span class="text-xs text-slate-400">2026-07-07 14:45</span>
+                                                </div>
+                                                <p class="text-sm text-slate-600">
+                                                    学员通过测评页面扫码添加微信，来源：公众号测评引流
+                                                </p>
+                                                <div class="mt-3">
+                                                    <span class="px-2 py-0.5 bg-green-50 text-green-600 text-xs rounded">新线索</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- 添加记录 -->
+                                <div class="bg-white rounded-xl border border-slate-200 p-5">
+                                    <h4 class="font-medium text-slate-800 mb-4">添加跟进记录</h4>
+                                    <div class="space-y-4">
+                                        <div class="flex gap-3">
+                                            <button class="px-4 py-2 bg-blue-100 text-blue-700 text-sm rounded-lg">微信</button>
+                                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-sm rounded-lg">电话</button>
+                                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-sm rounded-lg">面谈</button>
+                                            <button class="px-4 py-2 bg-slate-100 text-slate-600 text-sm rounded-lg">其他</button>
+                                        </div>
+                                        <textarea 
+                                            placeholder="请输入跟进内容..." 
+                                            class="w-full h-32 p-3 border border-slate-200 rounded-lg text-sm resize-none focus:outline-none focus:border-blue-400"
+                                        ></textarea>
+                                        <div class="flex items-center justify-between">
+                                            <div class="flex items-center gap-2 text-sm text-slate-500">
+                                                <span>下次跟进时间：</span>
+                                                <input type="date" class="px-2 py-1 border border-slate-200 rounded text-sm">
+                                            </div>
+                                            <button class="px-6 py-2 bg-blue-600 text-white text-sm rounded-lg hover:bg-blue-700">
+                                                保存记录
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-6 text-sm text-slate-500">
+                💡 销售端工作台 · 给销售/班主任使用，查看学员数据 + AI生成方案 + 话术库
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // ========== 主Tab切换 ==========
+        function switchMainTab(tab) {
+            // 隐藏所有内容
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // 重置所有tab样式
+            document.querySelectorAll('.main-tab').forEach(el => {
+                el.classList.remove('bg-blue-600', 'text-white');
+                el.classList.add('bg-slate-200', 'text-slate-600');
+            });
+            // 显示选中内容
+            document.getElementById('content-' + tab).classList.add('active');
+            // 设置选中tab样式
+            const activeTab = document.getElementById('tab-' + tab);
+            activeTab.classList.remove('bg-slate-200', 'text-slate-600');
+            activeTab.classList.add('bg-blue-600', 'text-white');
+
+            // 切换到销售端时初始化图表
+            if (tab === 'sales') {
+                setTimeout(initSalesCharts, 100);
+            }
+        }
+
+        // ========== 步骤切换 ==========
+        let currentMiniStep = 1;
+        let currentWebStep = 1;
+
+        function nextStep(type, step) {
+            const container = type === 'mini' ? 'mini' : 'web';
+            document.querySelectorAll('#' + container + '-container .step').forEach(el => el.classList.remove('active'));
+            document.getElementById(type + '-step-' + step).classList.add('active');
+            
+            if (type === 'mini') currentMiniStep = step;
+            else currentWebStep = step;
+
+            // 报告页初始化图表
+            if (type === 'mini' && step === 4) {
+                setTimeout(initMiniRadarChart, 100);
+            }
+            if (type === 'web' && step === 3) {
+                setTimeout(initWebCharts, 100);
+            }
+        }
+
+        // ========== 答题逻辑 ==========
+        const questions = [
+            { type: '基础信息', text: '你的最高学历是？', options: ['高中/中专及以下', '大专', '本科', '硕士及以上'] },
+            { type: '基础信息', text: '你有多少年工作经验？', options: ['1年以内', '1-3年', '3-5年', '5年以上'] },
+            { type: '基础信息', text: '你是否从事过安全相关工作？', options: ['完全没有', '接触过一点', '1-3年相关经验', '3年以上相关经验'] },
+            { type: '认知水平', text: '中级注安考试成绩有效期是几年？', options: ['1年', '2年', '3年', '4年'] },
+            { type: '认知水平', text: '注安考试实务科目有几个专业方向？', options: ['5个', '6个', '7个', '8个'] },
+            { type: '认知水平', text: '以下哪个不是注安考试科目？', options: ['安全生产法规', '安全生产管理', '安全生产技术', '安全生产英语'] },
+            { type: '知识测试', text: '安全生产法规定的主要负责人职责不包括？', options: ['建立健全安全生产责任制', '组织制定安全生产规章制度', '具体执行安全检查', '保证安全生产投入'] },
+            { type: '知识测试', text: '根据生产安全事故等级划分，造成10人以上30人以下死亡的属于？', options: ['一般事故', '较大事故', '重大事故', '特别重大事故'] },
+            { type: '知识测试', text: '特种设备使用单位应当在特种设备投入使用前或者投入使用后多少日内办理使用登记？', options: ['15日', '30日', '60日', '90日'] },
+            { type: '知识测试', text: '安全生产责任制的核心是？', options: ['安全第一、预防为主', '管生产必须管安全', '安全生产人人有责', '谁主管谁负责'] },
+            { type: '知识测试', text: '机械安全防护装置中，只能从正面进行操作的是？', options: ['固定防护装置', '联锁防护装置', '跳闸安全装置', '双手操作式安全装置'] },
+            { type: '学习习惯', text: '你每天能抽出多少时间学习？', options: ['30分钟以内', '30分钟-1小时', '1-2小时', '2小时以上'] },
+        ];
+
+        let currentQuestion = 0;
+
+        function updateQuestion() {
+            const q = questions[currentQuestion];
+            const progress = ((currentQuestion + 1) / questions.length) * 100;
+
+            // 更新小程序
+            document.getElementById('mini-question-num').textContent = `第 ${currentQuestion + 1} 题 / 共 ${questions.length} 题`;
+            document.getElementById('mini-question-type').textContent = q.type;
+            document.getElementById('mini-question-text').textContent = q.text;
+            document.getElementById('mini-progress').style.width = progress + '%';
+            
+            const miniOptions = document.getElementById('mini-options');
+            miniOptions.innerHTML = q.options.map((opt, i) => `
+                <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 text-sm">
+                    ${String.fromCharCode(65 + i)}. ${opt}
+                </button>
+            `).join('');
+
+            // 更新网页版
+            document.getElementById('web-question-num').textContent = `第 ${currentQuestion + 1} 题 / 共 ${questions.length} 题`;
+            document.getElementById('web-question-type').textContent = q.type;
+            document.getElementById('web-question-text').textContent = q.text;
+            document.getElementById('web-progress').style.width = progress + '%';
+            
+            const webOptions = document.getElementById('web-options');
+            webOptions.innerHTML = q.options.map((opt, i) => `
+                <button onclick="selectOption(this)" class="option-btn w-full p-4 text-left border-2 border-slate-200 rounded-xl text-slate-700 hover:border-blue-400">
+                    ${String.fromCharCode(65 + i)}. ${opt}
+                </button>
+            `).join('');
+        }
+
+        function selectOption(btn) {
+            // 清除其他选中状态
+            const parent = btn.parentElement;
+            parent.querySelectorAll('.option-btn').forEach(el => el.classList.remove('selected'));
+            btn.classList.add('selected');
+        }
+
+        function nextQuestion() {
+            if (currentQuestion < questions.length - 1) {
+                currentQuestion++;
+                updateQuestion();
+            } else {
+                // 最后一题，跳转到加载页
+                const type = currentMiniStep > 1 ? 'mini' : 'web';
+                if (type === 'mini') {
+                    nextStep('mini', 3);
+                    setTimeout(() => nextStep('mini', 4), 2000);
+                } else {
+                    nextStep('web', 3);
+                }
+            }
+        }
+
+        function prevQuestion() {
+            if (currentQuestion > 0) {
+                currentQuestion--;
+                updateQuestion();
+            }
+        }
+
+        // ========== 销售端子Tab切换 ==========
+        function switchSalesTab(tab) {
+            // 隐藏所有内容
+            document.querySelectorAll('.sales-content').forEach(el => el.classList.add('hidden'));
+            // 重置所有tab样式
+            document.querySelectorAll('.sales-tab').forEach(el => {
+                el.classList.remove('border-blue-600', 'text-blue-600');
+                el.classList.add('border-transparent', 'text-slate-500');
+            });
+            // 显示选中内容
+            document.getElementById('sales-content-' + tab).classList.remove('hidden');
+            // 设置选中tab样式
+            const activeTab = document.getElementById('sales-tab-' + tab);
+            activeTab.classList.remove('border-transparent', 'text-slate-500');
+            activeTab.classList.add('border-blue-600', 'text-blue-600');
+        }
+
+        function selectUser(card) {
+            document.querySelectorAll('.user-card').forEach(el => el.classList.remove('active'));
+            card.classList.add('active');
+        }
+
+        // ========== 图表初始化 ==========
+        const radarData = {
+            labels: ['法规', '管理', '技术基础', '实务认知'],
+            datasets: [{
+                label: '掌握率',
+                data: [65, 72, 78, 73],
+                backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                borderColor: 'rgba(59, 130, 246, 1)',
+                borderWidth: 2,
+                pointBackgroundColor: 'rgba(59, 130, 246, 1)',
+                pointBorderColor: '#fff',
+                pointHoverBackgroundColor: '#fff',
+                pointHoverBorderColor: 'rgba(59, 130, 246, 1)'
+            }]
+        };
+
+        const barData = {
+            labels: ['法规', '管理', '技术基础', '实务认知'],
+            datasets: [{
+                label: '你的掌握率',
+                data: [65, 72, 78, 73],
+                backgroundColor: [
+                    'rgba(239, 68, 68, 0.7)',
+                    'rgba(249, 115, 22, 0.7)',
+                    'rgba(34, 197, 94, 0.7)',
+                    'rgba(59, 130, 246, 0.7)'
+                ],
+                borderRadius: 6
+            }, {
+                label: '平均水平',
+                data: [60, 65, 62, 58],
+                backgroundColor: 'rgba(148, 163, 184, 0.3)',
+                borderRadius: 6
+            }]
+        };
+
+        function initMiniRadarChart() {
+            const ctx = document.getElementById('mini-radar-chart');
+            if (!ctx) return;
+            new Chart(ctx, {
+                type: 'radar',
+                data: radarData,
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            beginAtZero: true,
+                            max: 100,
+                            ticks: { stepSize: 20, display: false },
+                            pointLabels: { font: { size: 11 } }
+                        }
+                    },
+                    plugins: { legend: { display: false } }
+                }
+            });
+        }
+
+        function initWebCharts() {
+            const radarCtx = document.getElementById('web-radar-chart');
+            if (radarCtx) {
+                new Chart(radarCtx, {
+                    type: 'radar',
+                    data: radarData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: { stepSize: 20 }
+                            }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            const barCtx = document.getElementById('web-bar-chart');
+            if (barCtx) {
+                new Chart(barCtx, {
+                    type: 'bar',
+                    data: barData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: { beginAtZero: true, max: 100 }
+                        },
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
+            }
+        }
+
+        function initSalesCharts() {
+            const radarCtx = document.getElementById('sales-radar-chart');
+            if (radarCtx) {
+                new Chart(radarCtx, {
+                    type: 'radar',
+                    data: radarData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            r: {
+                                beginAtZero: true,
+                                max: 100,
+                                ticks: { stepSize: 20 }
+                            }
+                        },
+                        plugins: { legend: { display: false } }
+                    }
+                });
+            }
+
+            const barCtx = document.getElementById('sales-bar-chart');
+            if (barCtx) {
+                new Chart(barCtx, {
+                    type: 'bar',
+                    data: barData,
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        indexAxis: 'y',
+                        scales: {
+                            x: { beginAtZero: true, max: 100 }
+                        },
+                        plugins: { legend: { position: 'bottom' } }
+                    }
+                });
+            }
+        }
+
+        // 页面加载完成后初始化
+        window.onload = function() {
+            updateQuestion();
+        };
+    </script>
+</body>
+</html>

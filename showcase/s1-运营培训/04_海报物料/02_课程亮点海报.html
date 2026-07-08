@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>4.2 课程亮点海报 · WorkBuddy 培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafafa;color:#1f2937;line-height:1.7}
+.header{background:linear-gradient(135deg,#0c4a6e 0%,#0ea5e9 100%);color:#fff;padding:48px 32px 56px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.08);border-radius:50%}
+.crumbs{font-size:13px;opacity:0.9;margin-bottom:14px}
+.crumbs a{color:#fff;text-decoration:none}
+h1{font-size:34px;margin-bottom:12px;position:relative;z-index:1}
+.subtitle{font-size:16px;opacity:0.95;position:relative;z-index:1}
+.container{max-width:1100px;margin:-32px auto 60px;padding:0 24px}
+.card{background:#fff;border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h2{font-size:24px;color:#0c4a6e;margin-bottom:16px;padding-left:14px;border-left:5px solid #0ea5e9}
+.card h3{font-size:18px;color:#0c4a6e;margin:18px 0 10px}
+.tip{background:linear-gradient(135deg,#f0f9ff,#bae6fd);border-left:4px solid #0ea5e9;padding:16px 20px;border-radius:8px;margin:20px 0;color:#0c4a6e}
+.tip strong{color:#075985}
+.warn{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:8px;margin:20px 0;color:#78350f}
+.fab{background:linear-gradient(135deg,#ede9fe,#ddd6fe);border-radius:12px;padding:24px;margin:20px 0}
+.fab h3{color:#5b21b6}
+.fab-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:14px}
+.fab-item{background:#fff;padding:18px;border-radius:10px;border-top:4px solid #7c3aed}
+.fab-item b{display:block;color:#5b21b6;font-size:14px;margin-bottom:6px}
+.fab-item .label{font-size:11px;background:#ede9fe;color:#5b21b6;padding:2px 8px;border-radius:10px;display:inline-block;margin-bottom:8px}
+.fab-item p{font-size:13px;color:#374151;line-height:1.6}
+.style-tabs{display:flex;gap:8px;margin:18px 0}
+.style-tab{padding:8px 18px;border-radius:20px;font-size:13px;cursor:pointer;font-weight:600;border:2px solid transparent}
+.style-tab.tech{background:#dbeafe;color:#1e40af}
+.style-tab.chinese{background:#fee2e2;color:#991b1b}
+.style-tab.dark{background:#1f2937;color:#fbbf24}
+.style-tab.active{border-color:#0c4a6e;transform:scale(1.05)}
+.style-panel{background:#f8fafc;border-radius:12px;padding:24px;margin:20px 0}
+table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+th{background:linear-gradient(135deg,#0c4a6e,#0ea5e9);color:#fff;padding:14px 12px;text-align:left;font-size:14px}
+td{padding:12px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+tr:hover td{background:#f0f9ff}
+.mock{background:#0f172a;color:#fff;padding:32px;border-radius:12px;margin:20px 0;position:relative;overflow:hidden}
+.mock::before{content:"";position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(circle,rgba(14,165,233,0.3),transparent 70%)}
+.mock .badge{display:inline-block;background:rgba(14,165,233,0.2);color:#38bdf8;padding:4px 12px;border-radius:12px;font-size:12px;margin-bottom:14px}
+.mock h2{font-size:32px;margin-bottom:12px;position:relative;z-index:1}
+.mock p{color:#cbd5e1;font-size:15px;position:relative;z-index:1;margin-bottom:8px}
+.mock .price{color:#fbbf24;font-size:36px;font-weight:900;margin:20px 0 12px}
+.mock .cta{display:inline-block;background:linear-gradient(135deg,#0ea5e9,#06b6d4);color:#fff;padding:12px 28px;border-radius:30px;font-size:14px;font-weight:bold;margin-top:14px}
+.template{background:#f8fafc;border-left:4px solid #0ea5e9;padding:18px;border-radius:8px;margin:16px 0;font-family:Menlo,monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;color:#0c4a6e}
+.nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb}
+.nav a{padding:12px 24px;background:#fff;border:2px solid #0ea5e9;color:#0c4a6e;text-decoration:none;border-radius:8px;font-weight:600}
+.nav a:hover{background:#0ea5e9;color:#fff}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumbs"><a href="../index.html">培训首页</a> / <a href="index.html">模块四·海报物料</a> / 4.2</div>
+  <h1>💎 课程亮点海报（卖点卡片化）</h1>
+  <div class="subtitle">3 句话 + 关键词卡片，3 套不同风格模板——让产品亮点 5 秒内抓住眼球</div>
+</div>
+<div class="container">
+
+<div class="card">
+  <h2>一、FAB 法则（销售话术 → 海报文案）</h2>
+  <p>亮点海报的精髓：<b>把教研语言翻译成客户能秒懂的利益点</b>。使用经典的 FAB 框架：</p>
+  <div class="fab">
+    <h3>📐 FAB = Feature（属性）+ Advantage（优势）+ Benefit（利益）</h3>
+    <div class="fab-grid">
+      <div class="fab-item">
+        <span class="label">F · 属性</span>
+        <b>课程有什么？</b>
+        <p>比如：4 科 96 课时高清精讲、智能题库 8000+ 题、命题人密押卷 3 套</p>
+      </div>
+      <div class="fab-item">
+        <span class="label">A · 优势</span>
+        <b>比别人强在哪？</b>
+        <p>命题组前成员亲授、AI 智能错题本、协议班不过退费 80%</p>
+      </div>
+      <div class="fab-item">
+        <span class="label">B · 利益</span>
+        <b>对学员有啥用？</b>
+        <p>每天 1 小时，60 天过 4 科；考不过不亏钱；考过了涨薪 30%</p>
+      </div>
+    </div>
+  </div>
+  <div class="tip"><strong>📌 海报只用 B 段（利益）！</strong>属性和优势放在详情页，朋友圈/落地页海报只放"对学员有啥用"。</div>
+</div>
+
+<div class="card">
+  <h2>二、5 大课程亮点海报（基于 26 年运营手册真实定价）</h2>
+  <table>
+    <thead><tr><th>课程</th><th>定价</th><th>核心卖点（B 段，1 句话版本）</th><th>适用人群</th></tr></thead>
+    <tbody>
+      <tr><td><b>云私塾</b></td><td>¥2,999</td><td>AI 智能魔方 + 私教 max，一人一档，60 天精准过 4 科</td><td>工作忙 / 上班族</td></tr>
+      <tr><td><b>零基础全程班</b></td><td>¥1,249</td><td>96 课时精讲 + 8000 题库，从 0 到 1 带你入门 4 科</td><td>完全没基础</td></tr>
+      <tr><td><b>私教营</b></td><td>¥3,980</td><td>1V1 名师辅导 + 命题人密押，不过退费 80%</td><td>追求高通过率</td></tr>
+      <tr><td><b>央企定制班</b></td><td>¥3,699</td><td>针对央企国企编制，集训式教学 + 内部题库</td><td>央企国企员工</td></tr>
+      <tr><td><b>协议班（不过退）</b></td><td>¥1,980</td><td>不过退费 80%，零风险冲刺</td><td>犹豫型客户</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>三、3 套风格模板（套用即可）</h2>
+  <div class="style-tabs">
+    <span class="style-tab tech active">🔵 科技蓝（主推）</span>
+    <span class="style-tab chinese">🟥 中国红（节日/冲刺）</span>
+    <span class="style-tab dark">⚫ 暗黑金（高端班）</span>
+  </div>
+
+  <div class="style-panel">
+    <h3 style="color:#0c4a6e;margin-bottom:14px">🔵 风格 1：科技蓝（云私塾 / AI 智能魔方）</h3>
+    <div class="mock">
+      <span class="badge">🌟 26 年旗舰班</span>
+      <h2>云私塾 · 一人一档智能冲刺</h2>
+      <p>✓ AI 智能魔方 · 千人千面学习路径</p>
+      <p>✓ 私教 max 1V1 答疑 · 24h 响应</p>
+      <p>✓ 命题人密押卷 · 覆盖 92% 高频考点</p>
+      <div class="price">¥2,999</div>
+      <span class="cta">立即咨询 →</span>
+    </div>
+  </div>
+
+  <div class="style-panel">
+    <h3 style="color:#991b1b;margin-bottom:14px">🟥 风格 2：中国红（节日活动 / 限时冲刺）</h3>
+    <div class="mock" style="background:linear-gradient(135deg,#7f1d1d,#dc2626)">
+      <span class="badge" style="background:rgba(255,255,255,0.2);color:#fef3c7">🔥 限时特惠</span>
+      <h2>考前 30 天冲刺 · 8 折抢</h2>
+      <p>原价 ¥3,980 → 限时 ¥3,184</p>
+      <p>✓ 送 1V1 名师密押课</p>
+      <p>✓ 送 3 套命题人密押卷</p>
+      <p>✓ 协议保障：不过退 80%</p>
+      <div class="price">¥3,184</div>
+      <span class="cta" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#7f1d1d">仅剩 38 个名额 →</span>
+    </div>
+  </div>
+
+  <div class="style-panel">
+    <h3 style="color:#1f2937;margin-bottom:14px">⚫ 风格 3：暗黑金（私教营 / 高端定制）</h3>
+    <div class="mock" style="background:linear-gradient(135deg,#0c0a09,#1c1917)">
+      <span class="badge" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#0c0a09;font-weight:bold">👑 VIP 私教</span>
+      <h2 style="background:linear-gradient(135deg,#fbbf24,#f59e0b);-webkit-background-clip:text;-webkit-text-fill-color:transparent">私教营 · 名师 1V1 私带</h2>
+      <p style="color:#d6d3d1">✓ 命题组前成员亲授 · 8 大专题精讲</p>
+      <p style="color:#d6d3d1">✓ 24h 名师答疑群 · 30 天陪跑到考前</p>
+      <p style="color:#d6d3d1">✓ 不过退费 80% · 零风险冲刺</p>
+      <div class="price">¥3,980</div>
+      <span class="cta" style="background:linear-gradient(135deg,#fbbf24,#f59e0b);color:#0c0a09">预约名师 →</span>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>四、提问模板（直接复制用）</h2>
+  <div class="template">帮我做一张"私教营"课程亮点海报。
+
+课程信息（来自 26 年运营手册）：
+- 名称：私教营
+- 定价：¥3,980
+- 核心属性（F）：1V1 名师辅导、命题人密押 3 套、AI 错题本
+- 核心优势（A）：命题组前成员授课、不过退费 80%
+- 核心利益（B）：60 天精准过 4 科、考不过不亏钱
+- 目标人群：追求高通过率、有预算的上班族
+
+风格要求：
+- 暗黑金（高端 VIP 感）
+- 主标题 32pt
+- 价格 ¥3,980 大字号金色
+- 3 个核心利益点用勾选列表展示
+- 行动号召：预约名师
+
+输出：单页 HTML，配色给到具体色值（#XXXXXX 格式）。</div>
+</div>
+
+<div class="warn"><strong>⚠️ 重要：</strong>海报中的价格、政策、卖点必须和 26 年运营手册 100% 一致。每次改价后所有在用海报要同步更新！</div>
+
+<div class="nav">
+  <a href="01_倒计时海报.html">← 上一篇：4.1 倒计时海报</a>
+  <a href="03_朋友圈九宫格.html">下一篇：4.3 朋友圈九宫格 →</a>
+</div>
+
+</div>
+</body>
+</html>

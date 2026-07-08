@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>6.1 调研问卷设计 · WorkBuddy 培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafafa;color:#1f2937;line-height:1.7}
+.header{background:linear-gradient(135deg,#0f766e 0%,#14b8a6 100%);color:#fff;padding:48px 32px 56px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.08);border-radius:50%}
+.crumbs{font-size:13px;opacity:0.9;margin-bottom:14px}
+.crumbs a{color:#fff;text-decoration:none}
+h1{font-size:34px;margin-bottom:12px;position:relative;z-index:1}
+.subtitle{font-size:16px;opacity:0.95;position:relative;z-index:1}
+.container{max-width:1100px;margin:-32px auto 60px;padding:0 24px}
+.card{background:#fff;border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h2{font-size:24px;color:#0f766e;margin-bottom:16px;padding-left:14px;border-left:5px solid #14b8a6}
+.card h3{font-size:18px;color:#0f766e;margin:18px 0 10px}
+.tip{background:linear-gradient(135deg,#ccfbf1,#99f6e4);border-left:4px solid #14b8a6;padding:16px 20px;border-radius:8px;margin:20px 0;color:#134e4a}
+.tip strong{color:#0f766e}
+.warn{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:8px;margin:20px 0;color:#78350f}
+.q-card{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border-radius:10px;padding:18px;margin:12px 0;border-left:4px solid #14b8a6}
+.q-card .qid{background:#0f766e;color:#fff;padding:2px 10px;border-radius:10px;font-size:11px;display:inline-block;margin-bottom:6px}
+.q-card h4{color:#134e4a;font-size:15px;margin:6px 0}
+.q-card .options{background:#fff;padding:10px 14px;border-radius:6px;margin-top:8px;font-size:13px;color:#0f766e;line-height:1.8}
+.q-card .tag{font-size:11px;padding:2px 8px;border-radius:10px;margin-right:4px;font-weight:600}
+.q-card .tag.single{background:#dbeafe;color:#1e40af}
+.q-card .tag.multi{background:#ede9fe;color:#5b21b6}
+.q-card .tag.scale{background:#d1fae5;color:#065f46}
+.q-card .tag.fill{background:#fee2e2;color:#991b1b}
+.persona-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin:20px 0}
+.persona-card{background:linear-gradient(135deg,#f0fdfa,#ccfbf1);border-radius:10px;padding:18px;border-top:4px solid #14b8a6}
+.persona-card b{display:block;color:#0f766e;font-size:15px;margin-bottom:6px}
+.persona-card .tag{background:#0f766e;color:#fff;padding:2px 8px;border-radius:10px;font-size:11px;display:inline-block;margin-right:4px}
+.persona-card p{color:#374151;font-size:13px;margin:6px 0;line-height:1.6}
+table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+th{background:linear-gradient(135deg,#0f766e,#14b8a6);color:#fff;padding:14px 12px;text-align:left;font-size:14px}
+td{padding:12px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+tr:hover td{background:#f0fdfa}
+.template{background:#f8fafc;border-left:4px solid #14b8a6;padding:18px;border-radius:8px;margin:16px 0;font-family:Menlo,monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;color:#0f766e}
+.nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb}
+.nav a{padding:12px 24px;background:#fff;border:2px solid #14b8a6;color:#0f766e;text-decoration:none;border-radius:8px;font-weight:600}
+.nav a:hover{background:#14b8a6;color:#fff}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumbs"><a href="../index.html">培训首页</a> / <a href="index.html">模块六·学员调研</a> / 6.1</div>
+  <h1>📋 调研问卷设计（4 类学员 × 4 套问卷）</h1>
+  <div class="subtitle">新客 / 在读 / 二战 / 老学员——每类学员调研目的不同，题目也不同</div>
+</div>
+<div class="container">
+
+<div class="card">
+  <h2>一、为什么要"4 套问卷"而不是"1 套打天下"？</h2>
+  <p>4 类学员的<b>决策阶段</b>完全不同：</p>
+  <table>
+    <thead><tr><th>学员类型</th><th>决策阶段</th><th>核心痛点</th><th>调研目的</th></tr></thead>
+    <tbody>
+      <tr><td><b>新客</b>（未报名）</td><td>意识 → 考虑</td><td>不知道要不要考、值不值得</td><td>识别高意向 + 决策障碍</td></tr>
+      <tr><td><b>在读</b>（已报名）</td><td>学习中</td><td>跟不上 / 不会学 / 焦虑</td><td>学习障碍 + 课程满意度</td></tr>
+      <tr><td><b>二战</b>（去年没过）</td><td>复购决策</td><td>上次哪里没准备好</td><td>去年失败原因 + 这次预期</td></tr>
+      <tr><td><b>老学员</b>（已取证）</td><td>复购/转介绍</td><td>还需不需要其他证</td><td>复购意向 + 推荐意愿 NPS</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>二、问卷设计 5 大黄金原则</h2>
+  <div class="tip"><strong>📌 5 条黄金法则：</strong><br>
+  ① <b>15-20 题</b>，5-8 分钟可填完（再长学员就跑）<br>
+  ② <b>题型混合</b>：单选 + 多选 + 量表 + 填空（避免疲劳）<br>
+  ③ <b>关键问题放第 3-7 题</b>（前 2 题热身，结尾 2 题开放）<br>
+  ④ <b>1 个问题只问 1 件事</b>（别"既...又..."）<br>
+  ⑤ <b>跳过逻辑</b>：根据前题答案自动跳题（节省时间）</div>
+</div>
+
+<div class="card">
+  <h2>三、问卷 1：新客意向调研（最常用）</h2>
+  <p><b>目的：</b>识别高意向学员、挖决策顾虑、收集内容偏好</p>
+
+  <div class="q-card">
+    <span class="qid">Q1</span> <span class="tag single">单选</span>
+    <h4>您目前是否在从事安全相关工作？</h4>
+    <div class="options">A. 是，已经在做  B. 不是，但想转行  C. 学生/刚毕业  D. 其他</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q2</span> <span class="tag single">单选</span>
+    <h4>您是从哪个渠道了解到我们？</h4>
+    <div class="options">A. 抖音/快手  B. 微信朋友圈  C. 百度搜索  D. 朋友介绍  E. 其他</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q3</span> <span class="tag scale">量表</span>
+    <h4>您目前对"考中级注安"这件事的意愿有多强？（1-10 分）</h4>
+    <div class="options">1=完全没想法 → 10=今年必过</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q4</span> <span class="tag multi">多选</span>
+    <h4>您目前最担心什么？（最多 3 项）</h4>
+    <div class="options">A. 考不过浪费时间  B. 课程太贵  C. 不知道选哪个机构  D. 工作太忙没时间  E. 不知道怎么开始  F. 其它</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q5</span> <span class="tag scale">量表</span>
+    <h4>您能接受的培训预算是多少？</h4>
+    <div class="options">A. 1000 以下  B. 1000-2000  C. 2000-4000  D. 4000+  E. 看情况</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q6</span> <span class="tag multi">多选</span>
+    <h4>您最希望课程包含哪些内容？（多选）</h4>
+    <div class="options">A. 命题人密押  B. AI 智能题库  C. 1V1 答疑  D. 历年真题精讲  E. 不过退费  F. 配套纸质教材</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q7</span> <span class="tag fill">填空</span>
+    <h4>您目前在备考中遇到的最大问题是？</h4>
+    <div class="options">____________________________________（开放题）</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q8</span> <span class="tag fill">填空</span>
+    <h4>如果有一项服务能帮到您，您最希望它是什么？</h4>
+    <div class="options">____________________________________（开放题）</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>四、问卷 2：在读学员满意度（每月 1 次）</h2>
+  <p><b>目的：</b>识别学习障碍、监控课程质量、预警退费风险</p>
+
+  <div class="q-card">
+    <span class="qid">Q1</span> <span class="tag scale">量表</span>
+    <h4>您对目前课程的整体满意度？（1-10 分）</h4>
+    <div class="options">1=非常不满意 → 10=非常满意</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q2</span> <span class="tag multi">多选</span>
+    <h4>您在学习中遇到哪些困难？（多选）</h4>
+    <div class="options">A. 看不懂  B. 进度跟不上  C. 题目不会做  D. 不会规划时间  E. 容易忘  F. 其它</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q3</span> <span class="tag scale">量表</span>
+    <h4>主讲老师讲课清晰度？</h4>
+    <div class="options">1=完全听不懂 → 10=非常清晰</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q4</span> <span class="tag fill">填空</span>
+    <h4>您希望我们改进的 1 件事是？</h4>
+    <div class="options">____________________________________</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>五、问卷 3：二战学员调研（4 月 / 8 月各 1 次）</h2>
+  <p><b>目的：</b>挖去年失败原因、定位今年卖点</p>
+
+  <div class="q-card">
+    <span class="qid">Q1</span> <span class="tag single">单选</span>
+    <h4>您去年备考中最大的问题是？</h4>
+    <div class="options">A. 时间不够  B. 没有方法  C. 课程质量差  D. 工作冲突  E. 其它</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q2</span> <span class="tag fill">填空</span>
+    <h4>去年最遗憾的 1 件事是？</h4>
+    <div class="options">____________________________________</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q3</span> <span class="tag multi">多选</span>
+    <h4>今年您最希望我们帮您解决什么？（多选）</h4>
+    <div class="options">A. 强制学习计划  B. 1V1 答疑  C. 押题密卷  D. 不过退费  E. 考前 1 个月集训</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>六、问卷 4：老学员复购调研（取证后 30 天）</h2>
+  <p><b>目的：</b>挖掘复购意向 + 转介绍 + NPS 净推荐值</p>
+
+  <div class="q-card">
+    <span class="qid">Q1</span> <span class="tag scale">量表</span>
+    <h4>您有多大可能向朋友推荐我们的课程？（NPS 量表）</h4>
+    <div class="options">0=完全不会 → 10=强烈推荐</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q2</span> <span class="tag multi">多选</span>
+    <h4>取证后您还有什么新需求？（多选）</h4>
+    <div class="options">A. 一级注安  B. 一消  C. 城规  D. 咨询工程师  E. 不需要  F. 其它</div>
+  </div>
+
+  <div class="q-card">
+    <span class="qid">Q3</span> <span class="tag fill">填空</span>
+    <h4>对环球网校，您最想说的 1 句话？</h4>
+    <div class="options">____________________________________</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>七、提问模板（直接复制用）</h2>
+  <div class="template">帮我设计一份《中级注安 26 年老学员复购调研问卷》。
+
+目标：挖老学员复购意向 + 转介绍意愿 + NPS 满意度
+投放：取证后 30 天，老学员微信群
+时长：控制在 5 分钟内
+
+要求：
+- 12-15 题
+- 题型混合：单选 5 + 多选 3 + 量表 4 + 填空 3
+- 关键题：NPS 净推荐值（0-10 分量表）
+- 重点挖：①是否会推荐给朋友 ②是否想考一消/一建 ③对注安课程的满意度
+- 结尾留 2 题开放题挖隐性需求
+- 跳过逻辑：Q3 选"不需要"则跳过 Q4-Q8
+
+参考课程：注安 + 一消 + 城规 + 咨询工程师
+风格：老学员口吻、亲切、不官方</div>
+</div>
+
+<div class="warn"><strong>⚠️ 投放提醒：</strong>调研问卷可挂在<b>腾讯问卷</b>（你的销售团队应该都有账号），结果导出 Excel 后用 6.2 文档里的"AI 数据简报"模板自动分析。</div>
+
+<div class="nav">
+  <a href="index.html">← 返回模块六</a>
+  <a href="02_结果分析.html">下一篇：6.2 调研结果分析 →</a>
+</div>
+
+</div>
+</body>
+</html>

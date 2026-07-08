@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>模块七·进阶能力｜WorkBuddy × 中级注安运营培训</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+  background: linear-gradient(135deg, #faf5ff 0%, #ede9fe 50%, #ddd6fe 100%);
+  color: #2c3e50;
+  line-height: 1.8;
+  padding: 20px;
+}
+.container { max-width: 1100px; margin: 0 auto; }
+
+.hero {
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 50%, #a78bfa 100%);
+  color: white;
+  padding: 50px 40px;
+  border-radius: 20px;
+  margin-bottom: 24px;
+  box-shadow: 0 12px 32px rgba(91, 33, 182, 0.25);
+  text-align: center;
+}
+.hero .badge {
+  display: inline-block;
+  background: rgba(255,255,255,0.2);
+  color: white;
+  padding: 4px 14px;
+  border-radius: 20px;
+  font-size: 13px;
+  margin-bottom: 16px;
+  backdrop-filter: blur(10px);
+}
+.hero h1 { font-size: 36px; margin-bottom: 12px; font-weight: 700; }
+.hero .desc { font-size: 16px; opacity: 0.95; max-width: 680px; margin: 0 auto; }
+.hero .stats {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.hero .stat-item { text-align: center; }
+.hero .stat-num { font-size: 28px; font-weight: 700; color: #fbbf24; }
+.hero .stat-label { font-size: 13px; opacity: 0.85; }
+
+.module-nav {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 10px;
+  margin-bottom: 24px;
+  background: white;
+  padding: 16px;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.module-nav a {
+  text-decoration: none;
+  text-align: center;
+  padding: 10px 8px;
+  border-radius: 8px;
+  font-size: 13px;
+  color: #475569;
+  background: #f8fafc;
+  border: 1px solid #e2e8f0;
+  transition: all 0.2s;
+}
+.module-nav a.active { background: linear-gradient(135deg, #5b21b6, #7c3aed); color: white; border-color: transparent; }
+.module-nav a:hover:not(.active) { background: #f5f3ff; transform: translateY(-2px); }
+
+.doc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.doc-card {
+  background: white;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: 0 4px 20px rgba(91, 33, 182, 0.08);
+  text-decoration: none;
+  color: inherit;
+  border: 2px solid transparent;
+  transition: all 0.25s;
+  position: relative;
+  overflow: hidden;
+}
+.doc-card::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 4px;
+  background: linear-gradient(90deg, #5b21b6, #a78bfa);
+}
+.doc-card:hover { transform: translateY(-5px); box-shadow: 0 12px 32px rgba(91, 33, 182, 0.18); border-color: #a78bfa; }
+.doc-card .doc-num {
+  display: inline-block;
+  background: linear-gradient(135deg, #5b21b6, #7c3aed);
+  color: white;
+  padding: 4px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+.doc-card h3 { color: #5b21b6; font-size: 18px; margin-bottom: 10px; }
+.doc-card p { color: #64748b; font-size: 14px; margin-bottom: 14px; line-height: 1.7; }
+.doc-card .meta {
+  margin-top: 12px;
+  font-size: 12px;
+  color: #94a3b8;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.doc-card .meta span { background: #f5f3ff; padding: 3px 10px; border-radius: 4px; color: #7c3aed; }
+.doc-card .tag-ready {
+  position: absolute;
+  top: 16px; right: 16px;
+  background: #d1fae5;
+  color: #065f46;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.progress-card {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+.progress-card h2 {
+  color: #5b21b6;
+  font-size: 20px;
+  margin-bottom: 16px;
+  padding-left: 12px;
+  border-left: 4px solid #a78bfa;
+}
+.progress-bar {
+  background: #e9d5ff;
+  height: 12px;
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+.progress-bar .fill {
+  background: linear-gradient(90deg, #7c3aed, #a78bfa);
+  height: 100%;
+  border-radius: 6px;
+  width: 100%;
+  transition: width 0.8s ease;
+}
+.progress-text { color: #64748b; font-size: 13px; text-align: right; }
+
+.prereq-card {
+  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+  border: 1px solid #fbbf24;
+  border-radius: 12px;
+  padding: 24px;
+  margin-bottom: 20px;
+}
+.prereq-card h2 { color: #92400e; font-size: 18px; margin-bottom: 12px; }
+.prereq-card p { color: #78350f; font-size: 14px; }
+
+.outro-card {
+  background: linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%);
+  border: 1px solid #c4b5fd;
+  border-radius: 12px;
+  padding: 28px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.outro-card h2 { color: #5b21b6; font-size: 22px; margin-bottom: 12px; }
+.outro-card p { color: #6b21a8; font-size: 15px; line-height: 1.8; }
+.outro-card .big-num { font-size: 48px; font-weight: 800; color: #7c3aed; }
+.outro-card .big-label { font-size: 14px; color: #7c3aed; }
+
+@media (max-width: 640px) {
+  .hero { padding: 30px 20px; }
+  .hero h1 { font-size: 26px; }
+  .hero .stats { gap: 20px; }
+  .module-nav { grid-template-columns: repeat(2, 1fr); }
+  .doc-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="hero">
+    <div class="badge">🚀 WorkBuddy 高阶玩法 · v2.1 完整版终章</div>
+    <h1>模块七 · 进阶能力</h1>
+    <p class="desc">从"会用 AI 干活"到"让 AI 自动干活"——把过程资产变成组织能力</p>
+    <div class="stats">
+      <div class="stat-item"><div class="stat-num">3</div><div class="stat-label">进阶文档</div></div>
+      <div class="stat-item"><div class="stat-num">∞</div><div class="stat-label">自动化复利</div></div>
+      <div class="stat-item"><div class="stat-num">10x</div><div class="stat-label">效率放大器</div></div>
+    </div>
+  </div>
+
+  <div class="module-nav">
+    <a href="../01_开篇导读/index.html">① 开篇导读</a>
+    <a href="../02_运营方案/index.html">② 运营方案</a>
+    <a href="../03_销售支持/index.html">③ 销售支持</a>
+    <a href="../04_海报物料/index.html">④ 海报物料</a>
+    <a href="../05_周报分析/index.html">⑤ 周报分析</a>
+    <a href="../06_学员调研/index.html">⑥ 学员调研</a>
+    <a href="index.html" class="active">⑦ 进阶能力 ⭐</a>
+    <a href="../08_案例库/index.html">⑧ 案例库</a>
+    <a href="../09_Sales工作台/index.html">⑨ Sales工作台</a>
+  </div>
+
+  <div class="progress-card">
+    <h2>📊 模块七·进阶能力 - 全部完成 ✅</h2>
+    <div class="progress-bar"><div class="fill"></div></div>
+    <div class="progress-text">已完成 3/3 篇 · 恭喜你！全套培训文档到此收官 🎉</div>
+  </div>
+
+  <div class="prereq-card">
+    <h2>⚠️ 前置要求：请先完成前面 6 个模块</h2>
+    <p>本模块是<strong>进阶内容</strong>，建立在前面模块的基础上。如果你还没跑通周报生成、话术提炼、海报制作等基础场景，建议先回前面的模块实操一遍。<br>
+    <strong>前置技能：</strong>能独立用 WorkBuddy 完成至少 3 个日常任务（写周报 / 出话术 / 做海报）</p>
+  </div>
+
+  <div class="doc-grid">
+    <a href="01_知识库沉淀.html" class="doc-card">
+      <span class="tag-ready">✅ 已交付</span>
+      <span class="doc-num">7.1</span>
+      <h3>📚 知识库沉淀（乐享）</h3>
+      <p>别让资产跟着人走——把话术、方案、SOP、案例系统化沉淀到乐享知识库，建立团队可搜索、可复用的"第二大脑"。含分类体系、写入规范、维护节奏。</p>
+      <div class="meta">
+        <span>⏱️ 15 分钟</span>
+        <span>🎯 组织资产</span>
+        <span>📂 乐享实操</span>
+      </div>
+    </a>
+
+    <a href="02_自动化任务.html" class="doc-card">
+      <span class="tag-ready">✅ 已交付</span>
+      <span class="doc-num">7.2</span>
+      <h3>🤖 自动化任务</h3>
+      <p>从"每周手动问 AI 写周报"到"AI 每周五自动写好等你审"。学会设置定时/周期性任务，让重复工作自动流转，你只做审核和拍板。</p>
+      <div class="meta">
+        <span>⏱️ 20 分钟</span>
+        <span>🎯 效率杠杆</span>
+        <span>⚙️ 5 个实战案例</span>
+      </div>
+    </a>
+
+    <a href="03_多模态生成.html" class="doc-card">
+      <span class="tag-ready">✅ 已交付</span>
+      <span class="doc-num">7.3</span>
+      <h3>🎬 多模态内容生成</h3>
+      <p>不只会写字——AI 还能做视频、建 3D 模型、出特效图。了解文生视频/图生 3D/图片编辑的高级玩法，让你的营销物料从"能用"到"惊艳"。</p>
+      <div class="meta">
+        <span>⏱️ 15 分钟</span>
+        <span>🎯 差异化武器</span>
+        <span>🎨 视觉升级</span>
+      </div>
+    </a>
+  </div>
+
+  <div class="outro-card">
+    <h2>🎉 全套培训文档 · 完结撒花！</h2>
+    <p>
+      从模块一的"为什么用 AI"到模块七的"让 AI 自己干"<br>
+      你已经掌握了 <span class="big-num">9</span> 大模块 <span class="big-num">36</span> 篇文档的完整体系<br><br>
+      <strong>接下来做什么？</strong><br>
+      ① 挑一个本周就能用的场景（推荐：7.2 自动化任务 — 先设个周报自动生成试试水）<br>
+      ② 把团队的过程资产整理一份清单，按 7.1 的方法沉淀到乐享<br>
+      ③ 有营销活动需要出彩物料时，翻 7.3 的多模态指南找灵感
+    </p>
+  </div>
+</div>
+</body>
+</html>

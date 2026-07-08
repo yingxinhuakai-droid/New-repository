@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>用户分层与跟进SOP - 模块首页</title>
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: #f5f5f7; color: #1d1d1f; line-height: 1.6; }
+.hero { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); padding: 40px 32px 32px; color: #fff; }
+.hero-inner { max-width: 880px; margin: 0 auto; }
+.breadcrumb { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
+.breadcrumb a { color: rgba(255,255,255,0.5); text-decoration: none; }
+.breadcrumb a:hover { color: rgba(255,255,255,0.8); }
+.hero-title { font-size: 28px; font-weight: 700; }
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.75); margin-top: 8px; }
+.container { max-width: 880px; margin: 0 auto; padding: 32px; }
+.articles { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+.article-card { background: #fff; border-radius: 14px; border: 1px solid #e5e5e7; padding: 24px; transition: all 0.2s; cursor: pointer; text-decoration: none; color: #1d1d1f; display: block; }
+.article-card:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); }
+.article-tag { font-size: 11px; padding: 3px 10px; border-radius: 100px; font-weight: 600; display: inline-block; margin-bottom: 12px; }
+.tag-core { background: rgba(30,58,138,0.1); color: #1e3a8a; }
+.tag-req { background: rgba(190,24,93,0.1); color: #be185d; }
+.tag-new { background: rgba(124,58,237,0.1); color: #7c3aed; }
+.article-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+.article-desc { font-size: 13px; color: #6e6e73; }
+.article-meta { display: flex; gap: 12px; margin-top: 16px; font-size: 12px; color: #86868b; }
+.intro-box { background: #fff; border-radius: 14px; border: 1px solid #e5e5e7; padding: 24px; margin-bottom: 24px; }
+.intro-box h2 { font-size: 16px; font-weight: 700; color: #1e3a8a; margin-bottom: 12px; }
+.intro-box p { font-size: 14px; color: #6e6e73; }
+.intro-box ul { margin-top: 12px; padding-left: 20px; }
+.intro-box li { font-size: 14px; color: #6e6e73; margin-bottom: 6px; }
+.footer { text-align: center; padding: 32px; font-size: 12px; color: #86868b; }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-inner">
+    <div class="breadcrumb"><a href="../index.html">首页</a> / 模块一</div>
+    <div class="hero-title">用户分层与跟进SOP</div>
+    <div class="hero-sub">6层用户模型 + 三大团队跟进路径 + 线索跨团队流转规则</div>
+  </div>
+</div>
+
+<div class="container">
+
+  <div class="intro-box">
+    <h2>这个模块解决什么问题</h2>
+    <p>每个销售最常犯的错误就是"所有用户一视同仁地跟进"——结果温线索被冷线索挤占精力，高意向升级用户没人管。这个模块帮你建立清晰的分层认知和标准化跟进节奏。</p>
+    <ul>
+      <li><strong>用户分层体系</strong>：学会6秒判断一个用户属于哪一层，该用什么策略</li>
+      <li><strong>跟进SOP</strong>：每个团队有明确的 Day X 做什么事，不再凭感觉</li>
+      <li><strong>流转规则</strong>：线索从纯电销转给社群、从社群转给升级，流程清晰不扯皮</li>
+    </ul>
+  </div>
+
+  <div class="articles">
+    <a class="article-card" href="01_用户分层体系.html">
+      <span class="article-tag tag-core">核心</span>
+      <div class="article-title">用户分层体系</div>
+      <div class="article-desc">6层用户模型：冷线索 → 温线索 → 意向 → 成交 → 高意向升级 → 沉默流失</div>
+      <div class="article-meta"><span>8分钟</span><span>所有团队必读</span></div>
+    </a>
+    <a class="article-card" href="02_社群微销跟进SOP.html">
+      <span class="article-tag tag-core">核心</span>
+      <div class="article-title">社群微销跟进SOP</div>
+      <div class="article-desc">14天微信培育路径：欢迎语 → 互动 → 痛点推送 → 报价 → 成交</div>
+      <div class="article-meta"><span>12分钟</span><span>社群微销专属</span></div>
+    </a>
+    <a class="article-card" href="03_纯电销跟进SOP.html">
+      <span class="article-tag tag-core">核心</span>
+      <div class="article-title">纯电销跟进SOP</div>
+      <div class="article-desc">7天双触达路径：首次拨打 → 短信触达 → 加微 → 转交培育池</div>
+      <div class="article-meta"><span>10分钟</span><span>纯电销专属</span></div>
+    </a>
+    <a class="article-card" href="04_升级电销跟进SOP.html">
+      <span class="article-tag tag-req">必读</span>
+      <div class="article-title">升级电销跟进SOP</div>
+      <div class="article-desc">30天存量激活路径：满意度回访 → 学习跟进 → 升级触达 → 持续培育</div>
+      <div class="article-meta"><span>10分钟</span><span>升级团队专属</span></div>
+    </a>
+    <a class="article-card" href="05_线索流转规则.html">
+      <span class="article-tag tag-req">必读</span>
+      <div class="article-title">线索流转规则</div>
+      <div class="article-desc">线索在团队间如何流转、转交条件、信息同步规范</div>
+      <div class="article-meta"><span>6分钟</span><span>所有团队必读</span></div>
+    </a>
+  </div>
+
+</div>
+
+<div class="footer">注安销售团队培训文档 · 模块一 · 内部资料</div>
+
+</body>
+</html>

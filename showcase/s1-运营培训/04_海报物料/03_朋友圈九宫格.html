@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>4.3 朋友圈九宫格 · WorkBuddy 培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafafa;color:#1f2937;line-height:1.7}
+.header{background:linear-gradient(135deg,#0c4a6e 0%,#0ea5e9 100%);color:#fff;padding:48px 32px 56px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.08);border-radius:50%}
+.crumbs{font-size:13px;opacity:0.9;margin-bottom:14px}
+.crumbs a{color:#fff;text-decoration:none}
+h1{font-size:34px;margin-bottom:12px;position:relative;z-index:1}
+.subtitle{font-size:16px;opacity:0.95;position:relative;z-index:1}
+.container{max-width:1100px;margin:-32px auto 60px;padding:0 24px}
+.card{background:#fff;border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h2{font-size:24px;color:#0c4a6e;margin-bottom:16px;padding-left:14px;border-left:5px solid #0ea5e9}
+.card h3{font-size:18px;color:#0c4a6e;margin:18px 0 10px}
+.tip{background:linear-gradient(135deg,#f0f9ff,#bae6fd);border-left:4px solid #0ea5e9;padding:16px 20px;border-radius:8px;margin:20px 0;color:#0c4a6e}
+.tip strong{color:#075985}
+.warn{background:linear-gradient(135deg,#fef3c7,#fde68a);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:8px;margin:20px 0;color:#78350f}
+.matrix{background:linear-gradient(135deg,#e0f2fe,#bae6fd);border-radius:12px;padding:24px;margin:20px 0}
+.matrix h3{color:#0c4a6e;margin-bottom:14px}
+.matrix-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.matrix-cell{background:#fff;padding:14px;border-radius:8px;text-align:center;font-size:13px;color:#0c4a6e;font-weight:600}
+.matrix-cell.cover{background:linear-gradient(135deg,#0c4a6e,#0ea5e9);color:#fff}
+.matrix-cell strong{display:block;font-size:11px;margin-bottom:4px;opacity:0.85}
+.day-plan{background:#f8fafc;border-radius:12px;padding:24px;margin:20px 0}
+.day-row{display:grid;grid-template-columns:80px 1fr;gap:14px;padding:12px 0;border-bottom:1px dashed #e5e7eb;align-items:start}
+.day-row:last-child{border-bottom:none}
+.day-row .day{background:linear-gradient(135deg,#0c4a6e,#0ea5e9);color:#fff;padding:8px 12px;border-radius:8px;text-align:center;font-weight:bold;font-size:13px}
+.day-row .day b{display:block;font-size:18px}
+.day-row .content h4{color:#0c4a6e;font-size:15px;margin-bottom:6px}
+.day-row .content p{color:#6b7280;font-size:13px;line-height:1.6}
+table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+th{background:linear-gradient(135deg,#0c4a6e,#0ea5e9);color:#fff;padding:14px 12px;text-align:left;font-size:14px}
+td{padding:12px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+tr:hover td{background:#f0f9ff}
+.template{background:#f8fafc;border-left:4px solid #0ea5e9;padding:18px;border-radius:8px;margin:16px 0;font-family:Menlo,monospace;font-size:13px;line-height:1.8;white-space:pre-wrap;color:#0c4a6e}
+.nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb}
+.nav a{padding:12px 24px;background:#fff;border:2px solid #0ea5e9;color:#0c4a6e;text-decoration:none;border-radius:8px;font-weight:600}
+.nav a:hover{background:#0ea5e9;color:#fff}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumbs"><a href="../index.html">培训首页</a> / <a href="index.html">模块四·海报物料</a> / 4.3</div>
+  <h1>📱 朋友圈九宫格（一次 9 张）</h1>
+  <div class="subtitle">统一风格、统一节奏的销售朋友圈素材——让私域流量天天有内容</div>
+</div>
+<div class="container">
+
+<div class="card">
+  <h2>一、为什么必须做九宫格？</h2>
+  <p>朋友圈是销售私域的"主战场"。当潜在客户点进你的朋友圈，9 张统一风格的图能瞬间建立"专业感 + 信任感"。</p>
+  <p>你的真实业务痛点：销售每天要发朋友圈，但每个人发的图风格都不一样，缺统一素材。现在由你来提供"弹药库"：</p>
+  <div class="tip"><strong>📌 销售朋友圈 3 大误区：</strong><br>
+  ① 一天发 5 条广告 → 被屏蔽<br>
+  ② 风格乱发 → 显得不专业<br>
+  ③ 只有硬广 → 没人看</div>
+</div>
+
+<div class="card">
+  <h2>二、9 张九宫格内容矩阵（万能公式）</h2>
+  <div class="matrix">
+    <h3>📐 3-3-3 内容比例（黄金配方）</h3>
+    <div class="matrix-grid">
+      <div class="matrix-cell cover"><strong>位置 1</strong>封面图</div>
+      <div class="matrix-cell"><strong>位置 2</strong>痛点共鸣</div>
+      <div class="matrix-cell"><strong>位置 3</strong>学员故事</div>
+      <div class="matrix-cell"><strong>位置 4</strong>课程卖点</div>
+      <div class="matrix-cell"><strong>位置 5</strong>价格锚点</div>
+      <div class="matrix-cell"><strong>位置 6</strong>限时优惠</div>
+      <div class="matrix-cell"><strong>位置 7</strong>学员好评</div>
+      <div class="matrix-cell"><strong>位置 8</strong>名师 IP</div>
+      <div class="matrix-cell"><strong>位置 9</strong>行动号召</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>三、5 套现成九宫格主题（套用即可）</h2>
+
+<div class="day-plan">
+  <div class="day-row">
+    <div class="day"><b>主题 1</b>考前冲刺</div>
+    <div class="content">
+      <h4>《考前 30 天，如何多拿 30 分》</h4>
+      <p>1 封面：倒计时大字 / 2-3 痛点：来不及？/ 4-5 卖点：冲刺班/押题 / 6 优惠：8 折 / 7 好评 / 8 名师 / 9 CTA 扫码</p>
+    </div>
+  </div>
+  <div class="day-row">
+    <div class="day"><b>主题 2</b>报名提醒</div>
+    <div class="content">
+      <h4>《中级注安 26 年报名通道已开》</h4>
+      <p>1 封面：报名通知 / 2 政策：今年改革 / 3 故事：去年错过 / 4 班型：零基础 ¥1,249 / 5 锚点：原价 ¥1,980 / 6 限时 6 折 / 7 好评截图 / 8 名师头像 / 9 报名通道</p>
+    </div>
+  </div>
+  <div class="day-row">
+    <div class="day"><b>主题 3</b>复购活动</div>
+    <div class="content">
+      <h4>《注安上岸后，再来个一消吧》</h4>
+      <p>1 封面：凭注安准考证 8 折 / 2 故事：考完注安闲 / 3 复购理由：黄金搭档 / 4 一消亮点 / 5 价格：¥2,499 / 6 限时 8 折 / 7 老学员好评 / 8 一消名师 / 9 立即咨询</p>
+    </div>
+  </div>
+  <div class="day-row">
+    <div class="day"><b>主题 4</b>直播预告</div>
+    <div class="content">
+      <h4>《云私塾发布会今晚 8 点开播》</h4>
+      <p>1 封面：直播海报 / 2 直播主题 / 3 主讲老师 / 4 直播流程 / 5 直播福利：9 元定金 / 6 倒计时 / 7 抽奖预告 / 8 私教营亮点 / 9 直播链接</p>
+    </div>
+  </div>
+  <div class="day-row">
+    <div class="day"><b>主题 5</b>名师 IP</div>
+    <div class="content">
+      <h4>《命题人张老师 · 押题从未失手》</h4>
+      <p>1 封面：老师大头照 / 2 履历：命题组 8 年 / 3 教学成绩：去年命中 92% / 4 学员评价 / 5 老师日常：备课 / 6 上课现场 / 7 老师语录 / 8 课程体系 / 9 预约试听</p>
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="card">
+  <h2>四、朋友圈配文（3 套万能模板）</h2>
+  <table>
+    <thead><tr><th>类型</th><th>配文模板</th><th>使用场景</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><b>故事型</b></td>
+        <td>"上个月一位 XX 学员跟我说：[学员原话]<br>她用 60 天时间，从完全不懂到一次过 4 科。<br>今天把这个故事分享给你，希望对你有启发。<br>【配 9 张图】"</td>
+        <td>招生、转化</td>
+      </tr>
+      <tr>
+        <td><b>福利型</b></td>
+        <td>"📢 中级注安 26 年第一波福利：<br>云私塾 9 元定金抵 500！<br>前 50 名再送 3 套密押卷！<br>⏰ 仅限今晚 24 点<br>【配 9 张图】"</td>
+        <td>活动、促销</td>
+      </tr>
+      <tr>
+        <td><b>专业型</b></td>
+        <td>"❓ 备考中级注安的同学，<br>4 科里最难的是哪一科？<br>评论区告诉我，<br>下条视频出详细拆解。<br>【配 9 张图】"</td>
+        <td>养号、人设</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>五、提问模板（直接复制用）</h2>
+  <div class="template">帮我做一组"中级注安考前 30 天冲刺"的朋友圈九宫格素材，9 张图。
+
+配文：故事型（参考 4 套模板）
+活动信息（来自真实复购方案）：
+- 课程：云私塾 + 冲刺班组合
+- 定价：组合包 ¥3,499（原价 ¥4,279）
+- 限时优惠：考前 30 天 8 折
+- 赠品：3 套命题人密押卷
+- 倒计时：30 天（实际考试日 X 月 X 日）
+
+9 张图内容：
+1. 封面：倒计时 30 天大字
+2. 痛点：考前 1 个月焦虑
+3. 学员故事：去年冲刺班王同学一次过
+4. 课程核心卖点
+5. 锚点价格：原价 ¥4,279
+6. 限时 8 折：¥3,499
+7. 学员好评截图 3-5 条
+8. 主讲老师（命题人张老师）
+9. 行动号召：扫码咨询
+
+风格要求：
+- 蓝橙配色（紧迫感 + 信任感）
+- 1080×1080px（朋友圈正方形）
+- 每张图保持视觉连贯（同色系+同字体）
+- 位置 9 必须有大二维码占位
+
+输出：1 个 HTML 包含 9 张图，可逐张截图使用。</div>
+</div>
+
+<div class="warn"><strong>⚠️ 朋友圈发图 5 条铁律：</strong><br>
+① 每天最多 1 条广告图（其他发生活/专业内容）<br>
+② 发图时间：早 8 点 / 午 12 点 / 晚 9 点（黄金触达）<br>
+③ 配文不超过 5 行（折叠区要点在第 1 行）<br>
+④ 学员好评/案例必须脱敏（打码或口述）<br>
+⑤ 不发"百分百包过"等违规承诺</div>
+
+<div class="nav">
+  <a href="02_课程亮点海报.html">← 上一篇：4.2 课程亮点海报</a>
+  <a href="04_营销日历.html">下一篇：4.4 营销日历 →</a>
+</div>
+
+</div>
+</body>
+</html>

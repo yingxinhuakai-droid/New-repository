@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Sales 工作台 v2.0 · 入口页</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#0F172A;color:#E2E8F0;min-height:100vh;line-height:1.7}
+.header{background:linear-gradient(135deg,#DC2626 0%,#EF4444 50%,#F59E0B 100%);padding:60px 32px 80px;text-align:center;position:relative;overflow:hidden}
+.header::before{content:"";position:absolute;top:-100px;right:-100px;width:400px;height:400px;background:rgba(255,255,255,0.08);border-radius:50%}
+.header::after{content:"";position:absolute;bottom:-150px;left:-100px;width:500px;height:500px;background:rgba(0,0,0,0.1);border-radius:50%}
+.header h1{font-size:46px;color:#fff;margin-bottom:12px;position:relative;z-index:1;letter-spacing:1px;text-shadow:0 4px 12px rgba(0,0,0,.3)}
+.header .sub{font-size:17px;color:rgba(255,255,255,0.95);position:relative;z-index:1;max-width:680px;margin:0 auto}
+.badges{margin-top:20px;position:relative;z-index:1}
+.badge{display:inline-block;background:rgba(0,0,0,0.3);color:#fff;padding:6px 14px;border-radius:20px;font-size:13px;margin:0 4px;backdrop-filter:blur(8px)}
+
+.container{max-width:1100px;margin:-50px auto 60px;padding:0 24px;position:relative;z-index:2}
+
+.entry-card{background:linear-gradient(135deg,#1E293B,#334155);border:2px solid #DC2626;border-radius:18px;padding:40px;text-align:center;box-shadow:0 20px 60px rgba(0,0,0,.4);margin-bottom:32px}
+.entry-card h2{color:#F8FAFC;font-size:28px;margin-bottom:14px}
+.entry-card p{color:#CBD5E1;margin-bottom:24px;font-size:15px}
+.entry-card .features{display:flex;justify-content:center;gap:24px;flex-wrap:wrap;margin:24px 0}
+.entry-card .feat{background:rgba(255,255,255,0.05);padding:14px 20px;border-radius:10px;color:#FCD34D;font-size:14px;border:1px solid rgba(255,255,255,0.1)}
+.enter-btn{display:inline-block;padding:18px 56px;background:linear-gradient(135deg,#DC2626,#EF4444);color:#fff;text-decoration:none;border-radius:50px;font-size:18px;font-weight:700;box-shadow:0 8px 24px rgba(220,38,38,.4);transition:all .2s;letter-spacing:1px}
+.enter-btn:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(220,38,38,.5)}
+
+.section{background:#1E293B;border:1px solid #334155;border-radius:14px;padding:32px;margin-bottom:24px}
+.section h3{color:#FCD34D;font-size:22px;margin-bottom:18px;padding-left:14px;border-left:5px solid #DC2626}
+
+.tab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.tab-card{background:#0F172A;border:1px solid #334155;border-radius:10px;padding:18px;transition:all .2s;cursor:pointer}
+.tab-card:hover{border-color:#DC2626;transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.3)}
+.tab-card .icon{font-size:28px;margin-bottom:8px}
+.tab-card h4{color:#F8FAFC;font-size:15px;margin-bottom:6px}
+.tab-card p{color:#94A3B8;font-size:12px;line-height:1.5}
+.tab-card .count{display:inline-block;background:#DC2626;color:#fff;padding:2px 8px;border-radius:10px;font-size:11px;margin-top:6px;font-weight:700}
+
+.guide{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.guide-step{background:linear-gradient(135deg,#0F172A,#1E293B);border:1px solid #334155;border-radius:10px;padding:20px;position:relative}
+.guide-step .num{position:absolute;top:-12px;left:20px;background:#DC2626;color:#fff;width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:14px}
+.guide-step h5{color:#F8FAFC;margin:8px 0 6px;font-size:15px}
+.guide-step p{color:#CBD5E1;font-size:13px;line-height:1.6}
+
+.tip{background:linear-gradient(135deg,rgba(245,158,11,.15),rgba(180,83,9,.1));border-left:4px solid #F59E0B;padding:16px 20px;border-radius:8px;margin:20px 0;color:#FDE68A}
+.tip strong{color:#FCD34D}
+
+.changelog{background:#0F172A;border-radius:10px;padding:20px;margin:20px 0}
+.changelog h4{color:#16A34A;margin-bottom:12px;font-size:15px}
+.changelog ul{list-style:none;padding:0}
+.changelog li{padding:8px 0;color:#CBD5E1;font-size:13px;border-bottom:1px solid #1E293B}
+.changelog li:last-child{border-bottom:none}
+.changelog li::before{content:"✅ ";color:#16A34A;margin-right:6px}
+
+.back{padding:14px 28px;background:#1E293B;border:2px solid #DC2626;color:#DC2626;text-decoration:none;border-radius:8px;font-weight:600;display:inline-block;margin-top:20px;transition:all .2s}
+.back:hover{background:#DC2626;color:#fff}
+
+@media(max-width:768px){
+  .header{padding:40px 20px 60px}
+  .header h1{font-size:32px}
+  .header .sub{font-size:14px}
+  .container{padding:0 16px}
+  .entry-card{padding:28px 20px}
+  .entry-card h2{font-size:22px}
+  .enter-btn{padding:14px 36px;font-size:15px}
+  .section{padding:20px}
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>🎯 Sales Workbench</h1>
+  <div class="sub">中级注安销售弹药库 · 销售打开就能用</div>
+  <div class="badges">
+    <span class="badge">v2.0 升级版</span>
+    <span class="badge">📊 12 大功能模块</span>
+    <span class="badge">📱 移动端适配</span>
+    <span class="badge">📋 一键复制话术</span>
+  </div>
+</div>
+
+<div class="container">
+
+<div class="entry-card">
+  <h2>👉 直接进入工作台</h2>
+  <p>深色 dashboard 风格 · 12 个 Tab 自由切换 · 话术支持一键复制</p>
+  <div class="features">
+    <div class="feat">📊 实时看板</div>
+    <div class="feat">📚 8大班型</div>
+    <div class="feat">💬 6大话术</div>
+    <div class="feat">🛡️ 10大异议</div>
+    <div class="feat">⚔️ 竞品对比</div>
+    <div class="feat">🔄 复购规则</div>
+  </div>
+  <a href="dashboard.html" class="enter-btn">🚀 立即进入工作台</a>
+</div>
+
+<div class="section">
+  <h3>📚 12 大功能模块速查</h3>
+  <div class="tab-grid">
+    <div class="tab-card">
+      <div class="icon">📊</div>
+      <h4>实时看板</h4>
+      <p>5月业绩 + 6月预测 + 端口数据 + 流量 + 预警</p>
+      <span class="count">5 大模块</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">📚</div>
+      <h4>8 大班型</h4>
+      <p>云私塾/央企/魔鬼/私教/零基础/全程/钻石/考点</p>
+      <span class="count">8 班型 + 搜索</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">💬</div>
+      <h4>6 大场景话术</h4>
+      <p>开场白/挖需/价值塑造/异议/逼单/转介绍</p>
+      <span class="count">15+ 句</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">🛡️</div>
+      <h4>10 大异议</h4>
+      <p>太贵/没时间/没用/考虑下/竞品/0基础 等</p>
+      <span class="count">10 Q&A</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">⚔️</div>
+      <h4>竞品对比</h4>
+      <p>环球 vs 233/优路/嗨学/本质 5 维对比 + 话术</p>
+      <span class="count">5 维度</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">🔄</div>
+      <h4>复购规则</h4>
+      <p>历史消费折扣 + 团购福利 + 跨项目复购</p>
+      <span class="count">3 张表</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">📋</div>
+      <h4>审批速查</h4>
+      <p>10 大审批场景 + 申请模板</p>
+      <span class="count">10 场景</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">📅</div>
+      <h4>节点日历</h4>
+      <p>26 年 12 月考试 + 复购黄金期</p>
+      <span class="count">12 个月</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">👥</div>
+      <h4>团队 PK</h4>
+      <p>5 团队达成率 + 保定标杆经验</p>
+      <span class="count">5 团队</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">🎯</div>
+      <h4>6 月行动</h4>
+      <p>P0/P1/P2 3 档行动建议 + 4 周节奏</p>
+      <span class="count">3 档 + 4 周</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">🛠️</div>
+      <h4>物料库</h4>
+      <p>朋友圈/私聊/落地页/海报提示词</p>
+      <span class="count">20+ 物料</span>
+    </div>
+    <div class="tab-card">
+      <div class="icon">📱</div>
+      <h4>朋友圈文案</h4>
+      <p>30 天可循环文案库</p>
+      <span class="count">30 条</span>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>🚀 3 步使用指南</h3>
+  <div class="guide">
+    <div class="guide-step">
+      <div class="num">1</div>
+      <h5>打开工作台</h5>
+      <p>点击上方"立即进入工作台"按钮，或在浏览器中直接打开本 HTML。手机/电脑/平板都能用，已做响应式适配。</p>
+    </div>
+    <div class="guide-step">
+      <div class="num">2</div>
+      <h5>切换 Tab 查资料</h5>
+      <p>顶部 12 个 Tab 横向滑动切换。需要看竞品就点"⚔️ 竞品对比"，需要话术就点"💬 话术库"，按需取用。</p>
+    </div>
+    <div class="guide-step">
+      <div class="num">3</div>
+      <h5>话术一键复制</h5>
+      <p>所有话术右上角都有"复制"按钮，点击后自动复制到剪贴板，可直接粘贴到微信/企微/朋友圈。</p>
+    </div>
+  </div>
+  <div class="tip">
+    <strong>💡 高手技巧：</strong>① Ctrl+F / Cmd+F 浏览器内搜索关键词；② 长按话术块也能选中复制；③ 把 HTML 收藏到书签，随时调用。
+  </div>
+</div>
+
+<div class="section">
+  <h3>📊 v2.0 升级日志</h3>
+  <div class="changelog">
+    <h4>✨ 相比 v1.0 新增：</h4>
+    <ul>
+      <li>新增「🎯 6月行动」Tab — P0/P1/P2 三档行动建议 + 4 周节奏</li>
+      <li>新增「🛠️ 物料库」Tab — 朋友圈/私聊/落地页/海报提示词 20+ 条</li>
+      <li>新增「📱 朋友圈文案」Tab — 30 天可循环朋友圈素材库</li>
+      <li>6 月数据预测写入看板（¥480 万目标 / +20% ARPU 提升目标）</li>
+      <li>5 大产品筛选按钮（全部/主推/增长/需关注/引流）</li>
+      <li>班型卡 hover 动效 + 价格优化提示</li>
+    </ul>
+    <h4 style="color:#3B82F6;margin-top:18px">🔧 体验优化：</h4>
+    <ul>
+      <li>移动端响应式适配（<768px 自动切换布局）</li>
+      <li>Header 固定置顶，Tab 滚动时吸顶</li>
+      <li>Toast 复制反馈（更优雅的"已复制"提示）</li>
+      <li>回到顶部按钮（滚动 400px 自动出现）</li>
+      <li>键盘 Esc 快捷键（关闭搜索框）</li>
+      <li>时间实时刷新（精确到秒）</li>
+    </ul>
+  </div>
+</div>
+
+<a href="../index.html" class="back">← 返回培训文档总目录</a>
+
+</div>
+</body>
+</html>

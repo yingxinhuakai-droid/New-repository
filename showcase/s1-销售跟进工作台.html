@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>销售内容生产工作台</title>
+<style>
+:root {
+  --bg: #f5f5f7;
+  --card: #ffffff;
+  --text: #1d1d1f;
+  --text2: #6e6e73;
+  --text3: #86868b;
+  --border: #d2d2d7;
+  --accent: #0071e3;
+  --accent-light: rgba(0,113,227,0.08);
+  --accent2: #5e5ce6;
+  --accent3: #34c759;
+  --accent4: #ff9500;
+  --accent5: #ff3b30;
+  --radius: 14px;
+  --radius-sm: 10px;
+  --shadow: 0 1px 3px rgba(0,0,0,0.06), 0 6px 16px rgba(0,0,0,0.04);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+  font-size: 14px;
+}
+.app { display: flex; min-height: 100vh; }
+
+/* ===== Sidebar ===== */
+.sidebar {
+  width: 230px;
+  background: var(--card);
+  border-right: 1px solid var(--border);
+  padding: 24px 0;
+  position: fixed;
+  height: 100vh;
+  overflow-y: auto;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+}
+.sidebar-brand {
+  padding: 0 24px 24px;
+  font-size: 19px;
+  font-weight: 700;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 12px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.sidebar-brand .logo {
+  width: 32px; height: 32px;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  color: white; font-size: 16px; font-weight: 700;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 12px 24px;
+  cursor: pointer;
+  color: var(--text2);
+  font-weight: 500;
+  transition: all 0.2s;
+  border-left: 3px solid transparent;
+}
+.nav-item:hover { background: var(--accent-light); color: var(--accent); }
+.nav-item.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-left-color: var(--accent);
+}
+.nav-icon { font-size: 18px; width: 24px; text-align: center; }
+.sidebar-footer {
+  margin-top: auto;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border);
+  font-size: 12px;
+  color: var(--text3);
+}
+
+/* ===== Main ===== */
+.main {
+  margin-left: 230px;
+  flex: 1;
+  padding: 32px 40px;
+  max-width: 1200px;
+}
+.page-header { margin-bottom: 28px; }
+.page-title { font-size: 26px; font-weight: 700; }
+.page-desc { font-size: 14px; color: var(--text2); margin-top: 6px; }
+
+/* ===== Layout ===== */
+.tool-layout {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 24px;
+}
+.panel {
+  background: var(--card);
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  padding: 24px;
+  box-shadow: var(--shadow);
+}
+.panel-title {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  display: flex; align-items: center; gap: 8px;
+}
+
+/* ===== Form Elements ===== */
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  margin-bottom: 8px;
+}
+.chip-group { display: flex; flex-wrap: wrap; gap: 8px; }
+.chip {
+  padding: 7px 14px;
+  border-radius: 20px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  color: var(--text2);
+  user-select: none;
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.selected {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: white;
+}
+.chip.selected.green { background: var(--accent3); border-color: var(--accent3); }
+.chip.selected.purple { background: var(--accent2); border-color: var(--accent2); }
+.chip.selected.orange { background: var(--accent4); border-color: var(--accent4); }
+.text-input {
+  width: 100%;
+  padding: 10px 14px;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius-sm);
+  font-size: 14px;
+  font-family: inherit;
+  transition: border-color 0.2s;
+  background: var(--card);
+}
+.text-input:focus { outline: none; border-color: var(--accent); }
+textarea.text-input { min-height: 60px; resize: vertical; line-height: 1.6; }
+select.text-input { cursor: pointer; }
+
+/* ===== Buttons ===== */
+.btn {
+  padding: 10px 20px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--text);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+.btn:hover { background: var(--bg); border-color: var(--text3); }
+.btn-primary {
+  background: var(--accent);
+  color: white;
+  border: none;
+  width: 100%;
+  justify-content: center;
+  padding: 12px;
+  font-size: 15px;
+}
+.btn-primary:hover { background: #0066cc; }
+.btn-small {
+  padding: 5px 12px;
+  font-size: 12px;
+  border-radius: 6px;
+}
+.btn-ghost {
+  border: none;
+  background: transparent;
+  color: var(--accent);
+  padding: 4px 8px;
+}
+
+/* ===== Result Cards ===== */
+.result-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 22px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow);
+  position: relative;
+  transition: all 0.2s;
+  animation: cardIn 0.3s ease;
+}
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.result-card:hover { border-color: var(--accent); }
+.result-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 10px;
+}
+.result-tag {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--accent);
+  background: var(--accent-light);
+  padding: 3px 10px;
+  border-radius: 6px;
+}
+.result-body {
+  font-size: 14.5px;
+  line-height: 1.75;
+  color: var(--text);
+  white-space: pre-wrap;
+}
+.result-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid var(--border);
+}
+.copy-btn {
+  padding: 6px 14px;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  background: var(--bg);
+  color: var(--text2);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.copy-btn:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+.copy-btn.copied { background: var(--accent3); color: white; border-color: var(--accent3); }
+
+/* ===== Empty State ===== */
+.empty-state {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text3);
+}
+.empty-state .icon { font-size: 48px; margin-bottom: 16px; }
+.empty-state .title { font-size: 16px; font-weight: 600; color: var(--text2); margin-bottom: 8px; }
+.empty-state .desc { font-size: 14px; }
+
+/* ===== Section ===== */
+.section { display: none; }
+.section.active { display: block; animation: fadeIn 0.3s ease; }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ===== Channel Card ===== */
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+}
+.channel-card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  box-shadow: var(--shadow);
+  cursor: pointer;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.channel-card:hover { transform: translateY(-3px); box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+.channel-card::before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0; bottom: 0;
+  width: 4px;
+}
+.channel-card.c1::before { background: var(--accent); }
+.channel-card.c2::before { background: var(--accent2); }
+.channel-card.c3::before { background: var(--accent3); }
+.channel-card.c4::before { background: var(--accent4); }
+.channel-card.c5::before { background: var(--accent5); }
+.channel-card.c6::before { background: #af52de; }
+.channel-card.c7::before { background: #64d2ff; }
+.channel-name { font-size: 16px; font-weight: 700; margin-bottom: 6px; }
+.channel-tag {
+  font-size: 12px;
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 12px;
+  font-weight: 500;
+}
+.channel-desc { font-size: 13px; color: var(--text2); line-height: 1.6; margin-bottom: 14px; }
+.channel-stats { display: flex; gap: 16px; font-size: 12px; }
+.channel-stat { color: var(--text3); }
+.channel-stat strong { color: var(--text); font-size: 15px; display: block; }
+
+/* Channel Detail Modal */
+.channel-detail {
+  display: none;
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+.channel-detail.show { display: flex; animation: fadeIn 0.2s; }
+.channel-detail-card {
+  background: var(--card);
+  border-radius: var(--radius);
+  max-width: 600px;
+  width: 100%;
+  max-height: 85vh;
+  overflow-y: auto;
+  padding: 32px;
+}
+.detail-close {
+  float: right;
+  cursor: pointer;
+  font-size: 24px;
+  color: var(--text3);
+  line-height: 1;
+}
+.detail-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; }
+.detail-sub { font-size: 14px; color: var(--text2); margin-bottom: 24px; }
+.detail-section { margin-bottom: 20px; }
+.detail-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 8px;
+}
+.detail-content { font-size: 14px; line-height: 1.8; }
+.detail-list { list-style: none; }
+.detail-list li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+.detail-list li:last-child { border-bottom: none; }
+.detail-list .label { color: var(--text2); }
+.detail-list .value { font-weight: 600; }
+
+/* ===== Phone Script ===== */
+.script-block {
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  border-left: 3px solid var(--accent);
+}
+.script-block.green { border-left-color: var(--accent3); }
+.script-block.orange { border-left-color: var(--accent4); }
+.script-block.purple { border-left-color: var(--accent2); }
+.script-block-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text2);
+  margin-bottom: 8px;
+}
+.script-block-content {
+  font-size: 14.5px;
+  line-height: 1.75;
+}
+
+/* ===== Objection ===== */
+.objection-input {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px;
+  margin-bottom: 16px;
+}
+.objection-quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 12px;
+}
+.objection-quick .chip { font-size: 12px; padding: 5px 12px; }
+
+/* ===== Toast ===== */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: var(--text);
+  color: white;
+  padding: 12px 28px;
+  border-radius: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  z-index: 200;
+  transition: transform 0.3s ease;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+}
+.toast.show { transform: translateX(-50%) translateY(0); }
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text3); }
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .sidebar { width: 60px; }
+  .sidebar-brand span, .nav-item span:not(.nav-icon), .sidebar-footer { display: none; }
+  .nav-item { justify-content: center; padding: 14px; }
+  .main { margin-left: 60px; padding: 20px; }
+  .tool-layout { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+<!-- ===== Sidebar ===== -->
+<nav class="sidebar">
+  <div class="sidebar-brand">
+    <div class="logo">S</div>
+    <span>销售工作台</span>
+  </div>
+  <div class="nav-item active" onclick="showSection('opening', this)">
+    <span class="nav-icon">💬</span><span>加微开场白</span>
+  </div>
+  <div class="nav-item" onclick="showSection('moments', this)">
+    <span class="nav-icon">📸</span><span>朋友圈文案</span>
+  </div>
+  <div class="nav-item" onclick="showSection('phone', this)">
+    <span class="nav-icon">📞</span><span>电话脚本</span>
+  </div>
+  <div class="nav-item" onclick="showSection('objection', this)">
+    <span class="nav-icon">🛡️</span><span>异议处理</span>
+  </div>
+  <div class="nav-item" onclick="showSection('channel', this)">
+    <span class="nav-icon">🗺️</span><span>渠道速查卡</span>
+  </div>
+  <div class="sidebar-footer">
+    中级注安 · 销售内容生产台<br>动态生成 · 一键复制
+  </div>
+</nav>
+
+<!-- ===== Main ===== -->
+<main class="main">
+
+<!-- ==================== 1. 加微开场白 ==================== -->
+<section id="section-opening" class="section active">
+  <div class="page-header">
+    <div class="page-title">加微开场白生成器</div>
+    <div class="page-desc">选渠道、选风格，一键生成加微通过后的第一句话</div>
+  </div>
+  <div class="tool-layout">
+    <div class="panel">
+      <div class="panel-title">⚙️ 参数设置</div>
+      <div class="form-group">
+        <label class="form-label">① 选择渠道来源</label>
+        <div class="chip-group" id="op_channel">
+          <div class="chip" onclick="selectChip(this,'op_channel')">课堂APP</div>
+          <div class="chip" onclick="selectChip(this,'op_channel')">SEO搜索</div>
+          <div class="chip" onclick="selectChip(this,'op_channel')">题库APP</div>
+          <div class="chip" onclick="selectChip(this,'op_channel')">微信小程序</div>
+          <div class="chip" onclick="selectChip(this,'op_channel')">图书兑换</div>
+          <div class="chip" onclick="selectChip(this,'op_channel')">神策圈选</div>
+          <div class="chip" onclick="selectChip(this,'op_channel')">书课包</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">② 选择话术风格</label>
+        <div class="chip-group" id="op_style">
+          <div class="chip" onclick="selectChip(this,'op_style')">亲切自然</div>
+          <div class="chip" onclick="selectChip(this,'op_style')">专业高效</div>
+          <div class="chip" onclick="selectChip(this,'op_style')">活泼有趣</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">③ 用户痛点/标签（选填）</label>
+        <input type="text" class="text-input" id="op_tag" placeholder="如：备考时间紧、零基础、在职备考…">
+      </div>
+      <div class="form-group">
+        <label class="form-label">④ 生成条数</label>
+        <div class="chip-group" id="op_count">
+          <div class="chip selected" onclick="selectChip(this,'op_count')">3条</div>
+          <div class="chip" onclick="selectChip(this,'op_count')">5条</div>
+          <div class="chip" onclick="selectChip(this,'op_count')">8条</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="generateOpening()">✨ 生成开场白</button>
+    </div>
+    <div id="op_results">
+      <div class="empty-state">
+        <div class="icon">💬</div>
+        <div class="title">选好参数，点「生成」</div>
+        <div class="desc">每次生成内容不同，点击「换一批」可重新生成</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 2. 朋友圈文案 ==================== -->
+<section id="section-moments" class="section">
+  <div class="page-header">
+    <div class="page-title">朋友圈文案生成器</div>
+    <div class="page-desc">选内容类型、选主题，一键生成可直接发朋友圈的文案</div>
+  </div>
+  <div class="tool-layout">
+    <div class="panel">
+      <div class="panel-title">⚙️ 参数设置</div>
+      <div class="form-group">
+        <label class="form-label">① 内容类型</label>
+        <div class="chip-group" id="mm_type">
+          <div class="chip selected" onclick="selectChip(this,'mm_type')">备考干货</div>
+          <div class="chip" onclick="selectChip(this,'mm_type')">学员案例</div>
+          <div class="chip" onclick="selectChip(this,'mm_type')">活动促销</div>
+          <div class="chip" onclick="selectChip(this,'mm_type')">互动话题</div>
+          <div class="chip" onclick="selectChip(this,'mm_type')">节日问候</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">② 主题方向（选填）</label>
+        <input type="text" class="text-input" id="mm_topic" placeholder="如：安全生产法、管理科目、考前冲刺…">
+      </div>
+      <div class="form-group">
+        <label class="form-label">③ 生成条数</label>
+        <div class="chip-group" id="mm_count">
+          <div class="chip selected" onclick="selectChip(this,'mm_count')">3条</div>
+          <div class="chip" onclick="selectChip(this,'mm_count')">5条</div>
+          <div class="chip" onclick="selectChip(this,'mm_count')">10条</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">④ 风格</label>
+        <div class="chip-group" id="mm_style">
+          <div class="chip selected" onclick="selectChip(this,'mm_style')">接地气</div>
+          <div class="chip" onclick="selectChip(this,'mm_style')">专业感</div>
+          <div class="chip" onclick="selectChip(this,'mm_style')">走心型</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="generateMoments()">✨ 生成朋友圈文案</button>
+    </div>
+    <div id="mm_results">
+      <div class="empty-state">
+        <div class="icon">📸</div>
+        <div class="title">选好参数，点「生成」</div>
+        <div class="desc">每次生成内容不同，支持一键复制</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 3. 电话脚本 ==================== -->
+<section id="section-phone" class="section">
+  <div class="page-header">
+    <div class="page-title">电话脚本生成器</div>
+    <div class="page-desc">选渠道，一键生成完整电话脚本：开场白+价值主张+挖需问题+异议预案</div>
+  </div>
+  <div class="tool-layout">
+    <div class="panel">
+      <div class="panel-title">⚙️ 参数设置</div>
+      <div class="form-group">
+        <label class="form-label">① 选择渠道来源</label>
+        <div class="chip-group" id="ph_channel">
+          <div class="chip" onclick="selectChip(this,'ph_channel')">课堂APP</div>
+          <div class="chip" onclick="selectChip(this,'ph_channel')">SEO搜索</div>
+          <div class="chip" onclick="selectChip(this,'ph_channel')">题库APP</div>
+          <div class="chip" onclick="selectChip(this,'ph_channel')">微信小程序</div>
+          <div class="chip" onclick="selectChip(this,'ph_channel')">图书兑换</div>
+          <div class="chip" onclick="selectChip(this,'ph_channel')">神策圈选</div>
+          <div class="chip" onclick="selectChip(this,'ph_channel')">书课包</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">② 客户阶段</label>
+        <div class="chip-group" id="ph_stage">
+          <div class="chip selected" onclick="selectChip(this,'ph_stage')">首次拨打</div>
+          <div class="chip" onclick="selectChip(this,'ph_stage')">二次回访</div>
+          <div class="chip" onclick="selectChip(this,'ph_stage')">逼单跟进</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">③ 客户情况（选填）</label>
+        <textarea class="text-input" id="ph_info" placeholder="如：零基础、在职备考、之前咨询过价格但犹豫…"></textarea>
+      </div>
+      <button class="btn btn-primary" onclick="generatePhoneScript()">✨ 生成电话脚本</button>
+    </div>
+    <div id="ph_results">
+      <div class="empty-state">
+        <div class="icon">📞</div>
+        <div class="title">选好渠道，点「生成」</div>
+        <div class="desc">生成完整脚本：开场白→价值主张→挖需→异议预案</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 4. 异议处理 ==================== -->
+<section id="section-objection" class="section">
+  <div class="page-header">
+    <div class="page-title">异议处理生成器</div>
+    <div class="page-desc">输入客户的拒绝理由，一键生成3种应对策略</div>
+  </div>
+  <div class="tool-layout">
+    <div class="panel">
+      <div class="panel-title">⚙️ 参数设置</div>
+      <div class="form-group">
+        <label class="form-label">① 客户说的原话</label>
+        <textarea class="text-input" id="ob_text" placeholder="直接粘贴客户说的话，如：太贵了，我再想想吧" style="min-height:80px;"></textarea>
+        <div class="objection-quick">
+          <span class="chip" onclick="setObjection('太贵了，别家更便宜')">太贵了</span>
+          <span class="chip" onclick="setObjection('我再想想，跟家里人商量一下')">再想想</span>
+          <span class="chip" onclick="setObjection('我有书有课了，不需要')">已有资料</span>
+          <span class="chip" onclick="setObjection('我基础好，自学就行')">自学就行</span>
+          <span class="chip" onclick="setObjection('等教材出来再说')">等教材</span>
+          <span class="chip" onclick="setObjection('你们能包过吗？通过率多少？')">包过吗</span>
+          <span class="chip" onclick="setObjection('现在还没开始备考，等报名了再买')">不急</span>
+          <span class="chip" onclick="setObjection('我在其他机构报了名了')">已报别家</span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">② 应对策略</label>
+        <div class="chip-group" id="ob_strategy">
+          <div class="chip selected" onclick="selectChip(this,'ob_strategy')">全部策略</div>
+          <div class="chip" onclick="selectChip(this,'ob_strategy')">共情型</div>
+          <div class="chip" onclick="selectChip(this,'ob_strategy')">数据型</div>
+          <div class="chip" onclick="selectChip(this,'ob_strategy')">案例型</div>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">③ 推荐产品</label>
+        <div class="chip-group" id="ob_product">
+          <div class="chip selected" onclick="selectChip(this,'ob_product')">基础班 ¥2,500</div>
+          <div class="chip" onclick="selectChip(this,'ob_product')">高端班 ¥16,800</div>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="generateObjection()">✨ 生成应对话术</button>
+    </div>
+    <div id="ob_results">
+      <div class="empty-state">
+        <div class="icon">🛡️</div>
+        <div class="title">输入客户说的话，点「生成」</div>
+        <div class="desc">自动生成共情型、数据型、案例型三种应对策略</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== 5. 渠道速查卡 ==================== -->
+<section id="section-channel" class="section">
+  <div class="page-header">
+    <div class="page-title">渠道速查卡</div>
+    <div class="page-desc">点击渠道卡片，查看完整属性：用户画像、跟进策略、话术原则、产品推荐</div>
+  </div>
+  <div class="channel-grid" id="channel_grid"></div>
+</section>
+
+</main>
+</div>
+
+<!-- ===== Channel Detail Modal ===== -->
+<div class="channel-detail" id="channel_detail" onclick="closeDetail(event)">
+  <div class="channel-detail-card" id="detail_content"></div>
+</div>
+
+<!-- ===== Toast ===== -->
+<div class="toast" id="toast">已复制到剪贴板</div>
+
+<script>
+// ==================== Helper ====================
+function showSection(id, el) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.getElementById('section-' + id).classList.add('active');
+  document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+  el.classList.add('active');
+}
+
+function selectChip(el, groupId) {
+  const group = document.getElementById(groupId);
+  // 单选模式
+  group.querySelectorAll('.chip').forEach(c => {
+    c.classList.remove('selected','green','purple','orange');
+  });
+  el.classList.add('selected');
+  // 特殊配色
+  if (groupId === 'op_style' || groupId === 'mm_style') {
+    const idx = Array.from(group.children).indexOf(el);
+    if (idx === 1) el.classList.add('purple');
+    if (idx === 2) el.classList.add('orange');
+  }
+}
+
+function getSelected(groupId) {
+  const el = document.getElementById(groupId).querySelector('.chip.selected');
+  return el ? el.textContent.trim() : null;
+}
+
+function showToast(msg) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function copyText(text, btn) {
+  navigator.clipboard.writeText(text).then(() => {
+    if (btn) {
+      btn.classList.add('copied');
+      btn.textContent = '✓ 已复制';
+      setTimeout(() => {
+        btn.classList.remove('copied');
+        btn.textContent = '📋 复制';
+      }, 2000);
+    }
+    showToast('已复制到剪贴板');
+  });
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function pickN(arr, n) {
+  return shuffle(arr).slice(0, n);
+}
+
+// ==================== Channel Data ====================
+const channelData = {
+  '课堂APP': {
+    name: '课堂APP',
+    color: 'c1',
+    tagColor: '#0071e3',
+    tag: '品牌用户 · 需求明确',
+    oneLiner: '主动在APP搜课的品牌用户，知道自己要什么',
+    userFeature: '品牌信任度高，备考意向明确，转化周期短',
+    firstNeed: '课程推荐、备考规划、性价比对比',
+    sellProduct: '云私塾为主，推不动依次降班',
+    sellMethod: '电销为主，快速跟进',
+    convCycle: '短（1-2周）',
+    openPrinciple: '专业高效，直接切入课程需求，不要绕弯子',
+    followUp: '立即跟进，当天首拨，3天内必须触达',
+    stats: { flow: '474', orders: '51', revenue: '¥11.8万', convRate: '11%', ap: '¥2,324' },
+    userImage: '25-35岁职场人，主动搜索注安课程，有一定了解，对比心理强',
+    painPoints: ['课程贵不贵', '能不能过', '时间够不够', '和别家比好不好'],
+    productOrder: ['云私塾 ¥2,500', '刷题班 ¥1,500', '图书精讲 ¥980'],
+    scriptTip: '开场直接说"看到您在APP上关注了注安课程"，用专业感建立信任'
+  },
+  'SEO搜索': {
+    name: 'SEO搜索',
+    color: 'c2',
+    tagColor: '#5e5ce6',
+    tag: '搜索用户 · 意向精准',
+    oneLiner: '通过搜索引擎找到我们的精准用户',
+    userFeature: '主动搜索来的，有明确备考需求，但品牌认知可能不强',
+    firstNeed: '了解课程、对比机构、找性价比高的方案',
+    sellProduct: '云私塾为主，强调品牌实力',
+    sellMethod: '电销为主，建立信任后促成交',
+    convCycle: '短（2-8周）',
+    openPrinciple: '先建立信任，再推课程。搜索用户在对比，要突出差异化优势',
+    followUp: '当天跟进，3天内二次触达，1周内完成报价',
+    stats: { flow: '553', orders: '16', revenue: '¥7.6万', convRate: '3-9%', ap: '¥2,700' },
+    userImage: '有备考计划但还没报班，在多家机构间对比，价格敏感但更看重通过率',
+    painPoints: ['哪个机构靠谱', '通过率怎么样', '价格合不合理', '服务好不好'],
+    productOrder: ['云私塾 ¥2,500', '刷题班 ¥1,500', '图书精讲 ¥980'],
+    scriptTip: '开场提"您在网上搜到了我们的注安课程"，重点讲品牌+通过率'
+  },
+  '题库APP': {
+    name: '题库APP',
+    color: 'c3',
+    tagColor: '#34c759',
+    tag: '刷题用户 · 需求弱',
+    oneLiner: '来刷免费题的，看课需求低，需要长线培育',
+    userFeature: '以刷题为主，对报班有抵触，觉得免费够用',
+    firstNeed: '免费刷题、错题解析、考点梳理',
+    sellProduct: '刷题班/题库Plus切入，二转云私塾',
+    sellMethod: '微销为主，先养后转',
+    convCycle: '长（3个月+）',
+    openPrinciple: '不急着推课！从做题切入，先提供价值，再慢慢引导报班',
+    followUp: '加微后14天培育期，先推干货内容，第15天开始软推课程',
+    stats: { flow: '468', orders: '22', revenue: '¥6.1万', convRate: '5%', ap: '¥2,753' },
+    userImage: '可能是学生或刚工作不久，预算有限，觉得免费题够用，需要被"教育"才愿意付费',
+    painPoints: ['免费题够用', '不想花钱', '不确定能不能考过', '时间碎片化'],
+    productOrder: ['刷题班 ¥1,500', '题库Plus ¥800', '云私塾 ¥2,500'],
+    scriptTip: '开场从做题切入："看到你在用题库刷题，有道高频错题分享给你"'
+  },
+  '微信小程序': {
+    name: '微信小程序',
+    color: 'c4',
+    tagColor: '#ff9500',
+    tag: '微信生态 · 白嫖用户',
+    oneLiner: '微信生态来的，习惯免费内容，需要养熟',
+    userFeature: '习惯微信生态，对广告有免疫力，需要内容打动',
+    firstNeed: '免费资料、备考规划、社群陪伴',
+    sellProduct: '图书精讲切入，升级云私塾',
+    sellMethod: '微销为主，内容培育',
+    convCycle: '长',
+    openPrinciple: '先用免费资料吸引，建立专业形象后引导付费',
+    followUp: '加微后先发资料包，7天后开始互动，14天后试推课程',
+    stats: { flow: '75', orders: '9', revenue: '¥1.7万', convRate: '12%', ap: '¥1,856' },
+    userImage: '微信重度用户，喜欢白嫖，需要"钩子"引导付费',
+    painPoints: ['免费够用', '不知道值不值', '怕被骗', '时间不固定'],
+    productOrder: ['图书精讲 ¥980', '刷题班 ¥1,500', '云私塾 ¥2,500'],
+    scriptTip: '开场发资料："你有份注安备考资料包待领取～"'
+  },
+  '图书兑换': {
+    name: '图书兑换',
+    color: 'c5',
+    tagColor: '#ff3b30',
+    tag: '量大质杂 · 长线培育',
+    oneLiner: '量最大的渠道，有书有课还面临竞品，需要长线培育',
+    userFeature: '已有图书和配套课，觉得自己不需要再花钱，但实际没学进去',
+    firstNeed: '图书配套课怎么用、教材变动、考点梳理',
+    sellProduct: '图书精讲班切入，升级云私塾',
+    sellMethod: '微销为主，不急于成单',
+    convCycle: '长（3-6个月）',
+    openPrinciple: '从"帮你把书用好"切入，不要急着推课，先解决使用问题',
+    followUp: '加微后先教怎么用书，1个月后引导精讲班，3个月后推云私塾',
+    stats: { flow: '468', orders: '22', revenue: '¥6.1万', convRate: '5%', ap: '¥2,753' },
+    userImage: '可能有书但没看，有课但没听，处于"买了就等于学了"的幻觉中',
+    painPoints: ['有书有课了', '还没开始学', '不确定要不要加课', '怕重复花钱'],
+    productOrder: ['图书精讲 ¥980', '刷题班 ¥1,500', '云私塾 ¥2,500'],
+    scriptTip: '开场从用书切入："您之前兑换的图书配套课，用得怎么样了？"'
+  },
+  '神策圈选': {
+    name: '神策圈选',
+    color: 'c6',
+    tagColor: '#af52de',
+    tag: '高活用户 · 及时跟进',
+    oneLiner: '浏览注安页面3次+的活跃用户，有潜在需求',
+    userFeature: '反复浏览但没留资，有潜在需求但没行动，需要推一把',
+    firstNeed: '课程详情、价格、试听',
+    sellProduct: '云私塾为主，强调限时优惠',
+    sellMethod: '电销+微销，及时跟进',
+    convCycle: '中长',
+    openPrinciple: '提"注意到您多次关注了注安课程"，制造被关注感，拉近距离',
+    followUp: '纳入考核，48小时内必须触达，7天内完成首报价',
+    stats: { flow: '460', orders: '15', revenue: '¥2.2万', convRate: '3%', ap: '¥1,479' },
+    userImage: '在犹豫期，反复看说明有意向但下不了决心，需要一个推动力',
+    painPoints: ['在犹豫', '价格门槛', '不确定值不值', '怕考不过'],
+    productOrder: ['云私塾 ¥2,500', '刷题班 ¥1,500', '图书精讲 ¥980'],
+    scriptTip: '开场："注意到您最近多次浏览了我们的注安课程，看来您对今年考试挺关注的"'
+  },
+  '书课包': {
+    name: '书课包',
+    color: 'c7',
+    tagColor: '#64d2ff',
+    tag: '抖音购买 · 体验转化',
+    oneLiner: '抖音买的书课包，有学习行为，两周体验营模式转化',
+    userFeature: '已经付费过（低客单），有学习行为，对品牌有初步认知',
+    firstNeed: '配套课程怎么上、学习规划、进阶课程',
+    sellProduct: '图书精讲→刷题班→云私塾，阶梯式升级',
+    sellMethod: '微销为主，体验营模式',
+    convCycle: '长',
+    openPrinciple: '从"已购课程体验"切入，用服务打动，引导升级',
+    followUp: '加微后先服务体验课，2周后引导升级',
+    stats: { flow: '38', orders: '6', revenue: '¥1.5万', convRate: '16%', ap: '¥2,558' },
+    userImage: '抖音冲动消费型，已经花了小钱，需要被引导花大钱',
+    painPoints: ['已花过钱', '不确定要不要升级', '体验课够不够', '时间够不够'],
+    productOrder: ['图书精讲 ¥980', '刷题班 ¥1,500', '云私塾 ¥2,500'],
+    scriptTip: '开场："您在抖音购买的书课包到了吧？我帮您规划下怎么用最高效"'
+  }
+};
+
+// ==================== 开场白模板库 ====================
+const openingTemplates = {
+  '课堂APP': {
+    '亲切自然': [
+      '哈喽～看到你在APP上关注了注安课程，是想今年考吗？我帮你看看适合哪个班型～',
+      '嗨，你在课堂APP上看的注安课程还挺热门的，需要我帮你分析下备考规划不？',
+      '你好呀！你在APP上关注的注安课，今年的考纲有新变化，我整理了重点，发你看看？',
+      '哈喽，看到你在看注安课程，刚好我们最近有试听课，要不要先体验下？不花钱的那种～',
+      '嗨～你是在APP上搜注安的吧？今年考试时间确定了，我帮你算算备考时间够不够',
+      '你好！你在APP上看的注安课，我有份备考时间表可以分享给你，要不要？',
+      '哈喽，注安备考搭子！你在APP上看了课程，我猜你应该是今年要考的吧？',
+      '嗨，看到你关注了注安课，刚好我们这周有免费的直播课，帮你预约一个？'
+    ],
+    '专业高效': [
+      '您好，看到您在环球网校APP上关注了中级注安课程。我是您的专属课程顾问，今年备考有什么可以帮您的？',
+      '您好，注意到您浏览了注安课程详情页。今年的考纲有更新，我帮您梳理了变化要点，方便发您吗？',
+      '您好，您在APP上关注的注安课程目前有最新班型。根据今年的考试时间，建议您现在开始系统备考，我帮您做个规划？',
+      '您好，看到您关注了注安课程。目前距考试还有约4个月，备考时间紧张，我可以帮您制定一个学习计划。',
+      '您好，您在APP上查看的注安课程，我这边可以提供详细的课程方案和价格对比，需要我发您吗？',
+      '您好，注意到您多次浏览注安课程。我是课程顾问老师，可以帮您评估适合的班型，什么时候方便沟通？'
+    ],
+    '活泼有趣': [
+      '嘿！看到你在APP上盯注安课程了👀 今年不拿下更待何时！我帮你看看怎么安排～',
+      '叮咚～你的注安备考小助手上线啦！在APP上看到你关注了课程，需要帮忙随时call我～',
+      '哈喽哈喽！注安备考人集合啦✊ 你在APP上看了课程，来来来我帮你避避坑～',
+      '嗨嗨嗨！发现一个认真备考的人！你在APP上看注安了叭？来，备考搭子了解一下～',
+      '哟～注安备考人你好！看你关注了课程，今年的通过率数据我帮你整理好了，要不要看？',
+      '嘿！终于等到你！在APP上看注安的，一定是个有上进心的人👏 我帮你规划下备考？'
+    ]
+  },
+  'SEO搜索': {
+    '亲切自然': [
+      '哈喽～你在网上搜到了我们的注安课程，是想今年考吗？我帮你看看适合什么班～',
+      '嗨，看到你在了解注安培训，刚好我在这个领域做了几年，可以帮你避避坑～',
+      '你好呀！你在网上找注安课程是吧？我们机构做了十几年了，我帮你分析下怎么选最合适～',
+      '哈喽，你是想考注安对吧？网上信息挺多的，我帮你整理了一份对比，发你看看？',
+      '嗨～看到你在了解注安考试，今年的报考条件有变化，我帮你确认下你符不符合？'
+    ],
+    '专业高效': [
+      '您好，您通过搜索了解到了我们的注安课程。我是课程顾问，可以为您提供课程方案和备考规划，请问您目前是什么基础？',
+      '您好，看到您在了解注安培训。我们可以提供完整的课程体系、通过率数据和价格方案，方便详细沟通吗？',
+      '您好，您在网上搜索注安课程，说明有备考计划。我帮您梳理了各家机构对比和我们的核心优势，需要发您吗？',
+      '您好，了解到您在关注注安考试。今年的报考条件和考试时间已公布，我可以帮您做一份个性化备考方案。',
+      '您好，您通过搜索找到了我们。注安考试我们有完整的课程体系和教研团队，我可以帮您评估适合的班型。'
+    ],
+    '活泼有趣': [
+      '嘿！搜到我们啦～说明你今年注安是认真的！来来来，我帮你规划规划💪',
+      '叮～搜到我们说明缘分到了！注安备考我帮你安排得明明白白✨',
+      '哈喽！搜索小能手你好！注安课程我帮你对比好了，不踩坑的那种～',
+      '哟～搜到我们了，看来注安备考要动真格的！我帮你看看怎么安排最合适😎',
+      '嘿，搜索达人！你找到我们了，说明你的注安备考要开始了！我助你一臂之力～'
+    ]
+  },
+  '题库APP': {
+    '亲切自然': [
+      '哈喽～看到你也在用题库刷题，备考注安对吧？有道高频错题很多人选错，分享给你看看～',
+      '嗨，你在题库刷题呢？我这边有最新的命题趋势分析，需要的话发你～',
+      '你好呀，刷题刷到哪了？最近有道题争议挺大的，我帮你解析下～',
+      '哈喽～注安刷题搭子！看到你最近在用题库，有遇到什么难点吗？',
+      '嗨，你在题库APP上做题呢？今年的考点有变化，我整理了新考纲重点，要不要？'
+    ],
+    '专业高效': [
+      '您好，注意到您在使用我们的题库APP刷题。如果您在备考注安，我可以提供系统化的备考方案，目前刷题遇到瓶颈了吗？',
+      '您好，看到您在题库做题。注安考试的命题规律和高频考点我帮您梳理了，需要参考吗？',
+      '您好，您在题库APP的做题记录显示正确率还可以提升。我们有配套的精讲课程，可以帮您系统备考。',
+      '您好，注意到您在用题库刷题备考注安。除了刷题，系统学习也很重要，我可以帮您规划一下。'
+    ],
+    '活泼有趣': [
+      '哈喽刷题达人！题库刷得怎么样了？有道"杀手题"分享给你试试🔪',
+      '嘿！又在刷题了吧？休息一下，我给你分享个命题趋势预测～',
+      '叮咚～你的备考小助手来送弹药了！最新考点分析要不要？',
+      '哈喽哈喽！刷题累了没？给你看个好消息缓解一下～',
+      '嘿！题库王者你好！看你刷了不少题，备考进度怎么样了？'
+    ]
+  },
+  '微信小程序': {
+    '亲切自然': [
+      '哈喽～你在我们小程序上领了注安资料对吧？用得怎么样了？有问题随时问我～',
+      '嗨，看到你在小程序上浏览了注安内容，有份备考规划图发你看看？',
+      '你好呀！你在小程序领的资料看了吗？今年考试时间定了，我帮你算算还剩多少天～',
+      '哈喽，小程序上的资料够用吗？我这边还有更多干货，需要的话发你～',
+      '嗨～你在小程序上关注了注安，有份免费直播课帮你预约了，要不要？'
+    ],
+    '专业高效': [
+      '您好，看到您在我们的小程序上领取了注安备考资料。我是课程顾问，可以为您提供完整的备考方案。',
+      '您好，您在小程序上的操作记录显示您在关注注安考试。我可以帮您做一份个性化学习计划，需要吗？',
+      '您好，注意到您通过小程序了解了我们的注安课程。目前有免费的试听课，建议您先体验。',
+      '您好，您在小程序领取的资料是基础版，我们有更完整的备考体系，方便详细沟通吗？'
+    ],
+    '活泼有趣': [
+      '嘿！小程序上领到资料了吧？够不够用？不够我这还有更多好货～',
+      '叮～你的注安备考资料包已到货！还有配套直播课要不要一起领了？',
+      '哈喽！小程序逛得怎么样？发现好东西了没？我给你加个料～',
+      '嗨嗨！在小程序上看到你关注注安了，来来来，备考攻略送你一份～'
+    ]
+  },
+  '图书兑换': {
+    '亲切自然': [
+      '哈喽～你之前兑换的图书配套课，用得怎么样了？有不会的地方随时问我～',
+      '嗨，看到你兑换了注安图书，书收到了吗？我帮你规划下怎么用最高效～',
+      '你好呀！你兑换的书课到了吧？今年的教材有变动，我帮你标出来重点～',
+      '哈喽，你之前兑换的注安资料看了吗？有配套的精讲视频，要不要发你？',
+      '嗨～你的兑换课程开通了吧？我这边有学习计划表，按着学不迷路～'
+    ],
+    '专业高效': [
+      '您好，您之前兑换了注安图书配套课程。我是课程顾问，可以帮您制定学习计划，目前学习进度如何？',
+      '您好，您的兑换课程已开通。建议您按照"先看书再听课最后刷题"的顺序备考，我可以提供详细规划。',
+      '您好，注意到您兑换了注安资料。今年的教材有重要变动，我帮您整理了变化对比，需要发您吗？',
+      '您好，您的兑换课程可以正常使用了。如果学习中有疑问，我可以提供专业解答。'
+    ],
+    '活泼有趣': [
+      '嘿！兑换的书课到手了吧？怎么用我教你，保证不落灰～',
+      '叮咚～你的注安书课包已就位！我帮你规划下怎么啃最高效📖',
+      '哈喽！书课兑换成功啦！别让它在角落吃灰，我帮你安排起来～',
+      '嗨～兑换达人你好！书课怎么用最值钱我教你，保证不亏～'
+    ]
+  },
+  '神策圈选': {
+    '亲切自然': [
+      '哈喽～注意到你最近看了好几次注安课程，今年是打算考吗？帮你看看适合什么班～',
+      '嗨，看到你关注注安好几天了，是在犹豫选哪个班型吗？我帮你分析下～',
+      '你好呀！你浏览课程挺仔细的，有看中的班型吗？有什么顾虑可以跟我说～',
+      '哈喽，你在我们网站看了好几次注安课了，今年考试时间快到了，要不要抓紧安排？',
+      '嗨～关注注安有一阵了吧？今年的优惠活动快结束了，要不要了解下？'
+    ],
+    '专业高效': [
+      '您好，注意到您多次浏览了我们的注安课程详情页。看来您对今年考试很关注，我是课程顾问，可以帮您评估适合的方案。',
+      '您好，您的浏览记录显示您对注安课程有持续关注。目前距离考试时间不多，建议尽快开始系统备考。',
+      '您好，看到您多次查看注安课程。我可以提供详细的课程方案、价格和通过率数据，方便沟通吗？',
+      '您好，您在我们平台上的浏览行为显示您有备考注安的计划。我可以帮您做一份备考时间规划。'
+    ],
+    '活泼有趣': [
+      '嘿！看到你又来看注安课程了👀 心动了对不对？来，我帮你下个决心～',
+      '叮～你的注安课程浏览次数已达标！解锁专属课程顾问一枚（就是我）✨',
+      '哈喽！你来看课程好几次了，我猜你在纠结对不对？来，帮你分析分析～',
+      '嗨嗨！又来看注安啦？别犹豫了，今年的优惠快没了，赶紧安排！'
+    ]
+  },
+  '书课包': {
+    '亲切自然': [
+      '哈喽～你在抖音上买的书课包到了吧？我帮你规划下怎么用最高效～',
+      '嗨，你购买的书课包课程开通了吗？有配套的学习计划表，我发你～',
+      '你好呀！书课包怎么用清楚了吗？我这边有详细的使用指南，要不要？',
+      '哈喽，你买的书课包里有配套视频课，建议先看第一章试试水，有问题随时问我～',
+      '嗨～书课包到了就开始学吧！今年的考纲有变化，我帮你标注下重点～'
+    ],
+    '专业高效': [
+      '您好，您在抖音购买的书课包已发货。我是课程顾问，可以帮您制定学习计划，请问您目前是什么基础？',
+      '您好，您的书课包包含图书和配套视频课程。建议您按照学习计划表系统学习，我可以提供指导。',
+      '您好，您的书课包订单已确认。注安考试备考建议尽早开始，我可以帮您规划备考时间线。',
+      '您好，您购买的书课包可以开始学习了。如果需要进一步系统备考，我可以提供课程方案。'
+    ],
+    '活泼有趣': [
+      '嘿！书课包到手了吧？别让它落灰，我教你秒上手～',
+      '叮咚～你的书课包已就位！备考第一步怎么走，我帮你安排📖',
+      '哈喽！抖音下单成功！接下来交给我就行，保证你学得明明白白～',
+      '嗨嗨！书课包到了就开干吧！今年的注安，我们一起拿下💪'
+    ]
+  }
+};
+
+// ==================== 朋友圈模板库 ====================
+const momentTemplates = {
+  '备考干货': {
+    '接地气': [
+      '📚 注安备考第1弹｜很多人问"管理科目怎么学"\n\n说实话，管理科目是四科里最容易拿分的，但也是最容易丢分的。\n\n核心就三个字：背、练、串。\n→ 背：高频考点必须背熟\n→ 练：每年真题至少刷3遍\n→ 串：把零散知识点串成线\n\n别贪多，每天学2小时，坚持到考试就够了。\n\n#注安备考 #安全管理',
+      '⚠️ 注意！2026年注安考试时间线\n\n报名时间：预计7月\n考试时间：10月底\n\n现在到考试还有不到5个月，按这个节奏走：\n6月：管理+法规打基础\n7月：技术基础+专业实务\n8月：全科刷题强化\n9月：真题模拟\n10月：冲刺押题\n\n别等报名了再开始，那时候真来不及了。\n\n#注安考试时间 #备考规划',
+      '🔑 注安备考最大的坑：买了课不看\n\n我见过太多人，课程买了一堆，结果打开次数个位数。\n\n其实你不需要买很多课，你需要的是：\n1️⃣ 一套靠谱的精讲课\n2️⃣ 一本题库（电子版也行）\n3️⃣ 一份学习计划\n\n然后就是——每天坚持学2小时。\n\n比什么技巧都管用。\n\n#注安备考心得'
+    ],
+    '专业感': [
+      '📊 注安管理科目高频考点分析\n\n根据近5年真题统计，以下章节出题频率最高：\n\n第1章 安全生产管理基本概念 — 出题率92%\n第2章 重大危险源辨识 — 出题率88%\n第5章 安全生产预警体系 — 出题率85%\n\n建议重点突破以上章节，合理分配复习时间。\n\n需要详细考点梳理的，私信我。\n\n#注安管理 #考点分析',
+      '📋 注安法规科目记忆方法\n\n法规科目不是死记硬背，有方法：\n\n1. 先理解再记忆 — 每条法规背后都有逻辑\n2. 对比记忆 — 安全生产法 vs 劳动法\n3. 口诀记忆 — 把数字和关键词编成口诀\n4. 场景记忆 — 把法条放到实际场景中\n\n我们整理了一份法规记忆手册，需要的可以私信。\n\n#注安法规 #备考方法'
+    ],
+    '走心型': [
+      '🌙 凌晨1点，还有人在问注安怎么备考\n\n说实话，每次看到这种消息，我都有点感慨。\n\n白天上班，晚上挤时间看书，周末不敢出去聚会。为了一个证，放弃了那么多。\n\n但你知道吗？考试这东西，最怕的不是难，是你放弃了。\n\n只要你在坚持，你就赢了80%的人。\n\n因为注安考试的通过率，只有20%左右——剩下的80%，都是中途放弃的。\n\n#注安备考 #坚持就是胜利'
+    ]
+  },
+  '学员案例': {
+    '接地气': [
+      '🎉 又一个学员过注安了！\n\n张哥，工地施工员，38岁，零基础。\n\n去年6月加我微信，问的第一个问题是"注安难不难考"。\n\n我给他配了云私塾+刷题班，每天学2小时。\n\n10月出成绩：管理72、法规68、技术75、实务70，全科通过✅\n\n他发消息说：原来没那么难，早知道前年就报了。\n\n所以啊，别犹豫，犹豫的时间够你考两次了。\n\n#注安通过 #学员故事',
+      '💪 90后宝妈注安一次过！\n\n李姐，孩子2岁，在职备考。\n\n每天等娃睡了学2小时，周末刷题。\n\n用的云私塾全套课程，从6月学到10月。\n\n成绩出来：全科通过，管理78分！\n\n她说：当妈了更要考证，给孩子做个榜样。\n\n这就是最好的身教吧。\n\n#注安备考 #宝妈考证'
+    ],
+    '专业感': [
+      '📈 学员成绩报告｜2025年注安考试\n\n本月已有37位学员反馈成绩，通过29人，通过率78.4%。\n\n其中：\n· 云私塾学员通过率 82%\n· 刷题班学员通过率 71%\n· 自学学员通过率 31%\n\n系统学习的优势很明显。\n\n2026年备考已开始，早准备早通过。\n\n#注安通过率 #成绩报告'
+    ],
+    '走心型': [
+      '✉️ 今天收到一条消息，差点看哭了\n\n一个去年报班的学员说："老师，我过了。谢谢你当时一直催我学习，要不是你，我肯定半途放弃了。"\n\n他是个外卖小哥，白天跑单，晚上看书。\n\n去年报了云私塾，我每周催他打卡，有时候他不回消息，我就多催几次。\n\n成绩出来那天，他发了一长串谢谢。\n\n其实该说谢谢的是我——你们能坚持下来，就是给我最好的回报。\n\n#注安 #学员故事'
+    ]
+  },
+  '活动促销': {
+    '接地气': [
+      '🔥 注安备考季！全年最低价来了！\n\n云私塾原价3980，现在只要2500！\n还送刷题班+题库VIP+模拟卷！\n\n活动只剩3天，过了恢复原价！\n\n每天学2小时，4个月过注安。\n别等了，早学早过。\n\n👇 戳我了解详情',
+      '⚡ 限时秒杀！注安课程立减1500！\n\n云私塾+刷题班+精讲班 三件套\n原价5980，现在只要3980！\n\n前50名再送：\n✅ 1对1备考规划\n✅ 真题模拟卷5套\n✅ 考前押题课\n\n名额不多了，先到先得！',
+      '🎁 老学员专属福利！\n\n之前报过基础班的同学看过来！\n升级VIP高端班，立减3000！\n\n高端班包含：\n✅ 全科直播+录播\n✅ 1对1答疑\n✅ 考前密训\n✅ 不过免费重学\n\n名额有限，私信锁定优惠！'
+    ],
+    '专业感': [
+      '📋 2026年注安备考限时优惠方案\n\n活动时间：即日起至本月底\n\n方案A：云私塾 ¥2,500（原价3,980）\n· 全科精讲+刷题+模拟\n\n方案B：云私塾+刷题班 ¥3,500（原价5,480）\n· 含题库VIP+真题解析\n\n方案C：VIP高端班 ¥16,800\n· 1对1服务+不过免费重学\n\n以上方案均赠送备考规划服务。详询私信。',
+      '📊 注安课程体系及限时优惠\n\n基础班：¥2,500 → 含全科精讲\n刷题班：¥1,500 → 含题库+解析\n高端班：¥16,800 → 含1对1+保过\n\n本月报名额外赠送：\n· 2026年考纲变动解读\n· 历年真题汇编（电子版）\n\n名额有限，先到先得。'
+    ],
+    '走心型': [
+      '💌 写给还在犹豫的你\n\n我知道你在纠结：要不要报班？值不值？\n\n说实话，这个问题没有标准答案。\n\n但有一个事实：去年犹豫的人，今年还在犹豫。而去年报了的人，今年已经拿证涨薪了。\n\n课程价格2500，考过注安一年涨薪至少5000+。\n这笔账，你自己算。\n\n现在报名，全年最低价。不是为了让你花钱，是希望你别再等了。\n\n等来等去，等掉的是你的时间。'
+    ]
+  },
+  '互动话题': {
+    '接地气': [
+      '💬 聊聊：你备考注安最大的障碍是什么？\n\nA. 没时间\nB. 看不懂\nC. 记不住\nD. 坚持不下去\n\n评论区选一个，我帮你想办法～',
+      '🗳️ 投票：注安四科你觉得哪科最难？\n\n1️⃣ 安全生产管理\n2️⃣ 安全生产法规\n3️⃣ 安全生产技术基础\n4️⃣ 专业实务\n\n选一个你怕的，下期出攻略！',
+      '🙋 考过注安的举手！你们都花了多久备考？\n\nA. 3个月以内\nB. 3-6个月\nC. 6个月以上\nD. 裸考过的（大佬请收下我的膝盖）'
+    ],
+    '专业感': [
+      '📊 注安备考问卷调查\n\n为了给大家提供更好的备考方案，想了解一下：\n\n1. 你的备考进度到哪了？\n2. 每天能学习多长时间？\n3. 最薄弱的科目是哪个？\n\n评论区告诉我，我帮你定制学习计划。',
+      '💡 每日一题｜注安管理\n\n某企业发生生产安全事故，造成3人以上10人以下死亡。根据《生产安全事故报告和调查处理条例》，该事故属于什么等级？\n\nA. 特别重大事故\nB. 重大事故\nC. 较大事故\nD. 一般事故\n\n评论区答对的有奖🎁'
+    ],
+    '走心型': [
+      '🌙 深夜话题\n\n你为什么考注安？\n\n是为了涨薪？升职？跳槽？还是不甘心？\n\n每个考证的人背后都有一个故事。\n\n评论区说说你的理由，说不定你的故事能激励更多人。'
+    ]
+  },
+  '节日问候': {
+    '接地气': [
+      '🏮 元旦快乐！新的一年，注安备考也要开始啦～\n\n去年的flag实现了吗？没实现没关系，今年继续！\n\n注安备考最好的时间：一个是去年，一个是现在。\n\n新年新开始，一起加油！💪',
+      '🌴 端午节快乐！\n\n粽子吃了没？假期过了几天了？\n\n别忘了，注安考试10月就来了。\n\n假期放松之余，记得看两页书📖\n\n毕竟，过节是暂时的，考证是一辈子的～'
+    ],
+    '专业感': [
+      '🎊 新年伊始，备考正当时\n\n2026年注安考试时间已确定：10月30-31日\n\n从现在开始备考，时间刚好。\n\n我们为您准备了2026年完整备考方案：\n· 1月-3月：基础精讲\n· 4月-6月：强化刷题\n· 7月-9月：真题模拟\n· 10月：考前冲刺\n\n早准备早通过，详询私信。',
+      '☀️ 暑期备考提醒\n\n7-8月是注安备考的黄金期，也是最容易被拉开差距的阶段。\n\n建议暑期完成：\n✅ 全科精讲课听完一遍\n✅ 每科刷题500+\n✅ 整理错题本\n\n坚持住，10月考试你就能从容应对。'
+    ],
+    '走心型': [
+      '🌙 中秋快乐\n\n今天月圆人团圆。\n\n但我知道，很多人还在加班、还在看书、还在刷题。\n\n备考的路确实辛苦，但想想考过之后——\n不用再熬夜看书了，不用再纠结要不要报班了，工资卡上多出来的数字。\n\n月圆了，你的注安也快圆了。\n\n坚持住，加油。🌕'
+    ]
+  }
+};
+
+// ==================== 电话脚本模板 ====================
+const phoneScriptTemplates = {
+  '课堂APP': {
+    '首次拨打': {
+      opening: '您好，请问是{客户称呼}吗？我是环球网校的注安课程顾问{销售姓名}。看到您在我们APP上关注了中级注安课程，是想今年备考吗？',
+      valueProp: '我们注安课程做了十几年了，今年全新升级了云私塾体系，包含全科精讲、刷题、模拟和考前冲刺，通过率在行业里是排前的。现在报名有早鸟优惠，比报名季便宜不少。',
+      questions: [
+        '您目前是什么基础？之前有了解过注安考试吗？',
+        '您是做什么工作的？安全生产相关吗？',
+        '您每天大概能抽出多长时间学习？'
+      ],
+      objections: [
+        { q: '价格方面', a: '云私塾原价3980，现在早鸟价2500，还额外送刷题班。算下来每天不到10块钱，但考过注安一年至少涨薪5000+' },
+        { q: '能不能过', a: '我们云私塾学员去年通过率82%，比行业平均高了3倍。有不过免费重学的保障' }
+      ]
+    },
+    '二次回访': {
+      opening: '您好{客户称呼}，上次通话后我帮您整理了一份备考方案，今天想跟您同步一下。上次说的{上次话题}，您考虑得怎么样了？',
+      valueProp: '上次聊完后我看了一下您的备考时间，按目前节奏到考试还有约4个月，完全来得及。我把课程内容和时间安排都帮您规划好了。',
+      questions: [
+        '上次说的学习时间问题解决了吗？',
+        '课程方案那部分还有什么疑问吗？',
+        '家人那边商量过了吗？'
+      ],
+      objections: [
+        { q: '还想再考虑', a: '理解，但备考时间确实不多了。现在报名还能赶上基础精讲的进度，再晚1个月就吃力了' },
+        { q: '价格还是贵', a: '现在是全年最低价，下个月恢复原价3980。而且这个月报名额外送真题模拟卷5套' }
+      ]
+    },
+    '逼单跟进': {
+      opening: '{客户称呼}您好！今天最后跟您确认一下，因为早鸟优惠活动明天就截止了，想问问您这边定下来了吗？',
+      valueProp: '今天报名还能享受早鸟价2500，明天恢复原价3980。而且今天报名我额外申请了一个名额，送您1对1备考规划服务。',
+      questions: [
+        '您主要还在纠结哪个点？价格还是课程内容？',
+        '需要我帮您分期付款吗？'
+      ],
+      objections: [
+        { q: '再等等', a: '活动明天截止，之后就恢复原价了。您现在报就省1480，相当于白赚一个月工资' },
+        { q: '还是犹豫', a: '这样，今天报名我给您加一个7天无理由退款保障，不满意全额退，您先试试' }
+      ]
+    }
+  },
+  'SEO搜索': {
+    '首次拨打': {
+      opening: '您好，是{客户称呼}吗？我是环球网校的课程顾问{销售姓名}。您在网上搜索了注安培训课程，看到您在了解备考方案，方便聊两句吗？',
+      valueProp: '环球网校做注安培训十几年了，有完整的课程体系和教研团队。我知道您在对比不同机构，我可以帮您做一份详细对比，包括课程内容、通过率和价格。',
+      questions: [
+        '您目前有在对比其他机构吗？主要关注哪些方面？',
+        '您之前有了解过注安考试的内容和难度吗？',
+        '您的工作背景跟安全生产相关吗？'
+      ],
+      objections: [
+        { q: '在对比其他机构', a: '完全理解，货比三家是应该的。我帮您整理了一份我们和233网校、优路教育的对比表，包括课程时长、通过率、服务差异，发您参考' },
+        { q: '价格方面', a: '我们云私塾2500，含全科精讲+刷题+模拟+冲刺。比同价位机构多了1对1答疑和不过重学保障' }
+      ]
+    },
+    '二次回访': {
+      opening: '您好{客户称呼}，上次聊完后我帮您做了个课程对比表，今天发给您看看。上次说的几家机构对比结果出来了。',
+      valueProp: '对比下来我们在课程时长、通过率和服务保障上都更有优势。而且现在报名有早鸟优惠，比其他机构便宜不少。',
+      questions: [
+        '对比表看了吗？有什么疑问吗？',
+        '其他机构那边有跟您联系吗？',
+        '您现在倾向哪家？'
+      ],
+      objections: [
+        { q: '别家更便宜', a: '价格不是唯一标准，关键是通过率和服务。我们去年通过率82%，送不过免费重学，这个保障别家没有' },
+        { q: '还在对比', a: '理解，但早鸟优惠活动这周截止，之后恢复原价。建议先锁定优惠名额，7天内不满意可退' }
+      ]
+    },
+    '逼单跟进': {
+      opening: '{客户称呼}，早鸟活动最后一天了，今天报名还能享受2500的价格，明天恢复3980。您这边考虑好了吗？',
+      valueProp: '今天报名除了价格优惠，我还帮您申请了额外福利：送1对1备考规划+真题模拟卷5套+考前押题课。',
+      questions: [
+        '您还有哪个点不放心？',
+        '需要分期付款方案吗？'
+      ],
+      objections: [
+        { q: '还想再等等', a: '活动今天就截止了，恢复原价就多花1480。而且备考时间越来越少，再拖就来不及了' },
+        { q: '还是不确定', a: '这样，今天报名送您7天无理由退款，不满意全额退。先试听再决定，零风险' }
+      ]
+    }
+  },
+  '题库APP': {
+    '首次拨打': {
+      opening: '您好{客户称呼}，我是环球网校的课程顾问{销售姓名}。看到您在用我们的题库APP刷题备考注安，是今年打算考吗？',
+      valueProp: '刷题是备考的一部分，但光刷题不够，系统学习更重要。我们有配套的精讲课程，从基础到冲刺全覆盖，帮您把知识点串起来。',
+      questions: [
+        '您目前刷题正确率怎么样？',
+        '有没有遇到反复出错的知识点？',
+        '之前有系统学过注安的课程吗？'
+      ],
+      objections: [
+        { q: '免费题够用', a: '免费题确实能刷，但没有系统讲解，错题不知道为什么错。精讲课能帮你理解考点逻辑，效率高很多' },
+        { q: '不想花钱', a: '刷题班只要1500，每天不到5块钱。考过注安一年涨薪至少5000，这笔投资很值' }
+      ]
+    },
+    '二次回访': {
+      opening: '您好{客户称呼}，上次聊完后我注意到您刷题频率变高了，备考挺认真的。上次推荐的课程您看了吗？',
+      valueProp: '我看您最近的刷题记录，有几个知识点反复出错，精讲课刚好能解决这些问题。现在报名刷题班还送题库VIP。',
+      questions: [
+        '上次推荐的刷题班了解了吗？',
+        '目前刷题遇到什么瓶颈了吗？',
+        '每天能学多长时间？'
+      ],
+      objections: [
+        { q: '还在犹豫', a: '您的刷题正确率在60%左右，如果不系统学很难再提升。精讲课能帮您突破到80%+' },
+        { q: '再想想', a: '刷题班现在1500，送题库VIP和错题解析。活动这周截止，之后恢复原价' }
+      ]
+    },
+    '逼单跟进': {
+      opening: '{客户称呼}，刷题班活动最后一天了，今天报名1500还送题库VIP。您刷了这么久的题，是时候系统学一下了。',
+      valueProp: '今天报名额外送：高频错题精讲视频+考前押题课。光刷题不学的效果已经到瓶颈了，系统学才能突破。',
+      questions: [
+        '您还在纠结什么？',
+        '需要分期吗？'
+      ],
+      objections: [
+        { q: '再等等', a: '活动今天截止，之后恢复原价1980。您已经刷了这么多题，不系统学的话前面的努力就白费了' },
+        { q: '觉得贵', a: '1500的刷题班，每天不到5块钱。考过注安一年涨薪5000+，这笔账很划算' }
+      ]
+    }
+  },
+  '微信小程序': {
+    '首次拨打': {
+      opening: '您好{客户称呼}，我是环球网校的课程顾问{销售姓名}。看到您在小程序上领取了注安备考资料，是在准备今年的考试吗？',
+      valueProp: '我们小程序上的资料是基础版，我有更完整的备考体系可以提供给您。包括精讲课、刷题和模拟，帮您系统备考。',
+      questions: [
+        '您领的资料看了吗？觉得有帮助吗？',
+        '之前有了解过注安考试吗？',
+        '您的工作跟安全生产相关吗？'
+      ],
+      objections: [
+        { q: '免费资料够用', a: '免费资料是入门版，帮您了解考什么。但要系统备考还是需要课程，精讲课能把知识点讲透' },
+        { q: '不确定要不要考', a: '可以先了解下报考条件和考试内容，我帮您评估下适不适合考。不急着报班' }
+      ]
+    },
+    '二次回访': {
+      opening: '您好{客户称呼}，上次给您发的资料看了吗？有没有什么疑问？今天给您做个回访。',
+      valueProp: '看了资料应该对注安有初步了解了。如果打算今年考，现在开始系统学习刚好来得及。我们有图书精讲班，980元入门，性价比很高。',
+      questions: [
+        '资料看完了吗？觉得怎么样？',
+        '有考虑今年报考吗？',
+        '预算方面有什么顾虑吗？'
+      ],
+      objections: [
+        { q: '还没想好', a: '不急，可以先试听下我们的课程，觉得合适再考虑报班。我帮您安排一节免费试听课' },
+        { q: '觉得贵', a: '图书精讲班980，是入门级课程，适合先体验。之后觉得需要升级再转云私塾也行' }
+      ]
+    },
+    '逼单跟进': {
+      opening: '{客户称呼}，图书精讲班活动最后一天了，今天980报名还送配套教材。您之前看了试听课觉得怎么样？',
+      valueProp: '今天报名额外送：教材1本+题库VIP月卡+备考规划。980的入门课，先体验系统学习的感觉。',
+      questions: [
+        '试听课看了吗？感觉怎么样？',
+        '还有什么顾虑吗？'
+      ],
+      objections: [
+        { q: '再想想', a: '活动今天截止，之后恢复1280。980入门先学起来，之后升级可以抵扣差价' },
+        { q: '怕学不进去', a: '精讲课讲得比较通俗，零基础也能听懂。而且有1对1答疑，不会的随时问' }
+      ]
+    }
+  },
+  '图书兑换': {
+    '首次拨打': {
+      opening: '您好{客户称呼}，我是环球网校的课程顾问{销售姓名}。您之前在我们这里兑换了注安图书和配套课程，想了解一下您的学习进度，有遇到什么问题吗？',
+      valueProp: '兑换的图书和课程是基础版，如果您要系统备考注安，我们有更完整的精讲课程，帮您把书上的知识点吃透。',
+      questions: [
+        '兑换的书收到了吗？开始看了吗？',
+        '配套课程看了吗？感觉怎么样？',
+        '您是今年打算考注安吗？'
+      ],
+      objections: [
+        { q: '有书有课了', a: '兑换的书和课是入门版，内容比较基础。精讲班会把每个考点讲透，还有真题解析和模拟，帮您应对考试' },
+        { q: '还没开始学', a: '没关系，现在开始正好。我帮您做个学习计划，按着走就不会乱' }
+      ]
+    },
+    '二次回访': {
+      opening: '您好{客户称呼}，上次给您推荐的学习计划用了吗？最近学习进度怎么样？',
+      valueProp: '看您最近有在看兑换的课程，学习态度很好。如果觉得基础版不够用，可以升级到精讲班，内容更全面。',
+      questions: [
+        '学习计划按着走了吗？',
+        '兑换课程看到哪了？',
+        '有没有遇到看不懂的地方？'
+      ],
+      objections: [
+        { q: '免费的够用', a: '免费课确实能学，但深度不够。精讲班每个考点都讲透，还有配套习题和解析，通过率更高' },
+        { q: '暂时不想花钱', a: '理解，可以先学免费课打个基础。等觉得需要深入了再升级也行，课程一直都在' }
+      ]
+    },
+    '逼单跟进': {
+      opening: '{客户称呼}，精讲班活动最后一天了，今天980报名送配套教材。您免费课也看了一阵了，是不是觉得该深入了？',
+      valueProp: '今天报名额外送：教材1本+高频考点手册+1对1答疑。免费课看到瓶颈了，精讲课帮你突破。',
+      questions: [
+        '免费课看到哪了？',
+        '有没有觉得哪里不够用？'
+      ],
+      objections: [
+        { q: '再想想', a: '活动今天截止，之后恢复1280。免费课已经学到极限了，不升级很难突破' },
+        { q: '觉得贵', a: '980的精讲课，送教材和答疑。考过注安一年涨薪5000+，这个投入产出比很高' }
+      ]
+    }
+  },
+  '神策圈选': {
+    '首次拨打': {
+      opening: '您好{客户称呼}，我是环球网校的课程顾问{销售姓名}。注意到您最近多次浏览了我们的注安课程详情页，看来您对今年考试挺关注的，方便聊两句吗？',
+      valueProp: '您看了这么多次课程，说明在认真考虑。我可以帮您详细分析课程内容和价格，给您一个明确的建议。',
+      questions: [
+        '您是今年打算考注安吗？',
+        '目前是做什么工作的？',
+        '之前有了解过其他机构吗？'
+      ],
+      objections: [
+        { q: '在犹豫', a: '理解，毕竟是2500的投入。但您看了这么多次说明确实有意向，只是在纠结。我把课程方案和通过率数据发您，帮您做决定' },
+        { q: '价格方面', a: '云私塾2500，现在早鸟价。看了这么多次说明课程是打动您的，就是价格在犹豫对吧？我帮您申请个额外优惠' }
+      ]
+    },
+    '二次回访': {
+      opening: '您好{客户称呼}，上次给您发的课程方案看了吗？今天跟您确认下，有什么疑问我帮您解答。',
+      valueProp: '您之前一直在关注课程，说明需求是明确的。现在报名有早鸟优惠，比正式报名便宜不少。',
+      questions: [
+        '方案看了吗？有什么问题？',
+        '主要在纠结哪个点？',
+        '家人商量过了吗？'
+      ],
+      objections: [
+        { q: '还想再考虑', a: '您已经关注课程好久了，说明是有意向的。早鸟优惠这周截止，之后恢复原价。建议先锁定优惠，7天内不满意可退' },
+        { q: '价格贵', a: '今天报名我帮您额外申请了300元优惠券，到手2200。而且送刷题班+模拟卷' }
+      ]
+    },
+    '逼单跟进': {
+      opening: '{客户称呼}，早鸟活动最后一天了。您关注了这么久，今天报名最划算。',
+      valueProp: '今天报名享早鸟价2500+额外送300元优惠券+刷题班+1对1规划。明天恢复原价3980。',
+      questions: [
+        '您还在纠结什么？',
+        '需要分期方案吗？'
+      ],
+      objections: [
+        { q: '再等等', a: '您已经看了好多次了，说明真的想要。活动今天截止，不报的话明天就多花1480。早学早过' },
+        { q: '还是犹豫', a: '这样，今天报名送7天无理由退款。先锁定优惠，试听了不满意全额退' }
+      ]
+    }
+  },
+  '书课包': {
+    '首次拨打': {
+      opening: '您好{客户称呼}，我是环球网校的课程顾问{销售姓名}。您在抖音上购买的书课包收到了吗？我帮您规划下怎么用最高效。',
+      valueProp: '书课包是入门产品，帮您初步了解注安。如果想系统备考，我们有更完整的精讲课程，内容更全面。',
+      questions: [
+        '书课包收到了吗？',
+        '开始学习了吗？感觉怎么样？',
+        '您是今年打算考注安吗？'
+      ],
+      objections: [
+        { q: '书课包够用', a: '书课包是入门版，帮您了解考点。但系统备考需要精讲课，把每个知识点讲透，还有配套习题' },
+        { q: '已经花钱了', a: '理解，已经花了钱。但如果要考过注安，精讲课是必要的。而且书课包用户升级有专属优惠' }
+      ]
+    },
+    '二次回访': {
+      opening: '您好{客户称呼}，上次给您的学习计划用了吗？书课包学到哪了？',
+      valueProp: '看您在学习书课包内容，态度很好。如果觉得需要更系统的课程，精讲班可以帮您深入。',
+      questions: [
+        '书课包学到哪了？',
+        '有遇到什么问题吗？',
+        '觉得内容够用吗？'
+      ],
+      objections: [
+        { q: '先学完再说', a: '好的，先学书课包。但如果觉得不够用了随时找我，精讲课随时可以升级' },
+        { q: '暂时不升级', a: '没问题，先把书课包学完。等需要深入了再升级，我这边给您留着优惠' }
+      ]
+    },
+    '逼单跟进': {
+      opening: '{客户称呼}，书课包用户专属升级活动最后一天了。精讲班980，书课包用户再减200，到手780。',
+      valueProp: '今天升级额外送：教材1本+题库VIP+1对1规划。780的精讲课，比原价便宜一半。',
+      questions: [
+        '书课包学完了吗？',
+        '觉得需要深入吗？'
+      ],
+      objections: [
+        { q: '再想想', a: '活动今天截止，之后恢复原价。780的精讲课很划算了，书课包用户专属优惠' },
+        { q: '觉得贵', a: '780的精讲课，送教材和答疑。考过注安一年涨薪5000+，这个投入很值' }
+      ]
+    }
+  }
+};
+
+// ==================== 异议处理模板库 ====================
+const objectionTemplates = {
+  '太贵了': {
+    '共情型': [
+      '我特别理解，2500确实不是小数目。但您想想，注安证考下来一年至少涨薪5000-10000，不到半年就回本了。而且我们支持分期，每月也就两三百，比请人吃饭还便宜。',
+      '完全理解您的感受，当初很多人第一次了解价格都觉得贵。但算一笔账：2500÷4个月备考期=每天不到21块钱，一杯奶茶的钱，但考过了每个月多赚5000+。',
+      '确实，花钱的时候谁都心疼。但您换个角度想，这2500买的不只是课，是4个月系统的学习+专业的答疑+考前的冲刺。比自己买书瞎学省太多时间了。'
+    ],
+    '数据型': [
+      '我理解您的感受。给您看组数据：去年我们云私塾学员通过率82%，自学通过率只有31%。2500的投入换来51%更高的通过率，这个性价比很高了。',
+      '价格确实不低，但您可以对比一下：233网校同类课程3200，优路教育3500，我们2500是同档位最低的。而且包含全科精讲+刷题+模拟+冲刺，还有不过免费重学保障。',
+      '贵的不是价格，是时间成本。自学平均要考2次才能过，每次备考4-6个月。报班一次过的概率是自学的2.6倍，省下来的时间价值远超2500。'
+    ],
+    '案例型': [
+      '有个学员之前跟您一样觉得贵，犹豫了半年才报。结果晚半年备考，考试差2分没过，又等了一年。他后来说，早知道就早点报了，白白浪费一年时间。',
+      '去年有个学员张哥，工地施工员，零基础。也是嫌贵犹豫，后来咬牙报了。4个月学完，全科通过。现在工资涨了2000，他说这2500是他花过最值的钱。',
+      '之前有个宝妈学员，孩子2岁，在职备考。也是觉得贵，但最后还是报了。她说：当妈了更要做榜样。结果全科通过，管理78分。您的基础比她好，没问题的。'
+    ]
+  },
+  '再想想': {
+    '共情型': [
+      '完全理解，这么大的决定确实要好好想想。不过我建议您想的时候，主要想三个问题：1.今年到底考不考？2.自学能不能过？3.晚报1个月值不值？想清楚这三个，答案就出来了。',
+      '理解，跟家人商量是应该的。不过提醒您一下，早鸟优惠这周截止，之后恢复原价3980。您可以先锁定优惠名额，7天内不满意全额退，零风险。',
+      '当然可以想，这种事不能冲动。不过备考时间确实不多了，现在距考试还有4个月，再犹豫2周就只剩3个半月了。建议您先报上，边学边想，不满意可以退。'
+    ],
+    '数据型': [
+      '理解您需要时间考虑。给您一组数据做参考：现在距考试还有约120天，每天学2小时=240小时。自学至少需要400小时才能系统过一遍，时间已经不够了。早报1天，多学1天。',
+      '当然可以再想想。不过数据上看：每年7-8月是报名高峰，那时候价格恢复原价3980，比现在贵1480。而且那时候距考试只有2个月，备考时间很紧张了。',
+      '考虑是应该的，但也要考虑时间成本。现在每天犹豫1天，就少学1天。4个月备考期，犹豫2周就少了3.5%的时间。时间不等人。'
+    ],
+    '案例型': [
+      '去年有个学员跟您一样要想想，结果想了2周，活动结束了，价格恢复原价。后来还是报了，但多花了1480。他说早知道就不犹豫了。',
+      '之前有个学员犹豫了1个月，最后决定报的时候，基础精讲课已经上了1/3，跟不上进度了。只能从回放开始补，很吃力。早报2周就不会这样。',
+      '有个学员去年就是"再想想"想到了9月，最后来不及只能裸考，结果差3分。他说如果6月就报了，按计划学，肯定能过。'
+    ]
+  },
+  '已有资料': {
+    '共情型': [
+      '有书有课是好事，说明您已经开始准备了。但免费资料的问题是没有系统性和针对性，知识点是散的。精讲课帮您把这些散点串成线，考试才能拿分。',
+      '理解，您已经有了基础资料，这很好。但考试不光靠资料，还需要方法和规划。我们的课程不是重复资料内容，而是帮您高效地用好这些资料。',
+      '有资料是好事，说明您有学习意识。但您想想，资料买了多久了？看完了吗？看懂了吗？光有资料不学，跟没有一样。课程的价值在于逼着您学+帮您学懂。'
+    ],
+    '数据型': [
+      '有资料很好，但您知道吗？有资料但没系统学的人，通过率只有28%。而有资料+系统课程的人，通过率到了79%。差距在"系统"两个字。',
+      '免费资料覆盖的考点大约只有考试内容的60-70%，剩下的30-40%需要系统课程才能覆盖。光靠免费资料，很难考过。',
+      '根据我们的统计，只看书自学平均需要2次才能通过考试。而系统学习+刷题+模拟，一次通过率是自学的2.8倍。'
+    ],
+    '案例型': [
+      '去年有个学员跟您一样，买了一堆资料觉得够用了。结果考前2个月发现看不完也看不懂，最后还是来报课了。但时间已经很紧，学得很吃力。',
+      '有个学员之前也有免费课，学了3个月正确率一直在50%左右。报了精讲课后1个月，正确率就上到了75%。他说免费课跟系统课不是一个量级的。',
+      '之前有个学员坚持自学，第一年差5分没过。第二年报了班，系统学了4个月，全科通过。他说第一年浪费的时间，够报两个班了。'
+    ]
+  },
+  '自学就行': {
+    '共情型': [
+      '您基础好肯定有优势，自学能力强也很棒。但注安考试不只是考知识，还考应试技巧和考点把握。精讲课能帮您把会的东西变成分数，不会的也能快速补上。',
+      '有基础的人其实更需要系统课，因为您能更快吸收，效率更高。自学的问题是有盲区自己不知道，考试才发现不会，就晚了。',
+      '基础好是优势，但考试考的是全科的每个知识点。一个人自学很难全面覆盖，精讲课帮您查漏补缺，确保不丢冤枉分。'
+    ],
+    '数据型': [
+      '有基础自学确实可以，但通过率差距很大：自学通过率31%，系统学习通过率82%。有基础的人报课，通过率能到89%。多花2500换58%的通过率提升，很值。',
+      '自学的问题是不知道考点重点，平均备考时间6-8个月。系统课程有考点分析，4个月就能系统过一遍。省下的2-4个月时间价值远超课程费。',
+      '数据上看，有基础自学的人第一次通过率约45%，第二次约65%。报班后第一次通过率提升到89%。多花一次考试的时间和精力，不如一次到位。'
+    ],
+    '案例型': [
+      '去年有个学员就是觉得自己基础好要自学，结果考试差了4分。他后来说，就是有2个知识点完全没复习到，精讲课里都讲了。',
+      '有个工程专业的学员，觉得安全管理的知识自己都懂。结果考试发现很多考题考的是法规细节，自学根本没覆盖到。第二年报了班才过。',
+      '之前有个学员自学了半年，模拟考正确率65%。报班后系统学了2个月，正确率就到了85%。他说有些考点自己根本想不到，老师一讲就通了。'
+    ]
+  },
+  '等教材': {
+    '共情型': [
+      '理解，等新教材出来再开始确实更踏实。但注安考试每年的核心考点变化不大，变化的只是细节。现在可以先学去年的教材，等新教材出来再调整，不浪费。',
+      '等教材的心情可以理解，但备考不一定要等教材。可以先学法规和管理这两个变化小的科目，技术基础等新教材出来再学也来得及。',
+      '理解您想等教材。但时间不等人，现在距考试4个月，等教材出来可能就剩2-3个月了。建议先开始学基础内容，教材出了再补充变动部分。'
+    ],
+    '数据型': [
+      '注安教材每年变动大约在10-15%，核心考点变化不大。现在学去年的教材，等新教材出来只需调整10-15%的内容，比从零开始省很多时间。',
+      '根据往年数据，等教材出来才开始备考的人，通过率比提前备考的人低25%。因为备考时间少了2个月，不够系统过一遍。',
+      '教材一般7月出版，到考试10月底只有3.5个月。3.5个月要学4科+刷题+模拟，时间非常紧张。现在开始有4.5个月，多出30%的备考时间。'
+    ],
+    '案例型': [
+      '去年有个学员就是等教材出来才学，结果时间不够，管理科目差3分没过。他后来说如果提前2个月开始学，肯定能过。',
+      '有个学员等了2个月教材出来才报班，结果精讲课要2个月才能听完，刷题和模拟的时间被严重压缩。考试时明显感觉练得不够。',
+      '之前有个学员6月开始学旧教材，7月新教材出来后只调整了变动部分。最后全科通过，比等教材的同学多学了2个月，从容很多。'
+    ]
+  },
+  '包过吗': {
+    '共情型': [
+      '理解您对通过率的关注，毕竟花了钱就想看到效果。但我们不能说"包过"，这是违规的。我能告诉您的是：去年云私塾学员通过率82%，还有不过免费重学的保障。',
+      '您的担心很正常，没有人想花钱不过。虽然不能承诺包过，但我们有完整的备考体系+专业教研团队+1对1答疑，通过率在行业里是排前的。高端班还有不过全额退的保障。',
+      '理解，通过率是大家最关心的。说实话，能不能过主要看您的学习投入，我们能做的是提供最好的课程和服务帮您备考。去年82%的通过率就是最好的证明。'
+    ],
+    '数据型': [
+      '根据规定，我们不能承诺包过。但可以给您看数据：2025年云私塾学员通过率82%，行业平均28%。高端班通过率89%，还有不过免费重学保障。',
+      '通过率数据：全科精讲+刷题+模拟+冲刺的完整体系，通过率82%。只听精讲不刷题通过率61%。系统学习+刷题的通过率最高。',
+      '往年通过率对比：自学28%，只刷题45%，系统课程82%，高端班89%。课程体系越完整，通过率越高。我们的云私塾是性价比最高的方案。'
+    ],
+    '案例型': [
+      '去年有个学员也问能不能包过，最后报了云私塾。每天学2小时，坚持了4个月，全科通过。他说不是课程包过，是课程让他坚持下来了。',
+      '有个学员之前自学没过，报了班后系统学，一次就过了。他说不是课程有多神，是有了系统规划和督促，效率高了很多。',
+      '之前有个学员报了高端班，有1对1答疑和考前密训，最后全科高分通过。他说高端班的价值不在"包过"，在于有人盯着你学+随时解决疑问。'
+    ]
+  },
+  '不急': {
+    '共情型': [
+      '理解，还没开始备考确实不着急报班。但注安考试每年只有一次，错过了就要等一年。建议先了解下考试内容和备考规划，等您准备好了随时找我。',
+      '不急是对的，备考节奏很重要。不过可以先把课程方案和备考规划了解一下，这样等您开始备考时就不慌了。我帮您先做个计划？',
+      '理解，现在还没到备考节奏。不过提醒您，早鸟优惠是有时限的。可以先锁定优惠名额，等您准备好了再开始学，课程有效期1年，不浪费。'
+    ],
+    '数据型': [
+      '注安考试每年只有1次，今年是10月30日。如果今年不考，要等到明年10月，整整多等1年。早1年拿证，早1年涨薪，机会成本不小。',
+      '现在距考试还有4个月，系统备考需要3-4个月。如果再等1-2个月，备考时间就不够了。数据上看，备考4个月通过率82%，备考2个月通过率只有45%。',
+      '报名时间一般在7月，到时价格恢复原价3980。现在锁定早鸟价2500，等报名时间到了直接开始学，省了1480。'
+    ],
+    '案例型': [
+      '去年有个学员也说不急，等到8月才开始备考，结果时间不够，只报了2科，另外2科今年还得考。他说早知道6月就开始了。',
+      '有个学员等报名了才报班，结果精讲课2个月才听完，刷题时间只有2周。考试时明显感觉练得不够，差了4分。',
+      '之前有个学员去年6月就说"不急"，结果今年还在备考。他说如果去年就开始，今年已经在拿证涨薪了。'
+    ]
+  },
+  '已报别家': {
+    '共情型': [
+      '理解，已经报了别的机构确实不好再换。不过我可以帮您对比一下课程内容和服务，如果觉得我们的更好，也可以考虑转过来。很多学员对比后都选择了我们。',
+      '已经报了也没关系，可以多了解一下。很多学员在A机构学了一半发现不满意，转到我们这来的。我们的课程和服务可以对比参考。',
+      '理解，报了别家就先学着。但如果学习过程中遇到问题，或者觉得课程不够好，随时可以找我。我们的课程随时可以转过来。'
+    ],
+    '数据型': [
+      '已报别家也没关系。给您做个对比：我们的通过率82%，行业平均只有28-45%。课程时长、服务保障、教研团队都可以对比。多了解一个选择不吃亏。',
+      '如果您在别家学得不错当然好。但如果通过率不理想，可以考虑转过来。去年从其他机构转来的学员通过率78%，比在原机构高了30%。',
+      '注安培训市场我们的优势：13年教研积累、82%通过率、不过免费重学。这些数据您可以跟现在报的机构对比一下。'
+    ],
+    '案例型': [
+      '去年有个学员在别家报了3000的课程，学了2个月发现讲得不好。转到我们这2500的云私塾，系统学了4个月就过了。他说早知道就直接来我们这了。',
+      '有个学员之前在别家报了名，但答疑服务很差，有问题没人管。转到我们这后有1对1答疑，问题都能及时解决。他说差别很大。',
+      '之前有个学员对比了3家机构，最后选了我们。他说主要看通过率和服务，我们82%的通过率+不过重学的保障是别家没有的。'
+    ]
+  }
+};
+
+// ==================== 生成函数 ====================
+
+// 1. 加微开场白
+function generateOpening() {
+  const channel = getSelected('op_channel');
+  if (!channel) { showToast('请先选择渠道'); return; }
+  const style = getSelected('op_style') || '亲切自然';
+  const tag = document.getElementById('op_tag').value.trim();
+  const countText = getSelected('op_count') || '3条';
+  const count = parseInt(countText);
+
+  const templates = openingTemplates[channel]?.[style] || openingTemplates[channel]?.['亲切自然'] || [];
+  if (templates.length === 0) { showToast('暂无该渠道模板'); return; }
+
+  const selected = pickN(templates, Math.min(count, templates.length));
+  const container = document.getElementById('op_results');
+  container.innerHTML = '';
+
+  selected.forEach((text, i) => {
+    let finalText = text;
+    if (tag) {
+      // 如果有用户标签，在话术后面加一句
+      const tagSuffix = ['\n\n（可根据用户情况补充：' + tag + '）', '\n\n→ 参考标签：' + tag, ''];
+      finalText += tagSuffix[i % tagSuffix.length];
+    }
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <div class="result-header">
+        <span class="result-tag">${channel} · ${style}</span>
+        <span style="font-size:12px;color:var(--text3);">第 ${i+1} 条</span>
+      </div>
+      <div class="result-body">${finalText}</div>
+      <div class="result-footer">
+        <button class="copy-btn" onclick="copyText(\`${finalText.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`, this)">📋 复制</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // 添加换一批按钮
+  const refreshBtn = document.createElement('div');
+  refreshBtn.style.textAlign = 'center';
+  refreshBtn.style.marginTop = '16px';
+  refreshBtn.innerHTML = `<button class="btn" onclick="generateOpening()">🔄 换一批</button>`;
+  container.appendChild(refreshBtn);
+}
+
+// 2. 朋友圈文案
+function generateMoments() {
+  const type = getSelected('mm_type') || '备考干货';
+  const topic = document.getElementById('mm_topic').value.trim();
+  const countText = getSelected('mm_count') || '3条';
+  const count = parseInt(countText);
+  const style = getSelected('mm_style') || '接地气';
+
+  const templates = momentTemplates[type]?.[style] || momentTemplates[type]?.['接地气'] || [];
+  // 如果某个风格模板不够，从其他风格补充
+  let pool = [...templates];
+  if (pool.length < count) {
+    Object.values(momentTemplates[type] || {}).forEach(arr => {
+      pool = pool.concat(arr);
+    });
+  }
+
+  const selected = pickN(pool, Math.min(count, pool.length));
+  const container = document.getElementById('mm_results');
+  container.innerHTML = '';
+
+  selected.forEach((text, i) => {
+    let finalText = text;
+    if (topic && i === 0) {
+      finalText = finalText.replace(/注安/g, topic + '注安');
+    }
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.innerHTML = `
+      <div class="result-header">
+        <span class="result-tag">${type} · ${style}</span>
+        <span style="font-size:12px;color:var(--text3);">第 ${i+1} 条</span>
+      </div>
+      <div class="result-body">${finalText}</div>
+      <div class="result-footer">
+        <button class="copy-btn" onclick="copyText(\`${finalText.replace(/`/g, '\\`').replace(/\$/g, '\\$')}\`, this)">📋 复制</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  const refreshBtn = document.createElement('div');
+  refreshBtn.style.textAlign = 'center';
+  refreshBtn.style.marginTop = '16px';
+  refreshBtn.innerHTML = `<button class="btn" onclick="generateMoments()">🔄 换一批</button>`;
+  container.appendChild(refreshBtn);
+}
+
+// 3. 电话脚本
+function generatePhoneScript() {
+  const channel = getSelected('ph_channel');
+  if (!channel) { showToast('请先选择渠道'); return; }
+  const stage = getSelected('ph_stage') || '首次拨打';
+  const info = document.getElementById('ph_info').value.trim();
+
+  const template = phoneScriptTemplates[channel]?.[stage];
+  if (!template) { showToast('暂无该渠道脚本'); return; }
+
+  // 替换变量
+  let opening = template.opening.replace('{客户称呼}', '同学').replace('{销售姓名}', '老师');
+  let valueProp = template.valueProp;
+  let questions = template.questions;
+  let objections = template.objections;
+
+  if (info) {
+    opening += `\n\n（客户情况参考：${info}）`;
+  }
+
+  const container = document.getElementById('ph_results');
+  container.innerHTML = '';
+
+  const card = document.createElement('div');
+  card.className = 'result-card';
+  card.innerHTML = `
+    <div class="result-header">
+      <span class="result-tag">${channel} · ${stage}</span>
+      <span style="font-size:12px;color:var(--text3);">完整脚本</span>
+    </div>
+    <div class="script-block">
+      <div class="script-block-title">📞 开场白（15秒）</div>
+      <div class="script-block-content">${opening}</div>
+    </div>
+    <div class="script-block green">
+      <div class="script-block-title">💡 价值主张（30秒）</div>
+      <div class="script-block-content">${valueProp}</div>
+    </div>
+    <div class="script-block orange">
+      <div class="script-block-title">🔍 挖需问题</div>
+      <div class="script-block-content">${questions.map((q,i) => `${i+1}. ${q}`).join('\n')}</div>
+    </div>
+    <div class="script-block purple">
+      <div class="script-block-title">🛡️ 异议预案</div>
+      <div class="script-block-content">${objections.map(o => `客户问「${o.q}」：\n${o.a}`).join('\n\n')}</div>
+    </div>
+    <div class="result-footer">
+      <button class="copy-btn" onclick="copyText(\`${(opening + '\n\n' + valueProp + '\n\n' + questions.map((q,i)=>(i+1)+'. '+q).join('\n') + '\n\n' + objections.map(o=>'客户问「'+o.q+'」：\n'+o.a).join('\n\n')).replace(/`/g,'\\`').replace(/\$/g,'\\$')}\`, this)">📋 复制全部</button>
+    </div>
+  `;
+  container.appendChild(card);
+
+  const refreshBtn = document.createElement('div');
+  refreshBtn.style.textAlign = 'center';
+  refreshBtn.style.marginTop = '16px';
+  refreshBtn.innerHTML = `<button class="btn" onclick="generatePhoneScript()">🔄 重新生成</button>`;
+  container.appendChild(refreshBtn);
+}
+
+// 4. 异议处理
+function setObjection(text) {
+  document.getElementById('ob_text').value = text;
+}
+
+function generateObjection() {
+  const text = document.getElementById('ob_text').value.trim();
+  if (!text) { showToast('请输入客户说的话'); return; }
+  const strategy = getSelected('ob_strategy') || '全部策略';
+  const product = getSelected('ob_product') || '基础班 ¥2,500';
+
+  // 匹配异议类型
+  let matchedKey = null;
+  const keys = Object.keys(objectionTemplates);
+  for (const key of keys) {
+    if (text.includes(key) || key.includes(text.slice(0,2))) {
+      matchedKey = key;
+      break;
+    }
+  }
+  // 模糊匹配
+  if (!matchedKey) {
+    if (text.includes('贵') || text.includes('便宜')) matchedKey = '太贵了';
+    else if (text.includes('想') || text.includes('商量') || text.includes('考虑')) matchedKey = '再想想';
+    else if (text.includes('有') && (text.includes('书') || text.includes('课') || text.includes('资料'))) matchedKey = '已有资料';
+    else if (text.includes('自学') || text.includes('基础')) matchedKey = '自学就行';
+    else if (text.includes('教材')) matchedKey = '等教材';
+    else if (text.includes('包过') || text.includes('通过率')) matchedKey = '包过吗';
+    else if (text.includes('不急') || text.includes('报名') || text.includes('没开始')) matchedKey = '不急';
+    else if (text.includes('别家') || text.includes('其他') || text.includes('机构')) matchedKey = '已报别家';
+  }
+
+  if (!matchedKey) {
+    showToast('未匹配到对应异议类型，请尝试其他表述');
+    return;
+  }
+
+  const templates = objectionTemplates[matchedKey];
+  const container = document.getElementById('ob_results');
+  container.innerHTML = '';
+
+  // 策略选择
+  let strategies = [];
+  if (strategy === '全部策略') {
+    strategies = ['共情型', '数据型', '案例型'];
+  } else {
+    strategies = [strategy];
+  }
+
+  const strategyLabels = {
+    '共情型': { color: 'var(--accent3)', icon: '💛' },
+    '数据型': { color: 'var(--accent)', icon: '📊' },
+    '案例型': { color: 'var(--accent4)', icon: '👤' }
+  };
+
+  strategies.forEach(strat => {
+    const list = templates[strat] || [];
+    const selected = pickN(list, 1)[0];
+    if (!selected) return;
+
+    const label = strategyLabels[strat];
+    const card = document.createElement('div');
+    card.className = 'result-card';
+    card.style.borderLeft = `4px solid ${label.color}`;
+    card.innerHTML = `
+      <div class="result-header">
+        <span class="result-tag" style="background:${label.color}20;color:${label.color};">${label.icon} ${strat}</span>
+        <span style="font-size:12px;color:var(--text3);">针对「${matchedKey}」</span>
+      </div>
+      <div class="result-body">${selected}</div>
+      <div class="result-footer">
+        <button class="copy-btn" onclick="copyText(\`${selected.replace(/`/g,'\\`').replace(/\$/g,'\\$')}\`, this)">📋 复制</button>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+
+  // 产品推荐
+  const recCard = document.createElement('div');
+  recCard.className = 'result-card';
+  recCard.style.background = 'var(--accent-light)';
+  recCard.style.border = '1px dashed var(--accent)';
+  recCard.innerHTML = `
+    <div class="result-header">
+      <span class="result-tag">💡 推荐话术</span>
+    </div>
+    <div class="result-body" style="font-size:14px;">
+      针对客户说的"${matchedKey}"，建议搭配 <strong>${product}</strong> 推荐：<br><br>
+      "${selected || ''}"的基础上，可以追加："${product.includes('高端') ? '高端班有1对1答疑和不过免费重学，适合想要一次通过的同学' : '基础班性价比最高，2500含全科精讲+刷题+模拟，还有不过重学保障'}"
+    </div>
+  `;
+  container.appendChild(recCard);
+
+  const refreshBtn = document.createElement('div');
+  refreshBtn.style.textAlign = 'center';
+  refreshBtn.style.marginTop = '16px';
+  refreshBtn.innerHTML = `<button class="btn" onclick="generateObjection()">🔄 换一批话术</button>`;
+  container.appendChild(refreshBtn);
+}
+
+// 5. 渠道速查卡
+function renderChannelCards() {
+  const grid = document.getElementById('channel_grid');
+  grid.innerHTML = '';
+  const channels = Object.keys(channelData);
+  channels.forEach((key, i) => {
+    const ch = channelData[key];
+    const card = document.createElement('div');
+    card.className = `channel-card ${ch.color}`;
+    card.onclick = () => showChannelDetail(key);
+    card.innerHTML = `
+      <div class="channel-name">${ch.name}</div>
+      <span class="channel-tag" style="background:${ch.tagColor};">${ch.tag}</span>
+      <div class="channel-desc">${ch.oneLiner}</div>
+      <div class="channel-stats">
+        <div class="channel-stat"><strong>${ch.stats.flow}</strong>月流量</div>
+        <div class="channel-stat"><strong>${ch.stats.convRate}</strong>销转率</div>
+        <div class="channel-stat"><strong>${ch.stats.ap}</strong>客单价</div>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function showChannelDetail(key) {
+  const ch = channelData[key];
+  if (!ch) return;
+  const detail = document.getElementById('detail_content');
+  detail.innerHTML = `
+    <span class="detail-close" onclick="closeDetailDirect()">✕</span>
+    <div class="detail-title">${ch.name}</div>
+    <div class="detail-sub">${ch.oneLiner}</div>
+    <span class="channel-tag" style="background:${ch.tagColor};margin-bottom:24px;">${ch.tag}</span>
+
+    <div class="detail-section">
+      <div class="detail-section-title">用户画像</div>
+      <div class="detail-content">${ch.userImage}</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">关键属性</div>
+      <ul class="detail-list">
+        <li><span class="label">品牌信任度</span><span class="value">${ch.userFeature}</span></li>
+        <li><span class="label">第一需求</span><span class="value">${ch.firstNeed}</span></li>
+        <li><span class="label">转化周期</span><span class="value">${ch.convCycle}</span></li>
+        <li><span class="label">销售方式</span><span class="value">${ch.sellMethod}</span></li>
+        <li><span class="label">主推产品</span><span class="value">${ch.sellProduct}</span></li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">数据表现</div>
+      <ul class="detail-list">
+        <li><span class="label">月流量</span><span class="value">${ch.stats.flow}</span></li>
+        <li><span class="label">月订单</span><span class="value">${ch.stats.orders}</span></li>
+        <li><span class="label">月流水</span><span class="value">${ch.stats.revenue}</span></li>
+        <li><span class="label">销转率</span><span class="value">${ch.stats.convRate}</span></li>
+        <li><span class="label">客单价</span><span class="value">${ch.stats.ap}</span></li>
+      </ul>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">用户痛点</div>
+      <div class="detail-content">
+        ${ch.painPoints.map(p => `• ${p}`).join('<br>')}
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">产品推荐顺序</div>
+      <div class="detail-content">
+        ${ch.productOrder.map((p,i) => `${i+1}. ${p}`).join('<br>')}
+      </div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">跟进策略</div>
+      <div class="detail-content">${ch.followUp}</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">话术原则</div>
+      <div class="detail-content">${ch.openPrinciple}</div>
+    </div>
+
+    <div class="detail-section">
+      <div class="detail-section-title">💡 脚本提示</div>
+      <div class="detail-content" style="background:var(--accent-light);padding:14px;border-radius:8px;color:var(--accent);">
+        ${ch.scriptTip}
+      </div>
+    </div>
+  `;
+  document.getElementById('channel_detail').classList.add('show');
+}
+
+function closeDetail(e) {
+  if (e.target.id === 'channel_detail') {
+    document.getElementById('channel_detail').classList.remove('show');
+  }
+}
+function closeDetailDirect() {
+  document.getElementById('channel_detail').classList.remove('show');
+}
+
+// Init
+renderChannelCards();
+</script>
+</body>
+</html>

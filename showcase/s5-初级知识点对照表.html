@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初级注安 · 知识点对照表</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif; background: #f4f6f9; color: #1a2942; font-size: 13px; line-height: 1.5; }
+
+.banner { background: linear-gradient(135deg, #0d2137, #163a5c); color: #d4e0f0; padding: 28px 36px; border-bottom: 3px solid #1e6fc7; }
+.banner h1 { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+.banner h1 span { color: #5aa3f0; }
+.banner .sub { font-size: 12px; color: #7a9cc0; display: flex; gap: 20px; flex-wrap: wrap; }
+
+.container { max-width: 1400px; margin: 0 auto; padding: 20px 24px; }
+
+.legend-bar { background: #fff; border: 1px solid #dde5f0; border-radius: 8px; padding: 14px 20px; display: flex; flex-wrap: wrap; gap: 16px; align-items: center; margin-bottom: 20px; font-size: 12px; }
+.legend-item { display: flex; align-items: center; gap: 6px; }
+.legend-dot { width: 12px; height: 12px; border-radius: 3px; flex-shrink: 0; }
+.keep { background: #1e8c3e; }
+.cut { background: #c0392b; }
+.downgrade { background: #e67e22; }
+.new { background: #2980b9; }
+
+.summary-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 24px; }
+.sum-card { background: #fff; border: 1px solid #dde5f0; border-radius: 8px; padding: 14px 16px; text-align: center; }
+.sum-card .num { font-size: 28px; font-weight: 700; margin-bottom: 4px; }
+.sum-card .label { font-size: 12px; color: #6b7d93; }
+
+.section-header { background: #fff; border: 1px solid #dde5f0; border-radius: 8px; padding: 16px 20px; margin-bottom: 16px; border-left: 4px solid #1e6fc7; }
+.section-header h2 { font-size: 16px; font-weight: 600; color: #0d2137; margin-bottom: 4px; }
+.section-header p { font-size: 12px; color: #6b7d93; line-height: 1.6; }
+
+table { width: 100%; border-collapse: collapse; background: #fff; border: 1px solid #dde5f0; border-radius: 8px; overflow: hidden; margin-bottom: 24px; font-size: 12px; }
+thead th { background: #eef3f9; color: #1a2942; font-weight: 600; padding: 12px 14px; text-align: left; border-bottom: 2px solid #d0d9e5; font-size: 11px; white-space: nowrap; }
+tbody td { padding: 10px 14px; border-bottom: 1px solid #eef2f7; vertical-align: top; }
+tbody tr:nth-child(even) td { background: #fafbfd; }
+tbody tr:hover td { background: #f0f5fb; }
+td strong { color: #0d2137; }
+
+.tag { display: inline-block; font-size: 10px; padding: 2px 6px; border-radius: 3px; font-weight: 600; line-height: 1.3; white-space: nowrap; }
+.tag-keep { background: #d4edda; color: #155724; }
+.tag-cut { background: #f8d7da; color: #721c24; }
+.tag-downgrade { background: #fff3cd; color: #856404; }
+.tag-new { background: #d1ecf1; color: #0c5460; }
+
+.divider { border: none; border-top: 2px dashed #dde5f0; margin: 28px 0; }
+
+.comparison-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 24px; }
+.compare-box { background: #fff; border: 1px solid #dde5f0; border-radius: 8px; padding: 18px; }
+.compare-box h3 { font-size: 14px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 2px solid #eef2f7; }
+.compare-box.primary h3 { color: #e67e22; border-color: #fce4c8; }
+.compare-box.intermediate h3 { color: #1e6fc7; border-color: #d1e3f8; }
+.compare-box ul { list-style: none; padding: 0; }
+.compare-box li { padding: 5px 0; font-size: 12px; color: #4a5568; border-bottom: 1px solid #f7f9fc; }
+.compare-box li::before { content: "• "; color: #999; }
+
+.footer-note { background: #fff8e1; border: 1px solid #ffe082; border-radius: 8px; padding: 14px 18px; font-size: 12px; color: #6d5c00; line-height: 1.8; margin-top: 24px; }
+.footer-note strong { color: #5d4a00; }
+
+.priority-bar { display: flex; gap: 10px; margin-bottom: 16px; flex-wrap: wrap; }
+.priority-item { padding: 6px 12px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+.p1 { background: #ffe0e0; color: #c0392b; border: 1px solid #f5c6cb; }
+.p2 { background: #fff3cd; color: #856404; border: 1px solid #ffe082; }
+.p3 { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+</style>
+</head>
+<body>
+
+<div class="banner">
+  <h1>初级注安 <span>vs</span> 中级注安 · 知识点对照表</h1>
+  <div class="sub">
+    <span>适用考季：2027年备课</span>
+    <span>依据：2019版应急管理部考试大纲（现行有效）</span>
+    <span>制作日期：2026.07</span>
+    <span>用途：老师精准裁剪课程内容，知道哪些复用、哪些改造、哪些新建</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- 图例 -->
+  <div class="legend-bar">
+    <div class="legend-item"><div class="legend-dot keep"></div><strong>保留</strong> = 中级内容直接复用，无需改动</div>
+    <div class="legend-item"><div class="legend-dot downgrade"></div><strong>降难度</strong> = 中级有但初级要求更低，需简化</div>
+    <div class="legend-item"><div class="legend-dot cut"></div><strong>砍掉</strong> = 中级有但初级不考，不纳入课程</div>
+    <div class="legend-item"><div class="legend-dot new"></div><strong>初级独有</strong> = 中级没有但初级考，需新建</div>
+  </div>
+
+  <!-- 总体占比 -->
+  <div class="summary-cards">
+    <div class="sum-card"><div class="num" style="color:#1e8c3e;">约45%</div><div class="label">可直接复用中级内容</div></div>
+    <div class="sum-card"><div class="num" style="color:#e67e22;">约30%</div><div class="label">需降难度后使用</div></div>
+    <div class="sum-card"><div class="num" style="color:#c0392b;">约20%</div><div class="label">直接砍掉不纳入</div></div>
+    <div class="sum-card"><div class="num" style="color:#2980b9;">约5%</div><div class="label">初级独有需新建</div></div>
+  </div>
+
+  <!-- ====== 宏观差异：科目结构对比 ====== -->
+  <div class="section-header">
+    <h2>🔍 先看宏观：初级 vs 中级 科目结构差异</h2>
+    <p>这是理解所有差异的底层逻辑。初级将中级4科的内容压缩到2科里，但每科深度远低于中级。</p>
+  </div>
+
+  <div class="comparison-grid">
+    <div class="compare-box primary">
+      <h3>🟠 初级（2科）</h3>
+      <ul>
+        <li><strong>科目1：安全生产法律法规</strong>（100分，2小时）<br>14个考试内容，覆盖核心法规</li>
+        <li><strong>科目2：安全生产实务</strong>（100分，2.5小时）<br>4部分：安全管理 + 技术基础 + 专业安全技术 + 案例分析<br>7个专业方向选1</li>
+      </ul>
+    </div>
+    <div class="compare-box intermediate">
+      <h3>🔵 中级（4科）</h3>
+      <ul>
+        <li><strong>科目1：安全生产法律法规</strong>（100分）<br>7个考试内容，37个部门规章</li>
+        <li><strong>科目2：安全生产管理</strong>（100分）<br>独立一科，深度管理理论</li>
+        <li><strong>科目3：安全生产技术基础</strong>（100分）<br>独立一科，通用技术原理</li>
+        <li><strong>科目4：安全生产专业实务</strong>（100分）<br>专业安全技术 + 案例分析<br>7个专业方向选1</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- ====== 法规科目对照 ====== -->
+  <div class="section-header">
+    <h2>📋 科目一：《安全生产法律法规》逐条对照（完整14条）</h2>
+    <p>初级法规大纲列出14个考试内容（编号"一"至"十四"），中级法规大纲列出7个考试内容（编号"一"至"七"）。编号不同，但内容可一一对应。</p>
+    <div class="priority-bar">
+      <span class="priority-item p1">P0：必须讲，学员最常考的法</span>
+      <span class="priority-item p2">P1：核心法，各省大概率考</span>
+      <span class="priority-item p3">P2：视省份情况补充</span>
+    </div>
+  </div>
+
+  <table>
+    <thead>
+    <tr>
+      <th width="50">序号</th>
+      <th width="140">初级大纲考点</th>
+      <th width="140">中级对应内容</th>
+      <th width="90">处理方式</th>
+      <th>备课操作说明</th>
+    </tr>
+    </thead>
+    <tbody>
+    <!-- 1 -->
+    <tr>
+      <td>1</td>
+      <td><strong>习近平新时代中国特色社会主义思想有关内容</strong></td>
+      <td>中级同章节，内容完全一致</td>
+      <td><span class="tag tag-keep">保留</span></td>
+      <td>两级完全一致。直接复用中级讲义此部分，1课时足够。讲习近平总书记在安全生产方面的重要论述和中央文件即可。</td>
+    </tr>
+    <!-- 2 -->
+    <tr>
+      <td>2</td>
+      <td><strong>《安全生产法》</strong>——分析安全生产保障、安全管理机构职责、从业人员权利义务、应急救援与调查处理、标准化</td>
+      <td>中级同内容，要求"分析+解决+判断违法行为及法律责任"</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>核心考点，必讲。<br>①不要求精确背诵罚款金额，改为了解罚款档次<br>②案例分析从"判断+计算"降为"情景识别"<br>③删掉安全生产标准化详细评分条款<br>④保留：安全生产保障、机构职责、应急救援框架</td>
+    </tr>
+    <!-- 3 -->
+    <tr>
+      <td>3</td>
+      <td><strong>《矿山安全法》</strong>——分析矿山建设、开采安全保障和安全管理</td>
+      <td>中级有，内容完全一致</td>
+      <td><span class="tag tag-keep">保留</span></td>
+      <td>初级仍考矿山法，不要误以为初级不考。直接复用中级内容，1课时足够。注意：实务矿山专业方向的考生这章更重要。</td>
+    </tr>
+    <!-- 4 -->
+    <tr>
+      <td>4</td>
+      <td><strong>《消防法》</strong>——熟悉火灾预防、消防组织建设、灭火救援</td>
+      <td>中级要求"分析+解决+判断违法行为"</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>认知层次从"运用"降为"理解"。<br>①删掉消防验收程序细节<br>②保留火灾预防基本原则和组织要求<br>③不做复杂案例判断</td>
+    </tr>
+    <!-- 5 -->
+    <tr>
+      <td>5</td>
+      <td><strong>《道路交通安全法》</strong>——分析车辆、驾驶人、通行条件、通行规定、事故处理</td>
+      <td>中级有，要求"分析+解决"</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>初级要求"了解违法行为及应负法律责任"，比中级浅。1课时即可，偏常识性内容，不需要深度案例分析。</td>
+    </tr>
+    <!-- 6 -->
+    <tr>
+      <td>6</td>
+      <td><strong>《特种设备安全法》</strong>——熟悉生产、经营、使用、检验检测、应急救援与调查处理</td>
+      <td>中级有，要求深入分析</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>①了解特种设备分类即可，不要求精准掌握各类别参数<br>②保留使用管理和检验检测的基本原则<br>③事故应急救援要求降低到"了解规定框架"</td>
+    </tr>
+    <!-- 7 -->
+    <tr>
+      <td>7</td>
+      <td><strong>《刑法》+ 司法解释</strong>——了解生产安全犯罪罪名、刑事责任、定罪标准</td>
+      <td>中级有，要求更深</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>①知道有哪些罪名即可（重大责任事故罪、强令违章冒险作业罪等）<br>②了解"造成严重后果"的基本门槛<br>③不做复杂量刑分析</td>
+    </tr>
+    <!-- 8 -->
+    <tr>
+      <td>8</td>
+      <td><strong>《劳动法》+《劳动合同法》</strong>——熟悉劳动安全卫生、女职工特殊保护、社会保险等</td>
+      <td>中级两法分开讲，每个单独考</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>①中级《劳动合同法》是独立考点，初级只是"熟悉劳动合同制度中有关安全生产方面的要求"<br>②聚焦安全生产相关内容，不考一般劳动法条款<br>③合并为1个课时</td>
+    </tr>
+    <!-- 9 -->
+    <tr>
+      <td>9</td>
+      <td><strong>《职业病防治法》</strong>——熟悉职业病危害因素预防、防护与管理</td>
+      <td>中级有，同类要求</td>
+      <td><span class="tag tag-keep">保留</span></td>
+      <td>内容基本一致。复用中级讲义的职业病预防、防护措施部分，不做深度扩展。</td>
+    </tr>
+    <!-- 10 -->
+    <tr>
+      <td>10</td>
+      <td><strong>《突发事件应对法》</strong>——熟悉预防与应急准备、应急处置与救援</td>
+      <td>中级有，同类要求</td>
+      <td><span class="tag tag-keep">保留</span></td>
+      <td>内容一致。复用中级讲义即可。重点讲生产经营单位及从业人员在突发事件中的职责。</td>
+    </tr>
+    <!-- 11 -->
+    <tr>
+      <td>11</td>
+      <td><strong>13部安全生产行政法规</strong>（打包合并）<br>安全生产许可证条例、生产安全事故应急条例、生产安全事故报告和调查处理条例、工伤保险条例、煤矿安全监察条例、预防煤矿事故特别规定、建设工程安全生产管理条例、危险化学品安全管理条例、烟花爆竹安全管理条例、民用爆炸物品安全管理条例、特种设备安全监察条例、大型群众性活动安全管理条例、女职工劳动保护特别规定</td>
+      <td>中级同样涵盖这些条例，但每个单独深入展开</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>初级将这些条例打包为一个考试内容，不是每个都深入考。<br>①核心保留：《生产安全事故报告和调查处理条例》+《工伤保险条例》+《安全生产许可证条例》——这三个是高频考点<br>②精简讲：其余条例只讲基本原则和核心条款<br>③砍掉大量中级细节（如事故等级认定的精确计算、工伤保险待遇的金额计算）</td>
+    </tr>
+    <!-- 12 -->
+    <tr>
+      <td>12</td>
+      <td><strong>14项部门规章及重要文件</strong>（注册安全工程师管理、安全培训、隐患排查、应急预案、事故信息报告、特种作业人员培训考核、重大隐患判定标准7个行业×8个、淘汰落后目录、消防监督管理等）</td>
+      <td>中级有37个部门规章，远超初级范围</td>
+      <td><span class="tag tag-downgrade">降难度</span> + <span class="tag tag-cut">部分砍掉</span></td>
+      <td><strong>重点保留（说核心要点即可）：</strong><br>①注册安全工程师分类管理办法 + 管理规定<br>②生产经营单位安全培训规定<br>③安全生产事故隐患排查治理暂行规定<br>④生产安全事故应急预案管理办法<br>⑤特种作业人员安全技术培训考核管理规定<br><br><strong>直接砍掉（中级有但初级不深入）：</strong><br>⑥安全生产培训管理办法<br>⑦各行业许可证实施办法（煤矿/非煤矿/烟花爆竹/危化品等12个）<br>⑧煤矿安全规程/培训规定、非煤矿山外包管理、尾矿库管理、冶金企业规定等（除非对应专业方向才补）<br>⑨食品生产企业安全规定、海洋石油规定等<br>⑩建筑相关管理规定</td>
+    </tr>
+    <!-- 13 -->
+    <tr>
+      <td>13</td>
+      <td><strong>安全生产地方性法规</strong><br>分值占比不超过30%</td>
+      <td>中级不考地方性法规（全国统一命题）</td>
+      <td><span class="tag tag-new">初级独有</span></td>
+      <td>这是初级最大的差异化考点，也是备课最大的不确定性来源。<br>①每个开考省份需单独梳理该省《安全生产条例》及地方政府规章<br>②建议按重点省份分批整理，不追求全覆盖<br>③地方性法规占比不超过30%（大纲原文），投入产出比需评估<br>④策略：先做3-5个学员集中省份，其他省份随开随补</td>
+    </tr>
+    <!-- 14 -->
+    <tr>
+      <td>14</td>
+      <td><strong>其他安全生产法律法规和规章</strong><br>由各地结合实际确定</td>
+      <td>中级对应的"其他法律、法规和规章"也是宽泛描述</td>
+      <td><span class="tag tag-new">初级独有</span></td>
+      <td>弹性空间，视各省实际情况决定。第一年备考建议以大纲前13条为核心，本条暂不展开，等真题反馈后再补。</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== 中级独有内容提醒 ====== -->
+  <div class="section-header">
+    <h2>⚠️ 中级考但初级不考的内容（避免老师多讲）</h2>
+    <p>以下内容在中级法规中是重点章节，但初级大纲里没有明确要求。老师备课时注意不要惯性带入。</p>
+  </div>
+
+  <table>
+    <thead>
+    <tr><th width="180">中级内容</th><th>说明</th><th width="80">处理</th></tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><strong>安全生产法律体系</strong></td>
+      <td>中级法规第（二）部分，独立章节讲法律层级、体系框架。初级大纲没有这个独立模块。</td>
+      <td><span class="tag tag-cut">砍掉</span></td>
+    </tr>
+    <tr>
+      <td><strong>《建筑法》</strong></td>
+      <td>中级单行法律之一，初级"单行法律"里没有收建筑法。</td>
+      <td><span class="tag tag-cut">砍掉</span></td>
+    </tr>
+    <tr>
+      <td><strong>《行政处罚法》</strong></td>
+      <td>中级相关法律之一。初级大纲里相关法律部分只有刑法、劳动法、劳动合同法、突发事件应对法、职业病防治法，没有行政处罚法。</td>
+      <td><span class="tag tag-cut">砍掉</span></td>
+    </tr>
+    <tr>
+      <td><strong>37个部门规章中大部分</strong></td>
+      <td>中级部门规章章节涵盖37个文件，初级只取了其中约14个核心文件。大量行业特定许可证办法、行业管理规定不需要讲。</td>
+      <td><span class="tag tag-cut">砍掉</span></td>
+    </tr>
+    <tr>
+      <td><strong>建设项目安全设施"三同时"</strong></td>
+      <td>中级部门规章第10条，初级没有单独列出。</td>
+      <td><span class="tag tag-cut">砍掉</span></td>
+    </tr>
+    <tr>
+      <td><strong>安全生产培训管理办法</strong></td>
+      <td>中级部门规章第5条，初级只列了"安全培训规定"而非"培训管理办法"。</td>
+      <td><span class="tag tag-cut">砍掉</span></td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <!-- ====== 实务科目对照 ====== -->
+  <div class="section-header">
+    <h2>📐 科目二：《安全生产实务》对照 —— 初级4合1 vs 中级3+1</h2>
+    <p>初级实务把中级3个独立科目的内容合并到1科里，每个部分的内容量和深度都大幅缩减。初级考"安全生产管理+安全生产技术基础+专业安全技术+安全生产案例分析"，中级这4块分散在3科独立考试里。</p>
+  </div>
+
+  <table>
+    <thead>
+    <tr><th width="50">板块</th><th width="150">初级要求</th><th width="150">中级对应</th><th width="90">处理</th><th>备课操作说明</th></tr>
+    </thead>
+    <tbody>
+    <!-- 实务一：安全管理 -->
+    <tr>
+      <td><strong>安全生产管理</strong><br>（初级实务第一部分）</td>
+      <td>12个知识点：<br>①拟定工作计划、起草规章制度<br>②安全教育培训和安全检查<br>③"三同时"、劳动防护用品管理<br>④危险有害因素辨识<br>⑤重大危险源辨识与申报<br>⑥危险作业（动火/高处/受限空间等）风险与审批<br>⑦事故应急预案编制、演练<br>⑧职业危害辨识与防治<br>⑨安全生产标准化建设<br>⑩事故等级界定<br>⑪事故原因分析<br>⑫事故责任分析与防范</td>
+      <td>中级《安全生产管理》是独立科目（100分）<br>包含：管理理论、监管监察、责任制、标准化、安全评价、安全文化、重大危险源、规章制度、操作规程、安全投入、安全技术措施、三同时、设备设施安全、作业环境、教育培训、隐患排查、应急管理、事故调查处理、统计分析等20+章节</td>
+      <td><span class="tag tag-downgrade">大幅降难度</span></td>
+      <td><strong>保留并简化：</strong><br>①安全教育培训与检查 → 保留框架<br>②危险有害因素辨识 → 保留基础方法<br>③重大危险源辨识 → 知道概念和分级标准即可<br>④危险作业审批 → 知道5类危险作业名称和基本要求<br>⑤应急预案编制 → 讲预案结构和基本流程<br>⑥事故等级与调查 → 核心考点，保留<br><br><strong>砍掉：</strong><br>⑦安全管理理论深度内容（海因里希法则等）<br>⑧安全评价方法论（LEC法等）<br>⑨安全文化模型<br>⑩统计分析工具（主次图、事故树等）<br>⑪安全投入经济学分析</td>
+    </tr>
+    <!-- 实务二：技术基础 -->
+    <tr>
+      <td><strong>安全生产技术基础</strong><br>（初级实务第二部分）</td>
+      <td>5个知识点：<br>①机械电气危险有害因素与预防<br>②火灾类型与防火防爆<br>③特种设备安全管理及技术措施<br>④危险化学品特性与储运安全<br>⑤危险作业（动火/受限空间等）风险分析与防范</td>
+      <td>中级《安全生产技术基础》是独立科目（100分）<br>包含：机械安全、电气安全、特种设备、防火防爆、危险化学品、特种作业等6大模块的深度技术原理</td>
+      <td><span class="tag tag-downgrade">大幅降难度</span></td>
+      <td>初级技术基础不考计算、不考设计参数、不考机械图纸识别。<br>①机械电气部分：只讲常见危险类型，不讲防护装置设计标准<br>②防火防爆：只讲火灾分类和灭火方法选择，不讲爆炸极限计算<br>③特种设备：只讲安全管理要求，不讲设计规范<br>④危险化学品：只讲分类和基本特性，不讲化学反应原理<br>⑤危险作业风险：讲管控要点，不讲工程措施细节<br><br><strong>直接砍掉：</strong>中级里的机械设计安全原理、电气防爆等级、防火分区计算等全部技术细节</td>
+    </tr>
+    <!-- 实务三：专业安全技术 -->
+    <tr>
+      <td><strong>专业安全技术</strong><br>（初级实务第三部分）</td>
+      <td>7个专业方向（选1）：<br>①煤矿安全技术<br>②金属非金属矿山安全技术<br>③化工安全技术<br>④金属冶炼安全技术<br>⑤建筑施工安全技术<br>⑥道路运输安全技术<br>⑦其他安全技术</td>
+      <td>中级《专业实务》同样7个方向<br>但每个方向的技术深度远超初级</td>
+      <td><span class="tag tag-downgrade">降难度</span></td>
+      <td>初级专业安全技术偏"识别+防范"，中级偏"分析+设计"。<br>每个专业方向的中级内容可以直接做减法：<br>①保留：场景危险识别、常见事故类型、基本安全措施<br>②砍掉：工程设计层面的安全计算、专项技术方案细节<br>③每个专业方向控制在3-5课时（中级通常是8-12课时）</td>
+    </tr>
+    <!-- 实务四：案例分析 -->
+    <tr>
+      <td><strong>安全生产案例分析</strong><br>（初级实务第四部分）</td>
+      <td>综合运用法律、管理、技术知识：<br>①辨识危险有害因素和重大危险源<br>②排查事故隐患，提出控制整改措施<br>③编制应急预案、培训演练方案<br>④进行轻伤事故分析和处理</td>
+      <td>中级案例分析题型包括：<br>客观题（单选+多选，10%）+ 主观题（综合案例分析，70%）</td>
+      <td><span class="tag tag-downgrade">大幅降难度</span></td>
+      <td>初级案例分析只到"轻伤事故"级别，中级会考到"较大/重大事故"。<br>①案例场景复杂度降低（单场景→少变量）<br>②不要求写完整的调查报告，只要求分析基本原因和措施<br>③应急预案编制只要求框架，不要求细节内容<br>④改编中级简单案例作为初级练习素材<br><br>考试题型上，初级案例分析可能以简答/辨析为主，不像中级那样是长篇综合案例。</td>
+    </tr>
+    </tbody>
+  </table>
+
+
+  <!-- ====== 备课优先级 ====== -->
+  <div class="section-header">
+    <h2>🎯 老师备课优先级建议</h2>
+    <p>按"投入产出比"排序，帮老师把有限的备课时长花在刀刃上。</p>
+  </div>
+
+  <table>
+    <thead>
+    <tr><th width="50">优先级</th><th width="180">内容模块</th><th>操作策略</th><th>预计工作量</th></tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><span class="tag tag-keep" style="font-size:14px;">P0</span></td>
+      <td><strong>安全生产法<br>13部核心行政法规<br>安全管理基础12点</strong></td>
+      <td>中级内容降维改造。先把中级讲义里对应章节拿出来，按"降难度"标准砍掉深度内容。这是课程主体，占70%+的课时。</td>
+      <td>最大工作量，但可复用中级基础</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-downgrade" style="font-size:14px;">P1</span></td>
+      <td><strong>技术基础5点<br>行业规章14项<br>专业安全技术</strong></td>
+      <td>中级内容大幅精简。技术基础只保留安全常识层，不讲技术原理。行业规章只讲核心条款。</td>
+      <td>中等工作量</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-new" style="font-size:14px;">P2</span></td>
+      <td><strong>省地方性法规<br>其他法规补充</strong></td>
+      <td>这是初级独有的新建内容。建议先做3个重点省份，积累方法论后再扩展。课件模板统一，只换省情内容。</td>
+      <td>初期较大，后续新增省份工作量递减</td>
+    </tr>
+    <tr>
+      <td><span class="tag tag-cut" style="font-size:14px;">不纳入</span></td>
+      <td><strong>建筑法/行政处罚法<br>安全评价/安全文化<br>37部规章中23部</strong></td>
+      <td>明确告知老师：这些不考，不要讲。在备课指引里列"黑名单"。</td>
+      <td>零</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== 各地差异注意事项 ====== -->
+  <div class="section-header">
+    <h2>🗺️ 各省差异注意事项</h2>
+    <p>各省在统一大纲框架下自主命题，以下差异需要在备课中提前应对。</p>
+  </div>
+
+  <table>
+    <thead>
+    <tr><th width="180">差异类型</th><th>说明</th><th>应对建议</th></tr>
+    </thead>
+    <tbody>
+    <tr>
+      <td><strong>题型差异</strong></td>
+      <td>大纲只说"客观题和主观题"，但各省具体怎么配比不同。有的省可能全客观题（单选+多选），有的省客观+主观（简答/辨析/案例）。</td>
+      <td>先收集目标省份近年真题/样题了解题型，课程里两种题型都要练习到。</td>
+    </tr>
+    <tr>
+      <td><strong>试题风格</strong></td>
+      <td>有的省偏记忆型（考法条原文），有的省偏理解型（考场景判断），有的省偏实务型。</td>
+      <td>第一次真题回收后建立各省"风格画像"，后续针对性调整讲义和练习题风格。</td>
+    </tr>
+    <tr>
+      <td><strong>地方性法规（≤30%）</strong></td>
+      <td>大纲明确允许地方性法规+政府规章占比不超过30%。不同省份的地方安全生产条例有差异。</td>
+      <td>重点省份单独梳理省安全生产条例，制作为"省情补充包"。</td>
+    </tr>
+    <tr>
+      <td><strong>大纲执行力度</strong></td>
+      <td>各省不一定严格逐条按大纲出题，有自由裁量空间。</td>
+      <td>大纲作为课程骨架，真题作为校准器。有真题的省份以真题为准调整。</td>
+    </tr>
+    </tbody>
+  </table>
+
+  <!-- ====== 脚注 ====== -->
+  <div class="footer-note">
+    <strong>📌 使用说明</strong><br>
+    1. 本对照表基于应急管理部2019年发布的初级和中级考试大纲，二者目前仍是现行有效版本<br>
+    2. "保留/降难度/砍掉"的判断标准来自大纲原文的能力层次描述（初级多用"了解/熟悉"，中级多用"分析/判断/解决"）<br>
+    3. 标注"初级独有"的内容（地方性法规等）需要在真题收集后进一步校准<br>
+    4. 建议每考季后根据实际真题反馈更新本表<br>
+    5. 配合《初级注安课程改动作战图》和《真题收集规划》一起使用效果最佳
+  </div>
+
+</div>
+
+</body>
+</html>

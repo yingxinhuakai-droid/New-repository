@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>3.5 销售物料生产（核心工作）· WorkBuddy 销售培训</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;background:#fafafa;color:#1f2937;line-height:1.7}
+.header{background:linear-gradient(135deg,#be185d 0%,#f43f5e 100%);color:#fff;padding:48px 32px 56px;position:relative;overflow:hidden}
+.header::after{content:"";position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:rgba(255,255,255,0.08);border-radius:50%}
+.crumbs{font-size:13px;opacity:0.9;margin-bottom:14px}
+.crumbs a{color:#fff;text-decoration:none}
+h1{font-size:34px;margin-bottom:12px;position:relative;z-index:1}
+.subtitle{font-size:16px;opacity:0.95;position:relative;z-index:1}
+.container{max-width:1100px;margin:-32px auto 60px;padding:0 24px}
+.card{background:#fff;border-radius:14px;padding:32px;margin-bottom:24px;box-shadow:0 4px 20px rgba(0,0,0,0.06)}
+.card h2{font-size:24px;color:#be185d;margin-bottom:16px;padding-left:14px;border-left:5px solid #f43f5e}
+.card h3{font-size:18px;color:#1f2937;margin:20px 0 12px}
+.matrix{background:linear-gradient(135deg,#fdf2f8 0%,#fce7f3 100%);border-radius:12px;padding:24px;margin:20px 0}
+.matrix-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:14px}
+.matrix-item{background:#fff;padding:18px;border-radius:10px;text-align:center;border-top:3px solid #f43f5e;transition:transform 0.2s}
+.matrix-item:hover{transform:translateY(-4px)}
+.matrix-item .ico{font-size:32px;margin-bottom:6px}
+.matrix-item h4{color:#be185d;font-size:15px;margin-bottom:4px}
+.matrix-item p{font-size:12px;color:#6b7280}
+.workflow{background:linear-gradient(135deg,#dbeafe,#bfdbfe);border-radius:10px;padding:20px;margin:20px 0}
+.workflow h4{color:#1e40af;margin-bottom:10px}
+.workflow-step{margin:8px 0;color:#1e3a8a;font-size:14px;padding-left:24px;position:relative}
+.workflow-step::before{content:"▸";position:absolute;left:8px;color:#1e40af;font-weight:bold}
+.workflow-step b{color:#1e40af}
+.example{background:linear-gradient(135deg,#0f172a,#1e293b);color:#e2e8f0;padding:20px;border-radius:10px;font-family:"SF Mono",Monaco,monospace;font-size:13px;line-height:1.8;margin:14px 0;overflow-x:auto;white-space:pre-wrap}
+.tip{background:linear-gradient(135deg,#fff7ed,#fed7aa);border-left:4px solid #f59e0b;padding:16px 20px;border-radius:8px;margin:20px 0;color:#7c2d12}
+.tip strong{color:#9a3412}
+.warn{background:linear-gradient(135deg,#fef2f2,#fecaca);border-left:4px solid #dc2626;padding:16px 20px;border-radius:8px;margin:20px 0;color:#7f1d1d}
+.warn strong{color:#991b1b}
+table{width:100%;border-collapse:collapse;margin:18px 0;background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,0.04)}
+th{background:linear-gradient(135deg,#be185d,#f43f5e);color:#fff;padding:12px;text-align:left;font-size:14px}
+td{padding:12px;border-bottom:1px solid #f3f4f6;font-size:14px;color:#374151}
+tr:hover td{background:#fdf2f8}
+.tag{display:inline-block;padding:3px 10px;border-radius:12px;font-size:12px;background:#fce7f3;color:#be185d;margin-right:6px}
+.tag.gold{background:#fef3c7;color:#92400e}
+.tag.green{background:#d1fae5;color:#065f46}
+.tag.red{background:#fecaca;color:#991b1b}
+.tag.blue{background:#dbeafe;color:#1e40af}
+.scenario{background:linear-gradient(135deg,#fdf2f8 0%,#fce7f3 100%);border-radius:12px;padding:22px;margin:18px 0}
+.scenario h3{color:#9f1239;font-size:18px;margin-bottom:12px;display:flex;align-items:center;gap:8px}
+.scenario h3::before{content:"🎨";font-size:20px}
+.scenario-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:14px 0}
+.scenario-item{background:#fff;padding:18px;border-radius:10px;border-top:3px solid #f43f5e}
+.scenario-item b{display:block;color:#be185d;margin-bottom:6px;font-size:15px}
+.scenario-item p{font-size:13px;color:#374151;margin:4px 0}
+.nav{display:flex;justify-content:space-between;margin-top:40px;padding-top:24px;border-top:1px solid #e5e7eb}
+.nav a{padding:12px 24px;background:#fff;border:2px solid #f43f5e;color:#be185d;text-decoration:none;border-radius:8px;font-weight:600}
+.nav a:hover{background:#f43f5e;color:#fff}
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="crumbs"><a href="../index.html">培训首页</a> / <a href="index.html">模块三·销售支持</a> / 3.5</div>
+  <h1>🎨 销售物料生产（核心工作）</h1>
+  <div class="subtitle">把教研产品变成销售手里的"弹药"——海报 / 朋友圈 / 招生页 / 视频脚本</div>
+</div>
+<div class="container">
+
+<div class="card">
+  <h2>一、你的角色：教研 → 销售的"翻译官"</h2>
+  <p>猴哥你最核心的工作是：<strong>把教研设计出来的产品，翻译成销售能在朋友圈、社群、私聊里直接用的物料</strong>。一线销售不需要懂"教学闭环"这种词，他们要的是<strong>今天发什么图、说什么话</strong>。</p>
+  <div class="tip"><strong>📌 关键定位：</strong>你不是替销售干活，你是<strong>给销售配弹药</strong>。他们带"枪"上场，你负责"装子弹"。</div>
+</div>
+
+<div class="card">
+  <h2>二、销售物料 4 大类 × 16 种速查</h2>
+  <div class="matrix">
+    <h3 style="color:#9f1239">📦 物料矩阵（销售用得到的所有东西）</h3>
+    <div class="matrix-grid">
+      <div class="matrix-item"><div class="ico">📱</div><h4>朋友圈素材</h4><p>9 宫格 / 单图 / 文字</p></div>
+      <div class="matrix-item"><div class="ico">💬</div><h4>社群话术</h4><p>每日推送 / 群公告</p></div>
+      <div class="matrix-item"><div class="ico">🎬</div><h4>视频脚本</h4><p>抖音 / 视频号 / 直播切片</p></div>
+      <div class="matrix-item"><div class="ico">🖼️</div><h4>招生页 H5</h4><p>落地页 / 拼团页</p></div>
+      <div class="matrix-item"><div class="ico">📊</div><h4>课程对比图</h4><p>8 大班型 / 协议说明</p></div>
+      <div class="matrix-item"><div class="ico">📚</div><h4>资料包封面</h4><p>《冲刺 30 讲》/ 思维导图</p></div>
+      <div class="matrix-item"><div class="ico">🎁</div><h4>活动海报</h4><p>618 / 冲刺 / 团报</p></div>
+      <div class="matrix-item"><div class="ico">🏆</div><h4>上岸喜报</h4><p>学员案例 / 老师包装</p></div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>三、4 大核心物料场景（含提问模板）</h2>
+
+  <div class="scenario">
+    <h3>🎯 场景 1：朋友圈 9 宫格（最常用！）</h3>
+    <div class="scenario-grid">
+      <div class="scenario-item">
+        <b>用途</b>
+        <p>销售每天发 1-2 条 9 宫格<br>覆盖活动/课程/案例/段子</p>
+      </div>
+      <div class="scenario-item">
+        <b>生产节奏</b>
+        <p>每月提前 1 周做 1 套<br>（8 张图 + 1 张封面）</p>
+      </div>
+      <div class="scenario-item">
+        <b>主题日历</b>
+        <p>周一：活动 / 周三：课程 / 周五：案例 / 周日：鸡汤</p>
+      </div>
+      <div class="scenario-item">
+        <b>尺寸</b>
+        <p>1080×1080（朋友圈正方形）<br>1080×1920（视频号封面）</p>
+      </div>
+    </div>
+
+    <div class="example">请帮我做【中级注安】6 月朋友圈 9 宫格素材，主题：618 冲刺特惠。
+
+【产品信息】
+- 班型：云私塾 ¥2,999（3 人成团 5 折，人均 ¥1,500）
+- 卖点：命题组师资 + AI 智能题库 + 1v1 私教 + 不过退 70%
+- 活动：6.1-6.18，3 人成团 5 折
+
+【9 张图主题】
+1. 封面：618 中级注安冲刺特惠
+2. 政策：3 人成团 5 折，人均 ¥1,500
+3. 师资：命题组前成员介绍
+4. 服务：1v1 私教答疑
+5. AI 智能题库展示
+6. 协议班不过退 70%
+7. 上岸喜报（学员案例）
+8. 拼团流程图
+9. 行动号召：扫码报名
+
+【风格要求】
+- 视觉：科技蓝 + 黄色高亮
+- 风格：活泼、有紧迫感
+- 每张图 1 句核心文案（≤15 字）
+- 配套 1 段朋友圈发布话术（≤100 字）</div>
+  </div>
+
+  <div class="scenario">
+    <h3>🎯 场景 2：社群每日推送话术</h3>
+    <div class="scenario-grid">
+      <div class="scenario-item">
+        <b>用途</b>
+        <p>销售群内每天发 1-3 条<br>激活群氛围 + 引导报名</p>
+      </div>
+      <div class="scenario-item">
+        <b>3 类内容</b>
+        <p>早安 / 干货 / 活动</p>
+      </div>
+      <div class="scenario-item">
+        <b>写作公式</b>
+        <p>情绪钩子 + 干货 + 行动号召</p>
+      </div>
+      <div class="scenario-item">
+        <b>频次</b>
+        <p>早 9 点 / 下午 3 点 / 晚 8 点</p>
+      </div>
+    </div>
+
+    <div class="example">请帮我写【中级注安冲刺群】6 月每日推送话术，1 周 7 天。
+
+【群定位】
+- 群类型：2026 中级注安冲刺群
+- 群成员：200 人备考学员 + 1 个销售 + 1 个班主任
+- 群目标：激活 + 转化
+
+【7 天内容排期】
+- 周一：本周学习计划发布
+- 周二：注安干货（高频考点）
+- 周三：上岸学员案例
+- 周四：政策利好 / 行业新闻
+- 周五：本周优惠活动
+- 周六：直播预告
+- 周日：周末鸡汤 + 下周预告
+
+【风格要求】
+- 像学姐/学长聊天，不打官腔
+- 每天 3 段：早安 + 干货 + 晚安
+- 每段 ≤50 字
+- 嵌入 1 个软广入口（不突兀）</div>
+  </div>
+
+  <div class="scenario">
+    <h3>🎯 场景 3：抖音 / 视频号短视频脚本</h3>
+    <div class="scenario-grid">
+      <div class="scenario-item">
+        <b>用途</b>
+        <p>获客 + 品牌曝光<br>（销售可二创/转发）</p>
+      </div>
+      <div class="scenario-item">
+        <b>3 类视频</b>
+        <p>干货 15s / 案例 30s / 直播切片 60s</p>
+      </div>
+      <div class="scenario-item">
+        <b>脚本结构</b>
+        <p>0-3s 钩子 / 3-25s 干货 / 25-30s 行动号召</p>
+      </div>
+      <div class="scenario-item">
+        <b>产出量</b>
+        <p>每周 3-5 条</p>
+      </div>
+    </div>
+
+    <div class="example">请帮我写【中级注安】3 类短视频脚本。
+
+【1·干货 15s 短视频】5 条
+- 主题：注安高频考点 / 避坑指南 / 记忆口诀
+- 钩子：第 1 秒必须吸引停留
+- 风格：老师口吻，像在跟学员说
+
+【2·案例 30s 短视频】3 条
+- 主题：38 岁宝妈 / 上班族 90 天 / 二战逆袭
+- 结构：身份 + 痛点 + 解决方案 + 结果
+- 风格：有画面感、有情绪
+
+【3·直播切片 60s】3 条
+- 主题：直播精彩片段 / 老师金句
+- 结构：最有冲击力的 1 分钟
+- 风格：金句 + 行动号召
+
+【整体要求】
+- 0-3s 必须有钩子（"很多人不知道..." / "考证的人都想知道的..."）
+- 结尾必须有 CTA（评论区扣 1 / 主页有详情）
+- 适合素人出镜，老师出镜均可</div>
+  </div>
+
+  <div class="scenario">
+    <h3>🎯 场景 4：招生 H5 / 落地页</h3>
+    <div class="scenario-grid">
+      <div class="scenario-item">
+        <b>用途</b>
+        <p>抖音/视频号引流落地<br>承接流量转化</p>
+      </div>
+      <div class="scenario-item">
+        <b>3 类页面</b>
+        <p>9 元体验课 / 1 元拼团 / 0 元领资料</p>
+      </div>
+      <div class="scenario-item">
+        <b>页面结构</b>
+        <p>钩子 → 痛点 → 方案 → 信任 → 行动</p>
+      </div>
+      <div class="scenario-item">
+        <b>工具</b>
+        <p>WorkBuddy 单页 HTML（5 分钟出）</p>
+      </div>
+    </div>
+
+    <div class="example">请帮我做【中级注安 9 元体验课】招生落地页 HTML。
+
+【页面信息】
+- 钩子：9 元 7 天注安速成班
+- 目标：留资 + 加微
+- 投放渠道：抖音信息流 / 视频号
+
+【页面结构】
+1. 头部：9 元 + 7 天 + "每天 1 小时" 巨型数字
+2. 痛点：3 个上班族的备考焦虑
+3. 方案：7 天你能学到什么（4 个 bullet）
+4. 信任：师资介绍 + 学员上岸喜报
+5. 行动：9 元扫码 + "仅限前 100 名"
+6. 兜底：常见问题 Q&A
+
+【风格要求】
+- 移动端优先（90% 用户手机看）
+- 主色：科技蓝 #1e40af
+- 高亮色：警示黄 #fbbf24
+- 紧迫感：倒计时 + 限量 + 价格对比</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>四、物料生产标准流程（4 步）</h2>
+  <div class="workflow">
+    <h4>🎯 从"教研输入"到"销售输出"的完整链路</h4>
+    <div class="workflow-step"><b>Step 1 · 提取信息</b>：从教研方案/产品手册里提取 5W（What/Why/Who/How/When）</div>
+    <div class="workflow-step"><b>Step 2 · 匹配场景</b>：不同物料对应不同销售场景（朋友圈/社群/私聊/线下）</div>
+    <div class="workflow-step"><b>Step 3 · 改写为销售语言</b>：用 FAB 把"教学闭环"翻译成"您有问题不用等"</div>
+    <div class="workflow-step"><b>Step 4 · 排期分发</b>：月度素材日历 + 销售工作台自动同步</div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>五、物料生产排期表（每月必备）</h2>
+  <table>
+    <thead><tr><th>时间</th><th>产出</th><th>数量</th><th>负责人</th><th>落地形式</th></tr></thead>
+    <tbody>
+      <tr><td>每月 25 日</td><td>下月朋友圈 9 宫格套图</td><td>4 套（每周 1 套）</td><td>运营（你）</td><td>HTML 海报</td></tr>
+      <tr><td>每月 25 日</td><td>下月社群推送话术</td><td>30 条（每天 1-3 条）</td><td>运营（你）</td><td>Markdown + 销售工作台</td></tr>
+      <tr><td>每周一</td><td>本周视频脚本</td><td>3-5 条</td><td>运营 + 销售部</td><td>短视频脚本 + 拍摄</td></tr>
+      <tr><td>活动前 7 天</td><td>活动主视觉 + 拼团页</td><td>1 套</td><td>设计 + 运营</td><td>H5 + 海报</td></tr>
+      <tr><td>每月 1 号</td><td>课程对比图更新</td><td>1 张</td><td>运营（你）</td><td>PNG + 销售工作台</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="card">
+  <h2>六、AI 工具箱（让 AI 帮你做物料）</h2>
+  <table>
+    <thead><tr><th>物料类型</th><th>AI 能力</th><th>WorkBuddy 用法</th><th>耗时</th></tr></thead>
+    <tbody>
+      <tr><td><span class="tag">朋友圈 9 宫格</span></td><td>图像生成 + 文案</td><td>1 条 prompt 出 9 张图+1 段话术</td><td>5 分钟</td></tr>
+      <tr><td><span class="tag gold">社群话术</span></td><td>文本生成</td><td>1 条 prompt 出 30 天排期</td><td>5 分钟</td></tr>
+      <tr><td><span class="tag green">视频脚本</span></td><td>脚本生成 + 数字人</td><td>1 条 prompt 出 5 条脚本</td><td>10 分钟</td></tr>
+      <tr><td><span class="tag red">招生 H5</span></td><td>单页 HTML 生成</td><td>1 条 prompt 出 1 个落地页</td><td>10 分钟</td></tr>
+      <tr><td><span class="tag blue">课程对比图</span></td><td>图表生成</td><td>1 条 prompt 出对比表</td><td>3 分钟</td></tr>
+    </tbody>
+  </table>
+  <div class="tip"><strong>💡 效率提升：</strong>以前一套朋友圈素材需要 1 个设计 + 半天。现在你用 AI + 1 个设计审核，<strong>30 分钟搞定</strong>，<strong>效率提升 5 倍</strong>。</div>
+</div>
+
+<div class="card">
+  <h2>七、避坑指南：物料生产的 3 大禁忌</h2>
+  <div class="warn">
+    <strong>❌ 禁忌 1：物料堆术语</strong>
+    <p>不要把"教学闭环 / 教研赋能 / 全链路"这种词硬塞到朋友圈。销售发了客户看不懂，直接拉黑。</p>
+  </div>
+  <div class="warn">
+    <strong>❌ 禁忌 2：物料跟产品脱节</strong>
+    <p>教研说云私塾 3 大亮点，物料要围绕这 3 大亮点做，<strong>不要自己加卖点</strong>，容易和销售口径不一致。</p>
+  </div>
+  <div class="warn">
+    <strong>❌ 禁忌 3：物料不更新</strong>
+    <p>朋友圈一套素材用 3 个月，客户都看腻了。每月至少更新 30%，活动期全套换新。</p>
+  </div>
+</div>
+
+<div class="nav">
+  <a href="04_竞品对标.html">← 上一篇：3.4</a>
+  <a href="06_朋友圈文案.html">下一篇：3.6 朋友圈文案专项 →</a>
+</div>
+</div>
+</body>
+</html>
